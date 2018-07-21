@@ -39,6 +39,7 @@ Friend Class frmMapEditor
         scrlMapViewV.Maximum = (Map.MaxY \ PIC_Y) + PIC_Y
 
         GameWindow.SetView(New SFML.Graphics.View(New SFML.Graphics.FloatRect(0, 0, picScreen.Width, picScreen.Height)))
+
     End Sub
 
     Private Sub FrmEditor_MapEditor_Closing(sender As Object, e As CancelEventArgs) Handles MyBase.Closing

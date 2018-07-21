@@ -17,14 +17,14 @@
 
     End Sub
 
-    Private Sub NudBaseMap_ValueChanged(sender As Object, e As EventArgs) Handles nudBaseMap.KeyPress, nudBaseMap.Click
+    Private Sub NudBaseMap_ValueChanged(sender As Object, e As EventArgs) Handles nudBaseMap.KeyUp, nudBaseMap.Click
         If Editorindex <= 0 Then Exit Sub
 
         If nudBaseMap.Value < 1 OrElse nudBaseMap.Value > MAX_MAPS Then Exit Sub
         House(Editorindex).BaseMap = nudBaseMap.Value
     End Sub
 
-    Private Sub NudX_ValueChanged(sender As Object, e As EventArgs) Handles nudX.KeyPress, nudX.Click
+    Private Sub NudX_ValueChanged(sender As Object, e As EventArgs) Handles nudX.KeyUp, nudX.Click
         If Editorindex <= 0 Then Exit Sub
 
         If nudX.Value < 0 OrElse nudX.Value > 255 Then Exit Sub
@@ -32,7 +32,7 @@
 
     End Sub
 
-    Private Sub NudY_ValueChanged(sender As Object, e As EventArgs) Handles nudY.KeyPress, nudY.Click
+    Private Sub NudY_ValueChanged(sender As Object, e As EventArgs) Handles nudY.KeyUp, nudY.Click
         If Editorindex <= 0 Then Exit Sub
 
         If nudY.Value < 0 OrElse nudY.Value > 255 Then Exit Sub
@@ -40,14 +40,14 @@
 
     End Sub
 
-    Private Sub NudPrice_ValueChanged(sender As Object, e As EventArgs) Handles nudPrice.KeyPress, nudPrice.Click
+    Private Sub NudPrice_ValueChanged(sender As Object, e As EventArgs) Handles nudPrice.KeyUp, nudPrice.Click
         If Editorindex <= 0 Then Exit Sub
 
         House(Editorindex).Price = nudPrice.Value
 
     End Sub
 
-    Private Sub NudFurniture_ValueChanged(sender As Object, e As EventArgs) Handles nudFurniture.KeyPress, nudFurniture.Click
+    Private Sub NudFurniture_ValueChanged(sender As Object, e As EventArgs) Handles nudFurniture.KeyUp, nudFurniture.Click
         If Editorindex <= 0 Then Exit Sub
 
         If nudFurniture.Value < 0 Then Exit Sub

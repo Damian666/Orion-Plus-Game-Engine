@@ -4,7 +4,7 @@
     <Element Name="ResourcesNum" Value="1;2;3" />
   </Resources>
   <Prefab1>
-    <Element Name="Layer1Tileset" Value="12" />
+    <Element Name="Layer1Tileset" Value="4" />
     <Element Name="Layer1X" Value="0" />
     <Element Name="Layer1Y" Value="9" />
     <Element Name="Layer1Autotile" Value="3" />
@@ -27,7 +27,7 @@
     <Element Name="Type" Value="1" />
   </Prefab1>
   <Prefab2>
-    <Element Name="Layer1Tileset" Value="13" />
+    <Element Name="Layer1Tileset" Value="5" />
     <Element Name="Layer1X" Value="0" />
     <Element Name="Layer1Y" Value="3" />
     <Element Name="Layer1Autotile" Value="0" />
@@ -50,7 +50,7 @@
     <Element Name="Type" Value="0" />
   </Prefab2>
   <Prefab3>
-    <Element Name="Layer1Tileset" Value="13" />
+    <Element Name="Layer1Tileset" Value="5" />
     <Element Name="Layer1X" Value="2" />
     <Element Name="Layer1Y" Value="3" />
     <Element Name="Layer1Autotile" Value="1" />
@@ -77,7 +77,7 @@
     <Element Name="Layer1X" Value="0" />
     <Element Name="Layer1Y" Value="0" />
     <Element Name="Layer1Autotile" Value="0" />
-    <Element Name="Layer2Tileset" Value="13" />
+    <Element Name="Layer2Tileset" Value="5" />
     <Element Name="Layer2X" Value="2" />
     <Element Name="Layer2Y" Value="0" />
     <Element Name="Layer2Autotile" Value="1" />
@@ -100,7 +100,7 @@
     <Element Name="Layer1X" Value="0" />
     <Element Name="Layer1Y" Value="0" />
     <Element Name="Layer1Autotile" Value="0" />
-    <Element Name="Layer2Tileset" Value="13" />
+    <Element Name="Layer2Tileset" Value="5" />
     <Element Name="Layer2X" Value="8" />
     <Element Name="Layer2Y" Value="0" />
     <Element Name="Layer2Autotile" Value="1" />
@@ -123,7 +123,7 @@
     <Element Name="Layer1X" Value="0" />
     <Element Name="Layer1Y" Value="0" />
     <Element Name="Layer1Autotile" Value="0" />
-    <Element Name="Layer2Tileset" Value="12" />
+    <Element Name="Layer2Tileset" Value="4" />
     <Element Name="Layer2X" Value="0" />
     <Element Name="Layer2Y" Value="0" />
     <Element Name="Layer2Autotile" Value="3" />
@@ -146,7 +146,7 @@
     <Element Name="Layer1X" Value="0" />
     <Element Name="Layer1Y" Value="0" />
     <Element Name="Layer1Autotile" Value="0" />
-    <Element Name="Layer2Tileset" Value="14" />
+    <Element Name="Layer2Tileset" Value="6" />
     <Element Name="Layer2X" Value="0" />
     <Element Name="Layer2Y" Value="1" />
     <Element Name="Layer2Autotile" Value="0" />

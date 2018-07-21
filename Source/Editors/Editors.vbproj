@@ -78,7 +78,7 @@
   <ItemGroup>
     <Compile Include="ApplicationEvents.vb" />
     <Compile Include="GlobalSuppressions.vb" />
-    <Compile Include="Source\Modules\modOptions.vb" />
+    <Compile Include="Source\Modules\E_Options.vb" />
     <Compile Include="Source\Forms\frmAutoMapper.Designer.vb">
       <DependentUpon>frmAutoMapper.vb</DependentUpon>
     </Compile>
@@ -197,26 +197,27 @@
     <Compile Include="Source\Forms\frmVisualWarp.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Source\Modules\modLoop.vb" />
-    <Compile Include="Source\Modules\modPets.vb" />
-    <Compile Include="Source\Modules\modProjectiles.vb" />
-    <Compile Include="Source\Modules\modWeather.vb" />
-    <Compile Include="Source\Modules\modSound.vb" />
-    <Compile Include="Source\Modules\modText.vb" />
-    <Compile Include="Source\Modules\modHousing.vb" />
-    <Compile Include="Source\Modules\modEventSystem.vb" />
-    <Compile Include="Source\Modules\modAutoTiles.vb" />
-    <Compile Include="Source\Modules\modGraphics.vb" />
-    <Compile Include="Source\Modules\modDataBase.vb" />
-    <Compile Include="Source\Modules\modCrafting.vb" />
-    <Compile Include="Source\Modules\modEditors.vb" />
-    <Compile Include="Source\Modules\modQuest.vb" />
-    <Compile Include="Source\Modules\modGlobals.vb" />
-    <Compile Include="Source\Modules\modTypes.vb" />
-    <Compile Include="Source\Modules\modAutoMap.vb" />
-    <Compile Include="Source\Modules\Network\modNetworkConfig.vb" />
-    <Compile Include="Source\Modules\Network\modNetworkReceive.vb" />
-    <Compile Include="Source\Modules\Network\modNetworkSend.vb" />
+    <Compile Include="Source\Modules\E_Loop.vb" />
+    <Compile Include="Source\Modules\Objects\E_Items.vb" />
+    <Compile Include="Source\Modules\Objects\E_Pets.vb" />
+    <Compile Include="Source\Modules\Objects\E_Projectiles.vb" />
+    <Compile Include="Source\Modules\E_Weather.vb" />
+    <Compile Include="Source\Modules\E_Sound.vb" />
+    <Compile Include="Source\Modules\E_Text.vb" />
+    <Compile Include="Source\Modules\Objects\E_Housing.vb" />
+    <Compile Include="Source\Modules\E_EventSystem.vb" />
+    <Compile Include="Source\Modules\E_AutoTiles.vb" />
+    <Compile Include="Source\Modules\E_Graphics.vb" />
+    <Compile Include="Source\Modules\E_DataBase.vb" />
+    <Compile Include="Source\Modules\E_Crafting.vb" />
+    <Compile Include="Source\Modules\E_Editors.vb" />
+    <Compile Include="Source\Modules\Objects\E_Quest.vb" />
+    <Compile Include="Source\Modules\E_Globals.vb" />
+    <Compile Include="Source\Modules\E_Types.vb" />
+    <Compile Include="Source\Modules\E_AutoMap.vb" />
+    <Compile Include="Source\Modules\Network\E_NetworkConfig.vb" />
+    <Compile Include="Source\Modules\Network\E_NetworkReceive.vb" />
+    <Compile Include="Source\Modules\Network\E_NetworkSend.vb" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="My Project\Resources.resx">

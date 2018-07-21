@@ -1,8 +1,16 @@
 ﻿Friend Class FrmAutoMapper
 #Region "Frm Code"
+    Private Sub FrmAutoMapper_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        pnlResources.Top = 0
+        pnlResources.Left = 0
+        pnlTileConfig.Top = 0
+        pnlTileConfig.Left = 0
+        Width = 409
+    End Sub
 
     Private Sub TilesetsToolStripMenuItem2_Click(sender As Object, e As EventArgs) Handles TilesetsToolStripMenuItem.Click
         pnlTileConfig.Visible = True
+        pnlTileConfig.BringToFront()
     End Sub
 
     Private Sub ResourcesToolStripMenuItem2_Click(sender As Object, e As EventArgs) Handles ResourcesToolStripMenuItem.Click
@@ -10,6 +18,7 @@
         Dim i As Integer
 
         pnlResources.Visible = True
+        pnlResources.BringToFront()
 
         Resources = Split(ResourcesNum, ";")
 
@@ -38,6 +47,7 @@
 
 #Region "Resources"
     Private Sub LstResources_SelectedIndexChanged(sender As Object, e As EventArgs) Handles lstResources.SelectedIndexChanged
+        If lstResources.SelectedIndex < 0 Then Exit Sub
         txtResource.Text = lstResources.Items.Item(lstResources.SelectedIndex)
     End Sub
 
@@ -62,34 +72,41 @@
     End Sub
 
     Private Sub BtnSaveResource_Click(sender As Object, e As EventArgs) Handles btnSaveResource.Click
+        Dim i As Integer
         Dim ResourceStr As String = ""
+
         Dim myXml As New XmlClass With {
             .Filename = IO.Path.Combine(Application.StartupPath, "Data", "AutoMapper.xml"),
             .Root = "Options"
         }
-        Dim i As Integer
+
+        myXml.LoadXml()
 
         For i = 0 To lstResources.Items.Count - 1
             ResourceStr = CStr(ResourceStr & lstResources.Items(i))
             If i < lstResources.Items.Count - 1 Then ResourceStr = ResourceStr & ";"
-        Next i
+        Next
 
         myXml.WriteString("Resources", "ResourcesNum", ResourceStr)
+
+        myXml.CloseXml(True)
+
         pnlResources.Visible = False
     End Sub
 #End Region
 
 #Region "TileSet"
+
     Private Sub CmbPrefab_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbPrefab.SelectedIndexChanged
         Dim Layer As Integer
 
-        For Layer = 1 To LayerType.Count
+        For Layer = 1 To LayerType.Count - 1
             If Tile(cmbPrefab.SelectedIndex + 1).Layer(Layer).Tileset > 0 Then
                 Exit For
             End If
         Next
 
-        cmbLayer.SelectedIndex = Layer - 1
+        cmbLayer.SelectedIndex = Layer - 2
         CmbLayer_SelectedIndexChanged(sender, e)
     End Sub
 
@@ -102,6 +119,7 @@
         txtTileX.Text = Tile(Prefab).Layer(Layer).X
         txtTileY.Text = Tile(Prefab).Layer(Layer).Y
         txtAutotile.Text = Tile(Prefab).Layer(Layer).AutoTile
+
         If Tile(Prefab).Type = TileType.Blocked Then
             chkBlocked.Checked = True
         Else
@@ -119,6 +137,9 @@
             .Filename = IO.Path.Combine(Application.StartupPath, "Data", "AutoMapper.xml"),
             .Root = "Options"
         }
+
+        myXml.LoadXml()
+
         Prefab = cmbPrefab.SelectedIndex + 1
 
         For Layer = 1 To 5
@@ -132,16 +153,12 @@
 
         myXml.WriteString("Prefab" & Prefab, "Type", Val(Tile(Prefab).Type))
 
+        myXml.CloseXml(True)
+
+        pnlTileConfig.Visible = False
+
         LoadTilePrefab()
     End Sub
-
-    Private Sub FrmAutoMapper_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        pnlResources.Top = 0
-        pnlResources.Left = 0
-    End Sub
-
-
-
 
 #End Region
 
