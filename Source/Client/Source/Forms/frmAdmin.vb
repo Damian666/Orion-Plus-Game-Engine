@@ -107,7 +107,7 @@
 #End Region
 
 #Region "Editors"
-    Private Sub BtnMapEditor_Click(sender As Object, e As EventArgs) Handles btnMapEditor.Click
+    Private Sub BtnMapEditor_Click(sender As Object, e As EventArgs) 
 
         If GetPlayerAccess(MyIndex) < AdminType.Mapper Then
             AddText("You need to be a high enough staff member to do this!", QColorType.AlertColor)

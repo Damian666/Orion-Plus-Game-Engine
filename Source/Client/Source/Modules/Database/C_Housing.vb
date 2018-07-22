@@ -209,7 +209,7 @@ Friend Module C_Housing
         End If
 
         'seeying we still use it, lets update timer
-        With SkillIconsGfxInfo(i)
+        With FurnitureGfxInfo(i)
             .TextureTimer = GetTickCount() + 100000
         End With
 
