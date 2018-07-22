@@ -625,7 +625,7 @@ Module E_Loop
         End If
 
         If InitAutoMapper = True Then
-            FrmAutoMapper.Visible = True
+            OpenAutomapper()
             InitAutoMapper = False
         End If
     End Sub

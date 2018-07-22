@@ -86,33 +86,33 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="GlobalSuppressions.vb" />
-    <Compile Include="Source\Modules\Network\ServerNetworkConfig.vb" />
-    <Compile Include="Source\Modules\Network\ServerNetworkReceive.vb" />
-    <Compile Include="Source\Modules\Network\ServerNetworkSend.vb" />
-    <Compile Include="Source\Modules\Objects\ServerItems.vb" />
-    <Compile Include="Source\Modules\Objects\ServerNpc.vb" />
-    <Compile Include="Source\Modules\ServerAutoMap.vb" />
-    <Compile Include="Source\Modules\ServerConsole.vb" />
-    <Compile Include="Source\Modules\ServerConstants.vb" />
-    <Compile Include="Source\Modules\ServerCrafting.vb" />
-    <Compile Include="Source\Modules\ServerDatabase.vb" />
-    <Compile Include="Source\Modules\Events\ServerEventLogic.vb" />
-    <Compile Include="Source\Modules\Events\ServerEvents.vb" />
-    <Compile Include="Source\Modules\ServerGameLogic.vb" />
-    <Compile Include="Source\Modules\ServerGeneral.vb" />
-    <Compile Include="Source\Modules\ServerGlobals.vb" />
-    <Compile Include="Source\Modules\Objects\ServerHousing.vb" />
-    <Compile Include="Source\Modules\Objects\ServerInstances.vb" />
-    <Compile Include="Source\Modules\ServerParties.vb" />
-    <Compile Include="Source\Modules\Objects\ServerPets.vb" />
-    <Compile Include="Source\Modules\Objects\ServerPlayers.vb" />
-    <Compile Include="Source\Modules\ServerLoop.vb" />
-    <Compile Include="Source\Modules\Objects\ServerProjectiles.vb" />
-    <Compile Include="Source\Modules\Objects\ServerQuest.vb" />
-    <Compile Include="Source\Modules\Objects\ServerRandomItems.vb" />
-    <Compile Include="Source\Modules\Objects\ServerResources.vb" />
-    <Compile Include="Source\Modules\ServerTime.vb" />
-    <Compile Include="Source\Modules\ServerTypes.vb" />
+    <Compile Include="Source\Modules\Network\S_NetworkConfig.vb" />
+    <Compile Include="Source\Modules\Network\S_NetworkReceive.vb" />
+    <Compile Include="Source\Modules\Network\S_NetworkSend.vb" />
+    <Compile Include="Source\Modules\Objects\S_Items.vb" />
+    <Compile Include="Source\Modules\Objects\S_Npc.vb" />
+    <Compile Include="Source\Modules\S_AutoMap.vb" />
+    <Compile Include="Source\Modules\S_Console.vb" />
+    <Compile Include="Source\Modules\S_Constants.vb" />
+    <Compile Include="Source\Modules\S_Crafting.vb" />
+    <Compile Include="Source\Modules\S_Database.vb" />
+    <Compile Include="Source\Modules\Events\S_EventLogic.vb" />
+    <Compile Include="Source\Modules\Events\S_Events.vb" />
+    <Compile Include="Source\Modules\S_GameLogic.vb" />
+    <Compile Include="Source\Modules\S_General.vb" />
+    <Compile Include="Source\Modules\S_Globals.vb" />
+    <Compile Include="Source\Modules\Objects\S_Housing.vb" />
+    <Compile Include="Source\Modules\Objects\S_Instances.vb" />
+    <Compile Include="Source\Modules\S_Parties.vb" />
+    <Compile Include="Source\Modules\Objects\S_Pets.vb" />
+    <Compile Include="Source\Modules\Objects\S_Players.vb" />
+    <Compile Include="Source\Modules\S_Loop.vb" />
+    <Compile Include="Source\Modules\Objects\S_Projectiles.vb" />
+    <Compile Include="Source\Modules\Objects\S_Quest.vb" />
+    <Compile Include="Source\Modules\Objects\S_RandomItems.vb" />
+    <Compile Include="Source\Modules\Objects\S_Resources.vb" />
+    <Compile Include="Source\Modules\S_Time.vb" />
+    <Compile Include="Source\Modules\S_Types.vb" />
     <Compile Include="My Project\AssemblyInfo.vb" />
     <Compile Include="My Project\Application.Designer.vb">
       <AutoGen>True</AutoGen>
@@ -128,7 +128,7 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
-    <Compile Include="Source\Modules\ServerOptions.vb" />
+    <Compile Include="Source\Modules\S_Options.vb" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="My Project\Resources.resx">

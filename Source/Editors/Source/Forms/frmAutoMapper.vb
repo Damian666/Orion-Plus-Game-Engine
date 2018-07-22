@@ -25,7 +25,7 @@
         lstResources.Items.Clear()
 
         For i = 0 To UBound(Resources)
-            lstResources.Items.Add(Resources(i))
+            lstResources.Items.Add(Resource(CInt(Resources(i))).Name)
         Next
     End Sub
 
@@ -106,7 +106,7 @@
             End If
         Next
 
-        cmbLayer.SelectedIndex = Layer - 2
+        cmbLayer.SelectedIndex = Layer - 1
         CmbLayer_SelectedIndexChanged(sender, e)
     End Sub
 

@@ -100,8 +100,8 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <Compile Include="Source\Modules\Database\modOptions.vb" />
-    <Compile Include="Source\Modules\UI\modChat.vb" />
+    <Compile Include="Source\Modules\Database\C_Options.vb" />
+    <Compile Include="Source\Modules\UI\C_Chat.vb" />
     <Compile Include="Source\Forms\frmAdmin.Designer.vb">
       <DependentUpon>frmAdmin.vb</DependentUpon>
     </Compile>
@@ -126,29 +126,29 @@
     <Compile Include="Source\Forms\frmOptions.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Source\Modules\Database\modAutoTiles.vb" />
-    <Compile Include="Source\Modules\Database\modCrafting.vb" />
-    <Compile Include="Source\Modules\Database\modEventSystem.vb" />
-    <Compile Include="Source\Modules\UI\modGuiFunctions.vb" />
-    <Compile Include="Source\Modules\Globals\modVariables.vb" />
-    <Compile Include="Source\Modules\modGeneral.vb" />
-    <Compile Include="Source\Modules\modGameLogic.vb" />
-    <Compile Include="Source\Modules\modGraphics.vb" />
-    <Compile Include="Source\Modules\Database\modHotBar.vb" />
-    <Compile Include="Source\Modules\Database\modHousing.vb" />
-    <Compile Include="Source\Modules\Database\modParties.vb" />
-    <Compile Include="Source\Modules\Database\modPets.vb" />
-    <Compile Include="Source\Modules\Database\modPlayer.vb" />
-    <Compile Include="Source\Modules\Database\modProjectiles.vb" />
-    <Compile Include="Source\Modules\Database\modQuest.vb" />
-    <Compile Include="Source\Modules\modSound.vb" />
-    <Compile Include="Source\Modules\Globals\modConstants.vb" />
-    <Compile Include="Source\Modules\Database\modDataBase.vb" />
-    <Compile Include="Source\Modules\UI\modTime.vb" />
-    <Compile Include="Source\Modules\UI\modUpdateUI.vb" />
-    <Compile Include="Source\Modules\UI\modText.vb" />
-    <Compile Include="Source\Modules\Database\modTypes.vb" />
-    <Compile Include="Source\Modules\Database\modWeather.vb" />
+    <Compile Include="Source\Modules\Database\C_AutoTiles.vb" />
+    <Compile Include="Source\Modules\Database\C_Crafting.vb" />
+    <Compile Include="Source\Modules\Database\C_EventSystem.vb" />
+    <Compile Include="Source\Modules\UI\C_GuiFunctions.vb" />
+    <Compile Include="Source\Modules\Globals\C_Variables.vb" />
+    <Compile Include="Source\Modules\C_General.vb" />
+    <Compile Include="Source\Modules\C_GameLogic.vb" />
+    <Compile Include="Source\Modules\C_Graphics.vb" />
+    <Compile Include="Source\Modules\Database\C_HotBar.vb" />
+    <Compile Include="Source\Modules\Database\C_Housing.vb" />
+    <Compile Include="Source\Modules\Database\C_Parties.vb" />
+    <Compile Include="Source\Modules\Database\C_Pets.vb" />
+    <Compile Include="Source\Modules\Database\C_Player.vb" />
+    <Compile Include="Source\Modules\Database\C_Projectiles.vb" />
+    <Compile Include="Source\Modules\Database\C_Quest.vb" />
+    <Compile Include="Source\Modules\C_Sound.vb" />
+    <Compile Include="Source\Modules\Globals\C_Constants.vb" />
+    <Compile Include="Source\Modules\Database\C_DataBase.vb" />
+    <Compile Include="Source\Modules\UI\C_Time.vb" />
+    <Compile Include="Source\Modules\UI\C_UpdateUI.vb" />
+    <Compile Include="Source\Modules\UI\C_Text.vb" />
+    <Compile Include="Source\Modules\Database\C_Types.vb" />
+    <Compile Include="Source\Modules\Database\C_Weather.vb" />
     <Compile Include="My Project\AssemblyInfo.vb" />
     <Compile Include="My Project\Application.Designer.vb">
       <AutoGen>True</AutoGen>
@@ -159,9 +159,9 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
-    <Compile Include="Source\Modules\Network\ClientNetworkConfig.vb" />
-    <Compile Include="Source\Modules\Network\ClientNetworkReceive.vb" />
-    <Compile Include="Source\Modules\Network\ClientNetworkSend.vb" />
+    <Compile Include="Source\Modules\Network\C_NetworkConfig.vb" />
+    <Compile Include="Source\Modules\Network\C_NetworkReceive.vb" />
+    <Compile Include="Source\Modules\Network\C_NetworkSend.vb" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Source\Forms\frmAdmin.resx">

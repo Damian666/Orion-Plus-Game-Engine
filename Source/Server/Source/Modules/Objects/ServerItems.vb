@@ -1,3 +1,0 @@
-﻿Module ServerItems
-
-End Module

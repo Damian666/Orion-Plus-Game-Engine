@@ -114,7 +114,7 @@
                 Tile(Prefab).Layer(Layer).AutoTile = Val(myXml.ReadString("Prefab" & Prefab, "Layer" & Layer & "Autotile"))
             Next
             Tile(Prefab).Type = Val(myXml.ReadString("Prefab" & Prefab, "Type"))
-        Next Prefab
+        Next
 
         ResourcesNum = myXml.ReadString("Resources", "ResourcesNum")
         Resources = Split(ResourcesNum, ";")
