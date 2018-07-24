@@ -35,12 +35,12 @@ Friend Module E_Weather
                             WeatherParticle(i).type = CurrentWeather
                             WeatherParticle(i).Velocity = Rand(8, 14)
                             WeatherParticle(i).X = (TileView.Left * 32) - 32
-                            WeatherParticle(i).Y = ((TileView.Top * 32) + Rand(-32, GameWindow.Size.Y))
+                            WeatherParticle(i).Y = ((TileView.Top * 32) + Rand(-32, frmMapEditor.rsMap.Size.Height))
                         Else
                             WeatherParticle(i).InUse = 1
                             WeatherParticle(i).type = CurrentWeather
                             WeatherParticle(i).Velocity = Rand(10, 15)
-                            WeatherParticle(i).X = ((TileView.Left * 32) + Rand(-32, GameWindow.Size.X))
+                            WeatherParticle(i).X = ((TileView.Left * 32) + Rand(-32, frmMapEditor.rsMap.Size.Width))
                             WeatherParticle(i).Y = (TileView.Top * 32) - 32
                         End If
                         'Exit For
@@ -76,13 +76,13 @@ Friend Module E_Weather
 
         If DrawThunder > 0 Then
             Dim tmpSprite As Sprite
-            tmpSprite = New Sprite(New Texture(New SFML.Graphics.Image(GameWindow.Size.X, GameWindow.Size.Y, SFML.Graphics.Color.White))) With {
+            tmpSprite = New Sprite(New Texture(New SFML.Graphics.Image(frmMapEditor.rsMap.Size.Width, frmMapEditor.rsMap.Size.Height, SFML.Graphics.Color.White))) With {
                 .Color = New Color(255, 255, 255, 150),
-                .TextureRect = New IntRect(0, 0, GameWindow.Size.X, GameWindow.Size.Y),
+                .TextureRect = New IntRect(0, 0, frmMapEditor.rsMap.Size.Width, frmMapEditor.rsMap.Size.Height),
                 .Position = New Vector2f(0, 0)
             }
 
-            GameWindow.Draw(tmpSprite) '
+            frmMapEditor.rsMap.Draw(tmpSprite) '
 
             DrawThunder = DrawThunder - 1
 
@@ -102,7 +102,7 @@ Friend Module E_Weather
                 Else
                     SpriteLeft = WeatherParticle(i).type - 1
                 End If
-                RenderSprite(WeatherSprite, GameWindow, ConvertMapX(WeatherParticle(i).X), ConvertMapY(WeatherParticle(i).Y), SpriteLeft * 32, 0, 32, 32)
+                RenderSprite(WeatherSprite, frmMapEditor.rsMap.SurfacePtr, ConvertMapX(WeatherParticle(i).X), ConvertMapY(WeatherParticle(i).Y), SpriteLeft * 32, 0, 32, 32)
             End If
         Next
 
@@ -140,12 +140,12 @@ Friend Module E_Weather
         Dim tmpSprite As Sprite
         tmpSprite = New Sprite(FogGFX(fogNum)) With {
             .Color = New Color(255, 255, 255, CurrentFogOpacity),
-            .TextureRect = New IntRect(0, 0, GameWindow.Size.X + 200, GameWindow.Size.Y + 200),
+            .TextureRect = New IntRect(0, 0, frmMapEditor.rsMap.Size.Width + 200, frmMapEditor.rsMap.Size.Height + 200),
             .Position = New Vector2f((horz * 2.5) + 50, (vert * 3.5) + 50),
-            .Scale = (New Vector2f(CDbl((GameWindow.Size.X + 200) / FogGFXInfo(fogNum).width), CDbl((GameWindow.Size.Y + 200) / FogGFXInfo(fogNum).height)))
+            .Scale = (New Vector2f(CDbl((frmMapEditor.rsMap.Size.Width + 200) / FogGFXInfo(fogNum).width), CDbl((frmMapEditor.rsMap.Size.Height + 200) / FogGFXInfo(fogNum).height)))
         }
 
-        GameWindow.Draw(tmpSprite) '
+        frmMapEditor.rsMap.Draw(tmpSprite) '
 
     End Sub
 

@@ -3,7 +3,6 @@ Imports SFML.Graphics
 Imports SFML.Window
 
 Module E_Graphics
-    Friend GameWindow As RenderWindow
     Friend TilesetWindow As RenderWindow
 
     Friend EditorItem_Furniture As RenderWindow
@@ -109,10 +108,6 @@ Module E_Graphics
     End Structure
 
     Sub InitGraphics()
-
-        GameWindow = New RenderWindow(frmMapEditor.picScreen.Handle)
-        GameWindow.SetFramerateLimit(FPS_LIMIT)
-
         TilesetWindow = New RenderWindow(frmMapEditor.picBackSelect.Handle)
 
         EditorItem_Furniture = New RenderWindow(frmItem.picFurniture.Handle)
@@ -401,7 +396,7 @@ Module E_Graphics
         rec.Width = 32
         rec.Height = 32
 
-        RenderSprite(DirectionsSprite, GameWindow, ConvertMapX(X * PIC_X), ConvertMapY(Y * PIC_Y), rec.X, rec.Y, rec.Width, rec.Height)
+        RenderSprite(DirectionsSprite, frmMapEditor.rsMap.SurfacePtr, ConvertMapX(X * PIC_X), ConvertMapY(Y * PIC_Y), rec.X, rec.Y, rec.Width, rec.Height)
 
         ' render dir blobs
         For i = 1 To 4
@@ -415,7 +410,7 @@ Module E_Graphics
             End If
             rec.Height = 8
 
-            RenderSprite(DirectionsSprite, GameWindow, ConvertMapX(X * PIC_X) + DirArrowX(i), ConvertMapY(Y * PIC_Y) + DirArrowY(i), rec.X, rec.Y, rec.Width, rec.Height)
+            RenderSprite(DirectionsSprite, frmMapEditor.rsMap.SurfacePtr, ConvertMapX(X * PIC_X) + DirArrowX(i), ConvertMapY(Y * PIC_Y) + DirArrowY(i), rec.X, rec.Y, rec.Width, rec.Height)
         Next
     End Sub
 
@@ -545,7 +540,7 @@ Module E_Graphics
             .TextureTimer = GetTickCount() + 100000
         End With
 
-        RenderSprite(ResourcesSprite(Resource), GameWindow, X, Y, rec.X, rec.Y, rec.Width, rec.Height)
+        RenderSprite(ResourcesSprite(Resource), frmMapEditor.rsMap.SurfacePtr, X, Y, rec.X, rec.Y, rec.Width, rec.Height)
     End Sub
 
     Friend Sub DrawMapResource(Resource_num As Integer)
@@ -626,7 +621,7 @@ Module E_Graphics
         x = ConvertMapX(MapItem(itemnum).X * PIC_X)
         y = ConvertMapY(MapItem(itemnum).Y * PIC_Y)
 
-        RenderSprite(ItemsSprite(PicNum), GameWindow, x, y, srcrec.X, srcrec.Y, srcrec.Width, srcrec.Height)
+        RenderSprite(ItemsSprite(PicNum), frmMapEditor.rsMap.SurfacePtr, x, y, srcrec.X, srcrec.Y, srcrec.Width, srcrec.Height)
     End Sub
 
     Friend Sub DrawCharacter(Sprite As Integer, x2 As Integer, y2 As Integer, rec As Rectangle)
@@ -652,7 +647,7 @@ Module E_Graphics
         width = (rec.Width)
         height = (rec.Height)
 
-        RenderSprite(CharacterSprite(Sprite), GameWindow, X, y, rec.X, rec.Y, rec.Width, rec.Height)
+        RenderSprite(CharacterSprite(Sprite), frmMapEditor.rsMap.SurfacePtr, X, y, rec.X, rec.Y, rec.Width, rec.Height)
     End Sub
 
     Friend Sub DrawMapTile(X As Integer, Y As Integer)
@@ -681,7 +676,7 @@ Module E_Graphics
                             .Height = 32
                         End With
 
-                        RenderSprite(TileSetSprite(.Layer(i).Tileset), GameWindow, ConvertMapX(X * PIC_X), ConvertMapY(Y * PIC_Y), srcrect.X, srcrect.Y, srcrect.Width, srcrect.Height)
+                        RenderSprite(TileSetSprite(.Layer(i).Tileset), frmMapEditor.rsMap.SurfacePtr, ConvertMapX(X * PIC_X), ConvertMapY(Y * PIC_Y), srcrect.X, srcrect.Y, srcrect.Width, srcrect.Height)
 
                     ElseIf Autotile(X, Y).Layer(i).renderState = RENDER_STATE_AUTOTILE Then
                         ' Draw autotiles
@@ -699,7 +694,7 @@ Module E_Graphics
     Friend Sub DrawMapFringeTile(X As Integer, Y As Integer)
         Dim i As Integer
         Dim srcrect As New Rectangle(0, 0, 0, 0)
-        Dim dest As Rectangle = New Rectangle(frmMapEditor.PointToScreen(frmMapEditor.picScreen.Location), New Size(32, 32))
+        'Dim dest As Rectangle = New Rectangle(frmMapEditor.PointToScreen(frmMapEditor.picScreen.Location), New Size(32, 32))
         'Dim tmpSprite As Sprite
 
         If GettingMap Then Exit Sub
@@ -727,7 +722,7 @@ Module E_Graphics
                             .Height = 32
                         End With
 
-                        RenderSprite(TileSetSprite(.Layer(i).Tileset), GameWindow, ConvertMapX(X * PIC_X), ConvertMapY(Y * PIC_Y), srcrect.X, srcrect.Y, srcrect.Width, srcrect.Height)
+                        RenderSprite(TileSetSprite(.Layer(i).Tileset), frmMapEditor.rsMap.SurfacePtr, ConvertMapX(X * PIC_X), ConvertMapY(Y * PIC_Y), srcrect.X, srcrect.Y, srcrect.Width, srcrect.Height)
 
                     ElseIf Autotile(X, Y).Layer(i).renderState = RENDER_STATE_AUTOTILE Then
                         ' Draw autotiles
@@ -921,206 +916,9 @@ Module E_Graphics
             End If
         Next
     End Sub
-
-    Friend Sub Render_Graphics()
-        Dim X As Integer, Y As Integer, I As Integer
-
-        'Don't Render IF
-        If GettingMap Then Exit Sub
-
-        'lets get going
-
-        'update view around player
-        UpdateCamera()
-
-        'let program do other things
-        Application.DoEvents()
-
-        frmMapEditor.picScreen.Width = (Map.MaxX * PIC_X) + PIC_X
-        frmMapEditor.picScreen.Height = (Map.MaxY * PIC_Y) + PIC_Y
-
-        'Clear each of our render targets
-        GameWindow.DispatchEvents()
-        GameWindow.Clear(Color.Black)
-
-        GameWindow.SetView(New View(New FloatRect(0, 0, frmMapEditor.picScreen.Width, frmMapEditor.picScreen.Height)))
-        TilesetWindow.SetView(New View(New FloatRect(0, 0, frmMapEditor.picBackSelect.Width, frmMapEditor.picBackSelect.Height)))
-
-        'clear any unused gfx
-        ClearGFX()
-
-        ' update animation editor
-        'If Editor = EDITOR_ANIMATION Then
-        '    EditorAnim_DrawAnim()
-        'End If
-
-        If InMapEditor AndAlso MapData = True Then
-            ' blit lower tiles
-            If NumTileSets > 0 Then
-                For X = TileView.Left To TileView.Right + 1
-                    For Y = TileView.Top To TileView.Bottom + 1
-                        If IsValidMapPoint(X, Y) Then
-                            DrawMapTile(X, Y)
-                        End If
-                    Next
-                Next
-            End If
-
-            ' events
-            If Map.CurrentEvents > 0 AndAlso Map.CurrentEvents <= Map.EventCount Then
-
-                For I = 1 To Map.CurrentEvents
-                    If Map.MapEvents(I).Position = 0 Then
-                        DrawEvent(I)
-                    End If
-                Next
-            End If
-
-            ' Draw out the items
-            If NumItems > 0 Then
-                For I = 1 To MAX_MAP_ITEMS
-
-                    If MapItem(I).Num > 0 Then
-                        DrawItem(I)
-                    End If
-
-                Next
-            End If
-
-            'Draw sum d00rs.
-            For X = TileView.Left To TileView.Right
-                For Y = TileView.Top To TileView.Bottom
-
-                    If IsValidMapPoint(X, Y) Then
-                        If Map.Tile(X, Y).Type = TileType.Door Then
-                            DrawDoor(X, Y)
-                        End If
-                    End If
-
-                Next
-            Next
-
-            ' Y-based render. Renders Players, Npcs and Resources based on Y-axis.
-            For Y = 0 To Map.MaxY
-
-                If NumCharacters > 0 Then
-
-                    ' Npcs
-                    For I = 1 To MAX_MAP_NPCS
-                        If MapNpc(I).Y = Y Then
-                            DrawNpc(I)
-                        End If
-                    Next
-
-                    ' events
-                    If Map.CurrentEvents > 0 AndAlso Map.CurrentEvents <= Map.EventCount Then
-
-                        For I = 1 To Map.CurrentEvents
-                            If Map.MapEvents(I).Position = 1 Then
-                                If Y = Map.MapEvents(I).Y Then
-                                    DrawEvent(I)
-                                End If
-                            End If
-                        Next
-                    End If
-
-                End If
-
-                ' Resources
-                If NumResources > 0 Then
-                    If Resources_Init Then
-                        If Resource_Index > 0 Then
-                            For I = 1 To Resource_Index
-                                If MapResource(I).Y = Y Then
-                                    DrawMapResource(I)
-                                End If
-                            Next
-                        End If
-                    End If
-                End If
-            Next
-
-            'events
-            If Map.CurrentEvents > 0 AndAlso Map.CurrentEvents <= Map.EventCount Then
-
-                For I = 1 To Map.CurrentEvents
-                    If Map.MapEvents(I).Position = 2 Then
-                        DrawEvent(I)
-                    End If
-                Next
-            End If
-
-            ' blit out upper tiles
-            If NumTileSets > 0 Then
-                For X = TileView.Left To TileView.Right + 1
-                    For Y = TileView.Top To TileView.Bottom + 1
-                        If IsValidMapPoint(X, Y) Then
-                            DrawMapFringeTile(X, Y)
-                        End If
-                    Next
-                Next
-            End If
-
-            DrawWeather()
-            DrawThunderEffect()
-            DrawMapTint()
-
-            ' Draw out a square at mouse cursor
-            If MapGrid = True Then
-                DrawGrid()
-            End If
-
-            If SelectedTab = 4 Then
-                For X = TileView.Left To TileView.Right
-                    For Y = TileView.Top To TileView.Bottom
-                        If IsValidMapPoint(X, Y) Then
-                            DrawDirections(X, Y)
-                        End If
-                    Next
-                Next
-            End If
-
-            'draw event names
-            For I = 0 To Map.CurrentEvents
-                If Map.MapEvents(I).Visible = 1 Then
-                    If Map.MapEvents(I).ShowName = 1 Then
-                        DrawEventName(I)
-                    End If
-                End If
-            Next
-
-            ' draw npc names
-            For I = 1 To MAX_MAP_NPCS
-                If MapNpc(I).Num > 0 Then
-                    DrawNPCName(I)
-                End If
-            Next
-
-            If CurrentFog > 0 Then
-                DrawFog()
-            End If
-
-            ' Blit out map attributes
-            If InMapEditor Then
-                DrawMapAttributes()
-                DrawTileOutline()
-            End If
-
-            If InMapEditor AndAlso SelectedTab = 5 Then
-                DrawEvents()
-                EditorEvent_DrawGraphic()
-            End If
-
-            ' Draw map name
-            DrawMapName()
-        End If
-
-        'and finally show everything on screen
-        GameWindow.Display()
-    End Sub
-
+    
     Sub DrawMapName()
-        DrawText(DrawMapNameX, DrawMapNameY, Map.Name, DrawMapNameColor, Color.Black, GameWindow)
+        DrawText(DrawMapNameX, DrawMapNameY, Map.Name, DrawMapNameColor, Color.Black, frmMapEditor.rsMap.SurfacePtr)
     End Sub
 
     Friend Sub DrawDoor(X As Integer, Y As Integer)
@@ -1163,7 +961,7 @@ Module E_Graphics
         x2 = (X * PIC_X)
         y2 = (Y * PIC_Y) - (DoorGFXInfo.height / 2) + 4
 
-        RenderSprite(DoorSprite, GameWindow, ConvertMapX(X * PIC_X), ConvertMapY(Y * PIC_Y), rec.X, rec.Y, rec.Width, rec.Height)
+        RenderSprite(DoorSprite, frmMapEditor.rsMap.SurfacePtr, ConvertMapX(X * PIC_X), ConvertMapY(Y * PIC_Y), rec.X, rec.Y, rec.Width, rec.Height)
     End Sub
 
     Friend Sub DrawTileOutline()
@@ -1189,7 +987,7 @@ Module E_Graphics
         }
 
         If SelectedTab = 2 Then
-            'RenderTexture(MiscGFX, GameWindow, ConvertMapX(CurX * PIC_X), ConvertMapY(CurY * PIC_Y), rec.X, rec.Y, rec.Width, rec.Height)
+            'RenderTexture(MiscGFX, frmMapEditor.rsMap.SurfacePtr, ConvertMapX(CurX * PIC_X), ConvertMapY(CurY * PIC_Y), rec.X, rec.Y, rec.Width, rec.Height)
             rec2.Size = New Vector2f(rec.Width, rec.Height)
         Else
             If TileSetTextureInfo(frmMapEditor.cmbTileSets.SelectedIndex + 1).IsLoaded = False Then
@@ -1201,14 +999,14 @@ Module E_Graphics
             End With
 
             If EditorTileWidth = 1 AndAlso EditorTileHeight = 1 Then
-                RenderSprite(TileSetSprite(frmMapEditor.cmbTileSets.SelectedIndex + 1), GameWindow, ConvertMapX(CurX * PIC_X), ConvertMapY(CurY * PIC_Y), EditorTileSelStart.X * PIC_X, EditorTileSelStart.Y * PIC_Y, rec.Width, rec.Height)
+                RenderSprite(TileSetSprite(frmMapEditor.cmbTileSets.SelectedIndex + 1), frmMapEditor.rsMap.SurfacePtr, ConvertMapX(CurX * PIC_X), ConvertMapY(CurY * PIC_Y), EditorTileSelStart.X * PIC_X, EditorTileSelStart.Y * PIC_Y, rec.Width, rec.Height)
                 rec2.Size = New Vector2f(rec.Width, rec.Height)
             Else
                 If frmMapEditor.cmbAutoTile.SelectedIndex > 0 Then
-                    RenderSprite(TileSetSprite(frmMapEditor.cmbTileSets.SelectedIndex + 1), GameWindow, ConvertMapX(CurX * PIC_X), ConvertMapY(CurY * PIC_Y), EditorTileSelStart.X * PIC_X, EditorTileSelStart.Y * PIC_Y, rec.Width, rec.Height)
+                    RenderSprite(TileSetSprite(frmMapEditor.cmbTileSets.SelectedIndex + 1), frmMapEditor.rsMap.SurfacePtr, ConvertMapX(CurX * PIC_X), ConvertMapY(CurY * PIC_Y), EditorTileSelStart.X * PIC_X, EditorTileSelStart.Y * PIC_Y, rec.Width, rec.Height)
                     rec2.Size = New Vector2f(rec.Width, rec.Height)
                 Else
-                    RenderSprite(TileSetSprite(frmMapEditor.cmbTileSets.SelectedIndex + 1), GameWindow, ConvertMapX(CurX * PIC_X), ConvertMapY(CurY * PIC_Y), EditorTileSelStart.X * PIC_X, EditorTileSelStart.Y * PIC_Y, EditorTileSelEnd.X * PIC_X, EditorTileSelEnd.Y * PIC_Y)
+                    RenderSprite(TileSetSprite(frmMapEditor.cmbTileSets.SelectedIndex + 1), frmMapEditor.rsMap.SurfacePtr, ConvertMapX(CurX * PIC_X), ConvertMapY(CurY * PIC_Y), EditorTileSelStart.X * PIC_X, EditorTileSelStart.Y * PIC_Y, EditorTileSelEnd.X * PIC_X, EditorTileSelEnd.Y * PIC_Y)
                     rec2.Size = New Vector2f(EditorTileSelEnd.X * PIC_X, EditorTileSelEnd.Y * PIC_Y)
                 End If
 
@@ -1217,7 +1015,7 @@ Module E_Graphics
         End If
 
         rec2.Position = New Vector2f(ConvertMapX(CurX * PIC_X), ConvertMapY(CurY * PIC_Y))
-        GameWindow.Draw(rec2)
+        frmMapEditor.rsMap.Draw(rec2)
     End Sub
 
     Friend Sub DrawGrid()
@@ -1236,7 +1034,7 @@ Module E_Graphics
                     rec.Size = New Vector2f((x * PIC_X), (y * PIC_X))
                     rec.Position = New Vector2f(ConvertMapX((x - 1) * PIC_X), ConvertMapY((y - 1) * PIC_Y))
 
-                    GameWindow.Draw(rec)
+                    frmMapEditor.rsMap.Draw(rec)
                 End If
 
             Next
@@ -1256,7 +1054,7 @@ Module E_Graphics
             .Position = New Vector2f(0, 0)
         }
 
-        GameWindow.Draw(MapTintSprite)
+        frmMapEditor.rsMap.Draw(MapTintSprite)
 
     End Sub
 

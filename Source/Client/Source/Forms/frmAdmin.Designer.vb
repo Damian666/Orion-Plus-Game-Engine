@@ -22,7 +22,7 @@ Partial Class FrmAdmin
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmAdmin))
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(FrmAdmin))
         Me.btnRespawn = New System.Windows.Forms.Button()
         Me.btnMapReport = New System.Windows.Forms.Button()
         Me.btnALoc = New System.Windows.Forms.Button()
@@ -52,7 +52,6 @@ Partial Class FrmAdmin
         Me.cmbAccess = New System.Windows.Forms.ComboBox()
         Me.TabPage3 = New System.Windows.Forms.TabPage()
         Me.TabPage4 = New System.Windows.Forms.TabPage()
-        Me.btnMapEditor = New System.Windows.Forms.Button()
         Me.nudSpawnItemAmount = New System.Windows.Forms.NumericUpDown()
         Me.cmbSpawnItem = New System.Windows.Forms.ComboBox()
         Me.TabControl1.SuspendLayout()
@@ -332,7 +331,6 @@ Partial Class FrmAdmin
         '
         'TabPage4
         '
-        Me.TabPage4.Controls.Add(Me.btnMapEditor)
         Me.TabPage4.Controls.Add(Me.nudSpawnItemAmount)
         Me.TabPage4.Controls.Add(Me.cmbSpawnItem)
         Me.TabPage4.Controls.Add(Me.btnRespawn)
@@ -347,15 +345,6 @@ Partial Class FrmAdmin
         Me.TabPage4.TabIndex = 3
         Me.TabPage4.Text = "Map Tools"
         Me.TabPage4.UseVisualStyleBackColor = True
-        '
-        'btnMapEditor
-        '
-        Me.btnMapEditor.Location = New System.Drawing.Point(14, 44)
-        Me.btnMapEditor.Name = "btnMapEditor"
-        Me.btnMapEditor.Size = New System.Drawing.Size(106, 25)
-        Me.btnMapEditor.TabIndex = 38
-        Me.btnMapEditor.Text = "Map Editor"
-        Me.btnMapEditor.UseVisualStyleBackColor = True
         '
         'nudSpawnItemAmount
         '
@@ -373,7 +362,7 @@ Partial Class FrmAdmin
         Me.cmbSpawnItem.Size = New System.Drawing.Size(159, 21)
         Me.cmbSpawnItem.TabIndex = 36
         '
-        'frmAdmin
+        'FrmAdmin
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
@@ -383,7 +372,7 @@ Partial Class FrmAdmin
         Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.MaximizeBox = False
         Me.MinimizeBox = False
-        Me.Name = "frmAdmin"
+        Me.Name = "FrmAdmin"
         Me.ShowIcon = False
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent
         Me.Text = "Admin Panel"
@@ -429,6 +418,5 @@ Partial Class FrmAdmin
     Friend WithEvents nudAdminSprite As Windows.Forms.NumericUpDown
     Friend WithEvents nudAdminMap As Windows.Forms.NumericUpDown
     Friend WithEvents btnLevelUp As Windows.Forms.Button
-    Friend WithEvents btnMapEditor As Windows.Forms.Button
     Friend WithEvents nudSpawnItemAmount As Windows.Forms.NumericUpDown
 End Class

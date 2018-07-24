@@ -25,7 +25,7 @@
         lstResources.Items.Clear()
 
         For i = 0 To UBound(Resources)
-            lstResources.Items.Add(Resource(CInt(Resources(i))).Name)
+            lstResources.Items.Add(Resources(i))
         Next
     End Sub
 

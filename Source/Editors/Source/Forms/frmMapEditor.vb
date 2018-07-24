@@ -1,7 +1,6 @@
 ﻿Imports System.ComponentModel
 
 Friend Class frmMapEditor
-
 #Region "Form Code"
 
     Private Sub FrmEditor_Map_Load(sender As Object, e As EventArgs) Handles MyBase.Shown
@@ -15,33 +14,12 @@ Friend Class frmMapEditor
 
         nudFog.Maximum = NumFogs
 
-        picScreen.Width = (Map.MaxX * PIC_X) + PIC_X
-        picScreen.Height = (Map.MaxY * PIC_Y) + PIC_Y
-
-        scrlMapViewH.Maximum = (Map.MaxX \ PIC_X) + PIC_X
-        scrlMapViewV.Maximum = (Map.MaxY \ PIC_Y) + PIC_Y
-
-        GameWindow.SetView(New SFML.Graphics.View(New SFML.Graphics.FloatRect(0, 0, picScreen.Width, picScreen.Height)))
+        rsMap.Width = (Map.MaxX + 1) * PIC_X
+        rsMap.Height = (Map.MaxY + 1) * PIC_Y
+        
         TilesetWindow.SetView(New SFML.Graphics.View(New SFML.Graphics.FloatRect(0, 0, picBackSelect.Width, picBackSelect.Height)))
-
-        picScreen.Focus()
-
     End Sub
-
-    Private Sub FrmEditor_MapEditor_Resize(sender As Object, e As EventArgs) Handles MyBase.Resize
-        If GameWindow Is Nothing Then Exit Sub
-
-        picScreen.Width = (Map.MaxX * PIC_X) + PIC_X
-        picScreen.Height = (Map.MaxY * PIC_Y) + PIC_Y
-
-        ' set the scrollbars
-        scrlMapViewH.Maximum = (Map.MaxX \ PIC_X) + PIC_X
-        scrlMapViewV.Maximum = (Map.MaxY \ PIC_Y) + PIC_Y
-
-        GameWindow.SetView(New SFML.Graphics.View(New SFML.Graphics.FloatRect(0, 0, picScreen.Width, picScreen.Height)))
-
-    End Sub
-
+    
     Private Sub FrmEditor_MapEditor_Closing(sender As Object, e As CancelEventArgs) Handles MyBase.Closing
         MapEditorCancel()
     End Sub
@@ -197,19 +175,207 @@ Friend Class frmMapEditor
     End Sub
 #End Region
 
-#Region "PicScreen"
-    Private Sub Picscreen_MouseDown(sender As Object, e As MouseEventArgs) Handles picScreen.MouseDown
+#Region "rsMap"
+
+    Private Sub rsMap_Render(sender As Object, e As EventArgs) Handles rsMap.Render
+        Dim X As Integer, Y As Integer, I As Integer
+
+        'Don't Render IF
+        If GettingMap Then Exit Sub
+
+        'lets get going
+
+        'update view around player
+        UpdateCamera()
+
+        'let program do other things
+        Application.DoEvents()
+
+        rsMap.Width = (Map.MaxX + 1) * PIC_X
+        rsMap.Height = (Map.MaxY + 1) * PIC_Y
+        
+        'clear any unused gfx
+        ClearGFX()
+
+        ' update animation editor
+        'If Editor = EDITOR_ANIMATION Then
+        '    EditorAnim_DrawAnim()
+        'End If
+
+        If InMapEditor AndAlso MapData = True Then
+            ' blit lower tiles
+            If NumTileSets > 0 Then
+                For X = TileView.Left To TileView.Right + 1
+                    For Y = TileView.Top To TileView.Bottom + 1
+                        If IsValidMapPoint(X, Y) Then
+                            DrawMapTile(X, Y)
+                        End If
+                    Next
+                Next
+            End If
+
+            ' events
+            If Map.CurrentEvents > 0 AndAlso Map.CurrentEvents <= Map.EventCount Then
+
+                For I = 1 To Map.CurrentEvents
+                    If Map.MapEvents(I).Position = 0 Then
+                        DrawEvent(I)
+                    End If
+                Next
+            End If
+
+            ' Draw out the items
+            If NumItems > 0 Then
+                For I = 1 To MAX_MAP_ITEMS
+
+                    If MapItem(I).Num > 0 Then
+                        DrawItem(I)
+                    End If
+
+                Next
+            End If
+
+            'Draw sum d00rs.
+            For X = TileView.Left To TileView.Right
+                For Y = TileView.Top To TileView.Bottom
+
+                    If IsValidMapPoint(X, Y) Then
+                        If Map.Tile(X, Y).Type = TileType.Door Then
+                            DrawDoor(X, Y)
+                        End If
+                    End If
+
+                Next
+            Next
+
+            ' Y-based render. Renders Players, Npcs and Resources based on Y-axis.
+            For Y = 0 To Map.MaxY
+
+                If NumCharacters > 0 Then
+
+                    ' Npcs
+                    For I = 1 To MAX_MAP_NPCS
+                        If MapNpc(I).Y = Y Then
+                            DrawNpc(I)
+                        End If
+                    Next
+
+                    ' events
+                    If Map.CurrentEvents > 0 AndAlso Map.CurrentEvents <= Map.EventCount Then
+
+                        For I = 1 To Map.CurrentEvents
+                            If Map.MapEvents(I).Position = 1 Then
+                                If Y = Map.MapEvents(I).Y Then
+                                    DrawEvent(I)
+                                End If
+                            End If
+                        Next
+                    End If
+
+                End If
+
+                ' Resources
+                If NumResources > 0 Then
+                    If Resources_Init Then
+                        If Resource_Index > 0 Then
+                            For I = 1 To Resource_Index
+                                If MapResource(I).Y = Y Then
+                                    DrawMapResource(I)
+                                End If
+                            Next
+                        End If
+                    End If
+                End If
+            Next
+
+            'events
+            If Map.CurrentEvents > 0 AndAlso Map.CurrentEvents <= Map.EventCount Then
+
+                For I = 1 To Map.CurrentEvents
+                    If Map.MapEvents(I).Position = 2 Then
+                        DrawEvent(I)
+                    End If
+                Next
+            End If
+
+            ' blit out upper tiles
+            If NumTileSets > 0 Then
+                For X = TileView.Left To TileView.Right + 1
+                    For Y = TileView.Top To TileView.Bottom + 1
+                        If IsValidMapPoint(X, Y) Then
+                            DrawMapFringeTile(X, Y)
+                        End If
+                    Next
+                Next
+            End If
+
+            DrawWeather()
+            DrawThunderEffect()
+            DrawMapTint()
+
+            ' Draw out a square at mouse cursor
+            If MapGrid = True Then
+                DrawGrid()
+            End If
+
+            If SelectedTab = 4 Then
+                For X = TileView.Left To TileView.Right
+                    For Y = TileView.Top To TileView.Bottom
+                        If IsValidMapPoint(X, Y) Then
+                            DrawDirections(X, Y)
+                        End If
+                    Next
+                Next
+            End If
+
+            'draw event names
+            For I = 0 To Map.CurrentEvents
+                If Map.MapEvents(I).Visible = 1 Then
+                    If Map.MapEvents(I).ShowName = 1 Then
+                        DrawEventName(I)
+                    End If
+                End If
+            Next
+
+            ' draw npc names
+            For I = 1 To MAX_MAP_NPCS
+                If MapNpc(I).Num > 0 Then
+                    DrawNPCName(I)
+                End If
+            Next
+
+            If CurrentFog > 0 Then
+                DrawFog()
+            End If
+
+            ' Blit out map attributes
+            If InMapEditor Then
+                DrawMapAttributes()
+                DrawTileOutline()
+            End If
+
+            If InMapEditor AndAlso SelectedTab = 5 Then
+                DrawEvents()
+                EditorEvent_DrawGraphic()
+            End If
+
+            ' Draw map name
+            DrawMapName()
+        End If
+    End Sub
+
+    Private Sub rsMap_MouseDown(sender As Object, e As MouseEventArgs) Handles rsMap.MouseDown
         If e.X > pnlBack2.Width - 32 OrElse e.Y > pnlBack2.Height - 32 Then Exit Sub
         MapEditorMouseDown(e.Button, e.X, e.Y, False)
 
     End Sub
 
-    Private Overloads Sub Picscreen_Paint(sender As Object, e As PaintEventArgs) Handles picScreen.Paint
+    Private Overloads Sub rsMap_Paint(sender As Object, e As PaintEventArgs) Handles rsMap.Paint
         'This is here to make sure that the box dosen't try to re-paint itself... saves time and w/e else
         Exit Sub
     End Sub
 
-    Private Sub Picscreen_MouseMove(sender As Object, e As MouseEventArgs) Handles picScreen.MouseMove
+    Private Sub rsMap_MouseMove(sender As Object, e As MouseEventArgs) Handles rsMap.MouseMove
 
         CurX = TileView.Left + ((e.Location.X + Camera.Left) \ PIC_X)
         CurY = TileView.Top + ((e.Location.Y + Camera.Top) \ PIC_Y)
@@ -224,7 +390,7 @@ Friend Class frmMapEditor
         tslCurXY.Text = "X: " & CurX & " - " & " Y: " & CurY
     End Sub
 
-    Private Sub Picscreen_MouseUp(sender As Object, e As MouseEventArgs) Handles picScreen.MouseUp
+    Private Sub rsMap_MouseUp(sender As Object, e As MouseEventArgs) Handles rsMap.MouseUp
 
         CurX = TileView.Left + ((e.Location.X + Camera.Left) \ PIC_X)
         CurY = TileView.Top + ((e.Location.Y + Camera.Top) \ PIC_Y)
@@ -661,15 +827,7 @@ Friend Class frmMapEditor
 
         GettingMap = False
     End Sub
-
-    Private Sub ScrlMapViewH_Scroll(sender As Object, e As EventArgs) Handles scrlMapViewH.ValueChanged
-        EditorViewX = scrlMapViewH.Value
-    End Sub
-
-    Private Sub ScrlMapViewV_Scroll(sender As Object, e As EventArgs) Handles scrlMapViewV.ValueChanged
-        EditorViewY = scrlMapViewV.Value
-    End Sub
-
+    
     Private Sub ChkInstance_CheckedChanged(sender As Object, e As EventArgs) Handles chkInstance.CheckedChanged
         If chkInstance.Checked = True Then
             Map.Instanced = 1
@@ -742,7 +900,6 @@ Friend Class frmMapEditor
         Application.DoEvents()
         Me.WindowState = FormWindowState.Normal
     End Sub
-
 #End Region
 
 End Class

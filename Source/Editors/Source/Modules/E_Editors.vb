@@ -155,18 +155,14 @@ Module E_Editors
         frmMapEditor.nudIntensity.Value = Map.WeatherIntensity
 
         SelectedTab = 1
-
-        GameWindow.SetView(New SFML.Graphics.View(New SFML.Graphics.FloatRect(0, 0, frmMapEditor.picScreen.Width, frmMapEditor.picScreen.Height)))
-
+        
         frmMapEditor.tslCurMap.Text = "Map: " & Map.mapNum
 
         ' show the form
         frmMapEditor.Visible = True
 
         GameStarted = True
-
-        frmMapEditor.picScreen.Focus()
-
+        
         InitMapEditor = False
     End Sub
 
