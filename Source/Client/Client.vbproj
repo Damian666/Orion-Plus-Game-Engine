@@ -12,7 +12,7 @@
     <AssemblyName>Orion+ Client</AssemblyName>
     <FileAlignment>512</FileAlignment>
     <MyType>WindowsForms</MyType>
-    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <OptionExplicit>On</OptionExplicit>
     <OptionCompare>Binary</OptionCompare>
     <OptionStrict>Off</OptionStrict>
@@ -77,8 +77,8 @@
     <Reference Include="DarkUI">
       <HintPath>..\Editors\DarkUI.dll</HintPath>
     </Reference>
-    <Reference Include="SFML.Portable, Version=2.0.6757.25898, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\SFML-Portable-2.1.1.4.0\lib\SFML.Portable.dll</HintPath>
+    <Reference Include="SFML.Portable, Version=2.0.6778.23407, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\SFML-Portable-2.1.1.5.0\lib\SFML.Portable.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Drawing" />
