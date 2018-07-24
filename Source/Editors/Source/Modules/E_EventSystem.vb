@@ -2846,7 +2846,7 @@ newlist:
                 Case 0
                     tX = ((x) - 4) + (PIC_X * 0.5)
                     tY = ((y) - 7) + (PIC_Y * 0.5)
-                    DrawText(tX, tY, "EV", (SFML.Graphics.Color.Green), (SFML.Graphics.Color.Black), frmMapEditor.rsMap.SurfacePtr)
+                    DrawText(tX, tY, "EV", (SFML.Graphics.Color.Green), (SFML.Graphics.Color.Black), frmMapEditor.rsMap.RenderWindow)
                 Case 1
                     If Map.Events(i).Pages(1).Graphic > 0 AndAlso Map.Events(i).Pages(1).Graphic <= NumCharacters Then
                         If CharacterGFXInfo(Map.Events(i).Pages(1).Graphic).IsLoaded = False Then
@@ -2904,9 +2904,9 @@ newlist:
                         End With
 
                         If rec.Height > 32 Then
-                            RenderSprite(TileSetSprite(Map.Events(i).Pages(1).Graphic), frmMapEditor.rsMap.SurfacePtr, ConvertMapX(Map.Events(i).X * PIC_X), ConvertMapY(Map.Events(i).Y * PIC_Y) - PIC_Y, rec.X, rec.Y, rec.Width, rec.Height)
+                            RenderSprite(TileSetSprite(Map.Events(i).Pages(1).Graphic), frmMapEditor.rsMap.RenderWindow, ConvertMapX(Map.Events(i).X * PIC_X), ConvertMapY(Map.Events(i).Y * PIC_Y) - PIC_Y, rec.X, rec.Y, rec.Width, rec.Height)
                         Else
-                            RenderSprite(TileSetSprite(Map.Events(i).Pages(1).Graphic), frmMapEditor.rsMap.SurfacePtr, ConvertMapX(Map.Events(i).X * PIC_X), ConvertMapY(Map.Events(i).Y * PIC_Y), rec.X, rec.Y, rec.Width, rec.Height)
+                            RenderSprite(TileSetSprite(Map.Events(i).Pages(1).Graphic), frmMapEditor.rsMap.RenderWindow, ConvertMapX(Map.Events(i).X * PIC_X), ConvertMapY(Map.Events(i).Y * PIC_Y), rec.X, rec.Y, rec.Width, rec.Height)
                         End If
 
                     Else
@@ -3025,9 +3025,9 @@ nextevent:
                 Y = Y - (sRect.Bottom - sRect.Top) + 32
 
                 If Map.MapEvents(Id).GraphicY2 > 1 Then
-                    RenderSprite(TileSetSprite(Map.MapEvents(Id).GraphicNum), frmMapEditor.rsMap.SurfacePtr, ConvertMapX(Map.MapEvents(Id).X * PIC_X), ConvertMapY(Map.MapEvents(Id).Y * PIC_Y) - PIC_Y, sRect.Left, sRect.Top, sRect.Width, sRect.Height)
+                    RenderSprite(TileSetSprite(Map.MapEvents(Id).GraphicNum), frmMapEditor.rsMap.RenderWindow, ConvertMapX(Map.MapEvents(Id).X * PIC_X), ConvertMapY(Map.MapEvents(Id).Y * PIC_Y) - PIC_Y, sRect.Left, sRect.Top, sRect.Width, sRect.Height)
                 Else
-                    RenderSprite(TileSetSprite(Map.MapEvents(Id).GraphicNum), frmMapEditor.rsMap.SurfacePtr, ConvertMapX(Map.MapEvents(Id).X * PIC_X), ConvertMapY(Map.MapEvents(Id).Y * PIC_Y), sRect.Left, sRect.Top, sRect.Width, sRect.Height)
+                    RenderSprite(TileSetSprite(Map.MapEvents(Id).GraphicNum), frmMapEditor.rsMap.RenderWindow, ConvertMapX(Map.MapEvents(Id).X * PIC_X), ConvertMapY(Map.MapEvents(Id).Y * PIC_Y), sRect.Left, sRect.Top, sRect.Width, sRect.Height)
                 End If
 
         End Select

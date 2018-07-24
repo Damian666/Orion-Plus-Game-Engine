@@ -102,7 +102,7 @@ Friend Module E_Weather
                 Else
                     SpriteLeft = WeatherParticle(i).type - 1
                 End If
-                RenderSprite(WeatherSprite, frmMapEditor.rsMap.SurfacePtr, ConvertMapX(WeatherParticle(i).X), ConvertMapY(WeatherParticle(i).Y), SpriteLeft * 32, 0, 32, 32)
+                RenderSprite(WeatherSprite, frmMapEditor.rsMap.RenderWindow, ConvertMapX(WeatherParticle(i).X), ConvertMapY(WeatherParticle(i).Y), SpriteLeft * 32, 0, 32, 32)
             End If
         Next
 

@@ -308,7 +308,7 @@ Module E_Loop
 
                         If TakeScreenShot Then
                             If ScreenShotTimer < Tick Then
-                                Dim screenshot As SFML.Graphics.Image = frmMapEditor.rsMap.SurfacePtr.Capture()
+                                Dim screenshot As SFML.Graphics.Image = frmMapEditor.rsMap.RenderWindow.Capture()
 
                                 If Not IO.Directory.Exists(Application.StartupPath & "\Data\Screenshots") Then
                                     IO.Directory.CreateDirectory(Application.StartupPath & "\Data\Screenshots")
@@ -322,7 +322,7 @@ Module E_Loop
 
                         If MakeCache Then
                             If ScreenShotTimer < Tick Then
-                                Dim screenshot As SFML.Graphics.Image = frmMapEditor.rsMap.SurfacePtr.Capture()
+                                Dim screenshot As SFML.Graphics.Image = frmMapEditor.rsMap.RenderWindow.Capture()
 
                                 If Not IO.Directory.Exists(Application.StartupPath & "\Data\Cache") Then
                                     IO.Directory.CreateDirectory(Application.StartupPath & "\Data\Cache")

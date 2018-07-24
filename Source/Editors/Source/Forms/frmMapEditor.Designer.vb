@@ -197,7 +197,7 @@ Partial Class frmMapEditor
         Me.scrlTrap = New System.Windows.Forms.HScrollBar()
         Me.lblTrap = New System.Windows.Forms.Label()
         Me.pnlMap = New Engine.NoResetPanel()
-        Me.rsMap = New SFML.WinForms.RenderSurface()
+        Me.rsMap = New SFML.UI.SfControl()
         Me.ToolStripContainer2.ContentPanel.SuspendLayout
         Me.ToolStripContainer2.SuspendLayout
         Me.ssInfo.SuspendLayout
@@ -2113,7 +2113,7 @@ Partial Class frmMapEditor
         Me.pnlMap.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom)  _
             Or System.Windows.Forms.AnchorStyles.Left)  _
             Or System.Windows.Forms.AnchorStyles.Right),System.Windows.Forms.AnchorStyles)
-        Me.pnlMap.AutoScroll = True
+        Me.pnlMap.AutoScroll = true
         Me.pnlMap.BackColor = System.Drawing.Color.Black
         Me.pnlMap.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center
         Me.pnlMap.Controls.Add(Me.rsMap)
@@ -2400,5 +2400,5 @@ End Sub
     Friend WithEvents btnCopyEvent As DarkUI.Controls.DarkButton
     Friend WithEvents DarkLabel15 As DarkUI.Controls.DarkLabel
     Friend WithEvents lblVisualWarp As Label
-    Friend WithEvents rsMap As SFML.WinForms.RenderSurface
+    Friend WithEvents rsMap As SFML.UI.SfControl
 End Class

@@ -6,12 +6,12 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{332AA7A4-686D-4808-BA75-55D705118314}</ProjectGuid>
     <OutputType>WinExe</OutputType>
-    <StartupObject>Engine.My.MyApplication</StartupObject>
+    <StartupObject>Sub Main</StartupObject>
     <RootNamespace>Engine</RootNamespace>
     <AssemblyName>Editors</AssemblyName>
     <FileAlignment>512</FileAlignment>
-    <MyType>WindowsForms</MyType>
-    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <MyType>WindowsFormsWithCustomSubMain</MyType>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <TargetFrameworkProfile />
   </PropertyGroup>
@@ -56,8 +56,8 @@
     <Reference Include="DarkUI">
       <HintPath>.\DarkUI.dll</HintPath>
     </Reference>
-    <Reference Include="SFML.Portable, Version=2.0.6757.25898, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\SFML-Portable-2.1.1.4.0\lib\SFML.Portable.dll</HintPath>
+    <Reference Include="SFML.Portable, Version=2.0.6778.23407, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\SFML-Portable-2.1.1.5.0\lib\SFML.Portable.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Drawing" />
@@ -276,6 +276,7 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Source\Forms\frmLogin.resx">
       <DependentUpon>frmLogin.vb</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Source\Forms\frmVisualWarp.resx">
       <DependentUpon>frmVisualWarp.vb</DependentUpon>

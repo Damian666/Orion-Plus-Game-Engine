@@ -1,4 +1,6 @@
 ﻿Imports System.ComponentModel
+Imports SFML.Graphics
+Imports SFML.Window
 
 Friend Class frmMapEditor
 #Region "Form Code"
@@ -182,15 +184,12 @@ Friend Class frmMapEditor
 
         'Don't Render IF
         If GettingMap Then Exit Sub
-
+        rsMap.RenderWindow.DispatchEvents()
         'lets get going
 
         'update view around player
         UpdateCamera()
-
-        'let program do other things
-        Application.DoEvents()
-
+        
         rsMap.Width = (Map.MaxX + 1) * PIC_X
         rsMap.Height = (Map.MaxY + 1) * PIC_Y
         
