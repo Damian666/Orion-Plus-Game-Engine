@@ -218,7 +218,7 @@ Friend Module S_Housing
                         Player(index).Character(TempPlayer(index).CurChar).LastY = GetPlayerY(index)
                         Player(index).Character(TempPlayer(index).CurChar).LastMap = GetPlayerMap(index)
                         TempPlayer(index).InvitationTimer = 0
-                        PlayerWarp(index, Player(TempPlayer(index).Invitationindex).Character(TempPlayer(index).CurChar).Map, HouseConfig(Player(TempPlayer(index).Invitationindex).Character(TempPlayer(TempPlayer(index).Invitationindex).CurChar).House.Houseindex).X, HouseConfig(Player(TempPlayer(index).Invitationindex).Character(TempPlayer(TempPlayer(index).Invitationindex).CurChar).House.Houseindex).Y, True, True)
+                        PlayerWarp(index, Player(TempPlayer(index).Invitationindex).Character(TempPlayer(index).CurChar).Map, HouseConfig(Player(TempPlayer(index).Invitationindex).Character(TempPlayer(TempPlayer(index).Invitationindex).CurChar).House.Houseindex).X, HouseConfig(Player(TempPlayer(index).Invitationindex).Character(TempPlayer(TempPlayer(index).Invitationindex).CurChar).House.Houseindex).Y, True)
                     Else
                         TempPlayer(index).InvitationTimer = 0
                         PlayerMsg(index, "Cannot find player!", ColorType.BrightRed)

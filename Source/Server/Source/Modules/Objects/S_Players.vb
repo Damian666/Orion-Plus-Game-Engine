@@ -1114,12 +1114,13 @@ Module S_Players
 #End Region
 
 #Region "Movement"
-    Sub PlayerWarp(index As Integer, MapNum As Integer, X As Integer, Y As Integer, Optional HouseTeleport As Boolean = False, Optional NoInstance As Boolean = False)
+    Sub PlayerWarp(index As Integer, MapNum As Integer, X As Integer, Y As Integer, Optional HouseTeleport As Boolean = False)
         Dim OldMap As Integer
         Dim i As Integer
         Dim buffer As ByteStream
 
-        If Map(MapNum).Instanced = 1 And NoInstance = False Then
+        'If (MapNum AndAlso INSTANCED_MAP_MASK) > 0 Then
+        If Map(MapNum).Instanced = 1 Then
             MapNum = CreateInstance(MapNum) ' AndAlso MAP_NUMBER_MASK)
             If MapNum = -1 Then
                 'Couldn't create instanced map!
