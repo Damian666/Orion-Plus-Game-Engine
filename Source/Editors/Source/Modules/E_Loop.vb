@@ -219,7 +219,7 @@ Module E_Loop
         Dim tmpfps As Integer, rendercount As Integer
 
         starttime = GetTickCount()
-
+        
         Do
             If GameDestroyed = True Then End
 
@@ -293,19 +293,8 @@ Module E_Loop
                             FadeOut()
                         End If
 
-                        If rendercount < Tick Then
-                            'Auctual Game Loop Stuff :/
-
-                            ' USES RSMAP.AUTODRAW/INTERVAL NOW!
-                            ' INTERVAL IS BASICLY THE SAME AS TICK + INTERVAL AMOUNT
-
-                            'Render_Graphics()
-                            'rendercount = Tick + 32
-                        End If
                         Application.DoEvents()
-
-                        EditorMap_DrawTileset()
-
+                        
                         If TakeScreenShot Then
                             If ScreenShotTimer < Tick Then
                                 Dim screenshot As SFML.Graphics.Image = frmMapEditor.rsMap.RenderWindow.Capture()

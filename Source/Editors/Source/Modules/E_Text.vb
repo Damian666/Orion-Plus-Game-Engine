@@ -15,12 +15,35 @@ Module E_Text
     ' Game text buffer
     Friend MyText As String = ""
 
-    Friend Sub DrawText(X As Integer, y As Integer, text As String, color As Color, BackColor As Color, ByRef target As RenderWindow, Optional TextSize As Byte = FONT_SIZE)
+    Friend Sub DrawText(X As Integer, y As Integer, text As String, color As Color, BackColor As Color, ByRef target As SFML.UI.SfControl, Optional TextSize As Byte = FONT_SIZE)
         Dim mystring As Text = New Text(text, SFMLGameFont) With {
             .CharacterSize = TextSize,
             .Color = BackColor,
             .Position = New Vector2f(X - 1, y - 1)
         }
+        target.Draw(mystring)
+
+        mystring.Position = New Vector2f(X - 1, y + 1)
+        target.Draw(mystring)
+
+        mystring.Position = New Vector2f(X + 1, y + 1)
+        target.Draw(mystring)
+
+        mystring.Position = New Vector2f(X + 1, y + -1)
+        target.Draw(mystring)
+
+        mystring.Color = color
+        mystring.Position = New Vector2f(X, y)
+        target.Draw(mystring)
+
+    End Sub
+    
+    Friend Sub DrawWindowText(X As Integer, y As Integer, text As String, color As Color, BackColor As Color, ByRef target As RenderWindow, Optional TextSize As Byte = FONT_SIZE)
+        Dim mystring As Text = New Text(text, SFMLGameFont) With {
+                .CharacterSize = TextSize,
+                .Color = BackColor,
+                .Position = New Vector2f(X - 1, y - 1)
+                }
         target.Draw(mystring)
 
         mystring.Position = New Vector2f(X - 1, y + 1)
@@ -66,7 +89,7 @@ Module E_Text
         End If
 
         ' Draw name
-        DrawText(TextX, TextY, Trim$(Npc(npcNum).Name), color, backcolor, frmMapEditor.rsMap.RenderWindow)
+        DrawText(TextX, TextY, Trim$(Npc(npcNum).Name), color, backcolor, frmMapEditor.rsMap)
     End Sub
 
     Friend Sub DrawEventName(index as integer)
@@ -101,7 +124,7 @@ Module E_Text
         End If
 
         ' Draw name
-        DrawText(TextX, TextY, Trim$(Name), color, backcolor, frmMapEditor.rsMap.RenderWindow)
+        DrawText(TextX, TextY, Trim$(Name), color, backcolor, frmMapEditor.rsMap)
 
     End Sub
 
@@ -128,39 +151,39 @@ Module E_Text
                                 Case TileType.Blocked
                                     rec.FillColor = New Color(255, 0, 0, 100)
                                     frmMapEditor.rsMap.Draw(rec)
-                                    DrawText(tX, tY, "B", (Color.White), (Color.Black), frmMapEditor.rsMap.RenderWindow)
+                                    DrawText(tX, tY, "B", (Color.White), (Color.Black), frmMapEditor.rsMap)
                                 Case TileType.Warp
-                                    DrawText(tX, tY, "W", (Color.Blue), (Color.Black), frmMapEditor.rsMap.RenderWindow)
+                                    DrawText(tX, tY, "W", (Color.Blue), (Color.Black), frmMapEditor.rsMap)
                                 Case TileType.Item
-                                    DrawText(tX, tY, "I", (Color.White), (Color.Black), frmMapEditor.rsMap.RenderWindow)
+                                    DrawText(tX, tY, "I", (Color.White), (Color.Black), frmMapEditor.rsMap)
                                 Case TileType.NpcAvoid
-                                    DrawText(tX, tY, "N", (Color.White), (Color.Black), frmMapEditor.rsMap.RenderWindow)
+                                    DrawText(tX, tY, "N", (Color.White), (Color.Black), frmMapEditor.rsMap)
                                 Case TileType.Key
-                                    DrawText(tX, tY, "K", (Color.White), (Color.Black), frmMapEditor.rsMap.RenderWindow)
+                                    DrawText(tX, tY, "K", (Color.White), (Color.Black), frmMapEditor.rsMap)
                                 Case TileType.KeyOpen
-                                    DrawText(tX, tY, "KO", (Color.White), (Color.Black), frmMapEditor.rsMap.RenderWindow)
+                                    DrawText(tX, tY, "KO", (Color.White), (Color.Black), frmMapEditor.rsMap)
                                 Case TileType.Resource
-                                    DrawText(tX, tY, "R", (Color.Green), (Color.Black), frmMapEditor.rsMap.RenderWindow)
+                                    DrawText(tX, tY, "R", (Color.Green), (Color.Black), frmMapEditor.rsMap)
                                 Case TileType.Door
-                                    DrawText(tX, tY, "D", (Color.Black), (Color.Red), frmMapEditor.rsMap.RenderWindow)
+                                    DrawText(tX, tY, "D", (Color.Black), (Color.Red), frmMapEditor.rsMap)
                                 Case TileType.NpcSpawn
                                     rec.FillColor = New Color(255, 255, 0, 100)
                                     frmMapEditor.rsMap.Draw(rec)
-                                    DrawText(tX, tY, "S", (Color.White), (Color.Black), frmMapEditor.rsMap.RenderWindow)
+                                    DrawText(tX, tY, "S", (Color.White), (Color.Black), frmMapEditor.rsMap)
                                 Case TileType.Shop
-                                    DrawText(tX, tY, "SH", (Color.Blue), (Color.Black), frmMapEditor.rsMap.RenderWindow)
+                                    DrawText(tX, tY, "SH", (Color.Blue), (Color.Black), frmMapEditor.rsMap)
                                 Case TileType.Bank
-                                    DrawText(tX, tY, "BA", (Color.Blue), (Color.Black), frmMapEditor.rsMap.RenderWindow)
+                                    DrawText(tX, tY, "BA", (Color.Blue), (Color.Black), frmMapEditor.rsMap)
                                 Case TileType.Heal
-                                    DrawText(tX, tY, "H", (Color.Green), (Color.Black), frmMapEditor.rsMap.RenderWindow)
+                                    DrawText(tX, tY, "H", (Color.Green), (Color.Black), frmMapEditor.rsMap)
                                 Case TileType.Trap
-                                    DrawText(tX, tY, "T", (Color.Red), (Color.Black), frmMapEditor.rsMap.RenderWindow)
+                                    DrawText(tX, tY, "T", (Color.Red), (Color.Black), frmMapEditor.rsMap)
                                 Case TileType.House
-                                    DrawText(tX, tY, "H", (Color.Green), (Color.Black), frmMapEditor.rsMap.RenderWindow)
+                                    DrawText(tX, tY, "H", (Color.Green), (Color.Black), frmMapEditor.rsMap)
                                 Case TileType.Craft
-                                    DrawText(tX, tY, "C", (Color.Green), (Color.Black), frmMapEditor.rsMap.RenderWindow)
+                                    DrawText(tX, tY, "C", (Color.Green), (Color.Black), frmMapEditor.rsMap)
                                 Case TileType.Light
-                                    DrawText(tX, tY, "L", (Color.Yellow), (Color.Black), frmMapEditor.rsMap.RenderWindow)
+                                    DrawText(tX, tY, "L", (Color.Yellow), (Color.Black), frmMapEditor.rsMap)
                             End Select
                         End With
                     End If

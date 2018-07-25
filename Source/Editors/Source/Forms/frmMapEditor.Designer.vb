@@ -35,11 +35,8 @@ Partial Class frmMapEditor
         Me.cmbTileSets = New DarkUI.Controls.DarkComboBox()
         Me.cmbLayers = New DarkUI.Controls.DarkComboBox()
         Me.DarkLabel4 = New DarkUI.Controls.DarkLabel()
-        Me.pnlBack = New System.Windows.Forms.Panel()
-        Me.picBackSelect = New System.Windows.Forms.PictureBox()
+        Me.pnlTileset = New Engine.NoResetPanel()
         Me.DarkLabel3 = New DarkUI.Controls.DarkLabel()
-        Me.scrlPictureY = New DarkUI.Controls.DarkScrollBar()
-        Me.scrlPictureX = New DarkUI.Controls.DarkScrollBar()
         Me.DarkLabel2 = New DarkUI.Controls.DarkLabel()
         Me.DarkLabel1 = New DarkUI.Controls.DarkLabel()
         Me.pnlNpc = New System.Windows.Forms.Panel()
@@ -198,13 +195,13 @@ Partial Class frmMapEditor
         Me.lblTrap = New System.Windows.Forms.Label()
         Me.pnlMap = New Engine.NoResetPanel()
         Me.rsMap = New SFML.UI.SfControl()
+        Me.rsTileset = New SFML.UI.SfControl()
         Me.ToolStripContainer2.ContentPanel.SuspendLayout
         Me.ToolStripContainer2.SuspendLayout
         Me.ssInfo.SuspendLayout
         Me.DarkSectionPanel1.SuspendLayout
         Me.pnlTiles.SuspendLayout
-        Me.pnlBack.SuspendLayout
-        CType(Me.picBackSelect,System.ComponentModel.ISupportInitialize).BeginInit
+        Me.pnlTileset.SuspendLayout
         Me.pnlNpc.SuspendLayout
         Me.pnlDirBlock.SuspendLayout
         Me.pnlEvents.SuspendLayout
@@ -338,10 +335,8 @@ Partial Class frmMapEditor
         Me.pnlTiles.Controls.Add(Me.cmbTileSets)
         Me.pnlTiles.Controls.Add(Me.cmbLayers)
         Me.pnlTiles.Controls.Add(Me.DarkLabel4)
-        Me.pnlTiles.Controls.Add(Me.pnlBack)
+        Me.pnlTiles.Controls.Add(Me.pnlTileset)
         Me.pnlTiles.Controls.Add(Me.DarkLabel3)
-        Me.pnlTiles.Controls.Add(Me.scrlPictureY)
-        Me.pnlTiles.Controls.Add(Me.scrlPictureX)
         Me.pnlTiles.Controls.Add(Me.DarkLabel2)
         Me.pnlTiles.Controls.Add(Me.DarkLabel1)
         Me.pnlTiles.Location = New System.Drawing.Point(1, 51)
@@ -425,23 +420,18 @@ Partial Class frmMapEditor
         Me.DarkLabel4.TabIndex = 18
         Me.DarkLabel4.Text = "AutoTile:"
         '
-        'pnlBack
+        'pnlTileset
         '
-        Me.pnlBack.BackColor = System.Drawing.Color.Black
-        Me.pnlBack.Controls.Add(Me.picBackSelect)
-        Me.pnlBack.Location = New System.Drawing.Point(3, 3)
-        Me.pnlBack.Name = "pnlBack"
-        Me.pnlBack.Size = New System.Drawing.Size(286, 442)
-        Me.pnlBack.TabIndex = 10
-        '
-        'picBackSelect
-        '
-        Me.picBackSelect.BackColor = System.Drawing.Color.Black
-        Me.picBackSelect.Location = New System.Drawing.Point(0, 0)
-        Me.picBackSelect.Name = "picBackSelect"
-        Me.picBackSelect.Size = New System.Drawing.Size(283, 451)
-        Me.picBackSelect.TabIndex = 1
-        Me.picBackSelect.TabStop = false
+        Me.pnlTileset.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom)  _
+            Or System.Windows.Forms.AnchorStyles.Left)  _
+            Or System.Windows.Forms.AnchorStyles.Right),System.Windows.Forms.AnchorStyles)
+        Me.pnlTileset.AutoScroll = true
+        Me.pnlTileset.BackColor = System.Drawing.Color.Black
+        Me.pnlTileset.Controls.Add(Me.rsTileset)
+        Me.pnlTileset.Location = New System.Drawing.Point(3, 3)
+        Me.pnlTileset.Name = "pnlTileset"
+        Me.pnlTileset.Size = New System.Drawing.Size(309, 458)
+        Me.pnlTileset.TabIndex = 10
         '
         'DarkLabel3
         '
@@ -453,23 +443,6 @@ Partial Class frmMapEditor
         Me.DarkLabel3.Size = New System.Drawing.Size(36, 13)
         Me.DarkLabel3.TabIndex = 16
         Me.DarkLabel3.Text = "Layer:"
-        '
-        'scrlPictureY
-        '
-        Me.scrlPictureY.BackColor = System.Drawing.SystemColors.ControlDark
-        Me.scrlPictureY.Location = New System.Drawing.Point(292, 3)
-        Me.scrlPictureY.Name = "scrlPictureY"
-        Me.scrlPictureY.Size = New System.Drawing.Size(18, 442)
-        Me.scrlPictureY.TabIndex = 12
-        '
-        'scrlPictureX
-        '
-        Me.scrlPictureX.BackColor = System.Drawing.SystemColors.ControlDark
-        Me.scrlPictureX.Location = New System.Drawing.Point(3, 451)
-        Me.scrlPictureX.Name = "scrlPictureX"
-        Me.scrlPictureX.ScrollOrientation = DarkUI.Controls.DarkScrollOrientation.Horizontal
-        Me.scrlPictureX.Size = New System.Drawing.Size(283, 16)
-        Me.scrlPictureX.TabIndex = 11
         '
         'DarkLabel2
         '
@@ -2134,6 +2107,17 @@ Partial Class frmMapEditor
         Me.rsMap.Size = New System.Drawing.Size(96, 96)
         Me.rsMap.TabIndex = 0
         '
+        'rsTileset
+        '
+        Me.rsTileset.AutoDrawInterval = 100
+        Me.rsTileset.BackColor = System.Drawing.Color.CornflowerBlue
+        Me.rsTileset.BackgroundImage = CType(resources.GetObject("rsTileset.BackgroundImage"),System.Drawing.Image)
+        Me.rsTileset.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center
+        Me.rsTileset.Location = New System.Drawing.Point(0, 0)
+        Me.rsTileset.Name = "rsTileset"
+        Me.rsTileset.Size = New System.Drawing.Size(96, 96)
+        Me.rsTileset.TabIndex = 0
+        '
         'frmMapEditor
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6!, 13!)
@@ -2156,8 +2140,7 @@ Partial Class frmMapEditor
         Me.DarkSectionPanel1.ResumeLayout(false)
         Me.pnlTiles.ResumeLayout(false)
         Me.pnlTiles.PerformLayout
-        Me.pnlBack.ResumeLayout(false)
-        CType(Me.picBackSelect,System.ComponentModel.ISupportInitialize).EndInit
+        Me.pnlTileset.ResumeLayout(false)
         Me.pnlNpc.ResumeLayout(false)
         Me.pnlDirBlock.ResumeLayout(false)
         Me.pnlDirBlock.PerformLayout
@@ -2250,10 +2233,7 @@ End Sub
     Friend WithEvents btnNpc As DarkUI.Controls.DarkButton
     Friend WithEvents btnDirBlock As DarkUI.Controls.DarkButton
     Friend WithEvents btnEvents As DarkUI.Controls.DarkButton
-    Friend WithEvents pnlBack As Panel
-    Friend WithEvents picBackSelect As PictureBox
-    Friend WithEvents scrlPictureY As DarkUI.Controls.DarkScrollBar
-    Friend WithEvents scrlPictureX As DarkUI.Controls.DarkScrollBar
+    Friend WithEvents pnlTileset As NoResetPanel
     Friend WithEvents DarkLabel1 As DarkUI.Controls.DarkLabel
     Friend WithEvents DarkLabel2 As DarkUI.Controls.DarkLabel
     Friend WithEvents DarkLabel3 As DarkUI.Controls.DarkLabel
@@ -2401,4 +2381,5 @@ End Sub
     Friend WithEvents DarkLabel15 As DarkUI.Controls.DarkLabel
     Friend WithEvents lblVisualWarp As Label
     Friend WithEvents rsMap As SFML.UI.SfControl
+    Friend WithEvents rsTileset As SFML.UI.SfControl
 End Class

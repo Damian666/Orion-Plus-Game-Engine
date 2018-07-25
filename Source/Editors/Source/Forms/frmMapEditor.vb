@@ -18,44 +18,15 @@ Friend Class frmMapEditor
 
         rsMap.Width = (Map.MaxX + 1) * PIC_X
         rsMap.Height = (Map.MaxY + 1) * PIC_Y
-        
-        TilesetWindow.SetView(New SFML.Graphics.View(New SFML.Graphics.FloatRect(0, 0, picBackSelect.Width, picBackSelect.Height)))
+
     End Sub
-    
+
     Private Sub FrmEditor_MapEditor_Closing(sender As Object, e As CancelEventArgs) Handles MyBase.Closing
         MapEditorCancel()
     End Sub
 
     Private Sub FrmEditor_MapEditor_Closed(sender As Object, e As EventArgs) Handles Me.Closed
         MapEditorCancel()
-    End Sub
-
-    Private Sub PicBackSelect_MouseDown(sender As Object, e As MouseEventArgs) Handles picBackSelect.MouseDown
-        MapEditorChooseTile(e.Button, e.X, e.Y)
-    End Sub
-
-    Private Sub PicBackSelect_MouseMove(sender As Object, e As MouseEventArgs) Handles picBackSelect.MouseMove
-        MapEditorDrag(e.Button, e.X, e.Y)
-    End Sub
-
-    Private Overloads Sub PicBackSelect_Paint(sender As Object, e As PaintEventArgs) Handles picBackSelect.Paint
-        'Overrides the paint sub
-    End Sub
-
-    Private Overloads Sub PnlBack_Paint(sender As Object, e As PaintEventArgs) Handles pnlBack.Paint
-        'Overrides the paint sub
-    End Sub
-
-    Private Overloads Sub PnlBack2_Paint(sender As Object, e As PaintEventArgs) Handles pnlBack2.Paint
-        'Overrides the paint sub
-    End Sub
-
-    Private Sub ScrlPictureY_Scroll(sender As Object, e As EventArgs) Handles scrlPictureY.ValueChanged
-        MapEditorTileScroll()
-    End Sub
-
-    Private Sub ScrlPictureX_Scroll(sender As Object, e As EventArgs) Handles scrlPictureX.ValueChanged
-        MapEditorTileScroll()
     End Sub
 
     Private Sub CmbTileSets_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbTileSets.SelectedIndexChanged
@@ -67,16 +38,6 @@ Friend Class frmMapEditor
 
         EditorTileSelStart = New Point(0, 0)
         EditorTileSelEnd = New Point(1, 1)
-
-        'EditorMap_DrawTileset2()
-
-        'pnlBack.Refresh()
-
-        picBackSelect.Height = TileSetTextureInfo(cmbTileSets.SelectedIndex + 1).height
-        picBackSelect.Width = TileSetTextureInfo(cmbTileSets.SelectedIndex + 1).width
-
-        scrlPictureY.Maximum = (picBackSelect.Height \ PIC_Y) + PIC_Y
-        scrlPictureX.Maximum = (picBackSelect.Width \ PIC_X) + PIC_X
     End Sub
 
     Private Sub CmbAutoTile_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbAutoTile.SelectedIndexChanged
@@ -177,14 +138,13 @@ Friend Class frmMapEditor
     End Sub
 #End Region
 
-#Region "rsMap"
+#Region "RsMap"
 
     Private Sub RsMap_Render(sender As Object, e As EventArgs) Handles rsMap.Render
         Dim X As Integer, Y As Integer, I As Integer
 
         'Don't Render IF
         If GettingMap Then Exit Sub
-        rsMap.RenderWindow.DispatchEvents()
         'lets get going
 
         'update view around player
@@ -192,6 +152,7 @@ Friend Class frmMapEditor
 
         rsMap.Width = (Map.MaxX + 1) * PIC_X
         rsMap.Height = (Map.MaxY + 1) * PIC_Y
+        rsMap.RenderWindow.DispatchEvents()
 
         'clear any unused gfx
         ClearGFX()
@@ -395,6 +356,79 @@ Friend Class frmMapEditor
 
     End Sub
 
+#End Region
+
+#Region "RsTileset"
+    Private Sub RsTileset_Render(sender As Object, e As EventArgs) Handles rsTileset.Render
+        Dim height As Integer
+        Dim width As Integer
+        Dim tileset As Byte
+
+        ' find tileset number
+        tileset = cmbTileSets.SelectedIndex + 1
+
+        ' exit out if doesn't exist
+        If tileset <= 0 OrElse tileset > NumTileSets Then Exit Sub
+
+        rsTileset.Width = TileSetSprite(tileset).Texture.Size.X
+        rsTileset.Height = TileSetSprite(tileset).Texture.Size.Y
+        rsTileset.RenderWindow.DispatchEvents()
+
+        Dim rec2 As New RectangleShape With {
+            .OutlineColor = New Color(Color.Red),
+            .OutlineThickness = 0.6,
+            .FillColor = New Color(Color.Transparent)
+        }
+
+        If TileSetTextureInfo(tileset).IsLoaded = False Then
+            LoadTexture(tileset, 1)
+        End If
+        ' we use it, lets update timer
+        With TileSetTextureInfo(tileset)
+            .TextureTimer = GetTickCount() + 100000
+        End With
+
+        height = TileSetTextureInfo(tileset).height
+        width = TileSetTextureInfo(tileset).width
+
+        ' change selected shape for autotiles
+        If cmbAutoTile.SelectedIndex > 0 Then
+            Select Case cmbAutoTile.SelectedIndex
+                Case 1 ' autotile
+                    EditorTileWidth = 2
+                    EditorTileHeight = 3
+                Case 2 ' fake autotile
+                    EditorTileWidth = 1
+                    EditorTileHeight = 1
+                Case 3 ' animated
+                    EditorTileWidth = 6
+                    EditorTileHeight = 3
+                Case 4 ' cliff
+                    EditorTileWidth = 2
+                    EditorTileHeight = 2
+                Case 5 ' waterfall
+                    EditorTileWidth = 2
+                    EditorTileHeight = 3
+            End Select
+        End If
+
+        RenderSprite(TileSetSprite(tileset), rsTileset, 0, 0, 0, 0, width, height)
+
+        rec2.Size = New Vector2f(EditorTileWidth * PIC_X, EditorTileHeight * PIC_Y)
+
+        rec2.Position = New Vector2f(EditorTileSelStart.X * PIC_X, EditorTileSelStart.Y * PIC_Y)
+        rsTileset.Draw(rec2)
+
+        LastTileset = tileset
+    End Sub
+
+    Private Sub RsTileset_MouseDown(sender As Object, e As MouseEventArgs) Handles rsTileset.MouseDown
+        MapEditorChooseTile(e.Button, e.X, e.Y)
+    End Sub
+
+    Private Sub RsTileset_MouseMove(sender As Object, e As MouseEventArgs) Handles rsTileset.MouseMove
+        MapEditorDrag(e.Button, e.X, e.Y)
+    End Sub
 #End Region
 
 #Region "Attributes"
@@ -641,7 +675,7 @@ Friend Class frmMapEditor
     End Sub
 
     Private Sub BtnHouseTileOk_Click(sender As Object, e As EventArgs) Handles btnHouseTileOk.Click
-        HouseTileIndex = scrlBuyHouse.Value
+        HouseTileindex = scrlBuyHouse.Value
         pnlAttributes.Visible = False
         fraBuyHouse.Visible = False
     End Sub
@@ -703,7 +737,7 @@ Friend Class frmMapEditor
     End Sub
 
     Private Sub ScrlFog_Scroll(sender As Object, e As EventArgs) Handles nudFog.ValueChanged
-        Map.FogIndex = nudFog.Value
+        Map.Fogindex = nudFog.Value
         CurrentFog = nudFog.Value
     End Sub
 
@@ -762,7 +796,7 @@ Friend Class frmMapEditor
         With Map
 
             ' set the data before changing it
-            ReDim tempArr(.MaxX,.MaxY)
+            ReDim tempArr(.MaxX, .MaxY)
             For X = 0 To .MaxX
                 For Y = 0 To .MaxY
                     ReDim tempArr(X, Y).Layer(LayerType.Count - 1)
@@ -788,8 +822,8 @@ Friend Class frmMapEditor
             .MaxX = nudMaxX.Value
             .MaxY = nudMaxY.Value
 
-            ReDim Map.Tile(.MaxX,.MaxY)
-            ReDim Autotile(.MaxX,.MaxY)
+            ReDim Map.Tile(.MaxX, .MaxY)
+            ReDim Autotile(.MaxX, .MaxY)
 
             If x2 > .MaxX Then x2 = .MaxX
             If y2 > .MaxY Then y2 = .MaxY
@@ -825,7 +859,7 @@ Friend Class frmMapEditor
 
         GettingMap = False
     End Sub
-    
+
     Private Sub ChkInstance_CheckedChanged(sender As Object, e As EventArgs) Handles chkInstance.CheckedChanged
         If chkInstance.Checked = True Then
             Map.Instanced = 1
