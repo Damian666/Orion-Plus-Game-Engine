@@ -153,6 +153,8 @@ Friend Class frmMapEditor
         rsMap.Width = (Map.MaxX + 1) * PIC_X
         rsMap.Height = (Map.MaxY + 1) * PIC_Y
         rsMap.RenderWindow.DispatchEvents()
+        rsMap.View = New View(New FloatRect(0, 0,
+            rsMap.RenderWindow.Size.X, rsMap.RenderWindow.Size.Y))
 
         'clear any unused gfx
         ClearGFX()
@@ -373,6 +375,8 @@ Friend Class frmMapEditor
         rsTileset.Width = TileSetSprite(tileset).Texture.Size.X
         rsTileset.Height = TileSetSprite(tileset).Texture.Size.Y
         rsTileset.RenderWindow.DispatchEvents()
+        rsTileset.View = New View(New FloatRect(0, 0,
+            rsTileset.RenderWindow.Size.X, rsTileset.RenderWindow.Size.Y))
 
         Dim rec2 As New RectangleShape With {
             .OutlineColor = New Color(Color.Red),
