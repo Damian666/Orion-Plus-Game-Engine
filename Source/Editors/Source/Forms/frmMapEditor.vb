@@ -179,7 +179,7 @@ Friend Class frmMapEditor
 
 #Region "rsMap"
 
-    Private Sub rsMap_Render(sender As Object, e As EventArgs) Handles rsMap.Render
+    Private Sub RsMap_Render(sender As Object, e As EventArgs) Handles rsMap.Render
         Dim X As Integer, Y As Integer, I As Integer
 
         'Don't Render IF
@@ -189,10 +189,10 @@ Friend Class frmMapEditor
 
         'update view around player
         UpdateCamera()
-        
+
         rsMap.Width = (Map.MaxX + 1) * PIC_X
         rsMap.Height = (Map.MaxY + 1) * PIC_Y
-        
+
         'clear any unused gfx
         ClearGFX()
 
@@ -276,8 +276,8 @@ Friend Class frmMapEditor
                 ' Resources
                 If NumResources > 0 Then
                     If Resources_Init Then
-                        If Resource_Index > 0 Then
-                            For I = 1 To Resource_Index
+                        If Resource_index > 0 Then
+                            For I = 1 To Resource_index
                                 If MapResource(I).Y = Y Then
                                     DrawMapResource(I)
                                 End If
@@ -363,18 +363,17 @@ Friend Class frmMapEditor
         End If
     End Sub
 
-    Private Sub rsMap_MouseDown(sender As Object, e As MouseEventArgs) Handles rsMap.MouseDown
+    Private Sub RsMap_MouseDown(sender As Object, e As MouseEventArgs) Handles rsMap.MouseDown
         If e.X > pnlBack2.Width - 32 OrElse e.Y > pnlBack2.Height - 32 Then Exit Sub
         MapEditorMouseDown(e.Button, e.X, e.Y, False)
-
     End Sub
 
-    Private Overloads Sub rsMap_Paint(sender As Object, e As PaintEventArgs) Handles rsMap.Paint
+    Private Overloads Sub RsMap_Paint(sender As Object, e As PaintEventArgs) Handles rsMap.Paint
         'This is here to make sure that the box dosen't try to re-paint itself... saves time and w/e else
         Exit Sub
     End Sub
 
-    Private Sub rsMap_MouseMove(sender As Object, e As MouseEventArgs) Handles rsMap.MouseMove
+    Private Sub RsMap_MouseMove(sender As Object, e As MouseEventArgs) Handles rsMap.MouseMove
 
         CurX = TileView.Left + ((e.Location.X + Camera.Left) \ PIC_X)
         CurY = TileView.Top + ((e.Location.Y + Camera.Top) \ PIC_Y)
@@ -389,7 +388,7 @@ Friend Class frmMapEditor
         tslCurXY.Text = "X: " & CurX & " - " & " Y: " & CurY
     End Sub
 
-    Private Sub rsMap_MouseUp(sender As Object, e As MouseEventArgs) Handles rsMap.MouseUp
+    Private Sub RsMap_MouseUp(sender As Object, e As MouseEventArgs) Handles rsMap.MouseUp
 
         CurX = TileView.Left + ((e.Location.X + Camera.Left) \ PIC_X)
         CurY = TileView.Top + ((e.Location.Y + Camera.Top) \ PIC_Y)

@@ -23,7 +23,7 @@ Partial Class FrmLogin
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
-        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmLogin))
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(FrmLogin))
         Me.tmrConnect = New System.Windows.Forms.Timer(Me.components)
         Me.lblConnectionStatus = New System.Windows.Forms.Label()
         Me.Label1 = New System.Windows.Forms.Label()
@@ -141,131 +141,145 @@ Partial Class FrmLogin
         '
         'btnPetEditor
         '
+        Me.btnPetEditor.BackColor = System.Drawing.SystemColors.Control
         Me.btnPetEditor.Location = New System.Drawing.Point(154, 34)
         Me.btnPetEditor.Name = "btnPetEditor"
         Me.btnPetEditor.Size = New System.Drawing.Size(112, 25)
         Me.btnPetEditor.TabIndex = 54
         Me.btnPetEditor.Text = "Pet Editor"
-        Me.btnPetEditor.UseVisualStyleBackColor = True
+        Me.btnPetEditor.UseVisualStyleBackColor = False
         '
         'btnAutoMapper
         '
+        Me.btnAutoMapper.BackColor = System.Drawing.SystemColors.Control
         Me.btnAutoMapper.Location = New System.Drawing.Point(154, 3)
         Me.btnAutoMapper.Name = "btnAutoMapper"
         Me.btnAutoMapper.Size = New System.Drawing.Size(112, 25)
         Me.btnAutoMapper.TabIndex = 53
         Me.btnAutoMapper.Text = "Auto Mapper"
-        Me.btnAutoMapper.UseVisualStyleBackColor = True
+        Me.btnAutoMapper.UseVisualStyleBackColor = False
         '
         'btnClassEditor
         '
+        Me.btnClassEditor.BackColor = System.Drawing.SystemColors.Control
         Me.btnClassEditor.Location = New System.Drawing.Point(390, 158)
         Me.btnClassEditor.Name = "btnClassEditor"
         Me.btnClassEditor.Size = New System.Drawing.Size(112, 25)
         Me.btnClassEditor.TabIndex = 52
         Me.btnClassEditor.Text = "Class Editor"
-        Me.btnClassEditor.UseVisualStyleBackColor = True
+        Me.btnClassEditor.UseVisualStyleBackColor = False
         '
         'btnRecipeEditor
         '
+        Me.btnRecipeEditor.BackColor = System.Drawing.SystemColors.Control
         Me.btnRecipeEditor.Location = New System.Drawing.Point(272, 158)
         Me.btnRecipeEditor.Name = "btnRecipeEditor"
         Me.btnRecipeEditor.Size = New System.Drawing.Size(112, 25)
         Me.btnRecipeEditor.TabIndex = 51
         Me.btnRecipeEditor.Text = "Recipe Editor"
-        Me.btnRecipeEditor.UseVisualStyleBackColor = True
+        Me.btnRecipeEditor.UseVisualStyleBackColor = False
         '
         'btnProjectiles
         '
+        Me.btnProjectiles.BackColor = System.Drawing.SystemColors.Control
         Me.btnProjectiles.Location = New System.Drawing.Point(390, 127)
         Me.btnProjectiles.Name = "btnProjectiles"
         Me.btnProjectiles.Size = New System.Drawing.Size(112, 25)
         Me.btnProjectiles.TabIndex = 50
         Me.btnProjectiles.Text = "Projectiles Editor"
-        Me.btnProjectiles.UseVisualStyleBackColor = True
+        Me.btnProjectiles.UseVisualStyleBackColor = False
         '
         'btnQuest
         '
+        Me.btnQuest.BackColor = System.Drawing.SystemColors.Control
         Me.btnQuest.Location = New System.Drawing.Point(272, 3)
         Me.btnQuest.Name = "btnQuest"
         Me.btnQuest.Size = New System.Drawing.Size(112, 25)
         Me.btnQuest.TabIndex = 48
         Me.btnQuest.Text = "Quest Editor"
-        Me.btnQuest.UseVisualStyleBackColor = True
+        Me.btnQuest.UseVisualStyleBackColor = False
         '
         'btnhouseEditor
         '
+        Me.btnhouseEditor.BackColor = System.Drawing.SystemColors.Control
         Me.btnhouseEditor.Location = New System.Drawing.Point(272, 127)
         Me.btnhouseEditor.Name = "btnhouseEditor"
         Me.btnhouseEditor.Size = New System.Drawing.Size(112, 25)
         Me.btnhouseEditor.TabIndex = 49
         Me.btnhouseEditor.Text = "Houses Editor"
-        Me.btnhouseEditor.UseVisualStyleBackColor = True
+        Me.btnhouseEditor.UseVisualStyleBackColor = False
         '
         'btnMapEditor
         '
+        Me.btnMapEditor.BackColor = System.Drawing.SystemColors.Control
         Me.btnMapEditor.Location = New System.Drawing.Point(390, 3)
         Me.btnMapEditor.Name = "btnMapEditor"
         Me.btnMapEditor.Size = New System.Drawing.Size(112, 25)
         Me.btnMapEditor.TabIndex = 41
         Me.btnMapEditor.Text = "Map Editor"
-        Me.btnMapEditor.UseVisualStyleBackColor = True
+        Me.btnMapEditor.UseVisualStyleBackColor = False
         '
         'btnItemEditor
         '
+        Me.btnItemEditor.BackColor = System.Drawing.SystemColors.Control
         Me.btnItemEditor.Location = New System.Drawing.Point(272, 34)
         Me.btnItemEditor.Name = "btnItemEditor"
         Me.btnItemEditor.Size = New System.Drawing.Size(112, 25)
         Me.btnItemEditor.TabIndex = 42
         Me.btnItemEditor.Text = "Item Editor"
-        Me.btnItemEditor.UseVisualStyleBackColor = True
+        Me.btnItemEditor.UseVisualStyleBackColor = False
         '
         'btnResourceEditor
         '
+        Me.btnResourceEditor.BackColor = System.Drawing.SystemColors.Control
         Me.btnResourceEditor.Location = New System.Drawing.Point(390, 34)
         Me.btnResourceEditor.Name = "btnResourceEditor"
         Me.btnResourceEditor.Size = New System.Drawing.Size(112, 25)
         Me.btnResourceEditor.TabIndex = 43
         Me.btnResourceEditor.Text = "Resource Editor"
-        Me.btnResourceEditor.UseVisualStyleBackColor = True
+        Me.btnResourceEditor.UseVisualStyleBackColor = False
         '
         'btnNPCEditor
         '
+        Me.btnNPCEditor.BackColor = System.Drawing.SystemColors.Control
         Me.btnNPCEditor.Location = New System.Drawing.Point(272, 65)
         Me.btnNPCEditor.Name = "btnNPCEditor"
         Me.btnNPCEditor.Size = New System.Drawing.Size(112, 25)
         Me.btnNPCEditor.TabIndex = 44
         Me.btnNPCEditor.Text = "NPC Editor"
-        Me.btnNPCEditor.UseVisualStyleBackColor = True
+        Me.btnNPCEditor.UseVisualStyleBackColor = False
         '
         'btnSkillEditor
         '
+        Me.btnSkillEditor.BackColor = System.Drawing.SystemColors.Control
         Me.btnSkillEditor.Location = New System.Drawing.Point(390, 65)
         Me.btnSkillEditor.Name = "btnSkillEditor"
         Me.btnSkillEditor.Size = New System.Drawing.Size(112, 25)
         Me.btnSkillEditor.TabIndex = 45
         Me.btnSkillEditor.Text = "Skill Editor"
-        Me.btnSkillEditor.UseVisualStyleBackColor = True
+        Me.btnSkillEditor.UseVisualStyleBackColor = False
         '
         'btnShopEditor
         '
+        Me.btnShopEditor.BackColor = System.Drawing.SystemColors.Control
         Me.btnShopEditor.Location = New System.Drawing.Point(272, 96)
         Me.btnShopEditor.Name = "btnShopEditor"
         Me.btnShopEditor.Size = New System.Drawing.Size(112, 25)
         Me.btnShopEditor.TabIndex = 46
         Me.btnShopEditor.Text = "Shop Editor"
-        Me.btnShopEditor.UseVisualStyleBackColor = True
+        Me.btnShopEditor.UseVisualStyleBackColor = False
         '
         'btnAnimationEditor
         '
+        Me.btnAnimationEditor.BackColor = System.Drawing.SystemColors.Control
         Me.btnAnimationEditor.Location = New System.Drawing.Point(390, 96)
         Me.btnAnimationEditor.Name = "btnAnimationEditor"
         Me.btnAnimationEditor.Size = New System.Drawing.Size(112, 25)
         Me.btnAnimationEditor.TabIndex = 47
         Me.btnAnimationEditor.Text = "Animation Editor"
-        Me.btnAnimationEditor.UseVisualStyleBackColor = True
+        Me.btnAnimationEditor.UseVisualStyleBackColor = False
         '
-        'frmLogin
+        'FrmLogin
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
@@ -284,7 +298,7 @@ Partial Class FrmLogin
         Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.MaximizeBox = False
         Me.MinimizeBox = False
-        Me.Name = "frmLogin"
+        Me.Name = "FrmLogin"
         Me.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide
         Me.Text = "Orion+ Editors"
         Me.pnlAdmin.ResumeLayout(False)
