@@ -81,11 +81,11 @@ Module E_Text
                 backcolor = Color.Black
         End Select
 
-        TextX = ConvertMapX(MapNpc(MapNpcNum).X * PIC_X) + MapNpc(MapNpcNum).XOffset + (PIC_X \ 2) - GetTextWidth((Trim$(Npc(npcNum).Name))) / 2
+        TextX = MapNpc(MapNpcNum).X * PIC_X + MapNpc(MapNpcNum).XOffset + (PIC_X \ 2) - GetTextWidth((Trim$(Npc(npcNum).Name))) / 2
         If Npc(npcNum).Sprite < 1 OrElse Npc(npcNum).Sprite > NumCharacters Then
-            TextY = ConvertMapY(MapNpc(MapNpcNum).Y * PIC_Y) + MapNpc(MapNpcNum).YOffset - 16
+            TextY = MapNpc(MapNpcNum).Y * PIC_Y + MapNpc(MapNpcNum).YOffset - 16
         Else
-            TextY = ConvertMapY(MapNpc(MapNpcNum).Y * PIC_Y) + MapNpc(MapNpcNum).YOffset - (CharacterGFXInfo(Npc(npcNum).Sprite).height / 4) + 16
+            TextY = MapNpc(MapNpcNum).Y * PIC_Y + MapNpc(MapNpcNum).YOffset - (CharacterGFXInfo(Npc(npcNum).Sprite).height / 4) + 16
         End If
 
         ' Draw name
@@ -105,21 +105,21 @@ Module E_Text
 
         Name = Trim$(Map.MapEvents(Index).Name)
         ' calc pos
-        TextX = ConvertMapX(Map.MapEvents(Index).X * PIC_X) + Map.MapEvents(Index).XOffset + (PIC_X \ 2) - GetTextWidth(Trim$(Name)) / 2
+        TextX = Map.MapEvents(Index).X * PIC_X + Map.MapEvents(Index).XOffset + (PIC_X \ 2) - GetTextWidth(Trim$(Name)) / 2
         If Map.MapEvents(Index).GraphicType = 0 Then
-            TextY = ConvertMapY(Map.MapEvents(Index).Y * PIC_Y) + Map.MapEvents(Index).YOffset - 16
+            TextY = Map.MapEvents(Index).Y * PIC_Y + Map.MapEvents(Index).YOffset - 16
         ElseIf Map.MapEvents(Index).GraphicType = 1 Then
             If Map.MapEvents(Index).GraphicNum < 1 OrElse Map.MapEvents(Index).GraphicNum > NumCharacters Then
-                TextY = ConvertMapY(Map.MapEvents(Index).Y * PIC_Y) + Map.MapEvents(Index).YOffset - 16
+                TextY = Map.MapEvents(Index).Y * PIC_Y + Map.MapEvents(Index).YOffset - 16
             Else
                 ' Determine location for text
-                TextY = ConvertMapY(Map.MapEvents(Index).Y * PIC_Y) + Map.MapEvents(Index).YOffset - (CharacterGFXInfo(Map.MapEvents(Index).GraphicNum).height / 4) + 16
+                TextY = Map.MapEvents(Index).Y * PIC_Y + Map.MapEvents(Index).YOffset - (CharacterGFXInfo(Map.MapEvents(Index).GraphicNum).height / 4) + 16
             End If
         ElseIf Map.MapEvents(Index).GraphicType = 2 Then
             If Map.MapEvents(Index).GraphicY2 > 0 Then
-                TextY = ConvertMapY(Map.MapEvents(Index).Y * PIC_Y) + Map.MapEvents(Index).YOffset - (Map.MapEvents(Index).GraphicY2 * PIC_Y) + 16
+                TextY = Map.MapEvents(Index).Y * PIC_Y + Map.MapEvents(Index).YOffset - (Map.MapEvents(Index).GraphicY2 * PIC_Y) + 16
             Else
-                TextY = ConvertMapY(Map.MapEvents(Index).Y * PIC_Y) + Map.MapEvents(Index).YOffset - 32 + 16
+                TextY = Map.MapEvents(Index).Y * PIC_Y + Map.MapEvents(Index).YOffset - 32 + 16
             End If
         End If
 
@@ -134,18 +134,18 @@ Module E_Text
         Dim rec As New RectangleShape
 
         If SelectedTab = 2 Then
-            For X = TileView.Left To TileView.Right
-                For y = TileView.Top To TileView.Bottom
+            For X = 0 To Map.MaxX
+                For y = 0 To Map.MaxY
                     If IsValidMapPoint(X, y) Then
                         With Map.Tile(X, y)
-                            tX = ((ConvertMapX(X * PIC_X)) - 4) + (PIC_X * 0.5)
-                            tY = ((ConvertMapY(y * PIC_Y)) - 7) + (PIC_Y * 0.5)
+                            tX = ((X * PIC_X) - 4) + (PIC_X * 0.5)
+                            tY = ((y * PIC_Y) - 7) + (PIC_Y * 0.5)
 
                             rec.OutlineColor = New Color(Color.White)
                             rec.OutlineThickness = 0.6
 
                             rec.Size = New Vector2f((PIC_X), (PIC_X))
-                            rec.Position = New Vector2f(ConvertMapX((X) * PIC_X), ConvertMapY((y) * PIC_Y))
+                            rec.Position = New Vector2f((X) * PIC_X, (y) * PIC_Y)
 
                             Select Case .Type
                                 Case TileType.Blocked

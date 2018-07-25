@@ -167,8 +167,8 @@ Friend Class frmMapEditor
         If InMapEditor AndAlso MapData = True Then
             ' blit lower tiles
             If NumTileSets > 0 Then
-                For X = TileView.Left To TileView.Right + 1
-                    For Y = TileView.Top To TileView.Bottom + 1
+                For X = 0 To Map.MaxX + 1
+                    For Y = 0 To Map.MaxY + 1
                         If IsValidMapPoint(X, Y) Then
                             DrawMapTile(X, Y)
                         End If
@@ -198,8 +198,8 @@ Friend Class frmMapEditor
             End If
 
             'Draw sum d00rs.
-            For X = TileView.Left To TileView.Right
-                For Y = TileView.Top To TileView.Bottom
+            For X = 0 To Map.MaxX
+                For Y = 0 To Map.MaxY
 
                     If IsValidMapPoint(X, Y) Then
                         If Map.Tile(X, Y).Type = TileType.Door Then
@@ -262,8 +262,8 @@ Friend Class frmMapEditor
 
             ' blit out upper tiles
             If NumTileSets > 0 Then
-                For X = TileView.Left To TileView.Right + 1
-                    For Y = TileView.Top To TileView.Bottom + 1
+                For X = 0 To Map.MaxX + 1
+                    For Y = 0 To Map.MaxY + 1
                         If IsValidMapPoint(X, Y) Then
                             DrawMapFringeTile(X, Y)
                         End If
@@ -281,8 +281,8 @@ Friend Class frmMapEditor
             End If
 
             If SelectedTab = 4 Then
-                For X = TileView.Left To TileView.Right
-                    For Y = TileView.Top To TileView.Bottom
+                For X = 0 To Map.MaxX
+                    For Y = 0 To Map.MaxY
                         If IsValidMapPoint(X, Y) Then
                             DrawDirections(X, Y)
                         End If
@@ -327,19 +327,14 @@ Friend Class frmMapEditor
     End Sub
 
     Private Sub RsMap_MouseDown(sender As Object, e As MouseEventArgs) Handles rsMap.MouseDown
-        If e.X > pnlBack2.Width - 32 OrElse e.Y > pnlBack2.Height - 32 Then Exit Sub
+        If e.X > rsMap.Width - 32 OrElse e.Y > rsMap.Height - 32 Then Exit Sub
         MapEditorMouseDown(e.Button, e.X, e.Y, False)
-    End Sub
-
-    Private Overloads Sub RsMap_Paint(sender As Object, e As PaintEventArgs) Handles rsMap.Paint
-        'This is here to make sure that the box dosen't try to re-paint itself... saves time and w/e else
-        Exit Sub
     End Sub
 
     Private Sub RsMap_MouseMove(sender As Object, e As MouseEventArgs) Handles rsMap.MouseMove
 
-        CurX = TileView.Left + ((e.Location.X + Camera.Left) \ PIC_X)
-        CurY = TileView.Top + ((e.Location.Y + Camera.Top) \ PIC_Y)
+        CurX = e.Location.X \ PIC_X
+        CurY = e.Location.Y \ PIC_Y
 
         CurMouseX = e.Location.X
         CurMouseY = e.Location.Y
@@ -353,8 +348,8 @@ Friend Class frmMapEditor
 
     Private Sub RsMap_MouseUp(sender As Object, e As MouseEventArgs) Handles rsMap.MouseUp
 
-        CurX = TileView.Left + ((e.Location.X + Camera.Left) \ PIC_X)
-        CurY = TileView.Top + ((e.Location.Y + Camera.Top) \ PIC_Y)
+        CurX = e.Location.X \ PIC_X
+        CurY = e.Location.Y \ PIC_Y
 
     End Sub
 
@@ -860,6 +855,9 @@ Friend Class frmMapEditor
             ClearTempTile()
             'MapEditorSend()
         End With
+        
+        rsMap.Width = (Map.MaxX + 1) * Pic_X
+        rsMap.Height = (Map.MaxY + 1) * Pic_Y
 
         GettingMap = False
     End Sub

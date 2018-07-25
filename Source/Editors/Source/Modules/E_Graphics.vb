@@ -401,7 +401,7 @@ Module E_Graphics
         rec.Width = 32
         rec.Height = 32
 
-        RenderSprite(DirectionsSprite, frmMapEditor.rsMap, ConvertMapX(X * PIC_X), ConvertMapY(Y * PIC_Y), rec.X, rec.Y, rec.Width, rec.Height)
+        RenderSprite(DirectionsSprite, frmMapEditor.rsMap, X * PIC_X, Y * PIC_Y, rec.X, rec.Y, rec.Width, rec.Height)
 
         ' render dir blobs
         For i = 1 To 4
@@ -415,7 +415,7 @@ Module E_Graphics
             End If
             rec.Height = 8
 
-            RenderSprite(DirectionsSprite, frmMapEditor.rsMap, ConvertMapX(X * PIC_X) + DirArrowX(i), ConvertMapY(Y * PIC_Y) + DirArrowY(i), rec.X, rec.Y, rec.Width, rec.Height)
+            RenderSprite(DirectionsSprite, frmMapEditor.rsMap, X * PIC_X + DirArrowX(i), Y * PIC_Y + DirArrowY(i), rec.X, rec.Y, rec.Width, rec.Height)
         Next
     End Sub
 
@@ -431,15 +431,7 @@ Module E_Graphics
     Friend Function IsDirBlocked(ByRef blockvar As Byte, ByRef Dir As Byte) As Boolean
         Return Not (Not blockvar AndAlso (2 ^ Dir))
     End Function
-
-    Friend Function ConvertMapX(X As Integer) As Integer
-        ConvertMapX = X - (TileView.Left * PIC_X) - Camera.Left
-    End Function
-
-    Friend Function ConvertMapY(Y As Integer) As Integer
-        ConvertMapY = Y - (TileView.Top * PIC_Y) - Camera.Top
-    End Function
-
+    
     Friend Sub DrawNpc(MapNpcNum As Integer)
         Dim anim As Byte
         Dim X As Integer
@@ -451,8 +443,8 @@ Module E_Graphics
 
         If MapNpc(MapNpcNum).Num = 0 Then Exit Sub ' no npc set
 
-        If MapNpc(MapNpcNum).X < TileView.Left OrElse MapNpc(MapNpcNum).X > TileView.Right Then Exit Sub
-        If MapNpc(MapNpcNum).Y < TileView.Top OrElse MapNpc(MapNpcNum).Y > TileView.Bottom Then Exit Sub
+        If MapNpc(MapNpcNum).X < 0 OrElse MapNpc(MapNpcNum).X > Map.MaxX Then Exit Sub
+        If MapNpc(MapNpcNum).Y < 0 OrElse MapNpc(MapNpcNum).Y > Map.MaxY Then Exit Sub
 
         Sprite = Npc(MapNpc(MapNpcNum).Num).Sprite
 
@@ -529,8 +521,8 @@ Module E_Graphics
         Dim width As Integer
         Dim height As Integer
 
-        X = ConvertMapX(dx)
-        Y = ConvertMapY(dy)
+        X = dx
+        Y = dy
         width = (rec.Right - rec.Left)
         height = (rec.Bottom - rec.Top)
 
@@ -611,20 +603,20 @@ Module E_Graphics
         End With
 
         With MapItem(itemnum)
-            If .X < TileView.Left OrElse .X > TileView.Right Then Exit Sub
-            If .Y < TileView.Top OrElse .Y > TileView.Bottom Then Exit Sub
+            If .X < 0 OrElse .X > Map.MaxX Then Exit Sub
+            If .Y < 0 OrElse .Y > Map.MaxY Then Exit Sub
         End With
 
         If ItemsGFXInfo(PicNum).width > 32 Then ' has more than 1 frame
             srcrec = New Rectangle((MapItem(itemnum).Frame * 32), 0, 32, 32)
-            destrec = New Rectangle(ConvertMapX(MapItem(itemnum).X * PIC_X), ConvertMapY(MapItem(itemnum).Y * PIC_Y), 32, 32)
+            destrec = New Rectangle(MapItem(itemnum).X * PIC_X, MapItem(itemnum).Y * PIC_Y, 32, 32)
         Else
             srcrec = New Rectangle(0, 0, PIC_X, PIC_Y)
-            destrec = New Rectangle(ConvertMapX(MapItem(itemnum).X * PIC_X), ConvertMapY(MapItem(itemnum).Y * PIC_Y), PIC_X, PIC_Y)
+            destrec = New Rectangle(MapItem(itemnum).X * PIC_X, MapItem(itemnum).Y * PIC_Y, PIC_X, PIC_Y)
         End If
 
-        x = ConvertMapX(MapItem(itemnum).X * PIC_X)
-        y = ConvertMapY(MapItem(itemnum).Y * PIC_Y)
+        x = MapItem(itemnum).X * PIC_X
+        y = MapItem(itemnum).Y * PIC_Y
 
         RenderSprite(ItemsSprite(PicNum), frmMapEditor.rsMap, x, y, srcrec.X, srcrec.Y, srcrec.Width, srcrec.Height)
     End Sub
@@ -647,8 +639,8 @@ Module E_Graphics
             .TextureTimer = GetTickCount() + 100000
         End With
 
-        X = ConvertMapX(x2)
-        y = ConvertMapY(y2)
+        X = x2
+        y = y2
         width = (rec.Width)
         height = (rec.Height)
 
@@ -681,14 +673,14 @@ Module E_Graphics
                             .Height = 32
                         End With
 
-                        RenderSprite(TileSetSprite(.Layer(i).Tileset), frmMapEditor.rsMap, ConvertMapX(X * PIC_X), ConvertMapY(Y * PIC_Y), srcrect.X, srcrect.Y, srcrect.Width, srcrect.Height)
+                        RenderSprite(TileSetSprite(.Layer(i).Tileset), frmMapEditor.rsMap, (X * PIC_X), (Y * PIC_Y), srcrect.X, srcrect.Y, srcrect.Width, srcrect.Height)
 
                     ElseIf Autotile(X, Y).Layer(i).renderState = RENDER_STATE_AUTOTILE Then
                         ' Draw autotiles
-                        DrawAutoTile(i, ConvertMapX(X * PIC_X), ConvertMapY(Y * PIC_Y), 1, X, Y, 0, False)
-                        DrawAutoTile(i, ConvertMapX(X * PIC_X) + 16, ConvertMapY(Y * PIC_Y), 2, X, Y, 0, False)
-                        DrawAutoTile(i, ConvertMapX(X * PIC_X), ConvertMapY(Y * PIC_Y) + 16, 3, X, Y, 0, False)
-                        DrawAutoTile(i, ConvertMapX(X * PIC_X) + 16, ConvertMapY(Y * PIC_Y) + 16, 4, X, Y, 0, False)
+                        DrawAutoTile(i, (X * PIC_X), (Y * PIC_Y), 1, X, Y, 0, False)
+                        DrawAutoTile(i, (X * PIC_X) + 16, (Y * PIC_Y), 2, X, Y, 0, False)
+                        DrawAutoTile(i, (X * PIC_X), (Y * PIC_Y) + 16, 3, X, Y, 0, False)
+                        DrawAutoTile(i, (X * PIC_X) + 16, (Y * PIC_Y) + 16, 4, X, Y, 0, False)
                     End If
                 End If
             Next
@@ -727,14 +719,14 @@ Module E_Graphics
                             .Height = 32
                         End With
 
-                        RenderSprite(TileSetSprite(.Layer(i).Tileset), frmMapEditor.rsMap, ConvertMapX(X * PIC_X), ConvertMapY(Y * PIC_Y), srcrect.X, srcrect.Y, srcrect.Width, srcrect.Height)
+                        RenderSprite(TileSetSprite(.Layer(i).Tileset), frmMapEditor.rsMap, (X * PIC_X), (Y * PIC_Y), srcrect.X, srcrect.Y, srcrect.Width, srcrect.Height)
 
                     ElseIf Autotile(X, Y).Layer(i).renderState = RENDER_STATE_AUTOTILE Then
                         ' Draw autotiles
-                        DrawAutoTile(i, ConvertMapX(X * PIC_X), ConvertMapY(Y * PIC_Y), 1, X, Y, 0, False)
-                        DrawAutoTile(i, ConvertMapX(X * PIC_X) + 16, ConvertMapY(Y * PIC_Y), 2, X, Y, 0, False)
-                        DrawAutoTile(i, ConvertMapX(X * PIC_X), ConvertMapY(Y * PIC_Y) + 16, 3, X, Y, 0, False)
-                        DrawAutoTile(i, ConvertMapX(X * PIC_X) + 16, ConvertMapY(Y * PIC_Y) + 16, 4, X, Y, 0, False)
+                        DrawAutoTile(i, (X * PIC_X), (Y * PIC_Y), 1, X, Y, 0, False)
+                        DrawAutoTile(i, (X * PIC_X) + 16, (Y * PIC_Y), 2, X, Y, 0, False)
+                        DrawAutoTile(i, (X * PIC_X), (Y * PIC_Y) + 16, 3, X, Y, 0, False)
+                        DrawAutoTile(i, (X * PIC_X) + 16, (Y * PIC_Y) + 16, 4, X, Y, 0, False)
                     End If
                 End If
             Next
@@ -834,20 +826,6 @@ Module E_Graphics
     'End Sub
 
     Friend Sub UpdateCamera()
-
-        With TileView
-            .Top = 0
-            .Bottom = Map.MaxY
-            .Left = 0
-            .Right = Map.MaxX
-        End With
-
-        With Camera
-            .Y = 0
-            .Height = Map.MaxY * 32
-            .X = 0
-            .Width = Map.MaxX * 32
-        End With
 
         UpdateDrawMapName()
 
@@ -966,7 +944,7 @@ Module E_Graphics
         x2 = (X * PIC_X)
         y2 = (Y * PIC_Y) - (DoorGFXInfo.height / 2) + 4
 
-        RenderSprite(DoorSprite, frmMapEditor.rsMap, ConvertMapX(X * PIC_X), ConvertMapY(Y * PIC_Y), rec.X, rec.Y, rec.Width, rec.Height)
+        RenderSprite(DoorSprite, frmMapEditor.rsMap, (X * PIC_X), (Y * PIC_Y), rec.X, rec.Y, rec.Width, rec.Height)
     End Sub
 
     Friend Sub DrawTileOutline()
@@ -992,7 +970,7 @@ Module E_Graphics
         }
 
         If SelectedTab = 2 Then
-            'RenderTexture(MiscGFX, frmMapEditor.rsMap, ConvertMapX(CurX * PIC_X), ConvertMapY(CurY * PIC_Y), rec.X, rec.Y, rec.Width, rec.Height)
+            'RenderTexture(MiscGFX, frmMapEditor.rsMap, (CurX * PIC_X), (CurY * PIC_Y), rec.X, rec.Y, rec.Width, rec.Height)
             rec2.Size = New Vector2f(rec.Width, rec.Height)
         Else
             If TileSetTextureInfo(frmMapEditor.cmbTileSets.SelectedIndex + 1).IsLoaded = False Then
@@ -1004,14 +982,14 @@ Module E_Graphics
             End With
 
             If EditorTileWidth = 1 AndAlso EditorTileHeight = 1 Then
-                RenderSprite(TileSetSprite(frmMapEditor.cmbTileSets.SelectedIndex + 1), frmMapEditor.rsMap, ConvertMapX(CurX * PIC_X), ConvertMapY(CurY * PIC_Y), EditorTileSelStart.X * PIC_X, EditorTileSelStart.Y * PIC_Y, rec.Width, rec.Height)
+                RenderSprite(TileSetSprite(frmMapEditor.cmbTileSets.SelectedIndex + 1), frmMapEditor.rsMap, (CurX * PIC_X), (CurY * PIC_Y), EditorTileSelStart.X * PIC_X, EditorTileSelStart.Y * PIC_Y, rec.Width, rec.Height)
                 rec2.Size = New Vector2f(rec.Width, rec.Height)
             Else
                 If frmMapEditor.cmbAutoTile.SelectedIndex > 0 Then
-                    RenderSprite(TileSetSprite(frmMapEditor.cmbTileSets.SelectedIndex + 1), frmMapEditor.rsMap, ConvertMapX(CurX * PIC_X), ConvertMapY(CurY * PIC_Y), EditorTileSelStart.X * PIC_X, EditorTileSelStart.Y * PIC_Y, rec.Width, rec.Height)
+                    RenderSprite(TileSetSprite(frmMapEditor.cmbTileSets.SelectedIndex + 1), frmMapEditor.rsMap, (CurX * PIC_X), (CurY * PIC_Y), EditorTileSelStart.X * PIC_X, EditorTileSelStart.Y * PIC_Y, rec.Width, rec.Height)
                     rec2.Size = New Vector2f(rec.Width, rec.Height)
                 Else
-                    RenderSprite(TileSetSprite(frmMapEditor.cmbTileSets.SelectedIndex + 1), frmMapEditor.rsMap, ConvertMapX(CurX * PIC_X), ConvertMapY(CurY * PIC_Y), EditorTileSelStart.X * PIC_X, EditorTileSelStart.Y * PIC_Y, EditorTileSelEnd.X * PIC_X, EditorTileSelEnd.Y * PIC_Y)
+                    RenderSprite(TileSetSprite(frmMapEditor.cmbTileSets.SelectedIndex + 1), frmMapEditor.rsMap, (CurX * PIC_X), (CurY * PIC_Y), EditorTileSelStart.X * PIC_X, EditorTileSelStart.Y * PIC_Y, EditorTileSelEnd.X * PIC_X, EditorTileSelEnd.Y * PIC_Y)
                     rec2.Size = New Vector2f(EditorTileSelEnd.X * PIC_X, EditorTileSelEnd.Y * PIC_Y)
                 End If
 
@@ -1019,7 +997,7 @@ Module E_Graphics
 
         End If
 
-        rec2.Position = New Vector2f(ConvertMapX(CurX * PIC_X), ConvertMapY(CurY * PIC_Y))
+        rec2.Position = New Vector2f(CurX * PIC_X, CurY * PIC_Y)
         frmMapEditor.rsMap.Draw(rec2)
     End Sub
 
@@ -1027,9 +1005,9 @@ Module E_Graphics
 
         Dim rec As New RectangleShape
 
-        For x = TileView.Left To TileView.Right ' - 1
+        For x = 0 To Map.MaxX ' - 1
 
-            For y = TileView.Top To TileView.Bottom ' - 1
+            For y = 0 To Map.MaxY ' - 1
 
                 If IsValidMapPoint(x, y) Then
 
@@ -1037,7 +1015,7 @@ Module E_Graphics
                     rec.OutlineThickness = 0.6
                     rec.FillColor = New Color(Color.Transparent)
                     rec.Size = New Vector2f((x * PIC_X), (y * PIC_X))
-                    rec.Position = New Vector2f(ConvertMapX((x - 1) * PIC_X), ConvertMapY((y - 1) * PIC_Y))
+                    rec.Position = New Vector2f((x - 1) * PIC_X, (y - 1) * PIC_Y)
 
                     frmMapEditor.rsMap.Draw(rec)
                 End If

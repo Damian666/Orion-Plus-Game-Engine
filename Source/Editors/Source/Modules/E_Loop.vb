@@ -292,8 +292,6 @@ Module E_Loop
                         If FadeOutSwitch = True Then
                             FadeOut()
                         End If
-
-                        Application.DoEvents()
                         
                         If TakeScreenShot Then
                             If ScreenShotTimer < Tick Then

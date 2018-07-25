@@ -34,14 +34,14 @@ Friend Module E_Weather
                             WeatherParticle(i).InUse = 1
                             WeatherParticle(i).type = CurrentWeather
                             WeatherParticle(i).Velocity = Rand(8, 14)
-                            WeatherParticle(i).X = (TileView.Left * 32) - 32
-                            WeatherParticle(i).Y = ((TileView.Top * 32) + Rand(-32, frmMapEditor.rsMap.Size.Height))
+                            WeatherParticle(i).X =  - 32
+                            WeatherParticle(i).Y = ( Rand(-32, frmMapEditor.rsMap.Size.Height))
                         Else
                             WeatherParticle(i).InUse = 1
                             WeatherParticle(i).type = CurrentWeather
                             WeatherParticle(i).Velocity = Rand(10, 15)
-                            WeatherParticle(i).X = ((TileView.Left * 32) + Rand(-32, frmMapEditor.rsMap.Size.Width))
-                            WeatherParticle(i).Y = (TileView.Top * 32) - 32
+                            WeatherParticle(i).X = (  Rand(-32, frmMapEditor.rsMap.Size.Width))
+                            WeatherParticle(i).Y =  - 32
                         End If
                         'Exit For
                     End If
@@ -60,7 +60,7 @@ Friend Module E_Weather
         End If
         For i = 1 To MAX_WEATHER_PARTICLES
             If WeatherParticle(i).InUse = 1 Then
-                If WeatherParticle(i).X > TileView.Right * 32 OrElse WeatherParticle(i).Y > TileView.Bottom * 32 Then
+                If WeatherParticle(i).X > Map.MaxX * 32 OrElse WeatherParticle(i).Y > Map.MaxY * 32 Then
                     WeatherParticle(i).InUse = 0
                 Else
                     WeatherParticle(i).X = WeatherParticle(i).X + WeatherParticle(i).Velocity
@@ -102,7 +102,7 @@ Friend Module E_Weather
                 Else
                     SpriteLeft = WeatherParticle(i).type - 1
                 End If
-                RenderSprite(WeatherSprite, frmMapEditor.rsMap, ConvertMapX(WeatherParticle(i).X), ConvertMapY(WeatherParticle(i).Y), SpriteLeft * 32, 0, 32, 32)
+                RenderSprite(WeatherSprite, frmMapEditor.rsMap, WeatherParticle(i).X, WeatherParticle(i).Y, SpriteLeft * 32, 0, 32, 32)
             End If
         Next
 
@@ -119,8 +119,8 @@ Friend Module E_Weather
         Dim horz As Integer = 0
         Dim vert As Integer = 0
 
-        For x = TileView.Left To TileView.Right + 1
-            For y = TileView.Top To TileView.Bottom + 1
+        For x = 0 To Map.MaxX + 1
+            For y = 0 To Map.MaxY + 1
                 If IsValidMapPoint(x, y) Then
                     horz = -x
                     vert = -y
