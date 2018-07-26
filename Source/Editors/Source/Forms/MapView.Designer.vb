@@ -23,7 +23,7 @@ Partial Class MapEditorView
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(MapEditorView))
-        Me.rsMap = New SFML.UI.SfControl()
+        Me.rsMap = New SFML.UI.SfPanel()
         Me.SuspendLayout()
         '
         'rsMap
@@ -51,5 +51,5 @@ Partial Class MapEditorView
 
     End Sub
 
-    Friend WithEvents rsMap As SFML.UI.SfControl
+    Friend WithEvents rsMap As SFML.UI.SfPanel
 End Class
