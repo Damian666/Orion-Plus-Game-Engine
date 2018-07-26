@@ -826,7 +826,7 @@ Friend Module E_AutoTiles
             .TextureRect = New IntRect(Autotile(X, Y).Layer(layerNum).srcX(quarterNum) + XOffset, Autotile(X, Y).Layer(layerNum).srcY(quarterNum) + YOffset, 16, 16),
             .Position = New Vector2f(destX, destY)
         }
-        frmMapEditor.rsMap.Draw(tmpSprite)
+        MapEditorView.rsMap.Draw(tmpSprite)
 
     End Sub
 End Module

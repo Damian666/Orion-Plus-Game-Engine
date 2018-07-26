@@ -401,7 +401,7 @@ Module E_Graphics
         rec.Width = 32
         rec.Height = 32
 
-        RenderSprite(DirectionsSprite, frmMapEditor.rsMap, X * PIC_X, Y * PIC_Y, rec.X, rec.Y, rec.Width, rec.Height)
+        RenderSprite(DirectionsSprite, MapEditorView.rsMap, X * PIC_X, Y * PIC_Y, rec.X, rec.Y, rec.Width, rec.Height)
 
         ' render dir blobs
         For i = 1 To 4
@@ -415,7 +415,7 @@ Module E_Graphics
             End If
             rec.Height = 8
 
-            RenderSprite(DirectionsSprite, frmMapEditor.rsMap, X * PIC_X + DirArrowX(i), Y * PIC_Y + DirArrowY(i), rec.X, rec.Y, rec.Width, rec.Height)
+            RenderSprite(DirectionsSprite, MapEditorView.rsMap, X * PIC_X + DirArrowX(i), Y * PIC_Y + DirArrowY(i), rec.X, rec.Y, rec.Width, rec.Height)
         Next
     End Sub
 
@@ -537,7 +537,7 @@ Module E_Graphics
             .TextureTimer = GetTickCount() + 100000
         End With
 
-        RenderSprite(ResourcesSprite(Resource), frmMapEditor.rsMap, X, Y, rec.X, rec.Y, rec.Width, rec.Height)
+        RenderSprite(ResourcesSprite(Resource), MapEditorView.rsMap, X, Y, rec.X, rec.Y, rec.Width, rec.Height)
     End Sub
 
     Friend Sub DrawMapResource(Resource_num As Integer)
@@ -618,7 +618,7 @@ Module E_Graphics
         x = MapItem(itemnum).X * PIC_X
         y = MapItem(itemnum).Y * PIC_Y
 
-        RenderSprite(ItemsSprite(PicNum), frmMapEditor.rsMap, x, y, srcrec.X, srcrec.Y, srcrec.Width, srcrec.Height)
+        RenderSprite(ItemsSprite(PicNum), MapEditorView.rsMap, x, y, srcrec.X, srcrec.Y, srcrec.Width, srcrec.Height)
     End Sub
 
     Friend Sub DrawCharacter(Sprite As Integer, x2 As Integer, y2 As Integer, rec As Rectangle)
@@ -644,7 +644,7 @@ Module E_Graphics
         width = (rec.Width)
         height = (rec.Height)
 
-        RenderSprite(CharacterSprite(Sprite), frmMapEditor.rsMap, X, y, rec.X, rec.Y, rec.Width, rec.Height)
+        RenderSprite(CharacterSprite(Sprite), MapEditorView.rsMap, X, y, rec.X, rec.Y, rec.Width, rec.Height)
     End Sub
 
     Friend Sub DrawMapTile(X As Integer, Y As Integer)
@@ -673,7 +673,7 @@ Module E_Graphics
                             .Height = 32
                         End With
 
-                        RenderSprite(TileSetSprite(.Layer(i).Tileset), frmMapEditor.rsMap, (X * PIC_X), (Y * PIC_Y), srcrect.X, srcrect.Y, srcrect.Width, srcrect.Height)
+                        RenderSprite(TileSetSprite(.Layer(i).Tileset), MapEditorView.rsMap, (X * PIC_X), (Y * PIC_Y), srcrect.X, srcrect.Y, srcrect.Width, srcrect.Height)
                         'RenderSprite(TileSetSprite(.Layer(i).Tileset), MapView.rsMap, (X * PIC_X), (Y * PIC_Y), srcrect.X, srcrect.Y, srcrect.Width, srcrect.Height)
 
                     ElseIf Autotile(X, Y).Layer(i).renderState = RENDER_STATE_AUTOTILE Then
@@ -720,7 +720,7 @@ Module E_Graphics
                             .Height = 32
                         End With
 
-                        RenderSprite(TileSetSprite(.Layer(i).Tileset), frmMapEditor.rsMap, (X * PIC_X), (Y * PIC_Y), srcrect.X, srcrect.Y, srcrect.Width, srcrect.Height)
+                        RenderSprite(TileSetSprite(.Layer(i).Tileset), MapEditorView.rsMap, (X * PIC_X), (Y * PIC_Y), srcrect.X, srcrect.Y, srcrect.Width, srcrect.Height)
 
                     ElseIf Autotile(X, Y).Layer(i).renderState = RENDER_STATE_AUTOTILE Then
                         ' Draw autotiles
@@ -902,7 +902,7 @@ Module E_Graphics
     End Sub
     
     Sub DrawMapName()
-        DrawText(DrawMapNameX, DrawMapNameY, Map.Name, DrawMapNameColor, Color.Black, frmMapEditor.rsMap)
+        DrawText(DrawMapNameX, DrawMapNameY, Map.Name, DrawMapNameColor, Color.Black, MapEditorView.rsMap)
     End Sub
 
     Friend Sub DrawDoor(X As Integer, Y As Integer)
@@ -945,7 +945,7 @@ Module E_Graphics
         x2 = (X * PIC_X)
         y2 = (Y * PIC_Y) - (DoorGFXInfo.height / 2) + 4
 
-        RenderSprite(DoorSprite, frmMapEditor.rsMap, (X * PIC_X), (Y * PIC_Y), rec.X, rec.Y, rec.Width, rec.Height)
+        RenderSprite(DoorSprite, MapEditorView.rsMap, (X * PIC_X), (Y * PIC_Y), rec.X, rec.Y, rec.Width, rec.Height)
     End Sub
 
     Friend Sub DrawTileOutline()
@@ -971,7 +971,7 @@ Module E_Graphics
         }
 
         If SelectedTab = 2 Then
-            'RenderTexture(MiscGFX, frmMapEditor.rsMap, (CurX * PIC_X), (CurY * PIC_Y), rec.X, rec.Y, rec.Width, rec.Height)
+            'RenderTexture(MiscGFX, MapEditorView.rsMap, (CurX * PIC_X), (CurY * PIC_Y), rec.X, rec.Y, rec.Width, rec.Height)
             rec2.Size = New Vector2f(rec.Width, rec.Height)
         Else
             If TileSetTextureInfo(frmMapEditor.cmbTileSets.SelectedIndex + 1).IsLoaded = False Then
@@ -983,14 +983,14 @@ Module E_Graphics
             End With
 
             If EditorTileWidth = 1 AndAlso EditorTileHeight = 1 Then
-                RenderSprite(TileSetSprite(frmMapEditor.cmbTileSets.SelectedIndex + 1), frmMapEditor.rsMap, (CurX * PIC_X), (CurY * PIC_Y), EditorTileSelStart.X * PIC_X, EditorTileSelStart.Y * PIC_Y, rec.Width, rec.Height)
+                RenderSprite(TileSetSprite(frmMapEditor.cmbTileSets.SelectedIndex + 1), MapEditorView.rsMap, (CurX * PIC_X), (CurY * PIC_Y), EditorTileSelStart.X * PIC_X, EditorTileSelStart.Y * PIC_Y, rec.Width, rec.Height)
                 rec2.Size = New Vector2f(rec.Width, rec.Height)
             Else
                 If frmMapEditor.cmbAutoTile.SelectedIndex > 0 Then
-                    RenderSprite(TileSetSprite(frmMapEditor.cmbTileSets.SelectedIndex + 1), frmMapEditor.rsMap, (CurX * PIC_X), (CurY * PIC_Y), EditorTileSelStart.X * PIC_X, EditorTileSelStart.Y * PIC_Y, rec.Width, rec.Height)
+                    RenderSprite(TileSetSprite(frmMapEditor.cmbTileSets.SelectedIndex + 1), MapEditorView.rsMap, (CurX * PIC_X), (CurY * PIC_Y), EditorTileSelStart.X * PIC_X, EditorTileSelStart.Y * PIC_Y, rec.Width, rec.Height)
                     rec2.Size = New Vector2f(rec.Width, rec.Height)
                 Else
-                    RenderSprite(TileSetSprite(frmMapEditor.cmbTileSets.SelectedIndex + 1), frmMapEditor.rsMap, (CurX * PIC_X), (CurY * PIC_Y), EditorTileSelStart.X * PIC_X, EditorTileSelStart.Y * PIC_Y, EditorTileSelEnd.X * PIC_X, EditorTileSelEnd.Y * PIC_Y)
+                    RenderSprite(TileSetSprite(frmMapEditor.cmbTileSets.SelectedIndex + 1), MapEditorView.rsMap, (CurX * PIC_X), (CurY * PIC_Y), EditorTileSelStart.X * PIC_X, EditorTileSelStart.Y * PIC_Y, EditorTileSelEnd.X * PIC_X, EditorTileSelEnd.Y * PIC_Y)
                     rec2.Size = New Vector2f(EditorTileSelEnd.X * PIC_X, EditorTileSelEnd.Y * PIC_Y)
                 End If
 
@@ -999,7 +999,7 @@ Module E_Graphics
         End If
 
         rec2.Position = New Vector2f(CurX * PIC_X, CurY * PIC_Y)
-        frmMapEditor.rsMap.Draw(rec2)
+        MapEditorView.rsMap.Draw(rec2)
     End Sub
 
     Friend Sub DrawGrid()
@@ -1018,7 +1018,7 @@ Module E_Graphics
                     rec.Size = New Vector2f((x * PIC_X), (y * PIC_X))
                     rec.Position = New Vector2f((x - 1) * PIC_X, (y - 1) * PIC_Y)
 
-                    frmMapEditor.rsMap.Draw(rec)
+                    MapEditorView.rsMap.Draw(rec)
                 End If
 
             Next
@@ -1038,7 +1038,7 @@ Module E_Graphics
             .Position = New Vector2f(0, 0)
         }
 
-        frmMapEditor.rsMap.Draw(MapTintSprite)
+        MapEditorView.rsMap.Draw(MapTintSprite)
 
     End Sub
 

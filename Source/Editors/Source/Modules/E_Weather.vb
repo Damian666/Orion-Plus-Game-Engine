@@ -35,12 +35,12 @@ Friend Module E_Weather
                             WeatherParticle(i).type = CurrentWeather
                             WeatherParticle(i).Velocity = Rand(8, 14)
                             WeatherParticle(i).X =  - 32
-                            WeatherParticle(i).Y = ( Rand(-32, frmMapEditor.rsMap.Size.Height))
+                            WeatherParticle(i).Y = ( Rand(-32, MapEditorView.rsMap.Size.Height))
                         Else
                             WeatherParticle(i).InUse = 1
                             WeatherParticle(i).type = CurrentWeather
                             WeatherParticle(i).Velocity = Rand(10, 15)
-                            WeatherParticle(i).X = (  Rand(-32, frmMapEditor.rsMap.Size.Width))
+                            WeatherParticle(i).X = (  Rand(-32, MapEditorView.rsMap.Size.Width))
                             WeatherParticle(i).Y =  - 32
                         End If
                         'Exit For
@@ -76,13 +76,13 @@ Friend Module E_Weather
 
         If DrawThunder > 0 Then
             Dim tmpSprite As Sprite
-            tmpSprite = New Sprite(New Texture(New SFML.Graphics.Image(frmMapEditor.rsMap.Size.Width, frmMapEditor.rsMap.Size.Height, SFML.Graphics.Color.White))) With {
+            tmpSprite = New Sprite(New Texture(New SFML.Graphics.Image(MapEditorView.rsMap.Size.Width, MapEditorView.rsMap.Size.Height, SFML.Graphics.Color.White))) With {
                 .Color = New Color(255, 255, 255, 150),
-                .TextureRect = New IntRect(0, 0, frmMapEditor.rsMap.Size.Width, frmMapEditor.rsMap.Size.Height),
+                .TextureRect = New IntRect(0, 0, MapEditorView.rsMap.Size.Width, MapEditorView.rsMap.Size.Height),
                 .Position = New Vector2f(0, 0)
             }
 
-            frmMapEditor.rsMap.Draw(tmpSprite) '
+            MapEditorView.rsMap.Draw(tmpSprite) '
 
             DrawThunder = DrawThunder - 1
 
@@ -102,7 +102,7 @@ Friend Module E_Weather
                 Else
                     SpriteLeft = WeatherParticle(i).type - 1
                 End If
-                RenderSprite(WeatherSprite, frmMapEditor.rsMap, WeatherParticle(i).X, WeatherParticle(i).Y, SpriteLeft * 32, 0, 32, 32)
+                RenderSprite(WeatherSprite, MapEditorView.rsMap, WeatherParticle(i).X, WeatherParticle(i).Y, SpriteLeft * 32, 0, 32, 32)
             End If
         Next
 
@@ -140,12 +140,12 @@ Friend Module E_Weather
         Dim tmpSprite As Sprite
         tmpSprite = New Sprite(FogGFX(fogNum)) With {
             .Color = New Color(255, 255, 255, CurrentFogOpacity),
-            .TextureRect = New IntRect(0, 0, frmMapEditor.rsMap.Size.Width + 200, frmMapEditor.rsMap.Size.Height + 200),
+            .TextureRect = New IntRect(0, 0, MapEditorView.rsMap.Size.Width + 200, MapEditorView.rsMap.Size.Height + 200),
             .Position = New Vector2f((horz * 2.5) + 50, (vert * 3.5) + 50),
-            .Scale = (New Vector2f(CDbl((frmMapEditor.rsMap.Size.Width + 200) / FogGFXInfo(fogNum).width), CDbl((frmMapEditor.rsMap.Size.Height + 200) / FogGFXInfo(fogNum).height)))
+            .Scale = (New Vector2f(CDbl((MapEditorView.rsMap.Size.Width + 200) / FogGFXInfo(fogNum).width), CDbl((MapEditorView.rsMap.Size.Height + 200) / FogGFXInfo(fogNum).height)))
         }
 
-        frmMapEditor.rsMap.Draw(tmpSprite) '
+        MapEditorView.rsMap.Draw(tmpSprite) '
 
     End Sub
 

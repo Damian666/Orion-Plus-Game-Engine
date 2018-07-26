@@ -278,7 +278,7 @@ Friend Module E_Housing
                         .TextureRect = New IntRect(0 + (X1 * 32), 0 + (Y1 * 32), 32, 32),
                         .Position = New Vector2f(X, Y)
                     }
-                    frmMapEditor.rsMap.Draw(tmpSprite)
+                    MapEditorView.rsMap.Draw(tmpSprite)
                 End If
             Next
         Next

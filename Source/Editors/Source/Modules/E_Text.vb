@@ -89,7 +89,7 @@ Module E_Text
         End If
 
         ' Draw name
-        DrawText(TextX, TextY, Trim$(Npc(npcNum).Name), color, backcolor, frmMapEditor.rsMap)
+        DrawText(TextX, TextY, Trim$(Npc(npcNum).Name), color, backcolor, MapEditorView.rsMap)
     End Sub
 
     Friend Sub DrawEventName(index as integer)
@@ -124,7 +124,7 @@ Module E_Text
         End If
 
         ' Draw name
-        DrawText(TextX, TextY, Trim$(Name), color, backcolor, frmMapEditor.rsMap)
+        DrawText(TextX, TextY, Trim$(Name), color, backcolor, MapEditorView.rsMap)
 
     End Sub
 
@@ -150,40 +150,40 @@ Module E_Text
                             Select Case .Type
                                 Case TileType.Blocked
                                     rec.FillColor = New Color(255, 0, 0, 100)
-                                    frmMapEditor.rsMap.Draw(rec)
-                                    DrawText(tX, tY, "B", (Color.White), (Color.Black), frmMapEditor.rsMap)
+                                    MapEditorView.rsMap.Draw(rec)
+                                    DrawText(tX, tY, "B", (Color.White), (Color.Black), MapEditorView.rsMap)
                                 Case TileType.Warp
-                                    DrawText(tX, tY, "W", (Color.Blue), (Color.Black), frmMapEditor.rsMap)
+                                    DrawText(tX, tY, "W", (Color.Blue), (Color.Black), MapEditorView.rsMap)
                                 Case TileType.Item
-                                    DrawText(tX, tY, "I", (Color.White), (Color.Black), frmMapEditor.rsMap)
+                                    DrawText(tX, tY, "I", (Color.White), (Color.Black), MapEditorView.rsMap)
                                 Case TileType.NpcAvoid
-                                    DrawText(tX, tY, "N", (Color.White), (Color.Black), frmMapEditor.rsMap)
+                                    DrawText(tX, tY, "N", (Color.White), (Color.Black), MapEditorView.rsMap)
                                 Case TileType.Key
-                                    DrawText(tX, tY, "K", (Color.White), (Color.Black), frmMapEditor.rsMap)
+                                    DrawText(tX, tY, "K", (Color.White), (Color.Black), MapEditorView.rsMap)
                                 Case TileType.KeyOpen
-                                    DrawText(tX, tY, "KO", (Color.White), (Color.Black), frmMapEditor.rsMap)
+                                    DrawText(tX, tY, "KO", (Color.White), (Color.Black), MapEditorView.rsMap)
                                 Case TileType.Resource
-                                    DrawText(tX, tY, "R", (Color.Green), (Color.Black), frmMapEditor.rsMap)
+                                    DrawText(tX, tY, "R", (Color.Green), (Color.Black), MapEditorView.rsMap)
                                 Case TileType.Door
-                                    DrawText(tX, tY, "D", (Color.Black), (Color.Red), frmMapEditor.rsMap)
+                                    DrawText(tX, tY, "D", (Color.Black), (Color.Red), MapEditorView.rsMap)
                                 Case TileType.NpcSpawn
                                     rec.FillColor = New Color(255, 255, 0, 100)
-                                    frmMapEditor.rsMap.Draw(rec)
-                                    DrawText(tX, tY, "S", (Color.White), (Color.Black), frmMapEditor.rsMap)
+                                    MapEditorView.rsMap.Draw(rec)
+                                    DrawText(tX, tY, "S", (Color.White), (Color.Black), MapEditorView.rsMap)
                                 Case TileType.Shop
-                                    DrawText(tX, tY, "SH", (Color.Blue), (Color.Black), frmMapEditor.rsMap)
+                                    DrawText(tX, tY, "SH", (Color.Blue), (Color.Black), MapEditorView.rsMap)
                                 Case TileType.Bank
-                                    DrawText(tX, tY, "BA", (Color.Blue), (Color.Black), frmMapEditor.rsMap)
+                                    DrawText(tX, tY, "BA", (Color.Blue), (Color.Black), MapEditorView.rsMap)
                                 Case TileType.Heal
-                                    DrawText(tX, tY, "H", (Color.Green), (Color.Black), frmMapEditor.rsMap)
+                                    DrawText(tX, tY, "H", (Color.Green), (Color.Black), MapEditorView.rsMap)
                                 Case TileType.Trap
-                                    DrawText(tX, tY, "T", (Color.Red), (Color.Black), frmMapEditor.rsMap)
+                                    DrawText(tX, tY, "T", (Color.Red), (Color.Black), MapEditorView.rsMap)
                                 Case TileType.House
-                                    DrawText(tX, tY, "H", (Color.Green), (Color.Black), frmMapEditor.rsMap)
+                                    DrawText(tX, tY, "H", (Color.Green), (Color.Black), MapEditorView.rsMap)
                                 Case TileType.Craft
-                                    DrawText(tX, tY, "C", (Color.Green), (Color.Black), frmMapEditor.rsMap)
+                                    DrawText(tX, tY, "C", (Color.Green), (Color.Black), MapEditorView.rsMap)
                                 Case TileType.Light
-                                    DrawText(tX, tY, "L", (Color.Yellow), (Color.Black), frmMapEditor.rsMap)
+                                    DrawText(tX, tY, "L", (Color.Yellow), (Color.Black), MapEditorView.rsMap)
                             End Select
                         End With
                     End If
