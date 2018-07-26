@@ -436,6 +436,7 @@
   <data name="tsbSave.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
+<<<<<<< HEAD
         YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAALwSURBVDhPjZJbSNNRHMf/4DbXS4gvYYEVBT4FohS+ZBfB
         jGpBUSARplMr97AHy5fME9jF7AaZpqWlReqEMpdlmnMtck2du7XNbd6CLLTI0srb7Hv6HVOrNx8+fH7n
         z/n+zuV/JHlk5auQiLtBgWyJ/JlfOSOPfNAshUTV9oeuq8lXxDZwWUIZZAmGf7xQ//89NPYylOtrTsuj
@@ -450,6 +451,22 @@
         qiosP2jhtSYXvtAOxF/JG5rle84YIKn1Qx9Ypx/MGkChw48cVo/CUiNUmiqs2HxtkTWJRahrsy++B2YL
         IPUiNYjLMiellXtHNLoBfuL8C2hLvDzhmvHXbuacEagLjdOC3cw1k3Wjd5pV95P7p9W33RPbsy0NvwHC
         78XNJ4czNwAAAABJRU5ErkJggg==
+=======
+        YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAALwSURBVDhPjZJLSFRRGMcvODOOmxA3YYEZCa4CUQo3aSmY
+        oU5gFIiE6aiVs5iF5SbzSi4CIy2fPQwHxdQU8gWp+UwdNcXHODPOe0ZnDDWytPI19j9919Rq5+LH7zuX
+        8/++c+89nNhP9cHDt9ItIDokf/artsV+NR2cR2Cd1fNUbZ4kpJmJIqshiuz+x/v1/889Q8ogDai9Lw6s
+        /8yJg5uXxGdaO4+lt+Ls09lD4ZvcBI+QFp0kuHqTk5x/uyGKrkXiYyNT21ywb4INkq1kC9FPdR9hoLqb
+        rCfH8O8hiu5nkjAVOM/w3i1xQitSc9Wwu1ywLSzAQjaTjcQs1XpCR7WWrCHH8wMQMp6X6qhB4oRbrOhF
+        as0is9GGdcaYmfydvEroKaCj9QrVGvIyOf7BGCQKI5NebQLnlaR3S+99RFqp7u9ksoG8H96fPEWeJF8p
+        mIE0ewxeN96B806yuH14DTIqjTDRBiF8cGxiN0xMExN7JDwzQMh4K7rAHU+zuf1ztcjs/8mE8JpwbPJX
+        snDsGZoohBepFsKfyPIqE06+WGG+d3vAnXhkdwcVziKqZY3dqjXjJjVKJ6cLFqgzI43WqVSn7vlCuQFB
+        dassIKePGpTa3WEVRoS9MuF2owWq0Tm0auZRNOgA32Xfw4bcHjs6Z+cxYHGiWTePiyoTTvP94MIfjkHW
+        YIVsaIPxtKlgfJ3N2F1Q9vxgfuUrzI/XQiCwYoV1UPAbvYLwbVLGN1goPwgupngS19vtBE0cngNfrYdx
+        zom0Ig2kWcOEehef7BG0TTl278MMNVD2OBBBd4dLaF9myuF5KB07LG/Kibw3TmZwOCEvtjDRZTUTyRoh
+        kjXgyLUR1jJmwRc6gfBXclw7LC5/GJy8xbXAa53g9S6UmJzI4jtQUjUKmaIBR889P8A/6hXaRowH94E3
+        uJBcTA1CM9TRKRX6JUW9jd15MgRlmZ7FFfb+iuWntwXk+b1bArG8ZjujxLzFv7aSrVvyl9r1iMyR5t9k
+        ZdMkp9Hs2AAAAABJRU5ErkJggg==
+>>>>>>> parent of 9300314... just some renamin shit.
 </value>
   </data>
   <data name="tsbDiscard.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
@@ -518,6 +535,7 @@
   <data name="tsbScreenShot.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
+<<<<<<< HEAD
         YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAODSURBVDhPhVN9TFtVHH1vy7pqnI7hqHM64lfcWOIkMM2M
         4ncMqX9sarKwmWHMosEZnR9rmSw8ChRWmRoU6oCtDLdJCQOVWjoK7DFKhwwo68dr90oLGwhvW5l2bZGO
         tu94kZn9ZfwlJ+cm596T+/vdc6n/LLVj/ZJyZ296/WjoueN+3HWIm6XU9j231P8vSbnzzXcPmsSJG/MI
@@ -534,6 +552,24 @@
         sPhmoGl3Q6G3oczgAssHwAfjUJ0V8Nh77dYVmxuSKSq9uk+S2xZfXTKERys9SK+/hNeap1FI4to3NYvp
         0Dz+JD0L4RjOTc1BZWYTmz8xD0sytY8v/qZHDj1Ib6w0Ls2o4pZmHOakW2q4O56u4dbKT3LZByzcBz+O
         cir2Kre3xc9t/XLAkZ5nrEx5qU62eJii/gb5bnbvwJmHNAAAAABJRU5ErkJggg==
+=======
+        YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAODSURBVDhPhVN9bFNVHL0PQqlGlDFZRZTFrwgjEZcNDQbn
+        dwypf4CYkIFhxhDNxCh+0A5H1nVbN+swZgh1H9ptAq4LDHW1+ygb3fZW5tjW0Y/X8rp2g83tAR1S2s6V
+        tX3HO4fhL+MvOTk3Ofee3N/vnkv+szSOtYvKnD3ptSOh54/5cc8hboZo7Htvq/9fkjLn9ncPd4vjN+cQ
+        vpVAeX8AdxcPz96W79QSrfPbNI0rXsReQX6XgHzLAlR6q9g7HsHI9Sj46Shswl/IPysg67gfSV+7wZQ4
+        BonGlkZSdXxMbw+ifSyCFn8EJh9linluHgnjVy8F5WZfGEaK03wYhWwAD6pMIilzdpFUusjvDODAmWtQ
+        nrkKpZlinikUZgH72/7AZ20T+JxCWcmKGkt/4gfXDHb9JmBpKXedLNrbB8nH57BUOYDlhU6s0noh+5KH
+        VGHFQwU9eOHIIN760YFXdENIVdWKshxr7A21Rcy13MR939CZMLkspHksHtDa8ZT+Mjafmkam3otdBg/q
+        XH+ifSqG34MJdFyJo54LIvuEC7K8OvFpVZt4v8o7R5g9FkiV1KDMjrTqMWyo8SG7wQPjpVkUnQ8jq2EK
+        62ou47njkyjoC6F14hbeOXkRSdstCWnBcJwwOWZq0LtgUDWKTdUcDO4gjjoieLT8AtYcMGPtF61IpfyI
+        1gZNfxCnvCFkqhpESQ4bI0y2ifb/r4Ef8noOnlAMe4wTSNrfgR3VAygy8ditH8JKRSfk9BndoQTeNlyE
+        ZHcrCPPmz3cMqv3Y2cjjWpRuaOCRfNCKF3UOyL934qXvHEhR9SFLZ4dA9Y+Mo1iyrSlCGHnjPzOQlQ5j
+        XaUPO5vGMBqJ49NfqEHRAFaVu7GaBmeeU0qGsKPWDl84gfdP03hva+ogzGvHINnXjmWKs5AVWvGq3o3O
+        8Rm0eqaxobQbyerzWFF8ASvUA1hf0gODTQArRLHlsC1279bGDwnzTF1UoujCcnrdNdphZFTxyKORdQSi
+        YH3T0La4oTDYUGp0wcIHwAfjUHcLeOK9FuuyjfXJhKQf7ZXkNMdXFg/i8QoP0msv4fWTUyigce2dnMFU
+        aA43aM9COIZzk7NQm7sTGz8xD0kydU8u/KbHDj3MrK8wLc44wi3OqOSkm6q4u56t4lbLT3BbDrLcBz+N
+        cGrLVW5fk5/b+lW/Iz3XVJHyco1s4TAhfwO+9neP7JRiVgAAAABJRU5ErkJggg==
+>>>>>>> parent of 9300314... just some renamin shit.
 </value>
   </data>
   <data name="rsMap.BackgroundImage" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">

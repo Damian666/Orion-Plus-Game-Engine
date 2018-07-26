@@ -140,7 +140,7 @@ Friend Class frmMapEditor
 
 #Region "RsMap"
 
-    Private Sub RsMap_Render(sender As Object, e As EventArgs) Handles rsMap.Render
+    Private Sub rsMap_Render(sender As Object, e As EventArgs) Handles rsMap.Render
         Dim X As Integer, Y As Integer, I As Integer
 
         'Don't Render IF
@@ -149,13 +149,17 @@ Friend Class frmMapEditor
 
         'update view around player
         UpdateCamera()
-
+        
         rsMap.Width = (Map.MaxX + 1) * PIC_X
         rsMap.Height = (Map.MaxY + 1) * PIC_Y
+<<<<<<< HEAD
         rsMap.RenderWindow.DispatchEvents()
         rsMap.View = New View(New FloatRect(0, 0,
             rsMap.Width, rsMap.Height))
 
+=======
+        
+>>>>>>> parent of 9300314... just some renamin shit.
         'clear any unused gfx
         ClearGFX()
 
@@ -239,8 +243,8 @@ Friend Class frmMapEditor
                 ' Resources
                 If NumResources > 0 Then
                     If Resources_Init Then
-                        If Resource_index > 0 Then
-                            For I = 1 To Resource_index
+                        If Resource_Index > 0 Then
+                            For I = 1 To Resource_Index
                                 If MapResource(I).Y = Y Then
                                     DrawMapResource(I)
                                 End If
@@ -326,12 +330,27 @@ Friend Class frmMapEditor
         End If
     End Sub
 
+<<<<<<< HEAD
     Private Sub RsMap_MouseDown(sender As Object, e As MouseEventArgs) Handles rsMap.MouseDown
         If e.X > rsMap.Width - 32 OrElse e.Y > rsMap.Height - 32 Then Exit Sub
+=======
+    Private Sub rsMap_MouseDown(sender As Object, e As MouseEventArgs) Handles rsMap.MouseDown
+        If e.X > pnlBack2.Width - 32 OrElse e.Y > pnlBack2.Height - 32 Then Exit Sub
+>>>>>>> parent of 9300314... just some renamin shit.
         MapEditorMouseDown(e.Button, e.X, e.Y, False)
+
     End Sub
 
+<<<<<<< HEAD
     Private Sub RsMap_MouseMove(sender As Object, e As MouseEventArgs) Handles rsMap.MouseMove
+=======
+    Private Overloads Sub rsMap_Paint(sender As Object, e As PaintEventArgs) Handles rsMap.Paint
+        'This is here to make sure that the box dosen't try to re-paint itself... saves time and w/e else
+        Exit Sub
+    End Sub
+
+    Private Sub rsMap_MouseMove(sender As Object, e As MouseEventArgs) Handles rsMap.MouseMove
+>>>>>>> parent of 9300314... just some renamin shit.
 
         CurX = e.Location.X \ PIC_X
         CurY = e.Location.Y \ PIC_Y
@@ -346,7 +365,7 @@ Friend Class frmMapEditor
         tslCurXY.Text = "X: " & CurX & " - " & " Y: " & CurY
     End Sub
 
-    Private Sub RsMap_MouseUp(sender As Object, e As MouseEventArgs) Handles rsMap.MouseUp
+    Private Sub rsMap_MouseUp(sender As Object, e As MouseEventArgs) Handles rsMap.MouseUp
 
         CurX = e.Location.X \ PIC_X
         CurY = e.Location.Y \ PIC_Y
