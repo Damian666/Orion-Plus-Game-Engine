@@ -36,6 +36,7 @@ Partial Class frmMapEditor
         Me.cmbLayers = New DarkUI.Controls.DarkComboBox()
         Me.DarkLabel4 = New DarkUI.Controls.DarkLabel()
         Me.pnlTileset = New Engine.NoResetPanel()
+        Me.rsTileset = New SFML.UI.SfControl()
         Me.DarkLabel3 = New DarkUI.Controls.DarkLabel()
         Me.DarkLabel2 = New DarkUI.Controls.DarkLabel()
         Me.DarkLabel1 = New DarkUI.Controls.DarkLabel()
@@ -195,7 +196,6 @@ Partial Class frmMapEditor
         Me.lblTrap = New System.Windows.Forms.Label()
         Me.pnlMap = New Engine.NoResetPanel()
         Me.rsMap = New SFML.UI.SfControl()
-        Me.rsTileset = New SFML.UI.SfControl()
         Me.ToolStripContainer2.ContentPanel.SuspendLayout
         Me.ToolStripContainer2.SuspendLayout
         Me.ssInfo.SuspendLayout
@@ -232,7 +232,6 @@ Partial Class frmMapEditor
         CType(Me.nudDown,System.ComponentModel.ISupportInitialize).BeginInit
         CType(Me.nudUp,System.ComponentModel.ISupportInitialize).BeginInit
         Me.ToolStrip.SuspendLayout
-        Me.pnlBack2.SuspendLayout
         Me.pnlAttributes.SuspendLayout
         Me.fraMapWarp.SuspendLayout
         Me.fraBuyHouse.SuspendLayout
@@ -432,6 +431,18 @@ Partial Class frmMapEditor
         Me.pnlTileset.Name = "pnlTileset"
         Me.pnlTileset.Size = New System.Drawing.Size(309, 458)
         Me.pnlTileset.TabIndex = 10
+        '
+        'rsTileset
+        '
+        Me.rsTileset.AutoDraw = false
+        Me.rsTileset.AutoDrawInterval = 100
+        Me.rsTileset.BackColor = System.Drawing.Color.CornflowerBlue
+        Me.rsTileset.BackgroundImage = CType(resources.GetObject("rsTileset.BackgroundImage"),System.Drawing.Image)
+        Me.rsTileset.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center
+        Me.rsTileset.Location = New System.Drawing.Point(0, 0)
+        Me.rsTileset.Name = "rsTileset"
+        Me.rsTileset.Size = New System.Drawing.Size(96, 96)
+        Me.rsTileset.TabIndex = 0
         '
         'DarkLabel3
         '
@@ -1540,10 +1551,10 @@ Partial Class frmMapEditor
         '
         'pnlBack2
         '
-        Me.pnlBack2.Controls.Add(Me.pnlAttributes)
-        Me.pnlBack2.Controls.Add(Me.pnlMap)
-        Me.pnlBack2.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.pnlBack2.Location = New System.Drawing.Point(318, 25)
+        Me.pnlBack2.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom)  _
+            Or System.Windows.Forms.AnchorStyles.Left)  _
+            Or System.Windows.Forms.AnchorStyles.Right),System.Windows.Forms.AnchorStyles)
+        Me.pnlBack2.Location = New System.Drawing.Point(320, 28)
         Me.pnlBack2.Name = "pnlBack2"
         Me.pnlBack2.SectionHeader = "MapView"
         Me.pnlBack2.Size = New System.Drawing.Size(758, 573)
@@ -1563,7 +1574,7 @@ Partial Class frmMapEditor
         Me.pnlAttributes.Controls.Add(Me.fraMapItem)
         Me.pnlAttributes.Controls.Add(Me.fraTrap)
         Me.pnlAttributes.ForeColor = System.Drawing.Color.LightGray
-        Me.pnlAttributes.Location = New System.Drawing.Point(6, 34)
+        Me.pnlAttributes.Location = New System.Drawing.Point(318, 60)
         Me.pnlAttributes.Name = "pnlAttributes"
         Me.pnlAttributes.Size = New System.Drawing.Size(709, 516)
         Me.pnlAttributes.TabIndex = 11
@@ -2090,7 +2101,7 @@ Partial Class frmMapEditor
         Me.pnlMap.BackColor = System.Drawing.Color.Black
         Me.pnlMap.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center
         Me.pnlMap.Controls.Add(Me.rsMap)
-        Me.pnlMap.Location = New System.Drawing.Point(1, 25)
+        Me.pnlMap.Location = New System.Drawing.Point(321, 54)
         Me.pnlMap.Name = "pnlMap"
         Me.pnlMap.Size = New System.Drawing.Size(757, 548)
         Me.pnlMap.TabIndex = 2
@@ -2107,27 +2118,18 @@ Partial Class frmMapEditor
         Me.rsMap.Size = New System.Drawing.Size(96, 96)
         Me.rsMap.TabIndex = 0
         '
-        'rsTileset
-        '
-        Me.rsTileset.AutoDrawInterval = 100
-        Me.rsTileset.BackColor = System.Drawing.Color.CornflowerBlue
-        Me.rsTileset.BackgroundImage = CType(resources.GetObject("rsTileset.BackgroundImage"),System.Drawing.Image)
-        Me.rsTileset.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center
-        Me.rsTileset.Location = New System.Drawing.Point(0, 0)
-        Me.rsTileset.Name = "rsTileset"
-        Me.rsTileset.Size = New System.Drawing.Size(96, 96)
-        Me.rsTileset.TabIndex = 0
-        '
         'frmMapEditor
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6!, 13!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(1292, 626)
-        Me.Controls.Add(Me.pnlBack2)
+        Me.Controls.Add(Me.pnlAttributes)
         Me.Controls.Add(Me.ToolStrip)
         Me.Controls.Add(Me.DarkSectionPanel2)
         Me.Controls.Add(Me.DarkSectionPanel1)
         Me.Controls.Add(Me.ToolStripContainer2)
+        Me.Controls.Add(Me.pnlMap)
+        Me.Controls.Add(Me.pnlBack2)
         Me.Controls.Add(Me.DarkDockPanel1)
         Me.Icon = CType(resources.GetObject("$this.Icon"),System.Drawing.Icon)
         Me.Name = "frmMapEditor"
@@ -2181,7 +2183,6 @@ Partial Class frmMapEditor
         CType(Me.nudUp,System.ComponentModel.ISupportInitialize).EndInit
         Me.ToolStrip.ResumeLayout(false)
         Me.ToolStrip.PerformLayout
-        Me.pnlBack2.ResumeLayout(false)
         Me.pnlAttributes.ResumeLayout(false)
         Me.fraMapWarp.ResumeLayout(false)
         Me.fraMapWarp.PerformLayout
