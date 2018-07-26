@@ -674,6 +674,7 @@ Module E_Graphics
                         End With
 
                         RenderSprite(TileSetSprite(.Layer(i).Tileset), frmMapEditor.rsMap, (X * PIC_X), (Y * PIC_Y), srcrect.X, srcrect.Y, srcrect.Width, srcrect.Height)
+                        'RenderSprite(TileSetSprite(.Layer(i).Tileset), MapView.rsMap, (X * PIC_X), (Y * PIC_Y), srcrect.X, srcrect.Y, srcrect.Width, srcrect.Height)
 
                     ElseIf Autotile(X, Y).Layer(i).renderState = RENDER_STATE_AUTOTILE Then
                         ' Draw autotiles

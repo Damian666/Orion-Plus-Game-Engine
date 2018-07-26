@@ -154,7 +154,7 @@ Friend Class frmMapEditor
         rsMap.Height = (Map.MaxY + 1) * PIC_Y
         rsMap.RenderWindow.DispatchEvents()
         rsMap.View = New View(New FloatRect(0, 0,
-            rsMap.RenderWindow.Size.X, rsMap.RenderWindow.Size.Y))
+            rsMap.Width, rsMap.Height))
 
         'clear any unused gfx
         ClearGFX()
@@ -367,6 +367,14 @@ Friend Class frmMapEditor
         ' exit out if doesn't exist
         If tileset <= 0 OrElse tileset > NumTileSets Then Exit Sub
 
+        If TileSetTextureInfo(tileset).IsLoaded = False Then
+            LoadTexture(tileset, 1)
+        End If
+        ' we use it, lets update timer
+        With TileSetTextureInfo(tileset)
+            .TextureTimer = GetTickCount() + 100000
+        End With
+
         rsTileset.Width = TileSetSprite(tileset).Texture.Size.X
         rsTileset.Height = TileSetSprite(tileset).Texture.Size.Y
         rsTileset.RenderWindow.DispatchEvents()
@@ -379,13 +387,7 @@ Friend Class frmMapEditor
             .FillColor = New Color(Color.Transparent)
         }
 
-        If TileSetTextureInfo(tileset).IsLoaded = False Then
-            LoadTexture(tileset, 1)
-        End If
-        ' we use it, lets update timer
-        With TileSetTextureInfo(tileset)
-            .TextureTimer = GetTickCount() + 100000
-        End With
+
 
         height = TileSetTextureInfo(tileset).height
         width = TileSetTextureInfo(tileset).width

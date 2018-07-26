@@ -81,6 +81,12 @@
     <Compile Include="NoResetPanel.vb">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Source\Forms\MapView.Designer.vb">
+      <DependentUpon>MapView.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Source\Forms\MapView.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Source\Modules\E_Options.vb" />
     <Compile Include="Source\Forms\frmAutoMapper.Designer.vb">
       <DependentUpon>frmAutoMapper.vb</DependentUpon>
@@ -280,6 +286,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Source\Forms\frmVisualWarp.resx">
       <DependentUpon>frmVisualWarp.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Source\Forms\MapView.resx">
+      <DependentUpon>MapView.vb</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

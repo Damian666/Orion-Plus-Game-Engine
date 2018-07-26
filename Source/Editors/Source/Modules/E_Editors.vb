@@ -160,6 +160,7 @@ Module E_Editors
 
         ' show the form
         frmMapEditor.Visible = True
+        MapEditorView.Visible = True
 
         GameStarted = True
         
