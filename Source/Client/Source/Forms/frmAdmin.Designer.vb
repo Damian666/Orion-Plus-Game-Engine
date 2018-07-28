@@ -54,6 +54,7 @@ Partial Class FrmAdmin
         Me.TabPage4 = New System.Windows.Forms.TabPage()
         Me.nudSpawnItemAmount = New System.Windows.Forms.NumericUpDown()
         Me.cmbSpawnItem = New System.Windows.Forms.ComboBox()
+        Me.btnMapEditor = New System.Windows.Forms.Button()
         Me.TabControl1.SuspendLayout()
         Me.TabPage1.SuspendLayout()
         CType(Me.nudAdminSprite, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -331,6 +332,7 @@ Partial Class FrmAdmin
         '
         'TabPage4
         '
+        Me.TabPage4.Controls.Add(Me.btnMapEditor)
         Me.TabPage4.Controls.Add(Me.nudSpawnItemAmount)
         Me.TabPage4.Controls.Add(Me.cmbSpawnItem)
         Me.TabPage4.Controls.Add(Me.btnRespawn)
@@ -361,6 +363,15 @@ Partial Class FrmAdmin
         Me.cmbSpawnItem.Name = "cmbSpawnItem"
         Me.cmbSpawnItem.Size = New System.Drawing.Size(159, 21)
         Me.cmbSpawnItem.TabIndex = 36
+        '
+        'btnMapEditor
+        '
+        Me.btnMapEditor.Location = New System.Drawing.Point(69, 44)
+        Me.btnMapEditor.Name = "btnMapEditor"
+        Me.btnMapEditor.Size = New System.Drawing.Size(106, 25)
+        Me.btnMapEditor.TabIndex = 39
+        Me.btnMapEditor.Text = "Map Editor"
+        Me.btnMapEditor.UseVisualStyleBackColor = True
         '
         'FrmAdmin
         '
@@ -419,4 +430,5 @@ Partial Class FrmAdmin
     Friend WithEvents nudAdminMap As Windows.Forms.NumericUpDown
     Friend WithEvents btnLevelUp As Windows.Forms.Button
     Friend WithEvents nudSpawnItemAmount As Windows.Forms.NumericUpDown
+    Friend WithEvents btnMapEditor As Windows.Forms.Button
 End Class

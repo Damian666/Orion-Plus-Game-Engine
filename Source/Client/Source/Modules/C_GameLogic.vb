@@ -2,7 +2,7 @@
 Imports System.Threading
 Imports System.Windows.Forms
 Imports ASFW
-Imports Orion
+Imports Engine
 
 Module C_GameLogic
     Friend GameRand As New Random()
@@ -261,8 +261,6 @@ Module C_GameLogic
                         tmr500 = Tick + 500
                     End If
 
-                    'ProcessWeather()
-
                     If FadeInSwitch = True Then
                         FadeIn()
                     End If
@@ -270,6 +268,8 @@ Module C_GameLogic
                     If FadeOutSwitch = True Then
                         FadeOut()
                     End If
+
+                    If InMapEditor Then EditorMap_DrawTileset()
 
                     Application.DoEvents()
 
@@ -1394,7 +1394,7 @@ Continue1:
         Dim g As Graphics = Graphics.FromImage(New Bitmap(1, 1))
         'Dim width As Integer
         'width = g.MeasureString(Trim$(Map.Name), New Font(FONT_NAME, FONT_SIZE, FontStyle.Bold, GraphicsUnit.Pixel)).Width
-        'DrawMapNameX = ((SCREEN_MAPX + 1) * PIC_X / 2) - width + 32
+        'DrawMapNameX = ((SCREEN_MAPX + 1) * PicX / 2) - width + 32
         'DrawMapNameY = 1
 
         Select Case Map.Moral

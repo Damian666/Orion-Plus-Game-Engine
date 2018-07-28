@@ -15,35 +15,12 @@ Module E_Text
     ' Game text buffer
     Friend MyText As String = ""
 
-    Friend Sub DrawText(X As Integer, y As Integer, text As String, color As Color, BackColor As Color, ByRef target As SFML.UI.SfControl, Optional TextSize As Byte = FONT_SIZE)
+    Friend Sub DrawText(X As Integer, y As Integer, text As String, color As Color, BackColor As Color, ByRef target As RenderWindow, Optional TextSize As Byte = FONT_SIZE)
         Dim mystring As Text = New Text(text, SFMLGameFont) With {
             .CharacterSize = TextSize,
             .Color = BackColor,
             .Position = New Vector2f(X - 1, y - 1)
         }
-        target.Draw(mystring)
-
-        mystring.Position = New Vector2f(X - 1, y + 1)
-        target.Draw(mystring)
-
-        mystring.Position = New Vector2f(X + 1, y + 1)
-        target.Draw(mystring)
-
-        mystring.Position = New Vector2f(X + 1, y + -1)
-        target.Draw(mystring)
-
-        mystring.Color = color
-        mystring.Position = New Vector2f(X, y)
-        target.Draw(mystring)
-
-    End Sub
-    
-    Friend Sub DrawWindowText(X As Integer, y As Integer, text As String, color As Color, BackColor As Color, ByRef target As RenderWindow, Optional TextSize As Byte = FONT_SIZE)
-        Dim mystring As Text = New Text(text, SFMLGameFont) With {
-                .CharacterSize = TextSize,
-                .Color = BackColor,
-                .Position = New Vector2f(X - 1, y - 1)
-                }
         target.Draw(mystring)
 
         mystring.Position = New Vector2f(X - 1, y + 1)
@@ -81,15 +58,15 @@ Module E_Text
                 backcolor = Color.Black
         End Select
 
-        TextX = MapNpc(MapNpcNum).X * PIC_X + MapNpc(MapNpcNum).XOffset + (PIC_X \ 2) - GetTextWidth((Trim$(Npc(npcNum).Name))) / 2
+        TextX = ConvertMapX(MapNpc(MapNpcNum).X * PIC_X) + MapNpc(MapNpcNum).XOffset + (PIC_X \ 2) - GetTextWidth((Trim$(Npc(npcNum).Name))) / 2
         If Npc(npcNum).Sprite < 1 OrElse Npc(npcNum).Sprite > NumCharacters Then
-            TextY = MapNpc(MapNpcNum).Y * PIC_Y + MapNpc(MapNpcNum).YOffset - 16
+            TextY = ConvertMapY(MapNpc(MapNpcNum).Y * PIC_Y) + MapNpc(MapNpcNum).YOffset - 16
         Else
-            TextY = MapNpc(MapNpcNum).Y * PIC_Y + MapNpc(MapNpcNum).YOffset - (CharacterGFXInfo(Npc(npcNum).Sprite).height / 4) + 16
+            TextY = ConvertMapY(MapNpc(MapNpcNum).Y * PIC_Y) + MapNpc(MapNpcNum).YOffset - (CharacterGFXInfo(Npc(npcNum).Sprite).height / 4) + 16
         End If
 
         ' Draw name
-        DrawText(TextX, TextY, Trim$(Npc(npcNum).Name), color, backcolor, MapEditorView.rsMap)
+        DrawText(TextX, TextY, Trim$(Npc(npcNum).Name), color, backcolor, GameWindow)
     End Sub
 
     Friend Sub DrawEventName(index as integer)
@@ -105,26 +82,26 @@ Module E_Text
 
         Name = Trim$(Map.MapEvents(Index).Name)
         ' calc pos
-        TextX = Map.MapEvents(Index).X * PIC_X + Map.MapEvents(Index).XOffset + (PIC_X \ 2) - GetTextWidth(Trim$(Name)) / 2
+        TextX = ConvertMapX(Map.MapEvents(Index).X * PIC_X) + Map.MapEvents(Index).XOffset + (PIC_X \ 2) - GetTextWidth(Trim$(Name)) / 2
         If Map.MapEvents(Index).GraphicType = 0 Then
-            TextY = Map.MapEvents(Index).Y * PIC_Y + Map.MapEvents(Index).YOffset - 16
+            TextY = ConvertMapY(Map.MapEvents(Index).Y * PIC_Y) + Map.MapEvents(Index).YOffset - 16
         ElseIf Map.MapEvents(Index).GraphicType = 1 Then
             If Map.MapEvents(Index).GraphicNum < 1 OrElse Map.MapEvents(Index).GraphicNum > NumCharacters Then
-                TextY = Map.MapEvents(Index).Y * PIC_Y + Map.MapEvents(Index).YOffset - 16
+                TextY = ConvertMapY(Map.MapEvents(Index).Y * PIC_Y) + Map.MapEvents(Index).YOffset - 16
             Else
                 ' Determine location for text
-                TextY = Map.MapEvents(Index).Y * PIC_Y + Map.MapEvents(Index).YOffset - (CharacterGFXInfo(Map.MapEvents(Index).GraphicNum).height / 4) + 16
+                TextY = ConvertMapY(Map.MapEvents(Index).Y * PIC_Y) + Map.MapEvents(Index).YOffset - (CharacterGFXInfo(Map.MapEvents(Index).GraphicNum).height / 4) + 16
             End If
         ElseIf Map.MapEvents(Index).GraphicType = 2 Then
             If Map.MapEvents(Index).GraphicY2 > 0 Then
-                TextY = Map.MapEvents(Index).Y * PIC_Y + Map.MapEvents(Index).YOffset - (Map.MapEvents(Index).GraphicY2 * PIC_Y) + 16
+                TextY = ConvertMapY(Map.MapEvents(Index).Y * PIC_Y) + Map.MapEvents(Index).YOffset - (Map.MapEvents(Index).GraphicY2 * PIC_Y) + 16
             Else
-                TextY = Map.MapEvents(Index).Y * PIC_Y + Map.MapEvents(Index).YOffset - 32 + 16
+                TextY = ConvertMapY(Map.MapEvents(Index).Y * PIC_Y) + Map.MapEvents(Index).YOffset - 32 + 16
             End If
         End If
 
         ' Draw name
-        DrawText(TextX, TextY, Trim$(Name), color, backcolor, MapEditorView.rsMap)
+        DrawText(TextX, TextY, Trim$(Name), color, backcolor, GameWindow)
 
     End Sub
 
@@ -134,56 +111,56 @@ Module E_Text
         Dim rec As New RectangleShape
 
         If SelectedTab = 2 Then
-            For X = 0 To Map.MaxX
-                For y = 0 To Map.MaxY
+            For X = TileView.Left To TileView.Right
+                For y = TileView.Top To TileView.Bottom
                     If IsValidMapPoint(X, y) Then
                         With Map.Tile(X, y)
-                            tX = ((X * PIC_X) - 4) + (PIC_X * 0.5)
-                            tY = ((y * PIC_Y) - 7) + (PIC_Y * 0.5)
+                            tX = ((ConvertMapX(X * PIC_X)) - 4) + (PIC_X * 0.5)
+                            tY = ((ConvertMapY(y * PIC_Y)) - 7) + (PIC_Y * 0.5)
 
                             rec.OutlineColor = New Color(Color.White)
                             rec.OutlineThickness = 0.6
 
                             rec.Size = New Vector2f((PIC_X), (PIC_X))
-                            rec.Position = New Vector2f((X) * PIC_X, (y) * PIC_Y)
+                            rec.Position = New Vector2f(ConvertMapX((X) * PIC_X), ConvertMapY((y) * PIC_Y))
 
                             Select Case .Type
                                 Case TileType.Blocked
                                     rec.FillColor = New Color(255, 0, 0, 100)
-                                    MapEditorView.rsMap.Draw(rec)
-                                    DrawText(tX, tY, "B", (Color.White), (Color.Black), MapEditorView.rsMap)
+                                    GameWindow.Draw(rec)
+                                    DrawText(tX, tY, "B", (Color.White), (Color.Black), GameWindow)
                                 Case TileType.Warp
-                                    DrawText(tX, tY, "W", (Color.Blue), (Color.Black), MapEditorView.rsMap)
+                                    DrawText(tX, tY, "W", (Color.Blue), (Color.Black), GameWindow)
                                 Case TileType.Item
-                                    DrawText(tX, tY, "I", (Color.White), (Color.Black), MapEditorView.rsMap)
+                                    DrawText(tX, tY, "I", (Color.White), (Color.Black), GameWindow)
                                 Case TileType.NpcAvoid
-                                    DrawText(tX, tY, "N", (Color.White), (Color.Black), MapEditorView.rsMap)
+                                    DrawText(tX, tY, "N", (Color.White), (Color.Black), GameWindow)
                                 Case TileType.Key
-                                    DrawText(tX, tY, "K", (Color.White), (Color.Black), MapEditorView.rsMap)
+                                    DrawText(tX, tY, "K", (Color.White), (Color.Black), GameWindow)
                                 Case TileType.KeyOpen
-                                    DrawText(tX, tY, "KO", (Color.White), (Color.Black), MapEditorView.rsMap)
+                                    DrawText(tX, tY, "KO", (Color.White), (Color.Black), GameWindow)
                                 Case TileType.Resource
-                                    DrawText(tX, tY, "R", (Color.Green), (Color.Black), MapEditorView.rsMap)
+                                    DrawText(tX, tY, "R", (Color.Green), (Color.Black), GameWindow)
                                 Case TileType.Door
-                                    DrawText(tX, tY, "D", (Color.Black), (Color.Red), MapEditorView.rsMap)
+                                    DrawText(tX, tY, "D", (Color.Black), (Color.Red), GameWindow)
                                 Case TileType.NpcSpawn
                                     rec.FillColor = New Color(255, 255, 0, 100)
-                                    MapEditorView.rsMap.Draw(rec)
-                                    DrawText(tX, tY, "S", (Color.White), (Color.Black), MapEditorView.rsMap)
+                                    GameWindow.Draw(rec)
+                                    DrawText(tX, tY, "S", (Color.White), (Color.Black), GameWindow)
                                 Case TileType.Shop
-                                    DrawText(tX, tY, "SH", (Color.Blue), (Color.Black), MapEditorView.rsMap)
+                                    DrawText(tX, tY, "SH", (Color.Blue), (Color.Black), GameWindow)
                                 Case TileType.Bank
-                                    DrawText(tX, tY, "BA", (Color.Blue), (Color.Black), MapEditorView.rsMap)
+                                    DrawText(tX, tY, "BA", (Color.Blue), (Color.Black), GameWindow)
                                 Case TileType.Heal
-                                    DrawText(tX, tY, "H", (Color.Green), (Color.Black), MapEditorView.rsMap)
+                                    DrawText(tX, tY, "H", (Color.Green), (Color.Black), GameWindow)
                                 Case TileType.Trap
-                                    DrawText(tX, tY, "T", (Color.Red), (Color.Black), MapEditorView.rsMap)
+                                    DrawText(tX, tY, "T", (Color.Red), (Color.Black), GameWindow)
                                 Case TileType.House
-                                    DrawText(tX, tY, "H", (Color.Green), (Color.Black), MapEditorView.rsMap)
+                                    DrawText(tX, tY, "H", (Color.Green), (Color.Black), GameWindow)
                                 Case TileType.Craft
-                                    DrawText(tX, tY, "C", (Color.Green), (Color.Black), MapEditorView.rsMap)
+                                    DrawText(tX, tY, "C", (Color.Green), (Color.Black), GameWindow)
                                 Case TileType.Light
-                                    DrawText(tX, tY, "L", (Color.Yellow), (Color.Black), MapEditorView.rsMap)
+                                    DrawText(tX, tY, "L", (Color.Yellow), (Color.Black), GameWindow)
                             End Select
                         End With
                     End If

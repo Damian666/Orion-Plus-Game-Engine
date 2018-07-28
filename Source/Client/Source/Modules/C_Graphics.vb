@@ -3,7 +3,7 @@ Imports System.Drawing
 Imports System.IO
 Imports System.Windows.Forms
 Imports SFML.Window
-Imports Orion
+Imports Engine
 
 Module C_Graphics
 #Region "Declarations"
@@ -249,8 +249,9 @@ Module C_Graphics
     Sub InitGraphics()
 
         GameWindow = New RenderWindow(frmGame.picscreen.Handle)
+        TilesetWindow = New RenderWindow(FrmEditor_MapEditor.picBackSelect.Handle)
 
-        SFMLGameFont = New SFML.Graphics.Font(Environment.GetFolderPath(Environment.SpecialFolder.Fonts) + "\" + FontName)
+        SfmlGameFont = New SFML.Graphics.Font(Environment.GetFolderPath(Environment.SpecialFolder.Fonts) + "\" + FontName)
 
         'this stuff only loads when needed :)
 
@@ -2034,6 +2035,23 @@ Module C_Graphics
         DrawThunderEffect()
         DrawMapTint()
 
+        ' Draw out a square at mouse cursor
+        If MapGrid = True AndAlso InMapEditor Then
+            DrawGrid()
+        End If
+
+        If FrmEditor_MapEditor.tabpages.SelectedTab Is FrmEditor_MapEditor.tpDirBlock Then
+            For x = TileView.Left To TileView.Right
+                For y = TileView.Top To TileView.Bottom
+                    If IsValidMapPoint(x, y) Then
+                        DrawDirections(x, y)
+                    End If
+                Next
+            Next
+        End If
+
+        If InMapEditor Then DrawTileOutline()
+
         'furniture
         If FurnitureSelected > 0 Then
             If Player(MyIndex).InHouse = MyIndex Then
@@ -2088,7 +2106,17 @@ Module C_Graphics
         'action msg
         For I = 1 To Byte.MaxValue
             DrawActionMsg(I)
-        Next I
+        Next
+
+        ' Blit out map attributes
+        If InMapEditor Then
+            DrawMapAttributes()
+        End If
+
+        If InMapEditor AndAlso FrmEditor_MapEditor.tabpages.SelectedTab Is FrmEditor_MapEditor.tpEvents Then
+            DrawEvents()
+            EditorEvent_DrawGraphic()
+        End If
 
         If GettingMap Then Exit Sub
 
@@ -3820,5 +3848,159 @@ NextLoop:
 
     Sub DrawCursor()
         RenderSprite(CursorSprite, GameWindow, CurMouseX, CurMouseY, 0, 0, CursorInfo.Width, CursorInfo.Height)
+    End Sub
+
+    Public Sub EditorMap_DrawTileset()
+        Dim height As Integer
+        Dim width As Integer
+        Dim tileset As Byte
+
+        TilesetWindow.DispatchEvents()
+        TilesetWindow.Clear(SFML.Graphics.Color.Black)
+
+        ' find tileset number
+        tileset = frmEditor_MapEditor.cmbTileSets.SelectedIndex + 1
+
+        ' exit out if doesn't exist
+        If tileset <= 0 OrElse tileset > NumTileSets Then Exit Sub
+
+        Dim rec2 As New RectangleShape With {
+            .OutlineColor = New SFML.Graphics.Color(SFML.Graphics.Color.Red),
+            .OutlineThickness = 0.6,
+            .FillColor = New SFML.Graphics.Color(SFML.Graphics.Color.Transparent)
+        }
+
+        If TileSetTextureInfo(tileset).IsLoaded = False Then
+            LoadTexture(tileset, 1)
+        End If
+        ' we use it, lets update timer
+        With TileSetTextureInfo(tileset)
+            .TextureTimer = GetTickCount() + 100000
+        End With
+
+        height = TileSetTextureInfo(tileset).Height
+        width = TileSetTextureInfo(tileset).Width
+        frmEditor_MapEditor.picBackSelect.Height = height
+        frmEditor_MapEditor.picBackSelect.Width = width
+
+        TilesetWindow.SetView(New SFML.Graphics.View(New FloatRect(0, 0, width, height)))
+
+        ' change selected shape for autotiles
+        If frmEditor_MapEditor.cmbAutoTile.SelectedIndex > 0 Then
+            Select Case frmEditor_MapEditor.cmbAutoTile.SelectedIndex
+                Case 1 ' autotile
+                    EditorTileWidth = 2
+                    EditorTileHeight = 3
+                Case 2 ' fake autotile
+                    EditorTileWidth = 1
+                    EditorTileHeight = 1
+                Case 3 ' animated
+                    EditorTileWidth = 6
+                    EditorTileHeight = 3
+                Case 4 ' cliff
+                    EditorTileWidth = 2
+                    EditorTileHeight = 2
+                Case 5 ' waterfall
+                    EditorTileWidth = 2
+                    EditorTileHeight = 3
+                Case Else
+                    EditorTileWidth = 1
+                    EditorTileHeight = 1
+            End Select
+        End If
+
+        RenderSprite(TileSetSprite(tileset), TilesetWindow, 0, 0, 0, 0, width, height)
+
+        rec2.Size = New Vector2f(EditorTileWidth * PicX, EditorTileHeight * PicY)
+
+        rec2.Position = New Vector2f(EditorTileSelStart.X * PicX, EditorTileSelStart.Y * PicY)
+        TilesetWindow.Draw(rec2)
+
+        'and finally show everything on screen
+        TilesetWindow.Display()
+
+        LastTileset = tileset
+    End Sub
+
+    Public Sub EditorMap_DrawMapItem()
+        Dim itemnum As Integer
+        itemnum = Item(frmEditor_MapEditor.scrlMapItem.Value).Pic
+
+        If itemnum < 1 OrElse itemnum > NumItems Then
+            frmEditor_MapEditor.picMapItem.BackgroundImage = Nothing
+            Exit Sub
+        End If
+
+        If File.Exists(Application.StartupPath & GfxPath & "items\" & itemnum & GfxExt) Then
+            frmEditor_MapEditor.picMapItem.BackgroundImage = Drawing.Image.FromFile(Application.StartupPath & GfxPath & "items\" & itemnum & GfxExt)
+        End If
+
+    End Sub
+
+    Public Sub EditorMap_DrawKey()
+        Dim itemnum As Integer
+
+        itemnum = Item(frmEditor_MapEditor.scrlMapKey.Value).Pic
+
+        If itemnum < 1 OrElse itemnum > NumItems Then
+            frmEditor_MapEditor.picMapKey.BackgroundImage = Nothing
+            Exit Sub
+        End If
+
+        If File.Exists(Application.StartupPath & GfxPath & "items\" & itemnum & GfxExt) Then
+            frmEditor_MapEditor.picMapKey.BackgroundImage = Drawing.Image.FromFile(Application.StartupPath & GfxPath & "items\" & itemnum & GfxExt)
+        End If
+
+    End Sub
+
+    Public Sub DrawTileOutline()
+        Dim rec As Rectangle
+        If FrmEditor_MapEditor.tabpages.SelectedTab Is FrmEditor_MapEditor.tpDirBlock Then Exit Sub
+
+        With rec
+            .Y = 0
+            .Height = PicY
+            .X = 0
+            .Width = PicX
+        End With
+
+        Dim rec2 As New RectangleShape With {
+            .OutlineColor = New SFML.Graphics.Color(SFML.Graphics.Color.Blue),
+            .OutlineThickness = 0.6,
+            .FillColor = New SFML.Graphics.Color(SFML.Graphics.Color.Transparent)
+        }
+
+        If FrmEditor_MapEditor.tabpages.SelectedTab Is FrmEditor_MapEditor.tpAttributes Then
+            rec2.Size = New Vector2f(rec.Width, rec.Height)
+        Else
+            If TileSetTextureInfo(FrmEditor_MapEditor.cmbTileSets.SelectedIndex + 1).IsLoaded = False Then
+                LoadTexture(FrmEditor_MapEditor.cmbTileSets.SelectedIndex + 1, 1)
+            End If
+            ' we use it, lets update timer
+            With TileSetTextureInfo(FrmEditor_MapEditor.cmbTileSets.SelectedIndex + 1)
+                .TextureTimer = GetTickCount() + 100000
+            End With
+
+            If EditorTileWidth = 1 AndAlso EditorTileHeight = 1 Then
+                RenderSprite(TileSetSprite(FrmEditor_MapEditor.cmbTileSets.SelectedIndex + 1), GameWindow, ConvertMapX(CurX * PicX), ConvertMapY(CurY * PicY), EditorTileSelStart.X * PicX, EditorTileSelStart.Y * PicY, rec.Width, rec.Height)
+
+                rec2.Size = New Vector2f(rec.Width, rec.Height)
+            Else
+                If FrmEditor_MapEditor.cmbAutoTile.SelectedIndex > 0 Then
+                    RenderSprite(TileSetSprite(FrmEditor_MapEditor.cmbTileSets.SelectedIndex + 1), GameWindow, ConvertMapX(CurX * PicX), ConvertMapY(CurY * PicY), EditorTileSelStart.X * PicX, EditorTileSelStart.Y * PicY, rec.Width, rec.Height)
+
+                    rec2.Size = New Vector2f(rec.Width, rec.Height)
+                Else
+                    RenderSprite(TileSetSprite(FrmEditor_MapEditor.cmbTileSets.SelectedIndex + 1), GameWindow, ConvertMapX(CurX * PicX), ConvertMapY(CurY * PicY), EditorTileSelStart.X * PicX, EditorTileSelStart.Y * PicY, EditorTileSelEnd.X * PicX, EditorTileSelEnd.Y * PicY)
+
+                    rec2.Size = New Vector2f(EditorTileSelEnd.X * PicX, EditorTileSelEnd.Y * PicY)
+                End If
+
+            End If
+
+        End If
+
+        rec2.Position = New Vector2f(ConvertMapX(CurX * PicX), ConvertMapY(CurY * PicY))
+        GameWindow.Draw(rec2)
     End Sub
 End Module

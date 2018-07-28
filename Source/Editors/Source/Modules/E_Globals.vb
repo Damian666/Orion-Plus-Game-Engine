@@ -146,6 +146,12 @@
     Friend Const SIZE_X As Integer = 32
     Friend Const SIZE_Y As Integer = 32
 
+    'Graphics
+    Friend Const FPS_LIMIT As Integer = 64
+
+    Friend Camera As Rectangle
+    Friend TileView As Rect
+
     ' for directional blocking
     Friend DirArrowX(4) As Byte
     Friend DirArrowY(4) As Byte

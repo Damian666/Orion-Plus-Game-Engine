@@ -271,14 +271,14 @@ Friend Module E_Housing
                     ' Set base x + y, then the offset due to size
                     X = (Furniture(index).X * 32) + (X1 * 32)
                     Y = (Furniture(index).Y * 32 - (Height * 32)) + (Y1 * 32)
-                    X = (X)
-                    Y = (Y)
+                    X = ConvertMapX(X)
+                    Y = ConvertMapY(Y)
 
                     Dim tmpSprite As Sprite = New Sprite(FurnitureGFX(i)) With {
                         .TextureRect = New IntRect(0 + (X1 * 32), 0 + (Y1 * 32), 32, 32),
                         .Position = New Vector2f(X, Y)
                     }
-                    MapEditorView.rsMap.Draw(tmpSprite)
+                    GameWindow.Draw(tmpSprite)
                 End If
             Next
         Next

@@ -1,5 +1,5 @@
 ﻿Imports System.Windows.Forms
-Imports Orion
+Imports Engine
 
 Friend Class FrmGame
 #Region "Frm Code"
@@ -175,6 +175,10 @@ Friend Class FrmGame
     Private Sub Picscreen_MouseDown(sender As Object, e As MouseEventArgs) Handles picscreen.MouseDown
         If Not CheckGuiClick(e.X, e.Y, e) Then
 
+            If InMapEditor Then
+                FrmEditor_MapEditor.MapEditorMouseDown(e.Button, e.X, e.Y, False)
+            End If
+
             ' left click
             If e.Button = MouseButtons.Left Then
 
@@ -235,6 +239,11 @@ Friend Class FrmGame
         CurMouseY = e.Location.Y
         CheckGuiMove(e.X, e.Y)
 
+        If InMapEditor Then
+            If e.Button = MouseButtons.Left OrElse e.Button = MouseButtons.Right Then
+                FrmEditor_MapEditor.MapEditorMouseDown(e.Button, e.X, e.Y)
+            End If
+        End If
     End Sub
 
     Private Sub Picscreen_MouseUp(sender As Object, e As MouseEventArgs) Handles picscreen.MouseUp

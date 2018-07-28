@@ -12,7 +12,7 @@
 #Region "Moderation"
     Private Sub BtnAdminWarpTo_Click(sender As Object, e As EventArgs) Handles btnAdminWarpTo.Click
 
-        If GetPlayerAccess(MyIndex) < AdminType.Mapper Then
+        If GetPlayerAccess(Myindex) < AdminType.Mapper Then
             AddText("You need to be a high enough staff member to do this!", QColorType.AlertColor)
             Exit Sub
         End If
@@ -26,7 +26,7 @@
     End Sub
 
     Private Sub BtnAdminBan_Click(sender As Object, e As EventArgs) Handles btnAdminBan.Click
-        If GetPlayerAccess(MyIndex) < AdminType.Mapper Then
+        If GetPlayerAccess(Myindex) < AdminType.Mapper Then
             AddText("You need to be a high enough staff member to do this!", QColorType.AlertColor)
             Exit Sub
         End If
@@ -37,7 +37,7 @@
     End Sub
 
     Private Sub BtnAdminKick_Click(sender As Object, e As EventArgs) Handles btnAdminKick.Click
-        If GetPlayerAccess(MyIndex) < AdminType.Mapper Then
+        If GetPlayerAccess(Myindex) < AdminType.Mapper Then
             AddText("You need to be a high enough staff member to do this!", QColorType.AlertColor)
             Exit Sub
         End If
@@ -48,7 +48,7 @@
     End Sub
 
     Private Sub BtnAdminWarp2Me_Click(sender As Object, e As EventArgs) Handles btnAdminWarp2Me.Click
-        If GetPlayerAccess(MyIndex) < AdminType.Mapper Then
+        If GetPlayerAccess(Myindex) < AdminType.Mapper Then
             AddText("You need to be a high enough staff member to do this!", QColorType.AlertColor)
             Exit Sub
         End If
@@ -61,7 +61,7 @@
     End Sub
 
     Private Sub BtnAdminWarpMe2_Click(sender As Object, e As EventArgs) Handles btnAdminWarpMe2.Click
-        If GetPlayerAccess(MyIndex) < AdminType.Mapper Then
+        If GetPlayerAccess(Myindex) < AdminType.Mapper Then
             AddText("You need to be a high enough staff member to do this!", QColorType.AlertColor)
             Exit Sub
         End If
@@ -78,7 +78,7 @@
     End Sub
 
     Private Sub BtnAdminSetAccess_Click(sender As Object, e As EventArgs) Handles btnAdminSetAccess.Click
-        If GetPlayerAccess(MyIndex) < AdminType.Creator Then
+        If GetPlayerAccess(Myindex) < AdminType.Creator Then
             AddText("You need to be a high enough staff member to do this!", QColorType.AlertColor)
             Exit Sub
         End If
@@ -95,7 +95,7 @@
     End Sub
 
     Private Sub BtnAdminSetSprite_Click(sender As Object, e As EventArgs) Handles btnAdminSetSprite.Click
-        If GetPlayerAccess(MyIndex) < AdminType.Mapper Then
+        If GetPlayerAccess(Myindex) < AdminType.Mapper Then
             AddText("You need to be a high enough staff member to do this!", QColorType.AlertColor)
             Exit Sub
         End If
@@ -107,9 +107,8 @@
 #End Region
 
 #Region "Editors"
-    Private Sub BtnMapEditor_Click(sender As Object, e As EventArgs) 
-
-        If GetPlayerAccess(MyIndex) < AdminType.Mapper Then
+    Private Sub BtnMapEditor_Click(sender As Object, e As EventArgs) Handles btnMapEditor.Click
+        If GetPlayerAccess(Myindex) < AdminType.Mapper Then
             AddText("You need to be a high enough staff member to do this!", QColorType.AlertColor)
             Exit Sub
         End If
@@ -120,7 +119,7 @@
 
 #Region "Map Report"
     Private Sub BtnMapReport_Click(sender As Object, e As EventArgs) Handles btnMapReport.Click
-        If GetPlayerAccess(MyIndex) < AdminType.Mapper Then
+        If GetPlayerAccess(Myindex) < AdminType.Mapper Then
             AddText("You need to be a high enough staff member to do this!", QColorType.AlertColor)
             Exit Sub
         End If
@@ -128,7 +127,7 @@
     End Sub
 
     Private Sub LstMaps_DoubleClick(sender As Object, e As EventArgs) Handles lstMaps.DoubleClick
-        If GetPlayerAccess(MyIndex) < AdminType.Mapper Then
+        If GetPlayerAccess(Myindex) < AdminType.Mapper Then
             AddText("You need to be a high enough staff member to do this!", QColorType.AlertColor)
             Exit Sub
         End If
@@ -152,7 +151,7 @@
     End Sub
 
     Private Sub BtnSpawnItem_Click(sender As Object, e As EventArgs) Handles btnSpawnItem.Click
-        If GetPlayerAccess(MyIndex) < AdminType.Creator Then
+        If GetPlayerAccess(Myindex) < AdminType.Creator Then
             AddText("You need to be a high enough staff member to do this!", QColorType.AlertColor)
             Exit Sub
         End If
@@ -161,7 +160,7 @@
     End Sub
 
     Private Sub BtnLevelUp_Click(sender As Object, e As EventArgs) Handles btnLevelUp.Click
-        If GetPlayerAccess(MyIndex) < AdminType.Developer Then
+        If GetPlayerAccess(Myindex) < AdminType.Developer Then
             AddText("You need to be a high enough staff member to do this!", QColorType.AlertColor)
             Exit Sub
         End If
@@ -171,7 +170,7 @@
     End Sub
 
     Private Sub BtnALoc_Click(sender As Object, e As EventArgs) Handles btnALoc.Click
-        If GetPlayerAccess(MyIndex) < AdminType.Mapper Then
+        If GetPlayerAccess(Myindex) < AdminType.Mapper Then
             AddText("You need to be a high enough staff member to do this!", QColorType.AlertColor)
             Exit Sub
         End If
@@ -180,7 +179,7 @@
     End Sub
 
     Private Sub BtnRespawn_Click(sender As Object, e As EventArgs) Handles btnRespawn.Click
-        If GetPlayerAccess(MyIndex) < AdminType.Mapper Then
+        If GetPlayerAccess(Myindex) < AdminType.Mapper Then
             AddText("You need to be a high enough staff member to do this!", QColorType.AlertColor)
             Exit Sub
         End If

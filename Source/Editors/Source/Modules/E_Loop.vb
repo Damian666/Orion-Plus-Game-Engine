@@ -214,12 +214,14 @@ Module E_Loop
 #End Region
 
     Sub GameLoop()
+        Dim dest As Point = New Point(frmMapEditor.PointToScreen(frmMapEditor.picScreen.Location))
+        Dim g As Graphics = frmMapEditor.picScreen.CreateGraphics
         Dim starttime As Integer, Tick As Integer, fogtmr As Integer
         Dim FrameTime As Integer, tmr500 As Integer
         Dim tmpfps As Integer, rendercount As Integer
 
         starttime = GetTickCount()
-        
+
         Do
             If GameDestroyed = True Then End
 
@@ -292,10 +294,19 @@ Module E_Loop
                         If FadeOutSwitch = True Then
                             FadeOut()
                         End If
-                        
+
+                        If rendercount < Tick Then
+                            'Auctual Game Loop Stuff :/
+                            Render_Graphics()
+                            rendercount = Tick + 32
+                        End If
+                        Application.DoEvents()
+
+                        EditorMap_DrawTileset()
+
                         If TakeScreenShot Then
                             If ScreenShotTimer < Tick Then
-                                Dim screenshot As SFML.Graphics.Image = MapEditorView.rsMap.RenderWindow.Capture()
+                                Dim screenshot As SFML.Graphics.Image = GameWindow.Capture()
 
                                 If Not IO.Directory.Exists(Application.StartupPath & "\Data\Screenshots") Then
                                     IO.Directory.CreateDirectory(Application.StartupPath & "\Data\Screenshots")
@@ -309,7 +320,7 @@ Module E_Loop
 
                         If MakeCache Then
                             If ScreenShotTimer < Tick Then
-                                Dim screenshot As SFML.Graphics.Image = MapEditorView.rsMap.RenderWindow.Capture()
+                                Dim screenshot As SFML.Graphics.Image = GameWindow.Capture()
 
                                 If Not IO.Directory.Exists(Application.StartupPath & "\Data\Cache") Then
                                     IO.Directory.CreateDirectory(Application.StartupPath & "\Data\Cache")

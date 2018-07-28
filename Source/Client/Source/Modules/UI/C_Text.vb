@@ -115,7 +115,7 @@ Module C_Text
         DrawText(TextX, TextY, Trim$(Npc(npcNum).Name), color, backcolor, GameWindow)
     End Sub
 
-    Friend Sub DrawEventName(index as integer)
+    Friend Sub DrawEventName(index As Integer)
         Dim textX As Integer
         Dim textY As Integer
         Dim color As Color, backcolor As Color
@@ -175,6 +175,61 @@ Module C_Text
                 End If
             End If
         Next
+
+    End Sub
+
+    Public Sub DrawMapAttributes()
+        Dim X As Integer
+        Dim y As Integer
+        Dim tX As Integer
+        Dim tY As Integer
+
+        If FrmEditor_MapEditor.tabpages.SelectedTab Is FrmEditor_MapEditor.tpAttributes Then
+            For X = TileView.Left To TileView.Right
+                For y = TileView.Top To TileView.Bottom
+                    If IsValidMapPoint(X, y) Then
+                        With Map.Tile(X, y)
+                            tX = ((ConvertMapX(X * PicX)) - 4) + (PicX * 0.5)
+                            tY = ((ConvertMapY(y * PicY)) - 7) + (PicY * 0.5)
+                            Select Case .Type
+                                Case TileType.Blocked
+                                    DrawText(tX, tY, "B", (Color.Red), (Color.Black), GameWindow)
+                                Case TileType.Warp
+                                    DrawText(tX, tY, "W", (Color.Blue), (Color.Black), GameWindow)
+                                Case TileType.Item
+                                    DrawText(tX, tY, "I", (Color.White), (Color.Black), GameWindow)
+                                Case TileType.NpcAvoid
+                                    DrawText(tX, tY, "N", (Color.White), (Color.Black), GameWindow)
+                                Case TileType.Key
+                                    DrawText(tX, tY, "K", (Color.White), (Color.Black), GameWindow)
+                                Case TileType.KeyOpen
+                                    DrawText(tX, tY, "KO", (Color.White), (Color.Black), GameWindow)
+                                Case TileType.Resource
+                                    DrawText(tX, tY, "R", (Color.Green), (Color.Black), GameWindow)
+                                Case TileType.Door
+                                    DrawText(tX, tY, "D", (Color.Black), (Color.Red), GameWindow)
+                                Case TileType.NpcSpawn
+                                    DrawText(tX, tY, "S", (Color.Yellow), (Color.Black), GameWindow)
+                                Case TileType.Shop
+                                    DrawText(tX, tY, "SH", (Color.Blue), (Color.Black), GameWindow)
+                                Case TileType.Bank
+                                    DrawText(tX, tY, "BA", (Color.Blue), (Color.Black), GameWindow)
+                                Case TileType.Heal
+                                    DrawText(tX, tY, "H", (Color.Green), (Color.Black), GameWindow)
+                                Case TileType.Trap
+                                    DrawText(tX, tY, "T", (Color.Red), (Color.Black), GameWindow)
+                                Case TileType.House
+                                    DrawText(tX, tY, "H", (Color.Green), (Color.Black), GameWindow)
+                                Case TileType.Craft
+                                    DrawText(tX, tY, "C", (Color.Green), (Color.Black), GameWindow)
+                                Case TileType.Light
+                                    DrawText(tX, tY, "L", (Color.Yellow), (Color.Black), GameWindow)
+                            End Select
+                        End With
+                    End If
+                Next
+            Next
+        End If
 
     End Sub
 
@@ -414,13 +469,13 @@ Module C_Text
     Friend Function Explode(str As String, splitChars As Char()) As String()
 
         Dim parts As New List(Of String)()
-        Dim startindex as integer = 0
+        Dim startindex As Integer = 0
         Explode = Nothing
 
         If str = Nothing Then Exit Function
 
         While True
-            Dim index as integer = str.IndexOfAny(splitChars, startIndex)
+            Dim index As Integer = str.IndexOfAny(splitChars, startIndex)
 
             If index = -1 Then
                 parts.Add(str.Substring(startIndex))
@@ -441,176 +496,6 @@ Module C_Text
         End While
 
     End Function
-
-    'Friend Function KeyPressed(e As KeyEventArgs) As String
-
-    '    Dim keyValue As String = ""
-    '    Threading.Thread.CurrentThread.CurrentCulture = New Globalization.CultureInfo("ru-RU")
-    '    Threading.Thread.CurrentThread.CurrentUICulture = New Globalization.CultureInfo("ru-RU")
-    '    Dim kc As New KeysConverter()
-    '    If e.KeyCode = 32 Then ' Space
-    '        keyValue = ChrW(e.KeyCode)
-
-    '    ElseIf e.KeyCode >= 65 AndAlso e.KeyCode <= 90 Then ' Letters
-    '        If e.Shift Then
-    '            keyValue = ChrW(e.KeyCode)
-    '        Else
-    '            keyValue = ChrW(e.KeyCode + 32)
-    '        End If
-    '        keyValue = kc.ConvertToString(Nothing, Threading.Thread.CurrentThread.CurrentCulture, e.KeyCode)
-
-    '    ElseIf e.KeyCode = Keys.D0 Then
-    '        If e.Shift Then
-    '            keyValue = ")"
-    '        Else
-    '            keyValue = "0"
-    '        End If
-
-    '    ElseIf e.KeyCode = Keys.D1 Then
-    '        If e.Shift Then
-    '            keyValue = "!"
-    '        Else
-    '            keyValue = "1"
-    '        End If
-
-    '    ElseIf e.KeyCode = Keys.D2 Then
-    '        If e.Shift Then
-    '            keyValue = "@"
-    '        Else
-    '            keyValue = "2"
-    '        End If
-
-    '    ElseIf e.KeyCode = Keys.D3 Then
-    '        If e.Shift Then
-    '            keyValue = "#"
-    '        Else
-    '            keyValue = "3"
-    '        End If
-
-    '    ElseIf e.KeyCode = Keys.D4 Then
-    '        If e.Shift Then
-    '            keyValue = "$"
-    '        Else
-    '            keyValue = "4"
-    '        End If
-
-    '    ElseIf e.KeyCode = Keys.D5 Then
-    '        If e.Shift Then
-    '            keyValue = "%"
-    '        Else
-    '            keyValue = "5"
-    '        End If
-
-    '    ElseIf e.KeyCode = Keys.D6 Then
-    '        If e.Shift Then
-    '            keyValue = "^"
-    '        Else
-    '            keyValue = "6"
-    '        End If
-
-    '    ElseIf e.KeyCode = Keys.D7 Then
-    '        If e.Shift Then
-    '            keyValue = "&"
-    '        Else
-    '            keyValue = "7"
-    '        End If
-
-    '    ElseIf e.KeyCode = Keys.D8 Then
-    '        If e.Shift Then
-    '            keyValue = "*"
-    '        Else
-    '            keyValue = "8"
-    '        End If
-
-    '    ElseIf e.KeyCode = Keys.D9 Then
-    '        If e.Shift Then
-    '            keyValue = "("
-    '        Else
-    '            keyValue = "9"
-    '        End If
-
-    '    ElseIf e.KeyCode = Keys.OemPeriod Then
-    '        If e.Shift Then
-    '            keyValue = ">"
-    '        Else
-    '            keyValue = "."
-    '        End If
-
-    '    ElseIf e.KeyCode = Keys.OemPipe Then
-    '        If e.Shift Then
-    '            'keyValue= "|"
-    '        Else
-    '            keyValue = "\"
-    '        End If
-
-    '    ElseIf e.KeyCode = Keys.OemCloseBrackets Then
-    '        If e.Shift Then
-    '            keyValue = "}"
-    '        Else
-    '            keyValue = "]"
-    '        End If
-
-    '    ElseIf e.KeyCode = Keys.OemMinus Then
-    '        If e.Shift Then
-    '            keyValue = "_"
-    '        Else
-    '            keyValue = "-"
-    '        End If
-
-    '    ElseIf e.KeyCode = Keys.OemOpenBrackets Then
-    '        If e.Shift Then
-    '            keyValue = "{"
-    '        Else
-    '            keyValue = "["
-    '        End If
-
-    '    ElseIf e.KeyCode = Keys.OemQuestion Then
-    '        If e.Shift Then
-    '            keyValue = "?"
-    '        Else
-    '            keyValue = "/"
-    '        End If
-
-    '    ElseIf e.KeyCode = Keys.OemQuotes Then
-    '        If e.Shift Then
-    '            keyValue = Chr(34)
-    '        Else
-    '            keyValue = "'"
-    '        End If
-
-    '    ElseIf e.KeyCode = Keys.OemSemicolon Then
-    '        If e.Shift Then
-    '            keyValue = ":"
-    '        Else
-    '            keyValue = ";"
-    '        End If
-
-    '    ElseIf e.KeyCode = Keys.Oemcomma Then
-    '        If e.Shift Then
-    '            keyValue = "<"
-    '        Else
-    '            keyValue = ","
-    '        End If
-
-    '    ElseIf e.KeyCode = Keys.Oemplus Then
-    '        If e.Shift Then
-    '            keyValue = "+"
-    '        Else
-    '            keyValue = "="
-    '        End If
-
-    '    ElseIf e.KeyCode = Keys.Oemtilde Then
-    '        If e.Shift Then
-    '            keyValue = "~"
-    '        Else
-    '            keyValue = "`"
-    '        End If
-
-    '    End If
-
-    '    Return keyValue
-
-    'End Function
 
     Friend Sub DrawChatBubble(index as integer)
         Dim theArray As List(Of String), x As Integer, y As Integer, i As Integer, maxWidth As Integer, x2 As Integer, y2 As Integer

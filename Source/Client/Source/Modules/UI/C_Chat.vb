@@ -1,6 +1,6 @@
 ﻿Imports System.Windows.Forms
 
-Namespace Global.Orion
+Namespace Global.Engine
     Friend Structure ChatCursor
         Friend X As Integer
         Friend Y As Integer

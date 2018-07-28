@@ -155,15 +155,18 @@ Module E_Editors
         frmMapEditor.nudIntensity.Value = Map.WeatherIntensity
 
         SelectedTab = 1
-        
+
+        GameWindow.SetView(New SFML.Graphics.View(New SFML.Graphics.FloatRect(0, 0, frmMapEditor.picScreen.Width, frmMapEditor.picScreen.Height)))
+
         frmMapEditor.tslCurMap.Text = "Map: " & Map.mapNum
 
         ' show the form
         frmMapEditor.Visible = True
-        MapEditorView.Visible = True
 
         GameStarted = True
-        
+
+        frmMapEditor.picScreen.Focus()
+
         InitMapEditor = False
     End Sub
 
@@ -183,6 +186,10 @@ Module E_Editors
         'For i = 0 To NumTileSets
         '    TileSetImgsLoaded(i) = False
         'Next
+
+        ' set the scrollbars
+        frmMapEditor.scrlPictureY.Maximum = (frmMapEditor.picBackSelect.Height \ PIC_Y) \ 2 ' \2 is new, lets test
+        frmMapEditor.scrlPictureX.Maximum = (frmMapEditor.picBackSelect.Width \ PIC_X) \ 2
 
         'set map names
         frmMapEditor.cmbMapList.Items.Clear()
@@ -222,7 +229,12 @@ Module E_Editors
         If MapData = True Then GettingMap = False
 
     End Sub
-    
+
+    Friend Sub MapEditorTileScroll()
+        frmMapEditor.picBackSelect.Top = (frmMapEditor.scrlPictureY.Value * PIC_Y) * -1
+        frmMapEditor.picBackSelect.Left = (frmMapEditor.scrlPictureX.Value * PIC_X) * -1
+    End Sub
+
     Friend Sub MapEditorChooseTile(Button As Integer, X As Single, Y As Single)
 
         If Button = MouseButtons.Left Then 'Left Mouse Button
@@ -268,9 +280,9 @@ Module E_Editors
             Y = (Y \ PIC_Y) + 1
             ' check it's not out of bounds
             If X < 0 Then X = 0
-            If X > frmMapEditor.rsTileset.Width / PIC_X Then X = frmMapEditor.rsTileset.Width / PIC_X
+            If X > frmMapEditor.picBackSelect.Width / PIC_X Then X = frmMapEditor.picBackSelect.Width / PIC_X
             If Y < 0 Then Y = 0
-            If Y > frmMapEditor.rsTileset.Height / PIC_Y Then Y = frmMapEditor.rsTileset.Height / PIC_Y
+            If Y > frmMapEditor.picBackSelect.Height / PIC_Y Then Y = frmMapEditor.picBackSelect.Height / PIC_Y
             ' find out what to set the width + height of map editor to
             If X > EditorTileX Then ' drag right
                 'EditorTileWidth = X

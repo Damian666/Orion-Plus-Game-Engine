@@ -1,4 +1,4 @@
-<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
+﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
 Partial Class frmMapEditor
     Inherits System.Windows.Forms.Form
 
@@ -35,9 +35,11 @@ Partial Class frmMapEditor
         Me.cmbTileSets = New DarkUI.Controls.DarkComboBox()
         Me.cmbLayers = New DarkUI.Controls.DarkComboBox()
         Me.DarkLabel4 = New DarkUI.Controls.DarkLabel()
-        Me.pnlTileset = New Engine.NoResetPanel()
-        Me.rsTileset = New SFML.UI.SfControl()
+        Me.pnlBack = New System.Windows.Forms.Panel()
+        Me.picBackSelect = New System.Windows.Forms.PictureBox()
         Me.DarkLabel3 = New DarkUI.Controls.DarkLabel()
+        Me.scrlPictureY = New DarkUI.Controls.DarkScrollBar()
+        Me.scrlPictureX = New DarkUI.Controls.DarkScrollBar()
         Me.DarkLabel2 = New DarkUI.Controls.DarkLabel()
         Me.DarkLabel1 = New DarkUI.Controls.DarkLabel()
         Me.pnlNpc = New System.Windows.Forms.Panel()
@@ -194,63 +196,66 @@ Partial Class frmMapEditor
         Me.btnTrap = New System.Windows.Forms.Button()
         Me.scrlTrap = New System.Windows.Forms.HScrollBar()
         Me.lblTrap = New System.Windows.Forms.Label()
-        Me.pnlMap = New Engine.NoResetPanel()
-        Me.rsMap = New SFML.UI.SfControl()
-        Me.ToolStripContainer2.ContentPanel.SuspendLayout
-        Me.ToolStripContainer2.SuspendLayout
-        Me.ssInfo.SuspendLayout
-        Me.DarkSectionPanel1.SuspendLayout
-        Me.pnlTiles.SuspendLayout
-        Me.pnlTileset.SuspendLayout
-        Me.pnlNpc.SuspendLayout
-        Me.pnlDirBlock.SuspendLayout
-        Me.pnlEvents.SuspendLayout
-        Me.pnlAttribute.SuspendLayout
-        Me.DarkSectionPanel2.SuspendLayout
-        Me.pnlMoreOptions.SuspendLayout
-        Me.GroupBox4.SuspendLayout
-        CType(Me.nudFogAlpha,System.ComponentModel.ISupportInitialize).BeginInit
-        CType(Me.nudFogSpeed,System.ComponentModel.ISupportInitialize).BeginInit
-        CType(Me.nudFog,System.ComponentModel.ISupportInitialize).BeginInit
-        CType(Me.nudIntensity,System.ComponentModel.ISupportInitialize).BeginInit
-        Me.GroupBox5.SuspendLayout
-        CType(Me.nudMapAlpha,System.ComponentModel.ISupportInitialize).BeginInit
-        CType(Me.nudMapBlue,System.ComponentModel.ISupportInitialize).BeginInit
-        CType(Me.nudMapGreen,System.ComponentModel.ISupportInitialize).BeginInit
-        CType(Me.nudMapRed,System.ComponentModel.ISupportInitialize).BeginInit
-        Me.GroupBox3.SuspendLayout
-        Me.GroupBox2.SuspendLayout
-        CType(Me.nudMaxY,System.ComponentModel.ISupportInitialize).BeginInit
-        CType(Me.nudMaxX,System.ComponentModel.ISupportInitialize).BeginInit
-        Me.GroupBox1.SuspendLayout
-        CType(Me.nudSpawnY,System.ComponentModel.ISupportInitialize).BeginInit
-        CType(Me.nudSpawnX,System.ComponentModel.ISupportInitialize).BeginInit
-        CType(Me.nudSpawnMap,System.ComponentModel.ISupportInitialize).BeginInit
-        Me.fraMapLinks.SuspendLayout
-        CType(Me.nudRight,System.ComponentModel.ISupportInitialize).BeginInit
-        CType(Me.nudLeft,System.ComponentModel.ISupportInitialize).BeginInit
-        CType(Me.nudDown,System.ComponentModel.ISupportInitialize).BeginInit
-        CType(Me.nudUp,System.ComponentModel.ISupportInitialize).BeginInit
-        Me.ToolStrip.SuspendLayout
-        Me.pnlAttributes.SuspendLayout
-        Me.fraMapWarp.SuspendLayout
-        Me.fraBuyHouse.SuspendLayout
-        Me.fraKeyOpen.SuspendLayout
-        Me.fraMapKey.SuspendLayout
-        CType(Me.picMapKey,System.ComponentModel.ISupportInitialize).BeginInit
-        Me.fraNpcSpawn.SuspendLayout
-        Me.fraHeal.SuspendLayout
-        Me.fraShop.SuspendLayout
-        Me.fraResource.SuspendLayout
-        Me.fraMapItem.SuspendLayout
-        CType(Me.picMapItem,System.ComponentModel.ISupportInitialize).BeginInit
-        Me.fraTrap.SuspendLayout
-        Me.pnlMap.SuspendLayout
-        Me.SuspendLayout
+        Me.scrlMapViewV = New DarkUI.Controls.DarkScrollBar()
+        Me.scrlMapViewH = New DarkUI.Controls.DarkScrollBar()
+        Me.picScreen = New System.Windows.Forms.PictureBox()
+        Me.ToolStripContainer2.ContentPanel.SuspendLayout()
+        Me.ToolStripContainer2.SuspendLayout()
+        Me.ssInfo.SuspendLayout()
+        Me.DarkSectionPanel1.SuspendLayout()
+        Me.pnlTiles.SuspendLayout()
+        Me.pnlBack.SuspendLayout()
+        CType(Me.picBackSelect, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.pnlNpc.SuspendLayout()
+        Me.pnlDirBlock.SuspendLayout()
+        Me.pnlEvents.SuspendLayout()
+        Me.pnlAttribute.SuspendLayout()
+        Me.DarkSectionPanel2.SuspendLayout()
+        Me.pnlMoreOptions.SuspendLayout()
+        Me.GroupBox4.SuspendLayout()
+        CType(Me.nudFogAlpha, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.nudFogSpeed, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.nudFog, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.nudIntensity, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.GroupBox5.SuspendLayout()
+        CType(Me.nudMapAlpha, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.nudMapBlue, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.nudMapGreen, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.nudMapRed, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.GroupBox3.SuspendLayout()
+        Me.GroupBox2.SuspendLayout()
+        CType(Me.nudMaxY, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.nudMaxX, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.GroupBox1.SuspendLayout()
+        CType(Me.nudSpawnY, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.nudSpawnX, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.nudSpawnMap, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.fraMapLinks.SuspendLayout()
+        CType(Me.nudRight, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.nudLeft, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.nudDown, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.nudUp, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.ToolStrip.SuspendLayout()
+        Me.pnlBack2.SuspendLayout()
+        Me.pnlAttributes.SuspendLayout()
+        Me.fraMapWarp.SuspendLayout()
+        Me.fraBuyHouse.SuspendLayout()
+        Me.fraKeyOpen.SuspendLayout()
+        Me.fraMapKey.SuspendLayout()
+        CType(Me.picMapKey, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.fraNpcSpawn.SuspendLayout()
+        Me.fraHeal.SuspendLayout()
+        Me.fraShop.SuspendLayout()
+        Me.fraResource.SuspendLayout()
+        Me.fraMapItem.SuspendLayout()
+        CType(Me.picMapItem, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.fraTrap.SuspendLayout()
+        CType(Me.picScreen, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.SuspendLayout()
         '
         'DarkDockPanel1
         '
-        Me.DarkDockPanel1.BackColor = System.Drawing.Color.FromArgb(CType(CType(60,Byte),Integer), CType(CType(63,Byte),Integer), CType(CType(65,Byte),Integer))
+        Me.DarkDockPanel1.BackColor = System.Drawing.Color.FromArgb(CType(CType(60, Byte), Integer), CType(CType(63, Byte), Integer), CType(CType(65, Byte), Integer))
         Me.DarkDockPanel1.Dock = System.Windows.Forms.DockStyle.Fill
         Me.DarkDockPanel1.Location = New System.Drawing.Point(0, 0)
         Me.DarkDockPanel1.Name = "DarkDockPanel1"
@@ -265,27 +270,27 @@ Partial Class frmMapEditor
         Me.ToolStripContainer2.ContentPanel.Controls.Add(Me.ssInfo)
         Me.ToolStripContainer2.ContentPanel.Size = New System.Drawing.Size(1292, 28)
         Me.ToolStripContainer2.Dock = System.Windows.Forms.DockStyle.Bottom
-        Me.ToolStripContainer2.LeftToolStripPanelVisible = false
+        Me.ToolStripContainer2.LeftToolStripPanelVisible = False
         Me.ToolStripContainer2.Location = New System.Drawing.Point(0, 598)
         Me.ToolStripContainer2.Name = "ToolStripContainer2"
-        Me.ToolStripContainer2.RightToolStripPanelVisible = false
+        Me.ToolStripContainer2.RightToolStripPanelVisible = False
         Me.ToolStripContainer2.Size = New System.Drawing.Size(1292, 28)
         Me.ToolStripContainer2.TabIndex = 6
         Me.ToolStripContainer2.Text = "ToolStripContainer2"
-        Me.ToolStripContainer2.TopToolStripPanelVisible = false
+        Me.ToolStripContainer2.TopToolStripPanelVisible = False
         '
         'ssInfo
         '
-        Me.ssInfo.AutoSize = false
-        Me.ssInfo.BackColor = System.Drawing.Color.FromArgb(CType(CType(60,Byte),Integer), CType(CType(63,Byte),Integer), CType(CType(65,Byte),Integer))
+        Me.ssInfo.AutoSize = False
+        Me.ssInfo.BackColor = System.Drawing.Color.FromArgb(CType(CType(60, Byte), Integer), CType(CType(63, Byte), Integer), CType(CType(65, Byte), Integer))
         Me.ssInfo.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.ssInfo.ForeColor = System.Drawing.Color.FromArgb(CType(CType(220,Byte),Integer), CType(CType(220,Byte),Integer), CType(CType(220,Byte),Integer))
+        Me.ssInfo.ForeColor = System.Drawing.Color.FromArgb(CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer))
         Me.ssInfo.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.tslCurMap, Me.tslCurXY, Me.tsCurFps})
         Me.ssInfo.Location = New System.Drawing.Point(0, 0)
         Me.ssInfo.Name = "ssInfo"
         Me.ssInfo.Padding = New System.Windows.Forms.Padding(0, 5, 0, 3)
         Me.ssInfo.Size = New System.Drawing.Size(1292, 28)
-        Me.ssInfo.SizingGrip = false
+        Me.ssInfo.SizingGrip = False
         Me.ssInfo.TabIndex = 0
         Me.ssInfo.Text = "DarkStatusStrip1"
         '
@@ -329,13 +334,15 @@ Partial Class frmMapEditor
         '
         'pnlTiles
         '
-        Me.pnlTiles.BackColor = System.Drawing.Color.FromArgb(CType(CType(60,Byte),Integer), CType(CType(63,Byte),Integer), CType(CType(65,Byte),Integer))
+        Me.pnlTiles.BackColor = System.Drawing.Color.FromArgb(CType(CType(60, Byte), Integer), CType(CType(63, Byte), Integer), CType(CType(65, Byte), Integer))
         Me.pnlTiles.Controls.Add(Me.cmbAutoTile)
         Me.pnlTiles.Controls.Add(Me.cmbTileSets)
         Me.pnlTiles.Controls.Add(Me.cmbLayers)
         Me.pnlTiles.Controls.Add(Me.DarkLabel4)
-        Me.pnlTiles.Controls.Add(Me.pnlTileset)
+        Me.pnlTiles.Controls.Add(Me.pnlBack)
         Me.pnlTiles.Controls.Add(Me.DarkLabel3)
+        Me.pnlTiles.Controls.Add(Me.scrlPictureY)
+        Me.pnlTiles.Controls.Add(Me.scrlPictureX)
         Me.pnlTiles.Controls.Add(Me.DarkLabel2)
         Me.pnlTiles.Controls.Add(Me.DarkLabel1)
         Me.pnlTiles.Location = New System.Drawing.Point(1, 51)
@@ -345,18 +352,18 @@ Partial Class frmMapEditor
         '
         'cmbAutoTile
         '
-        Me.cmbAutoTile.BackColor = System.Drawing.Color.FromArgb(CType(CType(69,Byte),Integer), CType(CType(73,Byte),Integer), CType(CType(74,Byte),Integer))
-        Me.cmbAutoTile.BorderColor = System.Drawing.Color.FromArgb(CType(CType(90,Byte),Integer), CType(CType(90,Byte),Integer), CType(CType(90,Byte),Integer))
+        Me.cmbAutoTile.BackColor = System.Drawing.Color.FromArgb(CType(CType(69, Byte), Integer), CType(CType(73, Byte), Integer), CType(CType(74, Byte), Integer))
+        Me.cmbAutoTile.BorderColor = System.Drawing.Color.FromArgb(CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer))
         Me.cmbAutoTile.BorderStyle = System.Windows.Forms.ButtonBorderStyle.Solid
-        Me.cmbAutoTile.ButtonColor = System.Drawing.Color.FromArgb(CType(CType(43,Byte),Integer), CType(CType(43,Byte),Integer), CType(CType(43,Byte),Integer))
-        Me.cmbAutoTile.ButtonIcon = CType(resources.GetObject("cmbAutoTile.ButtonIcon"),System.Drawing.Bitmap)
-        Me.cmbAutoTile.DrawDropdownHoverOutline = false
-        Me.cmbAutoTile.DrawFocusRectangle = false
+        Me.cmbAutoTile.ButtonColor = System.Drawing.Color.FromArgb(CType(CType(43, Byte), Integer), CType(CType(43, Byte), Integer), CType(CType(43, Byte), Integer))
+        Me.cmbAutoTile.ButtonIcon = CType(resources.GetObject("cmbAutoTile.ButtonIcon"), System.Drawing.Bitmap)
+        Me.cmbAutoTile.DrawDropdownHoverOutline = False
+        Me.cmbAutoTile.DrawFocusRectangle = False
         Me.cmbAutoTile.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed
         Me.cmbAutoTile.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cmbAutoTile.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.cmbAutoTile.ForeColor = System.Drawing.Color.Gainsboro
-        Me.cmbAutoTile.FormattingEnabled = true
+        Me.cmbAutoTile.FormattingEnabled = True
         Me.cmbAutoTile.Items.AddRange(New Object() {"Normal", "AutoTile", "Fake", "Animated", "Cliff", "Waterfall"})
         Me.cmbAutoTile.Location = New System.Drawing.Point(52, 512)
         Me.cmbAutoTile.Name = "cmbAutoTile"
@@ -367,18 +374,18 @@ Partial Class frmMapEditor
         '
         'cmbTileSets
         '
-        Me.cmbTileSets.BackColor = System.Drawing.Color.FromArgb(CType(CType(69,Byte),Integer), CType(CType(73,Byte),Integer), CType(CType(74,Byte),Integer))
-        Me.cmbTileSets.BorderColor = System.Drawing.Color.FromArgb(CType(CType(90,Byte),Integer), CType(CType(90,Byte),Integer), CType(CType(90,Byte),Integer))
+        Me.cmbTileSets.BackColor = System.Drawing.Color.FromArgb(CType(CType(69, Byte), Integer), CType(CType(73, Byte), Integer), CType(CType(74, Byte), Integer))
+        Me.cmbTileSets.BorderColor = System.Drawing.Color.FromArgb(CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer))
         Me.cmbTileSets.BorderStyle = System.Windows.Forms.ButtonBorderStyle.Solid
-        Me.cmbTileSets.ButtonColor = System.Drawing.Color.FromArgb(CType(CType(43,Byte),Integer), CType(CType(43,Byte),Integer), CType(CType(43,Byte),Integer))
-        Me.cmbTileSets.ButtonIcon = CType(resources.GetObject("cmbTileSets.ButtonIcon"),System.Drawing.Bitmap)
-        Me.cmbTileSets.DrawDropdownHoverOutline = false
-        Me.cmbTileSets.DrawFocusRectangle = false
+        Me.cmbTileSets.ButtonColor = System.Drawing.Color.FromArgb(CType(CType(43, Byte), Integer), CType(CType(43, Byte), Integer), CType(CType(43, Byte), Integer))
+        Me.cmbTileSets.ButtonIcon = CType(resources.GetObject("cmbTileSets.ButtonIcon"), System.Drawing.Bitmap)
+        Me.cmbTileSets.DrawDropdownHoverOutline = False
+        Me.cmbTileSets.DrawFocusRectangle = False
         Me.cmbTileSets.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed
         Me.cmbTileSets.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cmbTileSets.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.cmbTileSets.ForeColor = System.Drawing.Color.Gainsboro
-        Me.cmbTileSets.FormattingEnabled = true
+        Me.cmbTileSets.FormattingEnabled = True
         Me.cmbTileSets.Location = New System.Drawing.Point(52, 485)
         Me.cmbTileSets.Name = "cmbTileSets"
         Me.cmbTileSets.Size = New System.Drawing.Size(80, 21)
@@ -388,18 +395,18 @@ Partial Class frmMapEditor
         '
         'cmbLayers
         '
-        Me.cmbLayers.BackColor = System.Drawing.Color.FromArgb(CType(CType(69,Byte),Integer), CType(CType(73,Byte),Integer), CType(CType(74,Byte),Integer))
-        Me.cmbLayers.BorderColor = System.Drawing.Color.FromArgb(CType(CType(90,Byte),Integer), CType(CType(90,Byte),Integer), CType(CType(90,Byte),Integer))
+        Me.cmbLayers.BackColor = System.Drawing.Color.FromArgb(CType(CType(69, Byte), Integer), CType(CType(73, Byte), Integer), CType(CType(74, Byte), Integer))
+        Me.cmbLayers.BorderColor = System.Drawing.Color.FromArgb(CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer))
         Me.cmbLayers.BorderStyle = System.Windows.Forms.ButtonBorderStyle.Solid
-        Me.cmbLayers.ButtonColor = System.Drawing.Color.FromArgb(CType(CType(43,Byte),Integer), CType(CType(43,Byte),Integer), CType(CType(43,Byte),Integer))
-        Me.cmbLayers.ButtonIcon = CType(resources.GetObject("cmbLayers.ButtonIcon"),System.Drawing.Bitmap)
-        Me.cmbLayers.DrawDropdownHoverOutline = false
-        Me.cmbLayers.DrawFocusRectangle = false
+        Me.cmbLayers.ButtonColor = System.Drawing.Color.FromArgb(CType(CType(43, Byte), Integer), CType(CType(43, Byte), Integer), CType(CType(43, Byte), Integer))
+        Me.cmbLayers.ButtonIcon = CType(resources.GetObject("cmbLayers.ButtonIcon"), System.Drawing.Bitmap)
+        Me.cmbLayers.DrawDropdownHoverOutline = False
+        Me.cmbLayers.DrawFocusRectangle = False
         Me.cmbLayers.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed
         Me.cmbLayers.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cmbLayers.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.cmbLayers.ForeColor = System.Drawing.Color.Gainsboro
-        Me.cmbLayers.FormattingEnabled = true
+        Me.cmbLayers.FormattingEnabled = True
         Me.cmbLayers.Items.AddRange(New Object() {"Ground", "Mask", "Mask2", "Fringe", "Fringe2"})
         Me.cmbLayers.Location = New System.Drawing.Point(180, 485)
         Me.cmbLayers.Name = "cmbLayers"
@@ -410,56 +417,66 @@ Partial Class frmMapEditor
         '
         'DarkLabel4
         '
-        Me.DarkLabel4.AutoSize = true
+        Me.DarkLabel4.AutoSize = True
         Me.DarkLabel4.BackColor = System.Drawing.Color.Transparent
-        Me.DarkLabel4.ForeColor = System.Drawing.Color.FromArgb(CType(CType(220,Byte),Integer), CType(CType(220,Byte),Integer), CType(CType(220,Byte),Integer))
+        Me.DarkLabel4.ForeColor = System.Drawing.Color.FromArgb(CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer))
         Me.DarkLabel4.Location = New System.Drawing.Point(3, 516)
         Me.DarkLabel4.Name = "DarkLabel4"
         Me.DarkLabel4.Size = New System.Drawing.Size(49, 13)
         Me.DarkLabel4.TabIndex = 18
         Me.DarkLabel4.Text = "AutoTile:"
         '
-        'pnlTileset
+        'pnlBack
         '
-        Me.pnlTileset.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom)  _
-            Or System.Windows.Forms.AnchorStyles.Left)  _
-            Or System.Windows.Forms.AnchorStyles.Right),System.Windows.Forms.AnchorStyles)
-        Me.pnlTileset.AutoScroll = true
-        Me.pnlTileset.BackColor = System.Drawing.Color.Black
-        Me.pnlTileset.Controls.Add(Me.rsTileset)
-        Me.pnlTileset.Location = New System.Drawing.Point(3, 3)
-        Me.pnlTileset.Name = "pnlTileset"
-        Me.pnlTileset.Size = New System.Drawing.Size(309, 458)
-        Me.pnlTileset.TabIndex = 10
+        Me.pnlBack.BackColor = System.Drawing.Color.Black
+        Me.pnlBack.Controls.Add(Me.picBackSelect)
+        Me.pnlBack.Location = New System.Drawing.Point(3, 3)
+        Me.pnlBack.Name = "pnlBack"
+        Me.pnlBack.Size = New System.Drawing.Size(286, 442)
+        Me.pnlBack.TabIndex = 10
         '
-        'rsTileset
+        'picBackSelect
         '
-        Me.rsTileset.AutoDraw = false
-        Me.rsTileset.AutoDrawInterval = 100
-        Me.rsTileset.BackColor = System.Drawing.Color.CornflowerBlue
-        Me.rsTileset.BackgroundImage = CType(resources.GetObject("rsTileset.BackgroundImage"),System.Drawing.Image)
-        Me.rsTileset.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center
-        Me.rsTileset.Location = New System.Drawing.Point(0, 0)
-        Me.rsTileset.Name = "rsTileset"
-        Me.rsTileset.Size = New System.Drawing.Size(96, 96)
-        Me.rsTileset.TabIndex = 0
+        Me.picBackSelect.BackColor = System.Drawing.Color.Black
+        Me.picBackSelect.Location = New System.Drawing.Point(0, 0)
+        Me.picBackSelect.Name = "picBackSelect"
+        Me.picBackSelect.Size = New System.Drawing.Size(283, 451)
+        Me.picBackSelect.TabIndex = 1
+        Me.picBackSelect.TabStop = False
         '
         'DarkLabel3
         '
-        Me.DarkLabel3.AutoSize = true
+        Me.DarkLabel3.AutoSize = True
         Me.DarkLabel3.BackColor = System.Drawing.Color.Transparent
-        Me.DarkLabel3.ForeColor = System.Drawing.Color.FromArgb(CType(CType(220,Byte),Integer), CType(CType(220,Byte),Integer), CType(CType(220,Byte),Integer))
+        Me.DarkLabel3.ForeColor = System.Drawing.Color.FromArgb(CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer))
         Me.DarkLabel3.Location = New System.Drawing.Point(138, 489)
         Me.DarkLabel3.Name = "DarkLabel3"
         Me.DarkLabel3.Size = New System.Drawing.Size(36, 13)
         Me.DarkLabel3.TabIndex = 16
         Me.DarkLabel3.Text = "Layer:"
         '
+        'scrlPictureY
+        '
+        Me.scrlPictureY.BackColor = System.Drawing.SystemColors.ControlDark
+        Me.scrlPictureY.Location = New System.Drawing.Point(292, 3)
+        Me.scrlPictureY.Name = "scrlPictureY"
+        Me.scrlPictureY.Size = New System.Drawing.Size(18, 442)
+        Me.scrlPictureY.TabIndex = 12
+        '
+        'scrlPictureX
+        '
+        Me.scrlPictureX.BackColor = System.Drawing.SystemColors.ControlDark
+        Me.scrlPictureX.Location = New System.Drawing.Point(3, 451)
+        Me.scrlPictureX.Name = "scrlPictureX"
+        Me.scrlPictureX.ScrollOrientation = DarkUI.Controls.DarkScrollOrientation.Horizontal
+        Me.scrlPictureX.Size = New System.Drawing.Size(283, 16)
+        Me.scrlPictureX.TabIndex = 11
+        '
         'DarkLabel2
         '
-        Me.DarkLabel2.AutoSize = true
+        Me.DarkLabel2.AutoSize = True
         Me.DarkLabel2.BackColor = System.Drawing.Color.Transparent
-        Me.DarkLabel2.ForeColor = System.Drawing.Color.FromArgb(CType(CType(220,Byte),Integer), CType(CType(220,Byte),Integer), CType(CType(220,Byte),Integer))
+        Me.DarkLabel2.ForeColor = System.Drawing.Color.FromArgb(CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer))
         Me.DarkLabel2.Location = New System.Drawing.Point(3, 489)
         Me.DarkLabel2.Name = "DarkLabel2"
         Me.DarkLabel2.Size = New System.Drawing.Size(43, 13)
@@ -468,10 +485,10 @@ Partial Class frmMapEditor
         '
         'DarkLabel1
         '
-        Me.DarkLabel1.AutoSize = true
+        Me.DarkLabel1.AutoSize = True
         Me.DarkLabel1.BackColor = System.Drawing.Color.Transparent
         Me.DarkLabel1.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.DarkLabel1.ForeColor = System.Drawing.Color.FromArgb(CType(CType(220,Byte),Integer), CType(CType(220,Byte),Integer), CType(CType(220,Byte),Integer))
+        Me.DarkLabel1.ForeColor = System.Drawing.Color.FromArgb(CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer))
         Me.DarkLabel1.Location = New System.Drawing.Point(57, 470)
         Me.DarkLabel1.Name = "DarkLabel1"
         Me.DarkLabel1.Size = New System.Drawing.Size(174, 13)
@@ -480,7 +497,7 @@ Partial Class frmMapEditor
         '
         'pnlNpc
         '
-        Me.pnlNpc.BackColor = System.Drawing.Color.FromArgb(CType(CType(60,Byte),Integer), CType(CType(63,Byte),Integer), CType(CType(65,Byte),Integer))
+        Me.pnlNpc.BackColor = System.Drawing.Color.FromArgb(CType(CType(60, Byte), Integer), CType(CType(63, Byte), Integer), CType(CType(65, Byte), Integer))
         Me.pnlNpc.Controls.Add(Me.cmbNpcList)
         Me.pnlNpc.Controls.Add(Me.lstMapNpc)
         Me.pnlNpc.Location = New System.Drawing.Point(2, 50)
@@ -490,10 +507,10 @@ Partial Class frmMapEditor
         '
         'cmbNpcList
         '
-        Me.cmbNpcList.BackColor = System.Drawing.Color.FromArgb(CType(CType(60,Byte),Integer), CType(CType(63,Byte),Integer), CType(CType(65,Byte),Integer))
+        Me.cmbNpcList.BackColor = System.Drawing.Color.FromArgb(CType(CType(60, Byte), Integer), CType(CType(63, Byte), Integer), CType(CType(65, Byte), Integer))
         Me.cmbNpcList.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cmbNpcList.ForeColor = System.Drawing.Color.LightGray
-        Me.cmbNpcList.FormattingEnabled = true
+        Me.cmbNpcList.FormattingEnabled = True
         Me.cmbNpcList.Location = New System.Drawing.Point(126, 441)
         Me.cmbNpcList.Name = "cmbNpcList"
         Me.cmbNpcList.Size = New System.Drawing.Size(184, 21)
@@ -501,10 +518,10 @@ Partial Class frmMapEditor
         '
         'lstMapNpc
         '
-        Me.lstMapNpc.BackColor = System.Drawing.Color.FromArgb(CType(CType(60,Byte),Integer), CType(CType(63,Byte),Integer), CType(CType(65,Byte),Integer))
+        Me.lstMapNpc.BackColor = System.Drawing.Color.FromArgb(CType(CType(60, Byte), Integer), CType(CType(63, Byte), Integer), CType(CType(65, Byte), Integer))
         Me.lstMapNpc.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.lstMapNpc.ForeColor = System.Drawing.Color.LightGray
-        Me.lstMapNpc.FormattingEnabled = true
+        Me.lstMapNpc.FormattingEnabled = True
         Me.lstMapNpc.Location = New System.Drawing.Point(3, 4)
         Me.lstMapNpc.Name = "lstMapNpc"
         Me.lstMapNpc.Size = New System.Drawing.Size(307, 431)
@@ -512,7 +529,7 @@ Partial Class frmMapEditor
         '
         'pnlDirBlock
         '
-        Me.pnlDirBlock.BackColor = System.Drawing.Color.FromArgb(CType(CType(60,Byte),Integer), CType(CType(63,Byte),Integer), CType(CType(65,Byte),Integer))
+        Me.pnlDirBlock.BackColor = System.Drawing.Color.FromArgb(CType(CType(60, Byte), Integer), CType(CType(63, Byte), Integer), CType(CType(65, Byte), Integer))
         Me.pnlDirBlock.Controls.Add(Me.DarkLabel6)
         Me.pnlDirBlock.Location = New System.Drawing.Point(2, 51)
         Me.pnlDirBlock.Name = "pnlDirBlock"
@@ -521,8 +538,8 @@ Partial Class frmMapEditor
         '
         'DarkLabel6
         '
-        Me.DarkLabel6.AutoSize = true
-        Me.DarkLabel6.ForeColor = System.Drawing.Color.FromArgb(CType(CType(220,Byte),Integer), CType(CType(220,Byte),Integer), CType(CType(220,Byte),Integer))
+        Me.DarkLabel6.AutoSize = True
+        Me.DarkLabel6.ForeColor = System.Drawing.Color.FromArgb(CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer))
         Me.DarkLabel6.Location = New System.Drawing.Point(8, 8)
         Me.DarkLabel6.Name = "DarkLabel6"
         Me.DarkLabel6.Size = New System.Drawing.Size(239, 13)
@@ -531,7 +548,7 @@ Partial Class frmMapEditor
         '
         'btnEvents
         '
-        Me.btnEvents.BackColor = System.Drawing.Color.FromArgb(CType(CType(60,Byte),Integer), CType(CType(63,Byte),Integer), CType(CType(65,Byte),Integer))
+        Me.btnEvents.BackColor = System.Drawing.Color.FromArgb(CType(CType(60, Byte), Integer), CType(CType(63, Byte), Integer), CType(CType(65, Byte), Integer))
         Me.btnEvents.Location = New System.Drawing.Point(264, 28)
         Me.btnEvents.Name = "btnEvents"
         Me.btnEvents.Padding = New System.Windows.Forms.Padding(5)
@@ -541,7 +558,7 @@ Partial Class frmMapEditor
         '
         'btnDirBlock
         '
-        Me.btnDirBlock.BackColor = System.Drawing.Color.FromArgb(CType(CType(60,Byte),Integer), CType(CType(63,Byte),Integer), CType(CType(65,Byte),Integer))
+        Me.btnDirBlock.BackColor = System.Drawing.Color.FromArgb(CType(CType(60, Byte), Integer), CType(CType(63, Byte), Integer), CType(CType(65, Byte), Integer))
         Me.btnDirBlock.Location = New System.Drawing.Point(163, 28)
         Me.btnDirBlock.Name = "btnDirBlock"
         Me.btnDirBlock.Padding = New System.Windows.Forms.Padding(5)
@@ -551,7 +568,7 @@ Partial Class frmMapEditor
         '
         'btnNpc
         '
-        Me.btnNpc.BackColor = System.Drawing.Color.FromArgb(CType(CType(60,Byte),Integer), CType(CType(63,Byte),Integer), CType(CType(65,Byte),Integer))
+        Me.btnNpc.BackColor = System.Drawing.Color.FromArgb(CType(CType(60, Byte), Integer), CType(CType(63, Byte), Integer), CType(CType(65, Byte), Integer))
         Me.btnNpc.Location = New System.Drawing.Point(118, 28)
         Me.btnNpc.Name = "btnNpc"
         Me.btnNpc.Padding = New System.Windows.Forms.Padding(5)
@@ -561,7 +578,7 @@ Partial Class frmMapEditor
         '
         'btnAttributes
         '
-        Me.btnAttributes.BackColor = System.Drawing.Color.FromArgb(CType(CType(60,Byte),Integer), CType(CType(63,Byte),Integer), CType(CType(65,Byte),Integer))
+        Me.btnAttributes.BackColor = System.Drawing.Color.FromArgb(CType(CType(60, Byte), Integer), CType(CType(63, Byte), Integer), CType(CType(65, Byte), Integer))
         Me.btnAttributes.Location = New System.Drawing.Point(49, 28)
         Me.btnAttributes.Name = "btnAttributes"
         Me.btnAttributes.Padding = New System.Windows.Forms.Padding(5)
@@ -571,7 +588,7 @@ Partial Class frmMapEditor
         '
         'btnTiles
         '
-        Me.btnTiles.BackColor = System.Drawing.Color.FromArgb(CType(CType(60,Byte),Integer), CType(CType(63,Byte),Integer), CType(CType(65,Byte),Integer))
+        Me.btnTiles.BackColor = System.Drawing.Color.FromArgb(CType(CType(60, Byte), Integer), CType(CType(63, Byte), Integer), CType(CType(65, Byte), Integer))
         Me.btnTiles.Location = New System.Drawing.Point(4, 28)
         Me.btnTiles.Name = "btnTiles"
         Me.btnTiles.Padding = New System.Windows.Forms.Padding(5)
@@ -581,7 +598,7 @@ Partial Class frmMapEditor
         '
         'pnlEvents
         '
-        Me.pnlEvents.BackColor = System.Drawing.Color.FromArgb(CType(CType(60,Byte),Integer), CType(CType(63,Byte),Integer), CType(CType(65,Byte),Integer))
+        Me.pnlEvents.BackColor = System.Drawing.Color.FromArgb(CType(CType(60, Byte), Integer), CType(CType(63, Byte), Integer), CType(CType(65, Byte), Integer))
         Me.pnlEvents.Controls.Add(Me.lblPasteMode)
         Me.pnlEvents.Controls.Add(Me.btnPasteEvent)
         Me.pnlEvents.Controls.Add(Me.DarkLabel16)
@@ -596,8 +613,8 @@ Partial Class frmMapEditor
         '
         'lblPasteMode
         '
-        Me.lblPasteMode.AutoSize = true
-        Me.lblPasteMode.ForeColor = System.Drawing.Color.FromArgb(CType(CType(220,Byte),Integer), CType(CType(220,Byte),Integer), CType(CType(220,Byte),Integer))
+        Me.lblPasteMode.AutoSize = True
+        Me.lblPasteMode.ForeColor = System.Drawing.Color.FromArgb(CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer))
         Me.lblPasteMode.Location = New System.Drawing.Point(92, 148)
         Me.lblPasteMode.Name = "lblPasteMode"
         Me.lblPasteMode.Size = New System.Drawing.Size(78, 13)
@@ -615,18 +632,18 @@ Partial Class frmMapEditor
         '
         'DarkLabel16
         '
-        Me.DarkLabel16.ForeColor = System.Drawing.Color.FromArgb(CType(CType(220,Byte),Integer), CType(CType(220,Byte),Integer), CType(CType(220,Byte),Integer))
+        Me.DarkLabel16.ForeColor = System.Drawing.Color.FromArgb(CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer))
         Me.DarkLabel16.Location = New System.Drawing.Point(8, 111)
         Me.DarkLabel16.Name = "DarkLabel16"
         Me.DarkLabel16.Size = New System.Drawing.Size(251, 44)
         Me.DarkLabel16.TabIndex = 16
-        Me.DarkLabel16.Text = "To paste a copied Event, press the paste button, then click on the map to place i"& _ 
+        Me.DarkLabel16.Text = "To paste a copied Event, press the paste button, then click on the map to place i" &
     "t."
         '
         'lblCopyMode
         '
-        Me.lblCopyMode.AutoSize = true
-        Me.lblCopyMode.ForeColor = System.Drawing.Color.FromArgb(CType(CType(220,Byte),Integer), CType(CType(220,Byte),Integer), CType(CType(220,Byte),Integer))
+        Me.lblCopyMode.AutoSize = True
+        Me.lblCopyMode.ForeColor = System.Drawing.Color.FromArgb(CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer))
         Me.lblCopyMode.Location = New System.Drawing.Point(92, 67)
         Me.lblCopyMode.Name = "lblCopyMode"
         Me.lblCopyMode.Size = New System.Drawing.Size(75, 13)
@@ -644,7 +661,7 @@ Partial Class frmMapEditor
         '
         'DarkLabel15
         '
-        Me.DarkLabel15.ForeColor = System.Drawing.Color.FromArgb(CType(CType(220,Byte),Integer), CType(CType(220,Byte),Integer), CType(CType(220,Byte),Integer))
+        Me.DarkLabel15.ForeColor = System.Drawing.Color.FromArgb(CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer))
         Me.DarkLabel15.Location = New System.Drawing.Point(8, 29)
         Me.DarkLabel15.Name = "DarkLabel15"
         Me.DarkLabel15.Size = New System.Drawing.Size(237, 30)
@@ -653,8 +670,8 @@ Partial Class frmMapEditor
         '
         'DarkLabel5
         '
-        Me.DarkLabel5.AutoSize = true
-        Me.DarkLabel5.ForeColor = System.Drawing.Color.FromArgb(CType(CType(220,Byte),Integer), CType(CType(220,Byte),Integer), CType(CType(220,Byte),Integer))
+        Me.DarkLabel5.AutoSize = True
+        Me.DarkLabel5.ForeColor = System.Drawing.Color.FromArgb(CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer))
         Me.DarkLabel5.Location = New System.Drawing.Point(8, 8)
         Me.DarkLabel5.Name = "DarkLabel5"
         Me.DarkLabel5.Size = New System.Drawing.Size(233, 13)
@@ -663,7 +680,7 @@ Partial Class frmMapEditor
         '
         'pnlAttribute
         '
-        Me.pnlAttribute.BackColor = System.Drawing.Color.FromArgb(CType(CType(60,Byte),Integer), CType(CType(63,Byte),Integer), CType(CType(65,Byte),Integer))
+        Me.pnlAttribute.BackColor = System.Drawing.Color.FromArgb(CType(CType(60, Byte), Integer), CType(CType(63, Byte), Integer), CType(CType(65, Byte), Integer))
         Me.pnlAttribute.Controls.Add(Me.optLight)
         Me.pnlAttribute.Controls.Add(Me.btnClearAttribute)
         Me.pnlAttribute.Controls.Add(Me.optHouse)
@@ -689,12 +706,12 @@ Partial Class frmMapEditor
         '
         'optLight
         '
-        Me.optLight.AutoSize = true
+        Me.optLight.AutoSize = True
         Me.optLight.Location = New System.Drawing.Point(235, 138)
         Me.optLight.Name = "optLight"
         Me.optLight.Size = New System.Drawing.Size(48, 17)
         Me.optLight.TabIndex = 16
-        Me.optLight.TabStop = true
+        Me.optLight.TabStop = True
         Me.optLight.Text = "Light"
         '
         'btnClearAttribute
@@ -708,8 +725,8 @@ Partial Class frmMapEditor
         '
         'optHouse
         '
-        Me.optHouse.AutoSize = true
-        Me.optHouse.BackColor = System.Drawing.Color.FromArgb(CType(CType(60,Byte),Integer), CType(CType(63,Byte),Integer), CType(CType(65,Byte),Integer))
+        Me.optHouse.AutoSize = True
+        Me.optHouse.BackColor = System.Drawing.Color.FromArgb(CType(CType(60, Byte), Integer), CType(CType(63, Byte), Integer), CType(CType(65, Byte), Integer))
         Me.optHouse.Location = New System.Drawing.Point(163, 139)
         Me.optHouse.Name = "optHouse"
         Me.optHouse.Size = New System.Drawing.Size(56, 17)
@@ -718,8 +735,8 @@ Partial Class frmMapEditor
         '
         'optShop
         '
-        Me.optShop.AutoSize = true
-        Me.optShop.BackColor = System.Drawing.Color.FromArgb(CType(CType(60,Byte),Integer), CType(CType(63,Byte),Integer), CType(CType(65,Byte),Integer))
+        Me.optShop.AutoSize = True
+        Me.optShop.BackColor = System.Drawing.Color.FromArgb(CType(CType(60, Byte), Integer), CType(CType(63, Byte), Integer), CType(CType(65, Byte), Integer))
         Me.optShop.Location = New System.Drawing.Point(97, 139)
         Me.optShop.Name = "optShop"
         Me.optShop.Size = New System.Drawing.Size(50, 17)
@@ -728,8 +745,8 @@ Partial Class frmMapEditor
         '
         'optNpcSpawn
         '
-        Me.optNpcSpawn.AutoSize = true
-        Me.optNpcSpawn.BackColor = System.Drawing.Color.FromArgb(CType(CType(60,Byte),Integer), CType(CType(63,Byte),Integer), CType(CType(65,Byte),Integer))
+        Me.optNpcSpawn.AutoSize = True
+        Me.optNpcSpawn.BackColor = System.Drawing.Color.FromArgb(CType(CType(60, Byte), Integer), CType(CType(63, Byte), Integer), CType(CType(65, Byte), Integer))
         Me.optNpcSpawn.Location = New System.Drawing.Point(10, 139)
         Me.optNpcSpawn.Name = "optNpcSpawn"
         Me.optNpcSpawn.Size = New System.Drawing.Size(81, 17)
@@ -738,8 +755,8 @@ Partial Class frmMapEditor
         '
         'optBank
         '
-        Me.optBank.AutoSize = true
-        Me.optBank.BackColor = System.Drawing.Color.FromArgb(CType(CType(60,Byte),Integer), CType(CType(63,Byte),Integer), CType(CType(65,Byte),Integer))
+        Me.optBank.AutoSize = True
+        Me.optBank.BackColor = System.Drawing.Color.FromArgb(CType(CType(60, Byte), Integer), CType(CType(63, Byte), Integer), CType(CType(65, Byte), Integer))
         Me.optBank.Location = New System.Drawing.Point(235, 94)
         Me.optBank.Name = "optBank"
         Me.optBank.Size = New System.Drawing.Size(50, 17)
@@ -748,8 +765,8 @@ Partial Class frmMapEditor
         '
         'optCraft
         '
-        Me.optCraft.AutoSize = true
-        Me.optCraft.BackColor = System.Drawing.Color.FromArgb(CType(CType(60,Byte),Integer), CType(CType(63,Byte),Integer), CType(CType(65,Byte),Integer))
+        Me.optCraft.AutoSize = True
+        Me.optCraft.BackColor = System.Drawing.Color.FromArgb(CType(CType(60, Byte), Integer), CType(CType(63, Byte), Integer), CType(CType(65, Byte), Integer))
         Me.optCraft.Location = New System.Drawing.Point(163, 94)
         Me.optCraft.Name = "optCraft"
         Me.optCraft.Size = New System.Drawing.Size(47, 17)
@@ -758,8 +775,8 @@ Partial Class frmMapEditor
         '
         'optTrap
         '
-        Me.optTrap.AutoSize = true
-        Me.optTrap.BackColor = System.Drawing.Color.FromArgb(CType(CType(60,Byte),Integer), CType(CType(63,Byte),Integer), CType(CType(65,Byte),Integer))
+        Me.optTrap.AutoSize = True
+        Me.optTrap.BackColor = System.Drawing.Color.FromArgb(CType(CType(60, Byte), Integer), CType(CType(63, Byte), Integer), CType(CType(65, Byte), Integer))
         Me.optTrap.Location = New System.Drawing.Point(97, 94)
         Me.optTrap.Name = "optTrap"
         Me.optTrap.Size = New System.Drawing.Size(47, 17)
@@ -768,8 +785,8 @@ Partial Class frmMapEditor
         '
         'optHeal
         '
-        Me.optHeal.AutoSize = true
-        Me.optHeal.BackColor = System.Drawing.Color.FromArgb(CType(CType(60,Byte),Integer), CType(CType(63,Byte),Integer), CType(CType(65,Byte),Integer))
+        Me.optHeal.AutoSize = True
+        Me.optHeal.BackColor = System.Drawing.Color.FromArgb(CType(CType(60, Byte), Integer), CType(CType(63, Byte), Integer), CType(CType(65, Byte), Integer))
         Me.optHeal.Location = New System.Drawing.Point(10, 94)
         Me.optHeal.Name = "optHeal"
         Me.optHeal.Size = New System.Drawing.Size(47, 17)
@@ -778,8 +795,8 @@ Partial Class frmMapEditor
         '
         'optKeyOpen
         '
-        Me.optKeyOpen.AutoSize = true
-        Me.optKeyOpen.BackColor = System.Drawing.Color.FromArgb(CType(CType(60,Byte),Integer), CType(CType(63,Byte),Integer), CType(CType(65,Byte),Integer))
+        Me.optKeyOpen.AutoSize = True
+        Me.optKeyOpen.BackColor = System.Drawing.Color.FromArgb(CType(CType(60, Byte), Integer), CType(CType(63, Byte), Integer), CType(CType(65, Byte), Integer))
         Me.optKeyOpen.Location = New System.Drawing.Point(235, 50)
         Me.optKeyOpen.Name = "optKeyOpen"
         Me.optKeyOpen.Size = New System.Drawing.Size(72, 17)
@@ -788,8 +805,8 @@ Partial Class frmMapEditor
         '
         'optKey
         '
-        Me.optKey.AutoSize = true
-        Me.optKey.BackColor = System.Drawing.Color.FromArgb(CType(CType(60,Byte),Integer), CType(CType(63,Byte),Integer), CType(CType(65,Byte),Integer))
+        Me.optKey.AutoSize = True
+        Me.optKey.BackColor = System.Drawing.Color.FromArgb(CType(CType(60, Byte), Integer), CType(CType(63, Byte), Integer), CType(CType(65, Byte), Integer))
         Me.optKey.Location = New System.Drawing.Point(163, 50)
         Me.optKey.Name = "optKey"
         Me.optKey.Size = New System.Drawing.Size(43, 17)
@@ -798,8 +815,8 @@ Partial Class frmMapEditor
         '
         'optDoor
         '
-        Me.optDoor.AutoSize = true
-        Me.optDoor.BackColor = System.Drawing.Color.FromArgb(CType(CType(60,Byte),Integer), CType(CType(63,Byte),Integer), CType(CType(65,Byte),Integer))
+        Me.optDoor.AutoSize = True
+        Me.optDoor.BackColor = System.Drawing.Color.FromArgb(CType(CType(60, Byte), Integer), CType(CType(63, Byte), Integer), CType(CType(65, Byte), Integer))
         Me.optDoor.Location = New System.Drawing.Point(97, 50)
         Me.optDoor.Name = "optDoor"
         Me.optDoor.Size = New System.Drawing.Size(48, 17)
@@ -808,8 +825,8 @@ Partial Class frmMapEditor
         '
         'optResource
         '
-        Me.optResource.AutoSize = true
-        Me.optResource.BackColor = System.Drawing.Color.FromArgb(CType(CType(60,Byte),Integer), CType(CType(63,Byte),Integer), CType(CType(65,Byte),Integer))
+        Me.optResource.AutoSize = True
+        Me.optResource.BackColor = System.Drawing.Color.FromArgb(CType(CType(60, Byte), Integer), CType(CType(63, Byte), Integer), CType(CType(65, Byte), Integer))
         Me.optResource.ForeColor = System.Drawing.SystemColors.ControlText
         Me.optResource.Location = New System.Drawing.Point(10, 50)
         Me.optResource.Name = "optResource"
@@ -819,8 +836,8 @@ Partial Class frmMapEditor
         '
         'optNpcAvoid
         '
-        Me.optNpcAvoid.AutoSize = true
-        Me.optNpcAvoid.BackColor = System.Drawing.Color.FromArgb(CType(CType(60,Byte),Integer), CType(CType(63,Byte),Integer), CType(CType(65,Byte),Integer))
+        Me.optNpcAvoid.AutoSize = True
+        Me.optNpcAvoid.BackColor = System.Drawing.Color.FromArgb(CType(CType(60, Byte), Integer), CType(CType(63, Byte), Integer), CType(CType(65, Byte), Integer))
         Me.optNpcAvoid.Location = New System.Drawing.Point(235, 7)
         Me.optNpcAvoid.Name = "optNpcAvoid"
         Me.optNpcAvoid.Size = New System.Drawing.Size(75, 17)
@@ -829,8 +846,8 @@ Partial Class frmMapEditor
         '
         'optItem
         '
-        Me.optItem.AutoSize = true
-        Me.optItem.BackColor = System.Drawing.Color.FromArgb(CType(CType(60,Byte),Integer), CType(CType(63,Byte),Integer), CType(CType(65,Byte),Integer))
+        Me.optItem.AutoSize = True
+        Me.optItem.BackColor = System.Drawing.Color.FromArgb(CType(CType(60, Byte), Integer), CType(CType(63, Byte), Integer), CType(CType(65, Byte), Integer))
         Me.optItem.Location = New System.Drawing.Point(163, 7)
         Me.optItem.Name = "optItem"
         Me.optItem.Size = New System.Drawing.Size(66, 17)
@@ -839,8 +856,8 @@ Partial Class frmMapEditor
         '
         'optWarp
         '
-        Me.optWarp.AutoSize = true
-        Me.optWarp.BackColor = System.Drawing.Color.FromArgb(CType(CType(60,Byte),Integer), CType(CType(63,Byte),Integer), CType(CType(65,Byte),Integer))
+        Me.optWarp.AutoSize = True
+        Me.optWarp.BackColor = System.Drawing.Color.FromArgb(CType(CType(60, Byte), Integer), CType(CType(63, Byte), Integer), CType(CType(65, Byte), Integer))
         Me.optWarp.Location = New System.Drawing.Point(97, 7)
         Me.optWarp.Name = "optWarp"
         Me.optWarp.Size = New System.Drawing.Size(51, 17)
@@ -849,8 +866,8 @@ Partial Class frmMapEditor
         '
         'optBlocked
         '
-        Me.optBlocked.AutoSize = true
-        Me.optBlocked.BackColor = System.Drawing.Color.FromArgb(CType(CType(60,Byte),Integer), CType(CType(63,Byte),Integer), CType(CType(65,Byte),Integer))
+        Me.optBlocked.AutoSize = True
+        Me.optBlocked.BackColor = System.Drawing.Color.FromArgb(CType(CType(60, Byte), Integer), CType(CType(63, Byte), Integer), CType(CType(65, Byte), Integer))
         Me.optBlocked.ForeColor = System.Drawing.SystemColors.ControlText
         Me.optBlocked.Location = New System.Drawing.Point(10, 7)
         Me.optBlocked.Name = "optBlocked"
@@ -860,7 +877,7 @@ Partial Class frmMapEditor
         '
         'DarkSectionPanel2
         '
-        Me.DarkSectionPanel2.AutoScroll = true
+        Me.DarkSectionPanel2.AutoScroll = True
         Me.DarkSectionPanel2.Controls.Add(Me.pnlMoreOptions)
         Me.DarkSectionPanel2.Controls.Add(Me.GroupBox5)
         Me.DarkSectionPanel2.Controls.Add(Me.btnMoreOptions)
@@ -882,13 +899,13 @@ Partial Class frmMapEditor
         '
         'pnlMoreOptions
         '
-        Me.pnlMoreOptions.BackColor = System.Drawing.Color.FromArgb(CType(CType(69,Byte),Integer), CType(CType(73,Byte),Integer), CType(CType(74,Byte),Integer))
+        Me.pnlMoreOptions.BackColor = System.Drawing.Color.FromArgb(CType(CType(69, Byte), Integer), CType(CType(73, Byte), Integer), CType(CType(74, Byte), Integer))
         Me.pnlMoreOptions.Controls.Add(Me.GroupBox4)
         Me.pnlMoreOptions.Location = New System.Drawing.Point(4, 26)
         Me.pnlMoreOptions.Name = "pnlMoreOptions"
         Me.pnlMoreOptions.Size = New System.Drawing.Size(208, 539)
         Me.pnlMoreOptions.TabIndex = 31
-        Me.pnlMoreOptions.Visible = false
+        Me.pnlMoreOptions.Visible = False
         '
         'GroupBox4
         '
@@ -907,12 +924,12 @@ Partial Class frmMapEditor
         Me.GroupBox4.Name = "GroupBox4"
         Me.GroupBox4.Size = New System.Drawing.Size(200, 96)
         Me.GroupBox4.TabIndex = 0
-        Me.GroupBox4.TabStop = false
+        Me.GroupBox4.TabStop = False
         Me.GroupBox4.Text = "Weather Options"
         '
         'nudFogAlpha
         '
-        Me.nudFogAlpha.BackColor = System.Drawing.Color.FromArgb(CType(CType(69,Byte),Integer), CType(CType(73,Byte),Integer), CType(CType(74,Byte),Integer))
+        Me.nudFogAlpha.BackColor = System.Drawing.Color.FromArgb(CType(CType(69, Byte), Integer), CType(CType(73, Byte), Integer), CType(CType(74, Byte), Integer))
         Me.nudFogAlpha.ForeColor = System.Drawing.Color.Gainsboro
         Me.nudFogAlpha.Location = New System.Drawing.Point(145, 69)
         Me.nudFogAlpha.Maximum = New Decimal(New Integer() {255, 0, 0, 0})
@@ -923,7 +940,7 @@ Partial Class frmMapEditor
         '
         'nudFogSpeed
         '
-        Me.nudFogSpeed.BackColor = System.Drawing.Color.FromArgb(CType(CType(69,Byte),Integer), CType(CType(73,Byte),Integer), CType(CType(74,Byte),Integer))
+        Me.nudFogSpeed.BackColor = System.Drawing.Color.FromArgb(CType(CType(69, Byte), Integer), CType(CType(73, Byte), Integer), CType(CType(74, Byte), Integer))
         Me.nudFogSpeed.ForeColor = System.Drawing.Color.Gainsboro
         Me.nudFogSpeed.Location = New System.Drawing.Point(61, 69)
         Me.nudFogSpeed.Name = "nudFogSpeed"
@@ -933,7 +950,7 @@ Partial Class frmMapEditor
         '
         'nudFog
         '
-        Me.nudFog.BackColor = System.Drawing.Color.FromArgb(CType(CType(69,Byte),Integer), CType(CType(73,Byte),Integer), CType(CType(74,Byte),Integer))
+        Me.nudFog.BackColor = System.Drawing.Color.FromArgb(CType(CType(69, Byte), Integer), CType(CType(73, Byte), Integer), CType(CType(74, Byte), Integer))
         Me.nudFog.ForeColor = System.Drawing.Color.Gainsboro
         Me.nudFog.Location = New System.Drawing.Point(145, 44)
         Me.nudFog.Name = "nudFog"
@@ -943,7 +960,7 @@ Partial Class frmMapEditor
         '
         'nudIntensity
         '
-        Me.nudIntensity.BackColor = System.Drawing.Color.FromArgb(CType(CType(69,Byte),Integer), CType(CType(73,Byte),Integer), CType(CType(74,Byte),Integer))
+        Me.nudIntensity.BackColor = System.Drawing.Color.FromArgb(CType(CType(69, Byte), Integer), CType(CType(73, Byte), Integer), CType(CType(74, Byte), Integer))
         Me.nudIntensity.ForeColor = System.Drawing.Color.Gainsboro
         Me.nudIntensity.Location = New System.Drawing.Point(61, 44)
         Me.nudIntensity.Name = "nudIntensity"
@@ -953,8 +970,8 @@ Partial Class frmMapEditor
         '
         'lblFogAlpha
         '
-        Me.lblFogAlpha.AutoSize = true
-        Me.lblFogAlpha.ForeColor = System.Drawing.Color.FromArgb(CType(CType(220,Byte),Integer), CType(CType(220,Byte),Integer), CType(CType(220,Byte),Integer))
+        Me.lblFogAlpha.AutoSize = True
+        Me.lblFogAlpha.ForeColor = System.Drawing.Color.FromArgb(CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer))
         Me.lblFogAlpha.Location = New System.Drawing.Point(111, 72)
         Me.lblFogAlpha.Name = "lblFogAlpha"
         Me.lblFogAlpha.Size = New System.Drawing.Size(37, 13)
@@ -963,8 +980,8 @@ Partial Class frmMapEditor
         '
         'lblFogSpeed
         '
-        Me.lblFogSpeed.AutoSize = true
-        Me.lblFogSpeed.ForeColor = System.Drawing.Color.FromArgb(CType(CType(220,Byte),Integer), CType(CType(220,Byte),Integer), CType(CType(220,Byte),Integer))
+        Me.lblFogSpeed.AutoSize = True
+        Me.lblFogSpeed.ForeColor = System.Drawing.Color.FromArgb(CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer))
         Me.lblFogSpeed.Location = New System.Drawing.Point(6, 72)
         Me.lblFogSpeed.Name = "lblFogSpeed"
         Me.lblFogSpeed.Size = New System.Drawing.Size(41, 13)
@@ -973,8 +990,8 @@ Partial Class frmMapEditor
         '
         'lblFogIndex
         '
-        Me.lblFogIndex.AutoSize = true
-        Me.lblFogIndex.ForeColor = System.Drawing.Color.FromArgb(CType(CType(220,Byte),Integer), CType(CType(220,Byte),Integer), CType(CType(220,Byte),Integer))
+        Me.lblFogIndex.AutoSize = True
+        Me.lblFogIndex.ForeColor = System.Drawing.Color.FromArgb(CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer))
         Me.lblFogIndex.Location = New System.Drawing.Point(111, 46)
         Me.lblFogIndex.Name = "lblFogIndex"
         Me.lblFogIndex.Size = New System.Drawing.Size(28, 13)
@@ -983,8 +1000,8 @@ Partial Class frmMapEditor
         '
         'lblIntensity
         '
-        Me.lblIntensity.AutoSize = true
-        Me.lblIntensity.ForeColor = System.Drawing.Color.FromArgb(CType(CType(220,Byte),Integer), CType(CType(220,Byte),Integer), CType(CType(220,Byte),Integer))
+        Me.lblIntensity.AutoSize = True
+        Me.lblIntensity.ForeColor = System.Drawing.Color.FromArgb(CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer))
         Me.lblIntensity.Location = New System.Drawing.Point(6, 46)
         Me.lblIntensity.Name = "lblIntensity"
         Me.lblIntensity.Size = New System.Drawing.Size(49, 13)
@@ -993,9 +1010,9 @@ Partial Class frmMapEditor
         '
         'cmbWeather
         '
-        Me.cmbWeather.BackColor = System.Drawing.Color.FromArgb(CType(CType(60,Byte),Integer), CType(CType(63,Byte),Integer), CType(CType(65,Byte),Integer))
+        Me.cmbWeather.BackColor = System.Drawing.Color.FromArgb(CType(CType(60, Byte), Integer), CType(CType(63, Byte), Integer), CType(CType(65, Byte), Integer))
         Me.cmbWeather.ForeColor = System.Drawing.Color.LightGray
-        Me.cmbWeather.FormattingEnabled = true
+        Me.cmbWeather.FormattingEnabled = True
         Me.cmbWeather.Items.AddRange(New Object() {"None", "Rain", "Snow", "Hail", "Sand Storm", "Storm", "Fog"})
         Me.cmbWeather.Location = New System.Drawing.Point(91, 17)
         Me.cmbWeather.Name = "cmbWeather"
@@ -1004,8 +1021,8 @@ Partial Class frmMapEditor
         '
         'DarkLabel14
         '
-        Me.DarkLabel14.AutoSize = true
-        Me.DarkLabel14.ForeColor = System.Drawing.Color.FromArgb(CType(CType(220,Byte),Integer), CType(CType(220,Byte),Integer), CType(CType(220,Byte),Integer))
+        Me.DarkLabel14.AutoSize = True
+        Me.DarkLabel14.ForeColor = System.Drawing.Color.FromArgb(CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer))
         Me.DarkLabel14.Location = New System.Drawing.Point(7, 22)
         Me.DarkLabel14.Name = "DarkLabel14"
         Me.DarkLabel14.Size = New System.Drawing.Size(78, 13)
@@ -1029,12 +1046,12 @@ Partial Class frmMapEditor
         Me.GroupBox5.Name = "GroupBox5"
         Me.GroupBox5.Size = New System.Drawing.Size(200, 85)
         Me.GroupBox5.TabIndex = 1
-        Me.GroupBox5.TabStop = false
+        Me.GroupBox5.TabStop = False
         Me.GroupBox5.Text = "Map Tinting"
         '
         'nudMapAlpha
         '
-        Me.nudMapAlpha.BackColor = System.Drawing.Color.FromArgb(CType(CType(69,Byte),Integer), CType(CType(73,Byte),Integer), CType(CType(74,Byte),Integer))
+        Me.nudMapAlpha.BackColor = System.Drawing.Color.FromArgb(CType(CType(69, Byte), Integer), CType(CType(73, Byte), Integer), CType(CType(74, Byte), Integer))
         Me.nudMapAlpha.ForeColor = System.Drawing.Color.Gainsboro
         Me.nudMapAlpha.Location = New System.Drawing.Point(139, 55)
         Me.nudMapAlpha.Maximum = New Decimal(New Integer() {255, 0, 0, 0})
@@ -1045,7 +1062,7 @@ Partial Class frmMapEditor
         '
         'nudMapBlue
         '
-        Me.nudMapBlue.BackColor = System.Drawing.Color.FromArgb(CType(CType(69,Byte),Integer), CType(CType(73,Byte),Integer), CType(CType(74,Byte),Integer))
+        Me.nudMapBlue.BackColor = System.Drawing.Color.FromArgb(CType(CType(69, Byte), Integer), CType(CType(73, Byte), Integer), CType(CType(74, Byte), Integer))
         Me.nudMapBlue.ForeColor = System.Drawing.Color.Gainsboro
         Me.nudMapBlue.Location = New System.Drawing.Point(41, 55)
         Me.nudMapBlue.Maximum = New Decimal(New Integer() {255, 0, 0, 0})
@@ -1056,7 +1073,7 @@ Partial Class frmMapEditor
         '
         'nudMapGreen
         '
-        Me.nudMapGreen.BackColor = System.Drawing.Color.FromArgb(CType(CType(69,Byte),Integer), CType(CType(73,Byte),Integer), CType(CType(74,Byte),Integer))
+        Me.nudMapGreen.BackColor = System.Drawing.Color.FromArgb(CType(CType(69, Byte), Integer), CType(CType(73, Byte), Integer), CType(CType(74, Byte), Integer))
         Me.nudMapGreen.ForeColor = System.Drawing.Color.Gainsboro
         Me.nudMapGreen.Location = New System.Drawing.Point(139, 29)
         Me.nudMapGreen.Maximum = New Decimal(New Integer() {255, 0, 0, 0})
@@ -1067,7 +1084,7 @@ Partial Class frmMapEditor
         '
         'nudMapRed
         '
-        Me.nudMapRed.BackColor = System.Drawing.Color.FromArgb(CType(CType(69,Byte),Integer), CType(CType(73,Byte),Integer), CType(CType(74,Byte),Integer))
+        Me.nudMapRed.BackColor = System.Drawing.Color.FromArgb(CType(CType(69, Byte), Integer), CType(CType(73, Byte), Integer), CType(CType(74, Byte), Integer))
         Me.nudMapRed.ForeColor = System.Drawing.Color.Gainsboro
         Me.nudMapRed.Location = New System.Drawing.Point(41, 29)
         Me.nudMapRed.Maximum = New Decimal(New Integer() {255, 0, 0, 0})
@@ -1078,21 +1095,21 @@ Partial Class frmMapEditor
         '
         'chkUseTint
         '
-        Me.chkUseTint.AutoSize = true
+        Me.chkUseTint.AutoSize = True
         Me.chkUseTint.BackColor = System.Drawing.Color.Transparent
-        Me.chkUseTint.Checked = true
+        Me.chkUseTint.Checked = True
         Me.chkUseTint.CheckState = System.Windows.Forms.CheckState.Checked
         Me.chkUseTint.Location = New System.Drawing.Point(6, 13)
         Me.chkUseTint.Name = "chkUseTint"
         Me.chkUseTint.Size = New System.Drawing.Size(93, 17)
         Me.chkUseTint.TabIndex = 25
         Me.chkUseTint.Text = "Use MapTint?"
-        Me.chkUseTint.UseVisualStyleBackColor = false
+        Me.chkUseTint.UseVisualStyleBackColor = False
         '
         'lblMapAlpha
         '
-        Me.lblMapAlpha.AutoSize = true
-        Me.lblMapAlpha.ForeColor = System.Drawing.Color.FromArgb(CType(CType(220,Byte),Integer), CType(CType(220,Byte),Integer), CType(CType(220,Byte),Integer))
+        Me.lblMapAlpha.AutoSize = True
+        Me.lblMapAlpha.ForeColor = System.Drawing.Color.FromArgb(CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer))
         Me.lblMapAlpha.Location = New System.Drawing.Point(96, 57)
         Me.lblMapAlpha.Name = "lblMapAlpha"
         Me.lblMapAlpha.Size = New System.Drawing.Size(37, 13)
@@ -1101,8 +1118,8 @@ Partial Class frmMapEditor
         '
         'lblMapBlue
         '
-        Me.lblMapBlue.AutoSize = true
-        Me.lblMapBlue.ForeColor = System.Drawing.Color.FromArgb(CType(CType(220,Byte),Integer), CType(CType(220,Byte),Integer), CType(CType(220,Byte),Integer))
+        Me.lblMapBlue.AutoSize = True
+        Me.lblMapBlue.ForeColor = System.Drawing.Color.FromArgb(CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer))
         Me.lblMapBlue.Location = New System.Drawing.Point(4, 57)
         Me.lblMapBlue.Name = "lblMapBlue"
         Me.lblMapBlue.Size = New System.Drawing.Size(31, 13)
@@ -1111,8 +1128,8 @@ Partial Class frmMapEditor
         '
         'lblMapGreen
         '
-        Me.lblMapGreen.AutoSize = true
-        Me.lblMapGreen.ForeColor = System.Drawing.Color.FromArgb(CType(CType(220,Byte),Integer), CType(CType(220,Byte),Integer), CType(CType(220,Byte),Integer))
+        Me.lblMapGreen.AutoSize = True
+        Me.lblMapGreen.ForeColor = System.Drawing.Color.FromArgb(CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer))
         Me.lblMapGreen.Location = New System.Drawing.Point(94, 31)
         Me.lblMapGreen.Name = "lblMapGreen"
         Me.lblMapGreen.Size = New System.Drawing.Size(39, 13)
@@ -1121,8 +1138,8 @@ Partial Class frmMapEditor
         '
         'lblMapRed
         '
-        Me.lblMapRed.AutoSize = true
-        Me.lblMapRed.ForeColor = System.Drawing.Color.FromArgb(CType(CType(220,Byte),Integer), CType(CType(220,Byte),Integer), CType(CType(220,Byte),Integer))
+        Me.lblMapRed.AutoSize = True
+        Me.lblMapRed.ForeColor = System.Drawing.Color.FromArgb(CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer))
         Me.lblMapRed.Location = New System.Drawing.Point(5, 31)
         Me.lblMapRed.Name = "lblMapRed"
         Me.lblMapRed.Size = New System.Drawing.Size(30, 13)
@@ -1131,7 +1148,7 @@ Partial Class frmMapEditor
         '
         'btnMoreOptions
         '
-        Me.btnMoreOptions.BackColor = System.Drawing.Color.FromArgb(CType(CType(60,Byte),Integer), CType(CType(63,Byte),Integer), CType(CType(65,Byte),Integer))
+        Me.btnMoreOptions.BackColor = System.Drawing.Color.FromArgb(CType(CType(60, Byte), Integer), CType(CType(63, Byte), Integer), CType(CType(65, Byte), Integer))
         Me.btnMoreOptions.Location = New System.Drawing.Point(9, 571)
         Me.btnMoreOptions.Name = "btnMoreOptions"
         Me.btnMoreOptions.Padding = New System.Windows.Forms.Padding(5)
@@ -1149,13 +1166,13 @@ Partial Class frmMapEditor
         Me.GroupBox3.Name = "GroupBox3"
         Me.GroupBox3.Size = New System.Drawing.Size(203, 136)
         Me.GroupBox3.TabIndex = 29
-        Me.GroupBox3.TabStop = false
+        Me.GroupBox3.TabStop = False
         Me.GroupBox3.Text = "Music"
         '
         'btnPreview
         '
-        Me.btnPreview.BackColor = System.Drawing.Color.FromArgb(CType(CType(60,Byte),Integer), CType(CType(63,Byte),Integer), CType(CType(65,Byte),Integer))
-        Me.btnPreview.Image = CType(resources.GetObject("btnPreview.Image"),System.Drawing.Image)
+        Me.btnPreview.BackColor = System.Drawing.Color.FromArgb(CType(CType(60, Byte), Integer), CType(CType(63, Byte), Integer), CType(CType(65, Byte), Integer))
+        Me.btnPreview.Image = CType(resources.GetObject("btnPreview.Image"), System.Drawing.Image)
         Me.btnPreview.Location = New System.Drawing.Point(9, 102)
         Me.btnPreview.Name = "btnPreview"
         Me.btnPreview.Padding = New System.Windows.Forms.Padding(5)
@@ -1163,14 +1180,14 @@ Partial Class frmMapEditor
         Me.btnPreview.TabIndex = 5
         Me.btnPreview.Text = "Preview Music"
         Me.btnPreview.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
-        Me.btnPreview.UseMnemonic = false
+        Me.btnPreview.UseMnemonic = False
         '
         'lstMusic
         '
-        Me.lstMusic.FormattingEnabled = true
+        Me.lstMusic.FormattingEnabled = True
         Me.lstMusic.Location = New System.Drawing.Point(6, 14)
         Me.lstMusic.Name = "lstMusic"
-        Me.lstMusic.ScrollAlwaysVisible = true
+        Me.lstMusic.ScrollAlwaysVisible = True
         Me.lstMusic.Size = New System.Drawing.Size(191, 82)
         Me.lstMusic.TabIndex = 4
         '
@@ -1187,12 +1204,12 @@ Partial Class frmMapEditor
         Me.GroupBox2.Name = "GroupBox2"
         Me.GroupBox2.Size = New System.Drawing.Size(203, 69)
         Me.GroupBox2.TabIndex = 28
-        Me.GroupBox2.TabStop = false
+        Me.GroupBox2.TabStop = False
         Me.GroupBox2.Text = "Map Size"
         '
         'nudMaxY
         '
-        Me.nudMaxY.BackColor = System.Drawing.Color.FromArgb(CType(CType(69,Byte),Integer), CType(CType(73,Byte),Integer), CType(CType(74,Byte),Integer))
+        Me.nudMaxY.BackColor = System.Drawing.Color.FromArgb(CType(CType(69, Byte), Integer), CType(CType(73, Byte), Integer), CType(CType(74, Byte), Integer))
         Me.nudMaxY.ForeColor = System.Drawing.Color.Gainsboro
         Me.nudMaxY.Location = New System.Drawing.Point(145, 14)
         Me.nudMaxY.Name = "nudMaxY"
@@ -1202,7 +1219,7 @@ Partial Class frmMapEditor
         '
         'nudMaxX
         '
-        Me.nudMaxX.BackColor = System.Drawing.Color.FromArgb(CType(CType(69,Byte),Integer), CType(CType(73,Byte),Integer), CType(CType(74,Byte),Integer))
+        Me.nudMaxX.BackColor = System.Drawing.Color.FromArgb(CType(CType(69, Byte), Integer), CType(CType(73, Byte), Integer), CType(CType(74, Byte), Integer))
         Me.nudMaxX.ForeColor = System.Drawing.Color.Gainsboro
         Me.nudMaxX.Location = New System.Drawing.Point(52, 14)
         Me.nudMaxX.Name = "nudMaxX"
@@ -1212,7 +1229,7 @@ Partial Class frmMapEditor
         '
         'btnSetSize
         '
-        Me.btnSetSize.BackColor = System.Drawing.Color.FromArgb(CType(CType(60,Byte),Integer), CType(CType(63,Byte),Integer), CType(CType(65,Byte),Integer))
+        Me.btnSetSize.BackColor = System.Drawing.Color.FromArgb(CType(CType(60, Byte), Integer), CType(CType(63, Byte), Integer), CType(CType(65, Byte), Integer))
         Me.btnSetSize.Location = New System.Drawing.Point(64, 39)
         Me.btnSetSize.Name = "btnSetSize"
         Me.btnSetSize.Padding = New System.Windows.Forms.Padding(5)
@@ -1222,8 +1239,8 @@ Partial Class frmMapEditor
         '
         'DarkLabel13
         '
-        Me.DarkLabel13.AutoSize = true
-        Me.DarkLabel13.ForeColor = System.Drawing.Color.FromArgb(CType(CType(220,Byte),Integer), CType(CType(220,Byte),Integer), CType(CType(220,Byte),Integer))
+        Me.DarkLabel13.AutoSize = True
+        Me.DarkLabel13.ForeColor = System.Drawing.Color.FromArgb(CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer))
         Me.DarkLabel13.Location = New System.Drawing.Point(99, 16)
         Me.DarkLabel13.Name = "DarkLabel13"
         Me.DarkLabel13.Size = New System.Drawing.Size(40, 13)
@@ -1232,8 +1249,8 @@ Partial Class frmMapEditor
         '
         'DarkLabel12
         '
-        Me.DarkLabel12.AutoSize = true
-        Me.DarkLabel12.ForeColor = System.Drawing.Color.FromArgb(CType(CType(220,Byte),Integer), CType(CType(220,Byte),Integer), CType(CType(220,Byte),Integer))
+        Me.DarkLabel12.AutoSize = True
+        Me.DarkLabel12.ForeColor = System.Drawing.Color.FromArgb(CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer))
         Me.DarkLabel12.Location = New System.Drawing.Point(6, 16)
         Me.DarkLabel12.Name = "DarkLabel12"
         Me.DarkLabel12.Size = New System.Drawing.Size(40, 13)
@@ -1254,12 +1271,12 @@ Partial Class frmMapEditor
         Me.GroupBox1.Name = "GroupBox1"
         Me.GroupBox1.Size = New System.Drawing.Size(203, 74)
         Me.GroupBox1.TabIndex = 27
-        Me.GroupBox1.TabStop = false
+        Me.GroupBox1.TabStop = False
         Me.GroupBox1.Text = "Respawn Settings"
         '
         'nudSpawnY
         '
-        Me.nudSpawnY.BackColor = System.Drawing.Color.FromArgb(CType(CType(69,Byte),Integer), CType(CType(73,Byte),Integer), CType(CType(74,Byte),Integer))
+        Me.nudSpawnY.BackColor = System.Drawing.Color.FromArgb(CType(CType(69, Byte), Integer), CType(CType(73, Byte), Integer), CType(CType(74, Byte), Integer))
         Me.nudSpawnY.ForeColor = System.Drawing.Color.Gainsboro
         Me.nudSpawnY.Location = New System.Drawing.Point(143, 44)
         Me.nudSpawnY.Name = "nudSpawnY"
@@ -1269,7 +1286,7 @@ Partial Class frmMapEditor
         '
         'nudSpawnX
         '
-        Me.nudSpawnX.BackColor = System.Drawing.Color.FromArgb(CType(CType(69,Byte),Integer), CType(CType(73,Byte),Integer), CType(CType(74,Byte),Integer))
+        Me.nudSpawnX.BackColor = System.Drawing.Color.FromArgb(CType(CType(69, Byte), Integer), CType(CType(73, Byte), Integer), CType(CType(74, Byte), Integer))
         Me.nudSpawnX.ForeColor = System.Drawing.Color.Gainsboro
         Me.nudSpawnX.Location = New System.Drawing.Point(48, 44)
         Me.nudSpawnX.Name = "nudSpawnX"
@@ -1279,7 +1296,7 @@ Partial Class frmMapEditor
         '
         'nudSpawnMap
         '
-        Me.nudSpawnMap.BackColor = System.Drawing.Color.FromArgb(CType(CType(69,Byte),Integer), CType(CType(73,Byte),Integer), CType(CType(74,Byte),Integer))
+        Me.nudSpawnMap.BackColor = System.Drawing.Color.FromArgb(CType(CType(69, Byte), Integer), CType(CType(73, Byte), Integer), CType(CType(74, Byte), Integer))
         Me.nudSpawnMap.ForeColor = System.Drawing.Color.Gainsboro
         Me.nudSpawnMap.Location = New System.Drawing.Point(108, 18)
         Me.nudSpawnMap.Name = "nudSpawnMap"
@@ -1289,8 +1306,8 @@ Partial Class frmMapEditor
         '
         'DarkLabel11
         '
-        Me.DarkLabel11.AutoSize = true
-        Me.DarkLabel11.ForeColor = System.Drawing.Color.FromArgb(CType(CType(220,Byte),Integer), CType(CType(220,Byte),Integer), CType(CType(220,Byte),Integer))
+        Me.DarkLabel11.AutoSize = True
+        Me.DarkLabel11.ForeColor = System.Drawing.Color.FromArgb(CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer))
         Me.DarkLabel11.Location = New System.Drawing.Point(120, 46)
         Me.DarkLabel11.Name = "DarkLabel11"
         Me.DarkLabel11.Size = New System.Drawing.Size(17, 13)
@@ -1299,8 +1316,8 @@ Partial Class frmMapEditor
         '
         'DarkLabel10
         '
-        Me.DarkLabel10.AutoSize = true
-        Me.DarkLabel10.ForeColor = System.Drawing.Color.FromArgb(CType(CType(220,Byte),Integer), CType(CType(220,Byte),Integer), CType(CType(220,Byte),Integer))
+        Me.DarkLabel10.AutoSize = True
+        Me.DarkLabel10.ForeColor = System.Drawing.Color.FromArgb(CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer))
         Me.DarkLabel10.Location = New System.Drawing.Point(7, 46)
         Me.DarkLabel10.Name = "DarkLabel10"
         Me.DarkLabel10.Size = New System.Drawing.Size(17, 13)
@@ -1309,8 +1326,8 @@ Partial Class frmMapEditor
         '
         'DarkLabel9
         '
-        Me.DarkLabel9.AutoSize = true
-        Me.DarkLabel9.ForeColor = System.Drawing.Color.FromArgb(CType(CType(220,Byte),Integer), CType(CType(220,Byte),Integer), CType(CType(220,Byte),Integer))
+        Me.DarkLabel9.AutoSize = True
+        Me.DarkLabel9.ForeColor = System.Drawing.Color.FromArgb(CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer))
         Me.DarkLabel9.Location = New System.Drawing.Point(6, 22)
         Me.DarkLabel9.Name = "DarkLabel9"
         Me.DarkLabel9.Size = New System.Drawing.Size(79, 13)
@@ -1319,9 +1336,9 @@ Partial Class frmMapEditor
         '
         'DarkLabel7
         '
-        Me.DarkLabel7.AutoSize = true
+        Me.DarkLabel7.AutoSize = True
         Me.DarkLabel7.BackColor = System.Drawing.Color.Transparent
-        Me.DarkLabel7.ForeColor = System.Drawing.Color.FromArgb(CType(CType(220,Byte),Integer), CType(CType(220,Byte),Integer), CType(CType(220,Byte),Integer))
+        Me.DarkLabel7.ForeColor = System.Drawing.Color.FromArgb(CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer))
         Me.DarkLabel7.Location = New System.Drawing.Point(6, 33)
         Me.DarkLabel7.Name = "DarkLabel7"
         Me.DarkLabel7.Size = New System.Drawing.Size(38, 13)
@@ -1330,8 +1347,8 @@ Partial Class frmMapEditor
         '
         'chkInstance
         '
-        Me.chkInstance.AutoSize = true
-        Me.chkInstance.BackColor = System.Drawing.Color.FromArgb(CType(CType(69,Byte),Integer), CType(CType(73,Byte),Integer), CType(CType(74,Byte),Integer))
+        Me.chkInstance.AutoSize = True
+        Me.chkInstance.BackColor = System.Drawing.Color.FromArgb(CType(CType(69, Byte), Integer), CType(CType(73, Byte), Integer), CType(CType(74, Byte), Integer))
         Me.chkInstance.ForeColor = System.Drawing.Color.Gainsboro
         Me.chkInstance.Location = New System.Drawing.Point(9, 85)
         Me.chkInstance.Name = "chkInstance"
@@ -1341,9 +1358,9 @@ Partial Class frmMapEditor
         '
         'txtName
         '
-        Me.txtName.BackColor = System.Drawing.Color.FromArgb(CType(CType(69,Byte),Integer), CType(CType(73,Byte),Integer), CType(CType(74,Byte),Integer))
+        Me.txtName.BackColor = System.Drawing.Color.FromArgb(CType(CType(69, Byte), Integer), CType(CType(73, Byte), Integer), CType(CType(74, Byte), Integer))
         Me.txtName.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.txtName.ForeColor = System.Drawing.Color.FromArgb(CType(CType(220,Byte),Integer), CType(CType(220,Byte),Integer), CType(CType(220,Byte),Integer))
+        Me.txtName.ForeColor = System.Drawing.Color.FromArgb(CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer))
         Me.txtName.Location = New System.Drawing.Point(50, 31)
         Me.txtName.Name = "txtName"
         Me.txtName.Size = New System.Drawing.Size(162, 20)
@@ -1351,9 +1368,9 @@ Partial Class frmMapEditor
         '
         'DarkLabel8
         '
-        Me.DarkLabel8.AutoSize = true
+        Me.DarkLabel8.AutoSize = True
         Me.DarkLabel8.BackColor = System.Drawing.Color.Transparent
-        Me.DarkLabel8.ForeColor = System.Drawing.Color.FromArgb(CType(CType(220,Byte),Integer), CType(CType(220,Byte),Integer), CType(CType(220,Byte),Integer))
+        Me.DarkLabel8.ForeColor = System.Drawing.Color.FromArgb(CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer))
         Me.DarkLabel8.Location = New System.Drawing.Point(8, 60)
         Me.DarkLabel8.Name = "DarkLabel8"
         Me.DarkLabel8.Size = New System.Drawing.Size(36, 13)
@@ -1373,12 +1390,12 @@ Partial Class frmMapEditor
         Me.fraMapLinks.Name = "fraMapLinks"
         Me.fraMapLinks.Size = New System.Drawing.Size(203, 82)
         Me.fraMapLinks.TabIndex = 23
-        Me.fraMapLinks.TabStop = false
+        Me.fraMapLinks.TabStop = False
         Me.fraMapLinks.Text = "Map Links"
         '
         'nudRight
         '
-        Me.nudRight.BackColor = System.Drawing.Color.FromArgb(CType(CType(69,Byte),Integer), CType(CType(73,Byte),Integer), CType(CType(74,Byte),Integer))
+        Me.nudRight.BackColor = System.Drawing.Color.FromArgb(CType(CType(69, Byte), Integer), CType(CType(73, Byte), Integer), CType(CType(74, Byte), Integer))
         Me.nudRight.ForeColor = System.Drawing.Color.Gainsboro
         Me.nudRight.Location = New System.Drawing.Point(147, 34)
         Me.nudRight.Name = "nudRight"
@@ -1388,7 +1405,7 @@ Partial Class frmMapEditor
         '
         'nudLeft
         '
-        Me.nudLeft.BackColor = System.Drawing.Color.FromArgb(CType(CType(69,Byte),Integer), CType(CType(73,Byte),Integer), CType(CType(74,Byte),Integer))
+        Me.nudLeft.BackColor = System.Drawing.Color.FromArgb(CType(CType(69, Byte), Integer), CType(CType(73, Byte), Integer), CType(CType(74, Byte), Integer))
         Me.nudLeft.ForeColor = System.Drawing.Color.Gainsboro
         Me.nudLeft.Location = New System.Drawing.Point(6, 34)
         Me.nudLeft.Name = "nudLeft"
@@ -1398,7 +1415,7 @@ Partial Class frmMapEditor
         '
         'nudDown
         '
-        Me.nudDown.BackColor = System.Drawing.Color.FromArgb(CType(CType(69,Byte),Integer), CType(CType(73,Byte),Integer), CType(CType(74,Byte),Integer))
+        Me.nudDown.BackColor = System.Drawing.Color.FromArgb(CType(CType(69, Byte), Integer), CType(CType(73, Byte), Integer), CType(CType(74, Byte), Integer))
         Me.nudDown.ForeColor = System.Drawing.Color.Gainsboro
         Me.nudDown.Location = New System.Drawing.Point(75, 54)
         Me.nudDown.Name = "nudDown"
@@ -1408,7 +1425,7 @@ Partial Class frmMapEditor
         '
         'nudUp
         '
-        Me.nudUp.BackColor = System.Drawing.Color.FromArgb(CType(CType(69,Byte),Integer), CType(CType(73,Byte),Integer), CType(CType(74,Byte),Integer))
+        Me.nudUp.BackColor = System.Drawing.Color.FromArgb(CType(CType(69, Byte), Integer), CType(CType(73, Byte), Integer), CType(CType(74, Byte), Integer))
         Me.nudUp.ForeColor = System.Drawing.Color.Gainsboro
         Me.nudUp.Location = New System.Drawing.Point(75, 11)
         Me.nudUp.Name = "nudUp"
@@ -1418,8 +1435,8 @@ Partial Class frmMapEditor
         '
         'lblMap
         '
-        Me.lblMap.AutoSize = true
-        Me.lblMap.ForeColor = System.Drawing.Color.FromArgb(CType(CType(220,Byte),Integer), CType(CType(220,Byte),Integer), CType(CType(220,Byte),Integer))
+        Me.lblMap.AutoSize = True
+        Me.lblMap.ForeColor = System.Drawing.Color.FromArgb(CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer))
         Me.lblMap.Location = New System.Drawing.Point(72, 36)
         Me.lblMap.Name = "lblMap"
         Me.lblMap.Size = New System.Drawing.Size(65, 13)
@@ -1428,9 +1445,9 @@ Partial Class frmMapEditor
         '
         'cmbMoral
         '
-        Me.cmbMoral.BackColor = System.Drawing.Color.FromArgb(CType(CType(60,Byte),Integer), CType(CType(63,Byte),Integer), CType(CType(65,Byte),Integer))
+        Me.cmbMoral.BackColor = System.Drawing.Color.FromArgb(CType(CType(60, Byte), Integer), CType(CType(63, Byte), Integer), CType(CType(65, Byte), Integer))
         Me.cmbMoral.ForeColor = System.Drawing.Color.LightGray
-        Me.cmbMoral.FormattingEnabled = true
+        Me.cmbMoral.FormattingEnabled = True
         Me.cmbMoral.Items.AddRange(New Object() {"None", "Safe Zone", "Indoors"})
         Me.cmbMoral.Location = New System.Drawing.Point(50, 57)
         Me.cmbMoral.Name = "cmbMoral"
@@ -1439,23 +1456,23 @@ Partial Class frmMapEditor
         '
         'ToolStrip
         '
-        Me.ToolStrip.AutoSize = false
-        Me.ToolStrip.BackColor = System.Drawing.Color.FromArgb(CType(CType(60,Byte),Integer), CType(CType(63,Byte),Integer), CType(CType(65,Byte),Integer))
-        Me.ToolStrip.ForeColor = System.Drawing.Color.FromArgb(CType(CType(220,Byte),Integer), CType(CType(220,Byte),Integer), CType(CType(220,Byte),Integer))
+        Me.ToolStrip.AutoSize = False
+        Me.ToolStrip.BackColor = System.Drawing.Color.FromArgb(CType(CType(60, Byte), Integer), CType(CType(63, Byte), Integer), CType(CType(65, Byte), Integer))
+        Me.ToolStrip.ForeColor = System.Drawing.Color.FromArgb(CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer))
         Me.ToolStrip.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden
         Me.ToolStrip.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.tsbSave, Me.tsbDiscard, Me.ToolStripSeparator1, Me.tsbMapGrid, Me.ToolStripSeparator2, Me.tsbFill, Me.tsbClear, Me.ToolStripSeparator3, Me.ToolStripLabel1, Me.cmbMapList, Me.ToolStripSeparator4, Me.tsbScreenShot})
         Me.ToolStrip.Location = New System.Drawing.Point(318, 0)
         Me.ToolStrip.Name = "ToolStrip"
         Me.ToolStrip.Padding = New System.Windows.Forms.Padding(5, 0, 1, 0)
         Me.ToolStrip.Size = New System.Drawing.Size(758, 25)
-        Me.ToolStrip.Stretch = true
+        Me.ToolStrip.Stretch = True
         Me.ToolStrip.TabIndex = 11
         Me.ToolStrip.Text = "DarkToolStrip1"
         '
         'tsbSave
         '
-        Me.tsbSave.ForeColor = System.Drawing.Color.FromArgb(CType(CType(220,Byte),Integer), CType(CType(220,Byte),Integer), CType(CType(220,Byte),Integer))
-        Me.tsbSave.Image = CType(resources.GetObject("tsbSave.Image"),System.Drawing.Image)
+        Me.tsbSave.ForeColor = System.Drawing.Color.FromArgb(CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer))
+        Me.tsbSave.Image = CType(resources.GetObject("tsbSave.Image"), System.Drawing.Image)
         Me.tsbSave.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
         Me.tsbSave.ImageTransparentColor = System.Drawing.Color.Magenta
         Me.tsbSave.Name = "tsbSave"
@@ -1464,8 +1481,8 @@ Partial Class frmMapEditor
         '
         'tsbDiscard
         '
-        Me.tsbDiscard.ForeColor = System.Drawing.Color.FromArgb(CType(CType(220,Byte),Integer), CType(CType(220,Byte),Integer), CType(CType(220,Byte),Integer))
-        Me.tsbDiscard.Image = CType(resources.GetObject("tsbDiscard.Image"),System.Drawing.Image)
+        Me.tsbDiscard.ForeColor = System.Drawing.Color.FromArgb(CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer))
+        Me.tsbDiscard.Image = CType(resources.GetObject("tsbDiscard.Image"), System.Drawing.Image)
         Me.tsbDiscard.ImageTransparentColor = System.Drawing.Color.Magenta
         Me.tsbDiscard.Name = "tsbDiscard"
         Me.tsbDiscard.Size = New System.Drawing.Size(66, 22)
@@ -1473,15 +1490,15 @@ Partial Class frmMapEditor
         '
         'ToolStripSeparator1
         '
-        Me.ToolStripSeparator1.ForeColor = System.Drawing.Color.FromArgb(CType(CType(220,Byte),Integer), CType(CType(220,Byte),Integer), CType(CType(220,Byte),Integer))
+        Me.ToolStripSeparator1.ForeColor = System.Drawing.Color.FromArgb(CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer))
         Me.ToolStripSeparator1.Margin = New System.Windows.Forms.Padding(0, 0, 2, 0)
         Me.ToolStripSeparator1.Name = "ToolStripSeparator1"
         Me.ToolStripSeparator1.Size = New System.Drawing.Size(6, 25)
         '
         'tsbMapGrid
         '
-        Me.tsbMapGrid.ForeColor = System.Drawing.Color.FromArgb(CType(CType(220,Byte),Integer), CType(CType(220,Byte),Integer), CType(CType(220,Byte),Integer))
-        Me.tsbMapGrid.Image = CType(resources.GetObject("tsbMapGrid.Image"),System.Drawing.Image)
+        Me.tsbMapGrid.ForeColor = System.Drawing.Color.FromArgb(CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer))
+        Me.tsbMapGrid.Image = CType(resources.GetObject("tsbMapGrid.Image"), System.Drawing.Image)
         Me.tsbMapGrid.ImageTransparentColor = System.Drawing.Color.Magenta
         Me.tsbMapGrid.Name = "tsbMapGrid"
         Me.tsbMapGrid.Size = New System.Drawing.Size(76, 22)
@@ -1489,15 +1506,15 @@ Partial Class frmMapEditor
         '
         'ToolStripSeparator2
         '
-        Me.ToolStripSeparator2.ForeColor = System.Drawing.Color.FromArgb(CType(CType(220,Byte),Integer), CType(CType(220,Byte),Integer), CType(CType(220,Byte),Integer))
+        Me.ToolStripSeparator2.ForeColor = System.Drawing.Color.FromArgb(CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer))
         Me.ToolStripSeparator2.Margin = New System.Windows.Forms.Padding(0, 0, 2, 0)
         Me.ToolStripSeparator2.Name = "ToolStripSeparator2"
         Me.ToolStripSeparator2.Size = New System.Drawing.Size(6, 25)
         '
         'tsbFill
         '
-        Me.tsbFill.ForeColor = System.Drawing.Color.FromArgb(CType(CType(220,Byte),Integer), CType(CType(220,Byte),Integer), CType(CType(220,Byte),Integer))
-        Me.tsbFill.Image = CType(resources.GetObject("tsbFill.Image"),System.Drawing.Image)
+        Me.tsbFill.ForeColor = System.Drawing.Color.FromArgb(CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer))
+        Me.tsbFill.Image = CType(resources.GetObject("tsbFill.Image"), System.Drawing.Image)
         Me.tsbFill.ImageTransparentColor = System.Drawing.Color.Magenta
         Me.tsbFill.Name = "tsbFill"
         Me.tsbFill.Size = New System.Drawing.Size(73, 22)
@@ -1505,8 +1522,8 @@ Partial Class frmMapEditor
         '
         'tsbClear
         '
-        Me.tsbClear.ForeColor = System.Drawing.Color.FromArgb(CType(CType(220,Byte),Integer), CType(CType(220,Byte),Integer), CType(CType(220,Byte),Integer))
-        Me.tsbClear.Image = CType(resources.GetObject("tsbClear.Image"),System.Drawing.Image)
+        Me.tsbClear.ForeColor = System.Drawing.Color.FromArgb(CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer))
+        Me.tsbClear.Image = CType(resources.GetObject("tsbClear.Image"), System.Drawing.Image)
         Me.tsbClear.ImageTransparentColor = System.Drawing.Color.Magenta
         Me.tsbClear.Name = "tsbClear"
         Me.tsbClear.Size = New System.Drawing.Size(85, 22)
@@ -1514,36 +1531,36 @@ Partial Class frmMapEditor
         '
         'ToolStripSeparator3
         '
-        Me.ToolStripSeparator3.ForeColor = System.Drawing.Color.FromArgb(CType(CType(220,Byte),Integer), CType(CType(220,Byte),Integer), CType(CType(220,Byte),Integer))
+        Me.ToolStripSeparator3.ForeColor = System.Drawing.Color.FromArgb(CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer))
         Me.ToolStripSeparator3.Margin = New System.Windows.Forms.Padding(0, 0, 2, 0)
         Me.ToolStripSeparator3.Name = "ToolStripSeparator3"
         Me.ToolStripSeparator3.Size = New System.Drawing.Size(6, 25)
         '
         'ToolStripLabel1
         '
-        Me.ToolStripLabel1.ForeColor = System.Drawing.Color.FromArgb(CType(CType(220,Byte),Integer), CType(CType(220,Byte),Integer), CType(CType(220,Byte),Integer))
+        Me.ToolStripLabel1.ForeColor = System.Drawing.Color.FromArgb(CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer))
         Me.ToolStripLabel1.Name = "ToolStripLabel1"
         Me.ToolStripLabel1.Size = New System.Drawing.Size(34, 22)
         Me.ToolStripLabel1.Text = "Map:"
         '
         'cmbMapList
         '
-        Me.cmbMapList.BackColor = System.Drawing.Color.FromArgb(CType(CType(60,Byte),Integer), CType(CType(63,Byte),Integer), CType(CType(65,Byte),Integer))
-        Me.cmbMapList.ForeColor = System.Drawing.Color.FromArgb(CType(CType(220,Byte),Integer), CType(CType(220,Byte),Integer), CType(CType(220,Byte),Integer))
+        Me.cmbMapList.BackColor = System.Drawing.Color.FromArgb(CType(CType(60, Byte), Integer), CType(CType(63, Byte), Integer), CType(CType(65, Byte), Integer))
+        Me.cmbMapList.ForeColor = System.Drawing.Color.FromArgb(CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer))
         Me.cmbMapList.Name = "cmbMapList"
         Me.cmbMapList.Size = New System.Drawing.Size(121, 25)
         '
         'ToolStripSeparator4
         '
-        Me.ToolStripSeparator4.ForeColor = System.Drawing.Color.FromArgb(CType(CType(220,Byte),Integer), CType(CType(220,Byte),Integer), CType(CType(220,Byte),Integer))
+        Me.ToolStripSeparator4.ForeColor = System.Drawing.Color.FromArgb(CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer))
         Me.ToolStripSeparator4.Margin = New System.Windows.Forms.Padding(0, 0, 2, 0)
         Me.ToolStripSeparator4.Name = "ToolStripSeparator4"
         Me.ToolStripSeparator4.Size = New System.Drawing.Size(6, 25)
         '
         'tsbScreenShot
         '
-        Me.tsbScreenShot.ForeColor = System.Drawing.Color.FromArgb(CType(CType(220,Byte),Integer), CType(CType(220,Byte),Integer), CType(CType(220,Byte),Integer))
-        Me.tsbScreenShot.Image = CType(resources.GetObject("tsbScreenShot.Image"),System.Drawing.Image)
+        Me.tsbScreenShot.ForeColor = System.Drawing.Color.FromArgb(CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer))
+        Me.tsbScreenShot.Image = CType(resources.GetObject("tsbScreenShot.Image"), System.Drawing.Image)
         Me.tsbScreenShot.ImageTransparentColor = System.Drawing.Color.Magenta
         Me.tsbScreenShot.Name = "tsbScreenShot"
         Me.tsbScreenShot.Size = New System.Drawing.Size(86, 22)
@@ -1551,10 +1568,12 @@ Partial Class frmMapEditor
         '
         'pnlBack2
         '
-        Me.pnlBack2.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom)  _
-            Or System.Windows.Forms.AnchorStyles.Left)  _
-            Or System.Windows.Forms.AnchorStyles.Right),System.Windows.Forms.AnchorStyles)
-        Me.pnlBack2.Location = New System.Drawing.Point(320, 28)
+        Me.pnlBack2.Controls.Add(Me.pnlAttributes)
+        Me.pnlBack2.Controls.Add(Me.scrlMapViewV)
+        Me.pnlBack2.Controls.Add(Me.scrlMapViewH)
+        Me.pnlBack2.Controls.Add(Me.picScreen)
+        Me.pnlBack2.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.pnlBack2.Location = New System.Drawing.Point(318, 25)
         Me.pnlBack2.Name = "pnlBack2"
         Me.pnlBack2.SectionHeader = "MapView"
         Me.pnlBack2.Size = New System.Drawing.Size(758, 573)
@@ -1562,7 +1581,7 @@ Partial Class frmMapEditor
         '
         'pnlAttributes
         '
-        Me.pnlAttributes.BackColor = System.Drawing.Color.FromArgb(CType(CType(60,Byte),Integer), CType(CType(63,Byte),Integer), CType(CType(65,Byte),Integer))
+        Me.pnlAttributes.BackColor = System.Drawing.Color.FromArgb(CType(CType(60, Byte), Integer), CType(CType(63, Byte), Integer), CType(CType(65, Byte), Integer))
         Me.pnlAttributes.Controls.Add(Me.fraMapWarp)
         Me.pnlAttributes.Controls.Add(Me.fraBuyHouse)
         Me.pnlAttributes.Controls.Add(Me.fraKeyOpen)
@@ -1574,11 +1593,11 @@ Partial Class frmMapEditor
         Me.pnlAttributes.Controls.Add(Me.fraMapItem)
         Me.pnlAttributes.Controls.Add(Me.fraTrap)
         Me.pnlAttributes.ForeColor = System.Drawing.Color.LightGray
-        Me.pnlAttributes.Location = New System.Drawing.Point(318, 60)
+        Me.pnlAttributes.Location = New System.Drawing.Point(6, 34)
         Me.pnlAttributes.Name = "pnlAttributes"
         Me.pnlAttributes.Size = New System.Drawing.Size(709, 516)
         Me.pnlAttributes.TabIndex = 11
-        Me.pnlAttributes.Visible = false
+        Me.pnlAttributes.Visible = False
         '
         'fraMapWarp
         '
@@ -1595,12 +1614,12 @@ Partial Class frmMapEditor
         Me.fraMapWarp.Name = "fraMapWarp"
         Me.fraMapWarp.Size = New System.Drawing.Size(211, 158)
         Me.fraMapWarp.TabIndex = 18
-        Me.fraMapWarp.TabStop = false
+        Me.fraMapWarp.TabStop = False
         Me.fraMapWarp.Text = "Map Warp"
         '
         'lblVisualWarp
         '
-        Me.lblVisualWarp.AutoSize = true
+        Me.lblVisualWarp.AutoSize = True
         Me.lblVisualWarp.Location = New System.Drawing.Point(8, 120)
         Me.lblVisualWarp.Name = "lblVisualWarp"
         Me.lblVisualWarp.Size = New System.Drawing.Size(64, 13)
@@ -1615,7 +1634,7 @@ Partial Class frmMapEditor
         Me.btnMapWarp.Size = New System.Drawing.Size(90, 28)
         Me.btnMapWarp.TabIndex = 6
         Me.btnMapWarp.Text = "Accept"
-        Me.btnMapWarp.UseVisualStyleBackColor = true
+        Me.btnMapWarp.UseVisualStyleBackColor = True
         '
         'scrlMapWarpY
         '
@@ -1640,7 +1659,7 @@ Partial Class frmMapEditor
         '
         'lblMapWarpY
         '
-        Me.lblMapWarpY.AutoSize = true
+        Me.lblMapWarpY.AutoSize = True
         Me.lblMapWarpY.Location = New System.Drawing.Point(7, 62)
         Me.lblMapWarpY.Name = "lblMapWarpY"
         Me.lblMapWarpY.Size = New System.Drawing.Size(26, 13)
@@ -1649,7 +1668,7 @@ Partial Class frmMapEditor
         '
         'lblMapWarpX
         '
-        Me.lblMapWarpX.AutoSize = true
+        Me.lblMapWarpX.AutoSize = True
         Me.lblMapWarpX.Location = New System.Drawing.Point(7, 41)
         Me.lblMapWarpX.Name = "lblMapWarpX"
         Me.lblMapWarpX.Size = New System.Drawing.Size(26, 13)
@@ -1658,7 +1677,7 @@ Partial Class frmMapEditor
         '
         'lblMapWarpMap
         '
-        Me.lblMapWarpMap.AutoSize = true
+        Me.lblMapWarpMap.AutoSize = True
         Me.lblMapWarpMap.Location = New System.Drawing.Point(6, 21)
         Me.lblMapWarpMap.Name = "lblMapWarpMap"
         Me.lblMapWarpMap.Size = New System.Drawing.Size(40, 13)
@@ -1675,7 +1694,7 @@ Partial Class frmMapEditor
         Me.fraBuyHouse.Name = "fraBuyHouse"
         Me.fraBuyHouse.Size = New System.Drawing.Size(211, 119)
         Me.fraBuyHouse.TabIndex = 27
-        Me.fraBuyHouse.TabStop = false
+        Me.fraBuyHouse.TabStop = False
         Me.fraBuyHouse.Text = "Buy House"
         '
         'btnHouseTileOk
@@ -1686,7 +1705,7 @@ Partial Class frmMapEditor
         Me.btnHouseTileOk.Size = New System.Drawing.Size(90, 28)
         Me.btnHouseTileOk.TabIndex = 6
         Me.btnHouseTileOk.Text = "Accept"
-        Me.btnHouseTileOk.UseVisualStyleBackColor = true
+        Me.btnHouseTileOk.UseVisualStyleBackColor = True
         '
         'scrlBuyHouse
         '
@@ -1698,7 +1717,7 @@ Partial Class frmMapEditor
         '
         'lblHouseName
         '
-        Me.lblHouseName.AutoSize = true
+        Me.lblHouseName.AutoSize = True
         Me.lblHouseName.Location = New System.Drawing.Point(6, 16)
         Me.lblHouseName.Name = "lblHouseName"
         Me.lblHouseName.Size = New System.Drawing.Size(41, 13)
@@ -1717,7 +1736,7 @@ Partial Class frmMapEditor
         Me.fraKeyOpen.Name = "fraKeyOpen"
         Me.fraKeyOpen.Size = New System.Drawing.Size(207, 138)
         Me.fraKeyOpen.TabIndex = 21
-        Me.fraKeyOpen.TabStop = false
+        Me.fraKeyOpen.TabStop = False
         Me.fraKeyOpen.Text = "Map Key Open"
         '
         'scrlKeyY
@@ -1729,7 +1748,7 @@ Partial Class frmMapEditor
         '
         'lblKeyY
         '
-        Me.lblKeyY.AutoSize = true
+        Me.lblKeyY.AutoSize = True
         Me.lblKeyY.Location = New System.Drawing.Point(6, 61)
         Me.lblKeyY.Name = "lblKeyY"
         Me.lblKeyY.Size = New System.Drawing.Size(26, 13)
@@ -1744,7 +1763,7 @@ Partial Class frmMapEditor
         Me.btnMapKeyOpen.Size = New System.Drawing.Size(90, 28)
         Me.btnMapKeyOpen.TabIndex = 6
         Me.btnMapKeyOpen.Text = "Accept"
-        Me.btnMapKeyOpen.UseVisualStyleBackColor = true
+        Me.btnMapKeyOpen.UseVisualStyleBackColor = True
         '
         'scrlKeyX
         '
@@ -1755,7 +1774,7 @@ Partial Class frmMapEditor
         '
         'lblKeyX
         '
-        Me.lblKeyX.AutoSize = true
+        Me.lblKeyX.AutoSize = True
         Me.lblKeyX.Location = New System.Drawing.Point(6, 22)
         Me.lblKeyX.Name = "lblKeyX"
         Me.lblKeyX.Size = New System.Drawing.Size(26, 13)
@@ -1774,20 +1793,20 @@ Partial Class frmMapEditor
         Me.fraMapKey.Name = "fraMapKey"
         Me.fraMapKey.Size = New System.Drawing.Size(206, 138)
         Me.fraMapKey.TabIndex = 20
-        Me.fraMapKey.TabStop = false
+        Me.fraMapKey.TabStop = False
         Me.fraMapKey.Text = "Map Key"
         '
         'chkMapKey
         '
-        Me.chkMapKey.AutoSize = true
-        Me.chkMapKey.Checked = true
+        Me.chkMapKey.AutoSize = True
+        Me.chkMapKey.Checked = True
         Me.chkMapKey.CheckState = System.Windows.Forms.CheckState.Checked
         Me.chkMapKey.Location = New System.Drawing.Point(9, 64)
         Me.chkMapKey.Name = "chkMapKey"
         Me.chkMapKey.Size = New System.Drawing.Size(152, 17)
         Me.chkMapKey.TabIndex = 8
         Me.chkMapKey.Text = "Take Key Away Upon Use"
-        Me.chkMapKey.UseVisualStyleBackColor = true
+        Me.chkMapKey.UseVisualStyleBackColor = True
         '
         'picMapKey
         '
@@ -1796,7 +1815,7 @@ Partial Class frmMapEditor
         Me.picMapKey.Name = "picMapKey"
         Me.picMapKey.Size = New System.Drawing.Size(32, 32)
         Me.picMapKey.TabIndex = 7
-        Me.picMapKey.TabStop = false
+        Me.picMapKey.TabStop = False
         '
         'btnMapKey
         '
@@ -1806,7 +1825,7 @@ Partial Class frmMapEditor
         Me.btnMapKey.Size = New System.Drawing.Size(90, 28)
         Me.btnMapKey.TabIndex = 6
         Me.btnMapKey.Text = "Accept"
-        Me.btnMapKey.UseVisualStyleBackColor = true
+        Me.btnMapKey.UseVisualStyleBackColor = True
         '
         'scrlMapKey
         '
@@ -1817,7 +1836,7 @@ Partial Class frmMapEditor
         '
         'lblMapKey
         '
-        Me.lblMapKey.AutoSize = true
+        Me.lblMapKey.AutoSize = True
         Me.lblMapKey.Location = New System.Drawing.Point(6, 22)
         Me.lblMapKey.Name = "lblMapKey"
         Me.lblMapKey.Size = New System.Drawing.Size(59, 13)
@@ -1835,13 +1854,13 @@ Partial Class frmMapEditor
         Me.fraNpcSpawn.Name = "fraNpcSpawn"
         Me.fraNpcSpawn.Size = New System.Drawing.Size(207, 120)
         Me.fraNpcSpawn.TabIndex = 23
-        Me.fraNpcSpawn.TabStop = false
+        Me.fraNpcSpawn.TabStop = False
         Me.fraNpcSpawn.Text = "Npc Spawn"
         '
         'lstNpc
         '
         Me.lstNpc.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-        Me.lstNpc.FormattingEnabled = true
+        Me.lstNpc.FormattingEnabled = True
         Me.lstNpc.Location = New System.Drawing.Point(6, 21)
         Me.lstNpc.Name = "lstNpc"
         Me.lstNpc.Size = New System.Drawing.Size(192, 21)
@@ -1856,7 +1875,7 @@ Partial Class frmMapEditor
         Me.btnNpcSpawn.Size = New System.Drawing.Size(90, 28)
         Me.btnNpcSpawn.TabIndex = 6
         Me.btnNpcSpawn.Text = "Accept"
-        Me.btnNpcSpawn.UseVisualStyleBackColor = false
+        Me.btnNpcSpawn.UseVisualStyleBackColor = False
         '
         'scrlNpcDir
         '
@@ -1869,7 +1888,7 @@ Partial Class frmMapEditor
         '
         'lblNpcDir
         '
-        Me.lblNpcDir.AutoSize = true
+        Me.lblNpcDir.AutoSize = True
         Me.lblNpcDir.Location = New System.Drawing.Point(3, 49)
         Me.lblNpcDir.Name = "lblNpcDir"
         Me.lblNpcDir.Size = New System.Drawing.Size(69, 13)
@@ -1887,7 +1906,7 @@ Partial Class frmMapEditor
         Me.fraHeal.Name = "fraHeal"
         Me.fraHeal.Size = New System.Drawing.Size(207, 111)
         Me.fraHeal.TabIndex = 25
-        Me.fraHeal.TabStop = false
+        Me.fraHeal.TabStop = False
         Me.fraHeal.Text = "Heal"
         '
         'scrlHeal
@@ -1899,7 +1918,7 @@ Partial Class frmMapEditor
         '
         'lblHeal
         '
-        Me.lblHeal.AutoSize = true
+        Me.lblHeal.AutoSize = True
         Me.lblHeal.Location = New System.Drawing.Point(8, 43)
         Me.lblHeal.Name = "lblHeal"
         Me.lblHeal.Size = New System.Drawing.Size(55, 13)
@@ -1909,7 +1928,7 @@ Partial Class frmMapEditor
         'cmbHeal
         '
         Me.cmbHeal.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-        Me.cmbHeal.FormattingEnabled = true
+        Me.cmbHeal.FormattingEnabled = True
         Me.cmbHeal.Items.AddRange(New Object() {"Hp", "Mp"})
         Me.cmbHeal.Location = New System.Drawing.Point(7, 19)
         Me.cmbHeal.Name = "cmbHeal"
@@ -1924,7 +1943,7 @@ Partial Class frmMapEditor
         Me.btnHeal.Size = New System.Drawing.Size(90, 28)
         Me.btnHeal.TabIndex = 6
         Me.btnHeal.Text = "Accept"
-        Me.btnHeal.UseVisualStyleBackColor = true
+        Me.btnHeal.UseVisualStyleBackColor = True
         '
         'fraShop
         '
@@ -1935,13 +1954,13 @@ Partial Class frmMapEditor
         Me.fraShop.Name = "fraShop"
         Me.fraShop.Size = New System.Drawing.Size(206, 111)
         Me.fraShop.TabIndex = 24
-        Me.fraShop.TabStop = false
+        Me.fraShop.TabStop = False
         Me.fraShop.Text = "Shop"
         '
         'cmbShop
         '
         Me.cmbShop.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-        Me.cmbShop.FormattingEnabled = true
+        Me.cmbShop.FormattingEnabled = True
         Me.cmbShop.Location = New System.Drawing.Point(6, 19)
         Me.cmbShop.Name = "cmbShop"
         Me.cmbShop.Size = New System.Drawing.Size(192, 21)
@@ -1955,7 +1974,7 @@ Partial Class frmMapEditor
         Me.btnShop.Size = New System.Drawing.Size(90, 28)
         Me.btnShop.TabIndex = 6
         Me.btnShop.Text = "Accept"
-        Me.btnShop.UseVisualStyleBackColor = true
+        Me.btnShop.UseVisualStyleBackColor = True
         '
         'fraResource
         '
@@ -1967,7 +1986,7 @@ Partial Class frmMapEditor
         Me.fraResource.Name = "fraResource"
         Me.fraResource.Size = New System.Drawing.Size(206, 120)
         Me.fraResource.TabIndex = 22
-        Me.fraResource.TabStop = false
+        Me.fraResource.TabStop = False
         Me.fraResource.Text = "Resources"
         '
         'btnResourceOk
@@ -1978,7 +1997,7 @@ Partial Class frmMapEditor
         Me.btnResourceOk.Size = New System.Drawing.Size(90, 28)
         Me.btnResourceOk.TabIndex = 6
         Me.btnResourceOk.Text = "Accept"
-        Me.btnResourceOk.UseVisualStyleBackColor = true
+        Me.btnResourceOk.UseVisualStyleBackColor = True
         '
         'scrlResource
         '
@@ -1989,7 +2008,7 @@ Partial Class frmMapEditor
         '
         'lblResource
         '
-        Me.lblResource.AutoSize = true
+        Me.lblResource.AutoSize = True
         Me.lblResource.Location = New System.Drawing.Point(6, 29)
         Me.lblResource.Name = "lblResource"
         Me.lblResource.Size = New System.Drawing.Size(41, 13)
@@ -2008,7 +2027,7 @@ Partial Class frmMapEditor
         Me.fraMapItem.Name = "fraMapItem"
         Me.fraMapItem.Size = New System.Drawing.Size(206, 112)
         Me.fraMapItem.TabIndex = 19
-        Me.fraMapItem.TabStop = false
+        Me.fraMapItem.TabStop = False
         Me.fraMapItem.Text = "Map Item"
         '
         'picMapItem
@@ -2018,7 +2037,7 @@ Partial Class frmMapEditor
         Me.picMapItem.Name = "picMapItem"
         Me.picMapItem.Size = New System.Drawing.Size(32, 32)
         Me.picMapItem.TabIndex = 7
-        Me.picMapItem.TabStop = false
+        Me.picMapItem.TabStop = False
         '
         'btnMapItem
         '
@@ -2028,7 +2047,7 @@ Partial Class frmMapEditor
         Me.btnMapItem.Size = New System.Drawing.Size(90, 28)
         Me.btnMapItem.TabIndex = 6
         Me.btnMapItem.Text = "Accept"
-        Me.btnMapItem.UseVisualStyleBackColor = true
+        Me.btnMapItem.UseVisualStyleBackColor = True
         '
         'scrlMapItemValue
         '
@@ -2046,7 +2065,7 @@ Partial Class frmMapEditor
         '
         'lblMapItem
         '
-        Me.lblMapItem.AutoSize = true
+        Me.lblMapItem.AutoSize = True
         Me.lblMapItem.Location = New System.Drawing.Point(6, 16)
         Me.lblMapItem.Name = "lblMapItem"
         Me.lblMapItem.Size = New System.Drawing.Size(73, 13)
@@ -2063,7 +2082,7 @@ Partial Class frmMapEditor
         Me.fraTrap.Name = "fraTrap"
         Me.fraTrap.Size = New System.Drawing.Size(207, 113)
         Me.fraTrap.TabIndex = 26
-        Me.fraTrap.TabStop = false
+        Me.fraTrap.TabStop = False
         Me.fraTrap.Text = "Trap"
         '
         'btnTrap
@@ -2074,7 +2093,7 @@ Partial Class frmMapEditor
         Me.btnTrap.Size = New System.Drawing.Size(90, 28)
         Me.btnTrap.TabIndex = 42
         Me.btnTrap.Text = "Accept"
-        Me.btnTrap.UseVisualStyleBackColor = true
+        Me.btnTrap.UseVisualStyleBackColor = True
         '
         'scrlTrap
         '
@@ -2085,132 +2104,136 @@ Partial Class frmMapEditor
         '
         'lblTrap
         '
-        Me.lblTrap.AutoSize = true
+        Me.lblTrap.AutoSize = True
         Me.lblTrap.Location = New System.Drawing.Point(6, 15)
         Me.lblTrap.Name = "lblTrap"
         Me.lblTrap.Size = New System.Drawing.Size(55, 13)
         Me.lblTrap.TabIndex = 40
         Me.lblTrap.Text = "Amount: 0"
         '
-        'pnlMap
+        'scrlMapViewV
         '
-        Me.pnlMap.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom)  _
-            Or System.Windows.Forms.AnchorStyles.Left)  _
-            Or System.Windows.Forms.AnchorStyles.Right),System.Windows.Forms.AnchorStyles)
-        Me.pnlMap.AutoScroll = true
-        Me.pnlMap.BackColor = System.Drawing.Color.Black
-        Me.pnlMap.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center
-        Me.pnlMap.Controls.Add(Me.rsMap)
-        Me.pnlMap.Location = New System.Drawing.Point(321, 54)
-        Me.pnlMap.Name = "pnlMap"
-        Me.pnlMap.Size = New System.Drawing.Size(757, 548)
-        Me.pnlMap.TabIndex = 2
+        Me.scrlMapViewV.BackColor = System.Drawing.SystemColors.ControlDark
+        Me.scrlMapViewV.Dock = System.Windows.Forms.DockStyle.Right
+        Me.scrlMapViewV.Location = New System.Drawing.Point(741, 25)
+        Me.scrlMapViewV.Name = "scrlMapViewV"
+        Me.scrlMapViewV.Size = New System.Drawing.Size(16, 531)
+        Me.scrlMapViewV.TabIndex = 10
+        Me.scrlMapViewV.Text = "DarkScrollBar1"
         '
-        'rsMap
+        'scrlMapViewH
         '
-        Me.rsMap.AutoDraw = false
-        Me.rsMap.AutoDrawInterval = 32
-        Me.rsMap.BackColor = System.Drawing.Color.CornflowerBlue
-        Me.rsMap.BackgroundImage = CType(resources.GetObject("rsMap.BackgroundImage"),System.Drawing.Image)
-        Me.rsMap.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center
-        Me.rsMap.Location = New System.Drawing.Point(0, 0)
-        Me.rsMap.Name = "rsMap"
-        Me.rsMap.Size = New System.Drawing.Size(96, 96)
-        Me.rsMap.TabIndex = 0
-        Me.rsMap.Visible = false
+        Me.scrlMapViewH.BackColor = System.Drawing.SystemColors.ControlDark
+        Me.scrlMapViewH.Dock = System.Windows.Forms.DockStyle.Bottom
+        Me.scrlMapViewH.ForeColor = System.Drawing.SystemColors.ControlDarkDark
+        Me.scrlMapViewH.Location = New System.Drawing.Point(1, 556)
+        Me.scrlMapViewH.Name = "scrlMapViewH"
+        Me.scrlMapViewH.ScrollOrientation = DarkUI.Controls.DarkScrollOrientation.Horizontal
+        Me.scrlMapViewH.Size = New System.Drawing.Size(756, 16)
+        Me.scrlMapViewH.TabIndex = 3
+        '
+        'picScreen
+        '
+        Me.picScreen.BackColor = System.Drawing.Color.Black
+        Me.picScreen.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center
+        Me.picScreen.Location = New System.Drawing.Point(1, 25)
+        Me.picScreen.Name = "picScreen"
+        Me.picScreen.Size = New System.Drawing.Size(598, 413)
+        Me.picScreen.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage
+        Me.picScreen.TabIndex = 2
+        Me.picScreen.TabStop = False
         '
         'frmMapEditor
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(6!, 13!)
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(1292, 626)
-        Me.Controls.Add(Me.pnlAttributes)
+        Me.Controls.Add(Me.pnlBack2)
         Me.Controls.Add(Me.ToolStrip)
         Me.Controls.Add(Me.DarkSectionPanel2)
         Me.Controls.Add(Me.DarkSectionPanel1)
         Me.Controls.Add(Me.ToolStripContainer2)
-        Me.Controls.Add(Me.pnlMap)
-        Me.Controls.Add(Me.pnlBack2)
         Me.Controls.Add(Me.DarkDockPanel1)
-        Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle
-        Me.Icon = CType(resources.GetObject("$this.Icon"),System.Drawing.Icon)
+        Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.Name = "frmMapEditor"
         Me.Text = "Map Editor"
-        Me.ToolStripContainer2.ContentPanel.ResumeLayout(false)
-        Me.ToolStripContainer2.ResumeLayout(false)
-        Me.ToolStripContainer2.PerformLayout
-        Me.ssInfo.ResumeLayout(false)
-        Me.ssInfo.PerformLayout
-        Me.DarkSectionPanel1.ResumeLayout(false)
-        Me.pnlTiles.ResumeLayout(false)
-        Me.pnlTiles.PerformLayout
-        Me.pnlTileset.ResumeLayout(false)
-        Me.pnlNpc.ResumeLayout(false)
-        Me.pnlDirBlock.ResumeLayout(false)
-        Me.pnlDirBlock.PerformLayout
-        Me.pnlEvents.ResumeLayout(false)
-        Me.pnlEvents.PerformLayout
-        Me.pnlAttribute.ResumeLayout(false)
-        Me.pnlAttribute.PerformLayout
-        Me.DarkSectionPanel2.ResumeLayout(false)
-        Me.DarkSectionPanel2.PerformLayout
-        Me.pnlMoreOptions.ResumeLayout(false)
-        Me.GroupBox4.ResumeLayout(false)
-        Me.GroupBox4.PerformLayout
-        CType(Me.nudFogAlpha,System.ComponentModel.ISupportInitialize).EndInit
-        CType(Me.nudFogSpeed,System.ComponentModel.ISupportInitialize).EndInit
-        CType(Me.nudFog,System.ComponentModel.ISupportInitialize).EndInit
-        CType(Me.nudIntensity,System.ComponentModel.ISupportInitialize).EndInit
-        Me.GroupBox5.ResumeLayout(false)
-        Me.GroupBox5.PerformLayout
-        CType(Me.nudMapAlpha,System.ComponentModel.ISupportInitialize).EndInit
-        CType(Me.nudMapBlue,System.ComponentModel.ISupportInitialize).EndInit
-        CType(Me.nudMapGreen,System.ComponentModel.ISupportInitialize).EndInit
-        CType(Me.nudMapRed,System.ComponentModel.ISupportInitialize).EndInit
-        Me.GroupBox3.ResumeLayout(false)
-        Me.GroupBox2.ResumeLayout(false)
-        Me.GroupBox2.PerformLayout
-        CType(Me.nudMaxY,System.ComponentModel.ISupportInitialize).EndInit
-        CType(Me.nudMaxX,System.ComponentModel.ISupportInitialize).EndInit
-        Me.GroupBox1.ResumeLayout(false)
-        Me.GroupBox1.PerformLayout
-        CType(Me.nudSpawnY,System.ComponentModel.ISupportInitialize).EndInit
-        CType(Me.nudSpawnX,System.ComponentModel.ISupportInitialize).EndInit
-        CType(Me.nudSpawnMap,System.ComponentModel.ISupportInitialize).EndInit
-        Me.fraMapLinks.ResumeLayout(false)
-        Me.fraMapLinks.PerformLayout
-        CType(Me.nudRight,System.ComponentModel.ISupportInitialize).EndInit
-        CType(Me.nudLeft,System.ComponentModel.ISupportInitialize).EndInit
-        CType(Me.nudDown,System.ComponentModel.ISupportInitialize).EndInit
-        CType(Me.nudUp,System.ComponentModel.ISupportInitialize).EndInit
-        Me.ToolStrip.ResumeLayout(false)
-        Me.ToolStrip.PerformLayout
-        Me.pnlAttributes.ResumeLayout(false)
-        Me.fraMapWarp.ResumeLayout(false)
-        Me.fraMapWarp.PerformLayout
-        Me.fraBuyHouse.ResumeLayout(false)
-        Me.fraBuyHouse.PerformLayout
-        Me.fraKeyOpen.ResumeLayout(false)
-        Me.fraKeyOpen.PerformLayout
-        Me.fraMapKey.ResumeLayout(false)
-        Me.fraMapKey.PerformLayout
-        CType(Me.picMapKey,System.ComponentModel.ISupportInitialize).EndInit
-        Me.fraNpcSpawn.ResumeLayout(false)
-        Me.fraNpcSpawn.PerformLayout
-        Me.fraHeal.ResumeLayout(false)
-        Me.fraHeal.PerformLayout
-        Me.fraShop.ResumeLayout(false)
-        Me.fraResource.ResumeLayout(false)
-        Me.fraResource.PerformLayout
-        Me.fraMapItem.ResumeLayout(false)
-        Me.fraMapItem.PerformLayout
-        CType(Me.picMapItem,System.ComponentModel.ISupportInitialize).EndInit
-        Me.fraTrap.ResumeLayout(false)
-        Me.fraTrap.PerformLayout
-        Me.pnlMap.ResumeLayout(false)
-        Me.ResumeLayout(false)
+        Me.ToolStripContainer2.ContentPanel.ResumeLayout(False)
+        Me.ToolStripContainer2.ResumeLayout(False)
+        Me.ToolStripContainer2.PerformLayout()
+        Me.ssInfo.ResumeLayout(False)
+        Me.ssInfo.PerformLayout()
+        Me.DarkSectionPanel1.ResumeLayout(False)
+        Me.pnlTiles.ResumeLayout(False)
+        Me.pnlTiles.PerformLayout()
+        Me.pnlBack.ResumeLayout(False)
+        CType(Me.picBackSelect, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.pnlNpc.ResumeLayout(False)
+        Me.pnlDirBlock.ResumeLayout(False)
+        Me.pnlDirBlock.PerformLayout()
+        Me.pnlEvents.ResumeLayout(False)
+        Me.pnlEvents.PerformLayout()
+        Me.pnlAttribute.ResumeLayout(False)
+        Me.pnlAttribute.PerformLayout()
+        Me.DarkSectionPanel2.ResumeLayout(False)
+        Me.DarkSectionPanel2.PerformLayout()
+        Me.pnlMoreOptions.ResumeLayout(False)
+        Me.GroupBox4.ResumeLayout(False)
+        Me.GroupBox4.PerformLayout()
+        CType(Me.nudFogAlpha, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.nudFogSpeed, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.nudFog, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.nudIntensity, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.GroupBox5.ResumeLayout(False)
+        Me.GroupBox5.PerformLayout()
+        CType(Me.nudMapAlpha, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.nudMapBlue, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.nudMapGreen, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.nudMapRed, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.GroupBox3.ResumeLayout(False)
+        Me.GroupBox2.ResumeLayout(False)
+        Me.GroupBox2.PerformLayout()
+        CType(Me.nudMaxY, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.nudMaxX, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.GroupBox1.ResumeLayout(False)
+        Me.GroupBox1.PerformLayout()
+        CType(Me.nudSpawnY, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.nudSpawnX, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.nudSpawnMap, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.fraMapLinks.ResumeLayout(False)
+        Me.fraMapLinks.PerformLayout()
+        CType(Me.nudRight, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.nudLeft, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.nudDown, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.nudUp, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.ToolStrip.ResumeLayout(False)
+        Me.ToolStrip.PerformLayout()
+        Me.pnlBack2.ResumeLayout(False)
+        Me.pnlAttributes.ResumeLayout(False)
+        Me.fraMapWarp.ResumeLayout(False)
+        Me.fraMapWarp.PerformLayout()
+        Me.fraBuyHouse.ResumeLayout(False)
+        Me.fraBuyHouse.PerformLayout()
+        Me.fraKeyOpen.ResumeLayout(False)
+        Me.fraKeyOpen.PerformLayout()
+        Me.fraMapKey.ResumeLayout(False)
+        Me.fraMapKey.PerformLayout()
+        CType(Me.picMapKey, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.fraNpcSpawn.ResumeLayout(False)
+        Me.fraNpcSpawn.PerformLayout()
+        Me.fraHeal.ResumeLayout(False)
+        Me.fraHeal.PerformLayout()
+        Me.fraShop.ResumeLayout(False)
+        Me.fraResource.ResumeLayout(False)
+        Me.fraResource.PerformLayout()
+        Me.fraMapItem.ResumeLayout(False)
+        Me.fraMapItem.PerformLayout()
+        CType(Me.picMapItem, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.fraTrap.ResumeLayout(False)
+        Me.fraTrap.PerformLayout()
+        CType(Me.picScreen, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.ResumeLayout(False)
 
-End Sub
+    End Sub
 
     Friend WithEvents DarkDockPanel1 As DarkUI.Docking.DarkDockPanel
     Friend WithEvents ToolStripContainer2 As ToolStripContainer
@@ -2227,16 +2250,21 @@ End Sub
     Friend WithEvents ToolStripSeparator3 As ToolStripSeparator
     Friend WithEvents ToolStripLabel1 As ToolStripLabel
     Friend WithEvents pnlBack2 As DarkUI.Controls.DarkSectionPanel
-    Friend WithEvents pnlMap As NoResetPanel
+    Friend WithEvents picScreen As PictureBox
     Friend WithEvents ssInfo As DarkUI.Controls.DarkStatusStrip
     Friend WithEvents tslCurMap As ToolStripStatusLabel
     Friend WithEvents cmbMapList As ToolStripComboBox
     Friend WithEvents btnAttributes As DarkUI.Controls.DarkButton
     Friend WithEvents btnTiles As DarkUI.Controls.DarkButton
+    Friend WithEvents scrlMapViewH As DarkUI.Controls.DarkScrollBar
     Friend WithEvents btnNpc As DarkUI.Controls.DarkButton
     Friend WithEvents btnDirBlock As DarkUI.Controls.DarkButton
     Friend WithEvents btnEvents As DarkUI.Controls.DarkButton
-    Friend WithEvents pnlTileset As NoResetPanel
+    Friend WithEvents scrlMapViewV As DarkUI.Controls.DarkScrollBar
+    Friend WithEvents pnlBack As Panel
+    Friend WithEvents picBackSelect As PictureBox
+    Friend WithEvents scrlPictureY As DarkUI.Controls.DarkScrollBar
+    Friend WithEvents scrlPictureX As DarkUI.Controls.DarkScrollBar
     Friend WithEvents DarkLabel1 As DarkUI.Controls.DarkLabel
     Friend WithEvents DarkLabel2 As DarkUI.Controls.DarkLabel
     Friend WithEvents DarkLabel3 As DarkUI.Controls.DarkLabel
@@ -2383,6 +2411,4 @@ End Sub
     Friend WithEvents btnCopyEvent As DarkUI.Controls.DarkButton
     Friend WithEvents DarkLabel15 As DarkUI.Controls.DarkLabel
     Friend WithEvents lblVisualWarp As Label
-    Friend WithEvents rsMap As SFML.UI.SfControl
-    Friend WithEvents rsTileset As SFML.UI.SfControl
 End Class

@@ -477,6 +477,67 @@
             ShowRClick = False
         End If
 
+        If InitMapEditor = True Then
+            FrmEditor_MapEditor.MapEditorInit()
+            InitMapEditor = False
+        End If
+
+        If InitMapProperties = True Then
+            FrmEditor_MapEditor.MapPropertiesInit()
+            InitMapProperties = False
+        End If
+
+        If InitEventEditorForm = True Then
+            FrmEditor_Events.InitEventEditorForm()
+
+            ' populate form
+            With FrmEditor_Events
+                ' set the tabs
+                .tabPages.TabPages.Clear()
+
+                For i = 1 To TmpEvent.PageCount
+                    .tabPages.TabPages.Add(Str(i))
+                Next
+                ' items
+                .cmbHasItem.Items.Clear()
+                .cmbHasItem.Items.Add("None")
+                For i = 1 To MAX_ITEMS
+                    .cmbHasItem.Items.Add(i & ": " & Trim$(Item(i).Name))
+                Next
+                ' variables
+                .cmbPlayerVar.Items.Clear()
+                .cmbPlayerVar.Items.Add("None")
+                For i = 1 To MaxVariables
+                    .cmbPlayerVar.Items.Add(i & ". " & Variables(i))
+                Next
+                ' variables
+                .cmbPlayerSwitch.Items.Clear()
+                .cmbPlayerSwitch.Items.Add("None")
+                For i = 1 To MaxSwitches
+                    .cmbPlayerSwitch.Items.Add(i & ". " & Switches(i))
+                Next
+                ' name
+                .txtName.Text = TmpEvent.Name
+                ' enable delete button
+                If TmpEvent.PageCount > 1 Then
+                    .btnDeletePage.Enabled = True
+                Else
+                    .btnDeletePage.Enabled = False
+                End If
+                .btnPastePage.Enabled = False
+                ' Load page 1 to start off with
+                CurPageNum = 1
+                EventEditorLoadPage(CurPageNum)
+
+                .nudShowTextFace.Maximum = NumFaces
+                .nudShowChoicesFace.Maximum = NumFaces
+            End With
+            ' show the editor
+            FrmEditor_Events.Show()
+
+            InitEventEditorForm = False
+        End If
+
         If OptionsVisible = True Then
 
             ' show in GUI
