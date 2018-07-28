@@ -526,105 +526,6 @@ Module S_NetworkSend
         buffer.Dispose()
     End Sub
 
-    Sub SendNpcs(index As Integer)
-        Dim i As Integer
-
-        For i = 1 To MAX_NPCS
-            If Len(Trim$(Npc(i).Name)) > 0 Then
-                SendUpdateNpcTo(index, i)
-            End If
-        Next
-
-    End Sub
-
-    Sub SendUpdateNpcTo(index As Integer, NpcNum As Integer)
-        Dim buffer As ByteStream, i As Integer
-        buffer = New ByteStream(4)
-        buffer.WriteInt32(ServerPackets.SUpdateNpc)
-
-        AddDebug("Sent SMSG: SUpdateNpc")
-
-        buffer.WriteInt32(NpcNum)
-        buffer.WriteInt32(Npc(NpcNum).Animation)
-        buffer.WriteString((Npc(NpcNum).AttackSay))
-        buffer.WriteInt32(Npc(NpcNum).Behaviour)
-
-        For i = 1 To 5
-            buffer.WriteInt32(Npc(NpcNum).DropChance(i))
-            buffer.WriteInt32(Npc(NpcNum).DropItem(i))
-            buffer.WriteInt32(Npc(NpcNum).DropItemValue(i))
-        Next
-
-        buffer.WriteInt32(Npc(NpcNum).Exp)
-        buffer.WriteInt32(Npc(NpcNum).Faction)
-        buffer.WriteInt32(Npc(NpcNum).Hp)
-        buffer.WriteString((Npc(NpcNum).Name))
-        buffer.WriteInt32(Npc(NpcNum).Range)
-        buffer.WriteInt32(Npc(NpcNum).SpawnTime)
-        buffer.WriteInt32(Npc(NpcNum).SpawnSecs)
-        buffer.WriteInt32(Npc(NpcNum).Sprite)
-
-        For i = 0 To StatType.Count - 1
-            buffer.WriteInt32(Npc(NpcNum).Stat(i))
-        Next
-
-        buffer.WriteInt32(Npc(NpcNum).QuestNum)
-
-        For i = 1 To MAX_NPC_SKILLS
-            buffer.WriteInt32(Npc(NpcNum).Skill(i))
-        Next
-
-        buffer.WriteInt32(Npc(NpcNum).Level)
-        buffer.WriteInt32(Npc(NpcNum).Damage)
-
-        Socket.SendDataTo(index, buffer.Data, buffer.Head)
-        buffer.Dispose()
-    End Sub
-
-    Sub SendUpdateNpcToAll(NpcNum As Integer)
-        Dim buffer As ByteStream, i As Integer
-        buffer = New ByteStream(4)
-        buffer.WriteInt32(ServerPackets.SUpdateNpc)
-
-        AddDebug("Sent SMSG: SUpdateNpc To All")
-
-        buffer.WriteInt32(NpcNum)
-        buffer.WriteInt32(Npc(NpcNum).Animation)
-        buffer.WriteString((Npc(NpcNum).AttackSay))
-        buffer.WriteInt32(Npc(NpcNum).Behaviour)
-
-        For i = 1 To 5
-            buffer.WriteInt32(Npc(NpcNum).DropChance(i))
-            buffer.WriteInt32(Npc(NpcNum).DropItem(i))
-            buffer.WriteInt32(Npc(NpcNum).DropItemValue(i))
-        Next
-
-        buffer.WriteInt32(Npc(NpcNum).Exp)
-        buffer.WriteInt32(Npc(NpcNum).Faction)
-        buffer.WriteInt32(Npc(NpcNum).Hp)
-        buffer.WriteString((Npc(NpcNum).Name))
-        buffer.WriteInt32(Npc(NpcNum).Range)
-        buffer.WriteInt32(Npc(NpcNum).SpawnTime)
-        buffer.WriteInt32(Npc(NpcNum).SpawnSecs)
-        buffer.WriteInt32(Npc(NpcNum).Sprite)
-
-        For i = 0 To StatType.Count - 1
-            buffer.WriteInt32(Npc(NpcNum).Stat(i))
-        Next
-
-        buffer.WriteInt32(Npc(NpcNum).QuestNum)
-
-        For i = 1 To MAX_NPC_SKILLS
-            buffer.WriteInt32(Npc(NpcNum).Skill(i))
-        Next
-
-        buffer.WriteInt32(Npc(NpcNum).Level)
-        buffer.WriteInt32(Npc(NpcNum).Damage)
-
-        SendDataToAll(buffer.Data, buffer.Head)
-        buffer.Dispose()
-    End Sub
-
     Sub SendResourceCacheTo(index As Integer, Resource_num As Integer)
         Dim buffer As ByteStream
         Dim i As Integer
@@ -1300,73 +1201,6 @@ Module S_NetworkSend
         buffer.Dispose()
     End Function
 
-    Sub SendMapItemsTo(index As Integer, mapNum As Integer)
-        Dim i As Integer
-        Dim buffer As ByteStream
-        buffer = New ByteStream(4)
-
-        buffer.WriteInt32(ServerPackets.SMapItemData)
-
-        AddDebug("Sent SMSG: SMapItemData")
-
-        For i = 1 To MAX_MAP_ITEMS
-            buffer.WriteInt32(MapItem(mapNum, i).Num)
-            buffer.WriteInt32(MapItem(mapNum, i).Value)
-            buffer.WriteInt32(MapItem(mapNum, i).X)
-            buffer.WriteInt32(MapItem(mapNum, i).Y)
-        Next
-
-        Socket.SendDataTo(index, buffer.Data, buffer.Head)
-
-        buffer.Dispose()
-    End Sub
-
-    Sub SendMapNpcsTo(index As Integer, mapNum As Integer)
-        Dim i As Integer
-        Dim buffer As ByteStream
-        buffer = New ByteStream(4)
-
-        buffer.WriteInt32(ServerPackets.SMapNpcData)
-
-        AddDebug("Sent SMSG: SMapNpcData")
-
-        For i = 1 To MAX_MAP_NPCS
-            buffer.WriteInt32(MapNpc(mapNum).Npc(i).Num)
-            buffer.WriteInt32(MapNpc(mapNum).Npc(i).X)
-            buffer.WriteInt32(MapNpc(mapNum).Npc(i).Y)
-            buffer.WriteInt32(MapNpc(mapNum).Npc(i).Dir)
-            buffer.WriteInt32(MapNpc(mapNum).Npc(i).Vital(VitalType.HP))
-            buffer.WriteInt32(MapNpc(mapNum).Npc(i).Vital(VitalType.MP))
-        Next
-
-        Socket.SendDataTo(index, buffer.Data, buffer.Head)
-
-        buffer.Dispose()
-    End Sub
-
-    Sub SendMapNpcTo(mapNum As Integer, MapNpcNum As Integer)
-        Dim buffer As ByteStream
-        buffer = New ByteStream(4)
-
-        buffer.WriteInt32(ServerPackets.SMapNpcUpdate)
-
-        AddDebug("Sent SMSG: SMapNpcUpdate")
-
-        buffer.WriteInt32(MapNpcNum)
-
-        With MapNpc(mapNum).Npc(MapNpcNum)
-            buffer.WriteInt32(.Num)
-            buffer.WriteInt32(.X)
-            buffer.WriteInt32(.Y)
-            buffer.WriteInt32(.Dir)
-            buffer.WriteInt32(.Vital(VitalType.HP))
-            buffer.WriteInt32(.Vital(VitalType.MP))
-        End With
-
-        SendDataToMap(mapNum, buffer.Data, buffer.Head)
-
-        buffer.Dispose()
-    End Sub
 
     Sub SendPlayerXY(index As Integer)
         Dim buffer As ByteStream
@@ -1522,24 +1356,7 @@ Module S_NetworkSend
         buffer.Dispose()
     End Sub
 
-    Sub SendMapNpcVitals(mapNum As Integer, MapNpcNum As Byte)
-        Dim i As Integer
-        Dim buffer As ByteStream
-        buffer = New ByteStream(4)
 
-        buffer.WriteInt32(ServerPackets.SMapNpcVitals)
-        buffer.WriteInt32(MapNpcNum)
-
-        AddDebug("Sent SMSG: SMapNpcVitals")
-
-        For i = 1 To VitalType.Count - 1
-            buffer.WriteInt32(MapNpc(mapNum).Npc(MapNpcNum).Vital(i))
-        Next
-
-        SendDataToMap(mapNum, buffer.Data, buffer.Head)
-
-        buffer.Dispose()
-    End Sub
 
     Sub SendMapKeyToMap(mapNum As Integer, X As Integer, Y As Integer, Value As Integer)
         Dim buffer As ByteStream
@@ -2186,27 +2003,6 @@ Module S_NetworkSend
         Buffer.Dispose()
     End Sub
 
-    Sub SendNpcAttack(index as integer, NpcNum As Integer)
-        Dim Buffer = New ByteStream(4)
-        Buffer.WriteInt32(ServerPackets.SAttack)
-
-        AddDebug("Sent SMSG: SNpcAttack")
-
-        Buffer.WriteInt32(NpcNum)
-        SendDataToMap(GetPlayerMap(Index), Buffer.Data, Buffer.Head)
-        Buffer.Dispose()
-    End Sub
-
-    Sub SendNpcDead(mapNum as Integer, index as integer)
-        Dim Buffer = New ByteStream(4)
-        Buffer.WriteInt32(ServerPackets.SNpcDead)
-
-        AddDebug("Sent SMSG: SNpcDead")
-
-        Buffer.WriteInt32(Index)
-        SendDataToMap(MapNum, Buffer.Data, Buffer.Head)
-        Buffer.Dispose()
-    End Sub
 
     Sub SendTotalOnlineTo(index as integer)
         Dim Buffer = New ByteStream(4)

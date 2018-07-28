@@ -1273,9 +1273,6 @@ Module S_NetworkReceive
         Buffer.Dispose()
     End Sub
 
-    ' ::::::::::::::::::::::::
-    ' :: Kick player packet ::
-    ' ::::::::::::::::::::::::
     Sub Packet_KickPlayer(index as integer, ByRef data() As Byte)
         Dim n As Integer
         Dim buffer As New ByteStream(data)
@@ -1288,8 +1285,8 @@ Module S_NetworkReceive
         End If
 
         ' The player index
-        n = FindPlayer(Buffer.ReadString) 'Parse(1))
-        Buffer.Dispose()
+        n = FindPlayer(buffer.ReadString)
+        buffer.Dispose()
 
         If n <> Index Then
             If n > 0 Then
@@ -1336,9 +1333,6 @@ Module S_NetworkReceive
         PlayerMsg(Index, "Ban list destroyed.", ColorType.BrightGreen)
     End Sub
 
-    ' :::::::::::::::::::::::
-    ' :: Ban player packet ::
-    ' :::::::::::::::::::::::
     Sub Packet_BanPlayer(index as integer, ByRef data() As Byte)
         Dim n As Integer
         Dim buffer As New ByteStream(data)
@@ -1478,72 +1472,6 @@ Module S_NetworkReceive
         SendUpdateItemToAll(n)
         SaveItem(n)
         Addlog(GetPlayerLogin(Index) & " saved item #" & n & ".", ADMIN_LOG)
-        Buffer.Dispose()
-    End Sub
-
-    Sub Packet_EditNpc(index as integer, ByRef data() As Byte)
-        AddDebug("Recieved EMSG: RequestEditNpc")
-
-        ' Prevent hacking
-        If GetPlayerAccess(index) < AdminType.Developer Then Exit Sub
-
-        Dim Buffer = New ByteStream(4)
-        Buffer.WriteInt32(ServerPackets.SNpcEditor)
-        Socket.SendDataTo(Index, Buffer.Data, Buffer.Head)
-
-        AddDebug("Sent SMSG: SNpcEditor")
-
-        Buffer.Dispose()
-    End Sub
-
-    Sub Packet_SaveNPC(index as integer, ByRef data() As Byte)
-        Dim NpcNum As Integer, i As Integer
-        Dim buffer As New ByteStream(data)
-
-        AddDebug("Recieved EMSG: SaveNpc")
-
-        ' Prevent hacking
-        If GetPlayerAccess(index) < AdminType.Developer Then Exit Sub
-
-        NpcNum = Buffer.ReadInt32
-
-        ' Update the Npc
-        Npc(NpcNum).Animation = Buffer.ReadInt32()
-        Npc(NpcNum).AttackSay = Buffer.ReadString()
-        Npc(NpcNum).Behaviour = Buffer.ReadInt32()
-        For i = 1 To 5
-            Npc(NpcNum).DropChance(i) = Buffer.ReadInt32()
-            Npc(NpcNum).DropItem(i) = Buffer.ReadInt32()
-            Npc(NpcNum).DropItemValue(i) = Buffer.ReadInt32()
-        Next
-
-        Npc(NpcNum).Exp = Buffer.ReadInt32()
-        Npc(NpcNum).Faction = Buffer.ReadInt32()
-        Npc(NpcNum).Hp = Buffer.ReadInt32()
-        Npc(NpcNum).Name = Buffer.ReadString()
-        Npc(NpcNum).Range = Buffer.ReadInt32()
-        Npc(NpcNum).SpawnTime = Buffer.ReadInt32()
-        Npc(NpcNum).SpawnSecs = Buffer.ReadInt32()
-        Npc(NpcNum).Sprite = Buffer.ReadInt32()
-
-        For i = 0 To StatType.Count - 1
-            Npc(NpcNum).Stat(i) = Buffer.ReadInt32()
-        Next
-
-        Npc(NpcNum).QuestNum = Buffer.ReadInt32()
-
-        For i = 1 To MAX_NPC_SKILLS
-            Npc(NpcNum).Skill(i) = Buffer.ReadInt32()
-        Next
-
-        Npc(NpcNum).Level = Buffer.ReadInt32()
-        Npc(NpcNum).Damage = Buffer.ReadInt32()
-
-        ' Save it
-        SendUpdateNpcToAll(NpcNum)
-        SaveNpc(NpcNum)
-        Addlog(GetPlayerLogin(Index) & " saved Npc #" & NpcNum & ".", ADMIN_LOG)
-
         Buffer.Dispose()
     End Sub
 
@@ -1911,59 +1839,6 @@ Module S_NetworkReceive
         Buffer.Dispose()
     End Sub
 
-    Sub Packet_EditResource(index as integer, ByRef data() As Byte)
-        AddDebug("Recieved EMSG: RequestEditResource")
-
-        ' Prevent hacking
-        If GetPlayerAccess(Index) < AdminType.Developer Then Exit Sub
-
-        Dim Buffer = New ByteStream(4)
-        Buffer.WriteInt32(ServerPackets.SResourceEditor)
-        Socket.SendDataTo(Index, Buffer.Data, Buffer.Head)
-
-        AddDebug("Sent SMSG: SResourceEditor")
-
-        Buffer.Dispose()
-    End Sub
-
-    Sub Packet_SaveResource(index as integer, ByRef data() As Byte)
-        Dim resourcenum As Integer
-        Dim buffer As New ByteStream(data)
-
-        AddDebug("Recieved EMSG: SaveResource")
-
-        ' Prevent hacking
-        If GetPlayerAccess(Index) < AdminType.Developer Then Exit Sub
-
-        resourcenum = Buffer.ReadInt32
-
-        ' Prevent hacking
-        If resourcenum < 0 OrElse resourcenum > MAX_RESOURCES Then Exit Sub
-
-        Resource(resourcenum).Animation = Buffer.ReadInt32()
-        Resource(resourcenum).EmptyMessage = Buffer.ReadString()
-        Resource(resourcenum).ExhaustedImage = Buffer.ReadInt32()
-        Resource(resourcenum).Health = Buffer.ReadInt32()
-        Resource(resourcenum).ExpReward = Buffer.ReadInt32()
-        Resource(resourcenum).ItemReward = Buffer.ReadInt32()
-        Resource(resourcenum).Name = Buffer.ReadString()
-        Resource(resourcenum).ResourceImage = Buffer.ReadInt32()
-        Resource(resourcenum).ResourceType = Buffer.ReadInt32()
-        Resource(resourcenum).RespawnTime = Buffer.ReadInt32()
-        Resource(resourcenum).SuccessMessage = Buffer.ReadString()
-        Resource(resourcenum).LvlRequired = Buffer.ReadInt32()
-        Resource(resourcenum).ToolRequired = Buffer.ReadInt32()
-        Resource(resourcenum).Walkthrough = Buffer.ReadInt32()
-
-        ' Save it
-        SendUpdateResourceToAll(resourcenum)
-        SaveResource(resourcenum)
-
-        Addlog(GetPlayerLogin(Index) & " saved Resource #" & resourcenum & ".", ADMIN_LOG)
-
-        Buffer.Dispose()
-    End Sub
-
     Sub Packet_CheckPing(index as integer, ByRef data() As Byte)
         dim buffer as ByteStream
         Buffer = New ByteStream(4)
@@ -2001,12 +1876,6 @@ Module S_NetworkReceive
         AddDebug("Recieved CMSG: CRequestNPCS")
 
         SendNpcs(Index)
-    End Sub
-
-    Sub Packet_RequestResources(index as integer, ByRef data() As Byte)
-        AddDebug("Recieved CMSG: CRequestResources")
-
-        SendResources(Index)
     End Sub
 
     Sub Packet_SpawnItem(index As Integer, ByRef data() As Byte)
