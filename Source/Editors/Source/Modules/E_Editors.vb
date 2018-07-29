@@ -5,45 +5,45 @@ Module E_Editors
 #Region "Animation Editor"
     Friend Sub AnimationEditorInit()
 
-        If frmAnimation.Visible = False Then Exit Sub
+        If FrmAnimation.Visible = False Then Exit Sub
 
-        Editorindex = frmAnimation.lstIndex.SelectedIndex + 1
+        Editorindex = FrmAnimation.lstIndex.SelectedIndex + 1
 
         With Animation(Editorindex)
 
             ' find the music we have set
-            frmAnimation.cmbSound.Items.Clear()
-            frmAnimation.cmbSound.Items.Add("None")
+            FrmAnimation.cmbSound.Items.Clear()
+            FrmAnimation.cmbSound.Items.Add("None")
 
             If UBound(SoundCache) > 0 Then
                 For i = 1 To UBound(SoundCache)
-                    frmAnimation.cmbSound.Items.Add(SoundCache(i))
+                    FrmAnimation.cmbSound.Items.Add(SoundCache(i))
                 Next
             End If
 
             If Trim$(Animation(Editorindex).Sound) = "None" OrElse Trim$(Animation(Editorindex).Sound) = "" Then
-                frmAnimation.cmbSound.SelectedIndex = 0
+                FrmAnimation.cmbSound.SelectedIndex = 0
             Else
-                For i = 1 To frmAnimation.cmbSound.Items.Count
-                    If frmAnimation.cmbSound.Items(i - 1).ToString = Trim$(.Sound) Then
-                        frmAnimation.cmbSound.SelectedIndex = i - 1
+                For i = 1 To FrmAnimation.cmbSound.Items.Count
+                    If FrmAnimation.cmbSound.Items(i - 1).ToString = Trim$(.Sound) Then
+                        FrmAnimation.cmbSound.SelectedIndex = i - 1
                         Exit For
                     End If
                 Next
             End If
-            frmAnimation.txtName.Text = Trim$(.Name)
+            FrmAnimation.txtName.Text = Trim$(.Name)
 
-            frmAnimation.nudSprite0.Value = .Sprite(0)
-            frmAnimation.nudFrameCount0.Value = .Frames(0)
-            frmAnimation.nudLoopCount0.Value = .LoopCount(0)
-            frmAnimation.nudLoopTime0.Value = .LoopTime(0)
+            FrmAnimation.nudSprite0.Value = .Sprite(0)
+            FrmAnimation.nudFrameCount0.Value = .Frames(0)
+            FrmAnimation.nudLoopCount0.Value = .LoopCount(0)
+            FrmAnimation.nudLoopTime0.Value = .LoopTime(0)
 
-            frmAnimation.nudSprite1.Value = .Sprite(1)
-            frmAnimation.nudFrameCount1.Value = .Frames(1)
-            frmAnimation.nudLoopCount1.Value = .LoopCount(1)
-            frmAnimation.nudLoopTime1.Value = .LoopTime(1)
+            FrmAnimation.nudSprite1.Value = .Sprite(1)
+            FrmAnimation.nudFrameCount1.Value = .Frames(1)
+            FrmAnimation.nudLoopCount1.Value = .LoopCount(1)
+            FrmAnimation.nudLoopTime1.Value = .LoopTime(1)
 
-            Editorindex = frmAnimation.lstIndex.SelectedIndex + 1
+            Editorindex = FrmAnimation.lstIndex.SelectedIndex + 1
         End With
 
         EditorAnim_DrawAnim()
@@ -59,14 +59,14 @@ Module E_Editors
             End If
         Next
 
-        frmAnimation.Visible = False
+        FrmAnimation.Visible = False
         Editor = 0
         ClearChanged_Animation()
     End Sub
 
     Friend Sub AnimationEditorCancel()
         Editor = 0
-        frmAnimation.Visible = False
+        FrmAnimation.Visible = False
         ClearChanged_Animation()
         ClearAnimations()
         SendRequestAnimations()

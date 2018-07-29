@@ -1067,8 +1067,6 @@ Module S_NetworkSend
         buffer.Dispose()
     End Sub
 
-
-
     Sub SendGameData(index As Integer)
         Dim buffer As ByteStream
         Dim i As Integer

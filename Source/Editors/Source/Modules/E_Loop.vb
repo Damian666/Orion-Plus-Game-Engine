@@ -396,7 +396,7 @@ Module E_Loop
         End If
 
         If InitAnimationEditor = True Then
-            With frmAnimation
+            With FrmAnimation
                 Editor = EDITOR_ANIMATION
                 .lstIndex.Items.Clear()
 
@@ -516,7 +516,7 @@ Module E_Loop
         End If
 
         If InitAnimationEditor = True Then
-            With frmAnimation
+            With FrmAnimation
                 Editor = EDITOR_ANIMATION
                 .lstIndex.Items.Clear()
 

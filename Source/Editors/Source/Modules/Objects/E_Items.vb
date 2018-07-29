@@ -1,5 +1,6 @@
 ﻿Imports System.IO
 Imports ASFW
+Imports SFML.Graphics
 
 Friend Module E_Items
 #Region "Database"
@@ -94,8 +95,8 @@ Friend Module E_Items
         Item(n).FurnitureWidth = buffer.ReadInt32()
         Item(n).FurnitureHeight = buffer.ReadInt32()
 
-        For a = 1 To 3
-            For b = 1 To 3
+        For a = 0 To 3
+            For b = 0 To 3
                 Item(n).FurnitureBlocks(a, b) = buffer.ReadInt32()
                 Item(n).FurnitureFringe(a, b) = buffer.ReadInt32()
             Next
@@ -168,8 +169,8 @@ Friend Module E_Items
         buffer.WriteInt32(Item(itemNum).FurnitureWidth)
         buffer.WriteInt32(Item(itemNum).FurnitureHeight)
 
-        For i = 1 To 3
-            For x = 1 To 3
+        For i = 0 To 3
+            For x = 0 To 3
                 buffer.WriteInt32(Item(itemNum).FurnitureBlocks(i, x))
                 buffer.WriteInt32(Item(itemNum).FurnitureFringe(i, x))
             Next
@@ -431,5 +432,102 @@ Friend Module E_Items
 
         If NumItems = 0 Then Exit Sub
     End Sub
+
+    Friend Sub EditorItem_DrawItem()
+        Dim itemnum As Integer
+        itemnum = FrmItem.nudPic.Value
+
+        If itemnum < 1 OrElse itemnum > NumItems Then
+            FrmItem.picItem.BackgroundImage = Nothing
+            Exit Sub
+        End If
+
+        If File.Exists(Application.StartupPath & GFX_PATH & "items\" & itemnum & GFX_EXT) Then
+            FrmItem.picItem.BackgroundImage = Drawing.Image.FromFile(Application.StartupPath & GFX_PATH & "items\" & itemnum & GFX_EXT)
+        End If
+
+    End Sub
+
+    Friend Sub EditorItem_DrawPaperdoll()
+        Dim Sprite As Integer
+
+        Sprite = FrmItem.nudPaperdoll.Value
+
+        If Sprite < 1 OrElse Sprite > NumPaperdolls Then
+            FrmItem.picPaperdoll.BackgroundImage = Nothing
+            Exit Sub
+        End If
+
+        If File.Exists(Application.StartupPath & GFX_PATH & "paperdolls\" & Sprite & GFX_EXT) Then
+            FrmItem.picPaperdoll.BackgroundImage = Drawing.Image.FromFile(Application.StartupPath & GFX_PATH & "paperdolls\" & Sprite & GFX_EXT)
+        End If
+    End Sub
+
+    Friend Sub EditorItem_DrawFurniture()
+        Dim Furniturenum As Integer
+        Dim sRECT As Rectangle
+        Dim dRECT As Rectangle
+        Furniturenum = FrmItem.nudFurniture.Value
+
+        If Furniturenum < 1 OrElse Furniturenum > NumFurniture Then
+            EditorItem_Furniture.Clear(ToSFMLColor(FrmItem.picFurniture.BackColor))
+            EditorItem_Furniture.Display()
+            Exit Sub
+        End If
+
+        If FurnitureGFXInfo(Furniturenum).IsLoaded = False Then
+            LoadTexture(Furniturenum, 10)
+        End If
+
+        'seeying we still use it, lets update timer
+        With FurnitureGFXInfo(Furniturenum)
+            .TextureTimer = GetTickCount() + 100000
+        End With
+
+        ' rect for source
+        With sRECT
+            .Y = 0
+            .Height = FurnitureGFXInfo(Furniturenum).height
+            .X = 0
+            .Width = FurnitureGFXInfo(Furniturenum).width
+        End With
+
+        ' same for destination as source
+        dRECT = sRECT
+
+        EditorItem_Furniture.Clear(ToSFMLColor(FrmItem.picFurniture.BackColor))
+
+        RenderSprite(FurnitureSprite(Furniturenum), EditorItem_Furniture, dRECT.X, dRECT.Y, sRECT.X, sRECT.Y, sRECT.Width, sRECT.Height)
+
+        If FrmItem.optSetBlocks.Checked = True Then
+            For X = 0 To 3
+                For Y = 0 To 3
+                    If X <= (FurnitureGFXInfo(Furniturenum).width / 32) - 1 Then
+                        If Y <= (FurnitureGFXInfo(Furniturenum).height / 32) - 1 Then
+                            If Item(Editorindex).FurnitureBlocks(X, Y) = 1 Then
+                                DrawText(X * 32 + 8, Y * 32 + 8, "X", Color.Red, Color.Black, EditorItem_Furniture)
+                            Else
+                                DrawText(X * 32 + 8, Y * 32 + 8, "O", Color.Blue, Color.Black, EditorItem_Furniture)
+                            End If
+                        End If
+                    End If
+                Next
+            Next
+        ElseIf FrmItem.optSetFringe.Checked = True Then
+            For X = 0 To 3
+                For Y = 0 To 3
+                    If X <= (FurnitureGFXInfo(Furniturenum).width / 32) - 1 Then
+                        If Y <= (FurnitureGFXInfo(Furniturenum).height / 32) Then
+                            If Item(Editorindex).FurnitureFringe(X, Y) = 1 Then
+                                DrawText(X * 32 + 8, Y * 32 + 8, "O", Color.Blue, Color.Black, EditorItem_Furniture)
+                            End If
+                        End If
+                    End If
+                Next
+            Next
+        End If
+        EditorItem_Furniture.Display()
+    End Sub
 #End Region
+
 End Module

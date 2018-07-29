@@ -1207,10 +1207,10 @@ Module C_NetworkReceive
         Item(n).FurnitureWidth = Buffer.ReadInt32()
         Item(n).FurnitureHeight = Buffer.ReadInt32()
 
-        For a = 1 To 3
-            For b = 1 To 3
-                Item(n).FurnitureBlocks(a, b) = Buffer.ReadInt32()
-                Item(n).FurnitureFringe(a, b) = Buffer.ReadInt32()
+        For a = 0 To 3
+            For b = 0 To 3
+                Item(n).FurnitureBlocks(a, b) = buffer.ReadInt32()
+                Item(n).FurnitureFringe(a, b) = buffer.ReadInt32()
             Next
         Next
 
@@ -1874,10 +1874,10 @@ Module C_NetworkReceive
             Item(n).FurnitureWidth = Buffer.ReadInt32()
             Item(n).FurnitureHeight = Buffer.ReadInt32()
 
-            For a = 1 To 3
-                For b = 1 To 3
-                    Item(n).FurnitureBlocks(a, b) = Buffer.ReadInt32()
-                    Item(n).FurnitureFringe(a, b) = Buffer.ReadInt32()
+            For a = 0 To 3
+                For b = 0 To 3
+                    Item(n).FurnitureBlocks(a, b) = buffer.ReadInt32()
+                    Item(n).FurnitureFringe(a, b) = buffer.ReadInt32()
                 Next
             Next
 

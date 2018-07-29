@@ -647,10 +647,9 @@ Module S_NetworkReceive
 
         PlayerMove(index, Dir, movement, False)
 
-        Addlog(" Player: " & GetPlayerName(index) & " : " & " X: " & tmpX & " Y: " & tmpY & " Dir: " & Dir & " Movement: " & movement, PLAYER_LOG)
-        Console.WriteLine(" Player: " & GetPlayerName(index) & " : " & " X: " & tmpX & " Y: " & tmpY & " Dir: " & Dir & " Movement: " & movement)
+        AddDebug(" Player: " & GetPlayerName(index) & " : " & " X: " & tmpX & " Y: " & tmpY & " Dir: " & Dir & " Movement: " & movement)
 
-        Buffer.Dispose()
+        buffer.Dispose()
     End Sub
 
     Sub Packet_PlayerDirection(index as integer, ByRef data() As Byte)

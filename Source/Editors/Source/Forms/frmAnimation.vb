@@ -1,4 +1,4 @@
-﻿Friend Class frmAnimation
+﻿Friend Class FrmAnimation
 
     Private Sub NudSprite0_ValueChanged(sender As Object, e As EventArgs) Handles nudSprite0.Click
         Animation(EditorIndex).Sprite(0) = nudSprite0.Value

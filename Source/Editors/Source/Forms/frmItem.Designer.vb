@@ -1,5 +1,5 @@
-﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
-Partial Class frmItem
+﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
+Partial Class FrmItem
     Inherits System.Windows.Forms.Form
 
     'Form overrides dispose to clean up the component list.
@@ -20,9 +20,9 @@ Partial Class frmItem
     'NOTE: The following procedure is required by the Windows Form Designer
     'It can be modified using the Windows Form Designer.  
     'Do not modify it using the code editor.
-    <System.Diagnostics.DebuggerStepThrough()> _
+    <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
-        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmItem))
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(FrmItem))
         Me.DarkGroupBox1 = New DarkUI.Controls.DarkGroupBox()
         Me.lstIndex = New System.Windows.Forms.ListBox()
         Me.fraBasics = New DarkUI.Controls.DarkGroupBox()
@@ -310,6 +310,7 @@ Partial Class frmItem
         Me.nudPrice.Name = "nudPrice"
         Me.nudPrice.Size = New System.Drawing.Size(69, 20)
         Me.nudPrice.TabIndex = 16
+        Me.nudPrice.Value = New Decimal(New Integer() {0, 0, 0, 0})
         '
         'DarkLabel7
         '
@@ -444,6 +445,7 @@ Partial Class frmItem
         Me.nudRarity.Name = "nudRarity"
         Me.nudRarity.Size = New System.Drawing.Size(49, 20)
         Me.nudRarity.TabIndex = 5
+        Me.nudRarity.Value = New Decimal(New Integer() {0, 0, 0, 0})
         '
         'DarkLabel3
         '
@@ -463,6 +465,7 @@ Partial Class frmItem
         Me.nudPic.Name = "nudPic"
         Me.nudPic.Size = New System.Drawing.Size(49, 20)
         Me.nudPic.TabIndex = 3
+        Me.nudPic.Value = New Decimal(New Integer() {0, 0, 0, 0})
         '
         'DarkLabel2
         '
@@ -606,6 +609,7 @@ Partial Class frmItem
         Me.nudVitalMod.Name = "nudVitalMod"
         Me.nudVitalMod.Size = New System.Drawing.Size(127, 20)
         Me.nudVitalMod.TabIndex = 1
+        Me.nudVitalMod.Value = New Decimal(New Integer() {0, 0, 0, 0})
         '
         'DarkLabel11
         '
@@ -774,6 +778,7 @@ Partial Class frmItem
         Me.nudPaperdoll.Name = "nudPaperdoll"
         Me.nudPaperdoll.Size = New System.Drawing.Size(47, 20)
         Me.nudPaperdoll.TabIndex = 59
+        Me.nudPaperdoll.Value = New Decimal(New Integer() {0, 0, 0, 0})
         '
         'DarkLabel23
         '
@@ -828,6 +833,7 @@ Partial Class frmItem
         Me.nudSpirit.Name = "nudSpirit"
         Me.nudSpirit.Size = New System.Drawing.Size(50, 20)
         Me.nudSpirit.TabIndex = 12
+        Me.nudSpirit.Value = New Decimal(New Integer() {0, 0, 0, 0})
         '
         'DarkLabel22
         '
@@ -848,6 +854,7 @@ Partial Class frmItem
         Me.nudIntelligence.Name = "nudIntelligence"
         Me.nudIntelligence.Size = New System.Drawing.Size(50, 20)
         Me.nudIntelligence.TabIndex = 10
+        Me.nudIntelligence.Value = New Decimal(New Integer() {0, 0, 0, 0})
         '
         'DarkLabel21
         '
@@ -868,6 +875,7 @@ Partial Class frmItem
         Me.nudVitality.Name = "nudVitality"
         Me.nudVitality.Size = New System.Drawing.Size(50, 20)
         Me.nudVitality.TabIndex = 8
+        Me.nudVitality.Value = New Decimal(New Integer() {0, 0, 0, 0})
         '
         'DarkLabel20
         '
@@ -888,6 +896,7 @@ Partial Class frmItem
         Me.nudLuck.Name = "nudLuck"
         Me.nudLuck.Size = New System.Drawing.Size(50, 20)
         Me.nudLuck.TabIndex = 6
+        Me.nudLuck.Value = New Decimal(New Integer() {0, 0, 0, 0})
         '
         'DarkLabel19
         '
@@ -908,6 +917,7 @@ Partial Class frmItem
         Me.nudEndurance.Name = "nudEndurance"
         Me.nudEndurance.Size = New System.Drawing.Size(50, 20)
         Me.nudEndurance.TabIndex = 4
+        Me.nudEndurance.Value = New Decimal(New Integer() {0, 0, 0, 0})
         '
         'DarkLabel18
         '
@@ -928,6 +938,7 @@ Partial Class frmItem
         Me.nudStrength.Name = "nudStrength"
         Me.nudStrength.Size = New System.Drawing.Size(50, 20)
         Me.nudStrength.TabIndex = 2
+        Me.nudStrength.Value = New Decimal(New Integer() {0, 0, 0, 0})
         '
         'DarkLabel17
         '
@@ -998,6 +1009,7 @@ Partial Class frmItem
         Me.nudSpeed.Name = "nudSpeed"
         Me.nudSpeed.Size = New System.Drawing.Size(92, 20)
         Me.nudSpeed.TabIndex = 5
+        Me.nudSpeed.Value = New Decimal(New Integer() {0, 0, 0, 0})
         '
         'lblSpeed
         '
@@ -1017,6 +1029,7 @@ Partial Class frmItem
         Me.nudDamage.Name = "nudDamage"
         Me.nudDamage.Size = New System.Drawing.Size(120, 20)
         Me.nudDamage.TabIndex = 3
+        Me.nudDamage.Value = New Decimal(New Integer() {0, 0, 0, 0})
         '
         'DarkLabel15
         '
@@ -1131,6 +1144,7 @@ Partial Class frmItem
         Me.nudSprReq.Name = "nudSprReq"
         Me.nudSprReq.Size = New System.Drawing.Size(50, 20)
         Me.nudSprReq.TabIndex = 18
+        Me.nudSprReq.Value = New Decimal(New Integer() {0, 0, 0, 0})
         '
         'DarkLabel32
         '
@@ -1151,6 +1165,7 @@ Partial Class frmItem
         Me.nudIntReq.Name = "nudIntReq"
         Me.nudIntReq.Size = New System.Drawing.Size(50, 20)
         Me.nudIntReq.TabIndex = 16
+        Me.nudIntReq.Value = New Decimal(New Integer() {0, 0, 0, 0})
         '
         'DarkLabel33
         '
@@ -1171,6 +1186,7 @@ Partial Class frmItem
         Me.nudVitReq.Name = "nudVitReq"
         Me.nudVitReq.Size = New System.Drawing.Size(50, 20)
         Me.nudVitReq.TabIndex = 14
+        Me.nudVitReq.Value = New Decimal(New Integer() {0, 0, 0, 0})
         '
         'DarkLabel34
         '
@@ -1191,6 +1207,7 @@ Partial Class frmItem
         Me.nudLuckReq.Name = "nudLuckReq"
         Me.nudLuckReq.Size = New System.Drawing.Size(50, 20)
         Me.nudLuckReq.TabIndex = 12
+        Me.nudLuckReq.Value = New Decimal(New Integer() {0, 0, 0, 0})
         '
         'DarkLabel29
         '
@@ -1211,6 +1228,7 @@ Partial Class frmItem
         Me.nudEndReq.Name = "nudEndReq"
         Me.nudEndReq.Size = New System.Drawing.Size(50, 20)
         Me.nudEndReq.TabIndex = 10
+        Me.nudEndReq.Value = New Decimal(New Integer() {0, 0, 0, 0})
         '
         'DarkLabel30
         '
@@ -1231,6 +1249,7 @@ Partial Class frmItem
         Me.nudStrReq.Name = "nudStrReq"
         Me.nudStrReq.Size = New System.Drawing.Size(50, 20)
         Me.nudStrReq.TabIndex = 8
+        Me.nudStrReq.Value = New Decimal(New Integer() {0, 0, 0, 0})
         '
         'DarkLabel31
         '
@@ -1260,6 +1279,7 @@ Partial Class frmItem
         Me.nudLevelReq.Name = "nudLevelReq"
         Me.nudLevelReq.Size = New System.Drawing.Size(120, 20)
         Me.nudLevelReq.TabIndex = 4
+        Me.nudLevelReq.Value = New Decimal(New Integer() {0, 0, 0, 0})
         '
         'cmbAccessReq
         '
@@ -1380,6 +1400,7 @@ Partial Class frmItem
         Me.nudFurniture.Name = "nudFurniture"
         Me.nudFurniture.Size = New System.Drawing.Size(76, 20)
         Me.nudFurniture.TabIndex = 15
+        Me.nudFurniture.Value = New Decimal(New Integer() {0, 0, 0, 0})
         '
         'DarkLabel37
         '
@@ -1408,7 +1429,6 @@ Partial Class frmItem
         Me.optSetFringe.Name = "optSetFringe"
         Me.optSetFringe.Size = New System.Drawing.Size(73, 17)
         Me.optSetFringe.TabIndex = 12
-        Me.optSetFringe.TabStop = True
         Me.optSetFringe.Text = "Set Fringe"
         '
         'optSetBlocks
@@ -1418,12 +1438,12 @@ Partial Class frmItem
         Me.optSetBlocks.Name = "optSetBlocks"
         Me.optSetBlocks.Size = New System.Drawing.Size(76, 17)
         Me.optSetBlocks.TabIndex = 11
-        Me.optSetBlocks.TabStop = True
         Me.optSetBlocks.Text = "Set Blocks"
         '
         'optNoFurnitureEditing
         '
         Me.optNoFurnitureEditing.AutoSize = True
+        Me.optNoFurnitureEditing.Checked = True
         Me.optNoFurnitureEditing.Location = New System.Drawing.Point(6, 62)
         Me.optNoFurnitureEditing.Name = "optNoFurnitureEditing"
         Me.optNoFurnitureEditing.Size = New System.Drawing.Size(74, 17)
@@ -1450,7 +1470,7 @@ Partial Class frmItem
         Me.cmbFurnitureType.Name = "cmbFurnitureType"
         Me.cmbFurnitureType.Size = New System.Drawing.Size(202, 21)
         Me.cmbFurnitureType.TabIndex = 9
-        Me.cmbFurnitureType.Text = Nothing
+        Me.cmbFurnitureType.Text = "Normal"
         Me.cmbFurnitureType.TextPadding = New System.Windows.Forms.Padding(2)
         '
         'DarkLabel36
@@ -1472,7 +1492,7 @@ Partial Class frmItem
         Me.picFurniture.TabIndex = 7
         Me.picFurniture.TabStop = False
         '
-        'frmEditor_Item
+        'FrmItem
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
@@ -1485,12 +1505,12 @@ Partial Class frmItem
         Me.Controls.Add(Me.btnRequirements)
         Me.Controls.Add(Me.btnBasics)
         Me.Controls.Add(Me.DarkGroupBox1)
-        Me.Controls.Add(Me.fraEquipment)
-        Me.Controls.Add(Me.fraFurniture)
         Me.Controls.Add(Me.fraRequirements)
         Me.Controls.Add(Me.fraBasics)
+        Me.Controls.Add(Me.fraEquipment)
+        Me.Controls.Add(Me.fraFurniture)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
-        Me.Name = "frmEditor_Item"
+        Me.Name = "FrmItem"
         Me.Text = "Item Editor"
         Me.DarkGroupBox1.ResumeLayout(False)
         Me.fraBasics.ResumeLayout(False)

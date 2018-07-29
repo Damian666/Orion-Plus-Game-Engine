@@ -13,7 +13,6 @@ Friend Module S_Items
 
         For i = 1 To MAX_ITEMS
             SaveItem(i)
-            Application.DoEvents()
         Next
 
     End Sub
@@ -58,8 +57,8 @@ Friend Module S_Items
         writer.WriteInt32(Item(itemNum).FurnitureWidth)
         writer.WriteInt32(Item(itemNum).FurnitureHeight)
 
-        For a = 1 To 3
-            For b = 1 To 3
+        For a = 0 To 3
+            For b = 0 To 3
                 writer.WriteInt32(Item(itemNum).FurnitureBlocks(a, b))
                 writer.WriteInt32(Item(itemNum).FurnitureFringe(a, b))
             Next
@@ -137,8 +136,8 @@ Friend Module S_Items
         Item(ItemNum).FurnitureWidth = reader.ReadInt32()
         Item(ItemNum).FurnitureHeight = reader.ReadInt32()
 
-        For a = 1 To 3
-            For b = 1 To 3
+        For a = 0 To 3
+            For b = 0 To 3
                 Item(ItemNum).FurnitureBlocks(a, b) = reader.ReadInt32()
                 Item(ItemNum).FurnitureFringe(a, b) = reader.ReadInt32()
             Next
@@ -245,12 +244,14 @@ Friend Module S_Items
         'Housing
         buffer.WriteInt32(Item(itemNum).FurnitureWidth)
         buffer.WriteInt32(Item(itemNum).FurnitureHeight)
-        For i = 1 To 3
-            For x = 1 To 3
+
+        For i = 0 To 3
+            For x = 0 To 3
                 buffer.WriteInt32(Item(itemNum).FurnitureBlocks(i, x))
                 buffer.WriteInt32(Item(itemNum).FurnitureFringe(i, x))
             Next
         Next
+
         buffer.WriteInt32(Item(itemNum).KnockBack)
         buffer.WriteInt32(Item(itemNum).KnockBackTiles)
         buffer.WriteInt32(Item(itemNum).Projectile)
@@ -483,8 +484,8 @@ Friend Module S_Items
         Item(n).FurnitureWidth = buffer.ReadInt32()
         Item(n).FurnitureHeight = buffer.ReadInt32()
 
-        For a = 1 To 3
-            For b = 1 To 3
+        For a = 0 To 3
+            For b = 0 To 3
                 Item(n).FurnitureBlocks(a, b) = buffer.ReadInt32()
                 Item(n).FurnitureFringe(a, b) = buffer.ReadInt32()
             Next

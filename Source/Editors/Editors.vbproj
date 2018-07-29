@@ -85,10 +85,10 @@
     <Compile Include="Source\Forms\frmAutoMapper.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Source\Forms\frmAnimation.Designer.vb">
-      <DependentUpon>frmAnimation.vb</DependentUpon>
+    <Compile Include="Source\Forms\FrmAnimation.Designer.vb">
+      <DependentUpon>FrmAnimation.vb</DependentUpon>
     </Compile>
-    <Compile Include="Source\Forms\frmAnimation.vb">
+    <Compile Include="Source\Forms\FrmAnimation.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Source\Forms\frmClasses.Designer.vb">
@@ -229,8 +229,8 @@
     <EmbeddedResource Include="Source\Forms\frmAutoMapper.resx">
       <DependentUpon>frmAutoMapper.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Source\Forms\frmAnimation.resx">
-      <DependentUpon>frmAnimation.vb</DependentUpon>
+    <EmbeddedResource Include="Source\Forms\FrmAnimation.resx">
+      <DependentUpon>FrmAnimation.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Source\Forms\frmClasses.resx">
       <DependentUpon>frmClasses.vb</DependentUpon>

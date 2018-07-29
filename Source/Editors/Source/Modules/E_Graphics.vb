@@ -119,8 +119,8 @@ Module E_Graphics
 
         EditorSkill_Icon = New RenderWindow(frmSkill.picSprite.Handle)
 
-        EditorAnimation_Anim1 = New RenderWindow(frmAnimation.picSprite0.Handle)
-        EditorAnimation_Anim2 = New RenderWindow(frmAnimation.picSprite1.Handle)
+        EditorAnimation_Anim1 = New RenderWindow(FrmAnimation.picSprite0.Handle)
+        EditorAnimation_Anim2 = New RenderWindow(FrmAnimation.picSprite1.Handle)
 
         SFMLGameFont = New Font(Environment.GetFolderPath(Environment.SpecialFolder.Fonts) + "\" + FONT_NAME)
 
@@ -1412,102 +1412,6 @@ Module E_Graphics
 
     End Sub
 
-    Friend Sub EditorItem_DrawItem()
-        Dim itemnum As Integer
-        itemnum = frmItem.nudPic.Value
-
-        If itemnum < 1 OrElse itemnum > NumItems Then
-            frmItem.picItem.BackgroundImage = Nothing
-            Exit Sub
-        End If
-
-        If File.Exists(Application.StartupPath & GFX_PATH & "items\" & itemnum & GFX_EXT) Then
-            frmItem.picItem.BackgroundImage = Drawing.Image.FromFile(Application.StartupPath & GFX_PATH & "items\" & itemnum & GFX_EXT)
-        End If
-
-    End Sub
-
-    Friend Sub EditorItem_DrawPaperdoll()
-        Dim Sprite As Integer
-
-        Sprite = frmItem.nudPaperdoll.Value
-
-        If Sprite < 1 OrElse Sprite > NumPaperdolls Then
-            frmItem.picPaperdoll.BackgroundImage = Nothing
-            Exit Sub
-        End If
-
-        If File.Exists(Application.StartupPath & GFX_PATH & "paperdolls\" & Sprite & GFX_EXT) Then
-            frmItem.picPaperdoll.BackgroundImage = Drawing.Image.FromFile(Application.StartupPath & GFX_PATH & "paperdolls\" & Sprite & GFX_EXT)
-        End If
-    End Sub
-
-    Friend Sub EditorItem_DrawFurniture()
-        Dim Furniturenum As Integer
-        Dim sRECT As Rectangle
-        Dim dRECT As Rectangle
-        Furniturenum = frmItem.nudFurniture.Value
-
-        If Furniturenum < 1 OrElse Furniturenum > NumFurniture Then
-            EditorItem_Furniture.Clear(ToSFMLColor(frmItem.picFurniture.BackColor))
-            EditorItem_Furniture.Display()
-            Exit Sub
-        End If
-
-        If FurnitureGFXInfo(Furniturenum).IsLoaded = False Then
-            LoadTexture(Furniturenum, 10)
-        End If
-
-        'seeying we still use it, lets update timer
-        With FurnitureGFXInfo(Furniturenum)
-            .TextureTimer = GetTickCount() + 100000
-        End With
-
-        ' rect for source
-        With sRECT
-            .Y = 0
-            .Height = FurnitureGFXInfo(Furniturenum).height
-            .X = 0
-            .Width = FurnitureGFXInfo(Furniturenum).width
-        End With
-
-        ' same for destination as source
-        dRECT = sRECT
-
-        EditorItem_Furniture.Clear(ToSFMLColor(frmItem.picFurniture.BackColor))
-
-        RenderSprite(FurnitureSprite(Furniturenum), EditorItem_Furniture, dRECT.X, dRECT.Y, sRECT.X, sRECT.Y, sRECT.Width, sRECT.Height)
-
-        If frmItem.optSetBlocks.Checked = True Then
-            For X = 0 To 3
-                For Y = 0 To 3
-                    If X <= (FurnitureGFXInfo(Furniturenum).width / 32) - 1 Then
-                        If Y <= (FurnitureGFXInfo(Furniturenum).height / 32) - 1 Then
-                            If Item(EditorIndex).FurnitureBlocks(X, Y) = 1 Then
-                                DrawText(X * 32 + 8, Y * 32 + 8, "X", Color.Red, Color.Black, EditorItem_Furniture)
-                            Else
-                                DrawText(X * 32 + 8, Y * 32 + 8, "O", Color.Blue, Color.Black, EditorItem_Furniture)
-                            End If
-                        End If
-                    End If
-                Next
-            Next
-        ElseIf frmItem.optSetFringe.Checked = True Then
-            For X = 0 To 3
-                For Y = 0 To 3
-                    If X <= (FurnitureGFXInfo(Furniturenum).width / 32) - 1 Then
-                        If Y <= (FurnitureGFXInfo(Furniturenum).height / 32) Then
-                            If Item(EditorIndex).FurnitureFringe(X, Y) = 1 Then
-                                DrawText(X * 32 + 8, Y * 32 + 8, "O", Color.Blue, Color.Black, EditorItem_Furniture)
-                            End If
-                        End If
-                    End If
-                Next
-            Next
-        End If
-        EditorItem_Furniture.Display()
-    End Sub
-
     Friend Sub EditorNpc_DrawSprite()
         Dim Sprite As Integer
 
@@ -1598,10 +1502,10 @@ Module E_Graphics
         Dim FrameCount As Integer
         Dim ShouldRender As Boolean
 
-        Animationnum = frmAnimation.nudSprite0.Value
+        Animationnum = FrmAnimation.nudSprite0.Value
 
         If Animationnum < 1 OrElse Animationnum > NumAnimations Then
-            EditorAnimation_Anim1.Clear(ToSFMLColor(frmAnimation.picSprite0.BackColor))
+            EditorAnimation_Anim1.Clear(ToSFMLColor(FrmAnimation.picSprite0.BackColor))
             EditorAnimation_Anim1.Display()
         Else
             If AnimationsGFXInfo(Animationnum).IsLoaded = False Then
@@ -1613,8 +1517,8 @@ Module E_Graphics
                 .TextureTimer = GetTickCount() + 100000
             End With
 
-            looptime = frmAnimation.nudLoopTime0.Value
-            FrameCount = frmAnimation.nudFrameCount0.Value
+            looptime = FrmAnimation.nudLoopTime0.Value
+            FrameCount = FrmAnimation.nudFrameCount0.Value
 
             ShouldRender = False
 
@@ -1631,10 +1535,10 @@ Module E_Graphics
             End If
 
             If ShouldRender Then
-                If frmAnimation.nudFrameCount0.Value > 0 Then
+                If FrmAnimation.nudFrameCount0.Value > 0 Then
                     ' total width divided by frame count
                     height = AnimationsGFXInfo(Animationnum).height
-                    width = AnimationsGFXInfo(Animationnum).width / frmAnimation.nudFrameCount0.Value
+                    width = AnimationsGFXInfo(Animationnum).width / FrmAnimation.nudFrameCount0.Value
 
                     With sRECT
                         .Y = 0
@@ -1650,7 +1554,7 @@ Module E_Graphics
                         .Width = width
                     End With
 
-                    EditorAnimation_Anim1.Clear(ToSFMLColor(frmAnimation.picSprite0.BackColor))
+                    EditorAnimation_Anim1.Clear(ToSFMLColor(FrmAnimation.picSprite0.BackColor))
 
                     RenderSprite(AnimationsSprite(Animationnum), EditorAnimation_Anim1, dRECT.X, dRECT.Y, sRECT.X, sRECT.Y, sRECT.Width, sRECT.Height)
 
@@ -1659,10 +1563,10 @@ Module E_Graphics
             End If
         End If
 
-        Animationnum = frmAnimation.nudSprite1.Value
+        Animationnum = FrmAnimation.nudSprite1.Value
 
         If Animationnum < 1 OrElse Animationnum > NumAnimations Then
-            EditorAnimation_Anim2.Clear(ToSFMLColor(frmAnimation.picSprite1.BackColor))
+            EditorAnimation_Anim2.Clear(ToSFMLColor(FrmAnimation.picSprite1.BackColor))
             EditorAnimation_Anim2.Display()
         Else
             If AnimationsGFXInfo(Animationnum).IsLoaded = False Then
@@ -1674,8 +1578,8 @@ Module E_Graphics
                 .TextureTimer = GetTickCount() + 100000
             End With
 
-            looptime = frmAnimation.nudLoopTime1.Value
-            FrameCount = frmAnimation.nudFrameCount1.Value
+            looptime = FrmAnimation.nudLoopTime1.Value
+            FrameCount = FrmAnimation.nudFrameCount1.Value
 
             ShouldRender = False
 
@@ -1692,10 +1596,10 @@ Module E_Graphics
             End If
 
             If ShouldRender Then
-                If frmAnimation.nudFrameCount1.Value > 0 Then
+                If FrmAnimation.nudFrameCount1.Value > 0 Then
                     ' total width divided by frame count
                     height = AnimationsGFXInfo(Animationnum).height
-                    width = AnimationsGFXInfo(Animationnum).width / frmAnimation.nudFrameCount1.Value
+                    width = AnimationsGFXInfo(Animationnum).width / FrmAnimation.nudFrameCount1.Value
 
                     With sRECT
                         .Y = 0
@@ -1711,7 +1615,7 @@ Module E_Graphics
                         .Width = width
                     End With
 
-                    EditorAnimation_Anim2.Clear(ToSFMLColor(frmAnimation.picSprite1.BackColor))
+                    EditorAnimation_Anim2.Clear(ToSFMLColor(FrmAnimation.picSprite1.BackColor))
 
                     RenderSprite(AnimationsSprite(Animationnum), EditorAnimation_Anim2, dRECT.X, dRECT.Y, sRECT.X, sRECT.Y, sRECT.Width, sRECT.Height)
                     EditorAnimation_Anim2.Display()
