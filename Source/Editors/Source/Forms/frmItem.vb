@@ -409,6 +409,15 @@
 
         Item(Editorindex).Data2 = nudFurniture.Value
 
+        If FurnitureGFXInfo(nudFurniture.Value).IsLoaded = False Then
+            LoadTexture(nudFurniture.Value, 10)
+        End If
+
+        'seeying we still use it, lets update timer
+        With FurnitureGFXInfo(nudFurniture.Value)
+            .TextureTimer = GetTickCount() + 100000
+        End With
+
         If nudFurniture.Value > 0 AndAlso nudFurniture.Value <= NumFurniture Then
             Item(Editorindex).FurnitureWidth = FurnitureGFXInfo(nudFurniture.Value).width / 32
             Item(Editorindex).FurnitureHeight = FurnitureGFXInfo(nudFurniture.Value).height / 32
