@@ -1214,35 +1214,6 @@ Module S_NetworkReceive
         TempPlayer(Index).GettingMap = False
     End Sub
 
-    Private Sub Packet_GetItem(index as integer, ByRef data() As Byte)
-        AddDebug("Recieved CMSG: CMapGetItem")
-
-        PlayerMapGetItem(Index)
-    End Sub
-
-    Private Sub Packet_DropItem(index as integer, ByRef data() As Byte)
-        Dim InvNum As Integer, Amount As Integer
-        Dim buffer As New ByteStream(data)
-
-        AddDebug("Recieved CMSG: CMapDropItem")
-
-        InvNum = Buffer.ReadInt32
-        Amount = Buffer.ReadInt32
-        Buffer.Dispose()
-
-        If TempPlayer(Index).InBank OrElse TempPlayer(Index).InShop Then Exit Sub
-
-        ' Prevent hacking
-        If InvNum < 1 OrElse InvNum > MAX_INV Then Exit Sub
-        If GetPlayerInvItemNum(Index, InvNum) < 1 OrElse GetPlayerInvItemNum(Index, InvNum) > MAX_ITEMS Then Exit Sub
-        If Item(GetPlayerInvItemNum(Index, InvNum)).Type = ItemType.Currency OrElse Item(GetPlayerInvItemNum(Index, InvNum)).Stackable = 1 Then
-            If Amount < 1 OrElse Amount > GetPlayerInvItemValue(Index, InvNum) Then Exit Sub
-        End If
-
-        ' everything worked out fine
-        PlayerMapDropItem(Index, InvNum, Amount)
-    End Sub
-
     Sub Packet_RespawnMap(index as integer, ByRef data() As Byte)
         Dim i As Integer
         Dim buffer As New ByteStream(data)
@@ -1377,103 +1348,15 @@ Module S_NetworkReceive
 
         SendMapEventData(Index)
 
-        Dim Buffer = New ByteStream(4)
+        Dim Buffer As New ByteStream(4)
         Buffer.WriteInt32(ServerPackets.SEditMap)
         Socket.SendDataTo(Index, Buffer.Data, Buffer.Head)
         Buffer.Dispose()
     End Sub
 
-    Private Sub Packet_EditItem(index as integer, ByRef data() As Byte)
-        AddDebug("Recieved EMSG: RequestEditItem")
 
-        ' Prevent hacking
-        If GetPlayerAccess(index) < AdminType.Mapper Then Exit Sub
 
-        Dim Buffer = New ByteStream(4)
 
-        Buffer.WriteInt32(ServerPackets.SItemEditor)
-        Socket.SendDataTo(Index, Buffer.Data, Buffer.Head)
-
-        AddDebug("Sent SMSG: SItemEditor")
-
-        Buffer.Dispose()
-    End Sub
-
-    Private Sub Packet_SaveItem(index as integer, ByRef data() As Byte)
-        Dim n As Integer
-        Dim buffer As New ByteStream(data)
-
-        AddDebug("Recieved EMSG: SaveItem")
-
-        ' Prevent hacking
-        If GetPlayerAccess(Index) < AdminType.Developer Then Exit Sub
-
-        n = Buffer.ReadInt32
-
-        If n < 0 OrElse n > MAX_ITEMS Then Exit Sub
-
-        ' Update the item
-        Item(n).AccessReq = Buffer.ReadInt32()
-
-        For i = 0 To StatType.Count - 1
-            Item(n).Add_Stat(i) = Buffer.ReadInt32()
-        Next
-
-        Item(n).Animation = Buffer.ReadInt32()
-        Item(n).BindType = Buffer.ReadInt32()
-        Item(n).ClassReq = Buffer.ReadInt32()
-        Item(n).Data1 = Buffer.ReadInt32()
-        Item(n).Data2 = Buffer.ReadInt32()
-        Item(n).Data3 = Buffer.ReadInt32()
-        Item(n).TwoHanded = Buffer.ReadInt32()
-        Item(n).LevelReq = Buffer.ReadInt32()
-        Item(n).Mastery = Buffer.ReadInt32()
-        Item(n).Name = Trim$(Buffer.ReadString)
-        Item(n).Paperdoll = Buffer.ReadInt32()
-        Item(n).Pic = Buffer.ReadInt32()
-        Item(n).Price = Buffer.ReadInt32()
-        Item(n).Rarity = Buffer.ReadInt32()
-        Item(n).Speed = Buffer.ReadInt32()
-
-        Item(n).Randomize = Buffer.ReadInt32()
-        Item(n).RandomMin = Buffer.ReadInt32()
-        Item(n).RandomMax = Buffer.ReadInt32()
-
-        Item(n).Stackable = Buffer.ReadInt32()
-        Item(n).Description = Trim$(Buffer.ReadString)
-
-        For i = 0 To StatType.Count - 1
-            Item(n).Stat_Req(i) = Buffer.ReadInt32()
-        Next
-
-        Item(n).Type = Buffer.ReadInt32()
-        Item(n).SubType = Buffer.ReadInt32
-
-        Item(n).ItemLevel = Buffer.ReadInt32
-
-        'Housing
-        Item(n).FurnitureWidth = Buffer.ReadInt32()
-        Item(n).FurnitureHeight = Buffer.ReadInt32()
-
-        For a = 1 To 3
-            For b = 1 To 3
-                Item(n).FurnitureBlocks(a, b) = Buffer.ReadInt32()
-                Item(n).FurnitureFringe(a, b) = Buffer.ReadInt32()
-            Next
-        Next
-
-        Item(n).KnockBack = Buffer.ReadInt32()
-        Item(n).KnockBackTiles = Buffer.ReadInt32()
-
-        Item(n).Projectile = Buffer.ReadInt32()
-        Item(n).Ammo = Buffer.ReadInt32()
-
-        ' Save it
-        SendUpdateItemToAll(n)
-        SaveItem(n)
-        Addlog(GetPlayerLogin(Index) & " saved item #" & n & ".", ADMIN_LOG)
-        Buffer.Dispose()
-    End Sub
 
     Sub Packet_EditShop(index as integer, ByRef data() As Byte)
         AddDebug("Recieved EMSG: RequestEditShop")
@@ -1866,11 +1749,7 @@ Module S_NetworkReceive
         SendPlayerData(Index)
     End Sub
 
-    Sub Packet_RequestItems(index as integer, ByRef data() As Byte)
-        AddDebug("Recieved CMSG: CRequestItems")
 
-        SendItems(Index)
-    End Sub
 
     Sub Packet_RequestNpcs(index as integer, ByRef data() As Byte)
         AddDebug("Recieved CMSG: CRequestNPCS")
@@ -1918,63 +1797,7 @@ Module S_NetworkReceive
         Buffer.Dispose()
     End Sub
 
-    Sub Packet_EditAnimation(index as integer, ByRef data() As Byte)
-        AddDebug("Recieved EMSG: RequestEditAnimation")
 
-        ' Prevent hacking
-        If GetPlayerAccess(index) < AdminType.Developer Then Exit Sub
-
-        Dim Buffer = New ByteStream(4)
-        Buffer.WriteInt32(ServerPackets.SAnimationEditor)
-        Socket.SendDataTo(Index, Buffer.Data, Buffer.Head)
-        Buffer.Dispose()
-    End Sub
-
-    Sub Packet_SaveAnimation(index as integer, ByRef data() As Byte)
-        Dim AnimNum As Integer
-        Dim buffer As New ByteStream(data)
-
-        AddDebug("Recieved EMSG: SaveAnimation")
-
-        AnimNum = Buffer.ReadInt32
-
-        ' Update the Animation
-        For i = 0 To UBound(Animation(AnimNum).Frames)
-            Animation(AnimNum).Frames(i) = Buffer.ReadInt32()
-        Next
-
-        For i = 0 To UBound(Animation(AnimNum).LoopCount)
-            Animation(AnimNum).LoopCount(i) = Buffer.ReadInt32()
-        Next
-
-        For i = 0 To UBound(Animation(AnimNum).LoopTime)
-            Animation(AnimNum).LoopTime(i) = Buffer.ReadInt32()
-        Next
-
-        Animation(AnimNum).Name = Buffer.ReadString()
-        Animation(AnimNum).Sound = Buffer.ReadString()
-
-        If Animation(AnimNum).Name Is Nothing Then Animation(AnimNum).Name = ""
-        If Animation(AnimNum).Sound Is Nothing Then Animation(AnimNum).Sound = ""
-
-        For i = 0 To UBound(Animation(AnimNum).Sprite)
-            Animation(AnimNum).Sprite(i) = Buffer.ReadInt32()
-        Next
-
-        Buffer.Dispose()
-
-        ' Save it
-        SaveAnimation(AnimNum)
-        SendUpdateAnimationToAll(AnimNum)
-        Addlog(GetPlayerLogin(Index) & " saved Animation #" & AnimNum & ".", ADMIN_LOG)
-
-    End Sub
-
-    Sub Packet_RequestAnimations(index as integer, ByRef data() As Byte)
-        AddDebug("Recieved CMSG: CRequestAnimations")
-
-        SendAnimations(Index)
-    End Sub
 
     Sub Packet_RequestSkills(index as integer, ByRef data() As Byte)
         AddDebug("Recieved CMSG: CRequestSkills")

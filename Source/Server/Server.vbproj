@@ -89,6 +89,7 @@
     <Compile Include="Source\Modules\Network\S_NetworkConfig.vb" />
     <Compile Include="Source\Modules\Network\S_NetworkReceive.vb" />
     <Compile Include="Source\Modules\Network\S_NetworkSend.vb" />
+    <Compile Include="Source\Modules\Objects\S_Animations.vb" />
     <Compile Include="Source\Modules\Objects\S_Items.vb" />
     <Compile Include="Source\Modules\Objects\S_Npc.vb" />
     <Compile Include="Source\Modules\S_AutoMap.vb" />

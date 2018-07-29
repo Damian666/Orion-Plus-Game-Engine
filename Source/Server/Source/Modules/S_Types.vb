@@ -4,7 +4,6 @@
     Friend Map(MAX_CACHED_MAPS) As MapRec
     Friend TempTile(MAX_CACHED_MAPS) As TempTileRec
     Friend PlayersOnMap(MAX_CACHED_MAPS) As Integer
-    Friend ResourceCache(MAX_CACHED_MAPS) As ResourceCacheRec
     Friend MapItem(MAX_CACHED_MAPS, MAX_MAP_ITEMS) As MapItemRec
     Friend MapNpc(MAX_CACHED_MAPS) As MapDataRec
     Friend Bank(MAX_PLAYERS) As BankRec
@@ -258,19 +257,6 @@
 
     Friend Structure MapDataRec
         Dim Npc() As MapNpcRec
-    End Structure
-
-    Friend Structure MapResourceRec
-        Dim ResourceState As Byte
-        Dim ResourceTimer As Integer
-        Dim X As Integer
-        Dim Y As Integer
-        Dim CurHealth As Byte
-    End Structure
-
-    Friend Structure ResourceCacheRec
-        Dim ResourceCount As Integer
-        Dim ResourceData() As MapResourceRec
     End Structure
 
     Friend Structure HotbarRec

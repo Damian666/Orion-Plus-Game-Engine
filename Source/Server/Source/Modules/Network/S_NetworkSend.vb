@@ -41,18 +41,7 @@ Module S_NetworkSend
         buffer.Dispose()
     End Sub
 
-    Sub SendAnimations(index As Integer)
-        Dim i As Integer
 
-        For i = 1 To MAX_ANIMATIONS
-
-            If Len(Trim$(Animation(i).Name)) > 0 Then
-                SendUpdateAnimationTo(index, i)
-            End If
-
-        Next
-
-    End Sub
 
     Sub SendNewCharClasses(index As Integer)
         Dim i As Integer, n As Integer, q As Integer
@@ -322,148 +311,7 @@ Module S_NetworkSend
         buffer.Dispose()
     End Sub
 
-    Sub SendItems(index As Integer)
-        Dim i As Integer
 
-        For i = 1 To MAX_ITEMS
-            If Len(Trim$(Item(i).Name)) > 0 Then
-                SendUpdateItemTo(index, i)
-            End If
-        Next
-
-    End Sub
-
-    Sub SendUpdateItemTo(index As Integer, itemNum As Integer)
-        Dim buffer As ByteStream
-        buffer = New ByteStream(4)
-        buffer.WriteInt32(ServerPackets.SUpdateItem)
-        buffer.WriteInt32(itemNum)
-        buffer.WriteInt32(Item(itemNum).AccessReq)
-
-        AddDebug("Sent SMSG: SUpdateItem")
-
-        For i = 0 To StatType.Count - 1
-            buffer.WriteInt32(Item(itemNum).Add_Stat(i))
-        Next
-
-        buffer.WriteInt32(Item(itemNum).Animation)
-        buffer.WriteInt32(Item(itemNum).BindType)
-        buffer.WriteInt32(Item(itemNum).ClassReq)
-        buffer.WriteInt32(Item(itemNum).Data1)
-        buffer.WriteInt32(Item(itemNum).Data2)
-        buffer.WriteInt32(Item(itemNum).Data3)
-        buffer.WriteInt32(Item(itemNum).TwoHanded)
-        buffer.WriteInt32(Item(itemNum).LevelReq)
-        buffer.WriteInt32(Item(itemNum).Mastery)
-        buffer.WriteString((Trim$(Item(itemNum).Name)))
-        buffer.WriteInt32(Item(itemNum).Paperdoll)
-        buffer.WriteInt32(Item(itemNum).Pic)
-        buffer.WriteInt32(Item(itemNum).Price)
-        buffer.WriteInt32(Item(itemNum).Rarity)
-        buffer.WriteInt32(Item(itemNum).Speed)
-
-        buffer.WriteInt32(Item(itemNum).Randomize)
-        buffer.WriteInt32(Item(itemNum).RandomMin)
-        buffer.WriteInt32(Item(itemNum).RandomMax)
-
-        buffer.WriteInt32(Item(itemNum).Stackable)
-        buffer.WriteString((Trim$(Item(itemNum).Description)))
-
-        For i = 0 To StatType.Count - 1
-            buffer.WriteInt32(Item(itemNum).Stat_Req(i))
-        Next
-
-        buffer.WriteInt32(Item(itemNum).Type)
-        buffer.WriteInt32(Item(itemNum).SubType)
-
-        buffer.WriteInt32(Item(itemNum).ItemLevel)
-
-        'Housing
-        buffer.WriteInt32(Item(itemNum).FurnitureWidth)
-        buffer.WriteInt32(Item(itemNum).FurnitureHeight)
-
-        For i = 1 To 3
-            For x = 1 To 3
-                buffer.WriteInt32(Item(itemNum).FurnitureBlocks(i, x))
-                buffer.WriteInt32(Item(itemNum).FurnitureFringe(i, x))
-            Next
-        Next
-
-        buffer.WriteInt32(Item(itemNum).KnockBack)
-        buffer.WriteInt32(Item(itemNum).KnockBackTiles)
-
-        buffer.WriteInt32(Item(itemNum).Projectile)
-        buffer.WriteInt32(Item(itemNum).Ammo)
-
-        Socket.SendDataTo(index, buffer.Data, buffer.Head)
-        buffer.Dispose()
-    End Sub
-
-    Sub SendUpdateItemToAll(itemNum As Integer)
-        Dim buffer As ByteStream
-        buffer = New ByteStream(4)
-        buffer.WriteInt32(ServerPackets.SUpdateItem)
-        buffer.WriteInt32(itemNum)
-        buffer.WriteInt32(Item(itemNum).AccessReq)
-
-        AddDebug("Sent SMSG: SUpdateItem To All")
-
-        For i = 0 To StatType.Count - 1
-            buffer.WriteInt32(Item(itemNum).Add_Stat(i))
-        Next
-
-        buffer.WriteInt32(Item(itemNum).Animation)
-        buffer.WriteInt32(Item(itemNum).BindType)
-        buffer.WriteInt32(Item(itemNum).ClassReq)
-        buffer.WriteInt32(Item(itemNum).Data1)
-        buffer.WriteInt32(Item(itemNum).Data2)
-        buffer.WriteInt32(Item(itemNum).Data3)
-        buffer.WriteInt32(Item(itemNum).TwoHanded)
-        buffer.WriteInt32(Item(itemNum).LevelReq)
-        buffer.WriteInt32(Item(itemNum).Mastery)
-        buffer.WriteString((Trim$(Item(itemNum).Name)))
-        buffer.WriteInt32(Item(itemNum).Paperdoll)
-        buffer.WriteInt32(Item(itemNum).Pic)
-        buffer.WriteInt32(Item(itemNum).Price)
-        buffer.WriteInt32(Item(itemNum).Rarity)
-        buffer.WriteInt32(Item(itemNum).Speed)
-
-        buffer.WriteInt32(Item(itemNum).Randomize)
-        buffer.WriteInt32(Item(itemNum).RandomMin)
-        buffer.WriteInt32(Item(itemNum).RandomMax)
-
-        buffer.WriteInt32(Item(itemNum).Stackable)
-        buffer.WriteString((Trim$(Item(itemNum).Description)))
-
-        For i = 0 To StatType.Count - 1
-            buffer.WriteInt32(Item(itemNum).Stat_Req(i))
-        Next
-
-        buffer.WriteInt32(Item(itemNum).Type)
-        buffer.WriteInt32(Item(itemNum).SubType)
-
-        buffer.WriteInt32(Item(itemNum).ItemLevel)
-
-        'Housing
-        buffer.WriteInt32(Item(itemNum).FurnitureWidth)
-        buffer.WriteInt32(Item(itemNum).FurnitureHeight)
-
-        For i = 1 To 3
-            For x = 1 To 3
-                buffer.WriteInt32(Item(itemNum).FurnitureBlocks(i, x))
-                buffer.WriteInt32(Item(itemNum).FurnitureFringe(i, x))
-            Next
-        Next
-
-        buffer.WriteInt32(Item(itemNum).KnockBack)
-        buffer.WriteInt32(Item(itemNum).KnockBackTiles)
-
-        buffer.WriteInt32(Item(itemNum).Projectile)
-        buffer.WriteInt32(Item(itemNum).Ammo)
-
-        SendDataToAll(buffer.Data, buffer.Head)
-        buffer.Dispose()
-    End Sub
 
     Sub SendLeftMap(index As Integer)
         Dim buffer As New ByteStream(4)
@@ -526,69 +374,7 @@ Module S_NetworkSend
         buffer.Dispose()
     End Sub
 
-    Sub SendResourceCacheTo(index As Integer, Resource_num As Integer)
-        Dim buffer As ByteStream
-        Dim i As Integer
-        buffer = New ByteStream(4)
-        buffer.WriteInt32(ServerPackets.SResourceCache)
-        buffer.WriteInt32(ResourceCache(GetPlayerMap(index)).ResourceCount)
 
-        AddDebug("Sent SMSG: SResourcesCahce")
-
-        If ResourceCache(GetPlayerMap(index)).ResourceCount > 0 Then
-
-            For i = 0 To ResourceCache(GetPlayerMap(index)).ResourceCount
-                buffer.WriteInt32(ResourceCache(GetPlayerMap(index)).ResourceData(i).ResourceState)
-                buffer.WriteInt32(ResourceCache(GetPlayerMap(index)).ResourceData(i).X)
-                buffer.WriteInt32(ResourceCache(GetPlayerMap(index)).ResourceData(i).Y)
-            Next
-
-        End If
-
-        Socket.SendDataTo(index, buffer.Data, buffer.Head)
-        buffer.Dispose()
-    End Sub
-
-    Sub SendResources(index As Integer)
-        Dim i As Integer
-
-        For i = 1 To MAX_RESOURCES
-
-            If Len(Trim$(Resource(i).Name)) > 0 Then
-                SendUpdateResourceTo(index, i)
-            End If
-
-        Next
-
-    End Sub
-
-    Sub SendUpdateResourceTo(index As Integer, ResourceNum As Integer)
-        Dim buffer As ByteStream
-
-        buffer = New ByteStream(4)
-
-        buffer.WriteInt32(ServerPackets.SUpdateResource)
-        buffer.WriteInt32(ResourceNum)
-        buffer.WriteInt32(Resource(ResourceNum).Animation)
-        buffer.WriteString((Resource(ResourceNum).EmptyMessage))
-        buffer.WriteInt32(Resource(ResourceNum).ExhaustedImage)
-        buffer.WriteInt32(Resource(ResourceNum).Health)
-        buffer.WriteInt32(Resource(ResourceNum).ExpReward)
-        buffer.WriteInt32(Resource(ResourceNum).ItemReward)
-        buffer.WriteString((Resource(ResourceNum).Name))
-        buffer.WriteInt32(Resource(ResourceNum).ResourceImage)
-        buffer.WriteInt32(Resource(ResourceNum).ResourceType)
-        buffer.WriteInt32(Resource(ResourceNum).RespawnTime)
-        buffer.WriteString((Resource(ResourceNum).SuccessMessage))
-        buffer.WriteInt32(Resource(ResourceNum).LvlRequired)
-        buffer.WriteInt32(Resource(ResourceNum).ToolRequired)
-        buffer.WriteInt32(Resource(ResourceNum).Walkthrough)
-
-        AddDebug("Sent SMSG: SUpdateResources")
-
-        Socket.SendDataTo(index, buffer.Data, buffer.Head)
-        buffer.Dispose()
-    End Sub
 
     Sub SendShops(index As Integer)
         Dim i As Integer
@@ -768,69 +554,7 @@ Module S_NetworkSend
         buffer.Dispose()
     End Sub
 
-    Sub SendUpdateAnimationTo(index As Integer, AnimationNum As Integer)
-        Dim buffer As New ByteStream(4)
 
-        buffer.WriteInt32(ServerPackets.SUpdateAnimation)
-        buffer.WriteInt32(AnimationNum)
-
-        AddDebug("Sent SMSG: SUpdateAnimation")
-
-        For i = 0 To UBound(Animation(AnimationNum).Frames)
-            buffer.WriteInt32(Animation(AnimationNum).Frames(i))
-        Next
-
-        For i = 0 To UBound(Animation(AnimationNum).LoopCount)
-            buffer.WriteInt32(Animation(AnimationNum).LoopCount(i))
-        Next
-
-        For i = 0 To UBound(Animation(AnimationNum).LoopTime)
-            buffer.WriteInt32(Animation(AnimationNum).LoopTime(i))
-        Next
-
-        buffer.WriteString((Animation(AnimationNum).Name))
-        buffer.WriteString((Animation(AnimationNum).Sound))
-
-        For i = 0 To UBound(Animation(AnimationNum).Sprite)
-            buffer.WriteInt32(Animation(AnimationNum).Sprite(i))
-        Next
-
-        Socket.SendDataTo(index, buffer.Data, buffer.Head)
-        buffer.Dispose()
-    End Sub
-
-    Sub SendUpdateAnimationToAll(AnimationNum As Integer)
-        Dim buffer As ByteStream
-
-        buffer = New ByteStream(4)
-
-        buffer.WriteInt32(ServerPackets.SUpdateAnimation)
-        buffer.WriteInt32(AnimationNum)
-
-        AddDebug("Sent SMSG: SUpdateAnimation To All")
-
-        For i = 0 To UBound(Animation(AnimationNum).Frames)
-            buffer.WriteInt32(Animation(AnimationNum).Frames(i))
-        Next
-
-        For i = 0 To UBound(Animation(AnimationNum).LoopCount)
-            buffer.WriteInt32(Animation(AnimationNum).LoopCount(i))
-        Next
-
-        For i = 0 To UBound(Animation(AnimationNum).LoopTime)
-            buffer.WriteInt32(Animation(AnimationNum).LoopTime(i))
-        Next
-
-        buffer.WriteString((Animation(AnimationNum).Name))
-        buffer.WriteString((Animation(AnimationNum).Sound))
-
-        For i = 0 To UBound(Animation(AnimationNum).Sprite)
-            buffer.WriteInt32(Animation(AnimationNum).Sprite(i))
-        Next
-
-        SendDataToAll(buffer.Data, buffer.Head)
-        buffer.Dispose()
-    End Sub
 
     Sub SendVitals(index As Integer)
         For i = 1 To VitalType.Count - 1
@@ -1327,36 +1051,6 @@ Module S_NetworkSend
         SendDataToMap(GetPlayerMap(index), data, data.Length)
     End Sub
 
-    Sub SendUpdateResourceToAll(ResourceNum As Integer)
-        Dim buffer As ByteStream
-
-        buffer = New ByteStream(4)
-
-        buffer.WriteInt32(ServerPackets.SUpdateResource)
-        buffer.WriteInt32(ResourceNum)
-
-        AddDebug("Sent SMSG: SUpdateResource")
-
-        buffer.WriteInt32(Resource(ResourceNum).Animation)
-        buffer.WriteString((Resource(ResourceNum).EmptyMessage))
-        buffer.WriteInt32(Resource(ResourceNum).ExhaustedImage)
-        buffer.WriteInt32(Resource(ResourceNum).Health)
-        buffer.WriteInt32(Resource(ResourceNum).ExpReward)
-        buffer.WriteInt32(Resource(ResourceNum).ItemReward)
-        buffer.WriteString((Resource(ResourceNum).Name))
-        buffer.WriteInt32(Resource(ResourceNum).ResourceImage)
-        buffer.WriteInt32(Resource(ResourceNum).ResourceType)
-        buffer.WriteInt32(Resource(ResourceNum).RespawnTime)
-        buffer.WriteString((Resource(ResourceNum).SuccessMessage))
-        buffer.WriteInt32(Resource(ResourceNum).LvlRequired)
-        buffer.WriteInt32(Resource(ResourceNum).ToolRequired)
-        buffer.WriteInt32(Resource(ResourceNum).Walkthrough)
-
-        SendDataToAll(buffer.Data, buffer.Head)
-        buffer.Dispose()
-    End Sub
-
-
 
     Sub SendMapKeyToMap(mapNum As Integer, X As Integer, Y As Integer, Value As Integer)
         Dim buffer As ByteStream
@@ -1373,28 +1067,7 @@ Module S_NetworkSend
         buffer.Dispose()
     End Sub
 
-    Sub SendResourceCacheToMap(mapNum As Integer, Resource_num As Integer)
-        Dim buffer As ByteStream
-        Dim i As Integer
-        buffer = New ByteStream(4)
-        buffer.WriteInt32(ServerPackets.SResourceCache)
-        buffer.WriteInt32(ResourceCache(mapNum).ResourceCount)
 
-        AddDebug("Sent SMSG: SResourceCache")
-
-        If ResourceCache(mapNum).ResourceCount > 0 Then
-
-            For i = 0 To ResourceCache(mapNum).ResourceCount
-                buffer.WriteInt32(ResourceCache(mapNum).ResourceData(i).ResourceState)
-                buffer.WriteInt32(ResourceCache(mapNum).ResourceData(i).X)
-                buffer.WriteInt32(ResourceCache(mapNum).ResourceData(i).Y)
-            Next
-
-        End If
-
-        SendDataToMap(mapNum, buffer.Data, buffer.Head)
-        buffer.Dispose()
-    End Sub
 
     Sub SendGameData(index As Integer)
         Dim buffer As ByteStream
@@ -1531,23 +1204,7 @@ Module S_NetworkSend
         buffer.Dispose()
     End Sub
 
-    Sub SendAnimation(mapNum As Integer, Anim As Integer, X As Integer, Y As Integer, Optional LockType As Byte = 0, Optional Lockindex As Integer = 0)
-        Dim buffer As ByteStream
 
-        buffer = New ByteStream(4)
-        buffer.WriteInt32(ServerPackets.SAnimation)
-        buffer.WriteInt32(Anim)
-        buffer.WriteInt32(X)
-        buffer.WriteInt32(Y)
-        buffer.WriteInt32(LockType)
-        buffer.WriteInt32(Lockindex)
-
-        AddDebug("Sent SMSG: SAnimation")
-
-        SendDataToMap(mapNum, buffer.Data, buffer.Head)
-
-        buffer.Dispose()
-    End Sub
 
     Sub SendOpenShop(index As Integer, ShopNum As Integer)
         Dim buffer As ByteStream
@@ -1730,26 +1387,7 @@ Module S_NetworkSend
         buffer.Dispose()
     End Sub
 
-    Sub SendMapItemsToAll(mapNum As Integer)
-        Dim i As Integer
-        Dim buffer As ByteStream
-        buffer = New ByteStream(4)
 
-        buffer.WriteInt32(ServerPackets.SMapItemData)
-
-        AddDebug("Sent SMSG: SMapItemData To All")
-
-        For i = 1 To MAX_MAP_ITEMS
-            buffer.WriteInt32(MapItem(mapNum, i).Num)
-            buffer.WriteInt32(MapItem(mapNum, i).Value)
-            buffer.WriteInt32(MapItem(mapNum, i).X)
-            buffer.WriteInt32(MapItem(mapNum, i).Y)
-        Next
-
-        SendDataToMap(mapNum, buffer.Data, buffer.Head)
-
-        buffer.Dispose()
-    End Sub
 
     Sub SendStunned(index As Integer)
         Dim buffer As ByteStream

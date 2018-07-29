@@ -5,6 +5,20 @@ Imports ASFW.IO.FileIO
 Friend Module S_Resources
 #Region "Globals & Types"
     Friend SkillExpTable(100) As Integer
+    Friend ResourceCache(MAX_CACHED_MAPS) As ResourceCacheRec
+
+    Friend Structure MapResourceRec
+        Dim ResourceState As Byte
+        Dim ResourceTimer As Integer
+        Dim X As Integer
+        Dim Y As Integer
+        Dim CurHealth As Byte
+    End Structure
+
+    Friend Structure ResourceCacheRec
+        Dim ResourceCount As Integer
+        Dim ResourceData() As MapResourceRec
+    End Structure
 #End Region
 
 #Region "DataBase"
@@ -333,6 +347,95 @@ Friend Module S_Resources
     End Sub
 
 
+#End Region
+
+#Region "Outgoing Packets"
+    Sub SendResourceCacheTo(index As Integer, Resource_num As Integer)
+        Dim buffer As ByteStream
+        Dim i As Integer
+        buffer = New ByteStream(4)
+        buffer.WriteInt32(ServerPackets.SResourceCache)
+        buffer.WriteInt32(ResourceCache(GetPlayerMap(index)).ResourceCount)
+
+        AddDebug("Sent SMSG: SResourcesCahce")
+
+        If ResourceCache(GetPlayerMap(index)).ResourceCount > 0 Then
+
+            For i = 0 To ResourceCache(GetPlayerMap(index)).ResourceCount
+                buffer.WriteInt32(ResourceCache(GetPlayerMap(index)).ResourceData(i).ResourceState)
+                buffer.WriteInt32(ResourceCache(GetPlayerMap(index)).ResourceData(i).X)
+                buffer.WriteInt32(ResourceCache(GetPlayerMap(index)).ResourceData(i).Y)
+            Next
+
+        End If
+
+        Socket.SendDataTo(index, buffer.Data, buffer.Head)
+        buffer.Dispose()
+    End Sub
+
+    Sub SendResourceCacheToMap(mapNum As Integer, Resource_num As Integer)
+        Dim buffer As ByteStream
+        Dim i As Integer
+        buffer = New ByteStream(4)
+        buffer.WriteInt32(ServerPackets.SResourceCache)
+        buffer.WriteInt32(ResourceCache(mapNum).ResourceCount)
+
+        AddDebug("Sent SMSG: SResourceCache")
+
+        If ResourceCache(mapNum).ResourceCount > 0 Then
+
+            For i = 0 To ResourceCache(mapNum).ResourceCount
+                buffer.WriteInt32(ResourceCache(mapNum).ResourceData(i).ResourceState)
+                buffer.WriteInt32(ResourceCache(mapNum).ResourceData(i).X)
+                buffer.WriteInt32(ResourceCache(mapNum).ResourceData(i).Y)
+            Next
+
+        End If
+
+        SendDataToMap(mapNum, buffer.Data, buffer.Head)
+        buffer.Dispose()
+    End Sub
+
+    Sub SendResources(index As Integer)
+        Dim i As Integer
+
+        For i = 1 To MAX_RESOURCES
+
+            If Len(Trim$(Resource(i).Name)) > 0 Then
+                SendUpdateResourceTo(index, i)
+            End If
+
+        Next
+
+    End Sub
+
+    Sub SendUpdateResourceTo(index As Integer, ResourceNum As Integer)
+        Dim buffer As ByteStream
+        buffer = New ByteStream(4)
+
+        buffer.WriteInt32(ServerPackets.SUpdateResource)
+
+        buffer.WriteBlock(ResourceData(ResourceNum))
+
+        AddDebug("Sent SMSG: SUpdateResources")
+
+        Socket.SendDataTo(index, buffer.Data, buffer.Head)
+        buffer.Dispose()
+    End Sub
+
+    Sub SendUpdateResourceToAll(ResourceNum As Integer)
+        Dim buffer As ByteStream
+        buffer = New ByteStream(4)
+
+        buffer.WriteInt32(ServerPackets.SUpdateResource)
+
+        buffer.WriteBlock(ResourceData(ResourceNum))
+
+        AddDebug("Sent SMSG: SUpdateResource")
+
+        SendDataToAll(buffer.Data, buffer.Head)
+        buffer.Dispose()
+    End Sub
 #End Region
 
 #Region "Functions"
