@@ -112,7 +112,8 @@
     <Compile Include="Source\Forms\frmEditor_MapEditor.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Source\Modules\Database\C_Options.vb" />
+    <Compile Include="Source\Modules\C_Options.vb" />
+    <Compile Include="Source\Modules\Objects\C_Resources.vb" />
     <Compile Include="Source\Modules\UI\C_Chat.vb" />
     <Compile Include="Source\Forms\frmAdmin.Designer.vb">
       <DependentUpon>frmAdmin.vb</DependentUpon>
@@ -138,29 +139,29 @@
     <Compile Include="Source\Forms\frmOptions.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Source\Modules\Database\C_AutoTiles.vb" />
-    <Compile Include="Source\Modules\Database\C_Crafting.vb" />
-    <Compile Include="Source\Modules\Database\C_EventSystem.vb" />
+    <Compile Include="Source\Modules\Objects\C_AutoTiles.vb" />
+    <Compile Include="Source\Modules\Objects\C_Crafting.vb" />
+    <Compile Include="Source\Modules\Objects\C_EventSystem.vb" />
     <Compile Include="Source\Modules\UI\C_GuiFunctions.vb" />
     <Compile Include="Source\Modules\Globals\C_Variables.vb" />
     <Compile Include="Source\Modules\C_General.vb" />
     <Compile Include="Source\Modules\C_GameLogic.vb" />
     <Compile Include="Source\Modules\C_Graphics.vb" />
-    <Compile Include="Source\Modules\Database\C_HotBar.vb" />
-    <Compile Include="Source\Modules\Database\C_Housing.vb" />
-    <Compile Include="Source\Modules\Database\C_Parties.vb" />
-    <Compile Include="Source\Modules\Database\C_Pets.vb" />
-    <Compile Include="Source\Modules\Database\C_Player.vb" />
-    <Compile Include="Source\Modules\Database\C_Projectiles.vb" />
-    <Compile Include="Source\Modules\Database\C_Quest.vb" />
+    <Compile Include="Source\Modules\Objects\C_HotBar.vb" />
+    <Compile Include="Source\Modules\Objects\C_Housing.vb" />
+    <Compile Include="Source\Modules\Objects\C_Parties.vb" />
+    <Compile Include="Source\Modules\Objects\C_Pets.vb" />
+    <Compile Include="Source\Modules\Objects\C_Player.vb" />
+    <Compile Include="Source\Modules\Objects\C_Projectiles.vb" />
+    <Compile Include="Source\Modules\Objects\C_Quest.vb" />
     <Compile Include="Source\Modules\C_Sound.vb" />
     <Compile Include="Source\Modules\Globals\C_Constants.vb" />
-    <Compile Include="Source\Modules\Database\C_DataBase.vb" />
+    <Compile Include="Source\Modules\C_DataBase.vb" />
     <Compile Include="Source\Modules\UI\C_Time.vb" />
     <Compile Include="Source\Modules\UI\C_UpdateUI.vb" />
     <Compile Include="Source\Modules\UI\C_Text.vb" />
-    <Compile Include="Source\Modules\Database\C_Types.vb" />
-    <Compile Include="Source\Modules\Database\C_Weather.vb" />
+    <Compile Include="Source\Modules\Objects\C_Types.vb" />
+    <Compile Include="Source\Modules\Objects\C_Weather.vb" />
     <Compile Include="My Project\AssemblyInfo.vb" />
     <Compile Include="My Project\Application.Designer.vb">
       <AutoGen>True</AutoGen>

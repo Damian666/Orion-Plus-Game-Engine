@@ -288,12 +288,13 @@ Friend Module S_Resources
 
 #Region "Incoming Packets"
     Sub Packet_EditResource(index As Integer, ByRef data() As Byte)
+        Dim Buffer As New ByteStream(4)
+
         AddDebug("Recieved EMSG: RequestEditResource")
 
         ' Prevent hacking
         If GetPlayerAccess(index) < AdminType.Developer Then Exit Sub
 
-        Dim Buffer = New ByteStream(4)
         Buffer.WriteInt32(ServerPackets.SResourceEditor)
         Socket.SendDataTo(index, Buffer.Data, Buffer.Head)
 
@@ -304,7 +305,7 @@ Friend Module S_Resources
 
     Sub Packet_SaveResource(index As Integer, ByRef data() As Byte)
         Dim resourcenum As Integer
-        Dim buffer As New ByteStream(data)
+        Dim buffer As New ByteStream(4)
 
         AddDebug("Recieved EMSG: SaveResource")
 
@@ -351,20 +352,22 @@ Friend Module S_Resources
 
 #Region "Outgoing Packets"
     Sub SendResourceCacheTo(index As Integer, Resource_num As Integer)
-        Dim buffer As ByteStream
-        Dim i As Integer
-        buffer = New ByteStream(4)
+        Dim i As Integer, mapnum As Integer
+        Dim buffer As New ByteStream(4)
+
+        mapnum = GetPlayerMap(index)
+
         buffer.WriteInt32(ServerPackets.SResourceCache)
-        buffer.WriteInt32(ResourceCache(GetPlayerMap(index)).ResourceCount)
+        buffer.WriteInt32(ResourceCache(mapnum).ResourceCount)
 
-        AddDebug("Sent SMSG: SResourcesCahce")
+        AddDebug("Sent SMSG: SResourcesCache")
 
-        If ResourceCache(GetPlayerMap(index)).ResourceCount > 0 Then
+        If ResourceCache(mapnum).ResourceCount > 0 Then
 
-            For i = 0 To ResourceCache(GetPlayerMap(index)).ResourceCount
-                buffer.WriteInt32(ResourceCache(GetPlayerMap(index)).ResourceData(i).ResourceState)
-                buffer.WriteInt32(ResourceCache(GetPlayerMap(index)).ResourceData(i).X)
-                buffer.WriteInt32(ResourceCache(GetPlayerMap(index)).ResourceData(i).Y)
+            For i = 0 To ResourceCache(mapnum).ResourceCount
+                buffer.WriteInt32(ResourceCache(mapnum).ResourceData(i).ResourceState)
+                buffer.WriteInt32(ResourceCache(mapnum).ResourceData(i).X)
+                buffer.WriteInt32(ResourceCache(mapnum).ResourceData(i).Y)
             Next
 
         End If
@@ -374,9 +377,9 @@ Friend Module S_Resources
     End Sub
 
     Sub SendResourceCacheToMap(mapNum As Integer, Resource_num As Integer)
-        Dim buffer As ByteStream
         Dim i As Integer
-        buffer = New ByteStream(4)
+        Dim buffer As New ByteStream(4)
+
         buffer.WriteInt32(ServerPackets.SResourceCache)
         buffer.WriteInt32(ResourceCache(mapNum).ResourceCount)
 
@@ -410,8 +413,7 @@ Friend Module S_Resources
     End Sub
 
     Sub SendUpdateResourceTo(index As Integer, ResourceNum As Integer)
-        Dim buffer As ByteStream
-        buffer = New ByteStream(4)
+        Dim buffer As New ByteStream(4)
 
         buffer.WriteInt32(ServerPackets.SUpdateResource)
 
@@ -424,8 +426,7 @@ Friend Module S_Resources
     End Sub
 
     Sub SendUpdateResourceToAll(ResourceNum As Integer)
-        Dim buffer As ByteStream
-        buffer = New ByteStream(4)
+        Dim buffer As New ByteStream(4)
 
         buffer.WriteInt32(ServerPackets.SUpdateResource)
 

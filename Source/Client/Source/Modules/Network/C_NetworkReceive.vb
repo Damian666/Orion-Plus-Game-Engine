@@ -1086,7 +1086,7 @@ Module C_NetworkReceive
 
         For i = 1 To Byte.MaxValue
             ClearActionMsg(i)
-        Next i
+        Next
 
         CurrentWeather = Map.WeatherType
         CurrentWeatherIntensity = Map.WeatherIntensity
@@ -1111,7 +1111,7 @@ Module C_NetworkReceive
     Private Sub Packet_GlobalMessage(ByRef data() As Byte)
         Dim msg As String
         dim buffer as New ByteStream(Data)
-        'Msg = Trim(Buffer.ReadString)
+
         msg = Trim(buffer.ReadString)
 
         buffer.Dispose()
@@ -1123,7 +1123,6 @@ Module C_NetworkReceive
         Dim msg As String
         dim buffer as New ByteStream(Data)
 
-        'Msg = Trim(Buffer.ReadString)
         msg = Trim(buffer.ReadString)
 
         buffer.Dispose()
@@ -1151,7 +1150,7 @@ Module C_NetworkReceive
     Private Sub Packet_PlayerMessage(ByRef data() As Byte)
         Dim msg As String, colour As Integer
         dim buffer as New ByteStream(Data)
-        'Msg = Trim(Buffer.ReadString)
+
         msg = Trim(buffer.ReadString)
 
         colour = Buffer.ReadInt32
@@ -1404,28 +1403,7 @@ Module C_NetworkReceive
         Buffer.Dispose()
     End Sub
 
-    Private Sub Packet_ResourceCache(ByRef data() As Byte)
-        Dim i As Integer
-        dim buffer as New ByteStream(Data)
-        ResourceIndex = Buffer.ReadInt32
-        ResourcesInit = False
 
-        If ResourceIndex > 0 Then
-            ReDim Preserve MapResource(ResourceIndex)
-
-            For i = 0 To ResourceIndex
-                MapResource(i).ResourceState = Buffer.ReadInt32
-                MapResource(i).X = Buffer.ReadInt32
-                MapResource(i).Y = Buffer.ReadInt32
-            Next
-
-            ResourcesInit = True
-        Else
-            ReDim MapResource(1)
-        End If
-
-        Buffer.Dispose()
-    End Sub
 
     Private Sub Packet_Ping(ByRef data() As Byte)
         PingEnd = GetTickCount()
@@ -1460,32 +1438,7 @@ Module C_NetworkReceive
         CreateActionMsg(message, color, tmpType, X, Y)
     End Sub
 
-    Private Sub Packet_UpdateResource(ByRef data() As Byte)
-        Dim resourceNum As Integer
-        dim buffer as New ByteStream(Data)
-        ResourceNum = Buffer.ReadInt32
 
-        Resource(ResourceNum).Animation = Buffer.ReadInt32()
-        Resource(ResourceNum).EmptyMessage = Trim(Buffer.ReadString())
-        Resource(ResourceNum).ExhaustedImage = Buffer.ReadInt32()
-        Resource(ResourceNum).Health = Buffer.ReadInt32()
-        Resource(ResourceNum).ExpReward = Buffer.ReadInt32()
-        Resource(ResourceNum).ItemReward = Buffer.ReadInt32()
-        Resource(ResourceNum).Name = Trim(Buffer.ReadString())
-        Resource(ResourceNum).ResourceImage = Buffer.ReadInt32()
-        Resource(ResourceNum).ResourceType = Buffer.ReadInt32()
-        Resource(ResourceNum).RespawnTime = Buffer.ReadInt32()
-        Resource(ResourceNum).SuccessMessage = Trim(Buffer.ReadString())
-        Resource(ResourceNum).LvlRequired = Buffer.ReadInt32()
-        Resource(ResourceNum).ToolRequired = Buffer.ReadInt32()
-        Resource(ResourceNum).Walkthrough = Buffer.ReadInt32()
-
-        If Resource(ResourceNum).Name Is Nothing Then Resource(ResourceNum).Name = ""
-        If Resource(ResourceNum).EmptyMessage Is Nothing Then Resource(ResourceNum).EmptyMessage = ""
-        If Resource(ResourceNum).SuccessMessage Is Nothing Then Resource(ResourceNum).SuccessMessage = ""
-
-        Buffer.Dispose()
-    End Sub
 
     Private Sub Packet_PlayerExp(ByRef data() As Byte)
         Dim index as integer, tnl As Integer

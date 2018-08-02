@@ -387,15 +387,6 @@ Module C_NetworkSend
 
     End Sub
 
-    Sub SendRequestResources()
-        Dim buffer As New ByteStream(4)
-
-        buffer.WriteInt32(ClientPackets.CRequestResources)
-
-        Socket.SendData(buffer.Data, buffer.Head)
-        buffer.Dispose()
-    End Sub
-
     Sub SendRequestNpcs()
         Dim buffer As New ByteStream(4)
 

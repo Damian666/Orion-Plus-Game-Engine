@@ -27,10 +27,7 @@ Module C_Variables
     Friend ChatBubble(Byte.MaxValue) As ChatBubbleRec
     Friend ChatBubbleindex As Integer
 
-    ' Cache the Resources in an array
-    Friend MapResource() As MapResourceRec
-    Friend ResourceIndex As Integer
-    Friend ResourcesInit As Boolean
+
 
     ' inv drag + drop
     Friend DragInvSlotNum As Integer

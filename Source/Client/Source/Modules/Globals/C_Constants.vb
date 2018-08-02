@@ -78,18 +78,6 @@ Module C_Constants
     Friend ItemRarityColor4 = New SFML.Graphics.Color(159, 0, 197) ' purple
     Friend ItemRarityColor5 = New SFML.Graphics.Color(255, 215, 0) ' gold
 
-    ' Game editor constants
-    Public Const EDITOR_ITEM As Byte = 1
-    Public Const EDITOR_NPC As Byte = 2
-    Public Const EDITOR_SKILL As Byte = 3
-    Public Const EDITOR_SHOP As Byte = 4
-    Public Const EDITOR_RESOURCE As Byte = 5
-    Public Const EDITOR_ANIMATION As Byte = 6
-    Public Const EDITOR_QUEST As Byte = 7
-    Public Const EDITOR_HOUSE As Byte = 8
-    Public Const EDITOR_RECIPE As Byte = 9
-    Public Const EDITOR_CLASSES As Byte = 10
-
     ' Used to check if in editor or not and variables for use in editor
     Public InMapEditor As Boolean
     Public EditorTileX As Integer
