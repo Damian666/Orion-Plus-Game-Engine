@@ -2011,11 +2011,12 @@ Module modDatabase
     Function ClassData() As Byte()
         Dim i As Integer, n As Integer, q As Integer
         Dim buffer As New ByteStream(4)
-        Buffer.WriteInt32(Max_Classes)
+
+        buffer.WriteInt32(Max_Classes)
 
         For i = 1 To Max_Classes
-            buffer.WriteString((Trim$(GetClassName(i))))
-            buffer.WriteString((Trim(Classes(i).Desc)))
+            buffer.WriteString((GetClassName(i).Trim))
+            buffer.WriteString((Classes(i).Desc.Trim))
             buffer.WriteInt32(GetClassMaxVital(i, VitalType.HP))
             buffer.WriteInt32(GetClassMaxVital(i, VitalType.MP))
             buffer.WriteInt32(GetClassMaxVital(i, VitalType.SP))

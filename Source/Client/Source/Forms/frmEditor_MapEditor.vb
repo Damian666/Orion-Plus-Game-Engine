@@ -1,6 +1,9 @@
 ﻿Imports System.Drawing
+Imports System.IO
 Imports System.Windows.Forms
 Imports ASFW
+Imports SFML.Graphics
+Imports SFML.Window
 
 Public Class FrmEditor_MapEditor
 #Region "Frm"
@@ -356,6 +359,29 @@ Public Class FrmEditor_MapEditor
         HouseTileindex = scrlBuyHouse.Value
         pnlAttributes.Visible = False
         fraBuyHouse.Visible = False
+    End Sub
+
+    Private Sub ChkInstance_CheckedChanged(sender As Object, e As EventArgs) Handles chkInstance.CheckedChanged
+        If chkInstance.Checked = True Then
+            Map.Instanced = 1
+        Else
+            Map.Instanced = 0
+        End If
+    End Sub
+
+    Private Sub OptDoor_CheckedChanged(sender As Object, e As EventArgs) Handles optDoor.CheckedChanged
+        If optDoor.Checked = False Then Exit Sub
+
+        ClearAttributeDialogue()
+        pnlAttributes.Visible = True
+        fraMapWarp.Visible = True
+
+        scrlMapWarpMap.Maximum = MAX_MAPS
+        scrlMapWarpMap.Value = 1
+        scrlMapWarpX.Maximum = Byte.MaxValue
+        scrlMapWarpY.Maximum = Byte.MaxValue
+        scrlMapWarpX.Value = 0
+        scrlMapWarpY.Value = 0
     End Sub
 
 #End Region
@@ -1105,29 +1131,164 @@ Public Class FrmEditor_MapEditor
 
     End Sub
 
-    Private Sub ChkInstance_CheckedChanged(sender As Object, e As EventArgs) Handles chkInstance.CheckedChanged
-        If chkInstance.Checked = True Then
-            Map.Instanced = 1
-        Else
-            Map.Instanced = 0
+
+
+#End Region
+
+#Region "Drawing"
+    Public Sub EditorMap_DrawTileset()
+        Dim height As Integer
+        Dim width As Integer
+        Dim tileset As Byte
+
+        TilesetWindow.DispatchEvents()
+        TilesetWindow.Clear(SFML.Graphics.Color.Black)
+
+        ' find tileset number
+        tileset = Me.cmbTileSets.SelectedIndex + 1
+
+        ' exit out if doesn't exist
+        If tileset <= 0 OrElse tileset > NumTileSets Then Exit Sub
+
+        Dim rec2 As New RectangleShape With {
+            .OutlineColor = New SFML.Graphics.Color(SFML.Graphics.Color.Red),
+            .OutlineThickness = 0.6,
+            .FillColor = New SFML.Graphics.Color(SFML.Graphics.Color.Transparent)
+        }
+
+        If TileSetTextureInfo(tileset).IsLoaded = False Then
+            LoadTexture(tileset, 1)
         End If
+        ' we use it, lets update timer
+        With TileSetTextureInfo(tileset)
+            .TextureTimer = GetTickCount() + 100000
+        End With
+
+        height = TileSetTextureInfo(tileset).Height
+        width = TileSetTextureInfo(tileset).Width
+        Me.picBackSelect.Height = height
+        Me.picBackSelect.Width = width
+
+        TilesetWindow.SetView(New SFML.Graphics.View(New FloatRect(0, 0, width, height)))
+
+        ' change selected shape for autotiles
+        If Me.cmbAutoTile.SelectedIndex > 0 Then
+            Select Case Me.cmbAutoTile.SelectedIndex
+                Case 1 ' autotile
+                    EditorTileWidth = 2
+                    EditorTileHeight = 3
+                Case 2 ' fake autotile
+                    EditorTileWidth = 1
+                    EditorTileHeight = 1
+                Case 3 ' animated
+                    EditorTileWidth = 6
+                    EditorTileHeight = 3
+                Case 4 ' cliff
+                    EditorTileWidth = 2
+                    EditorTileHeight = 2
+                Case 5 ' waterfall
+                    EditorTileWidth = 2
+                    EditorTileHeight = 3
+                Case Else
+                    EditorTileWidth = 1
+                    EditorTileHeight = 1
+            End Select
+        End If
+
+        RenderSprite(TileSetSprite(tileset), TilesetWindow, 0, 0, 0, 0, width, height)
+
+        rec2.Size = New Vector2f(EditorTileWidth * PicX, EditorTileHeight * PicY)
+
+        rec2.Position = New Vector2f(EditorTileSelStart.X * PicX, EditorTileSelStart.Y * PicY)
+        TilesetWindow.Draw(rec2)
+
+        'and finally show everything on screen
+        TilesetWindow.Display()
+
+        LastTileset = tileset
     End Sub
 
-    Private Sub OptDoor_CheckedChanged(sender As Object, e As EventArgs) Handles optDoor.CheckedChanged
-        If optDoor.Checked = False Then Exit Sub
+    Public Sub EditorMap_DrawMapItem()
+        Dim itemnum As Integer
+        itemnum = Item(Me.scrlMapItem.Value).Pic
 
-        ClearAttributeDialogue()
-        pnlAttributes.Visible = True
-        fraMapWarp.Visible = True
+        If itemnum < 1 OrElse itemnum > NumItems Then
+            Me.picMapItem.BackgroundImage = Nothing
+            Exit Sub
+        End If
 
-        scrlMapWarpMap.Maximum = MAX_MAPS
-        scrlMapWarpMap.Value = 1
-        scrlMapWarpX.Maximum = Byte.MaxValue
-        scrlMapWarpY.Maximum = Byte.MaxValue
-        scrlMapWarpX.Value = 0
-        scrlMapWarpY.Value = 0
+        If File.Exists(Application.StartupPath & GfxPath & "items\" & itemnum & GfxExt) Then
+            Me.picMapItem.BackgroundImage = Drawing.Image.FromFile(Application.StartupPath & GfxPath & "items\" & itemnum & GfxExt)
+        End If
+
     End Sub
 
+    Public Sub EditorMap_DrawKey()
+        Dim itemnum As Integer
+
+        itemnum = Item(Me.scrlMapKey.Value).Pic
+
+        If itemnum < 1 OrElse itemnum > NumItems Then
+            Me.picMapKey.BackgroundImage = Nothing
+            Exit Sub
+        End If
+
+        If File.Exists(Application.StartupPath & GfxPath & "items\" & itemnum & GfxExt) Then
+            Me.picMapKey.BackgroundImage = Drawing.Image.FromFile(Application.StartupPath & GfxPath & "items\" & itemnum & GfxExt)
+        End If
+
+    End Sub
+
+    Friend Sub DrawTileOutline()
+        Dim rec As Rectangle
+        If Me.tabpages.SelectedTab Is Me.tpDirBlock Then Exit Sub
+
+        With rec
+            .Y = 0
+            .Height = PicY
+            .X = 0
+            .Width = PicX
+        End With
+
+        Dim rec2 As New RectangleShape With {
+            .OutlineColor = New SFML.Graphics.Color(SFML.Graphics.Color.Blue),
+            .OutlineThickness = 0.6,
+            .FillColor = New SFML.Graphics.Color(SFML.Graphics.Color.Transparent)
+        }
+
+        If Me.tabpages.SelectedTab Is Me.tpAttributes Then
+            rec2.Size = New Vector2f(rec.Width, rec.Height)
+        Else
+            If TileSetTextureInfo(Me.cmbTileSets.SelectedIndex + 1).IsLoaded = False Then
+                LoadTexture(Me.cmbTileSets.SelectedIndex + 1, 1)
+            End If
+            ' we use it, lets update timer
+            With TileSetTextureInfo(Me.cmbTileSets.SelectedIndex + 1)
+                .TextureTimer = GetTickCount() + 100000
+            End With
+
+            If EditorTileWidth = 1 AndAlso EditorTileHeight = 1 Then
+                RenderSprite(TileSetSprite(Me.cmbTileSets.SelectedIndex + 1), GameWindow, ConvertMapX(CurX * PicX), ConvertMapY(CurY * PicY), EditorTileSelStart.X * PicX, EditorTileSelStart.Y * PicY, rec.Width, rec.Height)
+
+                rec2.Size = New Vector2f(rec.Width, rec.Height)
+            Else
+                If Me.cmbAutoTile.SelectedIndex > 0 Then
+                    RenderSprite(TileSetSprite(Me.cmbTileSets.SelectedIndex + 1), GameWindow, ConvertMapX(CurX * PicX), ConvertMapY(CurY * PicY), EditorTileSelStart.X * PicX, EditorTileSelStart.Y * PicY, rec.Width, rec.Height)
+
+                    rec2.Size = New Vector2f(rec.Width, rec.Height)
+                Else
+                    RenderSprite(TileSetSprite(Me.cmbTileSets.SelectedIndex + 1), GameWindow, ConvertMapX(CurX * PicX), ConvertMapY(CurY * PicY), EditorTileSelStart.X * PicX, EditorTileSelStart.Y * PicY, EditorTileSelEnd.X * PicX, EditorTileSelEnd.Y * PicY)
+
+                    rec2.Size = New Vector2f(EditorTileSelEnd.X * PicX, EditorTileSelEnd.Y * PicY)
+                End If
+
+            End If
+
+        End If
+
+        rec2.Position = New Vector2f(ConvertMapX(CurX * PicX), ConvertMapY(CurY * PicY))
+        GameWindow.Draw(rec2)
+    End Sub
 #End Region
 
 End Class

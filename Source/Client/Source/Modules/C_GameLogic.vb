@@ -2,15 +2,14 @@
 Imports System.Threading
 Imports System.Windows.Forms
 Imports ASFW
-Imports Engine
 
 Module C_GameLogic
     Friend GameRand As New Random()
 
     Sub GameLoop()
         Dim i As Integer
-        Dim dest As Point = New Point(frmGame.PointToScreen(frmGame.picscreen.Location))
-        Dim g As Graphics = frmGame.picscreen.CreateGraphics
+        Dim dest As Point = New Point(FrmGame.PointToScreen(FrmGame.picscreen.Location))
+        Dim g As Graphics = FrmGame.picscreen.CreateGraphics
         Dim starttime As Integer, tick As Integer, fogtmr As Integer
         Dim tmpfps As Integer, tmplps As Integer, walkTimer As Integer, frameTime As Integer
         Dim tmr10000 As Integer, tmr1000 As Integer, tmrweather As Integer
@@ -18,7 +17,7 @@ Module C_GameLogic
         Dim rendercount As Integer, fadetmr As Integer
 
         starttime = GetTickCount()
-        FrmMenu.lblNextChar.Left = lblnextcharleft
+        FrmMenu.lblNextChar.Left = Lblnextcharleft
 
         Do
             If GameDestroyed Then End
@@ -28,7 +27,7 @@ Module C_GameLogic
             DirLeft = VbKeyLeft
             DirRight = VbKeyRight
 
-            If frmmenuvisible = True Then
+            If Frmmenuvisible = True Then
                 If tmrconnect < GetTickCount() Then
                     If Socket.IsConnected() = True Then
                         FrmMenu.lblServerStatus.ForeColor = Color.LightGreen
@@ -50,112 +49,112 @@ Module C_GameLogic
             End If
 
             'Update the UI
-            UpdateUI()
+            UpdateUi()
 
             If GameStarted() = True Then
-                Tick = GetTickCount()
-                ElapsedTime = Tick - FrameTime ' Set the time difference for time-based movement
+                tick = GetTickCount()
+                ElapsedTime = tick - frameTime ' Set the time difference for time-based movement
 
-                FrameTime = Tick
-                frmmaingamevisible = True
+                frameTime = tick
+                Frmmaingamevisible = True
 
                 'Calculate FPS
-                If starttime < Tick Then
-                    FPS = tmpfps
-                    LPS = tmplps
+                If starttime < tick Then
+                    Fps = tmpfps
+                    Lps = tmplps
                     tmpfps = 0
                     tmplps = 0
-                    starttime = Tick + 1000
+                    starttime = tick + 1000
                 End If
                 tmplps = tmplps + 1
                 tmpfps = tmpfps + 1
 
                 ' Update inv animation
                 If NumItems > 0 Then
-                    If tmr100 < Tick Then
+                    If tmr100 < tick Then
 
                         If InBank Then DrawBank()
                         If InShop Then DrawShop()
                         If InTrade Then DrawTrade()
 
-                        tmr100 = Tick + 100
+                        tmr100 = tick + 100
                     End If
                 End If
 
-                If ShowAnimTimer < Tick Then
+                If ShowAnimTimer < tick Then
                     ShowAnimLayers = Not ShowAnimLayers
-                    ShowAnimTimer = Tick + 500
+                    ShowAnimTimer = tick + 500
                 End If
 
                 For i = 1 To Byte.MaxValue
                     CheckAnimInstance(i)
                 Next
 
-                If Tick > EventChatTimer Then
+                If tick > EventChatTimer Then
                     If EventText = "" Then
                         If EventChat = True Then
                             EventChat = False
-                            pnlEventChatVisible = False
+                            PnlEventChatVisible = False
                         End If
                     End If
                 End If
 
-                If tmr10000 < Tick Then
+                If tmr10000 < tick Then
                     If Options.HighEnd = 0 Then
                         'clear any unused gfx
-                        ClearGFX()
+                        ClearGfx()
                     End If
 
                     GetPing()
                     DrawPing()
 
-                    tmr10000 = Tick + 10000
+                    tmr10000 = tick + 10000
                 End If
 
-                If tmr1000 < Tick Then
+                If tmr1000 < tick Then
                     Time.Instance.Tick()
 
-                    tmr1000 = Tick + 1000
+                    tmr1000 = tick + 1000
                 End If
 
                 'crafting timer
                 If CraftTimerEnabled Then
-                    If CraftTimer < Tick Then
+                    If CraftTimer < tick Then
                         CraftProgressValue = CraftProgressValue + (100 / Recipe(GetRecipeIndex(RecipeNames(SelectedRecipe))).CreateTime)
 
                         If CraftProgressValue >= 100 Then
                             CraftTimerEnabled = False
                         End If
-                        CraftTimer = Tick + 1000
+                        CraftTimer = tick + 1000
                     End If
                 End If
 
                 'screenshake timer
                 If ShakeTimerEnabled Then
-                    If ShakeTimer < Tick Then
+                    If ShakeTimer < tick Then
                         If ShakeCount < 10 Then
                             If LastDir = 0 Then
-                                frmGame.picscreen.Location = New Point(frmGame.picscreen.Location.X + 20, frmGame.picscreen.Location.Y)
+                                FrmGame.picscreen.Location = New Point(FrmGame.picscreen.Location.X + 20, FrmGame.picscreen.Location.Y)
                                 LastDir = 1
                             Else
-                                frmGame.picscreen.Location = New Point(frmGame.picscreen.Location.X - 20, frmGame.picscreen.Location.Y)
+                                FrmGame.picscreen.Location = New Point(FrmGame.picscreen.Location.X - 20, FrmGame.picscreen.Location.Y)
                                 LastDir = 0
                             End If
                         Else
-                            frmGame.picscreen.Location = New Point(0, 0)
+                            FrmGame.picscreen.Location = New Point(0, 0)
                             ShakeCount = 0
                             ShakeTimerEnabled = False
                         End If
 
                         ShakeCount += 1
 
-                        ShakeTimer = Tick + 50
+                        ShakeTimer = tick + 50
                     End If
                 End If
 
                 ' check if trade timed out
                 If TradeRequest = True Then
-                    If TradeTimer < Tick Then
+                    If TradeTimer < tick Then
                         AddText(Strings.Get("trade", "tradetimeout"), ColorType.Yellow)
                         TradeRequest = False
                         TradeTimer = 0
@@ -166,9 +165,9 @@ Module C_GameLogic
                 If NumSkillIcons > 0 Then
                     For i = 1 To MAX_PLAYER_SKILLS
                         If PlayerSkills(i) > 0 Then
-                            If SkillCD(i) > 0 Then
-                                If SkillCD(i) + (Skill(PlayerSkills(i)).CdTime * 1000) < Tick Then
-                                    SkillCD(i) = 0
+                            If SkillCd(i) > 0 Then
+                                If SkillCd(i) + (Skill(PlayerSkills(i)).CdTime * 1000) < tick Then
+                                    SkillCd(i) = 0
                                     DrawPlayerSkills()
                                 End If
                             End If
@@ -178,14 +177,14 @@ Module C_GameLogic
 
                 ' check if we need to unlock the player's skill casting restriction
                 If SkillBuffer > 0 Then
-                    If SkillBufferTimer + (Skill(PlayerSkills(SkillBuffer)).CastTime * 1000) < Tick Then
+                    If SkillBufferTimer + (Skill(PlayerSkills(SkillBuffer)).CastTime * 1000) < tick Then
                         SkillBuffer = 0
                         SkillBufferTimer = 0
                     End If
                 End If
                 ' check if we need to unlock the pets's spell casting restriction
                 If PetSkillBuffer > 0 Then
-                    If PetSkillBufferTimer + (Skill(Pet(Player(MyIndex).Pet.Num).Skill(PetSkillBuffer)).CastTime * 1000) < Tick Then
+                    If PetSkillBufferTimer + (Skill(Pet(Player(Myindex).Pet.Num).Skill(PetSkillBuffer)).CastTime * 1000) < tick Then
                         PetSkillBuffer = 0
                         PetSkillBufferTimer = 0
                     End If
@@ -198,7 +197,7 @@ Module C_GameLogic
                     End If
 
                     ' Process input before rendering, otherwise input will be behind by 1 frame
-                    If WalkTimer < Tick Then
+                    If walkTimer < tick Then
 
                         For i = 1 To TotalOnline 'MAX_PLAYERS
                             If IsPlaying(i) Then
@@ -222,23 +221,23 @@ Module C_GameLogic
                             Next i
                         End If
 
-                        WalkTimer = Tick + 30 ' edit this value to change WalkTimer
+                        walkTimer = tick + 30 ' edit this value to change WalkTimer
                     End If
 
                     ' fog scrolling
-                    If fogtmr < Tick Then
+                    If fogtmr < tick Then
                         If CurrentFogSpeed > 0 Then
                             ' move
-                            fogOffsetX = fogOffsetX - 1
-                            fogOffsetY = fogOffsetY - 1
+                            FogOffsetX = FogOffsetX - 1
+                            FogOffsetY = FogOffsetY - 1
                             ' reset
-                            If fogOffsetX < -255 Then fogOffsetX = 1
-                            If fogOffsetY < -255 Then fogOffsetY = 1
-                            fogtmr = Tick + 255 - CurrentFogSpeed
+                            If FogOffsetX < -255 Then FogOffsetX = 1
+                            If FogOffsetY < -255 Then FogOffsetY = 1
+                            fogtmr = tick + 255 - CurrentFogSpeed
                         End If
                     End If
 
-                    If tmr500 < Tick Then
+                    If tmr500 < tick Then
                         ' animate waterfalls
                         Select Case WaterfallFrame
                             Case 0
@@ -258,7 +257,7 @@ Module C_GameLogic
                                 AutoTileFrame = 0
                         End Select
 
-                        tmr500 = Tick + 500
+                        tmr500 = tick + 500
                     End If
 
                     If FadeInSwitch = True Then
@@ -269,24 +268,24 @@ Module C_GameLogic
                         FadeOut()
                     End If
 
-                    If InMapEditor Then EditorMap_DrawTileset()
+                    If InMapEditor Then FrmEditor_MapEditor.EditorMap_DrawTileset()
 
                     Application.DoEvents()
 
                     If GettingMap Then
                         Dim font As New Font(Environment.GetFolderPath(Environment.SpecialFolder.Fonts) + "\" + FontName, FontSize)
-                        g.DrawString(Strings.Get("gamegui", "maprecieve"), font, Brushes.DarkCyan, frmGame.picscreen.Width - 130, 5)
+                        g.DrawString(Strings.Get("gamegui", "maprecieve"), font, Brushes.DarkCyan, FrmGame.picscreen.Width - 130, 5)
                     End If
 
                 End SyncLock
             End If
 
-            If tmrweather < Tick Then
+            If tmrweather < tick Then
                 ProcessWeather()
-                tmrweather = Tick + 50
+                tmrweather = tick + 50
             End If
 
-            If Fadetmr < Tick Then
+            If fadetmr < tick Then
                 If FadeType <> 2 Then
                     If FadeType = 1 Then
                         If FadeAmount = 255 Then
@@ -301,14 +300,14 @@ Module C_GameLogic
                         End If
                     End If
                 End If
-                Fadetmr = Tick + 30
+                fadetmr = tick + 30
             End If
 
-            If rendercount < Tick Then
+            If rendercount < tick Then
                 'Actual Game Loop Stuff :/
                 Render_Graphics()
                 tmplps = tmplps + 1
-                rendercount = Tick + 16
+                rendercount = tick + 16
             End If
 
             Application.DoEvents()
@@ -325,7 +324,7 @@ Module C_GameLogic
     Sub ClearTempTile()
         Dim x As Integer
         Dim y As Integer
-        ReDim TempTile(Map.MaxX,Map.MaxY)
+        ReDim TempTile(Map.MaxX, Map.MaxY)
 
         For X = 0 To Map.MaxX
             For Y = 0 To Map.MaxY

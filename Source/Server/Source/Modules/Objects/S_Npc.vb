@@ -1025,8 +1025,7 @@ Module S_Npc
 
         buffer.WriteInt32(ServerPackets.SMapNpcData)
 
-        Addlog("Sent SMSG: SMapNpcData", PACKET_LOG)
-        Console.WriteLine("Sent SMSG: SMapNpcData")
+        AddDebug("Sent SMSG: SMapNpcData")
 
         For i = 1 To MAX_MAP_NPCS
             buffer.WriteInt32(MapNpc(mapNum).Npc(i).Num)

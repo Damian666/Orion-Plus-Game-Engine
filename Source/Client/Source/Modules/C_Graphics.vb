@@ -1283,77 +1283,6 @@ Module C_Graphics
 
     End Sub
 
-    Friend Sub DrawResource(resource As Integer, dx As Integer, dy As Integer, rec As Rectangle)
-        If Resource < 1 OrElse Resource > NumResources Then Exit Sub
-        Dim x As Integer
-        Dim y As Integer
-        Dim width As Integer
-        Dim height As Integer
-
-        X = ConvertMapX(dx)
-        Y = ConvertMapY(dy)
-        width = (rec.Right - rec.Left)
-        height = (rec.Bottom - rec.Top)
-
-        If rec.Width < 0 OrElse rec.Height < 0 Then Exit Sub
-
-        If ResourcesGFXInfo(Resource).IsLoaded = False Then
-            LoadTexture(Resource, 5)
-        End If
-
-        'seeying we still use it, lets update timer
-        With ResourcesGFXInfo(Resource)
-            .TextureTimer = GetTickCount() + 100000
-        End With
-
-        RenderSprite(ResourcesSprite(Resource), GameWindow, X, Y, rec.X, rec.Y, rec.Width, rec.Height)
-
-    End Sub
-
-    Friend Sub DrawMapResource(resourceNum As Integer)
-        Dim resourceMaster As Integer
-
-        Dim resourceState As Integer
-        Dim resourceSprite As Integer
-        Dim rec As Rectangle
-        Dim x As Integer, y As Integer
-
-        If GettingMap Then Exit Sub
-        If MapData = False Then Exit Sub
-
-        If MapResource(resourceNum).X > Map.MaxX OrElse MapResource(resourceNum).Y > Map.MaxY Then Exit Sub
-
-        ' Get the Resource type
-        resourceMaster = Map.Tile(MapResource(resourceNum).X, MapResource(resourceNum).Y).Data1
-
-        If resourceMaster = 0 Then Exit Sub
-
-        If Resource(resourceMaster).ResourceImage = 0 Then Exit Sub
-
-        ' Get the Resource state
-        resourceState = MapResource(resourceNum).ResourceState
-
-        If resourceState = 0 Then ' normal
-            resourceSprite = Resource(resourceMaster).ResourceImage
-        ElseIf resourceState = 1 Then ' used
-            resourceSprite = Resource(resourceMaster).ExhaustedImage
-        End If
-
-        ' src rect
-        With rec
-            .Y = 0
-            .Height = ResourcesGFXInfo(resourceSprite).Height
-            .X = 0
-            .Width = ResourcesGFXInfo(resourceSprite).Width
-        End With
-
-        ' Set base x + y, then the offset due to size
-        X = (MapResource(resourceNum).X * PicX) - (ResourcesGFXInfo(resourceSprite).Width / 2) + 16
-        Y = (MapResource(resourceNum).Y * PicY) - ResourcesGFXInfo(resourceSprite).Height + 32
-
-        DrawResource(resourceSprite, X, Y, rec)
-    End Sub
-
     Friend Sub DrawItem(itemnum As Integer)
 
         Dim srcrec As Rectangle
@@ -1423,7 +1352,7 @@ Module C_Graphics
 
     End Sub
 
-    Friend Sub DrawBlood(index as integer)
+    Friend Sub DrawBlood(index As Integer)
         Dim dest As Point = New Point(frmGame.PointToScreen(frmGame.picscreen.Location))
         Dim srcrec As Rectangle
         Dim destrec As Rectangle
@@ -1447,92 +1376,6 @@ Module C_Graphics
             RenderSprite(BloodSprite, GameWindow, x, y, srcrec.X, srcrec.Y, srcrec.Width, srcrec.Height)
 
         End With
-
-    End Sub
-
-    Friend Sub DrawMapTile(x As Integer, y As Integer)
-        Dim i As Integer
-        Dim srcrect As New Rectangle(0, 0, 0, 0)
-
-        If GettingMap Then Exit Sub
-        If Map.Tile Is Nothing Then Exit Sub
-        If MapData = False Then Exit Sub
-
-        For i = LayerType.Ground To LayerType.Mask2
-            If Map.Tile(X, Y).Layer Is Nothing Then Exit Sub
-            ' skip tile if tileset isn't set
-            If Map.Tile(X, Y).Layer(i).Tileset > 0 AndAlso Map.Tile(X, Y).Layer(i).Tileset <= NumTileSets Then
-                If TileSetTextureInfo(Map.Tile(X, Y).Layer(i).Tileset).IsLoaded = False Then
-                    LoadTexture(Map.Tile(X, Y).Layer(i).Tileset, 1)
-                End If
-                ' we use it, lets update timer
-                With TileSetTextureInfo(Map.Tile(X, Y).Layer(i).Tileset)
-                    .TextureTimer = GetTickCount() + 100000
-                End With
-                If Autotile(X, Y).Layer(i).renderState = RenderStateNormal Then
-                    With srcrect
-                        .X = Map.Tile(X, Y).Layer(i).X * 32
-                        .Y = Map.Tile(X, Y).Layer(i).Y * 32
-                        .Width = 32
-                        .Height = 32
-                    End With
-
-                    RenderSprite(TileSetSprite(Map.Tile(X, Y).Layer(i).Tileset), GameWindow, ConvertMapX(X * PicX), ConvertMapY(Y * PicY), srcrect.X, srcrect.Y, srcrect.Width, srcrect.Height)
-
-                ElseIf Autotile(X, Y).Layer(i).renderState = RenderStateAutotile Then
-                    ' Draw autotiles
-                    DrawAutoTile(i, ConvertMapX(X * PicX), ConvertMapY(Y * PicY), 1, X, Y, 0, False)
-                    DrawAutoTile(i, ConvertMapX(X * PicX) + 16, ConvertMapY(Y * PicY), 2, X, Y, 0, False)
-                    DrawAutoTile(i, ConvertMapX(X * PicX), ConvertMapY(Y * PicY) + 16, 3, X, Y, 0, False)
-                    DrawAutoTile(i, ConvertMapX(X * PicX) + 16, ConvertMapY(Y * PicY) + 16, 4, X, Y, 0, False)
-                End If
-            End If
-        Next
-
-    End Sub
-
-    Friend Sub DrawMapFringeTile(x As Integer, y As Integer)
-        Dim i As Integer
-        Dim srcrect As New Rectangle(0, 0, 0, 0)
-        'Dim dest As Rectangle = New Rectangle(FrmMainGame.PointToScreen(FrmMainGame.picscreen.Location), New Size(32, 32))
-
-        If GettingMap Then Exit Sub
-        If Map.Tile Is Nothing Then Exit Sub
-        If MapData = False Then Exit Sub
-
-        For i = LayerType.Fringe To LayerType.Fringe2
-            If Map.Tile(X, Y).Layer Is Nothing Then Exit Sub
-            ' skip tile if tileset isn't set
-            If Map.Tile(X, Y).Layer(i).Tileset > 0 AndAlso Map.Tile(X, Y).Layer(i).Tileset <= NumTileSets Then
-                If TileSetTextureInfo(Map.Tile(X, Y).Layer(i).Tileset).IsLoaded = False Then
-                    LoadTexture(Map.Tile(X, Y).Layer(i).Tileset, 1)
-                End If
-
-                ' we use it, lets update timer
-                With TileSetTextureInfo(Map.Tile(X, Y).Layer(i).Tileset)
-                    .TextureTimer = GetTickCount() + 100000
-                End With
-
-                ' render
-                If Autotile(X, Y).Layer(i).renderState = RenderStateNormal Then
-                    With srcrect
-                        .X = Map.Tile(X, Y).Layer(i).X * 32
-                        .Y = Map.Tile(X, Y).Layer(i).Y * 32
-                        .Width = 32
-                        .Height = 32
-                    End With
-
-                    RenderSprite(TileSetSprite(Map.Tile(X, Y).Layer(i).Tileset), GameWindow, ConvertMapX(X * PicX), ConvertMapY(Y * PicY), srcrect.X, srcrect.Y, srcrect.Width, srcrect.Height)
-
-                ElseIf Autotile(X, Y).Layer(i).renderState = RenderStateAutotile Then
-                    ' Draw autotiles
-                    DrawAutoTile(i, ConvertMapX(X * PicX), ConvertMapY(Y * PicY), 1, X, Y, 0, False)
-                    DrawAutoTile(i, ConvertMapX(X * PicX) + 16, ConvertMapY(Y * PicY), 2, X, Y, 0, False)
-                    DrawAutoTile(i, ConvertMapX(X * PicX), ConvertMapY(Y * PicY) + 16, 3, X, Y, 0, False)
-                    DrawAutoTile(i, ConvertMapX(X * PicX) + 16, ConvertMapY(Y * PicY) + 16, 4, X, Y, 0, False)
-                End If
-            End If
-        Next
 
     End Sub
 
@@ -2050,7 +1893,7 @@ Module C_Graphics
             Next
         End If
 
-        If InMapEditor Then DrawTileOutline()
+        If InMapEditor Then FrmEditor_MapEditor.DrawTileOutline()
 
         'furniture
         If FurnitureSelected > 0 Then
@@ -3850,157 +3693,5 @@ NextLoop:
         RenderSprite(CursorSprite, GameWindow, CurMouseX, CurMouseY, 0, 0, CursorInfo.Width, CursorInfo.Height)
     End Sub
 
-    Public Sub EditorMap_DrawTileset()
-        Dim height As Integer
-        Dim width As Integer
-        Dim tileset As Byte
 
-        TilesetWindow.DispatchEvents()
-        TilesetWindow.Clear(SFML.Graphics.Color.Black)
-
-        ' find tileset number
-        tileset = frmEditor_MapEditor.cmbTileSets.SelectedIndex + 1
-
-        ' exit out if doesn't exist
-        If tileset <= 0 OrElse tileset > NumTileSets Then Exit Sub
-
-        Dim rec2 As New RectangleShape With {
-            .OutlineColor = New SFML.Graphics.Color(SFML.Graphics.Color.Red),
-            .OutlineThickness = 0.6,
-            .FillColor = New SFML.Graphics.Color(SFML.Graphics.Color.Transparent)
-        }
-
-        If TileSetTextureInfo(tileset).IsLoaded = False Then
-            LoadTexture(tileset, 1)
-        End If
-        ' we use it, lets update timer
-        With TileSetTextureInfo(tileset)
-            .TextureTimer = GetTickCount() + 100000
-        End With
-
-        height = TileSetTextureInfo(tileset).Height
-        width = TileSetTextureInfo(tileset).Width
-        frmEditor_MapEditor.picBackSelect.Height = height
-        frmEditor_MapEditor.picBackSelect.Width = width
-
-        TilesetWindow.SetView(New SFML.Graphics.View(New FloatRect(0, 0, width, height)))
-
-        ' change selected shape for autotiles
-        If frmEditor_MapEditor.cmbAutoTile.SelectedIndex > 0 Then
-            Select Case frmEditor_MapEditor.cmbAutoTile.SelectedIndex
-                Case 1 ' autotile
-                    EditorTileWidth = 2
-                    EditorTileHeight = 3
-                Case 2 ' fake autotile
-                    EditorTileWidth = 1
-                    EditorTileHeight = 1
-                Case 3 ' animated
-                    EditorTileWidth = 6
-                    EditorTileHeight = 3
-                Case 4 ' cliff
-                    EditorTileWidth = 2
-                    EditorTileHeight = 2
-                Case 5 ' waterfall
-                    EditorTileWidth = 2
-                    EditorTileHeight = 3
-                Case Else
-                    EditorTileWidth = 1
-                    EditorTileHeight = 1
-            End Select
-        End If
-
-        RenderSprite(TileSetSprite(tileset), TilesetWindow, 0, 0, 0, 0, width, height)
-
-        rec2.Size = New Vector2f(EditorTileWidth * PicX, EditorTileHeight * PicY)
-
-        rec2.Position = New Vector2f(EditorTileSelStart.X * PicX, EditorTileSelStart.Y * PicY)
-        TilesetWindow.Draw(rec2)
-
-        'and finally show everything on screen
-        TilesetWindow.Display()
-
-        LastTileset = tileset
-    End Sub
-
-    Public Sub EditorMap_DrawMapItem()
-        Dim itemnum As Integer
-        itemnum = Item(frmEditor_MapEditor.scrlMapItem.Value).Pic
-
-        If itemnum < 1 OrElse itemnum > NumItems Then
-            frmEditor_MapEditor.picMapItem.BackgroundImage = Nothing
-            Exit Sub
-        End If
-
-        If File.Exists(Application.StartupPath & GfxPath & "items\" & itemnum & GfxExt) Then
-            frmEditor_MapEditor.picMapItem.BackgroundImage = Drawing.Image.FromFile(Application.StartupPath & GfxPath & "items\" & itemnum & GfxExt)
-        End If
-
-    End Sub
-
-    Public Sub EditorMap_DrawKey()
-        Dim itemnum As Integer
-
-        itemnum = Item(frmEditor_MapEditor.scrlMapKey.Value).Pic
-
-        If itemnum < 1 OrElse itemnum > NumItems Then
-            frmEditor_MapEditor.picMapKey.BackgroundImage = Nothing
-            Exit Sub
-        End If
-
-        If File.Exists(Application.StartupPath & GfxPath & "items\" & itemnum & GfxExt) Then
-            frmEditor_MapEditor.picMapKey.BackgroundImage = Drawing.Image.FromFile(Application.StartupPath & GfxPath & "items\" & itemnum & GfxExt)
-        End If
-
-    End Sub
-
-    Public Sub DrawTileOutline()
-        Dim rec As Rectangle
-        If FrmEditor_MapEditor.tabpages.SelectedTab Is FrmEditor_MapEditor.tpDirBlock Then Exit Sub
-
-        With rec
-            .Y = 0
-            .Height = PicY
-            .X = 0
-            .Width = PicX
-        End With
-
-        Dim rec2 As New RectangleShape With {
-            .OutlineColor = New SFML.Graphics.Color(SFML.Graphics.Color.Blue),
-            .OutlineThickness = 0.6,
-            .FillColor = New SFML.Graphics.Color(SFML.Graphics.Color.Transparent)
-        }
-
-        If FrmEditor_MapEditor.tabpages.SelectedTab Is FrmEditor_MapEditor.tpAttributes Then
-            rec2.Size = New Vector2f(rec.Width, rec.Height)
-        Else
-            If TileSetTextureInfo(FrmEditor_MapEditor.cmbTileSets.SelectedIndex + 1).IsLoaded = False Then
-                LoadTexture(FrmEditor_MapEditor.cmbTileSets.SelectedIndex + 1, 1)
-            End If
-            ' we use it, lets update timer
-            With TileSetTextureInfo(FrmEditor_MapEditor.cmbTileSets.SelectedIndex + 1)
-                .TextureTimer = GetTickCount() + 100000
-            End With
-
-            If EditorTileWidth = 1 AndAlso EditorTileHeight = 1 Then
-                RenderSprite(TileSetSprite(FrmEditor_MapEditor.cmbTileSets.SelectedIndex + 1), GameWindow, ConvertMapX(CurX * PicX), ConvertMapY(CurY * PicY), EditorTileSelStart.X * PicX, EditorTileSelStart.Y * PicY, rec.Width, rec.Height)
-
-                rec2.Size = New Vector2f(rec.Width, rec.Height)
-            Else
-                If FrmEditor_MapEditor.cmbAutoTile.SelectedIndex > 0 Then
-                    RenderSprite(TileSetSprite(FrmEditor_MapEditor.cmbTileSets.SelectedIndex + 1), GameWindow, ConvertMapX(CurX * PicX), ConvertMapY(CurY * PicY), EditorTileSelStart.X * PicX, EditorTileSelStart.Y * PicY, rec.Width, rec.Height)
-
-                    rec2.Size = New Vector2f(rec.Width, rec.Height)
-                Else
-                    RenderSprite(TileSetSprite(FrmEditor_MapEditor.cmbTileSets.SelectedIndex + 1), GameWindow, ConvertMapX(CurX * PicX), ConvertMapY(CurY * PicY), EditorTileSelStart.X * PicX, EditorTileSelStart.Y * PicY, EditorTileSelEnd.X * PicX, EditorTileSelEnd.Y * PicY)
-
-                    rec2.Size = New Vector2f(EditorTileSelEnd.X * PicX, EditorTileSelEnd.Y * PicY)
-                End If
-
-            End If
-
-        End If
-
-        rec2.Position = New Vector2f(ConvertMapX(CurX * PicX), ConvertMapY(CurY * PicY))
-        GameWindow.Draw(rec2)
-    End Sub
 End Module

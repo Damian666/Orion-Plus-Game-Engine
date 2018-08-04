@@ -3,12 +3,9 @@
     Friend Options As New C_Options()
 
     ' Friend data structures
-    Friend Map As MapRec
-    Friend MapLock As New Object()
+
     Friend Bank As BankRec
-    Friend MapItem(MAX_MAP_ITEMS) As MapItemRec
-    Friend MapNpc(MAX_MAP_NPCS) As MapNpcRec
-    Friend TempTile(,) As TempTileRec
+
     Friend Player(MAX_PLAYERS) As PlayerRec
 
     ' client-side stuff

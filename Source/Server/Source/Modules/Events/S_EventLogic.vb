@@ -2338,7 +2338,6 @@ Friend Module S_EventLogic
         Dim i As Integer
 
         For i = 0 To MAX_MAPS
-            Application.DoEvents()
             SpawnGlobalEvents(i)
         Next
 

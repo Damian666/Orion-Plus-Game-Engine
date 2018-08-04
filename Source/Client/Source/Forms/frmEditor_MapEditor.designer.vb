@@ -1,5 +1,5 @@
 ﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
-Partial Class frmEditor_MapEditor
+Partial Class FrmEditor_MapEditor
     Inherits System.Windows.Forms.Form
 
     'Form overrides dispose to clean up the component list.

@@ -1761,12 +1761,11 @@ Friend Module S_Events
 #Region "Incoming Packets"
     Sub Packet_EventChatReply(index as integer, ByRef data() As Byte)
         Dim eventId As Integer, pageId As Integer, reply As Integer, i As Integer
-        dim buffer as New ByteStream(data)
-        Addlog("Recieved CMSG: CEventChatReply", PACKET_LOG)
-        Console.WriteLine("Recieved CMSG: CEventChatReply")
+        Dim buffer As New ByteStream(data)
 
+        AddDebug("Recieved CMSG: CEventChatReply")
 
-        eventID = Buffer.ReadInt32
+        eventId = Buffer.ReadInt32
         pageID = Buffer.ReadInt32
         reply = Buffer.ReadInt32
 
@@ -1813,9 +1812,9 @@ Friend Module S_Events
     Sub Packet_Event(index as integer, ByRef data() As Byte)
         Dim i As Integer, begineventprocessing As Boolean, z As Integer
         Dim x As Integer, y As Integer
-        dim buffer as New ByteStream(data)
-        Addlog("Recieved CMSG: CEvent", PACKET_LOG)
-        Console.WriteLine("Recieved CMSG: CEvent")
+        Dim buffer As New ByteStream(data)
+
+        AddDebug("Recieved CMSG: CEvent")
 
         i = Buffer.ReadInt32
         Buffer.Dispose()
@@ -1875,8 +1874,8 @@ Friend Module S_Events
     End Sub
 
     Sub Packet_RequestSwitchesAndVariables(index as integer, ByRef data() As Byte)
-        Addlog("Recieved CMSG: CRequestSwitchesAndVariables", PACKET_LOG)
-        Console.WriteLine("Recieved CMSG: CRequestSwitchesAndVariables")
+        AddDebug("Recieved CMSG: CRequestSwitchesAndVariables")
+
         SendSwitchesAndVariables(Index)
     End Sub
 
@@ -1884,8 +1883,7 @@ Friend Module S_Events
         Dim i As Integer
         dim buffer as New ByteStream(data)
 
-        Addlog("Recieved CMSG: CSwitchesAndVariables", PACKET_LOG)
-        Console.WriteLine("Recieved CMSG: CSwitchesAndVariables")
+        AddDebug("Recieved CMSG: CSwitchesAndVariables")
 
         For i = 1 To MaxSwitches
             Switches(i) = Buffer.ReadString
@@ -1912,8 +1910,7 @@ Friend Module S_Events
 
         Buffer.WriteInt32(ServerPackets.SSpecialEffect)
 
-        Addlog("Sent SMSG: SSpecialEffect", PACKET_LOG)
-        Console.WriteLine("Sent SMSG: SPecialEffect")
+        AddDebug("Sent SMSG: SSpecialEffect")
 
         Select Case EffectType
             Case EffectTypeFadein
@@ -1949,8 +1946,7 @@ Friend Module S_Events
 
         Buffer.WriteInt32(ServerPackets.SSwitchesAndVariables)
 
-        Addlog("Sent SMSG: SSwitchesAndVariables", PACKET_LOG)
-        Console.WriteLine("Sent SMSG: SSwitchesAndVariables")
+        AddDebug("Sent SMSG: SSwitchesAndVariables")
 
         For i = 1 To MaxSwitches
             buffer.WriteString((Trim(Switches(i))))
@@ -1977,8 +1973,7 @@ Friend Module S_Events
         buffer.WriteInt32(ServerPackets.SMapEventData)
         mapNum = GetPlayerMap(index)
 
-        Addlog("Sent SMSG: SMapEventData", PACKET_LOG)
-        Console.WriteLine("Sent SMSG: SMapEventData")
+        AddDebug("Sent SMSG: SMapEventData")
 
         'Event Data
         buffer.WriteInt32(Map(mapNum).EventCount)

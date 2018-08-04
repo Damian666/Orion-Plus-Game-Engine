@@ -18,17 +18,7 @@ Module C_DataBase
     End Function
 
 #Region "Assets Check"
-    Friend Sub CheckTilesets()
-        Dim i As Integer
-        i = 1
 
-        While File.Exists(Application.StartupPath & GfxPath & "\tilesets\" & i & GfxExt)
-            NumTileSets = NumTileSets + 1
-            i = i + 1
-        End While
-
-        If NumTileSets = 0 Then Exit Sub
-    End Sub
 
     Friend Sub CheckCharacters()
         Dim i As Integer
@@ -297,88 +287,7 @@ Module C_DataBase
 #End Region
 
 #Region "Maps"
-    Sub ClearMap()
 
-        SyncLock MapLock
-            Map.Name = ""
-            Map.Tileset = 1
-            Map.MaxX = ScreenMapx
-            Map.MaxY = ScreenMapy
-            Map.BootMap = 0
-            Map.BootX = 0
-            Map.BootY = 0
-            Map.Down = 0
-            Map.Left = 0
-            Map.Moral = 0
-            Map.Music = ""
-            Map.Revision = 0
-            Map.Right = 0
-            Map.Up = 0
-
-            ReDim Map.Npc(MAX_MAP_NPCS)
-            ReDim Map.Tile(Map.MaxX, Map.MaxY)
-
-            For x = 0 To ScreenMapx
-                For y = 0 To ScreenMapy
-                    ReDim Map.Tile(x, y).Layer(LayerType.Count - 1)
-                    For l = 0 To LayerType.Count - 1
-                        Map.Tile(x, y).Layer(l).Tileset = 0
-                        Map.Tile(x, y).Layer(l).X = 0
-                        Map.Tile(x, y).Layer(l).Y = 0
-                        Map.Tile(x, y).Layer(l).AutoTile = 0
-                    Next
-
-                Next
-            Next
-
-        End SyncLock
-
-    End Sub
-
-    Sub ClearMapItems()
-        Dim i As Integer
-
-        For i = 1 To MAX_MAP_ITEMS
-            ClearMapItem(i)
-        Next
-
-    End Sub
-
-    Sub ClearMapItem(index As Integer)
-        MapItem(index).Frame = 0
-        MapItem(index).Num = 0
-        MapItem(index).Value = 0
-        MapItem(index).X = 0
-        MapItem(index).Y = 0
-    End Sub
-
-    Sub ClearMapNpc(index As Integer)
-        MapNpc(index).Attacking = 0
-        MapNpc(index).AttackTimer = 0
-        MapNpc(index).Dir = 0
-        MapNpc(index).Map = 0
-        MapNpc(index).Moving = 0
-        MapNpc(index).Num = 0
-        MapNpc(index).Steps = 0
-        MapNpc(index).Target = 0
-        MapNpc(index).TargetType = 0
-        MapNpc(index).Vital(VitalType.HP) = 0
-        MapNpc(index).Vital(VitalType.MP) = 0
-        MapNpc(index).Vital(VitalType.SP) = 0
-        MapNpc(index).X = 0
-        MapNpc(index).XOffset = 0
-        MapNpc(index).Y = 0
-        MapNpc(index).YOffset = 0
-    End Sub
-
-    Sub ClearMapNpcs()
-        Dim i As Integer
-
-        For i = 1 To MAX_MAP_NPCS
-            ClearMapNpc(i)
-        Next
-
-    End Sub
 
     Sub ClearBlood()
         For I = 1 To Byte.MaxValue
