@@ -11,7 +11,6 @@ Module C_Variables
     Friend DirArrowX(4) As Byte
     Friend DirArrowY(4) As Byte
 
-    Friend TilesetsClr() As Color
     Friend LastTileset As Byte
 
     Friend UseFade As Boolean
@@ -26,13 +25,6 @@ Module C_Variables
     ' chat bubble
     Friend ChatBubble(Byte.MaxValue) As ChatBubbleRec
     Friend ChatBubbleindex As Integer
-
-
-
-    ' inv drag + drop
-    Friend DragInvSlotNum As Integer
-    Friend InvX As Integer
-    Friend InvY As Integer
 
     ' skill drag + drop
     Friend DragSkillSlotNum As Integer
@@ -52,8 +44,6 @@ Module C_Variables
     Friend PingToDraw As String
     Friend ShowRClick As Boolean
 
-    Friend InvItemFrame(MAX_INV) As Byte ' Used for animated items
-    Friend LastItemDesc As Integer ' Stores the last item we showed in desc
     Friend LastSkillDesc As Integer ' Stores the last skill we showed in desc
     Friend LastBankDesc As Integer ' Stores the last bank item we showed in desc
     Friend TmpCurrencyItem As Integer
@@ -112,7 +102,6 @@ Module C_Variables
 
     ' FPS and Time-based movement vars
     Friend ElapsedTime As Integer
-    'Friend ElapsedMTime As Integer
     Friend GameFps As Integer
     Friend GameLps As Integer
 
@@ -128,8 +117,6 @@ Module C_Variables
     ' Game editors
     Friend Editor As Byte
     Friend Editorindex As Integer
-    Friend AnimEditorFrame(1) As Integer
-    Friend AnimEditorTimer(1) As Integer
 
     ' Used to check if in editor or not and variables for use in editor
     Friend SpawnNpcNum As Integer
@@ -171,14 +158,6 @@ Module C_Variables
     Friend BloodIndex As Byte
     Friend AnimationIndex As Byte
 
-    ' Editor edited items array
-    Friend ItemChanged(MAX_ITEMS) As Boolean
-    Friend NpcChanged(MAX_NPCS) As Boolean
-    Friend ResourceChanged(MAX_NPCS) As Boolean
-    Friend AnimationChanged(MAX_ANIMATIONS) As Boolean
-    Friend SkillChanged(MAX_SKILLS) As Boolean
-    Friend ShopChanged(MAX_SHOPS) As Boolean
-
     ' New char
     Friend NewCharSprite As Integer
     Friend NewCharClass As Integer
@@ -198,29 +177,10 @@ Module C_Variables
     Friend News As String
     Friend UpdateNews As Boolean
 
-    ' fog
-    Friend FogOffsetX As Integer
-    Friend FogOffsetY As Integer
-
-    'Weather Stuff... events take precedent OVER map settings so we will keep temp map weather settings here.
-    Friend CurrentWeather As Integer
-    Friend CurrentWeatherIntensity As Integer
-    Friend CurrentFog As Integer
-    Friend CurrentFogSpeed As Integer
-    Friend CurrentFogOpacity As Integer
-    Friend CurrentTintR As Integer
-    Friend CurrentTintG As Integer
-    Friend CurrentTintB As Integer
-    Friend CurrentTintA As Integer
-    Friend DrawThunder As Integer
-
     Friend ShakeTimerEnabled As Boolean
     Friend ShakeTimer As Integer
     Friend ShakeCount As Byte
     Friend LastDir As Byte
-
-    Friend CraftTimerEnabled As Boolean
-    Friend CraftTimer As Integer
 
     Friend ShowAnimLayers As Boolean
     Friend ShowAnimTimer As Integer

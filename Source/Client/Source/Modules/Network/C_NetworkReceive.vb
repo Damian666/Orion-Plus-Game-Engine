@@ -745,8 +745,6 @@ Module C_NetworkReceive
         Buffer.Dispose()
     End Sub
 
-
-
     Private Sub Packet_GlobalMessage(ByRef data() As Byte)
         Dim msg As String
         dim buffer as New ByteStream(Data)
@@ -799,74 +797,7 @@ Module C_NetworkReceive
         AddText(Msg, colour)
     End Sub
 
-    Private Sub Packet_UpdateItem(ByRef data() As Byte)
-        Dim n As Integer, i As Integer
-        dim buffer as New ByteStream(Data)
-        n = Buffer.ReadInt32
 
-        ' Update the item
-        Item(n).AccessReq = Buffer.ReadInt32()
-
-        For i = 0 To StatType.Count - 1
-            Item(n).Add_Stat(i) = Buffer.ReadInt32()
-        Next
-
-        Item(n).Animation = Buffer.ReadInt32()
-        Item(n).BindType = Buffer.ReadInt32()
-        Item(n).ClassReq = Buffer.ReadInt32()
-        Item(n).Data1 = Buffer.ReadInt32()
-        Item(n).Data2 = Buffer.ReadInt32()
-        Item(n).Data3 = Buffer.ReadInt32()
-        Item(n).TwoHanded = Buffer.ReadInt32()
-        Item(n).LevelReq = Buffer.ReadInt32()
-        Item(n).Mastery = Buffer.ReadInt32()
-        Item(n).Name = Trim$(Buffer.ReadString())
-        Item(n).Paperdoll = Buffer.ReadInt32()
-        Item(n).Pic = Buffer.ReadInt32()
-        Item(n).Price = Buffer.ReadInt32()
-        Item(n).Rarity = Buffer.ReadInt32()
-        Item(n).Speed = Buffer.ReadInt32()
-
-        Item(n).Randomize = Buffer.ReadInt32()
-        Item(n).RandomMin = Buffer.ReadInt32()
-        Item(n).RandomMax = Buffer.ReadInt32()
-
-        Item(n).Stackable = Buffer.ReadInt32()
-        Item(n).Description = Trim$(Buffer.ReadString())
-
-        For i = 0 To StatType.Count - 1
-            Item(n).Stat_Req(i) = Buffer.ReadInt32()
-        Next
-
-        Item(n).Type = Buffer.ReadInt32()
-        Item(n).SubType = Buffer.ReadInt32
-
-        'Housing
-        Item(n).FurnitureWidth = Buffer.ReadInt32()
-        Item(n).FurnitureHeight = Buffer.ReadInt32()
-
-        For a = 0 To 3
-            For b = 0 To 3
-                Item(n).FurnitureBlocks(a, b) = buffer.ReadInt32()
-                Item(n).FurnitureFringe(a, b) = buffer.ReadInt32()
-            Next
-        Next
-
-        Item(n).KnockBack = Buffer.ReadInt32()
-        Item(n).KnockBackTiles = Buffer.ReadInt32()
-
-        Item(n).Projectile = Buffer.ReadInt32()
-        Item(n).Ammo = Buffer.ReadInt32()
-
-        Buffer.Dispose()
-
-        ' changes to inventory, need to clear any drop menu
-        frmGame.pnlCurrency.Visible = False
-        frmGame.txtCurrency.Text = ""
-        tmpCurrencyItem = 0
-        CurrencyMenu = 0 ' clear
-
-    End Sub
 
     Private Sub Packet_SpawnNPC(ByRef data() As Byte)
         Dim i As Integer
@@ -1243,7 +1174,7 @@ Module C_NetworkReceive
 
     Private Sub Packet_OpenBank(ByRef data() As Byte)
         Dim i As Integer, x As Integer
-        dim buffer as New ByteStream(Data)
+        Dim buffer As New ByteStream(Data)
         For i = 1 To MAX_BANK
             Bank.Item(i).Num = Buffer.ReadInt32
             Bank.Item(i).Value = Buffer.ReadInt32
@@ -1260,83 +1191,6 @@ Module C_NetworkReceive
         Next
 
         NeedToOpenBank = True
-
-        Buffer.Dispose()
-    End Sub
-
-    Private Sub Packet_ClearTradeTimer(ByRef data() As Byte)
-        dim buffer as New ByteStream(Data)
-        TradeRequest = False
-        TradeTimer = 0
-
-        Buffer.Dispose()
-    End Sub
-
-    Private Sub Packet_TradeInvite(ByRef data() As Byte)
-        Dim requester As Integer
-        dim buffer as New ByteStream(Data)
-        requester = Buffer.ReadInt32
-
-        DialogType = DialogueTypeTrade
-
-        DialogMsg1 = Strings.Get("trade", "tradeinvite", Trim$((Player(requester).Name)))
-
-        UpdateDialog = True
-
-        Buffer.Dispose()
-    End Sub
-
-    Private Sub Packet_Trade(ByRef data() As Byte)
-        dim buffer as New ByteStream(Data)
-        NeedToOpenTrade = True
-        Buffer.ReadInt32()
-        Tradername = Trim(Buffer.ReadString)
-        pnlTradeVisible = True
-
-        Buffer.Dispose()
-    End Sub
-
-    Private Sub Packet_CloseTrade(ByRef data() As Byte)
-        NeedtoCloseTrade = True
-    End Sub
-
-    Private Sub Packet_TradeUpdate(ByRef data() As Byte)
-        Dim datatype As Integer
-        dim buffer as New ByteStream(Data)
-        datatype = Buffer.ReadInt32
-
-        If datatype = 0 Then ' ours!
-            For i = 1 To MAX_INV
-                TradeYourOffer(i).Num = Buffer.ReadInt32
-                TradeYourOffer(i).Value = Buffer.ReadInt32
-            Next
-            YourWorth = Strings.Get("trade", "tradeworth", Buffer.ReadInt32)
-        ElseIf datatype = 1 Then 'theirs
-            For i = 1 To MAX_INV
-                TradeTheirOffer(i).Num = Buffer.ReadInt32
-                TradeTheirOffer(i).Value = Buffer.ReadInt32
-            Next
-            TheirWorth = "Total Worth: " & Buffer.ReadInt32 & "g"
-        End If
-
-        NeedtoUpdateTrade = True
-
-        Buffer.Dispose()
-    End Sub
-
-    Private Sub Packet_TradeStatus(ByRef data() As Byte)
-        Dim tradestatus As Integer
-        dim buffer as New ByteStream(Data)
-        tradestatus = Buffer.ReadInt32
-
-        Select Case tradestatus
-            Case 0 ' clear
-                'frmMainGame.lblTradeStatus.Text = ""
-            Case 1 ' they've accepted
-                AddText(Strings.Get("trade", "tradestatusok"), ColorType.White)
-            Case 2 ' you've accepted
-                AddText(Strings.Get("trade", "tradestatuswait"), ColorType.White)
-        End Select
 
         Buffer.Dispose()
     End Sub
@@ -1774,10 +1628,10 @@ Module C_NetworkReceive
 
     Private Sub Packet_ChatBubble(ByRef data() As Byte)
         Dim targetType As Integer, target As Integer, message As String, colour As Integer
-        dim buffer as New ByteStream(Data)
+        Dim buffer As New ByteStream(data)
+
         target = Buffer.ReadInt32
-        targetType = Buffer.ReadInt32
-        'Message = buffer.ReadString
+        targetType = buffer.ReadInt32
         message = Trim(buffer.ReadString)
         colour = Buffer.ReadInt32
         AddChatBubble(target, targetType, Message, colour)

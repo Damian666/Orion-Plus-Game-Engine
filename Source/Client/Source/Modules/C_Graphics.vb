@@ -1284,21 +1284,20 @@ Module C_Graphics
     End Sub
 
     Friend Sub DrawItem(itemnum As Integer)
-
-        Dim srcrec As Rectangle
-        Dim destrec As Rectangle
+        Dim srcrec As Rectangle, destrec As Rectangle
         Dim picNum As Integer
         Dim x As Integer, y As Integer
-        PicNum = Item(MapItem(itemnum).Num).Pic
 
-        If PicNum < 1 OrElse PicNum > NumItems Then Exit Sub
+        picNum = Item(MapItem(itemnum).Num).Pic
 
-        If ItemsGFXInfo(PicNum).IsLoaded = False Then
-            LoadTexture(PicNum, 4)
+        If picNum < 1 OrElse picNum > NumItems Then Exit Sub
+
+        If ItemsGfxInfo(picNum).IsLoaded = False Then
+            LoadTexture(picNum, 4)
         End If
 
         'seeying we still use it, lets update timer
-        With ItemsGFXInfo(PicNum)
+        With ItemsGfxInfo(picNum)
             .TextureTimer = GetTickCount() + 100000
         End With
 
@@ -1307,7 +1306,7 @@ Module C_Graphics
             If .Y < TileView.Top OrElse .Y > TileView.Bottom Then Exit Sub
         End With
 
-        If ItemsGFXInfo(PicNum).Width > 32 Then ' has more than 1 frame
+        If ItemsGfxInfo(picNum).Width > 32 Then ' has more than 1 frame
             srcrec = New Rectangle((MapItem(itemnum).Frame * 32), 0, 32, 32)
             destrec = New Rectangle(ConvertMapX(MapItem(itemnum).X * PicX), ConvertMapY(MapItem(itemnum).Y * PicY), 32, 32)
         Else
@@ -1318,7 +1317,7 @@ Module C_Graphics
         x = ConvertMapX(MapItem(itemnum).X * PicX)
         y = ConvertMapY(MapItem(itemnum).Y * PicY)
 
-        RenderSprite(ItemsSprite(PicNum), GameWindow, x, y, srcrec.X, srcrec.Y, srcrec.Width, srcrec.Height)
+        RenderSprite(ItemsSprite(picNum), GameWindow, x, y, srcrec.X, srcrec.Y, srcrec.Width, srcrec.Height)
 
     End Sub
 
@@ -3173,144 +3172,7 @@ NextLoop:
 
     End Sub
 
-    Sub DrawTrade()
-        Dim i As Integer, x As Integer, y As Integer, itemnum As Integer, itempic As Integer
-        Dim amount As String
-        Dim rec As Rectangle, recPos As Rectangle
-        Dim colour As SFML.Graphics.Color
 
-        Amount = 0
-        colour = SFML.Graphics.Color.White
-
-        If Not InGame Then Exit Sub
-
-        'first render panel
-        RenderSprite(TradePanelSprite, GameWindow, TradeWindowX, TradeWindowY, 0, 0, TradePanelGFXInfo.Width, TradePanelGFXInfo.Height)
-
-        'Headertext
-        DrawText(TradeWindowX + 70, TradeWindowY + 6, "Your Offer", SFML.Graphics.Color.White, SFML.Graphics.Color.Black, GameWindow, 15)
-
-        DrawText(TradeWindowX + 260, TradeWindowY + 6, Tradername & "'s Offer.", SFML.Graphics.Color.White, SFML.Graphics.Color.Black, GameWindow, 15)
-
-        For i = 1 To MAX_INV
-            ' blt your own offer
-            itemnum = GetPlayerInvItemNum(MyIndex, TradeYourOffer(i).Num)
-
-            If itemnum > 0 AndAlso itemnum <= MAX_ITEMS Then
-                itempic = Item(itemnum).Pic
-
-                If itempic > 0 AndAlso itempic <= NumItems Then
-
-                    If ItemsGFXInfo(itempic).IsLoaded = False Then
-                        LoadTexture(itempic, 4)
-                    End If
-
-                    'seeying we still use it, lets update timer
-                    With ItemsGFXInfo(itempic)
-                        .TextureTimer = GetTickCount() + 100000
-                    End With
-
-                    With rec
-                        .Y = 0
-                        .Height = PicY
-                        .X = 0
-                        .Width = PicX
-                    End With
-
-                    With recPos
-                        .Y = TradeWindowY + OurTradeY + InvTop + ((InvOffsetY + 32) * ((i - 1) \ InvColumns))
-                        .Height = PicY
-                        .X = TradeWindowX + OurTradeX + InvLeft + ((InvOffsetX + 32) * (((i - 1) Mod InvColumns)))
-                        .Width = PicX
-                    End With
-
-                    RenderSprite(ItemsSprite(itempic), GameWindow, recPos.X, recPos.Y, rec.X, rec.Y, rec.Width, rec.Height)
-
-                    ' If item is a stack - draw the amount you have
-                    If TradeYourOffer(i).Value >= 1 Then
-                        Y = recPos.Top + 22
-                        X = recPos.Left - 4
-
-                        ' Draw currency but with k, m, b etc. using a convertion function
-                        If Amount < 1000000 Then
-                            colour = SFML.Graphics.Color.White
-                        ElseIf Amount > 1000000 AndAlso CLng(Amount) < 10000000 Then
-                            colour = SFML.Graphics.Color.Yellow
-                        ElseIf Amount > 10000000 Then
-                            colour = SFML.Graphics.Color.Green
-                        End If
-
-                        Amount = TradeYourOffer(i).Value
-                        DrawText(X, Y, ConvertCurrency(Amount), colour, SFML.Graphics.Color.Black, GameWindow)
-                    End If
-                End If
-            End If
-        Next
-
-        DrawText(TradeWindowX + 8, TradeWindowY + 288, YourWorth, SFML.Graphics.Color.White, SFML.Graphics.Color.Black, GameWindow, 13)
-
-        For i = 1 To MAX_INV
-            ' blt their offer
-            itemnum = TradeTheirOffer(i).Num
-            'itemnum = GetPlayerInvItemNum(MyIndex, TradeYourOffer(i).Num)
-            If itemnum > 0 AndAlso itemnum <= MAX_ITEMS Then
-                itempic = Item(itemnum).Pic
-
-                If itempic > 0 AndAlso itempic <= NumItems Then
-                    If ItemsGFXInfo(itempic).IsLoaded = False Then
-                        LoadTexture(itempic, 4)
-                    End If
-
-                    'seeying we still use it, lets update timer
-                    With ItemsGFXInfo(itempic)
-                        .TextureTimer = GetTickCount() + 100000
-                    End With
-
-                    With rec
-                        .Y = 0
-                        .Height = PicY
-                        .X = 0
-                        .Width = PicX
-                    End With
-
-                    With recPos
-                        .Y = TradeWindowY + TheirTradeY + InvTop + ((InvOffsetY + 32) * ((i - 1) \ InvColumns))
-                        .Height = PicY
-                        .X = TradeWindowX + TheirTradeX + InvLeft + ((InvOffsetX + 32) * (((i - 1) Mod InvColumns)))
-                        .Width = PicX
-                    End With
-
-                    RenderSprite(ItemsSprite(itempic), GameWindow, recPos.X, recPos.Y, rec.X, rec.Y, rec.Width, rec.Height)
-
-                    ' If item is a stack - draw the amount they have
-                    If TradeTheirOffer(i).Value >= 1 Then
-                        Y = recPos.Top + 22
-                        X = recPos.Left - 4
-
-                        ' Draw currency but with k, m, b etc. using a convertion function
-                        If Amount < 1000000 Then
-                            colour = SFML.Graphics.Color.White
-                        ElseIf Amount > 1000000 AndAlso CLng(Amount) < 10000000 Then
-                            colour = SFML.Graphics.Color.Yellow
-                        ElseIf Amount > 10000000 Then
-                            colour = SFML.Graphics.Color.Green
-                        End If
-
-                        Amount = TradeTheirOffer(i).Value
-                        DrawText(X, Y, Amount, colour, SFML.Graphics.Color.Black, GameWindow)
-                    End If
-                End If
-            End If
-        Next
-
-        DrawText(TradeWindowX + 208, TradeWindowY + 288, TheirWorth, SFML.Graphics.Color.White, SFML.Graphics.Color.Black, GameWindow, 13)
-
-        'render accept button
-        DrawButton("Accept Trade", TradeWindowX + TradeButtonAcceptX, TradeWindowY + TradeButtonAcceptY, 0)
-
-        'render decline button
-        DrawButton("Decline Trade", TradeWindowX + TradeButtonDeclineX, TradeWindowY + TradeButtonDeclineY, 0)
-    End Sub
 
     Sub DrawPlayerSkills()
         Dim i As Integer, skillnum As Integer, skillicon As Integer

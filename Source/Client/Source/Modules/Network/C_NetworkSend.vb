@@ -67,7 +67,6 @@ Module C_NetworkSend
         Dim buffer As New ByteStream(4)
 
         buffer.WriteInt32(ClientPackets.CSayMsg)
-        'buffer.Writestring((text)
         buffer.WriteString((text))
 
         Socket.SendData(buffer.Data, buffer.Head)
@@ -174,15 +173,6 @@ Module C_NetworkSend
         buffer.Dispose()
     End Sub
 
-    Sub SendRequestItems()
-        Dim buffer As New ByteStream(4)
-
-        buffer.WriteInt32(ClientPackets.CRequestItems)
-
-        Socket.SendData(buffer.Data, buffer.Head)
-        buffer.Dispose()
-    End Sub
-
     Friend Sub SendPlayerDir()
         Dim buffer As New ByteStream(4)
 
@@ -252,8 +242,7 @@ Module C_NetworkSend
         Dim buffer As New ByteStream(4)
 
         buffer.WriteInt32(ClientPackets.CBroadcastMsg)
-        'buffer.Writestring((text)
-        buffer.WriteString((text))
+        buffer.WriteString(text.Trim)
 
         Socket.SendData(buffer.Data, buffer.Head)
         buffer.Dispose()
@@ -264,7 +253,6 @@ Module C_NetworkSend
 
         buffer.WriteInt32(ClientPackets.CPlayerMsg)
         buffer.WriteString((msgTo))
-        'buffer.Writestring((text)
         buffer.WriteString((text))
 
         Socket.SendData(buffer.Data, buffer.Head)
@@ -428,69 +416,6 @@ Module C_NetworkSend
 
         Socket.SendData(buffer.Data, buffer.Head)
         buffer.Dispose()
-    End Sub
-
-    Sub SendTradeRequest(name As String)
-        Dim buffer As New ByteStream(4)
-
-        buffer.WriteInt32(ClientPackets.CTradeInvite)
-
-        buffer.WriteString((name))
-
-        Socket.SendData(Buffer.Data, Buffer.Head)
-        Buffer.Dispose()
-
-    End Sub
-
-    Sub SendTradeInviteAccept(awnser As Byte)
-        dim buffer as New ByteStream(4)
-
-        Buffer.WriteInt32(ClientPackets.CTradeInviteAccept)
-
-        Buffer.WriteInt32(Awnser)
-
-        Socket.SendData(Buffer.Data, Buffer.Head)
-        Buffer.Dispose()
-
-    End Sub
-
-    Friend Sub TradeItem(invslot As Integer, amount As Integer)
-        dim buffer as New ByteStream(4)
-
-        Buffer.WriteInt32(ClientPackets.CTradeItem)
-        Buffer.WriteInt32(invslot)
-        Buffer.WriteInt32(Amount)
-
-        Socket.SendData(Buffer.Data, Buffer.Head)
-        Buffer.Dispose()
-    End Sub
-
-    Friend Sub UntradeItem(invslot As Integer)
-        dim buffer as New ByteStream(4)
-
-        Buffer.WriteInt32(ClientPackets.CUntradeItem)
-        Buffer.WriteInt32(invslot)
-
-        Socket.SendData(Buffer.Data, Buffer.Head)
-        Buffer.Dispose()
-    End Sub
-
-    Friend Sub AcceptTrade()
-        dim buffer as New ByteStream(4)
-
-        Buffer.WriteInt32(ClientPackets.CAcceptTrade)
-
-        Socket.SendData(Buffer.Data, Buffer.Head)
-        Buffer.Dispose()
-    End Sub
-
-    Friend Sub DeclineTrade()
-        dim buffer as New ByteStream(4)
-
-        Buffer.WriteInt32(ClientPackets.CDeclineTrade)
-
-        Socket.SendData(Buffer.Data, Buffer.Head)
-        Buffer.Dispose()
     End Sub
 
     Friend Sub SendLeaveGame()

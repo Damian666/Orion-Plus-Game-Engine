@@ -250,15 +250,7 @@
     Friend TradeButtonDeclineX As Integer = 250
     Friend TradeButtonDeclineY As Integer = 320
 
-    Friend TradeTimer As Integer
-    Friend TradeRequest As Boolean
-    Friend InTrade As Boolean
-    Friend TradeYourOffer(MAX_INV) As PlayerInvRec
-    Friend TradeTheirOffer(MAX_INV) As PlayerInvRec
-    Friend TradeX As Integer
-    Friend TradeY As Integer
-    Friend TheirWorth As String
-    Friend YourWorth As String
+
 
     'event chat constants
     Friend Const EventChatX As Integer = 250

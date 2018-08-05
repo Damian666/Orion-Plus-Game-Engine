@@ -19,7 +19,6 @@ Module C_DataBase
 
 #Region "Assets Check"
 
-
     Friend Sub CheckCharacters()
         Dim i As Integer
         i = 1
@@ -54,18 +53,6 @@ Module C_DataBase
         End While
 
         If NumAnimations = 0 Then Exit Sub
-    End Sub
-
-    Friend Sub CheckItems()
-        Dim i As Integer
-        i = 1
-
-        While File.Exists(Application.StartupPath & GfxPath & "Items\" & i & GfxExt)
-            NumItems = NumItems + 1
-            i = i + 1
-        End While
-
-        If NumItems = 0 Then Exit Sub
     End Sub
 
     Friend Sub CheckSkillIcons()
@@ -286,8 +273,7 @@ Module C_DataBase
     End Sub
 #End Region
 
-#Region "Maps"
-
+#Region "Blood"
 
     Sub ClearBlood()
         For I = 1 To Byte.MaxValue
@@ -295,43 +281,6 @@ Module C_DataBase
         Next
     End Sub
 
-#End Region
-
-#Region "Items"
-    Friend Sub ClearItem(index As Integer)
-        'Index = Index - 1
-        Item(index) = Nothing
-        Item(index) = New ItemRec
-        For x = 0 To StatType.Count - 1
-            ReDim Item(index).Add_Stat(x)
-        Next
-        For x = 0 To StatType.Count - 1
-            ReDim Item(index).Stat_Req(x)
-        Next
-
-        ReDim Item(index).FurnitureBlocks(3, 3)
-        ReDim Item(index).FurnitureFringe(3, 3)
-
-        Item(index).Name = ""
-    End Sub
-
-    Friend Sub ClearChanged_Item()
-        For i = 1 To MAX_ITEMS
-            ItemChanged(i) = Nothing
-        Next i
-        ReDim ItemChanged(MAX_ITEMS)
-    End Sub
-
-    Sub ClearItems()
-        Dim i As Integer
-
-        ReDim Item(MAX_ITEMS)
-
-        For i = 1 To MAX_ITEMS
-            ClearItem(i)
-        Next
-
-    End Sub
 #End Region
 
 #Region "Npc's"

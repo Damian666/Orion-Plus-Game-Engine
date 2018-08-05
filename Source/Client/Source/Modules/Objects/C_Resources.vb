@@ -24,14 +24,6 @@ Module C_Resources
         If NumResources = 0 Then Exit Sub
     End Sub
 
-    Friend Sub ClearChanged_Resource()
-        For i = 1 To MAX_RESOURCES
-            ResourceChanged(i) = Nothing
-        Next
-
-        ReDim ResourceChanged(MAX_RESOURCES)
-    End Sub
-
     Sub ClearResource(index As Integer)
         Resource(index) = Nothing
         Resource(index) = New ResourceRec With {
