@@ -19,7 +19,6 @@
 ' LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 ' OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 ' SOFTWARE.
-
 Imports System.Timers
 
 Friend Enum TimeOfDay As Byte
@@ -33,6 +32,7 @@ Friend Delegate Sub HandleTimeEvent(ByRef source As Time)
 
 Friend Class Time
     Private Shared _mInstance As Time = Nothing
+
     Friend Shared ReadOnly Property Instance As Time
         Get
             If (_mInstance Is Nothing) Then
@@ -50,6 +50,7 @@ Friend Class Time
     Private ReadOnly _mTimer As Timer
 
     Private _mTime As Date
+
     Friend Property Time As Date
         Get
             Return _mTime
@@ -64,24 +65,26 @@ Friend Class Time
         End Set
     End Property
 
-    Private mGameSpeed As Double
+    Private _mGameSpeed As Double
+
     Friend Property GameSpeed As Double
         Get
-            Return mGameSpeed
+            Return _mGameSpeed
         End Get
-        Set(value As Double)
-            mGameSpeed = value
+        Set
+            _mGameSpeed = Value
             RaiseEvent OnTimeSync(Me)
         End Set
     End Property
 
     Private mSyncInterval As Integer
+
     Friend Property SyncInterval As Integer
         Get
             Return mSyncInterval
         End Get
-        Set(value As Integer)
-            mSyncInterval = value
+        Set
+            mSyncInterval = Value
 
             _mTimer.Stop()
             _mTimer.Interval = mSyncInterval
@@ -91,12 +94,13 @@ Friend Class Time
     End Property
 
     Private mTimeOfDay As TimeOfDay
+
     Friend Property TimeOfDay As TimeOfDay
         Get
             Return mTimeOfDay
         End Get
-        Set(value As TimeOfDay)
-            mTimeOfDay = value
+        Set
+            mTimeOfDay = Value
             RaiseEvent OnTimeOfDayChanged(Me)
         End Set
     End Property

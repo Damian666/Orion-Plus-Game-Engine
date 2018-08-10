@@ -111,7 +111,6 @@ Module C_NetworkReceive
         Socket.PacketId(ServerPackets.SStopSound) = AddressOf Packet_StopSound
         Socket.PacketId(ServerPackets.SSwitchesAndVariables) = AddressOf Packet_SwitchesAndVariables
         Socket.PacketId(ServerPackets.SMapEventData) = AddressOf Packet_MapEventData
-        'SChatBubble
         Socket.PacketId(ServerPackets.SChatBubble) = AddressOf Packet_ChatBubble
         Socket.PacketId(ServerPackets.SSpecialEffect) = AddressOf Packet_SpecialEffect
         'SPic
@@ -879,39 +878,11 @@ Module C_NetworkReceive
 
     Private Sub Packet_MapKey(ByRef data() As Byte)
         Dim n As Integer, x As Integer, y As Integer
-        dim buffer as New ByteStream(Data)
+        Dim buffer As New ByteStream(Data)
         X = Buffer.ReadInt32
         Y = Buffer.ReadInt32
         n = Buffer.ReadInt32
         TempTile(X, Y).DoorOpen = n
-
-        Buffer.Dispose()
-    End Sub
-
-    Private Sub Packet_EditMap(ByRef data() As Byte)
-        dim buffer as New ByteStream(Data)
-        InitMapEditor = True
-
-        Buffer.Dispose()
-    End Sub
-
-    Private Sub Packet_UpdateShop(ByRef data() As Byte)
-        Dim shopnum As Integer
-        dim buffer as New ByteStream(Data)
-        shopnum = Buffer.ReadInt32
-
-        Shop(shopnum).BuyRate = Buffer.ReadInt32()
-        Shop(shopnum).Name = Trim(Buffer.ReadString())
-        Shop(shopnum).Face = Buffer.ReadInt32()
-
-        For i = 0 To MAX_TRADES
-            Shop(shopnum).TradeItem(i).CostItem = Buffer.ReadInt32()
-            Shop(shopnum).TradeItem(i).CostValue = Buffer.ReadInt32()
-            Shop(shopnum).TradeItem(i).Item = Buffer.ReadInt32()
-            Shop(shopnum).TradeItem(i).ItemValue = Buffer.ReadInt32()
-        Next
-
-        If Shop(shopnum).Name Is Nothing Then Shop(shopnum).Name = ""
 
         Buffer.Dispose()
     End Sub
@@ -1126,8 +1097,7 @@ Module C_NetworkReceive
         dim buffer as New ByteStream(Data)
         Name = Trim(Buffer.ReadString)
         Access = Buffer.ReadInt32
-        PK = Buffer.ReadInt32
-        'message = Trim(Buffer.ReadString)
+        pk = buffer.ReadInt32
         message = Trim(buffer.ReadString)
         header = Trim(Buffer.ReadString)
 
@@ -1136,20 +1106,7 @@ Module C_NetworkReceive
         Buffer.Dispose()
     End Sub
 
-    Private Sub Packet_OpenShop(ByRef data() As Byte)
-        Dim shopnum As Integer
-        dim buffer as New ByteStream(Data)
-        shopnum = Buffer.ReadInt32
 
-        NeedToOpenShop = True
-        NeedToOpenShopNum = shopnum
-
-        Buffer.Dispose()
-    End Sub
-
-    Private Sub Packet_ResetShopAction(ByRef data() As Byte)
-        ShopAction = 0
-    End Sub
 
     Private Sub Packet_Stunned(ByRef data() As Byte)
         dim buffer as New ByteStream(Data)
@@ -1172,28 +1129,7 @@ Module C_NetworkReceive
         Buffer.Dispose()
     End Sub
 
-    Private Sub Packet_OpenBank(ByRef data() As Byte)
-        Dim i As Integer, x As Integer
-        Dim buffer As New ByteStream(Data)
-        For i = 1 To MAX_BANK
-            Bank.Item(i).Num = Buffer.ReadInt32
-            Bank.Item(i).Value = Buffer.ReadInt32
 
-            Bank.ItemRand(i).Prefix = Buffer.ReadString
-            Bank.ItemRand(i).Suffix = Buffer.ReadString
-            Bank.ItemRand(i).Rarity = Buffer.ReadInt32
-            Bank.ItemRand(i).Damage = Buffer.ReadInt32
-            Bank.ItemRand(i).Speed = Buffer.ReadInt32
-
-            For x = 1 To StatType.Count - 1
-                Bank.ItemRand(i).Stat(x) = Buffer.ReadInt32
-            Next
-        Next
-
-        NeedToOpenBank = True
-
-        Buffer.Dispose()
-    End Sub
 
     Private Sub Packet_GameData(ByRef data() As Byte)
         Dim n As Integer, i As Integer, z As Integer, x As Integer, a As Integer, b As Integer

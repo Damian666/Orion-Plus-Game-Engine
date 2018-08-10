@@ -170,7 +170,7 @@ Module C_DataBase
         Options.Password = ""
         Options.SavePass = False
         Options.Username = ""
-        Options.Ip = "Localhost"
+        Options.Ip = "127.0.0.1"
         Options.Port = 7001
         Options.MenuMusic = ""
         Options.Music = 1
@@ -402,41 +402,6 @@ Module C_DataBase
             .Name = ""
         }
     End Sub
-#End Region
-
-#Region "Shops"
-    Sub ClearShop(index As Integer)
-        Shop(index) = Nothing
-        Shop(index) = New ShopRec With {
-            .Name = ""
-        }
-        ReDim Shop(index).TradeItem(MAX_TRADES)
-        For x = 0 To MAX_TRADES
-            ReDim Shop(index).TradeItem(x)
-        Next
-    End Sub
-
-    Sub ClearShops()
-        Dim i As Integer
-
-        ReDim Shop(MAX_SHOPS)
-
-        For i = 1 To MAX_SHOPS
-            ClearShop(i)
-        Next
-
-    End Sub
-#End Region
-
-#Region "Bank"
-    Sub ClearBank()
-        ReDim Bank.Item(MAX_BANK)
-        ReDim Bank.ItemRand(MAX_BANK)
-        For x = 1 To MAX_BANK
-            ReDim Bank.ItemRand(x).Stat(StatType.Count - 1)
-        Next
-    End Sub
-
 #End Region
 
 End Module

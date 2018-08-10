@@ -116,6 +116,8 @@
     <Compile Include="Source\Modules\Objects\C_Items.vb" />
     <Compile Include="Source\Modules\Objects\C_Maps.vb" />
     <Compile Include="Source\Modules\Objects\C_Resources.vb" />
+    <Compile Include="Source\Modules\Systems\C_Banks.vb" />
+    <Compile Include="Source\Modules\Systems\C_Shops.vb" />
     <Compile Include="Source\Modules\Systems\C_Trade.vb" />
     <Compile Include="Source\Modules\UI\C_Chat.vb" />
     <Compile Include="Source\Forms\frmAdmin.Designer.vb">

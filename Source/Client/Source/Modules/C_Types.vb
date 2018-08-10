@@ -3,9 +3,6 @@
     Friend Options As New C_Options()
 
     ' Friend data structures
-
-    Friend Bank As BankRec
-
     Friend Player(MAX_PLAYERS) As PlayerRec
 
     ' client-side stuff

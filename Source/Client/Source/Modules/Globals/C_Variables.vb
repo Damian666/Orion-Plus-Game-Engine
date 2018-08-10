@@ -31,10 +31,7 @@ Module C_Variables
     Friend SkillX As Integer
     Friend SkillY As Integer
 
-    ' bank drag + drop
-    Friend DragBankSlotNum As Integer
-    Friend BankX As Integer
-    Friend BankY As Integer
+
 
     ' gui
     Friend EqX As Integer
@@ -45,11 +42,10 @@ Module C_Variables
     Friend ShowRClick As Boolean
 
     Friend LastSkillDesc As Integer ' Stores the last skill we showed in desc
-    Friend LastBankDesc As Integer ' Stores the last bank item we showed in desc
+
     Friend TmpCurrencyItem As Integer
-    Friend InShop As Integer ' is the player in a shop?
-    Friend ShopAction As Byte ' stores the current shop action
-    Friend InBank As Integer
+
+
     Friend CurrencyMenu As Byte
     Friend HideGui As Boolean
 

@@ -11,26 +11,26 @@ Friend NotInheritable Class Strings
         Server
     End Enum
 
-    Private Shared DefaultLanguage As Language
-    Private Shared SelectedLanguage As Language
+    Private Shared _defaultLanguage As Language
+    Private Shared _selectedLanguage As Language
 
     Friend Shared Sub Init(component As OrionComponent, language As String)
         Dim path As String = Application.StartupPath & "\Data\"
-        If Not Directory.Exists(path) then Directory.CreateDirectory(path)
+        If Not Directory.Exists(path) Then Directory.CreateDirectory(path)
         path += "Languages\"
-        If Not Directory.Exists(path) then Directory.CreateDirectory(path)
-        
-        DefaultLanguage = New Language(path & component.ToString() & "_English.xml")
-        dim fPath as string =  path & component.ToString() & "_" & language & ".xml"
-        if file.Exists(fPath) Then SelectedLanguage = New Language(fPath)
+        If Not Directory.Exists(path) Then Directory.CreateDirectory(path)
+
+        _defaultLanguage = New Language(path & component.ToString() & "_English.xml")
+        Dim fPath As String = path & component.ToString() & "_" & language & ".xml"
+        If File.Exists(fPath) Then _selectedLanguage = New Language(fPath)
     End Sub
 
     Friend Shared Function [Get](section As String, id As String, ParamArray args As Object()) As String
-        If SelectedLanguage IsNot Nothing AndAlso SelectedLanguage.Loaded() AndAlso SelectedLanguage.HasString(section, id) Then
-            Return SelectedLanguage.GetString(section, id, args)
+        If _selectedLanguage IsNot Nothing AndAlso _selectedLanguage.Loaded() AndAlso _selectedLanguage.HasString(section, id) Then
+            Return _selectedLanguage.GetString(section, id, args)
         End If
-        If DefaultLanguage IsNot Nothing AndAlso DefaultLanguage.Loaded() AndAlso DefaultLanguage.HasString(section, id) Then
-            Return DefaultLanguage.GetString(section, id, args)
+        If _defaultLanguage IsNot Nothing AndAlso _defaultLanguage.Loaded() AndAlso _defaultLanguage.HasString(section, id) Then
+            Return _defaultLanguage.GetString(section, id, args)
         End If
         Return "Not Found"
     End Function

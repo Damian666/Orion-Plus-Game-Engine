@@ -111,6 +111,13 @@ Module C_Maps
 #End Region
 
 #Region "Incoming Packets"
+    Friend Sub Packet_EditMap(ByRef data() As Byte)
+        Dim buffer As New ByteStream(data)
+        InitMapEditor = True
+
+        buffer.Dispose()
+    End Sub
+
     Sub Packet_CheckMap(ByRef data() As Byte)
         Dim x As Integer, y As Integer, i As Integer
         Dim needMap As Byte

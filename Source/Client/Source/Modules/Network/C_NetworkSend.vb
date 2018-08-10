@@ -201,14 +201,7 @@ Module C_NetworkSend
         buffer.Dispose()
     End Sub
 
-    Sub SendRequestShops()
-        Dim buffer As New ByteStream(4)
 
-        buffer.WriteInt32(ClientPackets.CRequestShops)
-
-        Socket.SendData(buffer.Data, buffer.Head)
-        buffer.Dispose()
-    End Sub
 
     Sub SendRequestAnimations()
         Dim buffer As New ByteStream(4)
@@ -328,70 +321,7 @@ Module C_NetworkSend
         buffer.Dispose()
     End Sub
 
-    Friend Sub BuyItem(shopslot As Integer)
-        Dim buffer As New ByteStream(4)
 
-        buffer.WriteInt32(ClientPackets.CBuyItem)
-        buffer.WriteInt32(shopslot)
-
-        Socket.SendData(buffer.Data, buffer.Head)
-        buffer.Dispose()
-    End Sub
-
-    Friend Sub SellItem(invslot As Integer)
-        Dim buffer As New ByteStream(4)
-
-        buffer.WriteInt32(ClientPackets.CSellItem)
-        buffer.WriteInt32(invslot)
-
-        Socket.SendData(buffer.Data, buffer.Head)
-        buffer.Dispose()
-    End Sub
-
-    Friend Sub DepositItem(invslot As Integer, amount As Integer)
-        Dim buffer As New ByteStream(4)
-
-        buffer.WriteInt32(ClientPackets.CDepositItem)
-        buffer.WriteInt32(invslot)
-        buffer.WriteInt32(amount)
-
-        Socket.SendData(buffer.Data, buffer.Head)
-        buffer.Dispose()
-    End Sub
-
-    Friend Sub WithdrawItem(bankslot As Integer, amount As Integer)
-        Dim buffer As New ByteStream(4)
-
-        buffer.WriteInt32(ClientPackets.CWithdrawItem)
-        buffer.WriteInt32(bankslot)
-        buffer.WriteInt32(amount)
-
-        Socket.SendData(buffer.Data, buffer.Head)
-        buffer.Dispose()
-    End Sub
-
-    Friend Sub ChangeBankSlots(oldSlot As Integer, newSlot As Integer)
-        Dim buffer As New ByteStream(4)
-
-        buffer.WriteInt32(ClientPackets.CChangeBankSlots)
-        buffer.WriteInt32(oldSlot)
-        buffer.WriteInt32(newSlot)
-
-        Socket.SendData(buffer.Data, buffer.Head)
-        buffer.Dispose()
-    End Sub
-
-    Friend Sub CloseBank()
-        Dim buffer As New ByteStream(4)
-
-        buffer.WriteInt32(ClientPackets.CCloseBank)
-
-        Socket.SendData(buffer.Data, buffer.Head)
-        buffer.Dispose()
-
-        InBank = False
-        PnlBankVisible = False
-    End Sub
 
     Sub PlayerSearch(curX As Integer, curY As Integer, rClick As Byte)
         Dim buffer As New ByteStream(4)
