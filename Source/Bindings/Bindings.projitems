@@ -6,16 +6,16 @@
     <SharedGUID>71445ca4-1713-4144-8cf5-2ab69788d6fc</SharedGUID>
   </PropertyGroup>
   <PropertyGroup Label="Configuration">
-    <Import_RootNamespace>Bindings</Import_RootNamespace>
+    <Import_RootNamespace>Engine</Import_RootNamespace>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="$(MSBuildThisFileDirectory)Common\Time.vb" />
-    <Compile Include="$(MSBuildThisFileDirectory)Legacy\Constants.vb" />
-    <Compile Include="$(MSBuildThisFileDirectory)Legacy\Enums.vb" />
-    <Compile Include="$(MSBuildThisFileDirectory)Legacy\Language.vb" />
-    <Compile Include="$(MSBuildThisFileDirectory)Legacy\Packets.vb" />
-    <Compile Include="$(MSBuildThisFileDirectory)Legacy\Strings.vb" />
-    <Compile Include="$(MSBuildThisFileDirectory)Legacy\Types.vb" />
-    <Compile Include="$(MSBuildThisFileDirectory)Legacy\Xml.vb" />
+    <Compile Include="$(MSBuildThisFileDirectory)Time.vb" />
+    <Compile Include="$(MSBuildThisFileDirectory)Constants.vb" />
+    <Compile Include="$(MSBuildThisFileDirectory)Enums.vb" />
+    <Compile Include="$(MSBuildThisFileDirectory)Language.vb" />
+    <Compile Include="$(MSBuildThisFileDirectory)Packets.vb" />
+    <Compile Include="$(MSBuildThisFileDirectory)Strings.vb" />
+    <Compile Include="$(MSBuildThisFileDirectory)Types.vb" />
+    <Compile Include="$(MSBuildThisFileDirectory)Xml.vb" />
   </ItemGroup>
 </Project>
