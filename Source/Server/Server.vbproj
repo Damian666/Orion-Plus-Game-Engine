@@ -85,7 +85,6 @@
     <Import Include="System.Windows.Forms" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="GlobalSuppressions.vb" />
     <Compile Include="Source\Modules\Network\S_NetworkConfig.vb" />
     <Compile Include="Source\Modules\Network\S_NetworkReceive.vb" />
     <Compile Include="Source\Modules\Network\S_NetworkSend.vb" />
