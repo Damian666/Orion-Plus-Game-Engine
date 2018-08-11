@@ -22,93 +22,93 @@ Partial Class frmQuest
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Me.fraQuestList = New DarkUI.Controls.DarkGroupBox()
+        Me.fraQuestList = New System.Windows.Forms.GroupBox()
         Me.lstIndex = New System.Windows.Forms.ListBox()
-        Me.DarkGroupBox2 = New DarkUI.Controls.DarkGroupBox()
-        Me.DarkGroupBox5 = New DarkUI.Controls.DarkGroupBox()
-        Me.btnRemoveTask = New DarkUI.Controls.DarkButton()
-        Me.btnAddTask = New DarkUI.Controls.DarkButton()
+        Me.DarkGroupBox2 = New System.Windows.Forms.GroupBox()
+        Me.DarkGroupBox5 = New System.Windows.Forms.GroupBox()
+        Me.btnRemoveTask = New System.Windows.Forms.Button()
+        Me.btnAddTask = New System.Windows.Forms.Button()
         Me.lstTasks = New System.Windows.Forms.ListBox()
-        Me.DarkGroupBox4 = New DarkUI.Controls.DarkGroupBox()
+        Me.DarkGroupBox4 = New System.Windows.Forms.GroupBox()
         Me.lstRequirements = New System.Windows.Forms.ListBox()
-        Me.btnRemoveRequirement = New DarkUI.Controls.DarkButton()
-        Me.btnAddRequirement = New DarkUI.Controls.DarkButton()
-        Me.DarkGroupBox3 = New DarkUI.Controls.DarkGroupBox()
-        Me.nudItemRewValue = New DarkUI.Controls.DarkNumericUpDown()
-        Me.DarkLabel7 = New DarkUI.Controls.DarkLabel()
-        Me.cmbItemReward = New DarkUI.Controls.DarkComboBox()
-        Me.DarkLabel6 = New DarkUI.Controls.DarkLabel()
-        Me.nudExpReward = New DarkUI.Controls.DarkNumericUpDown()
-        Me.DarkLabel5 = New DarkUI.Controls.DarkLabel()
-        Me.btnRemoveReward = New DarkUI.Controls.DarkButton()
-        Me.btnAddReward = New DarkUI.Controls.DarkButton()
+        Me.btnRemoveRequirement = New System.Windows.Forms.Button()
+        Me.btnAddRequirement = New System.Windows.Forms.Button()
+        Me.DarkGroupBox3 = New System.Windows.Forms.GroupBox()
+        Me.nudItemRewValue = New System.Windows.Forms.NumericUpDown()
+        Me.DarkLabel7 = New System.Windows.Forms.Label()
+        Me.cmbItemReward = New System.Windows.Forms.ComboBox()
+        Me.DarkLabel6 = New System.Windows.Forms.Label()
+        Me.nudExpReward = New System.Windows.Forms.NumericUpDown()
+        Me.DarkLabel5 = New System.Windows.Forms.Label()
+        Me.btnRemoveReward = New System.Windows.Forms.Button()
+        Me.btnAddReward = New System.Windows.Forms.Button()
         Me.lstRewards = New System.Windows.Forms.ListBox()
-        Me.DarkLabel4 = New DarkUI.Controls.DarkLabel()
-        Me.DarkLabel3 = New DarkUI.Controls.DarkLabel()
-        Me.txtEndText = New DarkUI.Controls.DarkTextBox()
-        Me.txtProgressText = New DarkUI.Controls.DarkTextBox()
-        Me.DarkLabel2 = New DarkUI.Controls.DarkLabel()
-        Me.txtStartText = New DarkUI.Controls.DarkTextBox()
-        Me.chkQuestCancel = New DarkUI.Controls.DarkCheckBox()
-        Me.chkRepeat = New DarkUI.Controls.DarkCheckBox()
-        Me.txtName = New DarkUI.Controls.DarkTextBox()
-        Me.DarkLabel1 = New DarkUI.Controls.DarkLabel()
-        Me.DarkLabel8 = New DarkUI.Controls.DarkLabel()
-        Me.btnSave = New DarkUI.Controls.DarkButton()
-        Me.btnCancel = New DarkUI.Controls.DarkButton()
-        Me.fraTasks = New DarkUI.Controls.DarkGroupBox()
-        Me.btnCancelTask = New DarkUI.Controls.DarkButton()
-        Me.btnSaveTask = New DarkUI.Controls.DarkButton()
+        Me.DarkLabel4 = New System.Windows.Forms.Label()
+        Me.DarkLabel3 = New System.Windows.Forms.Label()
+        Me.txtEndText = New System.Windows.Forms.TextBox()
+        Me.txtProgressText = New System.Windows.Forms.TextBox()
+        Me.DarkLabel2 = New System.Windows.Forms.Label()
+        Me.txtStartText = New System.Windows.Forms.TextBox()
+        Me.chkQuestCancel = New System.Windows.Forms.CheckBox()
+        Me.chkRepeat = New System.Windows.Forms.CheckBox()
+        Me.txtName = New System.Windows.Forms.TextBox()
+        Me.DarkLabel1 = New System.Windows.Forms.Label()
+        Me.DarkLabel8 = New System.Windows.Forms.Label()
+        Me.btnSave = New System.Windows.Forms.Button()
+        Me.btnCancel = New System.Windows.Forms.Button()
+        Me.fraTasks = New System.Windows.Forms.GroupBox()
+        Me.btnCancelTask = New System.Windows.Forms.Button()
+        Me.btnSaveTask = New System.Windows.Forms.Button()
         Me.Panel2 = New System.Windows.Forms.Panel()
-        Me.optTask7 = New DarkUI.Controls.DarkRadioButton()
-        Me.optTask6 = New DarkUI.Controls.DarkRadioButton()
-        Me.optTask5 = New DarkUI.Controls.DarkRadioButton()
-        Me.optTask4 = New DarkUI.Controls.DarkRadioButton()
-        Me.optTask3 = New DarkUI.Controls.DarkRadioButton()
-        Me.optTask2 = New DarkUI.Controls.DarkRadioButton()
-        Me.DarkLabel16 = New DarkUI.Controls.DarkLabel()
-        Me.optTask1 = New DarkUI.Controls.DarkRadioButton()
-        Me.optTask0 = New DarkUI.Controls.DarkRadioButton()
+        Me.optTask7 = New System.Windows.Forms.RadioButton()
+        Me.optTask6 = New System.Windows.Forms.RadioButton()
+        Me.optTask5 = New System.Windows.Forms.RadioButton()
+        Me.optTask4 = New System.Windows.Forms.RadioButton()
+        Me.optTask3 = New System.Windows.Forms.RadioButton()
+        Me.optTask2 = New System.Windows.Forms.RadioButton()
+        Me.DarkLabel16 = New System.Windows.Forms.Label()
+        Me.optTask1 = New System.Windows.Forms.RadioButton()
+        Me.optTask0 = New System.Windows.Forms.RadioButton()
         Me.Panel1 = New System.Windows.Forms.Panel()
-        Me.cmbResource = New DarkUI.Controls.DarkComboBox()
-        Me.cmbMap = New DarkUI.Controls.DarkComboBox()
-        Me.cmbItem = New DarkUI.Controls.DarkComboBox()
-        Me.cmbNpc = New DarkUI.Controls.DarkComboBox()
-        Me.DarkLabel17 = New DarkUI.Controls.DarkLabel()
-        Me.lblTaskNum = New DarkUI.Controls.DarkLabel()
-        Me.nudAmount = New DarkUI.Controls.DarkNumericUpDown()
-        Me.DarkLabel15 = New DarkUI.Controls.DarkLabel()
-        Me.DarkLabel14 = New DarkUI.Controls.DarkLabel()
-        Me.DarkLabel13 = New DarkUI.Controls.DarkLabel()
-        Me.DarkLabel12 = New DarkUI.Controls.DarkLabel()
-        Me.DarkLabel11 = New DarkUI.Controls.DarkLabel()
-        Me.chkEnd = New DarkUI.Controls.DarkCheckBox()
-        Me.txtTaskSpeech = New DarkUI.Controls.DarkTextBox()
-        Me.DarkLabel10 = New DarkUI.Controls.DarkLabel()
-        Me.txtTaskLog = New DarkUI.Controls.DarkTextBox()
-        Me.DarkLabel9 = New DarkUI.Controls.DarkLabel()
-        Me.fraRequirements = New DarkUI.Controls.DarkGroupBox()
-        Me.DarkGroupBox6 = New DarkUI.Controls.DarkGroupBox()
-        Me.btnRequirementCancel = New DarkUI.Controls.DarkButton()
-        Me.btnRequirementSave = New DarkUI.Controls.DarkButton()
-        Me.nudTakeAmount = New DarkUI.Controls.DarkNumericUpDown()
-        Me.DarkLabel23 = New DarkUI.Controls.DarkLabel()
-        Me.cmbEndItem = New DarkUI.Controls.DarkComboBox()
-        Me.DarkLabel24 = New DarkUI.Controls.DarkLabel()
-        Me.nudGiveAmount = New DarkUI.Controls.DarkNumericUpDown()
-        Me.DarkLabel22 = New DarkUI.Controls.DarkLabel()
-        Me.cmbStartItem = New DarkUI.Controls.DarkComboBox()
-        Me.DarkLabel21 = New DarkUI.Controls.DarkLabel()
-        Me.cmbClassReq = New DarkUI.Controls.DarkComboBox()
-        Me.DarkLabel20 = New DarkUI.Controls.DarkLabel()
-        Me.rdbClassReq = New DarkUI.Controls.DarkRadioButton()
-        Me.cmbQuestReq = New DarkUI.Controls.DarkComboBox()
-        Me.DarkLabel19 = New DarkUI.Controls.DarkLabel()
-        Me.rdbQuestReq = New DarkUI.Controls.DarkRadioButton()
-        Me.cmbItemReq = New DarkUI.Controls.DarkComboBox()
-        Me.DarkLabel18 = New DarkUI.Controls.DarkLabel()
-        Me.rdbItemReq = New DarkUI.Controls.DarkRadioButton()
-        Me.rdbNoneReq = New DarkUI.Controls.DarkRadioButton()
+        Me.cmbResource = New System.Windows.Forms.ComboBox()
+        Me.cmbMap = New System.Windows.Forms.ComboBox()
+        Me.cmbItem = New System.Windows.Forms.ComboBox()
+        Me.cmbNpc = New System.Windows.Forms.ComboBox()
+        Me.DarkLabel17 = New System.Windows.Forms.Label()
+        Me.lblTaskNum = New System.Windows.Forms.Label()
+        Me.nudAmount = New System.Windows.Forms.NumericUpDown()
+        Me.DarkLabel15 = New System.Windows.Forms.Label()
+        Me.DarkLabel14 = New System.Windows.Forms.Label()
+        Me.DarkLabel13 = New System.Windows.Forms.Label()
+        Me.DarkLabel12 = New System.Windows.Forms.Label()
+        Me.DarkLabel11 = New System.Windows.Forms.Label()
+        Me.chkEnd = New System.Windows.Forms.CheckBox()
+        Me.txtTaskSpeech = New System.Windows.Forms.TextBox()
+        Me.DarkLabel10 = New System.Windows.Forms.Label()
+        Me.txtTaskLog = New System.Windows.Forms.TextBox()
+        Me.DarkLabel9 = New System.Windows.Forms.Label()
+        Me.fraRequirements = New System.Windows.Forms.GroupBox()
+        Me.DarkGroupBox6 = New System.Windows.Forms.GroupBox()
+        Me.btnRequirementCancel = New System.Windows.Forms.Button()
+        Me.btnRequirementSave = New System.Windows.Forms.Button()
+        Me.nudTakeAmount = New System.Windows.Forms.NumericUpDown()
+        Me.DarkLabel23 = New System.Windows.Forms.Label()
+        Me.cmbEndItem = New System.Windows.Forms.ComboBox()
+        Me.DarkLabel24 = New System.Windows.Forms.Label()
+        Me.nudGiveAmount = New System.Windows.Forms.NumericUpDown()
+        Me.DarkLabel22 = New System.Windows.Forms.Label()
+        Me.cmbStartItem = New System.Windows.Forms.ComboBox()
+        Me.DarkLabel21 = New System.Windows.Forms.Label()
+        Me.cmbClassReq = New System.Windows.Forms.ComboBox()
+        Me.DarkLabel20 = New System.Windows.Forms.Label()
+        Me.rdbClassReq = New System.Windows.Forms.RadioButton()
+        Me.cmbQuestReq = New System.Windows.Forms.ComboBox()
+        Me.DarkLabel19 = New System.Windows.Forms.Label()
+        Me.rdbQuestReq = New System.Windows.Forms.RadioButton()
+        Me.cmbItemReq = New System.Windows.Forms.ComboBox()
+        Me.DarkLabel18 = New System.Windows.Forms.Label()
+        Me.rdbItemReq = New System.Windows.Forms.RadioButton()
+        Me.rdbNoneReq = New System.Windows.Forms.RadioButton()
         Me.fraQuestList.SuspendLayout()
         Me.DarkGroupBox2.SuspendLayout()
         Me.DarkGroupBox5.SuspendLayout()
@@ -129,7 +129,6 @@ Partial Class frmQuest
         'fraQuestList
         '
         Me.fraQuestList.BackColor = System.Drawing.Color.FromArgb(CType(CType(45, Byte), Integer), CType(CType(45, Byte), Integer), CType(CType(48, Byte), Integer))
-        Me.fraQuestList.BorderColor = System.Drawing.Color.FromArgb(CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer))
         Me.fraQuestList.Controls.Add(Me.lstIndex)
         Me.fraQuestList.ForeColor = System.Drawing.Color.Gainsboro
         Me.fraQuestList.Location = New System.Drawing.Point(3, 3)
@@ -153,7 +152,6 @@ Partial Class frmQuest
         'DarkGroupBox2
         '
         Me.DarkGroupBox2.BackColor = System.Drawing.Color.FromArgb(CType(CType(45, Byte), Integer), CType(CType(45, Byte), Integer), CType(CType(48, Byte), Integer))
-        Me.DarkGroupBox2.BorderColor = System.Drawing.Color.FromArgb(CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer))
         Me.DarkGroupBox2.Controls.Add(Me.DarkGroupBox5)
         Me.DarkGroupBox2.Controls.Add(Me.DarkGroupBox4)
         Me.DarkGroupBox2.Controls.Add(Me.DarkGroupBox3)
@@ -178,7 +176,6 @@ Partial Class frmQuest
         'DarkGroupBox5
         '
         Me.DarkGroupBox5.BackColor = System.Drawing.Color.FromArgb(CType(CType(45, Byte), Integer), CType(CType(45, Byte), Integer), CType(CType(48, Byte), Integer))
-        Me.DarkGroupBox5.BorderColor = System.Drawing.Color.FromArgb(CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer))
         Me.DarkGroupBox5.Controls.Add(Me.btnRemoveTask)
         Me.DarkGroupBox5.Controls.Add(Me.btnAddTask)
         Me.DarkGroupBox5.Controls.Add(Me.lstTasks)
@@ -222,7 +219,6 @@ Partial Class frmQuest
         'DarkGroupBox4
         '
         Me.DarkGroupBox4.BackColor = System.Drawing.Color.FromArgb(CType(CType(45, Byte), Integer), CType(CType(45, Byte), Integer), CType(CType(48, Byte), Integer))
-        Me.DarkGroupBox4.BorderColor = System.Drawing.Color.FromArgb(CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer))
         Me.DarkGroupBox4.Controls.Add(Me.lstRequirements)
         Me.DarkGroupBox4.Controls.Add(Me.btnRemoveRequirement)
         Me.DarkGroupBox4.Controls.Add(Me.btnAddRequirement)
@@ -267,7 +263,6 @@ Partial Class frmQuest
         'DarkGroupBox3
         '
         Me.DarkGroupBox3.BackColor = System.Drawing.Color.FromArgb(CType(CType(45, Byte), Integer), CType(CType(45, Byte), Integer), CType(CType(48, Byte), Integer))
-        Me.DarkGroupBox3.BorderColor = System.Drawing.Color.FromArgb(CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer))
         Me.DarkGroupBox3.Controls.Add(Me.nudItemRewValue)
         Me.DarkGroupBox3.Controls.Add(Me.DarkLabel7)
         Me.DarkGroupBox3.Controls.Add(Me.cmbItemReward)
@@ -307,8 +302,6 @@ Partial Class frmQuest
         'cmbItemReward
         '
         Me.cmbItemReward.BackColor = System.Drawing.Color.FromArgb(CType(CType(69, Byte), Integer), CType(CType(73, Byte), Integer), CType(CType(74, Byte), Integer))
-        Me.cmbItemReward.BorderColor = System.Drawing.Color.FromArgb(CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer))
-        Me.cmbItemReward.BorderStyle = System.Windows.Forms.ButtonBorderStyle.Solid
         Me.cmbItemReward.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed
         Me.cmbItemReward.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cmbItemReward.FlatStyle = System.Windows.Forms.FlatStyle.Flat
@@ -513,7 +506,6 @@ Partial Class frmQuest
         'fraTasks
         '
         Me.fraTasks.BackColor = System.Drawing.Color.FromArgb(CType(CType(45, Byte), Integer), CType(CType(45, Byte), Integer), CType(CType(48, Byte), Integer))
-        Me.fraTasks.BorderColor = System.Drawing.Color.FromArgb(CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer))
         Me.fraTasks.Controls.Add(Me.btnCancelTask)
         Me.fraTasks.Controls.Add(Me.btnSaveTask)
         Me.fraTasks.Controls.Add(Me.Panel2)
@@ -677,8 +669,6 @@ Partial Class frmQuest
         'cmbResource
         '
         Me.cmbResource.BackColor = System.Drawing.Color.FromArgb(CType(CType(69, Byte), Integer), CType(CType(73, Byte), Integer), CType(CType(74, Byte), Integer))
-        Me.cmbResource.BorderColor = System.Drawing.Color.FromArgb(CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer))
-        Me.cmbResource.BorderStyle = System.Windows.Forms.ButtonBorderStyle.Solid
         Me.cmbResource.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed
         Me.cmbResource.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cmbResource.FlatStyle = System.Windows.Forms.FlatStyle.Flat
@@ -692,8 +682,6 @@ Partial Class frmQuest
         'cmbMap
         '
         Me.cmbMap.BackColor = System.Drawing.Color.FromArgb(CType(CType(69, Byte), Integer), CType(CType(73, Byte), Integer), CType(CType(74, Byte), Integer))
-        Me.cmbMap.BorderColor = System.Drawing.Color.FromArgb(CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer))
-        Me.cmbMap.BorderStyle = System.Windows.Forms.ButtonBorderStyle.Solid
         Me.cmbMap.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed
         Me.cmbMap.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cmbMap.FlatStyle = System.Windows.Forms.FlatStyle.Flat
@@ -707,8 +695,6 @@ Partial Class frmQuest
         'cmbItem
         '
         Me.cmbItem.BackColor = System.Drawing.Color.FromArgb(CType(CType(69, Byte), Integer), CType(CType(73, Byte), Integer), CType(CType(74, Byte), Integer))
-        Me.cmbItem.BorderColor = System.Drawing.Color.FromArgb(CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer))
-        Me.cmbItem.BorderStyle = System.Windows.Forms.ButtonBorderStyle.Solid
         Me.cmbItem.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed
         Me.cmbItem.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cmbItem.FlatStyle = System.Windows.Forms.FlatStyle.Flat
@@ -722,8 +708,6 @@ Partial Class frmQuest
         'cmbNpc
         '
         Me.cmbNpc.BackColor = System.Drawing.Color.FromArgb(CType(CType(69, Byte), Integer), CType(CType(73, Byte), Integer), CType(CType(74, Byte), Integer))
-        Me.cmbNpc.BorderColor = System.Drawing.Color.FromArgb(CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer))
-        Me.cmbNpc.BorderStyle = System.Windows.Forms.ButtonBorderStyle.Solid
         Me.cmbNpc.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed
         Me.cmbNpc.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cmbNpc.FlatStyle = System.Windows.Forms.FlatStyle.Flat
@@ -866,7 +850,6 @@ Partial Class frmQuest
         'fraRequirements
         '
         Me.fraRequirements.BackColor = System.Drawing.Color.FromArgb(CType(CType(45, Byte), Integer), CType(CType(45, Byte), Integer), CType(CType(48, Byte), Integer))
-        Me.fraRequirements.BorderColor = System.Drawing.Color.FromArgb(CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer))
         Me.fraRequirements.Controls.Add(Me.DarkGroupBox6)
         Me.fraRequirements.Controls.Add(Me.cmbClassReq)
         Me.fraRequirements.Controls.Add(Me.DarkLabel20)
@@ -890,7 +873,6 @@ Partial Class frmQuest
         'DarkGroupBox6
         '
         Me.DarkGroupBox6.BackColor = System.Drawing.Color.FromArgb(CType(CType(45, Byte), Integer), CType(CType(45, Byte), Integer), CType(CType(48, Byte), Integer))
-        Me.DarkGroupBox6.BorderColor = System.Drawing.Color.FromArgb(CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer))
         Me.DarkGroupBox6.Controls.Add(Me.btnRequirementCancel)
         Me.DarkGroupBox6.Controls.Add(Me.btnRequirementSave)
         Me.DarkGroupBox6.Controls.Add(Me.nudTakeAmount)
@@ -949,8 +931,6 @@ Partial Class frmQuest
         'cmbEndItem
         '
         Me.cmbEndItem.BackColor = System.Drawing.Color.FromArgb(CType(CType(69, Byte), Integer), CType(CType(73, Byte), Integer), CType(CType(74, Byte), Integer))
-        Me.cmbEndItem.BorderColor = System.Drawing.Color.FromArgb(CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer))
-        Me.cmbEndItem.BorderStyle = System.Windows.Forms.ButtonBorderStyle.Solid
         Me.cmbEndItem.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed
         Me.cmbEndItem.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cmbEndItem.FlatStyle = System.Windows.Forms.FlatStyle.Flat
@@ -993,8 +973,6 @@ Partial Class frmQuest
         'cmbStartItem
         '
         Me.cmbStartItem.BackColor = System.Drawing.Color.FromArgb(CType(CType(69, Byte), Integer), CType(CType(73, Byte), Integer), CType(CType(74, Byte), Integer))
-        Me.cmbStartItem.BorderColor = System.Drawing.Color.FromArgb(CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer))
-        Me.cmbStartItem.BorderStyle = System.Windows.Forms.ButtonBorderStyle.Solid
         Me.cmbStartItem.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed
         Me.cmbStartItem.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cmbStartItem.FlatStyle = System.Windows.Forms.FlatStyle.Flat
@@ -1018,8 +996,6 @@ Partial Class frmQuest
         'cmbClassReq
         '
         Me.cmbClassReq.BackColor = System.Drawing.Color.FromArgb(CType(CType(69, Byte), Integer), CType(CType(73, Byte), Integer), CType(CType(74, Byte), Integer))
-        Me.cmbClassReq.BorderColor = System.Drawing.Color.FromArgb(CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer))
-        Me.cmbClassReq.BorderStyle = System.Windows.Forms.ButtonBorderStyle.Solid
         Me.cmbClassReq.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed
         Me.cmbClassReq.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cmbClassReq.FlatStyle = System.Windows.Forms.FlatStyle.Flat
@@ -1053,8 +1029,6 @@ Partial Class frmQuest
         'cmbQuestReq
         '
         Me.cmbQuestReq.BackColor = System.Drawing.Color.FromArgb(CType(CType(69, Byte), Integer), CType(CType(73, Byte), Integer), CType(CType(74, Byte), Integer))
-        Me.cmbQuestReq.BorderColor = System.Drawing.Color.FromArgb(CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer))
-        Me.cmbQuestReq.BorderStyle = System.Windows.Forms.ButtonBorderStyle.Solid
         Me.cmbQuestReq.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed
         Me.cmbQuestReq.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cmbQuestReq.FlatStyle = System.Windows.Forms.FlatStyle.Flat
@@ -1088,8 +1062,6 @@ Partial Class frmQuest
         'cmbItemReq
         '
         Me.cmbItemReq.BackColor = System.Drawing.Color.FromArgb(CType(CType(69, Byte), Integer), CType(CType(73, Byte), Integer), CType(CType(74, Byte), Integer))
-        Me.cmbItemReq.BorderColor = System.Drawing.Color.FromArgb(CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer))
-        Me.cmbItemReq.BorderStyle = System.Windows.Forms.ButtonBorderStyle.Solid
         Me.cmbItemReq.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed
         Me.cmbItemReq.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cmbItemReq.FlatStyle = System.Windows.Forms.FlatStyle.Flat
@@ -1174,91 +1146,91 @@ Partial Class frmQuest
 
     End Sub
 
-    Friend WithEvents fraQuestList As DarkUI.Controls.DarkGroupBox
+    Friend WithEvents fraQuestList As System.Windows.Forms.GroupBox
     Friend WithEvents lstIndex As ListBox
-    Friend WithEvents DarkGroupBox2 As DarkUI.Controls.DarkGroupBox
-    Friend WithEvents txtName As DarkUI.Controls.DarkTextBox
-    Friend WithEvents DarkLabel1 As DarkUI.Controls.DarkLabel
-    Friend WithEvents chkRepeat As DarkUI.Controls.DarkCheckBox
-    Friend WithEvents chkQuestCancel As DarkUI.Controls.DarkCheckBox
-    Friend WithEvents txtStartText As DarkUI.Controls.DarkTextBox
-    Friend WithEvents DarkLabel2 As DarkUI.Controls.DarkLabel
-    Friend WithEvents txtEndText As DarkUI.Controls.DarkTextBox
-    Friend WithEvents txtProgressText As DarkUI.Controls.DarkTextBox
-    Friend WithEvents DarkLabel3 As DarkUI.Controls.DarkLabel
-    Friend WithEvents DarkLabel4 As DarkUI.Controls.DarkLabel
-    Friend WithEvents DarkGroupBox3 As DarkUI.Controls.DarkGroupBox
+    Friend WithEvents DarkGroupBox2 As System.Windows.Forms.GroupBox
+    Friend WithEvents txtName As System.Windows.Forms.TextBox
+    Friend WithEvents DarkLabel1 As System.Windows.Forms.Label
+    Friend WithEvents chkRepeat As System.Windows.Forms.CheckBox
+    Friend WithEvents chkQuestCancel As System.Windows.Forms.CheckBox
+    Friend WithEvents txtStartText As System.Windows.Forms.TextBox
+    Friend WithEvents DarkLabel2 As System.Windows.Forms.Label
+    Friend WithEvents txtEndText As System.Windows.Forms.TextBox
+    Friend WithEvents txtProgressText As System.Windows.Forms.TextBox
+    Friend WithEvents DarkLabel3 As System.Windows.Forms.Label
+    Friend WithEvents DarkLabel4 As System.Windows.Forms.Label
+    Friend WithEvents DarkGroupBox3 As System.Windows.Forms.GroupBox
     Friend WithEvents lstRewards As ListBox
-    Friend WithEvents btnAddReward As DarkUI.Controls.DarkButton
-    Friend WithEvents btnRemoveReward As DarkUI.Controls.DarkButton
-    Friend WithEvents nudExpReward As DarkUI.Controls.DarkNumericUpDown
-    Friend WithEvents DarkLabel5 As DarkUI.Controls.DarkLabel
-    Friend WithEvents nudItemRewValue As DarkUI.Controls.DarkNumericUpDown
-    Friend WithEvents DarkLabel7 As DarkUI.Controls.DarkLabel
-    Friend WithEvents cmbItemReward As DarkUI.Controls.DarkComboBox
-    Friend WithEvents DarkLabel6 As DarkUI.Controls.DarkLabel
-    Friend WithEvents DarkGroupBox4 As DarkUI.Controls.DarkGroupBox
-    Friend WithEvents DarkGroupBox5 As DarkUI.Controls.DarkGroupBox
-    Friend WithEvents btnAddRequirement As DarkUI.Controls.DarkButton
-    Friend WithEvents btnRemoveRequirement As DarkUI.Controls.DarkButton
+    Friend WithEvents btnAddReward As System.Windows.Forms.Button
+    Friend WithEvents btnRemoveReward As System.Windows.Forms.Button
+    Friend WithEvents nudExpReward As System.Windows.Forms.NumericUpDown
+    Friend WithEvents DarkLabel5 As System.Windows.Forms.Label
+    Friend WithEvents nudItemRewValue As System.Windows.Forms.NumericUpDown
+    Friend WithEvents DarkLabel7 As System.Windows.Forms.Label
+    Friend WithEvents cmbItemReward As System.Windows.Forms.ComboBox
+    Friend WithEvents DarkLabel6 As System.Windows.Forms.Label
+    Friend WithEvents DarkGroupBox4 As System.Windows.Forms.GroupBox
+    Friend WithEvents DarkGroupBox5 As System.Windows.Forms.GroupBox
+    Friend WithEvents btnAddRequirement As System.Windows.Forms.Button
+    Friend WithEvents btnRemoveRequirement As System.Windows.Forms.Button
     Friend WithEvents lstRequirements As ListBox
     Friend WithEvents lstTasks As ListBox
-    Friend WithEvents btnRemoveTask As DarkUI.Controls.DarkButton
-    Friend WithEvents btnAddTask As DarkUI.Controls.DarkButton
-    Friend WithEvents DarkLabel8 As DarkUI.Controls.DarkLabel
-    Friend WithEvents btnSave As DarkUI.Controls.DarkButton
-    Friend WithEvents btnCancel As DarkUI.Controls.DarkButton
-    Friend WithEvents fraTasks As DarkUI.Controls.DarkGroupBox
+    Friend WithEvents btnRemoveTask As System.Windows.Forms.Button
+    Friend WithEvents btnAddTask As System.Windows.Forms.Button
+    Friend WithEvents DarkLabel8 As System.Windows.Forms.Label
+    Friend WithEvents btnSave As System.Windows.Forms.Button
+    Friend WithEvents btnCancel As System.Windows.Forms.Button
+    Friend WithEvents fraTasks As System.Windows.Forms.GroupBox
     Friend WithEvents Panel1 As Panel
-    Friend WithEvents txtTaskLog As DarkUI.Controls.DarkTextBox
-    Friend WithEvents DarkLabel9 As DarkUI.Controls.DarkLabel
-    Friend WithEvents txtTaskSpeech As DarkUI.Controls.DarkTextBox
-    Friend WithEvents DarkLabel10 As DarkUI.Controls.DarkLabel
-    Friend WithEvents chkEnd As DarkUI.Controls.DarkCheckBox
-    Friend WithEvents DarkLabel11 As DarkUI.Controls.DarkLabel
-    Friend WithEvents DarkLabel13 As DarkUI.Controls.DarkLabel
-    Friend WithEvents DarkLabel12 As DarkUI.Controls.DarkLabel
-    Friend WithEvents DarkLabel14 As DarkUI.Controls.DarkLabel
-    Friend WithEvents nudAmount As DarkUI.Controls.DarkNumericUpDown
-    Friend WithEvents DarkLabel15 As DarkUI.Controls.DarkLabel
-    Friend WithEvents lblTaskNum As DarkUI.Controls.DarkLabel
+    Friend WithEvents txtTaskLog As System.Windows.Forms.TextBox
+    Friend WithEvents DarkLabel9 As System.Windows.Forms.Label
+    Friend WithEvents txtTaskSpeech As System.Windows.Forms.TextBox
+    Friend WithEvents DarkLabel10 As System.Windows.Forms.Label
+    Friend WithEvents chkEnd As System.Windows.Forms.CheckBox
+    Friend WithEvents DarkLabel11 As System.Windows.Forms.Label
+    Friend WithEvents DarkLabel13 As System.Windows.Forms.Label
+    Friend WithEvents DarkLabel12 As System.Windows.Forms.Label
+    Friend WithEvents DarkLabel14 As System.Windows.Forms.Label
+    Friend WithEvents nudAmount As System.Windows.Forms.NumericUpDown
+    Friend WithEvents DarkLabel15 As System.Windows.Forms.Label
+    Friend WithEvents lblTaskNum As System.Windows.Forms.Label
     Friend WithEvents Panel2 As Panel
-    Friend WithEvents optTask0 As DarkUI.Controls.DarkRadioButton
-    Friend WithEvents DarkLabel16 As DarkUI.Controls.DarkLabel
-    Friend WithEvents optTask1 As DarkUI.Controls.DarkRadioButton
-    Friend WithEvents optTask2 As DarkUI.Controls.DarkRadioButton
-    Friend WithEvents optTask3 As DarkUI.Controls.DarkRadioButton
-    Friend WithEvents optTask4 As DarkUI.Controls.DarkRadioButton
-    Friend WithEvents optTask5 As DarkUI.Controls.DarkRadioButton
-    Friend WithEvents optTask6 As DarkUI.Controls.DarkRadioButton
-    Friend WithEvents optTask7 As DarkUI.Controls.DarkRadioButton
-    Friend WithEvents DarkLabel17 As DarkUI.Controls.DarkLabel
-    Friend WithEvents fraRequirements As DarkUI.Controls.DarkGroupBox
-    Friend WithEvents rdbNoneReq As DarkUI.Controls.DarkRadioButton
-    Friend WithEvents rdbItemReq As DarkUI.Controls.DarkRadioButton
-    Friend WithEvents cmbItemReq As DarkUI.Controls.DarkComboBox
-    Friend WithEvents DarkLabel18 As DarkUI.Controls.DarkLabel
-    Friend WithEvents cmbQuestReq As DarkUI.Controls.DarkComboBox
-    Friend WithEvents DarkLabel19 As DarkUI.Controls.DarkLabel
-    Friend WithEvents rdbQuestReq As DarkUI.Controls.DarkRadioButton
-    Friend WithEvents cmbClassReq As DarkUI.Controls.DarkComboBox
-    Friend WithEvents DarkLabel20 As DarkUI.Controls.DarkLabel
-    Friend WithEvents rdbClassReq As DarkUI.Controls.DarkRadioButton
-    Friend WithEvents DarkGroupBox6 As DarkUI.Controls.DarkGroupBox
-    Friend WithEvents cmbStartItem As DarkUI.Controls.DarkComboBox
-    Friend WithEvents DarkLabel21 As DarkUI.Controls.DarkLabel
-    Friend WithEvents nudGiveAmount As DarkUI.Controls.DarkNumericUpDown
-    Friend WithEvents DarkLabel22 As DarkUI.Controls.DarkLabel
-    Friend WithEvents nudTakeAmount As DarkUI.Controls.DarkNumericUpDown
-    Friend WithEvents DarkLabel23 As DarkUI.Controls.DarkLabel
-    Friend WithEvents cmbEndItem As DarkUI.Controls.DarkComboBox
-    Friend WithEvents DarkLabel24 As DarkUI.Controls.DarkLabel
-    Friend WithEvents btnRequirementSave As DarkUI.Controls.DarkButton
-    Friend WithEvents btnRequirementCancel As DarkUI.Controls.DarkButton
-    Friend WithEvents btnCancelTask As DarkUI.Controls.DarkButton
-    Friend WithEvents btnSaveTask As DarkUI.Controls.DarkButton
-    Friend WithEvents cmbResource As DarkUI.Controls.DarkComboBox
-    Friend WithEvents cmbMap As DarkUI.Controls.DarkComboBox
-    Friend WithEvents cmbItem As DarkUI.Controls.DarkComboBox
-    Friend WithEvents cmbNpc As DarkUI.Controls.DarkComboBox
+    Friend WithEvents optTask0 As System.Windows.Forms.RadioButton
+    Friend WithEvents DarkLabel16 As System.Windows.Forms.Label
+    Friend WithEvents optTask1 As System.Windows.Forms.RadioButton
+    Friend WithEvents optTask2 As System.Windows.Forms.RadioButton
+    Friend WithEvents optTask3 As System.Windows.Forms.RadioButton
+    Friend WithEvents optTask4 As System.Windows.Forms.RadioButton
+    Friend WithEvents optTask5 As System.Windows.Forms.RadioButton
+    Friend WithEvents optTask6 As System.Windows.Forms.RadioButton
+    Friend WithEvents optTask7 As System.Windows.Forms.RadioButton
+    Friend WithEvents DarkLabel17 As System.Windows.Forms.Label
+    Friend WithEvents fraRequirements As System.Windows.Forms.GroupBox
+    Friend WithEvents rdbNoneReq As System.Windows.Forms.RadioButton
+    Friend WithEvents rdbItemReq As System.Windows.Forms.RadioButton
+    Friend WithEvents cmbItemReq As System.Windows.Forms.ComboBox
+    Friend WithEvents DarkLabel18 As System.Windows.Forms.Label
+    Friend WithEvents cmbQuestReq As System.Windows.Forms.ComboBox
+    Friend WithEvents DarkLabel19 As System.Windows.Forms.Label
+    Friend WithEvents rdbQuestReq As System.Windows.Forms.RadioButton
+    Friend WithEvents cmbClassReq As System.Windows.Forms.ComboBox
+    Friend WithEvents DarkLabel20 As System.Windows.Forms.Label
+    Friend WithEvents rdbClassReq As System.Windows.Forms.RadioButton
+    Friend WithEvents DarkGroupBox6 As System.Windows.Forms.GroupBox
+    Friend WithEvents cmbStartItem As System.Windows.Forms.ComboBox
+    Friend WithEvents DarkLabel21 As System.Windows.Forms.Label
+    Friend WithEvents nudGiveAmount As System.Windows.Forms.NumericUpDown
+    Friend WithEvents DarkLabel22 As System.Windows.Forms.Label
+    Friend WithEvents nudTakeAmount As System.Windows.Forms.NumericUpDown
+    Friend WithEvents DarkLabel23 As System.Windows.Forms.Label
+    Friend WithEvents cmbEndItem As System.Windows.Forms.ComboBox
+    Friend WithEvents DarkLabel24 As System.Windows.Forms.Label
+    Friend WithEvents btnRequirementSave As System.Windows.Forms.Button
+    Friend WithEvents btnRequirementCancel As System.Windows.Forms.Button
+    Friend WithEvents btnCancelTask As System.Windows.Forms.Button
+    Friend WithEvents btnSaveTask As System.Windows.Forms.Button
+    Friend WithEvents cmbResource As System.Windows.Forms.ComboBox
+    Friend WithEvents cmbMap As System.Windows.Forms.ComboBox
+    Friend WithEvents cmbItem As System.Windows.Forms.ComboBox
+    Friend WithEvents cmbNpc As System.Windows.Forms.ComboBox
 End Class

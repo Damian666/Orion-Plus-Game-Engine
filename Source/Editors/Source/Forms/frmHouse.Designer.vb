@@ -22,23 +22,23 @@ Partial Class FrmHouse
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
-        Me.DarkGroupBox1 = New DarkUI.Controls.DarkGroupBox()
+        Me.DarkGroupBox1 = New System.Windows.Forms.GroupBox()
         Me.lstIndex = New System.Windows.Forms.ListBox()
-        Me.DarkGroupBox2 = New DarkUI.Controls.DarkGroupBox()
-        Me.nudFurniture = New DarkUI.Controls.DarkNumericUpDown()
-        Me.DarkLabel6 = New DarkUI.Controls.DarkLabel()
-        Me.nudPrice = New DarkUI.Controls.DarkNumericUpDown()
-        Me.DarkLabel5 = New DarkUI.Controls.DarkLabel()
-        Me.nudY = New DarkUI.Controls.DarkNumericUpDown()
-        Me.DarkLabel4 = New DarkUI.Controls.DarkLabel()
-        Me.nudX = New DarkUI.Controls.DarkNumericUpDown()
-        Me.DarkLabel3 = New DarkUI.Controls.DarkLabel()
-        Me.nudBaseMap = New DarkUI.Controls.DarkNumericUpDown()
-        Me.DarkLabel2 = New DarkUI.Controls.DarkLabel()
-        Me.txtName = New DarkUI.Controls.DarkTextBox()
-        Me.DarkLabel1 = New DarkUI.Controls.DarkLabel()
-        Me.btnCancel = New DarkUI.Controls.DarkButton()
-        Me.btnSave = New DarkUI.Controls.DarkButton()
+        Me.DarkGroupBox2 = New System.Windows.Forms.GroupBox()
+        Me.nudFurniture = New System.Windows.Forms.NumericUpDown()
+        Me.DarkLabel6 = New System.Windows.Forms.Label()
+        Me.nudPrice = New System.Windows.Forms.NumericUpDown()
+        Me.DarkLabel5 = New System.Windows.Forms.Label()
+        Me.nudY = New System.Windows.Forms.NumericUpDown()
+        Me.DarkLabel4 = New System.Windows.Forms.Label()
+        Me.nudX = New System.Windows.Forms.NumericUpDown()
+        Me.DarkLabel3 = New System.Windows.Forms.Label()
+        Me.nudBaseMap = New System.Windows.Forms.NumericUpDown()
+        Me.DarkLabel2 = New System.Windows.Forms.Label()
+        Me.txtName = New System.Windows.Forms.TextBox()
+        Me.DarkLabel1 = New System.Windows.Forms.Label()
+        Me.btnCancel = New System.Windows.Forms.Button()
+        Me.btnSave = New System.Windows.Forms.Button()
         Me.DarkGroupBox1.SuspendLayout()
         Me.DarkGroupBox2.SuspendLayout()
         CType(Me.nudFurniture, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -51,7 +51,6 @@ Partial Class FrmHouse
         'DarkGroupBox1
         '
         Me.DarkGroupBox1.BackColor = System.Drawing.Color.FromArgb(CType(CType(45, Byte), Integer), CType(CType(45, Byte), Integer), CType(CType(48, Byte), Integer))
-        Me.DarkGroupBox1.BorderColor = System.Drawing.Color.FromArgb(CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer))
         Me.DarkGroupBox1.Controls.Add(Me.lstIndex)
         Me.DarkGroupBox1.ForeColor = System.Drawing.Color.Gainsboro
         Me.DarkGroupBox1.Location = New System.Drawing.Point(3, 3)
@@ -75,7 +74,6 @@ Partial Class FrmHouse
         'DarkGroupBox2
         '
         Me.DarkGroupBox2.BackColor = System.Drawing.Color.FromArgb(CType(CType(45, Byte), Integer), CType(CType(45, Byte), Integer), CType(CType(48, Byte), Integer))
-        Me.DarkGroupBox2.BorderColor = System.Drawing.Color.FromArgb(CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer))
         Me.DarkGroupBox2.Controls.Add(Me.nudFurniture)
         Me.DarkGroupBox2.Controls.Add(Me.DarkLabel6)
         Me.DarkGroupBox2.Controls.Add(Me.nudPrice)
@@ -263,21 +261,21 @@ Partial Class FrmHouse
 
     End Sub
 
-    Friend WithEvents DarkGroupBox1 As DarkUI.Controls.DarkGroupBox
+    Friend WithEvents DarkGroupBox1 As System.Windows.Forms.GroupBox
     Friend WithEvents lstIndex As ListBox
-    Friend WithEvents DarkGroupBox2 As DarkUI.Controls.DarkGroupBox
-    Friend WithEvents txtName As DarkUI.Controls.DarkTextBox
-    Friend WithEvents DarkLabel1 As DarkUI.Controls.DarkLabel
-    Friend WithEvents nudBaseMap As DarkUI.Controls.DarkNumericUpDown
-    Friend WithEvents DarkLabel2 As DarkUI.Controls.DarkLabel
-    Friend WithEvents nudY As DarkUI.Controls.DarkNumericUpDown
-    Friend WithEvents DarkLabel4 As DarkUI.Controls.DarkLabel
-    Friend WithEvents nudX As DarkUI.Controls.DarkNumericUpDown
-    Friend WithEvents DarkLabel3 As DarkUI.Controls.DarkLabel
-    Friend WithEvents nudPrice As DarkUI.Controls.DarkNumericUpDown
-    Friend WithEvents DarkLabel5 As DarkUI.Controls.DarkLabel
-    Friend WithEvents nudFurniture As DarkUI.Controls.DarkNumericUpDown
-    Friend WithEvents DarkLabel6 As DarkUI.Controls.DarkLabel
-    Friend WithEvents btnCancel As DarkUI.Controls.DarkButton
-    Friend WithEvents btnSave As DarkUI.Controls.DarkButton
+    Friend WithEvents DarkGroupBox2 As System.Windows.Forms.GroupBox
+    Friend WithEvents txtName As System.Windows.Forms.TextBox
+    Friend WithEvents DarkLabel1 As System.Windows.Forms.Label
+    Friend WithEvents nudBaseMap As System.Windows.Forms.NumericUpDown
+    Friend WithEvents DarkLabel2 As System.Windows.Forms.Label
+    Friend WithEvents nudY As System.Windows.Forms.NumericUpDown
+    Friend WithEvents DarkLabel4 As System.Windows.Forms.Label
+    Friend WithEvents nudX As System.Windows.Forms.NumericUpDown
+    Friend WithEvents DarkLabel3 As System.Windows.Forms.Label
+    Friend WithEvents nudPrice As System.Windows.Forms.NumericUpDown
+    Friend WithEvents DarkLabel5 As System.Windows.Forms.Label
+    Friend WithEvents nudFurniture As System.Windows.Forms.NumericUpDown
+    Friend WithEvents DarkLabel6 As System.Windows.Forms.Label
+    Friend WithEvents btnCancel As System.Windows.Forms.Button
+    Friend WithEvents btnSave As System.Windows.Forms.Button
 End Class

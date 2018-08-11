@@ -16,9 +16,7 @@ Module E_Loop
         SFML.Portable.Activate()
 
         'Strings.Init(1, "English")
-
-        ClearTempTile()
-
+        
         ' set values for directional blocking arrows
         DirArrowX(1) = 12 ' up
         DirArrowY(1) = 0
@@ -45,20 +43,7 @@ Module E_Loop
         CheckProjectiles()
 
         InitGraphics()
-
-        ReDim Autotile(Map.MaxX, Map.MaxY)
-
-        For X = 0 To Map.MaxX
-            For Y = 0 To Map.MaxY
-                ReDim Autotile(X, Y).Layer(LayerType.Count - 1)
-                For i = 0 To LayerType.Count - 1
-                    ReDim Autotile(X, Y).Layer(i).srcX(4)
-                    ReDim Autotile(X, Y).Layer(i).srcY(4)
-                    ReDim Autotile(X, Y).Layer(i).QuarterTile(4)
-                Next
-            Next
-        Next
-
+        
         ''Housing
         ReDim House(MAX_HOUSES)
         ReDim HouseConfig(MAX_HOUSES)
@@ -66,9 +51,7 @@ Module E_Loop
         'quests
         ReDim Quest(MAX_QUESTS)
         ClearQuests()
-
-        ReDim Map.Npc(MAX_MAP_NPCS)
-
+        
         ReDim Item(MAX_ITEMS)
         For i = 0 To MAX_ITEMS
             For x = 0 To StatType.Count - 1
@@ -94,14 +77,7 @@ Module E_Loop
 
             ReDim Npc(i).Skill(6)
         Next
-
-        ReDim MapNpc(MAX_MAP_NPCS)
-        For i = 0 To MAX_MAP_NPCS
-            For x = 0 To VitalType.Count - 1
-                ReDim MapNpc(i).Vital(x)
-            Next
-        Next
-
+        
         ReDim Shop(MAX_SHOPS)
         For i = 0 To MAX_SHOPS
             For x = 0 To MAX_TRADES
@@ -214,8 +190,6 @@ Module E_Loop
 #End Region
 
     Sub GameLoop()
-        Dim dest As Point = New Point(frmMapEditor.PointToScreen(frmMapEditor.picScreen.Location))
-        Dim g As Graphics = frmMapEditor.picScreen.CreateGraphics
         Dim starttime As Integer, Tick As Integer, fogtmr As Integer
         Dim FrameTime As Integer, tmr500 As Integer
         Dim tmpfps As Integer, rendercount As Integer
@@ -242,13 +216,11 @@ Module E_Loop
                     If starttime < Tick Then
                         FPS = tmpfps
 
-                        frmMapEditor.tsCurFps.Text = "Current FPS: " & FPS
                         tmpfps = 0
                         starttime = GetTickCount() + 1000
                     End If
                     tmpfps = tmpfps + 1
 
-                    SyncLock MapLock
                         ' fog scrolling
                         If fogtmr < Tick Then
                             If CurrentFogSpeed > 0 Then
@@ -261,32 +233,7 @@ Module E_Loop
                                 fogtmr = Tick + 255 - CurrentFogSpeed
                             End If
                         End If
-
-                        If tmr500 < Tick Then
-                            ' animate waterfalls
-                            Select Case waterfallFrame
-                                Case 0
-                                    waterfallFrame = 1
-                                Case 1
-                                    waterfallFrame = 2
-                                Case 2
-                                    waterfallFrame = 0
-                            End Select
-                            ' animate autotiles
-                            Select Case autoTileFrame
-                                Case 0
-                                    autoTileFrame = 1
-                                Case 1
-                                    autoTileFrame = 2
-                                Case 2
-                                    autoTileFrame = 0
-                            End Select
-
-                            tmr500 = Tick + 500
-                        End If
-
-                        ProcessWeather()
-
+                        
                         If FadeInSwitch = True Then
                             FadeIn()
                         End If
@@ -295,45 +242,7 @@ Module E_Loop
                             FadeOut()
                         End If
 
-                        If rendercount < Tick Then
-                            'Auctual Game Loop Stuff :/
-                            Render_Graphics()
-                            rendercount = Tick + 32
-                        End If
                         Application.DoEvents()
-
-                        EditorMap_DrawTileset()
-
-                        If TakeScreenShot Then
-                            If ScreenShotTimer < Tick Then
-                                Dim screenshot As SFML.Graphics.Image = GameWindow.Capture()
-
-                                If Not IO.Directory.Exists(Application.StartupPath & "\Data\Screenshots") Then
-                                    IO.Directory.CreateDirectory(Application.StartupPath & "\Data\Screenshots")
-                                End If
-                                screenshot.SaveToFile(Application.StartupPath & "\Data\Screenshots\Map" & Map.mapNum & ".png")
-
-                                HideCursor = False
-                                TakeScreenShot = False
-                            End If
-                        End If
-
-                        If MakeCache Then
-                            If ScreenShotTimer < Tick Then
-                                Dim screenshot As SFML.Graphics.Image = GameWindow.Capture()
-
-                                If Not IO.Directory.Exists(Application.StartupPath & "\Data\Cache") Then
-                                    IO.Directory.CreateDirectory(Application.StartupPath & "\Data\Cache")
-                                End If
-                                screenshot.SaveToFile(Application.StartupPath & "\Data\Cache\Map" & Map.mapNum & ".png")
-
-                                HideCursor = False
-                                MakeCache = False
-                                MapEditorSend()
-                            End If
-                        End If
-
-                    End SyncLock
 
                 End If
             End If
@@ -411,17 +320,7 @@ Module E_Loop
             End With
             InitAnimationEditor = False
         End If
-
-        If InitMapEditor = True Then
-            MapEditorInit()
-            InitMapEditor = False
-        End If
-
-        If InitMapProperties = True Then
-            MapPropertiesInit()
-            InitMapProperties = False
-        End If
-
+        
         If InitItemEditor = True Then
             ItemEditorPreInit()
             InitItemEditor = False
@@ -550,58 +449,7 @@ Module E_Loop
 
             HouseEdit = False
         End If
-
-        If InitEventEditorForm = True Then
-            frmEvents.InitEventEditorForm()
-
-            ' populate form
-            With frmEvents
-                ' set the tabs
-                .tabPages.TabPages.Clear()
-
-                For i = 1 To TmpEvent.PageCount
-                    .tabPages.TabPages.Add(Str(i))
-                Next
-                ' items
-                .cmbHasItem.Items.Clear()
-                .cmbHasItem.Items.Add("None")
-                For i = 1 To MAX_ITEMS
-                    .cmbHasItem.Items.Add(i & ": " & Trim$(Item(i).Name))
-                Next
-                ' variables
-                .cmbPlayerVar.Items.Clear()
-                .cmbPlayerVar.Items.Add("None")
-                For i = 1 To MaxVariables
-                    .cmbPlayerVar.Items.Add(i & ". " & Variables(i))
-                Next
-                ' variables
-                .cmbPlayerSwitch.Items.Clear()
-                .cmbPlayerSwitch.Items.Add("None")
-                For i = 1 To MaxSwitches
-                    .cmbPlayerSwitch.Items.Add(i & ". " & Switches(i))
-                Next
-                ' name
-                .txtName.Text = TmpEvent.Name
-                ' enable delete button
-                If TmpEvent.PageCount > 1 Then
-                    .btnDeletePage.Enabled = True
-                Else
-                    .btnDeletePage.Enabled = False
-                End If
-                .btnPastePage.Enabled = False
-                ' Load page 1 to start off with
-                CurPageNum = 1
-                EventEditorLoadPage(CurPageNum)
-
-                .nudShowTextFace.Maximum = NumFaces
-                .nudShowChoicesFace.Maximum = NumFaces
-            End With
-            ' show the editor
-            frmEvents.Show()
-
-            InitEventEditorForm = False
-        End If
-
+        
         If InitProjectileEditor = True Then
             With frmProjectile
                 Editor = EDITOR_PROJECTILE

@@ -24,32 +24,32 @@ Partial Class FrmAutoMapper
     Private Sub InitializeComponent()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(FrmAutoMapper))
         Me.pnlResources = New System.Windows.Forms.Panel()
-        Me.btnAddResource = New DarkUI.Controls.DarkButton()
-        Me.btnRemoveResource = New DarkUI.Controls.DarkButton()
-        Me.btnUpdateResource = New DarkUI.Controls.DarkButton()
-        Me.btnSaveResource = New DarkUI.Controls.DarkButton()
-        Me.btnCloseResource = New DarkUI.Controls.DarkButton()
-        Me.txtResource = New DarkUI.Controls.DarkTextBox()
-        Me.DarkLabel8 = New DarkUI.Controls.DarkLabel()
+        Me.btnAddResource = New System.Windows.Forms.Button()
+        Me.btnRemoveResource = New System.Windows.Forms.Button()
+        Me.btnUpdateResource = New System.Windows.Forms.Button()
+        Me.btnSaveResource = New System.Windows.Forms.Button()
+        Me.btnCloseResource = New System.Windows.Forms.Button()
+        Me.txtResource = New System.Windows.Forms.TextBox()
+        Me.DarkLabel8 = New System.Windows.Forms.Label()
         Me.lstResources = New System.Windows.Forms.ListBox()
         Me.pnlTileConfig = New System.Windows.Forms.Panel()
-        Me.btnTileSetSave = New DarkUI.Controls.DarkButton()
-        Me.btnTileSetClose = New DarkUI.Controls.DarkButton()
-        Me.DarkLabel10 = New DarkUI.Controls.DarkLabel()
-        Me.DarkLabel9 = New DarkUI.Controls.DarkLabel()
-        Me.cmbLayer = New DarkUI.Controls.DarkComboBox()
-        Me.cmbPrefab = New DarkUI.Controls.DarkComboBox()
+        Me.btnTileSetSave = New System.Windows.Forms.Button()
+        Me.btnTileSetClose = New System.Windows.Forms.Button()
+        Me.DarkLabel10 = New System.Windows.Forms.Label()
+        Me.DarkLabel9 = New System.Windows.Forms.Label()
+        Me.cmbLayer = New System.Windows.Forms.ComboBox()
+        Me.cmbPrefab = New System.Windows.Forms.ComboBox()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
-        Me.txtAutotile = New DarkUI.Controls.DarkTextBox()
-        Me.txtTileY = New DarkUI.Controls.DarkTextBox()
-        Me.txtTileX = New DarkUI.Controls.DarkTextBox()
-        Me.txtTileset = New DarkUI.Controls.DarkTextBox()
-        Me.chkBlocked = New DarkUI.Controls.DarkCheckBox()
+        Me.txtAutotile = New System.Windows.Forms.TextBox()
+        Me.txtTileY = New System.Windows.Forms.TextBox()
+        Me.txtTileX = New System.Windows.Forms.TextBox()
+        Me.txtTileset = New System.Windows.Forms.TextBox()
+        Me.chkBlocked = New System.Windows.Forms.CheckBox()
         Me.Label14 = New System.Windows.Forms.Label()
         Me.Label13 = New System.Windows.Forms.Label()
         Me.Label12 = New System.Windows.Forms.Label()
         Me.Label11 = New System.Windows.Forms.Label()
-        Me.DarkMenu = New DarkUI.Controls.DarkMenuStrip()
+        Me.DarkMenu = New System.Windows.Forms.MenuStrip()
         Me.ConfigurationsToolStripMenuItem2 = New System.Windows.Forms.ToolStripMenuItem()
         Me.TilesetsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ResourcesToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
@@ -60,21 +60,21 @@ Partial Class FrmAutoMapper
         Me.OverGrassToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
         Me.ResourcesToolStripMenuItem3 = New System.Windows.Forms.ToolStripMenuItem()
         Me.DetailsToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
-        Me.DarkLabel1 = New DarkUI.Controls.DarkLabel()
-        Me.DarkLabel2 = New DarkUI.Controls.DarkLabel()
-        Me.DarkLabel3 = New DarkUI.Controls.DarkLabel()
-        Me.DarkLabel4 = New DarkUI.Controls.DarkLabel()
-        Me.DarkLabel5 = New DarkUI.Controls.DarkLabel()
-        Me.DarkLabel6 = New DarkUI.Controls.DarkLabel()
-        Me.DarkLabel7 = New DarkUI.Controls.DarkLabel()
-        Me.txtMapStart = New DarkUI.Controls.DarkTextBox()
-        Me.txtMapSize = New DarkUI.Controls.DarkTextBox()
-        Me.txtMapX = New DarkUI.Controls.DarkTextBox()
-        Me.txtMapY = New DarkUI.Controls.DarkTextBox()
-        Me.txtSandBorder = New DarkUI.Controls.DarkTextBox()
-        Me.txtDetail = New DarkUI.Controls.DarkTextBox()
-        Me.txtResourceFreq = New DarkUI.Controls.DarkTextBox()
-        Me.btnStart = New DarkUI.Controls.DarkButton()
+        Me.DarkLabel1 = New System.Windows.Forms.Label()
+        Me.DarkLabel2 = New System.Windows.Forms.Label()
+        Me.DarkLabel3 = New System.Windows.Forms.Label()
+        Me.DarkLabel4 = New System.Windows.Forms.Label()
+        Me.DarkLabel5 = New System.Windows.Forms.Label()
+        Me.DarkLabel6 = New System.Windows.Forms.Label()
+        Me.DarkLabel7 = New System.Windows.Forms.Label()
+        Me.txtMapStart = New System.Windows.Forms.TextBox()
+        Me.txtMapSize = New System.Windows.Forms.TextBox()
+        Me.txtMapX = New System.Windows.Forms.TextBox()
+        Me.txtMapY = New System.Windows.Forms.TextBox()
+        Me.txtSandBorder = New System.Windows.Forms.TextBox()
+        Me.txtDetail = New System.Windows.Forms.TextBox()
+        Me.txtResourceFreq = New System.Windows.Forms.TextBox()
+        Me.btnStart = New System.Windows.Forms.Button()
         Me.pnlResources.SuspendLayout()
         Me.pnlTileConfig.SuspendLayout()
         Me.GroupBox1.SuspendLayout()
@@ -228,12 +228,6 @@ Partial Class FrmAutoMapper
         'cmbLayer
         '
         Me.cmbLayer.BackColor = System.Drawing.Color.FromArgb(CType(CType(45, Byte), Integer), CType(CType(45, Byte), Integer), CType(CType(48, Byte), Integer))
-        Me.cmbLayer.BorderColor = System.Drawing.Color.FromArgb(CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer))
-        Me.cmbLayer.BorderStyle = System.Windows.Forms.ButtonBorderStyle.Solid
-        Me.cmbLayer.ButtonColor = System.Drawing.Color.FromArgb(CType(CType(43, Byte), Integer), CType(CType(43, Byte), Integer), CType(CType(43, Byte), Integer))
-        Me.cmbLayer.ButtonIcon = CType(resources.GetObject("cmbLayer.ButtonIcon"), System.Drawing.Bitmap)
-        Me.cmbLayer.DrawDropdownHoverOutline = False
-        Me.cmbLayer.DrawFocusRectangle = False
         Me.cmbLayer.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed
         Me.cmbLayer.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cmbLayer.FlatStyle = System.Windows.Forms.FlatStyle.Flat
@@ -245,17 +239,10 @@ Partial Class FrmAutoMapper
         Me.cmbLayer.Size = New System.Drawing.Size(252, 21)
         Me.cmbLayer.TabIndex = 43
         Me.cmbLayer.Text = "Ground"
-        Me.cmbLayer.TextPadding = New System.Windows.Forms.Padding(2)
         '
         'cmbPrefab
         '
         Me.cmbPrefab.BackColor = System.Drawing.Color.FromArgb(CType(CType(45, Byte), Integer), CType(CType(45, Byte), Integer), CType(CType(48, Byte), Integer))
-        Me.cmbPrefab.BorderColor = System.Drawing.Color.FromArgb(CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer))
-        Me.cmbPrefab.BorderStyle = System.Windows.Forms.ButtonBorderStyle.Solid
-        Me.cmbPrefab.ButtonColor = System.Drawing.Color.FromArgb(CType(CType(43, Byte), Integer), CType(CType(43, Byte), Integer), CType(CType(43, Byte), Integer))
-        Me.cmbPrefab.ButtonIcon = CType(resources.GetObject("cmbPrefab.ButtonIcon"), System.Drawing.Bitmap)
-        Me.cmbPrefab.DrawDropdownHoverOutline = False
-        Me.cmbPrefab.DrawFocusRectangle = False
         Me.cmbPrefab.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed
         Me.cmbPrefab.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cmbPrefab.FlatStyle = System.Windows.Forms.FlatStyle.Flat
@@ -267,7 +254,6 @@ Partial Class FrmAutoMapper
         Me.cmbPrefab.Size = New System.Drawing.Size(252, 21)
         Me.cmbPrefab.TabIndex = 43
         Me.cmbPrefab.Text = "Water"
-        Me.cmbPrefab.TextPadding = New System.Windows.Forms.Padding(2)
         '
         'GroupBox1
         '
@@ -677,7 +663,7 @@ Partial Class FrmAutoMapper
     Friend WithEvents Label12 As Label
     Friend WithEvents Label11 As Label
     Friend WithEvents Label14 As Label
-    Friend WithEvents DarkMenu As DarkUI.Controls.DarkMenuStrip
+    Friend WithEvents DarkMenu As System.Windows.Forms.MenuStrip
     Friend WithEvents ConfigurationsToolStripMenuItem2 As ToolStripMenuItem
     Friend WithEvents TilesetsToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents ResourcesToolStripMenuItem As ToolStripMenuItem
@@ -688,37 +674,37 @@ Partial Class FrmAutoMapper
     Friend WithEvents OverGrassToolStripMenuItem1 As ToolStripMenuItem
     Friend WithEvents ResourcesToolStripMenuItem3 As ToolStripMenuItem
     Friend WithEvents DetailsToolStripMenuItem1 As ToolStripMenuItem
-    Friend WithEvents DarkLabel1 As DarkUI.Controls.DarkLabel
-    Friend WithEvents DarkLabel2 As DarkUI.Controls.DarkLabel
-    Friend WithEvents DarkLabel3 As DarkUI.Controls.DarkLabel
-    Friend WithEvents DarkLabel4 As DarkUI.Controls.DarkLabel
-    Friend WithEvents DarkLabel5 As DarkUI.Controls.DarkLabel
-    Friend WithEvents DarkLabel6 As DarkUI.Controls.DarkLabel
-    Friend WithEvents DarkLabel7 As DarkUI.Controls.DarkLabel
-    Friend WithEvents txtMapStart As DarkUI.Controls.DarkTextBox
-    Friend WithEvents txtMapSize As DarkUI.Controls.DarkTextBox
-    Friend WithEvents txtMapX As DarkUI.Controls.DarkTextBox
-    Friend WithEvents txtMapY As DarkUI.Controls.DarkTextBox
-    Friend WithEvents txtSandBorder As DarkUI.Controls.DarkTextBox
-    Friend WithEvents txtDetail As DarkUI.Controls.DarkTextBox
-    Friend WithEvents txtResourceFreq As DarkUI.Controls.DarkTextBox
-    Friend WithEvents btnStart As DarkUI.Controls.DarkButton
-    Friend WithEvents DarkLabel8 As DarkUI.Controls.DarkLabel
-    Friend WithEvents btnCloseResource As DarkUI.Controls.DarkButton
-    Friend WithEvents txtResource As DarkUI.Controls.DarkTextBox
-    Friend WithEvents btnSaveResource As DarkUI.Controls.DarkButton
-    Friend WithEvents btnUpdateResource As DarkUI.Controls.DarkButton
-    Friend WithEvents btnRemoveResource As DarkUI.Controls.DarkButton
-    Friend WithEvents btnAddResource As DarkUI.Controls.DarkButton
-    Friend WithEvents cmbPrefab As DarkUI.Controls.DarkComboBox
-    Friend WithEvents cmbLayer As DarkUI.Controls.DarkComboBox
-    Friend WithEvents DarkLabel10 As DarkUI.Controls.DarkLabel
-    Friend WithEvents DarkLabel9 As DarkUI.Controls.DarkLabel
-    Friend WithEvents chkBlocked As DarkUI.Controls.DarkCheckBox
-    Friend WithEvents txtTileset As DarkUI.Controls.DarkTextBox
-    Friend WithEvents txtAutotile As DarkUI.Controls.DarkTextBox
-    Friend WithEvents txtTileY As DarkUI.Controls.DarkTextBox
-    Friend WithEvents txtTileX As DarkUI.Controls.DarkTextBox
-    Friend WithEvents btnTileSetClose As DarkUI.Controls.DarkButton
-    Friend WithEvents btnTileSetSave As DarkUI.Controls.DarkButton
+    Friend WithEvents DarkLabel1 As System.Windows.Forms.Label
+    Friend WithEvents DarkLabel2 As System.Windows.Forms.Label
+    Friend WithEvents DarkLabel3 As System.Windows.Forms.Label
+    Friend WithEvents DarkLabel4 As System.Windows.Forms.Label
+    Friend WithEvents DarkLabel5 As System.Windows.Forms.Label
+    Friend WithEvents DarkLabel6 As System.Windows.Forms.Label
+    Friend WithEvents DarkLabel7 As System.Windows.Forms.Label
+    Friend WithEvents txtMapStart As System.Windows.Forms.TextBox
+    Friend WithEvents txtMapSize As System.Windows.Forms.TextBox
+    Friend WithEvents txtMapX As System.Windows.Forms.TextBox
+    Friend WithEvents txtMapY As System.Windows.Forms.TextBox
+    Friend WithEvents txtSandBorder As System.Windows.Forms.TextBox
+    Friend WithEvents txtDetail As System.Windows.Forms.TextBox
+    Friend WithEvents txtResourceFreq As System.Windows.Forms.TextBox
+    Friend WithEvents btnStart As System.Windows.Forms.Button
+    Friend WithEvents DarkLabel8 As System.Windows.Forms.Label
+    Friend WithEvents btnCloseResource As System.Windows.Forms.Button
+    Friend WithEvents txtResource As System.Windows.Forms.TextBox
+    Friend WithEvents btnSaveResource As System.Windows.Forms.Button
+    Friend WithEvents btnUpdateResource As System.Windows.Forms.Button
+    Friend WithEvents btnRemoveResource As System.Windows.Forms.Button
+    Friend WithEvents btnAddResource As System.Windows.Forms.Button
+    Friend WithEvents cmbPrefab As System.Windows.Forms.ComboBox
+    Friend WithEvents cmbLayer As System.Windows.Forms.ComboBox
+    Friend WithEvents DarkLabel10 As System.Windows.Forms.Label
+    Friend WithEvents DarkLabel9 As System.Windows.Forms.Label
+    Friend WithEvents chkBlocked As System.Windows.Forms.CheckBox
+    Friend WithEvents txtTileset As System.Windows.Forms.TextBox
+    Friend WithEvents txtAutotile As System.Windows.Forms.TextBox
+    Friend WithEvents txtTileY As System.Windows.Forms.TextBox
+    Friend WithEvents txtTileX As System.Windows.Forms.TextBox
+    Friend WithEvents btnTileSetClose As System.Windows.Forms.Button
+    Friend WithEvents btnTileSetSave As System.Windows.Forms.Button
 End Class

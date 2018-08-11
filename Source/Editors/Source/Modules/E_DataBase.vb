@@ -2,34 +2,7 @@
 
 Module ClientDataBase
     Friend GameRand As New Random()
-
-    Sub ClearTempTile()
-        Dim X As Integer
-        Dim Y As Integer
-        ReDim TempTile(Map.MaxX,Map.MaxY)
-
-        For X = 0 To Map.MaxX
-            For Y = 0 To Map.MaxY
-                TempTile(X, Y).DoorOpen = 0
-            Next
-        Next
-
-    End Sub
-
-    Friend Function IsInBounds()
-        IsInBounds = False
-        If (CurX >= 0) Then
-            If (CurX <= Map.MaxX) Then
-                If (CurY >= 0) Then
-                    If (CurY <= Map.MaxY) Then
-                        IsInBounds = True
-                    End If
-                End If
-            End If
-        End If
-
-    End Function
-
+    
     Friend Function GetTickCount()
         Return Environment.TickCount
     End Function
@@ -193,92 +166,7 @@ Module ClientDataBase
         End Try
         Return strContents
     End Function
-
-    Sub ClearMap()
-        SyncLock MapLock
-            Map.MapNum = 0
-            Map.Name = ""
-            Map.tileset = 1
-            Map.MaxX = SCREEN_MAPX
-            Map.MaxY = SCREEN_MAPY
-            Map.BootMap = 0
-            Map.BootX = 0
-            Map.BootY = 0
-            Map.Down = 0
-            Map.Left = 0
-            Map.Moral = 0
-            Map.Music = ""
-            Map.Revision = 0
-            Map.Right = 0
-            Map.Up = 0
-
-            ReDim Map.Npc(MAX_MAP_NPCS)
-            ReDim Map.Tile(Map.MaxX,Map.MaxY)
-
-            For x = 0 To SCREEN_MAPX
-                For y = 0 To SCREEN_MAPY
-                    ReDim Map.Tile(x, y).Layer(LayerType.Count - 1)
-                    For l = 0 To LayerType.Count - 1
-                        Map.Tile(x, y).Layer(l).Tileset = 0
-                        Map.Tile(x, y).Layer(l).X = 0
-                        Map.Tile(x, y).Layer(l).Y = 0
-                        Map.Tile(x, y).Layer(l).AutoTile = 0
-                    Next
-
-                Next
-            Next
-
-        End SyncLock
-
-    End Sub
-
-    Sub ClearMapItems()
-        Dim i As Integer
-
-        For i = 1 To MAX_MAP_ITEMS
-            ClearMapItem(i)
-        Next
-
-    End Sub
-
-    Sub ClearMapItem(index as integer)
-        MapItem(Index).Frame = 0
-        MapItem(Index).Num = 0
-        MapItem(Index).Value = 0
-        MapItem(Index).X = 0
-        MapItem(Index).Y = 0
-    End Sub
-
-    Sub ClearMapNpc(index as integer)
-        MapNpc(Index).Attacking = 0
-        MapNpc(Index).AttackTimer = 0
-        MapNpc(Index).Dir = 0
-        MapNpc(Index).Map = 0
-        MapNpc(Index).Moving = 0
-        MapNpc(Index).Num = 0
-        MapNpc(Index).Steps = 0
-        MapNpc(Index).Target = 0
-        MapNpc(Index).TargetType = 0
-        MapNpc(Index).Vital(VitalType.HP) = 0
-        MapNpc(Index).Vital(VitalType.MP) = 0
-        MapNpc(Index).Vital(VitalType.SP) = 0
-        MapNpc(Index).X = 0
-        MapNpc(Index).XOffset = 0
-        MapNpc(Index).Y = 0
-        MapNpc(Index).YOffset = 0
-    End Sub
-
-    Sub ClearMapNpcs()
-        Dim i As Integer
-
-        For i = 1 To MAX_MAP_NPCS
-            ClearMapNpc(i)
-        Next
-
-    End Sub
-
-
-
+    
     Friend Sub ClearChanged_Resource()
         For i = 1 To MAX_RESOURCES
             Resource_Changed(i) = Nothing

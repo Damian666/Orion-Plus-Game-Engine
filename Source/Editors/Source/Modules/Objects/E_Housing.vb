@@ -235,55 +235,6 @@ Friend Module E_Housing
         If NumFurniture = 0 Then Exit Sub
     End Sub
 
-    Friend Sub DrawFurniture(index As Integer, Layer As Integer)
-        Dim i As Integer, ItemNum As Integer
-        Dim X As Integer, Y As Integer, Width As Integer, Height As Integer, X1 As Integer, Y1 As Integer
-
-        ItemNum = Furniture(index).ItemNum
-
-        If Item(ItemNum).Type <> ItemType.Furniture Then Exit Sub
-
-        i = Item(ItemNum).Data2
-
-        If FurnitureGFXInfo(i).IsLoaded = False Then
-            LoadTexture(i, 10)
-        End If
-
-        'seeying we still use it, lets update timer
-        With SkillIconsGFXInfo(i)
-            .TextureTimer = GetTickCount() + 100000
-        End With
-
-        Width = Item(ItemNum).FurnitureWidth
-        Height = Item(ItemNum).FurnitureHeight
-
-        If Width > 4 Then Width = 4
-        If Height > 4 Then Height = 4
-        If i <= 0 OrElse i > NumFurniture Then Exit Sub
-
-        ' make sure it's not out of map
-        If Furniture(index).X > Map.MaxX Then Exit Sub
-        If Furniture(index).Y > Map.MaxY Then Exit Sub
-
-        For X1 = 0 To Width - 1
-            For Y1 = 0 To Height
-                If Item(Furniture(index).ItemNum).FurnitureFringe(X1, Y1) = Layer Then
-                    ' Set base x + y, then the offset due to size
-                    X = (Furniture(index).X * 32) + (X1 * 32)
-                    Y = (Furniture(index).Y * 32 - (Height * 32)) + (Y1 * 32)
-                    X = ConvertMapX(X)
-                    Y = ConvertMapY(Y)
-
-                    Dim tmpSprite As Sprite = New Sprite(FurnitureGFX(i)) With {
-                        .TextureRect = New IntRect(0 + (X1 * 32), 0 + (Y1 * 32), 32, 32),
-                        .Position = New Vector2f(X, Y)
-                    }
-                    GameWindow.Draw(tmpSprite)
-                End If
-            Next
-        Next
-
-    End Sub
 #End Region
 
 End Module

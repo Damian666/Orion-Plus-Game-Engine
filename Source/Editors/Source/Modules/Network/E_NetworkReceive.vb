@@ -8,12 +8,7 @@ Module E_NetworkReceive
 
         Socket.PacketId(ServerPackets.SLoginOk) = AddressOf Packet_LoginOk
         Socket.PacketId(ServerPackets.SClassesData) = AddressOf Packet_ClassesData
-
-        Socket.PacketId(ServerPackets.SMapData) = AddressOf Packet_MapData
-
-        Socket.PacketId(ServerPackets.SMapNpcData) = AddressOf Packet_MapNPCData
-        Socket.PacketId(ServerPackets.SMapNpcUpdate) = AddressOf Packet_MapNPCUpdate
-
+        
         Socket.PacketId(ServerPackets.SItemEditor) = AddressOf Packet_EditItem
         Socket.PacketId(ServerPackets.SUpdateItem) = AddressOf Packet_UpdateItem
 
@@ -37,9 +32,6 @@ Module E_NetworkReceive
         Socket.PacketId(ServerPackets.SUpdateAnimation) = AddressOf Packet_UpdateAnimation
 
         Socket.PacketId(ServerPackets.SGameData) = AddressOf Packet_GameData
-        Socket.PacketId(ServerPackets.SMapReport) = AddressOf Packet_Mapreport 'Mapreport
-
-        Socket.PacketId(ServerPackets.SMapNames) = AddressOf Packet_MapNames
 
         'quests
         Socket.PacketId(ServerPackets.SQuestEditor) = AddressOf Packet_QuestEditor
@@ -49,18 +41,7 @@ Module E_NetworkReceive
         Socket.PacketId(ServerPackets.SHouseConfigs) = AddressOf Packet_HouseConfigurations
         Socket.PacketId(ServerPackets.SFurniture) = AddressOf Packet_Furniture
         Socket.PacketId(ServerPackets.SHouseEdit) = AddressOf Packet_EditHouses
-
-        'Events
-        Socket.PacketId(ServerPackets.SSpawnEvent) = AddressOf Packet_SpawnEvent
-        Socket.PacketId(ServerPackets.SEventMove) = AddressOf Packet_EventMove
-        Socket.PacketId(ServerPackets.SEventDir) = AddressOf Packet_EventDir
-        Socket.PacketId(ServerPackets.SEventChat) = AddressOf Packet_EventChat
-        Socket.PacketId(ServerPackets.SEventStart) = AddressOf Packet_EventStart
-        Socket.PacketId(ServerPackets.SEventEnd) = AddressOf Packet_EventEnd
-        Socket.PacketId(ServerPackets.SSwitchesAndVariables) = AddressOf Packet_SwitchesAndVariables
-        Socket.PacketId(ServerPackets.SMapEventData) = AddressOf Packet_MapEventData
-        Socket.PacketId(ServerPackets.SHoldPlayer) = AddressOf Packet_HoldPlayer
-
+        
         Socket.PacketId(ServerPackets.SProjectileEditor) = AddressOf HandleProjectileEditor
         Socket.PacketId(ServerPackets.SUpdateProjectile) = AddressOf HandleUpdateProjectile
         Socket.PacketId(ServerPackets.SMapProjectile) = AddressOf HandleMapProjectile
@@ -177,300 +158,7 @@ Module E_NetworkReceive
 
         Buffer.Dispose()
     End Sub
-
-    Private Sub Packet_MapData(ByRef data() As Byte)
-        Dim X As Integer, Y As Integer, i As Integer
-        dim buffer as New ByteStream(Compression.DecompressBytes(Data))
-
-        MapData = False
-
-        SyncLock MapLock
-            If Buffer.ReadInt32 = 1 Then
-                ClearMap()
-                Map.MapNum = Buffer.ReadInt32
-                Map.Name = Trim(Buffer.ReadString)
-                Map.Music = Trim(Buffer.ReadString)
-                Map.Revision = Buffer.ReadInt32
-                Map.Moral = Buffer.ReadInt32
-                Map.tileset = Buffer.ReadInt32
-                Map.Up = Buffer.ReadInt32
-                Map.Down = Buffer.ReadInt32
-                Map.Left = Buffer.ReadInt32
-                Map.Right = Buffer.ReadInt32
-                Map.BootMap = Buffer.ReadInt32
-                Map.BootX = Buffer.ReadInt32
-                Map.BootY = Buffer.ReadInt32
-                Map.MaxX = Buffer.ReadInt32
-                Map.MaxY = Buffer.ReadInt32
-                Map.WeatherType = Buffer.ReadInt32
-                Map.FogIndex = Buffer.ReadInt32
-                Map.WeatherIntensity = Buffer.ReadInt32
-                Map.FogAlpha = Buffer.ReadInt32
-                Map.FogSpeed = Buffer.ReadInt32
-                Map.HasMapTint = Buffer.ReadInt32
-                Map.MapTintR = Buffer.ReadInt32
-                Map.MapTintG = Buffer.ReadInt32
-                Map.MapTintB = Buffer.ReadInt32
-                Map.MapTintA = Buffer.ReadInt32
-
-                Map.Instanced = Buffer.ReadInt32
-                Map.Panorama = Buffer.ReadInt32
-                Map.Parallax = Buffer.ReadInt32
-
-                ReDim Map.Tile(Map.MaxX,Map.MaxY)
-
-                For X = 1 To MAX_MAP_NPCS
-                    Map.Npc(X) = Buffer.ReadInt32
-                Next
-
-                For X = 0 To Map.MaxX
-                    For Y = 0 To Map.MaxY
-                        Map.Tile(X, Y).Data1 = Buffer.ReadInt32
-                        Map.Tile(X, Y).Data2 = Buffer.ReadInt32
-                        Map.Tile(X, Y).Data3 = Buffer.ReadInt32
-                        Map.Tile(X, Y).DirBlock = Buffer.ReadInt32
-
-                        ReDim Map.Tile(X, Y).Layer(LayerType.Count - 1)
-
-                        For i = 0 To LayerType.Count - 1
-                            Map.Tile(X, Y).Layer(i).Tileset = Buffer.ReadInt32
-                            Map.Tile(X, Y).Layer(i).X = Buffer.ReadInt32
-                            Map.Tile(X, Y).Layer(i).Y = Buffer.ReadInt32
-                            Map.Tile(X, Y).Layer(i).AutoTile = Buffer.ReadInt32
-                        Next
-                        Map.Tile(X, Y).Type = Buffer.ReadInt32
-                    Next
-                Next
-
-                'Event Data!
-                ResetEventdata()
-
-                Map.EventCount = Buffer.ReadInt32
-
-                If Map.EventCount > 0 Then
-                    ReDim Map.Events(Map.EventCount)
-                    For i = 1 To Map.EventCount
-                        With Map.Events(i)
-                            .Name = Trim(Buffer.ReadString)
-                            .Globals = Buffer.ReadInt32
-                            .X = Buffer.ReadInt32
-                            .Y = Buffer.ReadInt32
-                            .PageCount = Buffer.ReadInt32
-                        End With
-                        If Map.Events(i).PageCount > 0 Then
-                            ReDim Map.Events(i).Pages(Map.Events(i).PageCount)
-                            For X = 1 To Map.Events(i).PageCount
-                                With Map.Events(i).Pages(X)
-                                    .chkVariable = Buffer.ReadInt32
-                                    .VariableIndex = Buffer.ReadInt32
-                                    .VariableCondition = Buffer.ReadInt32
-                                    .VariableCompare = Buffer.ReadInt32
-
-                                    .chkSwitch = Buffer.ReadInt32
-                                    .SwitchIndex = Buffer.ReadInt32
-                                    .SwitchCompare = Buffer.ReadInt32
-
-                                    .chkHasItem = Buffer.ReadInt32
-                                    .HasItemIndex = Buffer.ReadInt32
-                                    .HasItemAmount = Buffer.ReadInt32
-
-                                    .chkSelfSwitch = Buffer.ReadInt32
-                                    .SelfSwitchIndex = Buffer.ReadInt32
-                                    .SelfSwitchCompare = Buffer.ReadInt32
-
-                                    .GraphicType = Buffer.ReadInt32
-                                    .Graphic = Buffer.ReadInt32
-                                    .GraphicX = Buffer.ReadInt32
-                                    .GraphicY = Buffer.ReadInt32
-                                    .GraphicX2 = Buffer.ReadInt32
-                                    .GraphicY2 = Buffer.ReadInt32
-
-                                    .MoveType = Buffer.ReadInt32
-                                    .MoveSpeed = Buffer.ReadInt32
-                                    .MoveFreq = Buffer.ReadInt32
-
-                                    .MoveRouteCount = Buffer.ReadInt32
-
-                                    .IgnoreMoveRoute = Buffer.ReadInt32
-                                    .RepeatMoveRoute = Buffer.ReadInt32
-
-                                    If .MoveRouteCount > 0 Then
-                                        ReDim Map.Events(i).Pages(X).MoveRoute(.MoveRouteCount)
-                                        For Y = 1 To .MoveRouteCount
-                                            .MoveRoute(Y).Index = Buffer.ReadInt32
-                                            .MoveRoute(Y).Data1 = Buffer.ReadInt32
-                                            .MoveRoute(Y).Data2 = Buffer.ReadInt32
-                                            .MoveRoute(Y).Data3 = Buffer.ReadInt32
-                                            .MoveRoute(Y).Data4 = Buffer.ReadInt32
-                                            .MoveRoute(Y).Data5 = Buffer.ReadInt32
-                                            .MoveRoute(Y).Data6 = Buffer.ReadInt32
-                                        Next
-                                    End If
-
-                                    .WalkAnim = Buffer.ReadInt32
-                                    .DirFix = Buffer.ReadInt32
-                                    .WalkThrough = Buffer.ReadInt32
-                                    .ShowName = Buffer.ReadInt32
-                                    .Trigger = Buffer.ReadInt32
-                                    .CommandListCount = Buffer.ReadInt32
-
-                                    .Position = Buffer.ReadInt32
-                                    .Questnum = Buffer.ReadInt32
-
-                                    .chkPlayerGender = Buffer.ReadInt32
-                                End With
-
-                                If Map.Events(i).Pages(X).CommandListCount > 0 Then
-                                    ReDim Map.Events(i).Pages(X).CommandList(Map.Events(i).Pages(X).CommandListCount)
-                                    For Y = 1 To Map.Events(i).Pages(X).CommandListCount
-                                        Map.Events(i).Pages(X).CommandList(Y).CommandCount = Buffer.ReadInt32
-                                        Map.Events(i).Pages(X).CommandList(Y).ParentList = Buffer.ReadInt32
-                                        If Map.Events(i).Pages(X).CommandList(Y).CommandCount > 0 Then
-                                            ReDim Map.Events(i).Pages(X).CommandList(Y).Commands(Map.Events(i).Pages(X).CommandList(Y).CommandCount)
-                                            For z = 1 To Map.Events(i).Pages(X).CommandList(Y).CommandCount
-                                                With Map.Events(i).Pages(X).CommandList(Y).Commands(z)
-                                                    .Index = Buffer.ReadInt32
-                                                    .Text1 = Trim(Buffer.ReadString)
-                                                    .Text2 = Trim(Buffer.ReadString)
-                                                    .Text3 = Trim(Buffer.ReadString)
-                                                    .Text4 = Trim(Buffer.ReadString)
-                                                    .Text5 = Trim(Buffer.ReadString)
-                                                    .Data1 = Buffer.ReadInt32
-                                                    .Data2 = Buffer.ReadInt32
-                                                    .Data3 = Buffer.ReadInt32
-                                                    .Data4 = Buffer.ReadInt32
-                                                    .Data5 = Buffer.ReadInt32
-                                                    .Data6 = Buffer.ReadInt32
-                                                    .ConditionalBranch.CommandList = Buffer.ReadInt32
-                                                    .ConditionalBranch.Condition = Buffer.ReadInt32
-                                                    .ConditionalBranch.Data1 = Buffer.ReadInt32
-                                                    .ConditionalBranch.Data2 = Buffer.ReadInt32
-                                                    .ConditionalBranch.Data3 = Buffer.ReadInt32
-                                                    .ConditionalBranch.ElseCommandList = Buffer.ReadInt32
-                                                    .MoveRouteCount = Buffer.ReadInt32
-                                                    If .MoveRouteCount > 0 Then
-                                                        ReDim Preserve .MoveRoute(.MoveRouteCount)
-                                                        For w = 1 To .MoveRouteCount
-                                                            .MoveRoute(w).Index = Buffer.ReadInt32
-                                                            .MoveRoute(w).Data1 = Buffer.ReadInt32
-                                                            .MoveRoute(w).Data2 = Buffer.ReadInt32
-                                                            .MoveRoute(w).Data3 = Buffer.ReadInt32
-                                                            .MoveRoute(w).Data4 = Buffer.ReadInt32
-                                                            .MoveRoute(w).Data5 = Buffer.ReadInt32
-                                                            .MoveRoute(w).Data6 = Buffer.ReadInt32
-                                                        Next
-                                                    End If
-                                                End With
-                                            Next
-                                        End If
-                                    Next
-                                End If
-                            Next
-                        End If
-                    Next
-                End If
-                'End Event Data
-
-            End If
-
-            For i = 1 To MAX_MAP_ITEMS
-                MapItem(i).Num = Buffer.ReadInt32
-                MapItem(i).Value = Buffer.ReadInt32()
-                MapItem(i).X = Buffer.ReadInt32()
-                MapItem(i).Y = Buffer.ReadInt32()
-            Next
-
-            For i = 1 To MAX_MAP_NPCS
-                MapNpc(i).Num = Buffer.ReadInt32()
-                MapNpc(i).X = Buffer.ReadInt32()
-                MapNpc(i).Y = Buffer.ReadInt32()
-                MapNpc(i).Dir = Buffer.ReadInt32()
-                MapNpc(i).Vital(VitalType.HP) = Buffer.ReadInt32()
-                MapNpc(i).Vital(VitalType.MP) = Buffer.ReadInt32()
-            Next
-
-            If Buffer.ReadInt32 = 1 Then
-                Resource_Index = Buffer.ReadInt32
-                Resources_Init = False
-
-                If Resource_Index > 0 Then
-                    ReDim MapResource(Resource_Index)
-
-                    For i = 0 To Resource_Index
-                        MapResource(i).ResourceState = Buffer.ReadInt32
-                        MapResource(i).X = Buffer.ReadInt32
-                        MapResource(i).Y = Buffer.ReadInt32
-                    Next
-
-                    Resources_Init = True
-                Else
-                    ReDim MapResource(1)
-                End If
-            End If
-
-            Buffer.Dispose()
-
-        End SyncLock
-
-        ClearTempTile()
-        InitAutotiles()
-
-        MapData = True
-
-        CurrentWeather = Map.WeatherType
-        CurrentWeatherIntensity = Map.WeatherIntensity
-        CurrentFog = Map.FogIndex
-        CurrentFogSpeed = Map.FogSpeed
-        CurrentFogOpacity = Map.FogAlpha
-        CurrentTintR = Map.MapTintR
-        CurrentTintG = Map.MapTintG
-        CurrentTintB = Map.MapTintB
-        CurrentTintA = Map.MapTintA
-
-        InMapEditor = True
-
-        GettingMap = False
-    End Sub
-
-    Private Sub Packet_MapNPCData(ByRef data() As Byte)
-        Dim i As Integer
-        dim buffer as New ByteStream(Data)
-
-        For i = 1 To MAX_MAP_NPCS
-
-            With MapNpc(i)
-                .Num = Buffer.ReadInt32
-                .X = Buffer.ReadInt32
-                .Y = Buffer.ReadInt32
-                .Dir = Buffer.ReadInt32
-                .Vital(VitalType.HP) = Buffer.ReadInt32
-                .Vital(VitalType.MP) = Buffer.ReadInt32
-            End With
-
-        Next
-
-        Buffer.Dispose()
-    End Sub
-
-    Private Sub Packet_MapNPCUpdate(ByRef data() As Byte)
-        Dim NpcNum As Integer
-        dim buffer as ByteStream
-        Buffer = New ByteStream(Data)
-
-        NpcNum = Buffer.ReadInt32
-
-        With MapNpc(NpcNum)
-            .Num = Buffer.ReadInt32
-            .X = Buffer.ReadInt32
-            .Y = Buffer.ReadInt32
-            .Dir = Buffer.ReadInt32
-            .Vital(VitalType.HP) = Buffer.ReadInt32
-            .Vital(VitalType.MP) = Buffer.ReadInt32
-        End With
-
-        Buffer.Dispose()
-    End Sub
-
+        
     Private Sub Packet_NPCEditor(ByRef data() As Byte)
         Dim buffer As New ByteStream(data)
         InitNPCEditor = True
@@ -998,29 +686,7 @@ Module E_NetworkReceive
 
         Buffer.Dispose()
     End Sub
-
-    Private Sub Packet_Mapreport(ByRef data() As Byte)
-        Dim I As Integer
-        dim buffer as New ByteStream(Data)
-        For I = 1 To MAX_MAPS
-            MapNames(I) = Trim(Buffer.ReadString())
-        Next
-
-        UpdateMapnames = True
-
-        Buffer.Dispose()
-    End Sub
-
-    Private Sub Packet_MapNames(ByRef data() As Byte)
-        Dim I As Integer
-        dim buffer as New ByteStream(Data)
-        For I = 1 To MAX_MAPS
-            MapNames(I) = Trim(Buffer.ReadString())
-        Next
-
-        Buffer.Dispose()
-    End Sub
-
+    
     Private Sub Packet_ClassEditor(ByRef data() As Byte)
         InitClassEditor = True
     End Sub

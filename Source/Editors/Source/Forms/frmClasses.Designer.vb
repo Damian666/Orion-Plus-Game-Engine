@@ -23,60 +23,60 @@ Partial Class frmClasses
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmClasses))
-        Me.DarkGroupBox1 = New DarkUI.Controls.DarkGroupBox()
+        Me.DarkGroupBox1 = New System.Windows.Forms.GroupBox()
         Me.lstIndex = New System.Windows.Forms.ListBox()
-        Me.DarkGroupBox2 = New DarkUI.Controls.DarkGroupBox()
-        Me.DarkGroupBox7 = New DarkUI.Controls.DarkGroupBox()
-        Me.nudStartY = New DarkUI.Controls.DarkNumericUpDown()
-        Me.DarkLabel15 = New DarkUI.Controls.DarkLabel()
-        Me.nudStartX = New DarkUI.Controls.DarkNumericUpDown()
-        Me.DarkLabel14 = New DarkUI.Controls.DarkLabel()
-        Me.nudStartMap = New DarkUI.Controls.DarkNumericUpDown()
-        Me.DarkLabel13 = New DarkUI.Controls.DarkLabel()
-        Me.DarkGroupBox6 = New DarkUI.Controls.DarkGroupBox()
-        Me.btnItemAdd = New DarkUI.Controls.DarkButton()
-        Me.nudItemAmount = New DarkUI.Controls.DarkNumericUpDown()
-        Me.DarkLabel12 = New DarkUI.Controls.DarkLabel()
-        Me.cmbItems = New DarkUI.Controls.DarkComboBox()
-        Me.DarkLabel11 = New DarkUI.Controls.DarkLabel()
+        Me.DarkGroupBox2 = New System.Windows.Forms.GroupBox()
+        Me.DarkGroupBox7 = New System.Windows.Forms.GroupBox()
+        Me.nudStartY = New System.Windows.Forms.NumericUpDown()
+        Me.DarkLabel15 = New System.Windows.Forms.Label()
+        Me.nudStartX = New System.Windows.Forms.NumericUpDown()
+        Me.DarkLabel14 = New System.Windows.Forms.Label()
+        Me.nudStartMap = New System.Windows.Forms.NumericUpDown()
+        Me.DarkLabel13 = New System.Windows.Forms.Label()
+        Me.DarkGroupBox6 = New System.Windows.Forms.GroupBox()
+        Me.btnItemAdd = New System.Windows.Forms.Button()
+        Me.nudItemAmount = New System.Windows.Forms.NumericUpDown()
+        Me.DarkLabel12 = New System.Windows.Forms.Label()
+        Me.cmbItems = New System.Windows.Forms.ComboBox()
+        Me.DarkLabel11 = New System.Windows.Forms.Label()
         Me.lstStartItems = New System.Windows.Forms.ListBox()
-        Me.DarkGroupBox5 = New DarkUI.Controls.DarkGroupBox()
-        Me.nudBaseExp = New DarkUI.Controls.DarkNumericUpDown()
-        Me.DarkLabel10 = New DarkUI.Controls.DarkLabel()
-        Me.nudSpirit = New DarkUI.Controls.DarkNumericUpDown()
-        Me.nudEndurance = New DarkUI.Controls.DarkNumericUpDown()
-        Me.DarkLabel8 = New DarkUI.Controls.DarkLabel()
-        Me.DarkLabel9 = New DarkUI.Controls.DarkLabel()
-        Me.nudVitality = New DarkUI.Controls.DarkNumericUpDown()
-        Me.nudLuck = New DarkUI.Controls.DarkNumericUpDown()
-        Me.DarkLabel6 = New DarkUI.Controls.DarkLabel()
-        Me.DarkLabel7 = New DarkUI.Controls.DarkLabel()
-        Me.nudIntelligence = New DarkUI.Controls.DarkNumericUpDown()
-        Me.nudStrength = New DarkUI.Controls.DarkNumericUpDown()
-        Me.DarkLabel5 = New DarkUI.Controls.DarkLabel()
-        Me.DarkLabel3 = New DarkUI.Controls.DarkLabel()
-        Me.DarkGroupBox4 = New DarkUI.Controls.DarkGroupBox()
-        Me.nudFemaleSprite = New DarkUI.Controls.DarkNumericUpDown()
-        Me.DarkLabel4 = New DarkUI.Controls.DarkLabel()
-        Me.btnDeleteFemaleSprite = New DarkUI.Controls.DarkButton()
-        Me.btnAddFemaleSprite = New DarkUI.Controls.DarkButton()
-        Me.cmbFemaleSprite = New DarkUI.Controls.DarkComboBox()
+        Me.DarkGroupBox5 = New System.Windows.Forms.GroupBox()
+        Me.nudBaseExp = New System.Windows.Forms.NumericUpDown()
+        Me.DarkLabel10 = New System.Windows.Forms.Label()
+        Me.nudSpirit = New System.Windows.Forms.NumericUpDown()
+        Me.nudEndurance = New System.Windows.Forms.NumericUpDown()
+        Me.DarkLabel8 = New System.Windows.Forms.Label()
+        Me.DarkLabel9 = New System.Windows.Forms.Label()
+        Me.nudVitality = New System.Windows.Forms.NumericUpDown()
+        Me.nudLuck = New System.Windows.Forms.NumericUpDown()
+        Me.DarkLabel6 = New System.Windows.Forms.Label()
+        Me.DarkLabel7 = New System.Windows.Forms.Label()
+        Me.nudIntelligence = New System.Windows.Forms.NumericUpDown()
+        Me.nudStrength = New System.Windows.Forms.NumericUpDown()
+        Me.DarkLabel5 = New System.Windows.Forms.Label()
+        Me.DarkLabel3 = New System.Windows.Forms.Label()
+        Me.DarkGroupBox4 = New System.Windows.Forms.GroupBox()
+        Me.nudFemaleSprite = New System.Windows.Forms.NumericUpDown()
+        Me.DarkLabel4 = New System.Windows.Forms.Label()
+        Me.btnDeleteFemaleSprite = New System.Windows.Forms.Button()
+        Me.btnAddFemaleSprite = New System.Windows.Forms.Button()
+        Me.cmbFemaleSprite = New System.Windows.Forms.ComboBox()
         Me.picFemale = New System.Windows.Forms.PictureBox()
-        Me.DarkGroupBox3 = New DarkUI.Controls.DarkGroupBox()
-        Me.nudMaleSprite = New DarkUI.Controls.DarkNumericUpDown()
-        Me.lblMaleSprite = New DarkUI.Controls.DarkLabel()
-        Me.btnDeleteMaleSprite = New DarkUI.Controls.DarkButton()
-        Me.btnAddMaleSprite = New DarkUI.Controls.DarkButton()
-        Me.cmbMaleSprite = New DarkUI.Controls.DarkComboBox()
+        Me.DarkGroupBox3 = New System.Windows.Forms.GroupBox()
+        Me.nudMaleSprite = New System.Windows.Forms.NumericUpDown()
+        Me.lblMaleSprite = New System.Windows.Forms.Label()
+        Me.btnDeleteMaleSprite = New System.Windows.Forms.Button()
+        Me.btnAddMaleSprite = New System.Windows.Forms.Button()
+        Me.cmbMaleSprite = New System.Windows.Forms.ComboBox()
         Me.picMale = New System.Windows.Forms.PictureBox()
-        Me.txtDescription = New DarkUI.Controls.DarkTextBox()
-        Me.DarkLabel2 = New DarkUI.Controls.DarkLabel()
-        Me.txtName = New DarkUI.Controls.DarkTextBox()
-        Me.DarkLabel1 = New DarkUI.Controls.DarkLabel()
-        Me.btnAddClass = New DarkUI.Controls.DarkButton()
-        Me.btnRemoveClass = New DarkUI.Controls.DarkButton()
-        Me.btnCancel = New DarkUI.Controls.DarkButton()
-        Me.btnSave = New DarkUI.Controls.DarkButton()
+        Me.txtDescription = New System.Windows.Forms.TextBox()
+        Me.DarkLabel2 = New System.Windows.Forms.Label()
+        Me.txtName = New System.Windows.Forms.TextBox()
+        Me.DarkLabel1 = New System.Windows.Forms.Label()
+        Me.btnAddClass = New System.Windows.Forms.Button()
+        Me.btnRemoveClass = New System.Windows.Forms.Button()
+        Me.btnCancel = New System.Windows.Forms.Button()
+        Me.btnSave = New System.Windows.Forms.Button()
         Me.DarkGroupBox1.SuspendLayout()
         Me.DarkGroupBox2.SuspendLayout()
         Me.DarkGroupBox7.SuspendLayout()
@@ -104,7 +104,6 @@ Partial Class frmClasses
         'DarkGroupBox1
         '
         Me.DarkGroupBox1.BackColor = System.Drawing.Color.FromArgb(CType(CType(45, Byte), Integer), CType(CType(45, Byte), Integer), CType(CType(48, Byte), Integer))
-        Me.DarkGroupBox1.BorderColor = System.Drawing.Color.FromArgb(CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer))
         Me.DarkGroupBox1.Controls.Add(Me.lstIndex)
         Me.DarkGroupBox1.ForeColor = System.Drawing.Color.Gainsboro
         Me.DarkGroupBox1.Location = New System.Drawing.Point(2, 2)
@@ -128,7 +127,6 @@ Partial Class frmClasses
         'DarkGroupBox2
         '
         Me.DarkGroupBox2.BackColor = System.Drawing.Color.FromArgb(CType(CType(45, Byte), Integer), CType(CType(45, Byte), Integer), CType(CType(48, Byte), Integer))
-        Me.DarkGroupBox2.BorderColor = System.Drawing.Color.FromArgb(CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer))
         Me.DarkGroupBox2.Controls.Add(Me.DarkGroupBox7)
         Me.DarkGroupBox2.Controls.Add(Me.DarkGroupBox6)
         Me.DarkGroupBox2.Controls.Add(Me.DarkGroupBox5)
@@ -149,7 +147,6 @@ Partial Class frmClasses
         'DarkGroupBox7
         '
         Me.DarkGroupBox7.BackColor = System.Drawing.Color.FromArgb(CType(CType(45, Byte), Integer), CType(CType(45, Byte), Integer), CType(CType(48, Byte), Integer))
-        Me.DarkGroupBox7.BorderColor = System.Drawing.Color.FromArgb(CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer))
         Me.DarkGroupBox7.Controls.Add(Me.nudStartY)
         Me.DarkGroupBox7.Controls.Add(Me.DarkLabel15)
         Me.DarkGroupBox7.Controls.Add(Me.nudStartX)
@@ -230,7 +227,6 @@ Partial Class frmClasses
         'DarkGroupBox6
         '
         Me.DarkGroupBox6.BackColor = System.Drawing.Color.FromArgb(CType(CType(45, Byte), Integer), CType(CType(45, Byte), Integer), CType(CType(48, Byte), Integer))
-        Me.DarkGroupBox6.BorderColor = System.Drawing.Color.FromArgb(CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer))
         Me.DarkGroupBox6.Controls.Add(Me.btnItemAdd)
         Me.DarkGroupBox6.Controls.Add(Me.nudItemAmount)
         Me.DarkGroupBox6.Controls.Add(Me.DarkLabel12)
@@ -278,12 +274,6 @@ Partial Class frmClasses
         'cmbItems
         '
         Me.cmbItems.BackColor = System.Drawing.Color.FromArgb(CType(CType(69, Byte), Integer), CType(CType(73, Byte), Integer), CType(CType(74, Byte), Integer))
-        Me.cmbItems.BorderColor = System.Drawing.Color.FromArgb(CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer))
-        Me.cmbItems.BorderStyle = System.Windows.Forms.ButtonBorderStyle.Solid
-        Me.cmbItems.ButtonColor = System.Drawing.Color.FromArgb(CType(CType(43, Byte), Integer), CType(CType(43, Byte), Integer), CType(CType(43, Byte), Integer))
-        Me.cmbItems.ButtonIcon = CType(resources.GetObject("cmbItems.ButtonIcon"), System.Drawing.Bitmap)
-        Me.cmbItems.DrawDropdownHoverOutline = False
-        Me.cmbItems.DrawFocusRectangle = False
         Me.cmbItems.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed
         Me.cmbItems.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cmbItems.FlatStyle = System.Windows.Forms.FlatStyle.Flat
@@ -294,7 +284,6 @@ Partial Class frmClasses
         Me.cmbItems.Size = New System.Drawing.Size(139, 21)
         Me.cmbItems.TabIndex = 3
         Me.cmbItems.Text = Nothing
-        Me.cmbItems.TextPadding = New System.Windows.Forms.Padding(2)
         '
         'DarkLabel11
         '
@@ -321,7 +310,6 @@ Partial Class frmClasses
         'DarkGroupBox5
         '
         Me.DarkGroupBox5.BackColor = System.Drawing.Color.FromArgb(CType(CType(45, Byte), Integer), CType(CType(45, Byte), Integer), CType(CType(48, Byte), Integer))
-        Me.DarkGroupBox5.BorderColor = System.Drawing.Color.FromArgb(CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer))
         Me.DarkGroupBox5.Controls.Add(Me.nudBaseExp)
         Me.DarkGroupBox5.Controls.Add(Me.DarkLabel10)
         Me.DarkGroupBox5.Controls.Add(Me.nudSpirit)
@@ -497,7 +485,6 @@ Partial Class frmClasses
         'DarkGroupBox4
         '
         Me.DarkGroupBox4.BackColor = System.Drawing.Color.FromArgb(CType(CType(45, Byte), Integer), CType(CType(45, Byte), Integer), CType(CType(48, Byte), Integer))
-        Me.DarkGroupBox4.BorderColor = System.Drawing.Color.FromArgb(CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer))
         Me.DarkGroupBox4.Controls.Add(Me.nudFemaleSprite)
         Me.DarkGroupBox4.Controls.Add(Me.DarkLabel4)
         Me.DarkGroupBox4.Controls.Add(Me.btnDeleteFemaleSprite)
@@ -553,12 +540,6 @@ Partial Class frmClasses
         'cmbFemaleSprite
         '
         Me.cmbFemaleSprite.BackColor = System.Drawing.Color.FromArgb(CType(CType(69, Byte), Integer), CType(CType(73, Byte), Integer), CType(CType(74, Byte), Integer))
-        Me.cmbFemaleSprite.BorderColor = System.Drawing.Color.FromArgb(CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer))
-        Me.cmbFemaleSprite.BorderStyle = System.Windows.Forms.ButtonBorderStyle.Solid
-        Me.cmbFemaleSprite.ButtonColor = System.Drawing.Color.FromArgb(CType(CType(43, Byte), Integer), CType(CType(43, Byte), Integer), CType(CType(43, Byte), Integer))
-        Me.cmbFemaleSprite.ButtonIcon = CType(resources.GetObject("cmbFemaleSprite.ButtonIcon"), System.Drawing.Bitmap)
-        Me.cmbFemaleSprite.DrawDropdownHoverOutline = False
-        Me.cmbFemaleSprite.DrawFocusRectangle = False
         Me.cmbFemaleSprite.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed
         Me.cmbFemaleSprite.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cmbFemaleSprite.FlatStyle = System.Windows.Forms.FlatStyle.Flat
@@ -569,7 +550,6 @@ Partial Class frmClasses
         Me.cmbFemaleSprite.Size = New System.Drawing.Size(149, 21)
         Me.cmbFemaleSprite.TabIndex = 15
         Me.cmbFemaleSprite.Text = Nothing
-        Me.cmbFemaleSprite.TextPadding = New System.Windows.Forms.Padding(2)
         '
         'picFemale
         '
@@ -584,7 +564,6 @@ Partial Class frmClasses
         'DarkGroupBox3
         '
         Me.DarkGroupBox3.BackColor = System.Drawing.Color.FromArgb(CType(CType(45, Byte), Integer), CType(CType(45, Byte), Integer), CType(CType(48, Byte), Integer))
-        Me.DarkGroupBox3.BorderColor = System.Drawing.Color.FromArgb(CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer))
         Me.DarkGroupBox3.Controls.Add(Me.nudMaleSprite)
         Me.DarkGroupBox3.Controls.Add(Me.lblMaleSprite)
         Me.DarkGroupBox3.Controls.Add(Me.btnDeleteMaleSprite)
@@ -640,12 +619,6 @@ Partial Class frmClasses
         'cmbMaleSprite
         '
         Me.cmbMaleSprite.BackColor = System.Drawing.Color.FromArgb(CType(CType(69, Byte), Integer), CType(CType(73, Byte), Integer), CType(CType(74, Byte), Integer))
-        Me.cmbMaleSprite.BorderColor = System.Drawing.Color.FromArgb(CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer))
-        Me.cmbMaleSprite.BorderStyle = System.Windows.Forms.ButtonBorderStyle.Solid
-        Me.cmbMaleSprite.ButtonColor = System.Drawing.Color.FromArgb(CType(CType(43, Byte), Integer), CType(CType(43, Byte), Integer), CType(CType(43, Byte), Integer))
-        Me.cmbMaleSprite.ButtonIcon = CType(resources.GetObject("cmbMaleSprite.ButtonIcon"), System.Drawing.Bitmap)
-        Me.cmbMaleSprite.DrawDropdownHoverOutline = False
-        Me.cmbMaleSprite.DrawFocusRectangle = False
         Me.cmbMaleSprite.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed
         Me.cmbMaleSprite.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cmbMaleSprite.FlatStyle = System.Windows.Forms.FlatStyle.Flat
@@ -656,7 +629,6 @@ Partial Class frmClasses
         Me.cmbMaleSprite.Size = New System.Drawing.Size(149, 21)
         Me.cmbMaleSprite.TabIndex = 9
         Me.cmbMaleSprite.Text = Nothing
-        Me.cmbMaleSprite.TextPadding = New System.Windows.Forms.Padding(2)
         '
         'picMale
         '
@@ -795,58 +767,58 @@ Partial Class frmClasses
 
     End Sub
 
-    Friend WithEvents DarkGroupBox1 As DarkUI.Controls.DarkGroupBox
-    Friend WithEvents DarkGroupBox2 As DarkUI.Controls.DarkGroupBox
-    Friend WithEvents txtName As DarkUI.Controls.DarkTextBox
-    Friend WithEvents DarkLabel1 As DarkUI.Controls.DarkLabel
-    Friend WithEvents txtDescription As DarkUI.Controls.DarkTextBox
-    Friend WithEvents DarkLabel2 As DarkUI.Controls.DarkLabel
+    Friend WithEvents DarkGroupBox1 As System.Windows.Forms.GroupBox
+    Friend WithEvents DarkGroupBox2 As System.Windows.Forms.GroupBox
+    Friend WithEvents txtName As System.Windows.Forms.TextBox
+    Friend WithEvents DarkLabel1 As System.Windows.Forms.Label
+    Friend WithEvents txtDescription As System.Windows.Forms.TextBox
+    Friend WithEvents DarkLabel2 As System.Windows.Forms.Label
     Friend WithEvents lstIndex As ListBox
-    Friend WithEvents DarkGroupBox4 As DarkUI.Controls.DarkGroupBox
-    Friend WithEvents DarkGroupBox3 As DarkUI.Controls.DarkGroupBox
+    Friend WithEvents DarkGroupBox4 As System.Windows.Forms.GroupBox
+    Friend WithEvents DarkGroupBox3 As System.Windows.Forms.GroupBox
     Friend WithEvents picMale As PictureBox
-    Friend WithEvents cmbMaleSprite As DarkUI.Controls.DarkComboBox
-    Friend WithEvents btnAddMaleSprite As DarkUI.Controls.DarkButton
-    Friend WithEvents btnDeleteMaleSprite As DarkUI.Controls.DarkButton
-    Friend WithEvents DarkLabel4 As DarkUI.Controls.DarkLabel
-    Friend WithEvents btnDeleteFemaleSprite As DarkUI.Controls.DarkButton
-    Friend WithEvents btnAddFemaleSprite As DarkUI.Controls.DarkButton
-    Friend WithEvents cmbFemaleSprite As DarkUI.Controls.DarkComboBox
+    Friend WithEvents cmbMaleSprite As System.Windows.Forms.ComboBox
+    Friend WithEvents btnAddMaleSprite As System.Windows.Forms.Button
+    Friend WithEvents btnDeleteMaleSprite As System.Windows.Forms.Button
+    Friend WithEvents DarkLabel4 As System.Windows.Forms.Label
+    Friend WithEvents btnDeleteFemaleSprite As System.Windows.Forms.Button
+    Friend WithEvents btnAddFemaleSprite As System.Windows.Forms.Button
+    Friend WithEvents cmbFemaleSprite As System.Windows.Forms.ComboBox
     Friend WithEvents picFemale As PictureBox
-    Friend WithEvents lblMaleSprite As DarkUI.Controls.DarkLabel
-    Friend WithEvents btnAddClass As DarkUI.Controls.DarkButton
-    Friend WithEvents btnRemoveClass As DarkUI.Controls.DarkButton
-    Friend WithEvents btnCancel As DarkUI.Controls.DarkButton
-    Friend WithEvents btnSave As DarkUI.Controls.DarkButton
-    Friend WithEvents DarkGroupBox5 As DarkUI.Controls.DarkGroupBox
-    Friend WithEvents nudFemaleSprite As DarkUI.Controls.DarkNumericUpDown
-    Friend WithEvents nudMaleSprite As DarkUI.Controls.DarkNumericUpDown
-    Friend WithEvents DarkLabel5 As DarkUI.Controls.DarkLabel
-    Friend WithEvents DarkLabel3 As DarkUI.Controls.DarkLabel
-    Friend WithEvents nudIntelligence As DarkUI.Controls.DarkNumericUpDown
-    Friend WithEvents nudStrength As DarkUI.Controls.DarkNumericUpDown
-    Friend WithEvents nudVitality As DarkUI.Controls.DarkNumericUpDown
-    Friend WithEvents nudLuck As DarkUI.Controls.DarkNumericUpDown
-    Friend WithEvents DarkLabel6 As DarkUI.Controls.DarkLabel
-    Friend WithEvents DarkLabel7 As DarkUI.Controls.DarkLabel
-    Friend WithEvents nudSpirit As DarkUI.Controls.DarkNumericUpDown
-    Friend WithEvents nudEndurance As DarkUI.Controls.DarkNumericUpDown
-    Friend WithEvents DarkLabel8 As DarkUI.Controls.DarkLabel
-    Friend WithEvents DarkLabel9 As DarkUI.Controls.DarkLabel
-    Friend WithEvents nudBaseExp As DarkUI.Controls.DarkNumericUpDown
-    Friend WithEvents DarkLabel10 As DarkUI.Controls.DarkLabel
-    Friend WithEvents DarkGroupBox6 As DarkUI.Controls.DarkGroupBox
+    Friend WithEvents lblMaleSprite As System.Windows.Forms.Label
+    Friend WithEvents btnAddClass As System.Windows.Forms.Button
+    Friend WithEvents btnRemoveClass As System.Windows.Forms.Button
+    Friend WithEvents btnCancel As System.Windows.Forms.Button
+    Friend WithEvents btnSave As System.Windows.Forms.Button
+    Friend WithEvents DarkGroupBox5 As System.Windows.Forms.GroupBox
+    Friend WithEvents nudFemaleSprite As System.Windows.Forms.NumericUpDown
+    Friend WithEvents nudMaleSprite As System.Windows.Forms.NumericUpDown
+    Friend WithEvents DarkLabel5 As System.Windows.Forms.Label
+    Friend WithEvents DarkLabel3 As System.Windows.Forms.Label
+    Friend WithEvents nudIntelligence As System.Windows.Forms.NumericUpDown
+    Friend WithEvents nudStrength As System.Windows.Forms.NumericUpDown
+    Friend WithEvents nudVitality As System.Windows.Forms.NumericUpDown
+    Friend WithEvents nudLuck As System.Windows.Forms.NumericUpDown
+    Friend WithEvents DarkLabel6 As System.Windows.Forms.Label
+    Friend WithEvents DarkLabel7 As System.Windows.Forms.Label
+    Friend WithEvents nudSpirit As System.Windows.Forms.NumericUpDown
+    Friend WithEvents nudEndurance As System.Windows.Forms.NumericUpDown
+    Friend WithEvents DarkLabel8 As System.Windows.Forms.Label
+    Friend WithEvents DarkLabel9 As System.Windows.Forms.Label
+    Friend WithEvents nudBaseExp As System.Windows.Forms.NumericUpDown
+    Friend WithEvents DarkLabel10 As System.Windows.Forms.Label
+    Friend WithEvents DarkGroupBox6 As System.Windows.Forms.GroupBox
     Friend WithEvents lstStartItems As ListBox
-    Friend WithEvents cmbItems As DarkUI.Controls.DarkComboBox
-    Friend WithEvents DarkLabel11 As DarkUI.Controls.DarkLabel
-    Friend WithEvents nudItemAmount As DarkUI.Controls.DarkNumericUpDown
-    Friend WithEvents DarkLabel12 As DarkUI.Controls.DarkLabel
-    Friend WithEvents btnItemAdd As DarkUI.Controls.DarkButton
-    Friend WithEvents DarkGroupBox7 As DarkUI.Controls.DarkGroupBox
-    Friend WithEvents nudStartMap As DarkUI.Controls.DarkNumericUpDown
-    Friend WithEvents DarkLabel13 As DarkUI.Controls.DarkLabel
-    Friend WithEvents nudStartY As DarkUI.Controls.DarkNumericUpDown
-    Friend WithEvents DarkLabel15 As DarkUI.Controls.DarkLabel
-    Friend WithEvents nudStartX As DarkUI.Controls.DarkNumericUpDown
-    Friend WithEvents DarkLabel14 As DarkUI.Controls.DarkLabel
+    Friend WithEvents cmbItems As System.Windows.Forms.ComboBox
+    Friend WithEvents DarkLabel11 As System.Windows.Forms.Label
+    Friend WithEvents nudItemAmount As System.Windows.Forms.NumericUpDown
+    Friend WithEvents DarkLabel12 As System.Windows.Forms.Label
+    Friend WithEvents btnItemAdd As System.Windows.Forms.Button
+    Friend WithEvents DarkGroupBox7 As System.Windows.Forms.GroupBox
+    Friend WithEvents nudStartMap As System.Windows.Forms.NumericUpDown
+    Friend WithEvents DarkLabel13 As System.Windows.Forms.Label
+    Friend WithEvents nudStartY As System.Windows.Forms.NumericUpDown
+    Friend WithEvents DarkLabel15 As System.Windows.Forms.Label
+    Friend WithEvents nudStartX As System.Windows.Forms.NumericUpDown
+    Friend WithEvents DarkLabel14 As System.Windows.Forms.Label
 End Class

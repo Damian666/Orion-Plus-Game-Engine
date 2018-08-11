@@ -23,36 +23,36 @@ Partial Class FrmAnimation
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(FrmAnimation))
-        Me.DarkGroupBox1 = New DarkUI.Controls.DarkGroupBox()
+        Me.DarkGroupBox1 = New System.Windows.Forms.GroupBox()
         Me.lstIndex = New System.Windows.Forms.ListBox()
-        Me.DarkGroupBox2 = New DarkUI.Controls.DarkGroupBox()
-        Me.cmbSound = New DarkUI.Controls.DarkComboBox()
-        Me.DarkLabel2 = New DarkUI.Controls.DarkLabel()
-        Me.DarkGroupBox4 = New DarkUI.Controls.DarkGroupBox()
-        Me.nudLoopTime1 = New DarkUI.Controls.DarkNumericUpDown()
-        Me.nudFrameCount1 = New DarkUI.Controls.DarkNumericUpDown()
-        Me.nudLoopCount1 = New DarkUI.Controls.DarkNumericUpDown()
-        Me.nudSprite1 = New DarkUI.Controls.DarkNumericUpDown()
-        Me.lblLoopTime1 = New DarkUI.Controls.DarkLabel()
-        Me.lblFrameCount1 = New DarkUI.Controls.DarkLabel()
-        Me.lblLoopCount1 = New DarkUI.Controls.DarkLabel()
-        Me.lblSprite1 = New DarkUI.Controls.DarkLabel()
+        Me.DarkGroupBox2 = New System.Windows.Forms.GroupBox()
+        Me.cmbSound = New System.Windows.Forms.ComboBox()
+        Me.DarkLabel2 = New System.Windows.Forms.Label()
+        Me.DarkGroupBox4 = New System.Windows.Forms.GroupBox()
+        Me.nudLoopTime1 = New System.Windows.Forms.NumericUpDown()
+        Me.nudFrameCount1 = New System.Windows.Forms.NumericUpDown()
+        Me.nudLoopCount1 = New System.Windows.Forms.NumericUpDown()
+        Me.nudSprite1 = New System.Windows.Forms.NumericUpDown()
+        Me.lblLoopTime1 = New System.Windows.Forms.Label()
+        Me.lblFrameCount1 = New System.Windows.Forms.Label()
+        Me.lblLoopCount1 = New System.Windows.Forms.Label()
+        Me.lblSprite1 = New System.Windows.Forms.Label()
         Me.picSprite1 = New System.Windows.Forms.PictureBox()
-        Me.DarkGroupBox3 = New DarkUI.Controls.DarkGroupBox()
-        Me.nudLoopTime0 = New DarkUI.Controls.DarkNumericUpDown()
-        Me.nudFrameCount0 = New DarkUI.Controls.DarkNumericUpDown()
-        Me.nudLoopCount0 = New DarkUI.Controls.DarkNumericUpDown()
-        Me.nudSprite0 = New DarkUI.Controls.DarkNumericUpDown()
-        Me.lblLoopTime0 = New DarkUI.Controls.DarkLabel()
-        Me.lblFrameCount0 = New DarkUI.Controls.DarkLabel()
-        Me.lblLoopCount0 = New DarkUI.Controls.DarkLabel()
-        Me.lblSprite0 = New DarkUI.Controls.DarkLabel()
+        Me.DarkGroupBox3 = New System.Windows.Forms.GroupBox()
+        Me.nudLoopTime0 = New System.Windows.Forms.NumericUpDown()
+        Me.nudFrameCount0 = New System.Windows.Forms.NumericUpDown()
+        Me.nudLoopCount0 = New System.Windows.Forms.NumericUpDown()
+        Me.nudSprite0 = New System.Windows.Forms.NumericUpDown()
+        Me.lblLoopTime0 = New System.Windows.Forms.Label()
+        Me.lblFrameCount0 = New System.Windows.Forms.Label()
+        Me.lblLoopCount0 = New System.Windows.Forms.Label()
+        Me.lblSprite0 = New System.Windows.Forms.Label()
         Me.picSprite0 = New System.Windows.Forms.PictureBox()
-        Me.txtName = New DarkUI.Controls.DarkTextBox()
-        Me.DarkLabel1 = New DarkUI.Controls.DarkLabel()
-        Me.btnSave = New DarkUI.Controls.DarkButton()
-        Me.btnDelete = New DarkUI.Controls.DarkButton()
-        Me.btnCancel = New DarkUI.Controls.DarkButton()
+        Me.txtName = New System.Windows.Forms.TextBox()
+        Me.DarkLabel1 = New System.Windows.Forms.Label()
+        Me.btnSave = New System.Windows.Forms.Button()
+        Me.btnDelete = New System.Windows.Forms.Button()
+        Me.btnCancel = New System.Windows.Forms.Button()
         Me.DarkGroupBox1.SuspendLayout()
         Me.DarkGroupBox2.SuspendLayout()
         Me.DarkGroupBox4.SuspendLayout()
@@ -72,7 +72,6 @@ Partial Class FrmAnimation
         'DarkGroupBox1
         '
         Me.DarkGroupBox1.BackColor = System.Drawing.Color.FromArgb(CType(CType(45, Byte), Integer), CType(CType(45, Byte), Integer), CType(CType(48, Byte), Integer))
-        Me.DarkGroupBox1.BorderColor = System.Drawing.Color.FromArgb(CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer))
         Me.DarkGroupBox1.Controls.Add(Me.lstIndex)
         Me.DarkGroupBox1.ForeColor = System.Drawing.Color.Gainsboro
         Me.DarkGroupBox1.Location = New System.Drawing.Point(2, 3)
@@ -96,7 +95,6 @@ Partial Class FrmAnimation
         'DarkGroupBox2
         '
         Me.DarkGroupBox2.BackColor = System.Drawing.Color.FromArgb(CType(CType(45, Byte), Integer), CType(CType(45, Byte), Integer), CType(CType(48, Byte), Integer))
-        Me.DarkGroupBox2.BorderColor = System.Drawing.Color.FromArgb(CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer))
         Me.DarkGroupBox2.Controls.Add(Me.cmbSound)
         Me.DarkGroupBox2.Controls.Add(Me.DarkLabel2)
         Me.DarkGroupBox2.Controls.Add(Me.DarkGroupBox4)
@@ -114,12 +112,6 @@ Partial Class FrmAnimation
         'cmbSound
         '
         Me.cmbSound.BackColor = System.Drawing.Color.FromArgb(CType(CType(69, Byte), Integer), CType(CType(73, Byte), Integer), CType(CType(74, Byte), Integer))
-        Me.cmbSound.BorderColor = System.Drawing.Color.FromArgb(CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer))
-        Me.cmbSound.BorderStyle = System.Windows.Forms.ButtonBorderStyle.Solid
-        Me.cmbSound.ButtonColor = System.Drawing.Color.FromArgb(CType(CType(43, Byte), Integer), CType(CType(43, Byte), Integer), CType(CType(43, Byte), Integer))
-        Me.cmbSound.ButtonIcon = CType(resources.GetObject("cmbSound.ButtonIcon"), System.Drawing.Bitmap)
-        Me.cmbSound.DrawDropdownHoverOutline = False
-        Me.cmbSound.DrawFocusRectangle = False
         Me.cmbSound.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawVariable
         Me.cmbSound.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cmbSound.FlatStyle = System.Windows.Forms.FlatStyle.Flat
@@ -130,7 +122,6 @@ Partial Class FrmAnimation
         Me.cmbSound.Size = New System.Drawing.Size(156, 21)
         Me.cmbSound.TabIndex = 25
         Me.cmbSound.Text = Nothing
-        Me.cmbSound.TextPadding = New System.Windows.Forms.Padding(2)
         '
         'DarkLabel2
         '
@@ -145,7 +136,6 @@ Partial Class FrmAnimation
         'DarkGroupBox4
         '
         Me.DarkGroupBox4.BackColor = System.Drawing.Color.FromArgb(CType(CType(45, Byte), Integer), CType(CType(45, Byte), Integer), CType(CType(48, Byte), Integer))
-        Me.DarkGroupBox4.BorderColor = System.Drawing.Color.FromArgb(CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer))
         Me.DarkGroupBox4.Controls.Add(Me.nudLoopTime1)
         Me.DarkGroupBox4.Controls.Add(Me.nudFrameCount1)
         Me.DarkGroupBox4.Controls.Add(Me.nudLoopCount1)
@@ -251,7 +241,6 @@ Partial Class FrmAnimation
         'DarkGroupBox3
         '
         Me.DarkGroupBox3.BackColor = System.Drawing.Color.FromArgb(CType(CType(45, Byte), Integer), CType(CType(45, Byte), Integer), CType(CType(48, Byte), Integer))
-        Me.DarkGroupBox3.BorderColor = System.Drawing.Color.FromArgb(CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer))
         Me.DarkGroupBox3.Controls.Add(Me.nudLoopTime0)
         Me.DarkGroupBox3.Controls.Add(Me.nudFrameCount0)
         Me.DarkGroupBox3.Controls.Add(Me.nudLoopCount0)
@@ -437,34 +426,34 @@ Partial Class FrmAnimation
 
     End Sub
 
-    Friend WithEvents DarkGroupBox1 As DarkUI.Controls.DarkGroupBox
-    Friend WithEvents DarkGroupBox2 As DarkUI.Controls.DarkGroupBox
+    Friend WithEvents DarkGroupBox1 As System.Windows.Forms.GroupBox
+    Friend WithEvents DarkGroupBox2 As System.Windows.Forms.GroupBox
     Friend WithEvents lstIndex As ListBox
-    Friend WithEvents txtName As DarkUI.Controls.DarkTextBox
-    Friend WithEvents DarkLabel1 As DarkUI.Controls.DarkLabel
-    Friend WithEvents DarkGroupBox3 As DarkUI.Controls.DarkGroupBox
+    Friend WithEvents txtName As System.Windows.Forms.TextBox
+    Friend WithEvents DarkLabel1 As System.Windows.Forms.Label
+    Friend WithEvents DarkGroupBox3 As System.Windows.Forms.GroupBox
     Friend WithEvents picSprite0 As PictureBox
-    Friend WithEvents lblLoopCount0 As DarkUI.Controls.DarkLabel
-    Friend WithEvents lblSprite0 As DarkUI.Controls.DarkLabel
-    Friend WithEvents lblLoopTime0 As DarkUI.Controls.DarkLabel
-    Friend WithEvents lblFrameCount0 As DarkUI.Controls.DarkLabel
-    Friend WithEvents DarkGroupBox4 As DarkUI.Controls.DarkGroupBox
-    Friend WithEvents lblLoopTime1 As DarkUI.Controls.DarkLabel
-    Friend WithEvents lblFrameCount1 As DarkUI.Controls.DarkLabel
-    Friend WithEvents lblLoopCount1 As DarkUI.Controls.DarkLabel
-    Friend WithEvents lblSprite1 As DarkUI.Controls.DarkLabel
+    Friend WithEvents lblLoopCount0 As System.Windows.Forms.Label
+    Friend WithEvents lblSprite0 As System.Windows.Forms.Label
+    Friend WithEvents lblLoopTime0 As System.Windows.Forms.Label
+    Friend WithEvents lblFrameCount0 As System.Windows.Forms.Label
+    Friend WithEvents DarkGroupBox4 As System.Windows.Forms.GroupBox
+    Friend WithEvents lblLoopTime1 As System.Windows.Forms.Label
+    Friend WithEvents lblFrameCount1 As System.Windows.Forms.Label
+    Friend WithEvents lblLoopCount1 As System.Windows.Forms.Label
+    Friend WithEvents lblSprite1 As System.Windows.Forms.Label
     Friend WithEvents picSprite1 As PictureBox
-    Friend WithEvents btnSave As DarkUI.Controls.DarkButton
-    Friend WithEvents btnDelete As DarkUI.Controls.DarkButton
-    Friend WithEvents btnCancel As DarkUI.Controls.DarkButton
-    Friend WithEvents nudLoopTime0 As DarkUI.Controls.DarkNumericUpDown
-    Friend WithEvents nudFrameCount0 As DarkUI.Controls.DarkNumericUpDown
-    Friend WithEvents nudLoopCount0 As DarkUI.Controls.DarkNumericUpDown
-    Friend WithEvents nudSprite0 As DarkUI.Controls.DarkNumericUpDown
-    Friend WithEvents nudLoopTime1 As DarkUI.Controls.DarkNumericUpDown
-    Friend WithEvents nudFrameCount1 As DarkUI.Controls.DarkNumericUpDown
-    Friend WithEvents nudLoopCount1 As DarkUI.Controls.DarkNumericUpDown
-    Friend WithEvents nudSprite1 As DarkUI.Controls.DarkNumericUpDown
-    Friend WithEvents cmbSound As DarkUI.Controls.DarkComboBox
-    Friend WithEvents DarkLabel2 As DarkUI.Controls.DarkLabel
+    Friend WithEvents btnSave As System.Windows.Forms.Button
+    Friend WithEvents btnDelete As System.Windows.Forms.Button
+    Friend WithEvents btnCancel As System.Windows.Forms.Button
+    Friend WithEvents nudLoopTime0 As System.Windows.Forms.NumericUpDown
+    Friend WithEvents nudFrameCount0 As System.Windows.Forms.NumericUpDown
+    Friend WithEvents nudLoopCount0 As System.Windows.Forms.NumericUpDown
+    Friend WithEvents nudSprite0 As System.Windows.Forms.NumericUpDown
+    Friend WithEvents nudLoopTime1 As System.Windows.Forms.NumericUpDown
+    Friend WithEvents nudFrameCount1 As System.Windows.Forms.NumericUpDown
+    Friend WithEvents nudLoopCount1 As System.Windows.Forms.NumericUpDown
+    Friend WithEvents nudSprite1 As System.Windows.Forms.NumericUpDown
+    Friend WithEvents cmbSound As System.Windows.Forms.ComboBox
+    Friend WithEvents DarkLabel2 As System.Windows.Forms.Label
 End Class

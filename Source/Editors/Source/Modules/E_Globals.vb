@@ -28,7 +28,6 @@
 
     Friend MapData As Boolean
     ' Cache the Resources in an array
-    Friend MapResource() As MapResourceRec
     Friend Resource_index as integer
     Friend Resources_Init As Boolean
 

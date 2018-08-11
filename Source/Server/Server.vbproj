@@ -65,12 +65,10 @@
   </PropertyGroup>
   <PropertyGroup />
   <ItemGroup>
-    <Reference Include="ASFW">
-      <HintPath>..\..\ASFW.dll</HintPath>
+    <Reference Include="ASFW, Version=1.0.6691.35832, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\CS-ASFW.1.0.0.5\lib\ASFW.dll</HintPath>
     </Reference>
     <Reference Include="System" />
-    <Reference Include="System.Data" />
-    <Reference Include="System.Deployment" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.XML" />
@@ -149,6 +147,7 @@
       <CustomToolNamespace>My</CustomToolNamespace>
       <LastGenOutput>Settings.Designer.vb</LastGenOutput>
     </None>
+    <None Include="packages.config" />
     <None Include="Source\Modules\SFML.Net.dll.config" />
   </ItemGroup>
   <ItemGroup>

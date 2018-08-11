@@ -136,381 +136,381 @@ Partial Class FrmEditor_Events
         Dim ListViewItem85 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Set Position Above Player")
         Dim ListViewItem86 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Set Graphic...")
         Me.tvCommands = New System.Windows.Forms.TreeView()
-        Me.fraPageSetUp = New DarkUI.Controls.DarkGroupBox()
-        Me.chkGlobal = New DarkUI.Controls.DarkCheckBox()
-        Me.btnClearPage = New DarkUI.Controls.DarkButton()
-        Me.btnDeletePage = New DarkUI.Controls.DarkButton()
-        Me.btnPastePage = New DarkUI.Controls.DarkButton()
-        Me.btnCopyPage = New DarkUI.Controls.DarkButton()
-        Me.btnNewPage = New DarkUI.Controls.DarkButton()
-        Me.txtName = New DarkUI.Controls.DarkTextBox()
-        Me.DarkLabel1 = New DarkUI.Controls.DarkLabel()
+        Me.fraPageSetUp = New System.Windows.Forms.GroupBox()
+        Me.chkGlobal = New System.Windows.Forms.CheckBox()
+        Me.btnClearPage = New System.Windows.Forms.Button()
+        Me.btnDeletePage = New System.Windows.Forms.Button()
+        Me.btnPastePage = New System.Windows.Forms.Button()
+        Me.btnCopyPage = New System.Windows.Forms.Button()
+        Me.btnNewPage = New System.Windows.Forms.Button()
+        Me.txtName = New System.Windows.Forms.TextBox()
+        Me.DarkLabel1 = New System.Windows.Forms.Label()
         Me.tabPages = New System.Windows.Forms.TabControl()
         Me.TabPage1 = New System.Windows.Forms.TabPage()
         Me.pnlTabPage = New System.Windows.Forms.Panel()
         Me.fraCommands = New System.Windows.Forms.Panel()
-        Me.btnCancelCommand = New DarkUI.Controls.DarkButton()
-        Me.DarkGroupBox8 = New DarkUI.Controls.DarkGroupBox()
-        Me.btnClearCommand = New DarkUI.Controls.DarkButton()
-        Me.btnDeleteCommand = New DarkUI.Controls.DarkButton()
-        Me.btnEditCommand = New DarkUI.Controls.DarkButton()
-        Me.btnAddCommand = New DarkUI.Controls.DarkButton()
+        Me.btnCancelCommand = New System.Windows.Forms.Button()
+        Me.DarkGroupBox8 = New System.Windows.Forms.GroupBox()
+        Me.btnClearCommand = New System.Windows.Forms.Button()
+        Me.btnDeleteCommand = New System.Windows.Forms.Button()
+        Me.btnEditCommand = New System.Windows.Forms.Button()
+        Me.btnAddCommand = New System.Windows.Forms.Button()
         Me.lstCommands = New System.Windows.Forms.ListBox()
-        Me.DarkLabel10 = New DarkUI.Controls.DarkLabel()
-        Me.DarkLabel9 = New DarkUI.Controls.DarkLabel()
-        Me.DarkGroupBox7 = New DarkUI.Controls.DarkGroupBox()
-        Me.cmbEventQuest = New DarkUI.Controls.DarkComboBox()
-        Me.DarkLabel8 = New DarkUI.Controls.DarkLabel()
-        Me.DarkGroupBox5 = New DarkUI.Controls.DarkGroupBox()
-        Me.cmbTrigger = New DarkUI.Controls.DarkComboBox()
-        Me.DarkGroupBox4 = New DarkUI.Controls.DarkGroupBox()
-        Me.cmbPositioning = New DarkUI.Controls.DarkComboBox()
-        Me.DarkGroupBox3 = New DarkUI.Controls.DarkGroupBox()
-        Me.DarkLabel7 = New DarkUI.Controls.DarkLabel()
-        Me.cmbMoveFreq = New DarkUI.Controls.DarkComboBox()
-        Me.DarkLabel6 = New DarkUI.Controls.DarkLabel()
-        Me.cmbMoveSpeed = New DarkUI.Controls.DarkComboBox()
-        Me.btnMoveRoute = New DarkUI.Controls.DarkButton()
-        Me.cmbMoveType = New DarkUI.Controls.DarkComboBox()
-        Me.DarkLabel5 = New DarkUI.Controls.DarkLabel()
-        Me.DarkGroupBox2 = New DarkUI.Controls.DarkGroupBox()
+        Me.DarkLabel10 = New System.Windows.Forms.Label()
+        Me.DarkLabel9 = New System.Windows.Forms.Label()
+        Me.DarkGroupBox7 = New System.Windows.Forms.GroupBox()
+        Me.cmbEventQuest = New System.Windows.Forms.ComboBox()
+        Me.DarkLabel8 = New System.Windows.Forms.Label()
+        Me.DarkGroupBox5 = New System.Windows.Forms.GroupBox()
+        Me.cmbTrigger = New System.Windows.Forms.ComboBox()
+        Me.DarkGroupBox4 = New System.Windows.Forms.GroupBox()
+        Me.cmbPositioning = New System.Windows.Forms.ComboBox()
+        Me.DarkGroupBox3 = New System.Windows.Forms.GroupBox()
+        Me.DarkLabel7 = New System.Windows.Forms.Label()
+        Me.cmbMoveFreq = New System.Windows.Forms.ComboBox()
+        Me.DarkLabel6 = New System.Windows.Forms.Label()
+        Me.cmbMoveSpeed = New System.Windows.Forms.ComboBox()
+        Me.btnMoveRoute = New System.Windows.Forms.Button()
+        Me.cmbMoveType = New System.Windows.Forms.ComboBox()
+        Me.DarkLabel5 = New System.Windows.Forms.Label()
+        Me.DarkGroupBox2 = New System.Windows.Forms.GroupBox()
         Me.picGraphic = New System.Windows.Forms.PictureBox()
-        Me.DarkGroupBox1 = New DarkUI.Controls.DarkGroupBox()
-        Me.cmbSelfSwitchCompare = New DarkUI.Controls.DarkComboBox()
-        Me.DarkLabel4 = New DarkUI.Controls.DarkLabel()
-        Me.cmbSelfSwitch = New DarkUI.Controls.DarkComboBox()
-        Me.chkSelfSwitch = New DarkUI.Controls.DarkCheckBox()
-        Me.cmbHasItem = New DarkUI.Controls.DarkComboBox()
-        Me.chkHasItem = New DarkUI.Controls.DarkCheckBox()
-        Me.cmbPlayerSwitchCompare = New DarkUI.Controls.DarkComboBox()
-        Me.DarkLabel3 = New DarkUI.Controls.DarkLabel()
-        Me.cmbPlayerSwitch = New DarkUI.Controls.DarkComboBox()
-        Me.chkPlayerSwitch = New DarkUI.Controls.DarkCheckBox()
-        Me.nudPlayerVariable = New DarkUI.Controls.DarkNumericUpDown()
-        Me.cmbPlayervarCompare = New DarkUI.Controls.DarkComboBox()
-        Me.DarkLabel2 = New DarkUI.Controls.DarkLabel()
-        Me.cmbPlayerVar = New DarkUI.Controls.DarkComboBox()
-        Me.chkPlayerVar = New DarkUI.Controls.DarkCheckBox()
-        Me.DarkGroupBox6 = New DarkUI.Controls.DarkGroupBox()
-        Me.chkShowName = New DarkUI.Controls.DarkCheckBox()
-        Me.chkWalkThrough = New DarkUI.Controls.DarkCheckBox()
-        Me.chkDirFix = New DarkUI.Controls.DarkCheckBox()
-        Me.chkWalkAnim = New DarkUI.Controls.DarkCheckBox()
-        Me.btnLabeling = New DarkUI.Controls.DarkButton()
-        Me.btnCancel = New DarkUI.Controls.DarkButton()
-        Me.btnOk = New DarkUI.Controls.DarkButton()
-        Me.fraMoveRoute = New DarkUI.Controls.DarkGroupBox()
-        Me.btnMoveRouteOk = New DarkUI.Controls.DarkButton()
-        Me.btnMoveRouteCancel = New DarkUI.Controls.DarkButton()
-        Me.chkRepeatRoute = New DarkUI.Controls.DarkCheckBox()
-        Me.chkIgnoreMove = New DarkUI.Controls.DarkCheckBox()
-        Me.DarkGroupBox10 = New DarkUI.Controls.DarkGroupBox()
+        Me.DarkGroupBox1 = New System.Windows.Forms.GroupBox()
+        Me.cmbSelfSwitchCompare = New System.Windows.Forms.ComboBox()
+        Me.DarkLabel4 = New System.Windows.Forms.Label()
+        Me.cmbSelfSwitch = New System.Windows.Forms.ComboBox()
+        Me.chkSelfSwitch = New System.Windows.Forms.CheckBox()
+        Me.cmbHasItem = New System.Windows.Forms.ComboBox()
+        Me.chkHasItem = New System.Windows.Forms.CheckBox()
+        Me.cmbPlayerSwitchCompare = New System.Windows.Forms.ComboBox()
+        Me.DarkLabel3 = New System.Windows.Forms.Label()
+        Me.cmbPlayerSwitch = New System.Windows.Forms.ComboBox()
+        Me.chkPlayerSwitch = New System.Windows.Forms.CheckBox()
+        Me.nudPlayerVariable = New System.Windows.Forms.NumericUpDown()
+        Me.cmbPlayervarCompare = New System.Windows.Forms.ComboBox()
+        Me.DarkLabel2 = New System.Windows.Forms.Label()
+        Me.cmbPlayerVar = New System.Windows.Forms.ComboBox()
+        Me.chkPlayerVar = New System.Windows.Forms.CheckBox()
+        Me.DarkGroupBox6 = New System.Windows.Forms.GroupBox()
+        Me.chkShowName = New System.Windows.Forms.CheckBox()
+        Me.chkWalkThrough = New System.Windows.Forms.CheckBox()
+        Me.chkDirFix = New System.Windows.Forms.CheckBox()
+        Me.chkWalkAnim = New System.Windows.Forms.CheckBox()
+        Me.btnLabeling = New System.Windows.Forms.Button()
+        Me.btnCancel = New System.Windows.Forms.Button()
+        Me.btnOk = New System.Windows.Forms.Button()
+        Me.fraMoveRoute = New System.Windows.Forms.GroupBox()
+        Me.btnMoveRouteOk = New System.Windows.Forms.Button()
+        Me.btnMoveRouteCancel = New System.Windows.Forms.Button()
+        Me.chkRepeatRoute = New System.Windows.Forms.CheckBox()
+        Me.chkIgnoreMove = New System.Windows.Forms.CheckBox()
+        Me.DarkGroupBox10 = New System.Windows.Forms.GroupBox()
         Me.lstvwMoveRoute = New System.Windows.Forms.ListView()
         Me.ColumnHeader3 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.ColumnHeader4 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.lstMoveRoute = New System.Windows.Forms.ListBox()
-        Me.cmbEvent = New DarkUI.Controls.DarkComboBox()
-        Me.fraGraphic = New DarkUI.Controls.DarkGroupBox()
+        Me.cmbEvent = New System.Windows.Forms.ComboBox()
+        Me.fraGraphic = New System.Windows.Forms.GroupBox()
         Me.pnlGraphicSel = New System.Windows.Forms.Panel()
         Me.picGraphicSel = New System.Windows.Forms.PictureBox()
-        Me.btnGraphicOk = New DarkUI.Controls.DarkButton()
-        Me.btnGraphicCancel = New DarkUI.Controls.DarkButton()
-        Me.DarkLabel13 = New DarkUI.Controls.DarkLabel()
-        Me.nudGraphic = New DarkUI.Controls.DarkNumericUpDown()
-        Me.DarkLabel12 = New DarkUI.Controls.DarkLabel()
-        Me.cmbGraphic = New DarkUI.Controls.DarkComboBox()
-        Me.DarkLabel11 = New DarkUI.Controls.DarkLabel()
-        Me.fraDialogue = New DarkUI.Controls.DarkGroupBox()
-        Me.fraPlayAnimation = New DarkUI.Controls.DarkGroupBox()
-        Me.btnPlayAnimationOk = New DarkUI.Controls.DarkButton()
-        Me.btnPlayAnimationCancel = New DarkUI.Controls.DarkButton()
-        Me.lblPlayAnimY = New DarkUI.Controls.DarkLabel()
-        Me.lblPlayAnimX = New DarkUI.Controls.DarkLabel()
-        Me.cmbPlayAnimEvent = New DarkUI.Controls.DarkComboBox()
-        Me.DarkLabel62 = New DarkUI.Controls.DarkLabel()
-        Me.cmbAnimTargetType = New DarkUI.Controls.DarkComboBox()
-        Me.nudPlayAnimTileY = New DarkUI.Controls.DarkNumericUpDown()
-        Me.nudPlayAnimTileX = New DarkUI.Controls.DarkNumericUpDown()
-        Me.DarkLabel61 = New DarkUI.Controls.DarkLabel()
-        Me.cmbPlayAnim = New DarkUI.Controls.DarkComboBox()
-        Me.fraMoveRouteWait = New DarkUI.Controls.DarkGroupBox()
-        Me.btnMoveWaitCancel = New DarkUI.Controls.DarkButton()
-        Me.btnMoveWaitOk = New DarkUI.Controls.DarkButton()
-        Me.DarkLabel79 = New DarkUI.Controls.DarkLabel()
-        Me.cmbMoveWait = New DarkUI.Controls.DarkComboBox()
-        Me.fraCustomScript = New DarkUI.Controls.DarkGroupBox()
-        Me.nudCustomScript = New DarkUI.Controls.DarkNumericUpDown()
-        Me.DarkLabel78 = New DarkUI.Controls.DarkLabel()
-        Me.btnCustomScriptCancel = New DarkUI.Controls.DarkButton()
-        Me.btnCustomScriptOk = New DarkUI.Controls.DarkButton()
-        Me.fraSetWeather = New DarkUI.Controls.DarkGroupBox()
-        Me.btnSetWeatherOk = New DarkUI.Controls.DarkButton()
-        Me.btnSetWeatherCancel = New DarkUI.Controls.DarkButton()
-        Me.DarkLabel76 = New DarkUI.Controls.DarkLabel()
-        Me.nudWeatherIntensity = New DarkUI.Controls.DarkNumericUpDown()
-        Me.DarkLabel75 = New DarkUI.Controls.DarkLabel()
-        Me.CmbWeather = New DarkUI.Controls.DarkComboBox()
-        Me.fraSpawnNpc = New DarkUI.Controls.DarkGroupBox()
-        Me.btnSpawnNpcOk = New DarkUI.Controls.DarkButton()
-        Me.btnSpawnNpcCancel = New DarkUI.Controls.DarkButton()
-        Me.cmbSpawnNpc = New DarkUI.Controls.DarkComboBox()
-        Me.fraGiveExp = New DarkUI.Controls.DarkGroupBox()
-        Me.btnGiveExpOk = New DarkUI.Controls.DarkButton()
-        Me.btnGiveExpCancel = New DarkUI.Controls.DarkButton()
-        Me.nudGiveExp = New DarkUI.Controls.DarkNumericUpDown()
-        Me.DarkLabel77 = New DarkUI.Controls.DarkLabel()
-        Me.fraEndQuest = New DarkUI.Controls.DarkGroupBox()
-        Me.btnEndQuestOk = New DarkUI.Controls.DarkButton()
-        Me.btnEndQuestCancel = New DarkUI.Controls.DarkButton()
-        Me.cmbEndQuest = New DarkUI.Controls.DarkComboBox()
-        Me.fraSetAccess = New DarkUI.Controls.DarkGroupBox()
-        Me.btnSetAccessOk = New DarkUI.Controls.DarkButton()
-        Me.btnSetAccessCancel = New DarkUI.Controls.DarkButton()
-        Me.cmbSetAccess = New DarkUI.Controls.DarkComboBox()
-        Me.fraSetWait = New DarkUI.Controls.DarkGroupBox()
-        Me.btnSetWaitOk = New DarkUI.Controls.DarkButton()
-        Me.btnSetWaitCancel = New DarkUI.Controls.DarkButton()
-        Me.DarkLabel74 = New DarkUI.Controls.DarkLabel()
-        Me.DarkLabel72 = New DarkUI.Controls.DarkLabel()
-        Me.DarkLabel73 = New DarkUI.Controls.DarkLabel()
-        Me.nudWaitAmount = New DarkUI.Controls.DarkNumericUpDown()
-        Me.fraShowPic = New DarkUI.Controls.DarkGroupBox()
-        Me.btnShowPicOk = New DarkUI.Controls.DarkButton()
-        Me.btnShowPicCancel = New DarkUI.Controls.DarkButton()
-        Me.DarkLabel71 = New DarkUI.Controls.DarkLabel()
-        Me.DarkLabel70 = New DarkUI.Controls.DarkLabel()
-        Me.DarkLabel67 = New DarkUI.Controls.DarkLabel()
-        Me.DarkLabel68 = New DarkUI.Controls.DarkLabel()
-        Me.nudPicOffsetY = New DarkUI.Controls.DarkNumericUpDown()
-        Me.nudPicOffsetX = New DarkUI.Controls.DarkNumericUpDown()
-        Me.DarkLabel69 = New DarkUI.Controls.DarkLabel()
-        Me.cmbPicLoc = New DarkUI.Controls.DarkComboBox()
-        Me.nudShowPicture = New DarkUI.Controls.DarkNumericUpDown()
+        Me.btnGraphicOk = New System.Windows.Forms.Button()
+        Me.btnGraphicCancel = New System.Windows.Forms.Button()
+        Me.DarkLabel13 = New System.Windows.Forms.Label()
+        Me.nudGraphic = New System.Windows.Forms.NumericUpDown()
+        Me.DarkLabel12 = New System.Windows.Forms.Label()
+        Me.cmbGraphic = New System.Windows.Forms.ComboBox()
+        Me.DarkLabel11 = New System.Windows.Forms.Label()
+        Me.fraDialogue = New System.Windows.Forms.GroupBox()
+        Me.fraPlayAnimation = New System.Windows.Forms.GroupBox()
+        Me.btnPlayAnimationOk = New System.Windows.Forms.Button()
+        Me.btnPlayAnimationCancel = New System.Windows.Forms.Button()
+        Me.lblPlayAnimY = New System.Windows.Forms.Label()
+        Me.lblPlayAnimX = New System.Windows.Forms.Label()
+        Me.cmbPlayAnimEvent = New System.Windows.Forms.ComboBox()
+        Me.DarkLabel62 = New System.Windows.Forms.Label()
+        Me.cmbAnimTargetType = New System.Windows.Forms.ComboBox()
+        Me.nudPlayAnimTileY = New System.Windows.Forms.NumericUpDown()
+        Me.nudPlayAnimTileX = New System.Windows.Forms.NumericUpDown()
+        Me.DarkLabel61 = New System.Windows.Forms.Label()
+        Me.cmbPlayAnim = New System.Windows.Forms.ComboBox()
+        Me.fraMoveRouteWait = New System.Windows.Forms.GroupBox()
+        Me.btnMoveWaitCancel = New System.Windows.Forms.Button()
+        Me.btnMoveWaitOk = New System.Windows.Forms.Button()
+        Me.DarkLabel79 = New System.Windows.Forms.Label()
+        Me.cmbMoveWait = New System.Windows.Forms.ComboBox()
+        Me.fraCustomScript = New System.Windows.Forms.GroupBox()
+        Me.nudCustomScript = New System.Windows.Forms.NumericUpDown()
+        Me.DarkLabel78 = New System.Windows.Forms.Label()
+        Me.btnCustomScriptCancel = New System.Windows.Forms.Button()
+        Me.btnCustomScriptOk = New System.Windows.Forms.Button()
+        Me.fraSetWeather = New System.Windows.Forms.GroupBox()
+        Me.btnSetWeatherOk = New System.Windows.Forms.Button()
+        Me.btnSetWeatherCancel = New System.Windows.Forms.Button()
+        Me.DarkLabel76 = New System.Windows.Forms.Label()
+        Me.nudWeatherIntensity = New System.Windows.Forms.NumericUpDown()
+        Me.DarkLabel75 = New System.Windows.Forms.Label()
+        Me.CmbWeather = New System.Windows.Forms.ComboBox()
+        Me.fraSpawnNpc = New System.Windows.Forms.GroupBox()
+        Me.btnSpawnNpcOk = New System.Windows.Forms.Button()
+        Me.btnSpawnNpcCancel = New System.Windows.Forms.Button()
+        Me.cmbSpawnNpc = New System.Windows.Forms.ComboBox()
+        Me.fraGiveExp = New System.Windows.Forms.GroupBox()
+        Me.btnGiveExpOk = New System.Windows.Forms.Button()
+        Me.btnGiveExpCancel = New System.Windows.Forms.Button()
+        Me.nudGiveExp = New System.Windows.Forms.NumericUpDown()
+        Me.DarkLabel77 = New System.Windows.Forms.Label()
+        Me.fraEndQuest = New System.Windows.Forms.GroupBox()
+        Me.btnEndQuestOk = New System.Windows.Forms.Button()
+        Me.btnEndQuestCancel = New System.Windows.Forms.Button()
+        Me.cmbEndQuest = New System.Windows.Forms.ComboBox()
+        Me.fraSetAccess = New System.Windows.Forms.GroupBox()
+        Me.btnSetAccessOk = New System.Windows.Forms.Button()
+        Me.btnSetAccessCancel = New System.Windows.Forms.Button()
+        Me.cmbSetAccess = New System.Windows.Forms.ComboBox()
+        Me.fraSetWait = New System.Windows.Forms.GroupBox()
+        Me.btnSetWaitOk = New System.Windows.Forms.Button()
+        Me.btnSetWaitCancel = New System.Windows.Forms.Button()
+        Me.DarkLabel74 = New System.Windows.Forms.Label()
+        Me.DarkLabel72 = New System.Windows.Forms.Label()
+        Me.DarkLabel73 = New System.Windows.Forms.Label()
+        Me.nudWaitAmount = New System.Windows.Forms.NumericUpDown()
+        Me.fraShowPic = New System.Windows.Forms.GroupBox()
+        Me.btnShowPicOk = New System.Windows.Forms.Button()
+        Me.btnShowPicCancel = New System.Windows.Forms.Button()
+        Me.DarkLabel71 = New System.Windows.Forms.Label()
+        Me.DarkLabel70 = New System.Windows.Forms.Label()
+        Me.DarkLabel67 = New System.Windows.Forms.Label()
+        Me.DarkLabel68 = New System.Windows.Forms.Label()
+        Me.nudPicOffsetY = New System.Windows.Forms.NumericUpDown()
+        Me.nudPicOffsetX = New System.Windows.Forms.NumericUpDown()
+        Me.DarkLabel69 = New System.Windows.Forms.Label()
+        Me.cmbPicLoc = New System.Windows.Forms.ComboBox()
+        Me.nudShowPicture = New System.Windows.Forms.NumericUpDown()
         Me.picShowPic = New System.Windows.Forms.PictureBox()
-        Me.cmbPicIndex = New DarkUI.Controls.DarkComboBox()
-        Me.DarkLabel66 = New DarkUI.Controls.DarkLabel()
-        Me.fraOpenShop = New DarkUI.Controls.DarkGroupBox()
-        Me.btnOpenShopOk = New DarkUI.Controls.DarkButton()
-        Me.btnOpenShopCancel = New DarkUI.Controls.DarkButton()
-        Me.cmbOpenShop = New DarkUI.Controls.DarkComboBox()
-        Me.fraChangeLevel = New DarkUI.Controls.DarkGroupBox()
-        Me.btnChangeLevelOk = New DarkUI.Controls.DarkButton()
-        Me.btnChangeLevelCancel = New DarkUI.Controls.DarkButton()
-        Me.DarkLabel65 = New DarkUI.Controls.DarkLabel()
-        Me.nudChangeLevel = New DarkUI.Controls.DarkNumericUpDown()
-        Me.fraChangeGender = New DarkUI.Controls.DarkGroupBox()
-        Me.btnChangeGenderOk = New DarkUI.Controls.DarkButton()
-        Me.btnChangeGenderCancel = New DarkUI.Controls.DarkButton()
-        Me.optChangeSexFemale = New DarkUI.Controls.DarkRadioButton()
-        Me.optChangeSexMale = New DarkUI.Controls.DarkRadioButton()
-        Me.fraGoToLabel = New DarkUI.Controls.DarkGroupBox()
-        Me.btnGoToLabelOk = New DarkUI.Controls.DarkButton()
-        Me.btnGoToLabelCancel = New DarkUI.Controls.DarkButton()
-        Me.txtGotoLabel = New DarkUI.Controls.DarkTextBox()
-        Me.DarkLabel60 = New DarkUI.Controls.DarkLabel()
-        Me.fraHidePic = New DarkUI.Controls.DarkGroupBox()
-        Me.btnHidePicOk = New DarkUI.Controls.DarkButton()
-        Me.btnHidePicCancel = New DarkUI.Controls.DarkButton()
-        Me.nudHidePic = New DarkUI.Controls.DarkNumericUpDown()
-        Me.DarkLabel59 = New DarkUI.Controls.DarkLabel()
-        Me.fraBeginQuest = New DarkUI.Controls.DarkGroupBox()
-        Me.btnBeginQuestOk = New DarkUI.Controls.DarkButton()
-        Me.btnBeginQuestCancel = New DarkUI.Controls.DarkButton()
-        Me.cmbBeginQuest = New DarkUI.Controls.DarkComboBox()
-        Me.DarkLabel58 = New DarkUI.Controls.DarkLabel()
-        Me.fraShowChoices = New DarkUI.Controls.DarkGroupBox()
-        Me.txtChoices4 = New DarkUI.Controls.DarkTextBox()
-        Me.txtChoices3 = New DarkUI.Controls.DarkTextBox()
-        Me.txtChoices2 = New DarkUI.Controls.DarkTextBox()
-        Me.txtChoices1 = New DarkUI.Controls.DarkTextBox()
-        Me.DarkLabel56 = New DarkUI.Controls.DarkLabel()
-        Me.DarkLabel57 = New DarkUI.Controls.DarkLabel()
-        Me.DarkLabel55 = New DarkUI.Controls.DarkLabel()
-        Me.DarkLabel54 = New DarkUI.Controls.DarkLabel()
-        Me.DarkLabel52 = New DarkUI.Controls.DarkLabel()
-        Me.txtChoicePrompt = New DarkUI.Controls.DarkTextBox()
-        Me.btnShowChoicesOk = New DarkUI.Controls.DarkButton()
+        Me.cmbPicIndex = New System.Windows.Forms.ComboBox()
+        Me.DarkLabel66 = New System.Windows.Forms.Label()
+        Me.fraOpenShop = New System.Windows.Forms.GroupBox()
+        Me.btnOpenShopOk = New System.Windows.Forms.Button()
+        Me.btnOpenShopCancel = New System.Windows.Forms.Button()
+        Me.cmbOpenShop = New System.Windows.Forms.ComboBox()
+        Me.fraChangeLevel = New System.Windows.Forms.GroupBox()
+        Me.btnChangeLevelOk = New System.Windows.Forms.Button()
+        Me.btnChangeLevelCancel = New System.Windows.Forms.Button()
+        Me.DarkLabel65 = New System.Windows.Forms.Label()
+        Me.nudChangeLevel = New System.Windows.Forms.NumericUpDown()
+        Me.fraChangeGender = New System.Windows.Forms.GroupBox()
+        Me.btnChangeGenderOk = New System.Windows.Forms.Button()
+        Me.btnChangeGenderCancel = New System.Windows.Forms.Button()
+        Me.optChangeSexFemale = New System.Windows.Forms.RadioButton()
+        Me.optChangeSexMale = New System.Windows.Forms.RadioButton()
+        Me.fraGoToLabel = New System.Windows.Forms.GroupBox()
+        Me.btnGoToLabelOk = New System.Windows.Forms.Button()
+        Me.btnGoToLabelCancel = New System.Windows.Forms.Button()
+        Me.txtGotoLabel = New System.Windows.Forms.TextBox()
+        Me.DarkLabel60 = New System.Windows.Forms.Label()
+        Me.fraHidePic = New System.Windows.Forms.GroupBox()
+        Me.btnHidePicOk = New System.Windows.Forms.Button()
+        Me.btnHidePicCancel = New System.Windows.Forms.Button()
+        Me.nudHidePic = New System.Windows.Forms.NumericUpDown()
+        Me.DarkLabel59 = New System.Windows.Forms.Label()
+        Me.fraBeginQuest = New System.Windows.Forms.GroupBox()
+        Me.btnBeginQuestOk = New System.Windows.Forms.Button()
+        Me.btnBeginQuestCancel = New System.Windows.Forms.Button()
+        Me.cmbBeginQuest = New System.Windows.Forms.ComboBox()
+        Me.DarkLabel58 = New System.Windows.Forms.Label()
+        Me.fraShowChoices = New System.Windows.Forms.GroupBox()
+        Me.txtChoices4 = New System.Windows.Forms.TextBox()
+        Me.txtChoices3 = New System.Windows.Forms.TextBox()
+        Me.txtChoices2 = New System.Windows.Forms.TextBox()
+        Me.txtChoices1 = New System.Windows.Forms.TextBox()
+        Me.DarkLabel56 = New System.Windows.Forms.Label()
+        Me.DarkLabel57 = New System.Windows.Forms.Label()
+        Me.DarkLabel55 = New System.Windows.Forms.Label()
+        Me.DarkLabel54 = New System.Windows.Forms.Label()
+        Me.DarkLabel52 = New System.Windows.Forms.Label()
+        Me.txtChoicePrompt = New System.Windows.Forms.TextBox()
+        Me.btnShowChoicesOk = New System.Windows.Forms.Button()
         Me.picShowChoicesFace = New System.Windows.Forms.PictureBox()
-        Me.btnShowChoicesCancel = New DarkUI.Controls.DarkButton()
-        Me.DarkLabel53 = New DarkUI.Controls.DarkLabel()
-        Me.nudShowChoicesFace = New DarkUI.Controls.DarkNumericUpDown()
-        Me.fraPlayerVariable = New DarkUI.Controls.DarkGroupBox()
-        Me.nudVariableData2 = New DarkUI.Controls.DarkNumericUpDown()
-        Me.optVariableAction2 = New DarkUI.Controls.DarkRadioButton()
-        Me.btnPlayerVarOk = New DarkUI.Controls.DarkButton()
-        Me.btnPlayerVarCancel = New DarkUI.Controls.DarkButton()
-        Me.DarkLabel51 = New DarkUI.Controls.DarkLabel()
-        Me.DarkLabel50 = New DarkUI.Controls.DarkLabel()
-        Me.nudVariableData4 = New DarkUI.Controls.DarkNumericUpDown()
-        Me.nudVariableData3 = New DarkUI.Controls.DarkNumericUpDown()
-        Me.optVariableAction3 = New DarkUI.Controls.DarkRadioButton()
-        Me.optVariableAction1 = New DarkUI.Controls.DarkRadioButton()
-        Me.nudVariableData1 = New DarkUI.Controls.DarkNumericUpDown()
-        Me.nudVariableData0 = New DarkUI.Controls.DarkNumericUpDown()
-        Me.optVariableAction0 = New DarkUI.Controls.DarkRadioButton()
-        Me.cmbVariable = New DarkUI.Controls.DarkComboBox()
-        Me.DarkLabel49 = New DarkUI.Controls.DarkLabel()
-        Me.fraChangeSprite = New DarkUI.Controls.DarkGroupBox()
-        Me.btnChangeSpriteOk = New DarkUI.Controls.DarkButton()
-        Me.btnChangeSpriteCancel = New DarkUI.Controls.DarkButton()
-        Me.DarkLabel48 = New DarkUI.Controls.DarkLabel()
-        Me.nudChangeSprite = New DarkUI.Controls.DarkNumericUpDown()
+        Me.btnShowChoicesCancel = New System.Windows.Forms.Button()
+        Me.DarkLabel53 = New System.Windows.Forms.Label()
+        Me.nudShowChoicesFace = New System.Windows.Forms.NumericUpDown()
+        Me.fraPlayerVariable = New System.Windows.Forms.GroupBox()
+        Me.nudVariableData2 = New System.Windows.Forms.NumericUpDown()
+        Me.optVariableAction2 = New System.Windows.Forms.RadioButton()
+        Me.btnPlayerVarOk = New System.Windows.Forms.Button()
+        Me.btnPlayerVarCancel = New System.Windows.Forms.Button()
+        Me.DarkLabel51 = New System.Windows.Forms.Label()
+        Me.DarkLabel50 = New System.Windows.Forms.Label()
+        Me.nudVariableData4 = New System.Windows.Forms.NumericUpDown()
+        Me.nudVariableData3 = New System.Windows.Forms.NumericUpDown()
+        Me.optVariableAction3 = New System.Windows.Forms.RadioButton()
+        Me.optVariableAction1 = New System.Windows.Forms.RadioButton()
+        Me.nudVariableData1 = New System.Windows.Forms.NumericUpDown()
+        Me.nudVariableData0 = New System.Windows.Forms.NumericUpDown()
+        Me.optVariableAction0 = New System.Windows.Forms.RadioButton()
+        Me.cmbVariable = New System.Windows.Forms.ComboBox()
+        Me.DarkLabel49 = New System.Windows.Forms.Label()
+        Me.fraChangeSprite = New System.Windows.Forms.GroupBox()
+        Me.btnChangeSpriteOk = New System.Windows.Forms.Button()
+        Me.btnChangeSpriteCancel = New System.Windows.Forms.Button()
+        Me.DarkLabel48 = New System.Windows.Forms.Label()
+        Me.nudChangeSprite = New System.Windows.Forms.NumericUpDown()
         Me.picChangeSprite = New System.Windows.Forms.PictureBox()
-        Me.fraSetSelfSwitch = New DarkUI.Controls.DarkGroupBox()
-        Me.btnSelfswitchOk = New DarkUI.Controls.DarkButton()
-        Me.btnSelfswitchCancel = New DarkUI.Controls.DarkButton()
-        Me.DarkLabel47 = New DarkUI.Controls.DarkLabel()
-        Me.cmbSetSelfSwitchTo = New DarkUI.Controls.DarkComboBox()
-        Me.DarkLabel46 = New DarkUI.Controls.DarkLabel()
-        Me.cmbSetSelfSwitch = New DarkUI.Controls.DarkComboBox()
-        Me.fraMapTint = New DarkUI.Controls.DarkGroupBox()
-        Me.btnMapTintOk = New DarkUI.Controls.DarkButton()
-        Me.btnMapTintCancel = New DarkUI.Controls.DarkButton()
-        Me.DarkLabel42 = New DarkUI.Controls.DarkLabel()
-        Me.nudMapTintData3 = New DarkUI.Controls.DarkNumericUpDown()
-        Me.nudMapTintData2 = New DarkUI.Controls.DarkNumericUpDown()
-        Me.DarkLabel43 = New DarkUI.Controls.DarkLabel()
-        Me.DarkLabel44 = New DarkUI.Controls.DarkLabel()
-        Me.nudMapTintData1 = New DarkUI.Controls.DarkNumericUpDown()
-        Me.nudMapTintData0 = New DarkUI.Controls.DarkNumericUpDown()
-        Me.DarkLabel45 = New DarkUI.Controls.DarkLabel()
-        Me.fraShowChatBubble = New DarkUI.Controls.DarkGroupBox()
-        Me.btnShowChatBubbleOk = New DarkUI.Controls.DarkButton()
-        Me.btnShowChatBubbleCancel = New DarkUI.Controls.DarkButton()
-        Me.DarkLabel41 = New DarkUI.Controls.DarkLabel()
-        Me.cmbChatBubbleTarget = New DarkUI.Controls.DarkComboBox()
-        Me.cmbChatBubbleTargetType = New DarkUI.Controls.DarkComboBox()
-        Me.DarkLabel40 = New DarkUI.Controls.DarkLabel()
-        Me.txtChatbubbleText = New DarkUI.Controls.DarkTextBox()
-        Me.DarkLabel39 = New DarkUI.Controls.DarkLabel()
-        Me.fraPlaySound = New DarkUI.Controls.DarkGroupBox()
-        Me.btnPlaySoundOk = New DarkUI.Controls.DarkButton()
-        Me.btnPlaySoundCancel = New DarkUI.Controls.DarkButton()
-        Me.cmbPlaySound = New DarkUI.Controls.DarkComboBox()
-        Me.fraChangePK = New DarkUI.Controls.DarkGroupBox()
-        Me.btnChangePkOk = New DarkUI.Controls.DarkButton()
-        Me.btnChangePkCancel = New DarkUI.Controls.DarkButton()
-        Me.cmbSetPK = New DarkUI.Controls.DarkComboBox()
-        Me.fraCreateLabel = New DarkUI.Controls.DarkGroupBox()
-        Me.btnCreatelabelOk = New DarkUI.Controls.DarkButton()
-        Me.btnCreatelabelCancel = New DarkUI.Controls.DarkButton()
-        Me.txtLabelName = New DarkUI.Controls.DarkTextBox()
-        Me.lblLabelName = New DarkUI.Controls.DarkLabel()
-        Me.fraChangeClass = New DarkUI.Controls.DarkGroupBox()
-        Me.btnChangeClassOk = New DarkUI.Controls.DarkButton()
-        Me.btnChangeClassCancel = New DarkUI.Controls.DarkButton()
-        Me.cmbChangeClass = New DarkUI.Controls.DarkComboBox()
-        Me.DarkLabel38 = New DarkUI.Controls.DarkLabel()
-        Me.fraChangeSkills = New DarkUI.Controls.DarkGroupBox()
-        Me.btnChangeSkillsOk = New DarkUI.Controls.DarkButton()
-        Me.btnChangeSkillsCancel = New DarkUI.Controls.DarkButton()
-        Me.optChangeSkillsRemove = New DarkUI.Controls.DarkRadioButton()
-        Me.optChangeSkillsAdd = New DarkUI.Controls.DarkRadioButton()
-        Me.cmbChangeSkills = New DarkUI.Controls.DarkComboBox()
-        Me.DarkLabel37 = New DarkUI.Controls.DarkLabel()
-        Me.fraCompleteTask = New DarkUI.Controls.DarkGroupBox()
-        Me.btnCompleteQuestTaskOk = New DarkUI.Controls.DarkButton()
-        Me.btnCompleteQuestTaskCancel = New DarkUI.Controls.DarkButton()
-        Me.DarkLabel35 = New DarkUI.Controls.DarkLabel()
-        Me.DarkLabel36 = New DarkUI.Controls.DarkLabel()
-        Me.nudCompleteQuestTask = New DarkUI.Controls.DarkNumericUpDown()
-        Me.cmbCompleteQuest = New DarkUI.Controls.DarkComboBox()
-        Me.fraPlayerWarp = New DarkUI.Controls.DarkGroupBox()
-        Me.btnPlayerWarpOk = New DarkUI.Controls.DarkButton()
-        Me.btnPlayerWarpCancel = New DarkUI.Controls.DarkButton()
-        Me.DarkLabel31 = New DarkUI.Controls.DarkLabel()
-        Me.cmbWarpPlayerDir = New DarkUI.Controls.DarkComboBox()
-        Me.nudWPY = New DarkUI.Controls.DarkNumericUpDown()
-        Me.DarkLabel32 = New DarkUI.Controls.DarkLabel()
-        Me.nudWPX = New DarkUI.Controls.DarkNumericUpDown()
-        Me.DarkLabel33 = New DarkUI.Controls.DarkLabel()
-        Me.nudWPMap = New DarkUI.Controls.DarkNumericUpDown()
-        Me.DarkLabel34 = New DarkUI.Controls.DarkLabel()
-        Me.fraSetFog = New DarkUI.Controls.DarkGroupBox()
-        Me.btnSetFogOk = New DarkUI.Controls.DarkButton()
-        Me.btnSetFogCancel = New DarkUI.Controls.DarkButton()
-        Me.DarkLabel30 = New DarkUI.Controls.DarkLabel()
-        Me.DarkLabel29 = New DarkUI.Controls.DarkLabel()
-        Me.DarkLabel28 = New DarkUI.Controls.DarkLabel()
-        Me.nudFogData2 = New DarkUI.Controls.DarkNumericUpDown()
-        Me.nudFogData1 = New DarkUI.Controls.DarkNumericUpDown()
-        Me.nudFogData0 = New DarkUI.Controls.DarkNumericUpDown()
-        Me.fraShowText = New DarkUI.Controls.DarkGroupBox()
-        Me.DarkLabel27 = New DarkUI.Controls.DarkLabel()
-        Me.txtShowText = New DarkUI.Controls.DarkTextBox()
-        Me.btnShowTextCancel = New DarkUI.Controls.DarkButton()
-        Me.btnShowTextOk = New DarkUI.Controls.DarkButton()
+        Me.fraSetSelfSwitch = New System.Windows.Forms.GroupBox()
+        Me.btnSelfswitchOk = New System.Windows.Forms.Button()
+        Me.btnSelfswitchCancel = New System.Windows.Forms.Button()
+        Me.DarkLabel47 = New System.Windows.Forms.Label()
+        Me.cmbSetSelfSwitchTo = New System.Windows.Forms.ComboBox()
+        Me.DarkLabel46 = New System.Windows.Forms.Label()
+        Me.cmbSetSelfSwitch = New System.Windows.Forms.ComboBox()
+        Me.fraMapTint = New System.Windows.Forms.GroupBox()
+        Me.btnMapTintOk = New System.Windows.Forms.Button()
+        Me.btnMapTintCancel = New System.Windows.Forms.Button()
+        Me.DarkLabel42 = New System.Windows.Forms.Label()
+        Me.nudMapTintData3 = New System.Windows.Forms.NumericUpDown()
+        Me.nudMapTintData2 = New System.Windows.Forms.NumericUpDown()
+        Me.DarkLabel43 = New System.Windows.Forms.Label()
+        Me.DarkLabel44 = New System.Windows.Forms.Label()
+        Me.nudMapTintData1 = New System.Windows.Forms.NumericUpDown()
+        Me.nudMapTintData0 = New System.Windows.Forms.NumericUpDown()
+        Me.DarkLabel45 = New System.Windows.Forms.Label()
+        Me.fraShowChatBubble = New System.Windows.Forms.GroupBox()
+        Me.btnShowChatBubbleOk = New System.Windows.Forms.Button()
+        Me.btnShowChatBubbleCancel = New System.Windows.Forms.Button()
+        Me.DarkLabel41 = New System.Windows.Forms.Label()
+        Me.cmbChatBubbleTarget = New System.Windows.Forms.ComboBox()
+        Me.cmbChatBubbleTargetType = New System.Windows.Forms.ComboBox()
+        Me.DarkLabel40 = New System.Windows.Forms.Label()
+        Me.txtChatbubbleText = New System.Windows.Forms.TextBox()
+        Me.DarkLabel39 = New System.Windows.Forms.Label()
+        Me.fraPlaySound = New System.Windows.Forms.GroupBox()
+        Me.btnPlaySoundOk = New System.Windows.Forms.Button()
+        Me.btnPlaySoundCancel = New System.Windows.Forms.Button()
+        Me.cmbPlaySound = New System.Windows.Forms.ComboBox()
+        Me.fraChangePK = New System.Windows.Forms.GroupBox()
+        Me.btnChangePkOk = New System.Windows.Forms.Button()
+        Me.btnChangePkCancel = New System.Windows.Forms.Button()
+        Me.cmbSetPK = New System.Windows.Forms.ComboBox()
+        Me.fraCreateLabel = New System.Windows.Forms.GroupBox()
+        Me.btnCreatelabelOk = New System.Windows.Forms.Button()
+        Me.btnCreatelabelCancel = New System.Windows.Forms.Button()
+        Me.txtLabelName = New System.Windows.Forms.TextBox()
+        Me.lblLabelName = New System.Windows.Forms.Label()
+        Me.fraChangeClass = New System.Windows.Forms.GroupBox()
+        Me.btnChangeClassOk = New System.Windows.Forms.Button()
+        Me.btnChangeClassCancel = New System.Windows.Forms.Button()
+        Me.cmbChangeClass = New System.Windows.Forms.ComboBox()
+        Me.DarkLabel38 = New System.Windows.Forms.Label()
+        Me.fraChangeSkills = New System.Windows.Forms.GroupBox()
+        Me.btnChangeSkillsOk = New System.Windows.Forms.Button()
+        Me.btnChangeSkillsCancel = New System.Windows.Forms.Button()
+        Me.optChangeSkillsRemove = New System.Windows.Forms.RadioButton()
+        Me.optChangeSkillsAdd = New System.Windows.Forms.RadioButton()
+        Me.cmbChangeSkills = New System.Windows.Forms.ComboBox()
+        Me.DarkLabel37 = New System.Windows.Forms.Label()
+        Me.fraCompleteTask = New System.Windows.Forms.GroupBox()
+        Me.btnCompleteQuestTaskOk = New System.Windows.Forms.Button()
+        Me.btnCompleteQuestTaskCancel = New System.Windows.Forms.Button()
+        Me.DarkLabel35 = New System.Windows.Forms.Label()
+        Me.DarkLabel36 = New System.Windows.Forms.Label()
+        Me.nudCompleteQuestTask = New System.Windows.Forms.NumericUpDown()
+        Me.cmbCompleteQuest = New System.Windows.Forms.ComboBox()
+        Me.fraPlayerWarp = New System.Windows.Forms.GroupBox()
+        Me.btnPlayerWarpOk = New System.Windows.Forms.Button()
+        Me.btnPlayerWarpCancel = New System.Windows.Forms.Button()
+        Me.DarkLabel31 = New System.Windows.Forms.Label()
+        Me.cmbWarpPlayerDir = New System.Windows.Forms.ComboBox()
+        Me.nudWPY = New System.Windows.Forms.NumericUpDown()
+        Me.DarkLabel32 = New System.Windows.Forms.Label()
+        Me.nudWPX = New System.Windows.Forms.NumericUpDown()
+        Me.DarkLabel33 = New System.Windows.Forms.Label()
+        Me.nudWPMap = New System.Windows.Forms.NumericUpDown()
+        Me.DarkLabel34 = New System.Windows.Forms.Label()
+        Me.fraSetFog = New System.Windows.Forms.GroupBox()
+        Me.btnSetFogOk = New System.Windows.Forms.Button()
+        Me.btnSetFogCancel = New System.Windows.Forms.Button()
+        Me.DarkLabel30 = New System.Windows.Forms.Label()
+        Me.DarkLabel29 = New System.Windows.Forms.Label()
+        Me.DarkLabel28 = New System.Windows.Forms.Label()
+        Me.nudFogData2 = New System.Windows.Forms.NumericUpDown()
+        Me.nudFogData1 = New System.Windows.Forms.NumericUpDown()
+        Me.nudFogData0 = New System.Windows.Forms.NumericUpDown()
+        Me.fraShowText = New System.Windows.Forms.GroupBox()
+        Me.DarkLabel27 = New System.Windows.Forms.Label()
+        Me.txtShowText = New System.Windows.Forms.TextBox()
+        Me.btnShowTextCancel = New System.Windows.Forms.Button()
+        Me.btnShowTextOk = New System.Windows.Forms.Button()
         Me.picShowTextFace = New System.Windows.Forms.PictureBox()
-        Me.DarkLabel26 = New DarkUI.Controls.DarkLabel()
-        Me.nudShowTextFace = New DarkUI.Controls.DarkNumericUpDown()
-        Me.fraAddText = New DarkUI.Controls.DarkGroupBox()
-        Me.btnAddTextOk = New DarkUI.Controls.DarkButton()
-        Me.btnAddTextCancel = New DarkUI.Controls.DarkButton()
-        Me.optAddText_Global = New DarkUI.Controls.DarkRadioButton()
-        Me.optAddText_Map = New DarkUI.Controls.DarkRadioButton()
-        Me.optAddText_Player = New DarkUI.Controls.DarkRadioButton()
-        Me.DarkLabel25 = New DarkUI.Controls.DarkLabel()
-        Me.txtAddText_Text = New DarkUI.Controls.DarkTextBox()
-        Me.DarkLabel24 = New DarkUI.Controls.DarkLabel()
-        Me.fraPlayerSwitch = New DarkUI.Controls.DarkGroupBox()
-        Me.btnSetPlayerSwitchOk = New DarkUI.Controls.DarkButton()
-        Me.btnSetPlayerswitchCancel = New DarkUI.Controls.DarkButton()
-        Me.cmbPlayerSwitchSet = New DarkUI.Controls.DarkComboBox()
-        Me.DarkLabel23 = New DarkUI.Controls.DarkLabel()
-        Me.cmbSwitch = New DarkUI.Controls.DarkComboBox()
-        Me.DarkLabel22 = New DarkUI.Controls.DarkLabel()
-        Me.fraChangeItems = New DarkUI.Controls.DarkGroupBox()
-        Me.btnChangeItemsOk = New DarkUI.Controls.DarkButton()
-        Me.btnChangeItemsCancel = New DarkUI.Controls.DarkButton()
-        Me.nudChangeItemsAmount = New DarkUI.Controls.DarkNumericUpDown()
-        Me.optChangeItemRemove = New DarkUI.Controls.DarkRadioButton()
-        Me.optChangeItemAdd = New DarkUI.Controls.DarkRadioButton()
-        Me.optChangeItemSet = New DarkUI.Controls.DarkRadioButton()
-        Me.cmbChangeItemIndex = New DarkUI.Controls.DarkComboBox()
-        Me.DarkLabel21 = New DarkUI.Controls.DarkLabel()
-        Me.fraConditionalBranch = New DarkUI.Controls.DarkGroupBox()
-        Me.btnConditionalBranchOk = New DarkUI.Controls.DarkButton()
-        Me.btnConditionalBranchCancel = New DarkUI.Controls.DarkButton()
-        Me.cmbCondition_Gender = New DarkUI.Controls.DarkComboBox()
-        Me.optCondition8 = New DarkUI.Controls.DarkRadioButton()
-        Me.fraConditions_Quest = New DarkUI.Controls.DarkGroupBox()
-        Me.DarkLabel20 = New DarkUI.Controls.DarkLabel()
-        Me.nudCondition_QuestTask = New DarkUI.Controls.DarkNumericUpDown()
-        Me.cmbCondition_General = New DarkUI.Controls.DarkComboBox()
-        Me.DarkLabel19 = New DarkUI.Controls.DarkLabel()
-        Me.optCondition_Quest1 = New DarkUI.Controls.DarkRadioButton()
-        Me.optCondition_Quest0 = New DarkUI.Controls.DarkRadioButton()
-        Me.nudCondition_Quest = New DarkUI.Controls.DarkNumericUpDown()
-        Me.DarkLabel18 = New DarkUI.Controls.DarkLabel()
-        Me.optCondition7 = New DarkUI.Controls.DarkRadioButton()
-        Me.cmbCondition_SelfSwitchCondition = New DarkUI.Controls.DarkComboBox()
-        Me.DarkLabel17 = New DarkUI.Controls.DarkLabel()
-        Me.cmbCondition_SelfSwitch = New DarkUI.Controls.DarkComboBox()
-        Me.optCondition6 = New DarkUI.Controls.DarkRadioButton()
-        Me.nudCondition_LevelAmount = New DarkUI.Controls.DarkNumericUpDown()
-        Me.optCondition5 = New DarkUI.Controls.DarkRadioButton()
-        Me.cmbCondition_LevelCompare = New DarkUI.Controls.DarkComboBox()
-        Me.cmbCondition_LearntSkill = New DarkUI.Controls.DarkComboBox()
-        Me.optCondition4 = New DarkUI.Controls.DarkRadioButton()
-        Me.cmbCondition_ClassIs = New DarkUI.Controls.DarkComboBox()
-        Me.optCondition3 = New DarkUI.Controls.DarkRadioButton()
-        Me.nudCondition_HasItem = New DarkUI.Controls.DarkNumericUpDown()
-        Me.DarkLabel16 = New DarkUI.Controls.DarkLabel()
-        Me.cmbCondition_HasItem = New DarkUI.Controls.DarkComboBox()
-        Me.optCondition2 = New DarkUI.Controls.DarkRadioButton()
-        Me.optCondition1 = New DarkUI.Controls.DarkRadioButton()
-        Me.DarkLabel15 = New DarkUI.Controls.DarkLabel()
-        Me.cmbCondtion_PlayerSwitchCondition = New DarkUI.Controls.DarkComboBox()
-        Me.cmbCondition_PlayerSwitch = New DarkUI.Controls.DarkComboBox()
-        Me.nudCondition_PlayerVarCondition = New DarkUI.Controls.DarkNumericUpDown()
-        Me.cmbCondition_PlayerVarCompare = New DarkUI.Controls.DarkComboBox()
-        Me.DarkLabel14 = New DarkUI.Controls.DarkLabel()
-        Me.cmbCondition_PlayerVarIndex = New DarkUI.Controls.DarkComboBox()
-        Me.optCondition0 = New DarkUI.Controls.DarkRadioButton()
-        Me.fraPlayBGM = New DarkUI.Controls.DarkGroupBox()
-        Me.btnPlayBgmOk = New DarkUI.Controls.DarkButton()
-        Me.btnPlayBgmCancel = New DarkUI.Controls.DarkButton()
-        Me.cmbPlayBGM = New DarkUI.Controls.DarkComboBox()
+        Me.DarkLabel26 = New System.Windows.Forms.Label()
+        Me.nudShowTextFace = New System.Windows.Forms.NumericUpDown()
+        Me.fraAddText = New System.Windows.Forms.GroupBox()
+        Me.btnAddTextOk = New System.Windows.Forms.Button()
+        Me.btnAddTextCancel = New System.Windows.Forms.Button()
+        Me.optAddText_Global = New System.Windows.Forms.RadioButton()
+        Me.optAddText_Map = New System.Windows.Forms.RadioButton()
+        Me.optAddText_Player = New System.Windows.Forms.RadioButton()
+        Me.DarkLabel25 = New System.Windows.Forms.Label()
+        Me.txtAddText_Text = New System.Windows.Forms.TextBox()
+        Me.DarkLabel24 = New System.Windows.Forms.Label()
+        Me.fraPlayerSwitch = New System.Windows.Forms.GroupBox()
+        Me.btnSetPlayerSwitchOk = New System.Windows.Forms.Button()
+        Me.btnSetPlayerswitchCancel = New System.Windows.Forms.Button()
+        Me.cmbPlayerSwitchSet = New System.Windows.Forms.ComboBox()
+        Me.DarkLabel23 = New System.Windows.Forms.Label()
+        Me.cmbSwitch = New System.Windows.Forms.ComboBox()
+        Me.DarkLabel22 = New System.Windows.Forms.Label()
+        Me.fraChangeItems = New System.Windows.Forms.GroupBox()
+        Me.btnChangeItemsOk = New System.Windows.Forms.Button()
+        Me.btnChangeItemsCancel = New System.Windows.Forms.Button()
+        Me.nudChangeItemsAmount = New System.Windows.Forms.NumericUpDown()
+        Me.optChangeItemRemove = New System.Windows.Forms.RadioButton()
+        Me.optChangeItemAdd = New System.Windows.Forms.RadioButton()
+        Me.optChangeItemSet = New System.Windows.Forms.RadioButton()
+        Me.cmbChangeItemIndex = New System.Windows.Forms.ComboBox()
+        Me.DarkLabel21 = New System.Windows.Forms.Label()
+        Me.fraConditionalBranch = New System.Windows.Forms.GroupBox()
+        Me.btnConditionalBranchOk = New System.Windows.Forms.Button()
+        Me.btnConditionalBranchCancel = New System.Windows.Forms.Button()
+        Me.cmbCondition_Gender = New System.Windows.Forms.ComboBox()
+        Me.optCondition8 = New System.Windows.Forms.RadioButton()
+        Me.fraConditions_Quest = New System.Windows.Forms.GroupBox()
+        Me.DarkLabel20 = New System.Windows.Forms.Label()
+        Me.nudCondition_QuestTask = New System.Windows.Forms.NumericUpDown()
+        Me.cmbCondition_General = New System.Windows.Forms.ComboBox()
+        Me.DarkLabel19 = New System.Windows.Forms.Label()
+        Me.optCondition_Quest1 = New System.Windows.Forms.RadioButton()
+        Me.optCondition_Quest0 = New System.Windows.Forms.RadioButton()
+        Me.nudCondition_Quest = New System.Windows.Forms.NumericUpDown()
+        Me.DarkLabel18 = New System.Windows.Forms.Label()
+        Me.optCondition7 = New System.Windows.Forms.RadioButton()
+        Me.cmbCondition_SelfSwitchCondition = New System.Windows.Forms.ComboBox()
+        Me.DarkLabel17 = New System.Windows.Forms.Label()
+        Me.cmbCondition_SelfSwitch = New System.Windows.Forms.ComboBox()
+        Me.optCondition6 = New System.Windows.Forms.RadioButton()
+        Me.nudCondition_LevelAmount = New System.Windows.Forms.NumericUpDown()
+        Me.optCondition5 = New System.Windows.Forms.RadioButton()
+        Me.cmbCondition_LevelCompare = New System.Windows.Forms.ComboBox()
+        Me.cmbCondition_LearntSkill = New System.Windows.Forms.ComboBox()
+        Me.optCondition4 = New System.Windows.Forms.RadioButton()
+        Me.cmbCondition_ClassIs = New System.Windows.Forms.ComboBox()
+        Me.optCondition3 = New System.Windows.Forms.RadioButton()
+        Me.nudCondition_HasItem = New System.Windows.Forms.NumericUpDown()
+        Me.DarkLabel16 = New System.Windows.Forms.Label()
+        Me.cmbCondition_HasItem = New System.Windows.Forms.ComboBox()
+        Me.optCondition2 = New System.Windows.Forms.RadioButton()
+        Me.optCondition1 = New System.Windows.Forms.RadioButton()
+        Me.DarkLabel15 = New System.Windows.Forms.Label()
+        Me.cmbCondtion_PlayerSwitchCondition = New System.Windows.Forms.ComboBox()
+        Me.cmbCondition_PlayerSwitch = New System.Windows.Forms.ComboBox()
+        Me.nudCondition_PlayerVarCondition = New System.Windows.Forms.NumericUpDown()
+        Me.cmbCondition_PlayerVarCompare = New System.Windows.Forms.ComboBox()
+        Me.DarkLabel14 = New System.Windows.Forms.Label()
+        Me.cmbCondition_PlayerVarIndex = New System.Windows.Forms.ComboBox()
+        Me.optCondition0 = New System.Windows.Forms.RadioButton()
+        Me.fraPlayBGM = New System.Windows.Forms.GroupBox()
+        Me.btnPlayBgmOk = New System.Windows.Forms.Button()
+        Me.btnPlayBgmCancel = New System.Windows.Forms.Button()
+        Me.cmbPlayBGM = New System.Windows.Forms.ComboBox()
         Me.pnlVariableSwitches = New System.Windows.Forms.Panel()
         Me.FraRenaming = New System.Windows.Forms.GroupBox()
         Me.btnRename_Cancel = New System.Windows.Forms.Button()
@@ -518,7 +518,7 @@ Partial Class FrmEditor_Events
         Me.fraRandom10 = New System.Windows.Forms.GroupBox()
         Me.txtRename = New System.Windows.Forms.TextBox()
         Me.lblEditing = New System.Windows.Forms.Label()
-        Me.fraLabeling = New DarkUI.Controls.DarkGroupBox()
+        Me.fraLabeling = New System.Windows.Forms.GroupBox()
         Me.lstSwitches = New System.Windows.Forms.ListBox()
         Me.lstVariables = New System.Windows.Forms.ListBox()
         Me.btnLabel_Cancel = New System.Windows.Forms.Button()
@@ -527,8 +527,8 @@ Partial Class FrmEditor_Events
         Me.lblRandomLabel25 = New System.Windows.Forms.Label()
         Me.btnRenameSwitch = New System.Windows.Forms.Button()
         Me.btnLabel_Ok = New System.Windows.Forms.Button()
-        Me.optCondition9 = New DarkUI.Controls.DarkRadioButton()
-        Me.cmbCondition_Time = New DarkUI.Controls.DarkComboBox()
+        Me.optCondition9 = New System.Windows.Forms.RadioButton()
+        Me.cmbCondition_Time = New System.Windows.Forms.ComboBox()
         Me.fraPageSetUp.SuspendLayout()
         Me.tabPages.SuspendLayout()
         Me.pnlTabPage.SuspendLayout()
@@ -763,7 +763,6 @@ Partial Class FrmEditor_Events
         'fraPageSetUp
         '
         Me.fraPageSetUp.BackColor = System.Drawing.Color.FromArgb(CType(CType(45, Byte), Integer), CType(CType(45, Byte), Integer), CType(CType(48, Byte), Integer))
-        Me.fraPageSetUp.BorderColor = System.Drawing.Color.FromArgb(CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer))
         Me.fraPageSetUp.Controls.Add(Me.chkGlobal)
         Me.fraPageSetUp.Controls.Add(Me.btnClearPage)
         Me.fraPageSetUp.Controls.Add(Me.btnDeletePage)
@@ -914,7 +913,6 @@ Partial Class FrmEditor_Events
         'DarkGroupBox8
         '
         Me.DarkGroupBox8.BackColor = System.Drawing.Color.FromArgb(CType(CType(45, Byte), Integer), CType(CType(45, Byte), Integer), CType(CType(48, Byte), Integer))
-        Me.DarkGroupBox8.BorderColor = System.Drawing.Color.FromArgb(CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer))
         Me.DarkGroupBox8.Controls.Add(Me.btnClearCommand)
         Me.DarkGroupBox8.Controls.Add(Me.btnDeleteCommand)
         Me.DarkGroupBox8.Controls.Add(Me.btnEditCommand)
@@ -995,7 +993,6 @@ Partial Class FrmEditor_Events
         'DarkGroupBox7
         '
         Me.DarkGroupBox7.BackColor = System.Drawing.Color.FromArgb(CType(CType(45, Byte), Integer), CType(CType(45, Byte), Integer), CType(CType(48, Byte), Integer))
-        Me.DarkGroupBox7.BorderColor = System.Drawing.Color.FromArgb(CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer))
         Me.DarkGroupBox7.Controls.Add(Me.cmbEventQuest)
         Me.DarkGroupBox7.Controls.Add(Me.DarkLabel8)
         Me.DarkGroupBox7.ForeColor = System.Drawing.Color.Gainsboro
@@ -1009,12 +1006,6 @@ Partial Class FrmEditor_Events
         'cmbEventQuest
         '
         Me.cmbEventQuest.BackColor = System.Drawing.Color.FromArgb(CType(CType(69, Byte), Integer), CType(CType(73, Byte), Integer), CType(CType(74, Byte), Integer))
-        Me.cmbEventQuest.BorderColor = System.Drawing.Color.FromArgb(CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer))
-        Me.cmbEventQuest.BorderStyle = System.Windows.Forms.ButtonBorderStyle.Solid
-        Me.cmbEventQuest.ButtonColor = System.Drawing.Color.FromArgb(CType(CType(43, Byte), Integer), CType(CType(43, Byte), Integer), CType(CType(43, Byte), Integer))
-        Me.cmbEventQuest.ButtonIcon = CType(resources.GetObject("cmbEventQuest.ButtonIcon"), System.Drawing.Bitmap)
-        Me.cmbEventQuest.DrawDropdownHoverOutline = False
-        Me.cmbEventQuest.DrawFocusRectangle = False
         Me.cmbEventQuest.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed
         Me.cmbEventQuest.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cmbEventQuest.FlatStyle = System.Windows.Forms.FlatStyle.Flat
@@ -1025,7 +1016,6 @@ Partial Class FrmEditor_Events
         Me.cmbEventQuest.Size = New System.Drawing.Size(143, 21)
         Me.cmbEventQuest.TabIndex = 1
         Me.cmbEventQuest.Text = Nothing
-        Me.cmbEventQuest.TextPadding = New System.Windows.Forms.Padding(2)
         '
         'DarkLabel8
         '
@@ -1040,7 +1030,6 @@ Partial Class FrmEditor_Events
         'DarkGroupBox5
         '
         Me.DarkGroupBox5.BackColor = System.Drawing.Color.FromArgb(CType(CType(45, Byte), Integer), CType(CType(45, Byte), Integer), CType(CType(48, Byte), Integer))
-        Me.DarkGroupBox5.BorderColor = System.Drawing.Color.FromArgb(CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer))
         Me.DarkGroupBox5.Controls.Add(Me.cmbTrigger)
         Me.DarkGroupBox5.ForeColor = System.Drawing.Color.Gainsboro
         Me.DarkGroupBox5.Location = New System.Drawing.Point(182, 321)
@@ -1053,12 +1042,6 @@ Partial Class FrmEditor_Events
         'cmbTrigger
         '
         Me.cmbTrigger.BackColor = System.Drawing.Color.FromArgb(CType(CType(69, Byte), Integer), CType(CType(73, Byte), Integer), CType(CType(74, Byte), Integer))
-        Me.cmbTrigger.BorderColor = System.Drawing.Color.FromArgb(CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer))
-        Me.cmbTrigger.BorderStyle = System.Windows.Forms.ButtonBorderStyle.Solid
-        Me.cmbTrigger.ButtonColor = System.Drawing.Color.FromArgb(CType(CType(43, Byte), Integer), CType(CType(43, Byte), Integer), CType(CType(43, Byte), Integer))
-        Me.cmbTrigger.ButtonIcon = CType(resources.GetObject("cmbTrigger.ButtonIcon"), System.Drawing.Bitmap)
-        Me.cmbTrigger.DrawDropdownHoverOutline = False
-        Me.cmbTrigger.DrawFocusRectangle = False
         Me.cmbTrigger.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed
         Me.cmbTrigger.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cmbTrigger.FlatStyle = System.Windows.Forms.FlatStyle.Flat
@@ -1070,12 +1053,10 @@ Partial Class FrmEditor_Events
         Me.cmbTrigger.Size = New System.Drawing.Size(189, 21)
         Me.cmbTrigger.TabIndex = 0
         Me.cmbTrigger.Text = Nothing
-        Me.cmbTrigger.TextPadding = New System.Windows.Forms.Padding(2)
         '
         'DarkGroupBox4
         '
         Me.DarkGroupBox4.BackColor = System.Drawing.Color.FromArgb(CType(CType(45, Byte), Integer), CType(CType(45, Byte), Integer), CType(CType(48, Byte), Integer))
-        Me.DarkGroupBox4.BorderColor = System.Drawing.Color.FromArgb(CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer))
         Me.DarkGroupBox4.Controls.Add(Me.cmbPositioning)
         Me.DarkGroupBox4.ForeColor = System.Drawing.Color.Gainsboro
         Me.DarkGroupBox4.Location = New System.Drawing.Point(182, 267)
@@ -1088,12 +1069,6 @@ Partial Class FrmEditor_Events
         'cmbPositioning
         '
         Me.cmbPositioning.BackColor = System.Drawing.Color.FromArgb(CType(CType(69, Byte), Integer), CType(CType(73, Byte), Integer), CType(CType(74, Byte), Integer))
-        Me.cmbPositioning.BorderColor = System.Drawing.Color.FromArgb(CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer))
-        Me.cmbPositioning.BorderStyle = System.Windows.Forms.ButtonBorderStyle.Solid
-        Me.cmbPositioning.ButtonColor = System.Drawing.Color.FromArgb(CType(CType(43, Byte), Integer), CType(CType(43, Byte), Integer), CType(CType(43, Byte), Integer))
-        Me.cmbPositioning.ButtonIcon = CType(resources.GetObject("cmbPositioning.ButtonIcon"), System.Drawing.Bitmap)
-        Me.cmbPositioning.DrawDropdownHoverOutline = False
-        Me.cmbPositioning.DrawFocusRectangle = False
         Me.cmbPositioning.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed
         Me.cmbPositioning.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cmbPositioning.FlatStyle = System.Windows.Forms.FlatStyle.Flat
@@ -1105,12 +1080,10 @@ Partial Class FrmEditor_Events
         Me.cmbPositioning.Size = New System.Drawing.Size(189, 21)
         Me.cmbPositioning.TabIndex = 0
         Me.cmbPositioning.Text = Nothing
-        Me.cmbPositioning.TextPadding = New System.Windows.Forms.Padding(2)
         '
         'DarkGroupBox3
         '
         Me.DarkGroupBox3.BackColor = System.Drawing.Color.FromArgb(CType(CType(45, Byte), Integer), CType(CType(45, Byte), Integer), CType(CType(48, Byte), Integer))
-        Me.DarkGroupBox3.BorderColor = System.Drawing.Color.FromArgb(CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer))
         Me.DarkGroupBox3.Controls.Add(Me.DarkLabel7)
         Me.DarkGroupBox3.Controls.Add(Me.cmbMoveFreq)
         Me.DarkGroupBox3.Controls.Add(Me.DarkLabel6)
@@ -1139,12 +1112,6 @@ Partial Class FrmEditor_Events
         'cmbMoveFreq
         '
         Me.cmbMoveFreq.BackColor = System.Drawing.Color.FromArgb(CType(CType(69, Byte), Integer), CType(CType(73, Byte), Integer), CType(CType(74, Byte), Integer))
-        Me.cmbMoveFreq.BorderColor = System.Drawing.Color.FromArgb(CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer))
-        Me.cmbMoveFreq.BorderStyle = System.Windows.Forms.ButtonBorderStyle.Solid
-        Me.cmbMoveFreq.ButtonColor = System.Drawing.Color.FromArgb(CType(CType(43, Byte), Integer), CType(CType(43, Byte), Integer), CType(CType(43, Byte), Integer))
-        Me.cmbMoveFreq.ButtonIcon = CType(resources.GetObject("cmbMoveFreq.ButtonIcon"), System.Drawing.Bitmap)
-        Me.cmbMoveFreq.DrawDropdownHoverOutline = False
-        Me.cmbMoveFreq.DrawFocusRectangle = False
         Me.cmbMoveFreq.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed
         Me.cmbMoveFreq.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cmbMoveFreq.FlatStyle = System.Windows.Forms.FlatStyle.Flat
@@ -1156,7 +1123,6 @@ Partial Class FrmEditor_Events
         Me.cmbMoveFreq.Size = New System.Drawing.Size(125, 21)
         Me.cmbMoveFreq.TabIndex = 5
         Me.cmbMoveFreq.Text = Nothing
-        Me.cmbMoveFreq.TextPadding = New System.Windows.Forms.Padding(2)
         '
         'DarkLabel6
         '
@@ -1171,12 +1137,6 @@ Partial Class FrmEditor_Events
         'cmbMoveSpeed
         '
         Me.cmbMoveSpeed.BackColor = System.Drawing.Color.FromArgb(CType(CType(69, Byte), Integer), CType(CType(73, Byte), Integer), CType(CType(74, Byte), Integer))
-        Me.cmbMoveSpeed.BorderColor = System.Drawing.Color.FromArgb(CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer))
-        Me.cmbMoveSpeed.BorderStyle = System.Windows.Forms.ButtonBorderStyle.Solid
-        Me.cmbMoveSpeed.ButtonColor = System.Drawing.Color.FromArgb(CType(CType(43, Byte), Integer), CType(CType(43, Byte), Integer), CType(CType(43, Byte), Integer))
-        Me.cmbMoveSpeed.ButtonIcon = CType(resources.GetObject("cmbMoveSpeed.ButtonIcon"), System.Drawing.Bitmap)
-        Me.cmbMoveSpeed.DrawDropdownHoverOutline = False
-        Me.cmbMoveSpeed.DrawFocusRectangle = False
         Me.cmbMoveSpeed.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed
         Me.cmbMoveSpeed.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cmbMoveSpeed.FlatStyle = System.Windows.Forms.FlatStyle.Flat
@@ -1188,7 +1148,6 @@ Partial Class FrmEditor_Events
         Me.cmbMoveSpeed.Size = New System.Drawing.Size(125, 21)
         Me.cmbMoveSpeed.TabIndex = 3
         Me.cmbMoveSpeed.Text = Nothing
-        Me.cmbMoveSpeed.TextPadding = New System.Windows.Forms.Padding(2)
         '
         'btnMoveRoute
         '
@@ -1202,12 +1161,6 @@ Partial Class FrmEditor_Events
         'cmbMoveType
         '
         Me.cmbMoveType.BackColor = System.Drawing.Color.FromArgb(CType(CType(69, Byte), Integer), CType(CType(73, Byte), Integer), CType(CType(74, Byte), Integer))
-        Me.cmbMoveType.BorderColor = System.Drawing.Color.FromArgb(CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer))
-        Me.cmbMoveType.BorderStyle = System.Windows.Forms.ButtonBorderStyle.Solid
-        Me.cmbMoveType.ButtonColor = System.Drawing.Color.FromArgb(CType(CType(43, Byte), Integer), CType(CType(43, Byte), Integer), CType(CType(43, Byte), Integer))
-        Me.cmbMoveType.ButtonIcon = CType(resources.GetObject("cmbMoveType.ButtonIcon"), System.Drawing.Bitmap)
-        Me.cmbMoveType.DrawDropdownHoverOutline = False
-        Me.cmbMoveType.DrawFocusRectangle = False
         Me.cmbMoveType.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed
         Me.cmbMoveType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cmbMoveType.FlatStyle = System.Windows.Forms.FlatStyle.Flat
@@ -1219,7 +1172,6 @@ Partial Class FrmEditor_Events
         Me.cmbMoveType.Size = New System.Drawing.Size(125, 21)
         Me.cmbMoveType.TabIndex = 1
         Me.cmbMoveType.Text = Nothing
-        Me.cmbMoveType.TextPadding = New System.Windows.Forms.Padding(2)
         '
         'DarkLabel5
         '
@@ -1234,7 +1186,6 @@ Partial Class FrmEditor_Events
         'DarkGroupBox2
         '
         Me.DarkGroupBox2.BackColor = System.Drawing.Color.FromArgb(CType(CType(45, Byte), Integer), CType(CType(45, Byte), Integer), CType(CType(48, Byte), Integer))
-        Me.DarkGroupBox2.BorderColor = System.Drawing.Color.FromArgb(CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer))
         Me.DarkGroupBox2.Controls.Add(Me.picGraphic)
         Me.DarkGroupBox2.ForeColor = System.Drawing.Color.Gainsboro
         Me.DarkGroupBox2.Location = New System.Drawing.Point(3, 138)
@@ -1256,7 +1207,6 @@ Partial Class FrmEditor_Events
         'DarkGroupBox1
         '
         Me.DarkGroupBox1.BackColor = System.Drawing.Color.FromArgb(CType(CType(45, Byte), Integer), CType(CType(45, Byte), Integer), CType(CType(48, Byte), Integer))
-        Me.DarkGroupBox1.BorderColor = System.Drawing.Color.FromArgb(CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer))
         Me.DarkGroupBox1.Controls.Add(Me.cmbSelfSwitchCompare)
         Me.DarkGroupBox1.Controls.Add(Me.DarkLabel4)
         Me.DarkGroupBox1.Controls.Add(Me.cmbSelfSwitch)
@@ -1283,12 +1233,6 @@ Partial Class FrmEditor_Events
         'cmbSelfSwitchCompare
         '
         Me.cmbSelfSwitchCompare.BackColor = System.Drawing.Color.FromArgb(CType(CType(69, Byte), Integer), CType(CType(73, Byte), Integer), CType(CType(74, Byte), Integer))
-        Me.cmbSelfSwitchCompare.BorderColor = System.Drawing.Color.FromArgb(CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer))
-        Me.cmbSelfSwitchCompare.BorderStyle = System.Windows.Forms.ButtonBorderStyle.Solid
-        Me.cmbSelfSwitchCompare.ButtonColor = System.Drawing.Color.FromArgb(CType(CType(43, Byte), Integer), CType(CType(43, Byte), Integer), CType(CType(43, Byte), Integer))
-        Me.cmbSelfSwitchCompare.ButtonIcon = CType(resources.GetObject("cmbSelfSwitchCompare.ButtonIcon"), System.Drawing.Bitmap)
-        Me.cmbSelfSwitchCompare.DrawDropdownHoverOutline = False
-        Me.cmbSelfSwitchCompare.DrawFocusRectangle = False
         Me.cmbSelfSwitchCompare.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed
         Me.cmbSelfSwitchCompare.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cmbSelfSwitchCompare.FlatStyle = System.Windows.Forms.FlatStyle.Flat
@@ -1300,7 +1244,6 @@ Partial Class FrmEditor_Events
         Me.cmbSelfSwitchCompare.Size = New System.Drawing.Size(89, 21)
         Me.cmbSelfSwitchCompare.TabIndex = 14
         Me.cmbSelfSwitchCompare.Text = Nothing
-        Me.cmbSelfSwitchCompare.TextPadding = New System.Windows.Forms.Padding(2)
         '
         'DarkLabel4
         '
@@ -1315,12 +1258,6 @@ Partial Class FrmEditor_Events
         'cmbSelfSwitch
         '
         Me.cmbSelfSwitch.BackColor = System.Drawing.Color.FromArgb(CType(CType(69, Byte), Integer), CType(CType(73, Byte), Integer), CType(CType(74, Byte), Integer))
-        Me.cmbSelfSwitch.BorderColor = System.Drawing.Color.FromArgb(CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer))
-        Me.cmbSelfSwitch.BorderStyle = System.Windows.Forms.ButtonBorderStyle.Solid
-        Me.cmbSelfSwitch.ButtonColor = System.Drawing.Color.FromArgb(CType(CType(43, Byte), Integer), CType(CType(43, Byte), Integer), CType(CType(43, Byte), Integer))
-        Me.cmbSelfSwitch.ButtonIcon = CType(resources.GetObject("cmbSelfSwitch.ButtonIcon"), System.Drawing.Bitmap)
-        Me.cmbSelfSwitch.DrawDropdownHoverOutline = False
-        Me.cmbSelfSwitch.DrawFocusRectangle = False
         Me.cmbSelfSwitch.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed
         Me.cmbSelfSwitch.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cmbSelfSwitch.FlatStyle = System.Windows.Forms.FlatStyle.Flat
@@ -1332,7 +1269,6 @@ Partial Class FrmEditor_Events
         Me.cmbSelfSwitch.Size = New System.Drawing.Size(89, 21)
         Me.cmbSelfSwitch.TabIndex = 12
         Me.cmbSelfSwitch.Text = Nothing
-        Me.cmbSelfSwitch.TextPadding = New System.Windows.Forms.Padding(2)
         '
         'chkSelfSwitch
         '
@@ -1346,12 +1282,6 @@ Partial Class FrmEditor_Events
         'cmbHasItem
         '
         Me.cmbHasItem.BackColor = System.Drawing.Color.FromArgb(CType(CType(69, Byte), Integer), CType(CType(73, Byte), Integer), CType(CType(74, Byte), Integer))
-        Me.cmbHasItem.BorderColor = System.Drawing.Color.FromArgb(CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer))
-        Me.cmbHasItem.BorderStyle = System.Windows.Forms.ButtonBorderStyle.Solid
-        Me.cmbHasItem.ButtonColor = System.Drawing.Color.FromArgb(CType(CType(43, Byte), Integer), CType(CType(43, Byte), Integer), CType(CType(43, Byte), Integer))
-        Me.cmbHasItem.ButtonIcon = CType(resources.GetObject("cmbHasItem.ButtonIcon"), System.Drawing.Bitmap)
-        Me.cmbHasItem.DrawDropdownHoverOutline = False
-        Me.cmbHasItem.DrawFocusRectangle = False
         Me.cmbHasItem.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed
         Me.cmbHasItem.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cmbHasItem.FlatStyle = System.Windows.Forms.FlatStyle.Flat
@@ -1362,7 +1292,6 @@ Partial Class FrmEditor_Events
         Me.cmbHasItem.Size = New System.Drawing.Size(204, 21)
         Me.cmbHasItem.TabIndex = 10
         Me.cmbHasItem.Text = Nothing
-        Me.cmbHasItem.TextPadding = New System.Windows.Forms.Padding(2)
         '
         'chkHasItem
         '
@@ -1376,12 +1305,6 @@ Partial Class FrmEditor_Events
         'cmbPlayerSwitchCompare
         '
         Me.cmbPlayerSwitchCompare.BackColor = System.Drawing.Color.FromArgb(CType(CType(69, Byte), Integer), CType(CType(73, Byte), Integer), CType(CType(74, Byte), Integer))
-        Me.cmbPlayerSwitchCompare.BorderColor = System.Drawing.Color.FromArgb(CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer))
-        Me.cmbPlayerSwitchCompare.BorderStyle = System.Windows.Forms.ButtonBorderStyle.Solid
-        Me.cmbPlayerSwitchCompare.ButtonColor = System.Drawing.Color.FromArgb(CType(CType(43, Byte), Integer), CType(CType(43, Byte), Integer), CType(CType(43, Byte), Integer))
-        Me.cmbPlayerSwitchCompare.ButtonIcon = CType(resources.GetObject("cmbPlayerSwitchCompare.ButtonIcon"), System.Drawing.Bitmap)
-        Me.cmbPlayerSwitchCompare.DrawDropdownHoverOutline = False
-        Me.cmbPlayerSwitchCompare.DrawFocusRectangle = False
         Me.cmbPlayerSwitchCompare.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed
         Me.cmbPlayerSwitchCompare.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cmbPlayerSwitchCompare.FlatStyle = System.Windows.Forms.FlatStyle.Flat
@@ -1393,7 +1316,6 @@ Partial Class FrmEditor_Events
         Me.cmbPlayerSwitchCompare.Size = New System.Drawing.Size(89, 21)
         Me.cmbPlayerSwitchCompare.TabIndex = 8
         Me.cmbPlayerSwitchCompare.Text = Nothing
-        Me.cmbPlayerSwitchCompare.TextPadding = New System.Windows.Forms.Padding(2)
         '
         'DarkLabel3
         '
@@ -1408,12 +1330,6 @@ Partial Class FrmEditor_Events
         'cmbPlayerSwitch
         '
         Me.cmbPlayerSwitch.BackColor = System.Drawing.Color.FromArgb(CType(CType(69, Byte), Integer), CType(CType(73, Byte), Integer), CType(CType(74, Byte), Integer))
-        Me.cmbPlayerSwitch.BorderColor = System.Drawing.Color.FromArgb(CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer))
-        Me.cmbPlayerSwitch.BorderStyle = System.Windows.Forms.ButtonBorderStyle.Solid
-        Me.cmbPlayerSwitch.ButtonColor = System.Drawing.Color.FromArgb(CType(CType(43, Byte), Integer), CType(CType(43, Byte), Integer), CType(CType(43, Byte), Integer))
-        Me.cmbPlayerSwitch.ButtonIcon = CType(resources.GetObject("cmbPlayerSwitch.ButtonIcon"), System.Drawing.Bitmap)
-        Me.cmbPlayerSwitch.DrawDropdownHoverOutline = False
-        Me.cmbPlayerSwitch.DrawFocusRectangle = False
         Me.cmbPlayerSwitch.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed
         Me.cmbPlayerSwitch.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cmbPlayerSwitch.FlatStyle = System.Windows.Forms.FlatStyle.Flat
@@ -1424,7 +1340,6 @@ Partial Class FrmEditor_Events
         Me.cmbPlayerSwitch.Size = New System.Drawing.Size(89, 21)
         Me.cmbPlayerSwitch.TabIndex = 6
         Me.cmbPlayerSwitch.Text = Nothing
-        Me.cmbPlayerSwitch.TextPadding = New System.Windows.Forms.Padding(2)
         '
         'chkPlayerSwitch
         '
@@ -1447,12 +1362,6 @@ Partial Class FrmEditor_Events
         'cmbPlayervarCompare
         '
         Me.cmbPlayervarCompare.BackColor = System.Drawing.Color.FromArgb(CType(CType(69, Byte), Integer), CType(CType(73, Byte), Integer), CType(CType(74, Byte), Integer))
-        Me.cmbPlayervarCompare.BorderColor = System.Drawing.Color.FromArgb(CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer))
-        Me.cmbPlayervarCompare.BorderStyle = System.Windows.Forms.ButtonBorderStyle.Solid
-        Me.cmbPlayervarCompare.ButtonColor = System.Drawing.Color.FromArgb(CType(CType(43, Byte), Integer), CType(CType(43, Byte), Integer), CType(CType(43, Byte), Integer))
-        Me.cmbPlayervarCompare.ButtonIcon = CType(resources.GetObject("cmbPlayervarCompare.ButtonIcon"), System.Drawing.Bitmap)
-        Me.cmbPlayervarCompare.DrawDropdownHoverOutline = False
-        Me.cmbPlayervarCompare.DrawFocusRectangle = False
         Me.cmbPlayervarCompare.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed
         Me.cmbPlayervarCompare.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cmbPlayervarCompare.FlatStyle = System.Windows.Forms.FlatStyle.Flat
@@ -1464,7 +1373,6 @@ Partial Class FrmEditor_Events
         Me.cmbPlayervarCompare.Size = New System.Drawing.Size(89, 21)
         Me.cmbPlayervarCompare.TabIndex = 3
         Me.cmbPlayervarCompare.Text = Nothing
-        Me.cmbPlayervarCompare.TextPadding = New System.Windows.Forms.Padding(2)
         '
         'DarkLabel2
         '
@@ -1479,12 +1387,6 @@ Partial Class FrmEditor_Events
         'cmbPlayerVar
         '
         Me.cmbPlayerVar.BackColor = System.Drawing.Color.FromArgb(CType(CType(69, Byte), Integer), CType(CType(73, Byte), Integer), CType(CType(74, Byte), Integer))
-        Me.cmbPlayerVar.BorderColor = System.Drawing.Color.FromArgb(CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer))
-        Me.cmbPlayerVar.BorderStyle = System.Windows.Forms.ButtonBorderStyle.Solid
-        Me.cmbPlayerVar.ButtonColor = System.Drawing.Color.FromArgb(CType(CType(43, Byte), Integer), CType(CType(43, Byte), Integer), CType(CType(43, Byte), Integer))
-        Me.cmbPlayerVar.ButtonIcon = CType(resources.GetObject("cmbPlayerVar.ButtonIcon"), System.Drawing.Bitmap)
-        Me.cmbPlayerVar.DrawDropdownHoverOutline = False
-        Me.cmbPlayerVar.DrawFocusRectangle = False
         Me.cmbPlayerVar.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed
         Me.cmbPlayerVar.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cmbPlayerVar.FlatStyle = System.Windows.Forms.FlatStyle.Flat
@@ -1495,7 +1397,6 @@ Partial Class FrmEditor_Events
         Me.cmbPlayerVar.Size = New System.Drawing.Size(89, 21)
         Me.cmbPlayerVar.TabIndex = 1
         Me.cmbPlayerVar.Text = Nothing
-        Me.cmbPlayerVar.TextPadding = New System.Windows.Forms.Padding(2)
         '
         'chkPlayerVar
         '
@@ -1509,7 +1410,6 @@ Partial Class FrmEditor_Events
         'DarkGroupBox6
         '
         Me.DarkGroupBox6.BackColor = System.Drawing.Color.FromArgb(CType(CType(45, Byte), Integer), CType(CType(45, Byte), Integer), CType(CType(48, Byte), Integer))
-        Me.DarkGroupBox6.BorderColor = System.Drawing.Color.FromArgb(CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer))
         Me.DarkGroupBox6.Controls.Add(Me.chkShowName)
         Me.DarkGroupBox6.Controls.Add(Me.chkWalkThrough)
         Me.DarkGroupBox6.Controls.Add(Me.chkDirFix)
@@ -1588,7 +1488,6 @@ Partial Class FrmEditor_Events
         'fraMoveRoute
         '
         Me.fraMoveRoute.BackColor = System.Drawing.Color.FromArgb(CType(CType(45, Byte), Integer), CType(CType(45, Byte), Integer), CType(CType(48, Byte), Integer))
-        Me.fraMoveRoute.BorderColor = System.Drawing.Color.FromArgb(CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer))
         Me.fraMoveRoute.Controls.Add(Me.btnMoveRouteOk)
         Me.fraMoveRoute.Controls.Add(Me.btnMoveRouteCancel)
         Me.fraMoveRoute.Controls.Add(Me.chkRepeatRoute)
@@ -1644,7 +1543,6 @@ Partial Class FrmEditor_Events
         'DarkGroupBox10
         '
         Me.DarkGroupBox10.BackColor = System.Drawing.Color.FromArgb(CType(CType(45, Byte), Integer), CType(CType(45, Byte), Integer), CType(CType(48, Byte), Integer))
-        Me.DarkGroupBox10.BorderColor = System.Drawing.Color.FromArgb(CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer))
         Me.DarkGroupBox10.Controls.Add(Me.lstvwMoveRoute)
         Me.DarkGroupBox10.ForeColor = System.Drawing.Color.Gainsboro
         Me.DarkGroupBox10.Location = New System.Drawing.Point(203, 10)
@@ -1762,12 +1660,6 @@ Partial Class FrmEditor_Events
         'cmbEvent
         '
         Me.cmbEvent.BackColor = System.Drawing.Color.FromArgb(CType(CType(69, Byte), Integer), CType(CType(73, Byte), Integer), CType(CType(74, Byte), Integer))
-        Me.cmbEvent.BorderColor = System.Drawing.Color.FromArgb(CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer))
-        Me.cmbEvent.BorderStyle = System.Windows.Forms.ButtonBorderStyle.Solid
-        Me.cmbEvent.ButtonColor = System.Drawing.Color.FromArgb(CType(CType(43, Byte), Integer), CType(CType(43, Byte), Integer), CType(CType(43, Byte), Integer))
-        Me.cmbEvent.ButtonIcon = CType(resources.GetObject("cmbEvent.ButtonIcon"), System.Drawing.Bitmap)
-        Me.cmbEvent.DrawDropdownHoverOutline = False
-        Me.cmbEvent.DrawFocusRectangle = False
         Me.cmbEvent.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed
         Me.cmbEvent.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cmbEvent.FlatStyle = System.Windows.Forms.FlatStyle.Flat
@@ -1778,12 +1670,10 @@ Partial Class FrmEditor_Events
         Me.cmbEvent.Size = New System.Drawing.Size(191, 21)
         Me.cmbEvent.TabIndex = 0
         Me.cmbEvent.Text = Nothing
-        Me.cmbEvent.TextPadding = New System.Windows.Forms.Padding(2)
         '
         'fraGraphic
         '
         Me.fraGraphic.BackColor = System.Drawing.Color.FromArgb(CType(CType(45, Byte), Integer), CType(CType(45, Byte), Integer), CType(CType(48, Byte), Integer))
-        Me.fraGraphic.BorderColor = System.Drawing.Color.FromArgb(CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer))
         Me.fraGraphic.Controls.Add(Me.pnlGraphicSel)
         Me.fraGraphic.Controls.Add(Me.btnGraphicOk)
         Me.fraGraphic.Controls.Add(Me.btnGraphicCancel)
@@ -1869,12 +1759,6 @@ Partial Class FrmEditor_Events
         'cmbGraphic
         '
         Me.cmbGraphic.BackColor = System.Drawing.Color.FromArgb(CType(CType(69, Byte), Integer), CType(CType(73, Byte), Integer), CType(CType(74, Byte), Integer))
-        Me.cmbGraphic.BorderColor = System.Drawing.Color.FromArgb(CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer))
-        Me.cmbGraphic.BorderStyle = System.Windows.Forms.ButtonBorderStyle.Solid
-        Me.cmbGraphic.ButtonColor = System.Drawing.Color.FromArgb(CType(CType(43, Byte), Integer), CType(CType(43, Byte), Integer), CType(CType(43, Byte), Integer))
-        Me.cmbGraphic.ButtonIcon = CType(resources.GetObject("cmbGraphic.ButtonIcon"), System.Drawing.Bitmap)
-        Me.cmbGraphic.DrawDropdownHoverOutline = False
-        Me.cmbGraphic.DrawFocusRectangle = False
         Me.cmbGraphic.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed
         Me.cmbGraphic.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cmbGraphic.FlatStyle = System.Windows.Forms.FlatStyle.Flat
@@ -1886,7 +1770,6 @@ Partial Class FrmEditor_Events
         Me.cmbGraphic.Size = New System.Drawing.Size(217, 21)
         Me.cmbGraphic.TabIndex = 1
         Me.cmbGraphic.Text = Nothing
-        Me.cmbGraphic.TextPadding = New System.Windows.Forms.Padding(2)
         '
         'DarkLabel11
         '
@@ -1901,7 +1784,6 @@ Partial Class FrmEditor_Events
         'fraDialogue
         '
         Me.fraDialogue.BackColor = System.Drawing.Color.FromArgb(CType(CType(45, Byte), Integer), CType(CType(45, Byte), Integer), CType(CType(48, Byte), Integer))
-        Me.fraDialogue.BorderColor = System.Drawing.Color.FromArgb(CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer))
         Me.fraDialogue.Controls.Add(Me.fraConditionalBranch)
         Me.fraDialogue.Controls.Add(Me.fraPlayAnimation)
         Me.fraDialogue.Controls.Add(Me.fraMoveRouteWait)
@@ -1949,7 +1831,6 @@ Partial Class FrmEditor_Events
         'fraPlayAnimation
         '
         Me.fraPlayAnimation.BackColor = System.Drawing.Color.FromArgb(CType(CType(45, Byte), Integer), CType(CType(45, Byte), Integer), CType(CType(48, Byte), Integer))
-        Me.fraPlayAnimation.BorderColor = System.Drawing.Color.FromArgb(CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer))
         Me.fraPlayAnimation.Controls.Add(Me.btnPlayAnimationOk)
         Me.fraPlayAnimation.Controls.Add(Me.btnPlayAnimationCancel)
         Me.fraPlayAnimation.Controls.Add(Me.lblPlayAnimY)
@@ -2011,12 +1892,6 @@ Partial Class FrmEditor_Events
         'cmbPlayAnimEvent
         '
         Me.cmbPlayAnimEvent.BackColor = System.Drawing.Color.FromArgb(CType(CType(69, Byte), Integer), CType(CType(73, Byte), Integer), CType(CType(74, Byte), Integer))
-        Me.cmbPlayAnimEvent.BorderColor = System.Drawing.Color.FromArgb(CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer))
-        Me.cmbPlayAnimEvent.BorderStyle = System.Windows.Forms.ButtonBorderStyle.Solid
-        Me.cmbPlayAnimEvent.ButtonColor = System.Drawing.Color.FromArgb(CType(CType(43, Byte), Integer), CType(CType(43, Byte), Integer), CType(CType(43, Byte), Integer))
-        Me.cmbPlayAnimEvent.ButtonIcon = CType(resources.GetObject("cmbPlayAnimEvent.ButtonIcon"), System.Drawing.Bitmap)
-        Me.cmbPlayAnimEvent.DrawDropdownHoverOutline = False
-        Me.cmbPlayAnimEvent.DrawFocusRectangle = False
         Me.cmbPlayAnimEvent.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed
         Me.cmbPlayAnimEvent.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cmbPlayAnimEvent.FlatStyle = System.Windows.Forms.FlatStyle.Flat
@@ -2027,7 +1902,6 @@ Partial Class FrmEditor_Events
         Me.cmbPlayAnimEvent.Size = New System.Drawing.Size(159, 21)
         Me.cmbPlayAnimEvent.TabIndex = 32
         Me.cmbPlayAnimEvent.Text = Nothing
-        Me.cmbPlayAnimEvent.TextPadding = New System.Windows.Forms.Padding(2)
         '
         'DarkLabel62
         '
@@ -2042,12 +1916,6 @@ Partial Class FrmEditor_Events
         'cmbAnimTargetType
         '
         Me.cmbAnimTargetType.BackColor = System.Drawing.Color.FromArgb(CType(CType(69, Byte), Integer), CType(CType(73, Byte), Integer), CType(CType(74, Byte), Integer))
-        Me.cmbAnimTargetType.BorderColor = System.Drawing.Color.FromArgb(CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer))
-        Me.cmbAnimTargetType.BorderStyle = System.Windows.Forms.ButtonBorderStyle.Solid
-        Me.cmbAnimTargetType.ButtonColor = System.Drawing.Color.FromArgb(CType(CType(43, Byte), Integer), CType(CType(43, Byte), Integer), CType(CType(43, Byte), Integer))
-        Me.cmbAnimTargetType.ButtonIcon = CType(resources.GetObject("cmbAnimTargetType.ButtonIcon"), System.Drawing.Bitmap)
-        Me.cmbAnimTargetType.DrawDropdownHoverOutline = False
-        Me.cmbAnimTargetType.DrawFocusRectangle = False
         Me.cmbAnimTargetType.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed
         Me.cmbAnimTargetType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cmbAnimTargetType.FlatStyle = System.Windows.Forms.FlatStyle.Flat
@@ -2059,7 +1927,6 @@ Partial Class FrmEditor_Events
         Me.cmbAnimTargetType.Size = New System.Drawing.Size(159, 21)
         Me.cmbAnimTargetType.TabIndex = 30
         Me.cmbAnimTargetType.Text = Nothing
-        Me.cmbAnimTargetType.TextPadding = New System.Windows.Forms.Padding(2)
         '
         'nudPlayAnimTileY
         '
@@ -2092,12 +1959,6 @@ Partial Class FrmEditor_Events
         'cmbPlayAnim
         '
         Me.cmbPlayAnim.BackColor = System.Drawing.Color.FromArgb(CType(CType(69, Byte), Integer), CType(CType(73, Byte), Integer), CType(CType(74, Byte), Integer))
-        Me.cmbPlayAnim.BorderColor = System.Drawing.Color.FromArgb(CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer))
-        Me.cmbPlayAnim.BorderStyle = System.Windows.Forms.ButtonBorderStyle.Solid
-        Me.cmbPlayAnim.ButtonColor = System.Drawing.Color.FromArgb(CType(CType(43, Byte), Integer), CType(CType(43, Byte), Integer), CType(CType(43, Byte), Integer))
-        Me.cmbPlayAnim.ButtonIcon = CType(resources.GetObject("cmbPlayAnim.ButtonIcon"), System.Drawing.Bitmap)
-        Me.cmbPlayAnim.DrawDropdownHoverOutline = False
-        Me.cmbPlayAnim.DrawFocusRectangle = False
         Me.cmbPlayAnim.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed
         Me.cmbPlayAnim.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cmbPlayAnim.FlatStyle = System.Windows.Forms.FlatStyle.Flat
@@ -2108,12 +1969,10 @@ Partial Class FrmEditor_Events
         Me.cmbPlayAnim.Size = New System.Drawing.Size(180, 21)
         Me.cmbPlayAnim.TabIndex = 0
         Me.cmbPlayAnim.Text = Nothing
-        Me.cmbPlayAnim.TextPadding = New System.Windows.Forms.Padding(2)
         '
         'fraMoveRouteWait
         '
         Me.fraMoveRouteWait.BackColor = System.Drawing.Color.FromArgb(CType(CType(45, Byte), Integer), CType(CType(45, Byte), Integer), CType(CType(48, Byte), Integer))
-        Me.fraMoveRouteWait.BorderColor = System.Drawing.Color.FromArgb(CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer))
         Me.fraMoveRouteWait.Controls.Add(Me.btnMoveWaitCancel)
         Me.fraMoveRouteWait.Controls.Add(Me.btnMoveWaitOk)
         Me.fraMoveRouteWait.Controls.Add(Me.DarkLabel79)
@@ -2158,12 +2017,6 @@ Partial Class FrmEditor_Events
         'cmbMoveWait
         '
         Me.cmbMoveWait.BackColor = System.Drawing.Color.FromArgb(CType(CType(69, Byte), Integer), CType(CType(73, Byte), Integer), CType(CType(74, Byte), Integer))
-        Me.cmbMoveWait.BorderColor = System.Drawing.Color.FromArgb(CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer))
-        Me.cmbMoveWait.BorderStyle = System.Windows.Forms.ButtonBorderStyle.Solid
-        Me.cmbMoveWait.ButtonColor = System.Drawing.Color.FromArgb(CType(CType(43, Byte), Integer), CType(CType(43, Byte), Integer), CType(CType(43, Byte), Integer))
-        Me.cmbMoveWait.ButtonIcon = CType(resources.GetObject("cmbMoveWait.ButtonIcon"), System.Drawing.Bitmap)
-        Me.cmbMoveWait.DrawDropdownHoverOutline = False
-        Me.cmbMoveWait.DrawFocusRectangle = False
         Me.cmbMoveWait.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed
         Me.cmbMoveWait.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cmbMoveWait.FlatStyle = System.Windows.Forms.FlatStyle.Flat
@@ -2174,12 +2027,10 @@ Partial Class FrmEditor_Events
         Me.cmbMoveWait.Size = New System.Drawing.Size(191, 21)
         Me.cmbMoveWait.TabIndex = 0
         Me.cmbMoveWait.Text = Nothing
-        Me.cmbMoveWait.TextPadding = New System.Windows.Forms.Padding(2)
         '
         'fraCustomScript
         '
         Me.fraCustomScript.BackColor = System.Drawing.Color.FromArgb(CType(CType(45, Byte), Integer), CType(CType(45, Byte), Integer), CType(CType(48, Byte), Integer))
-        Me.fraCustomScript.BorderColor = System.Drawing.Color.FromArgb(CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer))
         Me.fraCustomScript.Controls.Add(Me.nudCustomScript)
         Me.fraCustomScript.Controls.Add(Me.DarkLabel78)
         Me.fraCustomScript.Controls.Add(Me.btnCustomScriptCancel)
@@ -2233,7 +2084,6 @@ Partial Class FrmEditor_Events
         'fraSetWeather
         '
         Me.fraSetWeather.BackColor = System.Drawing.Color.FromArgb(CType(CType(45, Byte), Integer), CType(CType(45, Byte), Integer), CType(CType(48, Byte), Integer))
-        Me.fraSetWeather.BorderColor = System.Drawing.Color.FromArgb(CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer))
         Me.fraSetWeather.Controls.Add(Me.btnSetWeatherOk)
         Me.fraSetWeather.Controls.Add(Me.btnSetWeatherCancel)
         Me.fraSetWeather.Controls.Add(Me.DarkLabel76)
@@ -2299,12 +2149,6 @@ Partial Class FrmEditor_Events
         'CmbWeather
         '
         Me.CmbWeather.BackColor = System.Drawing.Color.FromArgb(CType(CType(69, Byte), Integer), CType(CType(73, Byte), Integer), CType(CType(74, Byte), Integer))
-        Me.CmbWeather.BorderColor = System.Drawing.Color.FromArgb(CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer))
-        Me.CmbWeather.BorderStyle = System.Windows.Forms.ButtonBorderStyle.Solid
-        Me.CmbWeather.ButtonColor = System.Drawing.Color.FromArgb(CType(CType(43, Byte), Integer), CType(CType(43, Byte), Integer), CType(CType(43, Byte), Integer))
-        Me.CmbWeather.ButtonIcon = CType(resources.GetObject("CmbWeather.ButtonIcon"), System.Drawing.Bitmap)
-        Me.CmbWeather.DrawDropdownHoverOutline = False
-        Me.CmbWeather.DrawFocusRectangle = False
         Me.CmbWeather.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed
         Me.CmbWeather.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.CmbWeather.FlatStyle = System.Windows.Forms.FlatStyle.Flat
@@ -2316,12 +2160,10 @@ Partial Class FrmEditor_Events
         Me.CmbWeather.Size = New System.Drawing.Size(155, 21)
         Me.CmbWeather.TabIndex = 0
         Me.CmbWeather.Text = Nothing
-        Me.CmbWeather.TextPadding = New System.Windows.Forms.Padding(2)
         '
         'fraSpawnNpc
         '
         Me.fraSpawnNpc.BackColor = System.Drawing.Color.FromArgb(CType(CType(45, Byte), Integer), CType(CType(45, Byte), Integer), CType(CType(48, Byte), Integer))
-        Me.fraSpawnNpc.BorderColor = System.Drawing.Color.FromArgb(CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer))
         Me.fraSpawnNpc.Controls.Add(Me.btnSpawnNpcOk)
         Me.fraSpawnNpc.Controls.Add(Me.btnSpawnNpcCancel)
         Me.fraSpawnNpc.Controls.Add(Me.cmbSpawnNpc)
@@ -2355,12 +2197,6 @@ Partial Class FrmEditor_Events
         'cmbSpawnNpc
         '
         Me.cmbSpawnNpc.BackColor = System.Drawing.Color.FromArgb(CType(CType(69, Byte), Integer), CType(CType(73, Byte), Integer), CType(CType(74, Byte), Integer))
-        Me.cmbSpawnNpc.BorderColor = System.Drawing.Color.FromArgb(CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer))
-        Me.cmbSpawnNpc.BorderStyle = System.Windows.Forms.ButtonBorderStyle.Solid
-        Me.cmbSpawnNpc.ButtonColor = System.Drawing.Color.FromArgb(CType(CType(43, Byte), Integer), CType(CType(43, Byte), Integer), CType(CType(43, Byte), Integer))
-        Me.cmbSpawnNpc.ButtonIcon = CType(resources.GetObject("cmbSpawnNpc.ButtonIcon"), System.Drawing.Bitmap)
-        Me.cmbSpawnNpc.DrawDropdownHoverOutline = False
-        Me.cmbSpawnNpc.DrawFocusRectangle = False
         Me.cmbSpawnNpc.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed
         Me.cmbSpawnNpc.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cmbSpawnNpc.FlatStyle = System.Windows.Forms.FlatStyle.Flat
@@ -2371,12 +2207,10 @@ Partial Class FrmEditor_Events
         Me.cmbSpawnNpc.Size = New System.Drawing.Size(234, 21)
         Me.cmbSpawnNpc.TabIndex = 0
         Me.cmbSpawnNpc.Text = Nothing
-        Me.cmbSpawnNpc.TextPadding = New System.Windows.Forms.Padding(2)
         '
         'fraGiveExp
         '
         Me.fraGiveExp.BackColor = System.Drawing.Color.FromArgb(CType(CType(45, Byte), Integer), CType(CType(45, Byte), Integer), CType(CType(48, Byte), Integer))
-        Me.fraGiveExp.BorderColor = System.Drawing.Color.FromArgb(CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer))
         Me.fraGiveExp.Controls.Add(Me.btnGiveExpOk)
         Me.fraGiveExp.Controls.Add(Me.btnGiveExpCancel)
         Me.fraGiveExp.Controls.Add(Me.nudGiveExp)
@@ -2431,7 +2265,6 @@ Partial Class FrmEditor_Events
         'fraEndQuest
         '
         Me.fraEndQuest.BackColor = System.Drawing.Color.FromArgb(CType(CType(45, Byte), Integer), CType(CType(45, Byte), Integer), CType(CType(48, Byte), Integer))
-        Me.fraEndQuest.BorderColor = System.Drawing.Color.FromArgb(CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer))
         Me.fraEndQuest.Controls.Add(Me.btnEndQuestOk)
         Me.fraEndQuest.Controls.Add(Me.btnEndQuestCancel)
         Me.fraEndQuest.Controls.Add(Me.cmbEndQuest)
@@ -2465,12 +2298,6 @@ Partial Class FrmEditor_Events
         'cmbEndQuest
         '
         Me.cmbEndQuest.BackColor = System.Drawing.Color.FromArgb(CType(CType(69, Byte), Integer), CType(CType(73, Byte), Integer), CType(CType(74, Byte), Integer))
-        Me.cmbEndQuest.BorderColor = System.Drawing.Color.FromArgb(CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer))
-        Me.cmbEndQuest.BorderStyle = System.Windows.Forms.ButtonBorderStyle.Solid
-        Me.cmbEndQuest.ButtonColor = System.Drawing.Color.FromArgb(CType(CType(43, Byte), Integer), CType(CType(43, Byte), Integer), CType(CType(43, Byte), Integer))
-        Me.cmbEndQuest.ButtonIcon = CType(resources.GetObject("cmbEndQuest.ButtonIcon"), System.Drawing.Bitmap)
-        Me.cmbEndQuest.DrawDropdownHoverOutline = False
-        Me.cmbEndQuest.DrawFocusRectangle = False
         Me.cmbEndQuest.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed
         Me.cmbEndQuest.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cmbEndQuest.FlatStyle = System.Windows.Forms.FlatStyle.Flat
@@ -2481,12 +2308,10 @@ Partial Class FrmEditor_Events
         Me.cmbEndQuest.Size = New System.Drawing.Size(188, 21)
         Me.cmbEndQuest.TabIndex = 28
         Me.cmbEndQuest.Text = Nothing
-        Me.cmbEndQuest.TextPadding = New System.Windows.Forms.Padding(2)
         '
         'fraSetAccess
         '
         Me.fraSetAccess.BackColor = System.Drawing.Color.FromArgb(CType(CType(45, Byte), Integer), CType(CType(45, Byte), Integer), CType(CType(48, Byte), Integer))
-        Me.fraSetAccess.BorderColor = System.Drawing.Color.FromArgb(CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer))
         Me.fraSetAccess.Controls.Add(Me.btnSetAccessOk)
         Me.fraSetAccess.Controls.Add(Me.btnSetAccessCancel)
         Me.fraSetAccess.Controls.Add(Me.cmbSetAccess)
@@ -2520,12 +2345,6 @@ Partial Class FrmEditor_Events
         'cmbSetAccess
         '
         Me.cmbSetAccess.BackColor = System.Drawing.Color.FromArgb(CType(CType(69, Byte), Integer), CType(CType(73, Byte), Integer), CType(CType(74, Byte), Integer))
-        Me.cmbSetAccess.BorderColor = System.Drawing.Color.FromArgb(CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer))
-        Me.cmbSetAccess.BorderStyle = System.Windows.Forms.ButtonBorderStyle.Solid
-        Me.cmbSetAccess.ButtonColor = System.Drawing.Color.FromArgb(CType(CType(43, Byte), Integer), CType(CType(43, Byte), Integer), CType(CType(43, Byte), Integer))
-        Me.cmbSetAccess.ButtonIcon = CType(resources.GetObject("cmbSetAccess.ButtonIcon"), System.Drawing.Bitmap)
-        Me.cmbSetAccess.DrawDropdownHoverOutline = False
-        Me.cmbSetAccess.DrawFocusRectangle = False
         Me.cmbSetAccess.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed
         Me.cmbSetAccess.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cmbSetAccess.FlatStyle = System.Windows.Forms.FlatStyle.Flat
@@ -2537,12 +2356,10 @@ Partial Class FrmEditor_Events
         Me.cmbSetAccess.Size = New System.Drawing.Size(188, 21)
         Me.cmbSetAccess.TabIndex = 0
         Me.cmbSetAccess.Text = Nothing
-        Me.cmbSetAccess.TextPadding = New System.Windows.Forms.Padding(2)
         '
         'fraSetWait
         '
         Me.fraSetWait.BackColor = System.Drawing.Color.FromArgb(CType(CType(45, Byte), Integer), CType(CType(45, Byte), Integer), CType(CType(48, Byte), Integer))
-        Me.fraSetWait.BorderColor = System.Drawing.Color.FromArgb(CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer))
         Me.fraSetWait.Controls.Add(Me.btnSetWaitOk)
         Me.fraSetWait.Controls.Add(Me.btnSetWaitCancel)
         Me.fraSetWait.Controls.Add(Me.DarkLabel74)
@@ -2619,7 +2436,6 @@ Partial Class FrmEditor_Events
         'fraShowPic
         '
         Me.fraShowPic.BackColor = System.Drawing.Color.FromArgb(CType(CType(45, Byte), Integer), CType(CType(45, Byte), Integer), CType(CType(48, Byte), Integer))
-        Me.fraShowPic.BorderColor = System.Drawing.Color.FromArgb(CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer))
         Me.fraShowPic.Controls.Add(Me.btnShowPicOk)
         Me.fraShowPic.Controls.Add(Me.btnShowPicCancel)
         Me.fraShowPic.Controls.Add(Me.DarkLabel71)
@@ -2734,12 +2550,6 @@ Partial Class FrmEditor_Events
         'cmbPicLoc
         '
         Me.cmbPicLoc.BackColor = System.Drawing.Color.FromArgb(CType(CType(69, Byte), Integer), CType(CType(73, Byte), Integer), CType(CType(74, Byte), Integer))
-        Me.cmbPicLoc.BorderColor = System.Drawing.Color.FromArgb(CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer))
-        Me.cmbPicLoc.BorderStyle = System.Windows.Forms.ButtonBorderStyle.Solid
-        Me.cmbPicLoc.ButtonColor = System.Drawing.Color.FromArgb(CType(CType(43, Byte), Integer), CType(CType(43, Byte), Integer), CType(CType(43, Byte), Integer))
-        Me.cmbPicLoc.ButtonIcon = CType(resources.GetObject("cmbPicLoc.ButtonIcon"), System.Drawing.Bitmap)
-        Me.cmbPicLoc.DrawDropdownHoverOutline = False
-        Me.cmbPicLoc.DrawFocusRectangle = False
         Me.cmbPicLoc.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed
         Me.cmbPicLoc.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cmbPicLoc.FlatStyle = System.Windows.Forms.FlatStyle.Flat
@@ -2751,7 +2561,6 @@ Partial Class FrmEditor_Events
         Me.cmbPicLoc.Size = New System.Drawing.Size(124, 21)
         Me.cmbPicLoc.TabIndex = 46
         Me.cmbPicLoc.Text = Nothing
-        Me.cmbPicLoc.TextPadding = New System.Windows.Forms.Padding(2)
         '
         'nudShowPicture
         '
@@ -2775,12 +2584,6 @@ Partial Class FrmEditor_Events
         'cmbPicIndex
         '
         Me.cmbPicIndex.BackColor = System.Drawing.Color.FromArgb(CType(CType(69, Byte), Integer), CType(CType(73, Byte), Integer), CType(CType(74, Byte), Integer))
-        Me.cmbPicIndex.BorderColor = System.Drawing.Color.FromArgb(CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer))
-        Me.cmbPicIndex.BorderStyle = System.Windows.Forms.ButtonBorderStyle.Solid
-        Me.cmbPicIndex.ButtonColor = System.Drawing.Color.FromArgb(CType(CType(43, Byte), Integer), CType(CType(43, Byte), Integer), CType(CType(43, Byte), Integer))
-        Me.cmbPicIndex.ButtonIcon = CType(resources.GetObject("cmbPicIndex.ButtonIcon"), System.Drawing.Bitmap)
-        Me.cmbPicIndex.DrawDropdownHoverOutline = False
-        Me.cmbPicIndex.DrawFocusRectangle = False
         Me.cmbPicIndex.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed
         Me.cmbPicIndex.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cmbPicIndex.FlatStyle = System.Windows.Forms.FlatStyle.Flat
@@ -2791,7 +2594,6 @@ Partial Class FrmEditor_Events
         Me.cmbPicIndex.Size = New System.Drawing.Size(162, 21)
         Me.cmbPicIndex.TabIndex = 1
         Me.cmbPicIndex.Text = Nothing
-        Me.cmbPicIndex.TextPadding = New System.Windows.Forms.Padding(2)
         '
         'DarkLabel66
         '
@@ -2806,7 +2608,6 @@ Partial Class FrmEditor_Events
         'fraOpenShop
         '
         Me.fraOpenShop.BackColor = System.Drawing.Color.FromArgb(CType(CType(45, Byte), Integer), CType(CType(45, Byte), Integer), CType(CType(48, Byte), Integer))
-        Me.fraOpenShop.BorderColor = System.Drawing.Color.FromArgb(CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer))
         Me.fraOpenShop.Controls.Add(Me.btnOpenShopOk)
         Me.fraOpenShop.Controls.Add(Me.btnOpenShopCancel)
         Me.fraOpenShop.Controls.Add(Me.cmbOpenShop)
@@ -2840,12 +2641,6 @@ Partial Class FrmEditor_Events
         'cmbOpenShop
         '
         Me.cmbOpenShop.BackColor = System.Drawing.Color.FromArgb(CType(CType(69, Byte), Integer), CType(CType(73, Byte), Integer), CType(CType(74, Byte), Integer))
-        Me.cmbOpenShop.BorderColor = System.Drawing.Color.FromArgb(CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer))
-        Me.cmbOpenShop.BorderStyle = System.Windows.Forms.ButtonBorderStyle.Solid
-        Me.cmbOpenShop.ButtonColor = System.Drawing.Color.FromArgb(CType(CType(43, Byte), Integer), CType(CType(43, Byte), Integer), CType(CType(43, Byte), Integer))
-        Me.cmbOpenShop.ButtonIcon = CType(resources.GetObject("cmbOpenShop.ButtonIcon"), System.Drawing.Bitmap)
-        Me.cmbOpenShop.DrawDropdownHoverOutline = False
-        Me.cmbOpenShop.DrawFocusRectangle = False
         Me.cmbOpenShop.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed
         Me.cmbOpenShop.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cmbOpenShop.FlatStyle = System.Windows.Forms.FlatStyle.Flat
@@ -2856,12 +2651,10 @@ Partial Class FrmEditor_Events
         Me.cmbOpenShop.Size = New System.Drawing.Size(226, 21)
         Me.cmbOpenShop.TabIndex = 0
         Me.cmbOpenShop.Text = Nothing
-        Me.cmbOpenShop.TextPadding = New System.Windows.Forms.Padding(2)
         '
         'fraChangeLevel
         '
         Me.fraChangeLevel.BackColor = System.Drawing.Color.FromArgb(CType(CType(45, Byte), Integer), CType(CType(45, Byte), Integer), CType(CType(48, Byte), Integer))
-        Me.fraChangeLevel.BorderColor = System.Drawing.Color.FromArgb(CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer))
         Me.fraChangeLevel.Controls.Add(Me.btnChangeLevelOk)
         Me.fraChangeLevel.Controls.Add(Me.btnChangeLevelCancel)
         Me.fraChangeLevel.Controls.Add(Me.DarkLabel65)
@@ -2915,7 +2708,6 @@ Partial Class FrmEditor_Events
         'fraChangeGender
         '
         Me.fraChangeGender.BackColor = System.Drawing.Color.FromArgb(CType(CType(45, Byte), Integer), CType(CType(45, Byte), Integer), CType(CType(48, Byte), Integer))
-        Me.fraChangeGender.BorderColor = System.Drawing.Color.FromArgb(CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer))
         Me.fraChangeGender.Controls.Add(Me.btnChangeGenderOk)
         Me.fraChangeGender.Controls.Add(Me.btnChangeGenderCancel)
         Me.fraChangeGender.Controls.Add(Me.optChangeSexFemale)
@@ -2970,7 +2762,6 @@ Partial Class FrmEditor_Events
         'fraGoToLabel
         '
         Me.fraGoToLabel.BackColor = System.Drawing.Color.FromArgb(CType(CType(45, Byte), Integer), CType(CType(45, Byte), Integer), CType(CType(48, Byte), Integer))
-        Me.fraGoToLabel.BorderColor = System.Drawing.Color.FromArgb(CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer))
         Me.fraGoToLabel.Controls.Add(Me.btnGoToLabelOk)
         Me.fraGoToLabel.Controls.Add(Me.btnGoToLabelCancel)
         Me.fraGoToLabel.Controls.Add(Me.txtGotoLabel)
@@ -3025,7 +2816,6 @@ Partial Class FrmEditor_Events
         'fraHidePic
         '
         Me.fraHidePic.BackColor = System.Drawing.Color.FromArgb(CType(CType(45, Byte), Integer), CType(CType(45, Byte), Integer), CType(CType(48, Byte), Integer))
-        Me.fraHidePic.BorderColor = System.Drawing.Color.FromArgb(CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer))
         Me.fraHidePic.Controls.Add(Me.btnHidePicOk)
         Me.fraHidePic.Controls.Add(Me.btnHidePicCancel)
         Me.fraHidePic.Controls.Add(Me.nudHidePic)
@@ -3079,7 +2869,6 @@ Partial Class FrmEditor_Events
         'fraBeginQuest
         '
         Me.fraBeginQuest.BackColor = System.Drawing.Color.FromArgb(CType(CType(45, Byte), Integer), CType(CType(45, Byte), Integer), CType(CType(48, Byte), Integer))
-        Me.fraBeginQuest.BorderColor = System.Drawing.Color.FromArgb(CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer))
         Me.fraBeginQuest.Controls.Add(Me.btnBeginQuestOk)
         Me.fraBeginQuest.Controls.Add(Me.btnBeginQuestCancel)
         Me.fraBeginQuest.Controls.Add(Me.cmbBeginQuest)
@@ -3114,12 +2903,6 @@ Partial Class FrmEditor_Events
         'cmbBeginQuest
         '
         Me.cmbBeginQuest.BackColor = System.Drawing.Color.FromArgb(CType(CType(69, Byte), Integer), CType(CType(73, Byte), Integer), CType(CType(74, Byte), Integer))
-        Me.cmbBeginQuest.BorderColor = System.Drawing.Color.FromArgb(CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer))
-        Me.cmbBeginQuest.BorderStyle = System.Windows.Forms.ButtonBorderStyle.Solid
-        Me.cmbBeginQuest.ButtonColor = System.Drawing.Color.FromArgb(CType(CType(43, Byte), Integer), CType(CType(43, Byte), Integer), CType(CType(43, Byte), Integer))
-        Me.cmbBeginQuest.ButtonIcon = CType(resources.GetObject("cmbBeginQuest.ButtonIcon"), System.Drawing.Bitmap)
-        Me.cmbBeginQuest.DrawDropdownHoverOutline = False
-        Me.cmbBeginQuest.DrawFocusRectangle = False
         Me.cmbBeginQuest.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed
         Me.cmbBeginQuest.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cmbBeginQuest.FlatStyle = System.Windows.Forms.FlatStyle.Flat
@@ -3130,7 +2913,6 @@ Partial Class FrmEditor_Events
         Me.cmbBeginQuest.Size = New System.Drawing.Size(190, 21)
         Me.cmbBeginQuest.TabIndex = 1
         Me.cmbBeginQuest.Text = Nothing
-        Me.cmbBeginQuest.TextPadding = New System.Windows.Forms.Padding(2)
         '
         'DarkLabel58
         '
@@ -3145,7 +2927,6 @@ Partial Class FrmEditor_Events
         'fraShowChoices
         '
         Me.fraShowChoices.BackColor = System.Drawing.Color.FromArgb(CType(CType(45, Byte), Integer), CType(CType(45, Byte), Integer), CType(CType(48, Byte), Integer))
-        Me.fraShowChoices.BorderColor = System.Drawing.Color.FromArgb(CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer))
         Me.fraShowChoices.Controls.Add(Me.txtChoices4)
         Me.fraShowChoices.Controls.Add(Me.txtChoices3)
         Me.fraShowChoices.Controls.Add(Me.txtChoices2)
@@ -3321,7 +3102,6 @@ Partial Class FrmEditor_Events
         'fraPlayerVariable
         '
         Me.fraPlayerVariable.BackColor = System.Drawing.Color.FromArgb(CType(CType(45, Byte), Integer), CType(CType(45, Byte), Integer), CType(CType(48, Byte), Integer))
-        Me.fraPlayerVariable.BorderColor = System.Drawing.Color.FromArgb(CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer))
         Me.fraPlayerVariable.Controls.Add(Me.nudVariableData2)
         Me.fraPlayerVariable.Controls.Add(Me.optVariableAction2)
         Me.fraPlayerVariable.Controls.Add(Me.btnPlayerVarOk)
@@ -3472,12 +3252,6 @@ Partial Class FrmEditor_Events
         'cmbVariable
         '
         Me.cmbVariable.BackColor = System.Drawing.Color.FromArgb(CType(CType(69, Byte), Integer), CType(CType(73, Byte), Integer), CType(CType(74, Byte), Integer))
-        Me.cmbVariable.BorderColor = System.Drawing.Color.FromArgb(CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer))
-        Me.cmbVariable.BorderStyle = System.Windows.Forms.ButtonBorderStyle.Solid
-        Me.cmbVariable.ButtonColor = System.Drawing.Color.FromArgb(CType(CType(43, Byte), Integer), CType(CType(43, Byte), Integer), CType(CType(43, Byte), Integer))
-        Me.cmbVariable.ButtonIcon = CType(resources.GetObject("cmbVariable.ButtonIcon"), System.Drawing.Bitmap)
-        Me.cmbVariable.DrawDropdownHoverOutline = False
-        Me.cmbVariable.DrawFocusRectangle = False
         Me.cmbVariable.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed
         Me.cmbVariable.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cmbVariable.FlatStyle = System.Windows.Forms.FlatStyle.Flat
@@ -3488,7 +3262,6 @@ Partial Class FrmEditor_Events
         Me.cmbVariable.Size = New System.Drawing.Size(179, 21)
         Me.cmbVariable.TabIndex = 1
         Me.cmbVariable.Text = Nothing
-        Me.cmbVariable.TextPadding = New System.Windows.Forms.Padding(2)
         '
         'DarkLabel49
         '
@@ -3503,7 +3276,6 @@ Partial Class FrmEditor_Events
         'fraChangeSprite
         '
         Me.fraChangeSprite.BackColor = System.Drawing.Color.FromArgb(CType(CType(45, Byte), Integer), CType(CType(45, Byte), Integer), CType(CType(48, Byte), Integer))
-        Me.fraChangeSprite.BorderColor = System.Drawing.Color.FromArgb(CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer))
         Me.fraChangeSprite.Controls.Add(Me.btnChangeSpriteOk)
         Me.fraChangeSprite.Controls.Add(Me.btnChangeSpriteCancel)
         Me.fraChangeSprite.Controls.Add(Me.DarkLabel48)
@@ -3568,7 +3340,6 @@ Partial Class FrmEditor_Events
         'fraSetSelfSwitch
         '
         Me.fraSetSelfSwitch.BackColor = System.Drawing.Color.FromArgb(CType(CType(45, Byte), Integer), CType(CType(45, Byte), Integer), CType(CType(48, Byte), Integer))
-        Me.fraSetSelfSwitch.BorderColor = System.Drawing.Color.FromArgb(CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer))
         Me.fraSetSelfSwitch.Controls.Add(Me.btnSelfswitchOk)
         Me.fraSetSelfSwitch.Controls.Add(Me.btnSelfswitchCancel)
         Me.fraSetSelfSwitch.Controls.Add(Me.DarkLabel47)
@@ -3615,12 +3386,6 @@ Partial Class FrmEditor_Events
         'cmbSetSelfSwitchTo
         '
         Me.cmbSetSelfSwitchTo.BackColor = System.Drawing.Color.FromArgb(CType(CType(69, Byte), Integer), CType(CType(73, Byte), Integer), CType(CType(74, Byte), Integer))
-        Me.cmbSetSelfSwitchTo.BorderColor = System.Drawing.Color.FromArgb(CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer))
-        Me.cmbSetSelfSwitchTo.BorderStyle = System.Windows.Forms.ButtonBorderStyle.Solid
-        Me.cmbSetSelfSwitchTo.ButtonColor = System.Drawing.Color.FromArgb(CType(CType(43, Byte), Integer), CType(CType(43, Byte), Integer), CType(CType(43, Byte), Integer))
-        Me.cmbSetSelfSwitchTo.ButtonIcon = CType(resources.GetObject("cmbSetSelfSwitchTo.ButtonIcon"), System.Drawing.Bitmap)
-        Me.cmbSetSelfSwitchTo.DrawDropdownHoverOutline = False
-        Me.cmbSetSelfSwitchTo.DrawFocusRectangle = False
         Me.cmbSetSelfSwitchTo.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed
         Me.cmbSetSelfSwitchTo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cmbSetSelfSwitchTo.FlatStyle = System.Windows.Forms.FlatStyle.Flat
@@ -3632,7 +3397,6 @@ Partial Class FrmEditor_Events
         Me.cmbSetSelfSwitchTo.Size = New System.Drawing.Size(168, 21)
         Me.cmbSetSelfSwitchTo.TabIndex = 2
         Me.cmbSetSelfSwitchTo.Text = Nothing
-        Me.cmbSetSelfSwitchTo.TextPadding = New System.Windows.Forms.Padding(2)
         '
         'DarkLabel46
         '
@@ -3647,12 +3411,6 @@ Partial Class FrmEditor_Events
         'cmbSetSelfSwitch
         '
         Me.cmbSetSelfSwitch.BackColor = System.Drawing.Color.FromArgb(CType(CType(69, Byte), Integer), CType(CType(73, Byte), Integer), CType(CType(74, Byte), Integer))
-        Me.cmbSetSelfSwitch.BorderColor = System.Drawing.Color.FromArgb(CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer))
-        Me.cmbSetSelfSwitch.BorderStyle = System.Windows.Forms.ButtonBorderStyle.Solid
-        Me.cmbSetSelfSwitch.ButtonColor = System.Drawing.Color.FromArgb(CType(CType(43, Byte), Integer), CType(CType(43, Byte), Integer), CType(CType(43, Byte), Integer))
-        Me.cmbSetSelfSwitch.ButtonIcon = CType(resources.GetObject("cmbSetSelfSwitch.ButtonIcon"), System.Drawing.Bitmap)
-        Me.cmbSetSelfSwitch.DrawDropdownHoverOutline = False
-        Me.cmbSetSelfSwitch.DrawFocusRectangle = False
         Me.cmbSetSelfSwitch.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed
         Me.cmbSetSelfSwitch.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cmbSetSelfSwitch.FlatStyle = System.Windows.Forms.FlatStyle.Flat
@@ -3663,12 +3421,10 @@ Partial Class FrmEditor_Events
         Me.cmbSetSelfSwitch.Size = New System.Drawing.Size(168, 21)
         Me.cmbSetSelfSwitch.TabIndex = 0
         Me.cmbSetSelfSwitch.Text = Nothing
-        Me.cmbSetSelfSwitch.TextPadding = New System.Windows.Forms.Padding(2)
         '
         'fraMapTint
         '
         Me.fraMapTint.BackColor = System.Drawing.Color.FromArgb(CType(CType(45, Byte), Integer), CType(CType(45, Byte), Integer), CType(CType(48, Byte), Integer))
-        Me.fraMapTint.BorderColor = System.Drawing.Color.FromArgb(CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer))
         Me.fraMapTint.Controls.Add(Me.btnMapTintOk)
         Me.fraMapTint.Controls.Add(Me.btnMapTintCancel)
         Me.fraMapTint.Controls.Add(Me.DarkLabel42)
@@ -3788,7 +3544,6 @@ Partial Class FrmEditor_Events
         'fraShowChatBubble
         '
         Me.fraShowChatBubble.BackColor = System.Drawing.Color.FromArgb(CType(CType(45, Byte), Integer), CType(CType(45, Byte), Integer), CType(CType(48, Byte), Integer))
-        Me.fraShowChatBubble.BorderColor = System.Drawing.Color.FromArgb(CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer))
         Me.fraShowChatBubble.Controls.Add(Me.btnShowChatBubbleOk)
         Me.fraShowChatBubble.Controls.Add(Me.btnShowChatBubbleCancel)
         Me.fraShowChatBubble.Controls.Add(Me.DarkLabel41)
@@ -3837,12 +3592,6 @@ Partial Class FrmEditor_Events
         'cmbChatBubbleTarget
         '
         Me.cmbChatBubbleTarget.BackColor = System.Drawing.Color.FromArgb(CType(CType(69, Byte), Integer), CType(CType(73, Byte), Integer), CType(CType(74, Byte), Integer))
-        Me.cmbChatBubbleTarget.BorderColor = System.Drawing.Color.FromArgb(CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer))
-        Me.cmbChatBubbleTarget.BorderStyle = System.Windows.Forms.ButtonBorderStyle.Solid
-        Me.cmbChatBubbleTarget.ButtonColor = System.Drawing.Color.FromArgb(CType(CType(43, Byte), Integer), CType(CType(43, Byte), Integer), CType(CType(43, Byte), Integer))
-        Me.cmbChatBubbleTarget.ButtonIcon = CType(resources.GetObject("cmbChatBubbleTarget.ButtonIcon"), System.Drawing.Bitmap)
-        Me.cmbChatBubbleTarget.DrawDropdownHoverOutline = False
-        Me.cmbChatBubbleTarget.DrawFocusRectangle = False
         Me.cmbChatBubbleTarget.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed
         Me.cmbChatBubbleTarget.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cmbChatBubbleTarget.FlatStyle = System.Windows.Forms.FlatStyle.Flat
@@ -3853,17 +3602,10 @@ Partial Class FrmEditor_Events
         Me.cmbChatBubbleTarget.Size = New System.Drawing.Size(159, 21)
         Me.cmbChatBubbleTarget.TabIndex = 28
         Me.cmbChatBubbleTarget.Text = Nothing
-        Me.cmbChatBubbleTarget.TextPadding = New System.Windows.Forms.Padding(2)
         '
         'cmbChatBubbleTargetType
         '
         Me.cmbChatBubbleTargetType.BackColor = System.Drawing.Color.FromArgb(CType(CType(69, Byte), Integer), CType(CType(73, Byte), Integer), CType(CType(74, Byte), Integer))
-        Me.cmbChatBubbleTargetType.BorderColor = System.Drawing.Color.FromArgb(CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer))
-        Me.cmbChatBubbleTargetType.BorderStyle = System.Windows.Forms.ButtonBorderStyle.Solid
-        Me.cmbChatBubbleTargetType.ButtonColor = System.Drawing.Color.FromArgb(CType(CType(43, Byte), Integer), CType(CType(43, Byte), Integer), CType(CType(43, Byte), Integer))
-        Me.cmbChatBubbleTargetType.ButtonIcon = CType(resources.GetObject("cmbChatBubbleTargetType.ButtonIcon"), System.Drawing.Bitmap)
-        Me.cmbChatBubbleTargetType.DrawDropdownHoverOutline = False
-        Me.cmbChatBubbleTargetType.DrawFocusRectangle = False
         Me.cmbChatBubbleTargetType.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed
         Me.cmbChatBubbleTargetType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cmbChatBubbleTargetType.FlatStyle = System.Windows.Forms.FlatStyle.Flat
@@ -3875,7 +3617,6 @@ Partial Class FrmEditor_Events
         Me.cmbChatBubbleTargetType.Size = New System.Drawing.Size(159, 21)
         Me.cmbChatBubbleTargetType.TabIndex = 27
         Me.cmbChatBubbleTargetType.Text = Nothing
-        Me.cmbChatBubbleTargetType.TextPadding = New System.Windows.Forms.Padding(2)
         '
         'DarkLabel40
         '
@@ -3910,7 +3651,6 @@ Partial Class FrmEditor_Events
         'fraPlaySound
         '
         Me.fraPlaySound.BackColor = System.Drawing.Color.FromArgb(CType(CType(45, Byte), Integer), CType(CType(45, Byte), Integer), CType(CType(48, Byte), Integer))
-        Me.fraPlaySound.BorderColor = System.Drawing.Color.FromArgb(CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer))
         Me.fraPlaySound.Controls.Add(Me.btnPlaySoundOk)
         Me.fraPlaySound.Controls.Add(Me.btnPlaySoundCancel)
         Me.fraPlaySound.Controls.Add(Me.cmbPlaySound)
@@ -3944,12 +3684,6 @@ Partial Class FrmEditor_Events
         'cmbPlaySound
         '
         Me.cmbPlaySound.BackColor = System.Drawing.Color.FromArgb(CType(CType(69, Byte), Integer), CType(CType(73, Byte), Integer), CType(CType(74, Byte), Integer))
-        Me.cmbPlaySound.BorderColor = System.Drawing.Color.FromArgb(CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer))
-        Me.cmbPlaySound.BorderStyle = System.Windows.Forms.ButtonBorderStyle.Solid
-        Me.cmbPlaySound.ButtonColor = System.Drawing.Color.FromArgb(CType(CType(43, Byte), Integer), CType(CType(43, Byte), Integer), CType(CType(43, Byte), Integer))
-        Me.cmbPlaySound.ButtonIcon = CType(resources.GetObject("cmbPlaySound.ButtonIcon"), System.Drawing.Bitmap)
-        Me.cmbPlaySound.DrawDropdownHoverOutline = False
-        Me.cmbPlaySound.DrawFocusRectangle = False
         Me.cmbPlaySound.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed
         Me.cmbPlaySound.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cmbPlaySound.FlatStyle = System.Windows.Forms.FlatStyle.Flat
@@ -3960,12 +3694,10 @@ Partial Class FrmEditor_Events
         Me.cmbPlaySound.Size = New System.Drawing.Size(234, 21)
         Me.cmbPlaySound.TabIndex = 0
         Me.cmbPlaySound.Text = Nothing
-        Me.cmbPlaySound.TextPadding = New System.Windows.Forms.Padding(2)
         '
         'fraChangePK
         '
         Me.fraChangePK.BackColor = System.Drawing.Color.FromArgb(CType(CType(45, Byte), Integer), CType(CType(45, Byte), Integer), CType(CType(48, Byte), Integer))
-        Me.fraChangePK.BorderColor = System.Drawing.Color.FromArgb(CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer))
         Me.fraChangePK.Controls.Add(Me.btnChangePkOk)
         Me.fraChangePK.Controls.Add(Me.btnChangePkCancel)
         Me.fraChangePK.Controls.Add(Me.cmbSetPK)
@@ -3999,12 +3731,6 @@ Partial Class FrmEditor_Events
         'cmbSetPK
         '
         Me.cmbSetPK.BackColor = System.Drawing.Color.FromArgb(CType(CType(69, Byte), Integer), CType(CType(73, Byte), Integer), CType(CType(74, Byte), Integer))
-        Me.cmbSetPK.BorderColor = System.Drawing.Color.FromArgb(CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer))
-        Me.cmbSetPK.BorderStyle = System.Windows.Forms.ButtonBorderStyle.Solid
-        Me.cmbSetPK.ButtonColor = System.Drawing.Color.FromArgb(CType(CType(43, Byte), Integer), CType(CType(43, Byte), Integer), CType(CType(43, Byte), Integer))
-        Me.cmbSetPK.ButtonIcon = CType(resources.GetObject("cmbSetPK.ButtonIcon"), System.Drawing.Bitmap)
-        Me.cmbSetPK.DrawDropdownHoverOutline = False
-        Me.cmbSetPK.DrawFocusRectangle = False
         Me.cmbSetPK.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed
         Me.cmbSetPK.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cmbSetPK.FlatStyle = System.Windows.Forms.FlatStyle.Flat
@@ -4016,12 +3742,10 @@ Partial Class FrmEditor_Events
         Me.cmbSetPK.Size = New System.Drawing.Size(226, 21)
         Me.cmbSetPK.TabIndex = 18
         Me.cmbSetPK.Text = Nothing
-        Me.cmbSetPK.TextPadding = New System.Windows.Forms.Padding(2)
         '
         'fraCreateLabel
         '
         Me.fraCreateLabel.BackColor = System.Drawing.Color.FromArgb(CType(CType(45, Byte), Integer), CType(CType(45, Byte), Integer), CType(CType(48, Byte), Integer))
-        Me.fraCreateLabel.BorderColor = System.Drawing.Color.FromArgb(CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer))
         Me.fraCreateLabel.Controls.Add(Me.btnCreatelabelOk)
         Me.fraCreateLabel.Controls.Add(Me.btnCreatelabelCancel)
         Me.fraCreateLabel.Controls.Add(Me.txtLabelName)
@@ -4076,7 +3800,6 @@ Partial Class FrmEditor_Events
         'fraChangeClass
         '
         Me.fraChangeClass.BackColor = System.Drawing.Color.FromArgb(CType(CType(45, Byte), Integer), CType(CType(45, Byte), Integer), CType(CType(48, Byte), Integer))
-        Me.fraChangeClass.BorderColor = System.Drawing.Color.FromArgb(CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer))
         Me.fraChangeClass.Controls.Add(Me.btnChangeClassOk)
         Me.fraChangeClass.Controls.Add(Me.btnChangeClassCancel)
         Me.fraChangeClass.Controls.Add(Me.cmbChangeClass)
@@ -4111,12 +3834,6 @@ Partial Class FrmEditor_Events
         'cmbChangeClass
         '
         Me.cmbChangeClass.BackColor = System.Drawing.Color.FromArgb(CType(CType(69, Byte), Integer), CType(CType(73, Byte), Integer), CType(CType(74, Byte), Integer))
-        Me.cmbChangeClass.BorderColor = System.Drawing.Color.FromArgb(CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer))
-        Me.cmbChangeClass.BorderStyle = System.Windows.Forms.ButtonBorderStyle.Solid
-        Me.cmbChangeClass.ButtonColor = System.Drawing.Color.FromArgb(CType(CType(43, Byte), Integer), CType(CType(43, Byte), Integer), CType(CType(43, Byte), Integer))
-        Me.cmbChangeClass.ButtonIcon = CType(resources.GetObject("cmbChangeClass.ButtonIcon"), System.Drawing.Bitmap)
-        Me.cmbChangeClass.DrawDropdownHoverOutline = False
-        Me.cmbChangeClass.DrawFocusRectangle = False
         Me.cmbChangeClass.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed
         Me.cmbChangeClass.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cmbChangeClass.FlatStyle = System.Windows.Forms.FlatStyle.Flat
@@ -4127,7 +3844,6 @@ Partial Class FrmEditor_Events
         Me.cmbChangeClass.Size = New System.Drawing.Size(191, 21)
         Me.cmbChangeClass.TabIndex = 1
         Me.cmbChangeClass.Text = Nothing
-        Me.cmbChangeClass.TextPadding = New System.Windows.Forms.Padding(2)
         '
         'DarkLabel38
         '
@@ -4142,7 +3858,6 @@ Partial Class FrmEditor_Events
         'fraChangeSkills
         '
         Me.fraChangeSkills.BackColor = System.Drawing.Color.FromArgb(CType(CType(45, Byte), Integer), CType(CType(45, Byte), Integer), CType(CType(48, Byte), Integer))
-        Me.fraChangeSkills.BorderColor = System.Drawing.Color.FromArgb(CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer))
         Me.fraChangeSkills.Controls.Add(Me.btnChangeSkillsOk)
         Me.fraChangeSkills.Controls.Add(Me.btnChangeSkillsCancel)
         Me.fraChangeSkills.Controls.Add(Me.optChangeSkillsRemove)
@@ -4199,12 +3914,6 @@ Partial Class FrmEditor_Events
         'cmbChangeSkills
         '
         Me.cmbChangeSkills.BackColor = System.Drawing.Color.FromArgb(CType(CType(69, Byte), Integer), CType(CType(73, Byte), Integer), CType(CType(74, Byte), Integer))
-        Me.cmbChangeSkills.BorderColor = System.Drawing.Color.FromArgb(CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer))
-        Me.cmbChangeSkills.BorderStyle = System.Windows.Forms.ButtonBorderStyle.Solid
-        Me.cmbChangeSkills.ButtonColor = System.Drawing.Color.FromArgb(CType(CType(43, Byte), Integer), CType(CType(43, Byte), Integer), CType(CType(43, Byte), Integer))
-        Me.cmbChangeSkills.ButtonIcon = CType(resources.GetObject("cmbChangeSkills.ButtonIcon"), System.Drawing.Bitmap)
-        Me.cmbChangeSkills.DrawDropdownHoverOutline = False
-        Me.cmbChangeSkills.DrawFocusRectangle = False
         Me.cmbChangeSkills.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed
         Me.cmbChangeSkills.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cmbChangeSkills.FlatStyle = System.Windows.Forms.FlatStyle.Flat
@@ -4215,7 +3924,6 @@ Partial Class FrmEditor_Events
         Me.cmbChangeSkills.Size = New System.Drawing.Size(198, 21)
         Me.cmbChangeSkills.TabIndex = 1
         Me.cmbChangeSkills.Text = Nothing
-        Me.cmbChangeSkills.TextPadding = New System.Windows.Forms.Padding(2)
         '
         'DarkLabel37
         '
@@ -4230,7 +3938,6 @@ Partial Class FrmEditor_Events
         'fraCompleteTask
         '
         Me.fraCompleteTask.BackColor = System.Drawing.Color.FromArgb(CType(CType(45, Byte), Integer), CType(CType(45, Byte), Integer), CType(CType(48, Byte), Integer))
-        Me.fraCompleteTask.BorderColor = System.Drawing.Color.FromArgb(CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer))
         Me.fraCompleteTask.Controls.Add(Me.btnCompleteQuestTaskOk)
         Me.fraCompleteTask.Controls.Add(Me.btnCompleteQuestTaskCancel)
         Me.fraCompleteTask.Controls.Add(Me.DarkLabel35)
@@ -4297,12 +4004,6 @@ Partial Class FrmEditor_Events
         'cmbCompleteQuest
         '
         Me.cmbCompleteQuest.BackColor = System.Drawing.Color.FromArgb(CType(CType(69, Byte), Integer), CType(CType(73, Byte), Integer), CType(CType(74, Byte), Integer))
-        Me.cmbCompleteQuest.BorderColor = System.Drawing.Color.FromArgb(CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer))
-        Me.cmbCompleteQuest.BorderStyle = System.Windows.Forms.ButtonBorderStyle.Solid
-        Me.cmbCompleteQuest.ButtonColor = System.Drawing.Color.FromArgb(CType(CType(43, Byte), Integer), CType(CType(43, Byte), Integer), CType(CType(43, Byte), Integer))
-        Me.cmbCompleteQuest.ButtonIcon = CType(resources.GetObject("cmbCompleteQuest.ButtonIcon"), System.Drawing.Bitmap)
-        Me.cmbCompleteQuest.DrawDropdownHoverOutline = False
-        Me.cmbCompleteQuest.DrawFocusRectangle = False
         Me.cmbCompleteQuest.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed
         Me.cmbCompleteQuest.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cmbCompleteQuest.FlatStyle = System.Windows.Forms.FlatStyle.Flat
@@ -4313,12 +4014,10 @@ Partial Class FrmEditor_Events
         Me.cmbCompleteQuest.Size = New System.Drawing.Size(179, 21)
         Me.cmbCompleteQuest.TabIndex = 20
         Me.cmbCompleteQuest.Text = Nothing
-        Me.cmbCompleteQuest.TextPadding = New System.Windows.Forms.Padding(2)
         '
         'fraPlayerWarp
         '
         Me.fraPlayerWarp.BackColor = System.Drawing.Color.FromArgb(CType(CType(45, Byte), Integer), CType(CType(45, Byte), Integer), CType(CType(48, Byte), Integer))
-        Me.fraPlayerWarp.BorderColor = System.Drawing.Color.FromArgb(CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer))
         Me.fraPlayerWarp.Controls.Add(Me.btnPlayerWarpOk)
         Me.fraPlayerWarp.Controls.Add(Me.btnPlayerWarpCancel)
         Me.fraPlayerWarp.Controls.Add(Me.DarkLabel31)
@@ -4369,12 +4068,6 @@ Partial Class FrmEditor_Events
         'cmbWarpPlayerDir
         '
         Me.cmbWarpPlayerDir.BackColor = System.Drawing.Color.FromArgb(CType(CType(69, Byte), Integer), CType(CType(73, Byte), Integer), CType(CType(74, Byte), Integer))
-        Me.cmbWarpPlayerDir.BorderColor = System.Drawing.Color.FromArgb(CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer))
-        Me.cmbWarpPlayerDir.BorderStyle = System.Windows.Forms.ButtonBorderStyle.Solid
-        Me.cmbWarpPlayerDir.ButtonColor = System.Drawing.Color.FromArgb(CType(CType(43, Byte), Integer), CType(CType(43, Byte), Integer), CType(CType(43, Byte), Integer))
-        Me.cmbWarpPlayerDir.ButtonIcon = CType(resources.GetObject("cmbWarpPlayerDir.ButtonIcon"), System.Drawing.Bitmap)
-        Me.cmbWarpPlayerDir.DrawDropdownHoverOutline = False
-        Me.cmbWarpPlayerDir.DrawFocusRectangle = False
         Me.cmbWarpPlayerDir.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed
         Me.cmbWarpPlayerDir.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cmbWarpPlayerDir.FlatStyle = System.Windows.Forms.FlatStyle.Flat
@@ -4386,7 +4079,6 @@ Partial Class FrmEditor_Events
         Me.cmbWarpPlayerDir.Size = New System.Drawing.Size(143, 21)
         Me.cmbWarpPlayerDir.TabIndex = 43
         Me.cmbWarpPlayerDir.Text = Nothing
-        Me.cmbWarpPlayerDir.TextPadding = New System.Windows.Forms.Padding(2)
         '
         'nudWPY
         '
@@ -4448,7 +4140,6 @@ Partial Class FrmEditor_Events
         'fraSetFog
         '
         Me.fraSetFog.BackColor = System.Drawing.Color.FromArgb(CType(CType(45, Byte), Integer), CType(CType(45, Byte), Integer), CType(CType(48, Byte), Integer))
-        Me.fraSetFog.BorderColor = System.Drawing.Color.FromArgb(CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer))
         Me.fraSetFog.Controls.Add(Me.btnSetFogOk)
         Me.fraSetFog.Controls.Add(Me.btnSetFogCancel)
         Me.fraSetFog.Controls.Add(Me.DarkLabel30)
@@ -4545,7 +4236,6 @@ Partial Class FrmEditor_Events
         'fraShowText
         '
         Me.fraShowText.BackColor = System.Drawing.Color.FromArgb(CType(CType(45, Byte), Integer), CType(CType(45, Byte), Integer), CType(CType(48, Byte), Integer))
-        Me.fraShowText.BorderColor = System.Drawing.Color.FromArgb(CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer))
         Me.fraShowText.Controls.Add(Me.DarkLabel27)
         Me.fraShowText.Controls.Add(Me.txtShowText)
         Me.fraShowText.Controls.Add(Me.btnShowTextCancel)
@@ -4633,7 +4323,6 @@ Partial Class FrmEditor_Events
         'fraAddText
         '
         Me.fraAddText.BackColor = System.Drawing.Color.FromArgb(CType(CType(45, Byte), Integer), CType(CType(45, Byte), Integer), CType(CType(48, Byte), Integer))
-        Me.fraAddText.BorderColor = System.Drawing.Color.FromArgb(CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer))
         Me.fraAddText.Controls.Add(Me.btnAddTextOk)
         Me.fraAddText.Controls.Add(Me.btnAddTextCancel)
         Me.fraAddText.Controls.Add(Me.optAddText_Global)
@@ -4733,7 +4422,6 @@ Partial Class FrmEditor_Events
         'fraPlayerSwitch
         '
         Me.fraPlayerSwitch.BackColor = System.Drawing.Color.FromArgb(CType(CType(45, Byte), Integer), CType(CType(45, Byte), Integer), CType(CType(48, Byte), Integer))
-        Me.fraPlayerSwitch.BorderColor = System.Drawing.Color.FromArgb(CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer))
         Me.fraPlayerSwitch.Controls.Add(Me.btnSetPlayerSwitchOk)
         Me.fraPlayerSwitch.Controls.Add(Me.btnSetPlayerswitchCancel)
         Me.fraPlayerSwitch.Controls.Add(Me.cmbPlayerSwitchSet)
@@ -4770,12 +4458,6 @@ Partial Class FrmEditor_Events
         'cmbPlayerSwitchSet
         '
         Me.cmbPlayerSwitchSet.BackColor = System.Drawing.Color.FromArgb(CType(CType(69, Byte), Integer), CType(CType(73, Byte), Integer), CType(CType(74, Byte), Integer))
-        Me.cmbPlayerSwitchSet.BorderColor = System.Drawing.Color.FromArgb(CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer))
-        Me.cmbPlayerSwitchSet.BorderStyle = System.Windows.Forms.ButtonBorderStyle.Solid
-        Me.cmbPlayerSwitchSet.ButtonColor = System.Drawing.Color.FromArgb(CType(CType(43, Byte), Integer), CType(CType(43, Byte), Integer), CType(CType(43, Byte), Integer))
-        Me.cmbPlayerSwitchSet.ButtonIcon = CType(resources.GetObject("cmbPlayerSwitchSet.ButtonIcon"), System.Drawing.Bitmap)
-        Me.cmbPlayerSwitchSet.DrawDropdownHoverOutline = False
-        Me.cmbPlayerSwitchSet.DrawFocusRectangle = False
         Me.cmbPlayerSwitchSet.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed
         Me.cmbPlayerSwitchSet.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cmbPlayerSwitchSet.FlatStyle = System.Windows.Forms.FlatStyle.Flat
@@ -4787,7 +4469,6 @@ Partial Class FrmEditor_Events
         Me.cmbPlayerSwitchSet.Size = New System.Drawing.Size(125, 21)
         Me.cmbPlayerSwitchSet.TabIndex = 3
         Me.cmbPlayerSwitchSet.Text = Nothing
-        Me.cmbPlayerSwitchSet.TextPadding = New System.Windows.Forms.Padding(2)
         '
         'DarkLabel23
         '
@@ -4802,12 +4483,6 @@ Partial Class FrmEditor_Events
         'cmbSwitch
         '
         Me.cmbSwitch.BackColor = System.Drawing.Color.FromArgb(CType(CType(69, Byte), Integer), CType(CType(73, Byte), Integer), CType(CType(74, Byte), Integer))
-        Me.cmbSwitch.BorderColor = System.Drawing.Color.FromArgb(CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer))
-        Me.cmbSwitch.BorderStyle = System.Windows.Forms.ButtonBorderStyle.Solid
-        Me.cmbSwitch.ButtonColor = System.Drawing.Color.FromArgb(CType(CType(43, Byte), Integer), CType(CType(43, Byte), Integer), CType(CType(43, Byte), Integer))
-        Me.cmbSwitch.ButtonIcon = CType(resources.GetObject("cmbSwitch.ButtonIcon"), System.Drawing.Bitmap)
-        Me.cmbSwitch.DrawDropdownHoverOutline = False
-        Me.cmbSwitch.DrawFocusRectangle = False
         Me.cmbSwitch.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed
         Me.cmbSwitch.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cmbSwitch.FlatStyle = System.Windows.Forms.FlatStyle.Flat
@@ -4818,7 +4493,6 @@ Partial Class FrmEditor_Events
         Me.cmbSwitch.Size = New System.Drawing.Size(125, 21)
         Me.cmbSwitch.TabIndex = 1
         Me.cmbSwitch.Text = Nothing
-        Me.cmbSwitch.TextPadding = New System.Windows.Forms.Padding(2)
         '
         'DarkLabel22
         '
@@ -4833,7 +4507,6 @@ Partial Class FrmEditor_Events
         'fraChangeItems
         '
         Me.fraChangeItems.BackColor = System.Drawing.Color.FromArgb(CType(CType(45, Byte), Integer), CType(CType(45, Byte), Integer), CType(CType(48, Byte), Integer))
-        Me.fraChangeItems.BorderColor = System.Drawing.Color.FromArgb(CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer))
         Me.fraChangeItems.Controls.Add(Me.btnChangeItemsOk)
         Me.fraChangeItems.Controls.Add(Me.btnChangeItemsCancel)
         Me.fraChangeItems.Controls.Add(Me.nudChangeItemsAmount)
@@ -4911,12 +4584,6 @@ Partial Class FrmEditor_Events
         'cmbChangeItemIndex
         '
         Me.cmbChangeItemIndex.BackColor = System.Drawing.Color.FromArgb(CType(CType(69, Byte), Integer), CType(CType(73, Byte), Integer), CType(CType(74, Byte), Integer))
-        Me.cmbChangeItemIndex.BorderColor = System.Drawing.Color.FromArgb(CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer))
-        Me.cmbChangeItemIndex.BorderStyle = System.Windows.Forms.ButtonBorderStyle.Solid
-        Me.cmbChangeItemIndex.ButtonColor = System.Drawing.Color.FromArgb(CType(CType(43, Byte), Integer), CType(CType(43, Byte), Integer), CType(CType(43, Byte), Integer))
-        Me.cmbChangeItemIndex.ButtonIcon = CType(resources.GetObject("cmbChangeItemIndex.ButtonIcon"), System.Drawing.Bitmap)
-        Me.cmbChangeItemIndex.DrawDropdownHoverOutline = False
-        Me.cmbChangeItemIndex.DrawFocusRectangle = False
         Me.cmbChangeItemIndex.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed
         Me.cmbChangeItemIndex.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cmbChangeItemIndex.FlatStyle = System.Windows.Forms.FlatStyle.Flat
@@ -4927,7 +4594,6 @@ Partial Class FrmEditor_Events
         Me.cmbChangeItemIndex.Size = New System.Drawing.Size(139, 21)
         Me.cmbChangeItemIndex.TabIndex = 1
         Me.cmbChangeItemIndex.Text = Nothing
-        Me.cmbChangeItemIndex.TextPadding = New System.Windows.Forms.Padding(2)
         '
         'DarkLabel21
         '
@@ -4942,7 +4608,6 @@ Partial Class FrmEditor_Events
         'fraConditionalBranch
         '
         Me.fraConditionalBranch.BackColor = System.Drawing.Color.FromArgb(CType(CType(45, Byte), Integer), CType(CType(45, Byte), Integer), CType(CType(48, Byte), Integer))
-        Me.fraConditionalBranch.BorderColor = System.Drawing.Color.FromArgb(CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer))
         Me.fraConditionalBranch.Controls.Add(Me.cmbCondition_Time)
         Me.fraConditionalBranch.Controls.Add(Me.optCondition9)
         Me.fraConditionalBranch.Controls.Add(Me.btnConditionalBranchOk)
@@ -5007,12 +4672,6 @@ Partial Class FrmEditor_Events
         'cmbCondition_Gender
         '
         Me.cmbCondition_Gender.BackColor = System.Drawing.Color.FromArgb(CType(CType(69, Byte), Integer), CType(CType(73, Byte), Integer), CType(CType(74, Byte), Integer))
-        Me.cmbCondition_Gender.BorderColor = System.Drawing.Color.FromArgb(CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer))
-        Me.cmbCondition_Gender.BorderStyle = System.Windows.Forms.ButtonBorderStyle.Solid
-        Me.cmbCondition_Gender.ButtonColor = System.Drawing.Color.FromArgb(CType(CType(43, Byte), Integer), CType(CType(43, Byte), Integer), CType(CType(43, Byte), Integer))
-        Me.cmbCondition_Gender.ButtonIcon = CType(resources.GetObject("cmbCondition_Gender.ButtonIcon"), System.Drawing.Bitmap)
-        Me.cmbCondition_Gender.DrawDropdownHoverOutline = False
-        Me.cmbCondition_Gender.DrawFocusRectangle = False
         Me.cmbCondition_Gender.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed
         Me.cmbCondition_Gender.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cmbCondition_Gender.FlatStyle = System.Windows.Forms.FlatStyle.Flat
@@ -5024,7 +4683,6 @@ Partial Class FrmEditor_Events
         Me.cmbCondition_Gender.Size = New System.Drawing.Size(144, 21)
         Me.cmbCondition_Gender.TabIndex = 29
         Me.cmbCondition_Gender.Text = Nothing
-        Me.cmbCondition_Gender.TextPadding = New System.Windows.Forms.Padding(2)
         '
         'optCondition8
         '
@@ -5039,7 +4697,6 @@ Partial Class FrmEditor_Events
         'fraConditions_Quest
         '
         Me.fraConditions_Quest.BackColor = System.Drawing.Color.FromArgb(CType(CType(45, Byte), Integer), CType(CType(45, Byte), Integer), CType(CType(48, Byte), Integer))
-        Me.fraConditions_Quest.BorderColor = System.Drawing.Color.FromArgb(CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer))
         Me.fraConditions_Quest.Controls.Add(Me.DarkLabel20)
         Me.fraConditions_Quest.Controls.Add(Me.nudCondition_QuestTask)
         Me.fraConditions_Quest.Controls.Add(Me.cmbCondition_General)
@@ -5076,12 +4733,6 @@ Partial Class FrmEditor_Events
         'cmbCondition_General
         '
         Me.cmbCondition_General.BackColor = System.Drawing.Color.FromArgb(CType(CType(69, Byte), Integer), CType(CType(73, Byte), Integer), CType(CType(74, Byte), Integer))
-        Me.cmbCondition_General.BorderColor = System.Drawing.Color.FromArgb(CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer))
-        Me.cmbCondition_General.BorderStyle = System.Windows.Forms.ButtonBorderStyle.Solid
-        Me.cmbCondition_General.ButtonColor = System.Drawing.Color.FromArgb(CType(CType(43, Byte), Integer), CType(CType(43, Byte), Integer), CType(CType(43, Byte), Integer))
-        Me.cmbCondition_General.ButtonIcon = CType(resources.GetObject("cmbCondition_General.ButtonIcon"), System.Drawing.Bitmap)
-        Me.cmbCondition_General.DrawDropdownHoverOutline = False
-        Me.cmbCondition_General.DrawFocusRectangle = False
         Me.cmbCondition_General.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed
         Me.cmbCondition_General.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cmbCondition_General.FlatStyle = System.Windows.Forms.FlatStyle.Flat
@@ -5093,7 +4744,6 @@ Partial Class FrmEditor_Events
         Me.cmbCondition_General.Size = New System.Drawing.Size(137, 21)
         Me.cmbCondition_General.TabIndex = 3
         Me.cmbCondition_General.Text = Nothing
-        Me.cmbCondition_General.TextPadding = New System.Windows.Forms.Padding(2)
         '
         'DarkLabel19
         '
@@ -5157,12 +4807,6 @@ Partial Class FrmEditor_Events
         'cmbCondition_SelfSwitchCondition
         '
         Me.cmbCondition_SelfSwitchCondition.BackColor = System.Drawing.Color.FromArgb(CType(CType(69, Byte), Integer), CType(CType(73, Byte), Integer), CType(CType(74, Byte), Integer))
-        Me.cmbCondition_SelfSwitchCondition.BorderColor = System.Drawing.Color.FromArgb(CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer))
-        Me.cmbCondition_SelfSwitchCondition.BorderStyle = System.Windows.Forms.ButtonBorderStyle.Solid
-        Me.cmbCondition_SelfSwitchCondition.ButtonColor = System.Drawing.Color.FromArgb(CType(CType(43, Byte), Integer), CType(CType(43, Byte), Integer), CType(CType(43, Byte), Integer))
-        Me.cmbCondition_SelfSwitchCondition.ButtonIcon = CType(resources.GetObject("cmbCondition_SelfSwitchCondition.ButtonIcon"), System.Drawing.Bitmap)
-        Me.cmbCondition_SelfSwitchCondition.DrawDropdownHoverOutline = False
-        Me.cmbCondition_SelfSwitchCondition.DrawFocusRectangle = False
         Me.cmbCondition_SelfSwitchCondition.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed
         Me.cmbCondition_SelfSwitchCondition.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cmbCondition_SelfSwitchCondition.FlatStyle = System.Windows.Forms.FlatStyle.Flat
@@ -5174,7 +4818,6 @@ Partial Class FrmEditor_Events
         Me.cmbCondition_SelfSwitchCondition.Size = New System.Drawing.Size(121, 21)
         Me.cmbCondition_SelfSwitchCondition.TabIndex = 23
         Me.cmbCondition_SelfSwitchCondition.Text = Nothing
-        Me.cmbCondition_SelfSwitchCondition.TextPadding = New System.Windows.Forms.Padding(2)
         '
         'DarkLabel17
         '
@@ -5189,12 +4832,6 @@ Partial Class FrmEditor_Events
         'cmbCondition_SelfSwitch
         '
         Me.cmbCondition_SelfSwitch.BackColor = System.Drawing.Color.FromArgb(CType(CType(69, Byte), Integer), CType(CType(73, Byte), Integer), CType(CType(74, Byte), Integer))
-        Me.cmbCondition_SelfSwitch.BorderColor = System.Drawing.Color.FromArgb(CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer))
-        Me.cmbCondition_SelfSwitch.BorderStyle = System.Windows.Forms.ButtonBorderStyle.Solid
-        Me.cmbCondition_SelfSwitch.ButtonColor = System.Drawing.Color.FromArgb(CType(CType(43, Byte), Integer), CType(CType(43, Byte), Integer), CType(CType(43, Byte), Integer))
-        Me.cmbCondition_SelfSwitch.ButtonIcon = CType(resources.GetObject("cmbCondition_SelfSwitch.ButtonIcon"), System.Drawing.Bitmap)
-        Me.cmbCondition_SelfSwitch.DrawDropdownHoverOutline = False
-        Me.cmbCondition_SelfSwitch.DrawFocusRectangle = False
         Me.cmbCondition_SelfSwitch.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed
         Me.cmbCondition_SelfSwitch.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cmbCondition_SelfSwitch.FlatStyle = System.Windows.Forms.FlatStyle.Flat
@@ -5205,7 +4842,6 @@ Partial Class FrmEditor_Events
         Me.cmbCondition_SelfSwitch.Size = New System.Drawing.Size(121, 21)
         Me.cmbCondition_SelfSwitch.TabIndex = 21
         Me.cmbCondition_SelfSwitch.Text = Nothing
-        Me.cmbCondition_SelfSwitch.TextPadding = New System.Windows.Forms.Padding(2)
         '
         'optCondition6
         '
@@ -5239,12 +4875,6 @@ Partial Class FrmEditor_Events
         'cmbCondition_LevelCompare
         '
         Me.cmbCondition_LevelCompare.BackColor = System.Drawing.Color.FromArgb(CType(CType(69, Byte), Integer), CType(CType(73, Byte), Integer), CType(CType(74, Byte), Integer))
-        Me.cmbCondition_LevelCompare.BorderColor = System.Drawing.Color.FromArgb(CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer))
-        Me.cmbCondition_LevelCompare.BorderStyle = System.Windows.Forms.ButtonBorderStyle.Solid
-        Me.cmbCondition_LevelCompare.ButtonColor = System.Drawing.Color.FromArgb(CType(CType(43, Byte), Integer), CType(CType(43, Byte), Integer), CType(CType(43, Byte), Integer))
-        Me.cmbCondition_LevelCompare.ButtonIcon = CType(resources.GetObject("cmbCondition_LevelCompare.ButtonIcon"), System.Drawing.Bitmap)
-        Me.cmbCondition_LevelCompare.DrawDropdownHoverOutline = False
-        Me.cmbCondition_LevelCompare.DrawFocusRectangle = False
         Me.cmbCondition_LevelCompare.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed
         Me.cmbCondition_LevelCompare.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cmbCondition_LevelCompare.FlatStyle = System.Windows.Forms.FlatStyle.Flat
@@ -5256,17 +4886,10 @@ Partial Class FrmEditor_Events
         Me.cmbCondition_LevelCompare.Size = New System.Drawing.Size(156, 21)
         Me.cmbCondition_LevelCompare.TabIndex = 17
         Me.cmbCondition_LevelCompare.Text = Nothing
-        Me.cmbCondition_LevelCompare.TextPadding = New System.Windows.Forms.Padding(2)
         '
         'cmbCondition_LearntSkill
         '
         Me.cmbCondition_LearntSkill.BackColor = System.Drawing.Color.FromArgb(CType(CType(69, Byte), Integer), CType(CType(73, Byte), Integer), CType(CType(74, Byte), Integer))
-        Me.cmbCondition_LearntSkill.BorderColor = System.Drawing.Color.FromArgb(CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer))
-        Me.cmbCondition_LearntSkill.BorderStyle = System.Windows.Forms.ButtonBorderStyle.Solid
-        Me.cmbCondition_LearntSkill.ButtonColor = System.Drawing.Color.FromArgb(CType(CType(43, Byte), Integer), CType(CType(43, Byte), Integer), CType(CType(43, Byte), Integer))
-        Me.cmbCondition_LearntSkill.ButtonIcon = CType(resources.GetObject("cmbCondition_LearntSkill.ButtonIcon"), System.Drawing.Bitmap)
-        Me.cmbCondition_LearntSkill.DrawDropdownHoverOutline = False
-        Me.cmbCondition_LearntSkill.DrawFocusRectangle = False
         Me.cmbCondition_LearntSkill.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed
         Me.cmbCondition_LearntSkill.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cmbCondition_LearntSkill.FlatStyle = System.Windows.Forms.FlatStyle.Flat
@@ -5277,7 +4900,6 @@ Partial Class FrmEditor_Events
         Me.cmbCondition_LearntSkill.Size = New System.Drawing.Size(276, 21)
         Me.cmbCondition_LearntSkill.TabIndex = 16
         Me.cmbCondition_LearntSkill.Text = Nothing
-        Me.cmbCondition_LearntSkill.TextPadding = New System.Windows.Forms.Padding(2)
         '
         'optCondition4
         '
@@ -5292,12 +4914,6 @@ Partial Class FrmEditor_Events
         'cmbCondition_ClassIs
         '
         Me.cmbCondition_ClassIs.BackColor = System.Drawing.Color.FromArgb(CType(CType(69, Byte), Integer), CType(CType(73, Byte), Integer), CType(CType(74, Byte), Integer))
-        Me.cmbCondition_ClassIs.BorderColor = System.Drawing.Color.FromArgb(CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer))
-        Me.cmbCondition_ClassIs.BorderStyle = System.Windows.Forms.ButtonBorderStyle.Solid
-        Me.cmbCondition_ClassIs.ButtonColor = System.Drawing.Color.FromArgb(CType(CType(43, Byte), Integer), CType(CType(43, Byte), Integer), CType(CType(43, Byte), Integer))
-        Me.cmbCondition_ClassIs.ButtonIcon = CType(resources.GetObject("cmbCondition_ClassIs.ButtonIcon"), System.Drawing.Bitmap)
-        Me.cmbCondition_ClassIs.DrawDropdownHoverOutline = False
-        Me.cmbCondition_ClassIs.DrawFocusRectangle = False
         Me.cmbCondition_ClassIs.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed
         Me.cmbCondition_ClassIs.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cmbCondition_ClassIs.FlatStyle = System.Windows.Forms.FlatStyle.Flat
@@ -5308,7 +4924,6 @@ Partial Class FrmEditor_Events
         Me.cmbCondition_ClassIs.Size = New System.Drawing.Size(276, 21)
         Me.cmbCondition_ClassIs.TabIndex = 14
         Me.cmbCondition_ClassIs.Text = Nothing
-        Me.cmbCondition_ClassIs.TextPadding = New System.Windows.Forms.Padding(2)
         '
         'optCondition3
         '
@@ -5342,12 +4957,6 @@ Partial Class FrmEditor_Events
         'cmbCondition_HasItem
         '
         Me.cmbCondition_HasItem.BackColor = System.Drawing.Color.FromArgb(CType(CType(69, Byte), Integer), CType(CType(73, Byte), Integer), CType(CType(74, Byte), Integer))
-        Me.cmbCondition_HasItem.BorderColor = System.Drawing.Color.FromArgb(CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer))
-        Me.cmbCondition_HasItem.BorderStyle = System.Windows.Forms.ButtonBorderStyle.Solid
-        Me.cmbCondition_HasItem.ButtonColor = System.Drawing.Color.FromArgb(CType(CType(43, Byte), Integer), CType(CType(43, Byte), Integer), CType(CType(43, Byte), Integer))
-        Me.cmbCondition_HasItem.ButtonIcon = CType(resources.GetObject("cmbCondition_HasItem.ButtonIcon"), System.Drawing.Bitmap)
-        Me.cmbCondition_HasItem.DrawDropdownHoverOutline = False
-        Me.cmbCondition_HasItem.DrawFocusRectangle = False
         Me.cmbCondition_HasItem.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed
         Me.cmbCondition_HasItem.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cmbCondition_HasItem.FlatStyle = System.Windows.Forms.FlatStyle.Flat
@@ -5358,7 +4967,6 @@ Partial Class FrmEditor_Events
         Me.cmbCondition_HasItem.Size = New System.Drawing.Size(121, 21)
         Me.cmbCondition_HasItem.TabIndex = 10
         Me.cmbCondition_HasItem.Text = Nothing
-        Me.cmbCondition_HasItem.TextPadding = New System.Windows.Forms.Padding(2)
         '
         'optCondition2
         '
@@ -5393,12 +5001,6 @@ Partial Class FrmEditor_Events
         'cmbCondtion_PlayerSwitchCondition
         '
         Me.cmbCondtion_PlayerSwitchCondition.BackColor = System.Drawing.Color.FromArgb(CType(CType(69, Byte), Integer), CType(CType(73, Byte), Integer), CType(CType(74, Byte), Integer))
-        Me.cmbCondtion_PlayerSwitchCondition.BorderColor = System.Drawing.Color.FromArgb(CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer))
-        Me.cmbCondtion_PlayerSwitchCondition.BorderStyle = System.Windows.Forms.ButtonBorderStyle.Solid
-        Me.cmbCondtion_PlayerSwitchCondition.ButtonColor = System.Drawing.Color.FromArgb(CType(CType(43, Byte), Integer), CType(CType(43, Byte), Integer), CType(CType(43, Byte), Integer))
-        Me.cmbCondtion_PlayerSwitchCondition.ButtonIcon = CType(resources.GetObject("cmbCondtion_PlayerSwitchCondition.ButtonIcon"), System.Drawing.Bitmap)
-        Me.cmbCondtion_PlayerSwitchCondition.DrawDropdownHoverOutline = False
-        Me.cmbCondtion_PlayerSwitchCondition.DrawFocusRectangle = False
         Me.cmbCondtion_PlayerSwitchCondition.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed
         Me.cmbCondtion_PlayerSwitchCondition.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cmbCondtion_PlayerSwitchCondition.FlatStyle = System.Windows.Forms.FlatStyle.Flat
@@ -5410,17 +5012,10 @@ Partial Class FrmEditor_Events
         Me.cmbCondtion_PlayerSwitchCondition.Size = New System.Drawing.Size(121, 21)
         Me.cmbCondtion_PlayerSwitchCondition.TabIndex = 6
         Me.cmbCondtion_PlayerSwitchCondition.Text = Nothing
-        Me.cmbCondtion_PlayerSwitchCondition.TextPadding = New System.Windows.Forms.Padding(2)
         '
         'cmbCondition_PlayerSwitch
         '
         Me.cmbCondition_PlayerSwitch.BackColor = System.Drawing.Color.FromArgb(CType(CType(69, Byte), Integer), CType(CType(73, Byte), Integer), CType(CType(74, Byte), Integer))
-        Me.cmbCondition_PlayerSwitch.BorderColor = System.Drawing.Color.FromArgb(CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer))
-        Me.cmbCondition_PlayerSwitch.BorderStyle = System.Windows.Forms.ButtonBorderStyle.Solid
-        Me.cmbCondition_PlayerSwitch.ButtonColor = System.Drawing.Color.FromArgb(CType(CType(43, Byte), Integer), CType(CType(43, Byte), Integer), CType(CType(43, Byte), Integer))
-        Me.cmbCondition_PlayerSwitch.ButtonIcon = CType(resources.GetObject("cmbCondition_PlayerSwitch.ButtonIcon"), System.Drawing.Bitmap)
-        Me.cmbCondition_PlayerSwitch.DrawDropdownHoverOutline = False
-        Me.cmbCondition_PlayerSwitch.DrawFocusRectangle = False
         Me.cmbCondition_PlayerSwitch.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed
         Me.cmbCondition_PlayerSwitch.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cmbCondition_PlayerSwitch.FlatStyle = System.Windows.Forms.FlatStyle.Flat
@@ -5431,7 +5026,6 @@ Partial Class FrmEditor_Events
         Me.cmbCondition_PlayerSwitch.Size = New System.Drawing.Size(121, 21)
         Me.cmbCondition_PlayerSwitch.TabIndex = 5
         Me.cmbCondition_PlayerSwitch.Text = Nothing
-        Me.cmbCondition_PlayerSwitch.TextPadding = New System.Windows.Forms.Padding(2)
         '
         'nudCondition_PlayerVarCondition
         '
@@ -5445,12 +5039,6 @@ Partial Class FrmEditor_Events
         'cmbCondition_PlayerVarCompare
         '
         Me.cmbCondition_PlayerVarCompare.BackColor = System.Drawing.Color.FromArgb(CType(CType(69, Byte), Integer), CType(CType(73, Byte), Integer), CType(CType(74, Byte), Integer))
-        Me.cmbCondition_PlayerVarCompare.BorderColor = System.Drawing.Color.FromArgb(CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer))
-        Me.cmbCondition_PlayerVarCompare.BorderStyle = System.Windows.Forms.ButtonBorderStyle.Solid
-        Me.cmbCondition_PlayerVarCompare.ButtonColor = System.Drawing.Color.FromArgb(CType(CType(43, Byte), Integer), CType(CType(43, Byte), Integer), CType(CType(43, Byte), Integer))
-        Me.cmbCondition_PlayerVarCompare.ButtonIcon = CType(resources.GetObject("cmbCondition_PlayerVarCompare.ButtonIcon"), System.Drawing.Bitmap)
-        Me.cmbCondition_PlayerVarCompare.DrawDropdownHoverOutline = False
-        Me.cmbCondition_PlayerVarCompare.DrawFocusRectangle = False
         Me.cmbCondition_PlayerVarCompare.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed
         Me.cmbCondition_PlayerVarCompare.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cmbCondition_PlayerVarCompare.FlatStyle = System.Windows.Forms.FlatStyle.Flat
@@ -5462,7 +5050,6 @@ Partial Class FrmEditor_Events
         Me.cmbCondition_PlayerVarCompare.Size = New System.Drawing.Size(88, 21)
         Me.cmbCondition_PlayerVarCompare.TabIndex = 3
         Me.cmbCondition_PlayerVarCompare.Text = Nothing
-        Me.cmbCondition_PlayerVarCompare.TextPadding = New System.Windows.Forms.Padding(2)
         '
         'DarkLabel14
         '
@@ -5477,12 +5064,6 @@ Partial Class FrmEditor_Events
         'cmbCondition_PlayerVarIndex
         '
         Me.cmbCondition_PlayerVarIndex.BackColor = System.Drawing.Color.FromArgb(CType(CType(69, Byte), Integer), CType(CType(73, Byte), Integer), CType(CType(74, Byte), Integer))
-        Me.cmbCondition_PlayerVarIndex.BorderColor = System.Drawing.Color.FromArgb(CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer))
-        Me.cmbCondition_PlayerVarIndex.BorderStyle = System.Windows.Forms.ButtonBorderStyle.Solid
-        Me.cmbCondition_PlayerVarIndex.ButtonColor = System.Drawing.Color.FromArgb(CType(CType(43, Byte), Integer), CType(CType(43, Byte), Integer), CType(CType(43, Byte), Integer))
-        Me.cmbCondition_PlayerVarIndex.ButtonIcon = CType(resources.GetObject("cmbCondition_PlayerVarIndex.ButtonIcon"), System.Drawing.Bitmap)
-        Me.cmbCondition_PlayerVarIndex.DrawDropdownHoverOutline = False
-        Me.cmbCondition_PlayerVarIndex.DrawFocusRectangle = False
         Me.cmbCondition_PlayerVarIndex.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed
         Me.cmbCondition_PlayerVarIndex.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cmbCondition_PlayerVarIndex.FlatStyle = System.Windows.Forms.FlatStyle.Flat
@@ -5493,7 +5074,6 @@ Partial Class FrmEditor_Events
         Me.cmbCondition_PlayerVarIndex.Size = New System.Drawing.Size(103, 21)
         Me.cmbCondition_PlayerVarIndex.TabIndex = 1
         Me.cmbCondition_PlayerVarIndex.Text = Nothing
-        Me.cmbCondition_PlayerVarIndex.TextPadding = New System.Windows.Forms.Padding(2)
         '
         'optCondition0
         '
@@ -5508,7 +5088,6 @@ Partial Class FrmEditor_Events
         'fraPlayBGM
         '
         Me.fraPlayBGM.BackColor = System.Drawing.Color.FromArgb(CType(CType(45, Byte), Integer), CType(CType(45, Byte), Integer), CType(CType(48, Byte), Integer))
-        Me.fraPlayBGM.BorderColor = System.Drawing.Color.FromArgb(CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer))
         Me.fraPlayBGM.Controls.Add(Me.btnPlayBgmOk)
         Me.fraPlayBGM.Controls.Add(Me.btnPlayBgmCancel)
         Me.fraPlayBGM.Controls.Add(Me.cmbPlayBGM)
@@ -5542,12 +5121,6 @@ Partial Class FrmEditor_Events
         'cmbPlayBGM
         '
         Me.cmbPlayBGM.BackColor = System.Drawing.Color.FromArgb(CType(CType(69, Byte), Integer), CType(CType(73, Byte), Integer), CType(CType(74, Byte), Integer))
-        Me.cmbPlayBGM.BorderColor = System.Drawing.Color.FromArgb(CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer))
-        Me.cmbPlayBGM.BorderStyle = System.Windows.Forms.ButtonBorderStyle.Solid
-        Me.cmbPlayBGM.ButtonColor = System.Drawing.Color.FromArgb(CType(CType(43, Byte), Integer), CType(CType(43, Byte), Integer), CType(CType(43, Byte), Integer))
-        Me.cmbPlayBGM.ButtonIcon = CType(resources.GetObject("cmbPlayBGM.ButtonIcon"), System.Drawing.Bitmap)
-        Me.cmbPlayBGM.DrawDropdownHoverOutline = False
-        Me.cmbPlayBGM.DrawFocusRectangle = False
         Me.cmbPlayBGM.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed
         Me.cmbPlayBGM.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cmbPlayBGM.FlatStyle = System.Windows.Forms.FlatStyle.Flat
@@ -5558,7 +5131,6 @@ Partial Class FrmEditor_Events
         Me.cmbPlayBGM.Size = New System.Drawing.Size(233, 21)
         Me.cmbPlayBGM.TabIndex = 0
         Me.cmbPlayBGM.Text = Nothing
-        Me.cmbPlayBGM.TextPadding = New System.Windows.Forms.Padding(2)
         '
         'pnlVariableSwitches
         '
@@ -5634,7 +5206,6 @@ Partial Class FrmEditor_Events
         'fraLabeling
         '
         Me.fraLabeling.BackColor = System.Drawing.Color.FromArgb(CType(CType(45, Byte), Integer), CType(CType(45, Byte), Integer), CType(CType(48, Byte), Integer))
-        Me.fraLabeling.BorderColor = System.Drawing.Color.FromArgb(CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer))
         Me.fraLabeling.Controls.Add(Me.lstSwitches)
         Me.fraLabeling.Controls.Add(Me.lstVariables)
         Me.fraLabeling.Controls.Add(Me.btnLabel_Cancel)
@@ -5744,12 +5315,6 @@ Partial Class FrmEditor_Events
         'cmbCondition_Time
         '
         Me.cmbCondition_Time.BackColor = System.Drawing.Color.FromArgb(CType(CType(69, Byte), Integer), CType(CType(73, Byte), Integer), CType(CType(74, Byte), Integer))
-        Me.cmbCondition_Time.BorderColor = System.Drawing.Color.FromArgb(CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer))
-        Me.cmbCondition_Time.BorderStyle = System.Windows.Forms.ButtonBorderStyle.Solid
-        Me.cmbCondition_Time.ButtonColor = System.Drawing.Color.FromArgb(CType(CType(43, Byte), Integer), CType(CType(43, Byte), Integer), CType(CType(43, Byte), Integer))
-        Me.cmbCondition_Time.ButtonIcon = CType(resources.GetObject("cmbCondition_Time.ButtonIcon"), System.Drawing.Bitmap)
-        Me.cmbCondition_Time.DrawDropdownHoverOutline = False
-        Me.cmbCondition_Time.DrawFocusRectangle = False
         Me.cmbCondition_Time.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawVariable
         Me.cmbCondition_Time.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cmbCondition_Time.FlatStyle = System.Windows.Forms.FlatStyle.Flat
@@ -5760,7 +5325,6 @@ Partial Class FrmEditor_Events
         Me.cmbCondition_Time.Name = "cmbCondition_Time"
         Me.cmbCondition_Time.Size = New System.Drawing.Size(144, 21)
         Me.cmbCondition_Time.TabIndex = 33
-        Me.cmbCondition_Time.TextPadding = New System.Windows.Forms.Padding(2)
         '
         'FrmEditor_Events
         '
@@ -5930,382 +5494,382 @@ Partial Class FrmEditor_Events
     End Sub
 
     Friend WithEvents tvCommands As TreeView
-    Friend WithEvents fraPageSetUp As DarkUI.Controls.DarkGroupBox
+    Friend WithEvents fraPageSetUp As System.Windows.Forms.GroupBox
     Friend WithEvents tabPages As TabControl
     Friend WithEvents TabPage1 As TabPage
-    Friend WithEvents txtName As DarkUI.Controls.DarkTextBox
-    Friend WithEvents DarkLabel1 As DarkUI.Controls.DarkLabel
-    Friend WithEvents btnNewPage As DarkUI.Controls.DarkButton
-    Friend WithEvents btnCopyPage As DarkUI.Controls.DarkButton
-    Friend WithEvents btnPastePage As DarkUI.Controls.DarkButton
-    Friend WithEvents btnClearPage As DarkUI.Controls.DarkButton
-    Friend WithEvents btnDeletePage As DarkUI.Controls.DarkButton
+    Friend WithEvents txtName As System.Windows.Forms.TextBox
+    Friend WithEvents DarkLabel1 As System.Windows.Forms.Label
+    Friend WithEvents btnNewPage As System.Windows.Forms.Button
+    Friend WithEvents btnCopyPage As System.Windows.Forms.Button
+    Friend WithEvents btnPastePage As System.Windows.Forms.Button
+    Friend WithEvents btnClearPage As System.Windows.Forms.Button
+    Friend WithEvents btnDeletePage As System.Windows.Forms.Button
     Friend WithEvents pnlTabPage As Panel
-    Friend WithEvents DarkGroupBox1 As DarkUI.Controls.DarkGroupBox
-    Friend WithEvents chkPlayerVar As DarkUI.Controls.DarkCheckBox
-    Friend WithEvents cmbPlayerVar As DarkUI.Controls.DarkComboBox
-    Friend WithEvents DarkLabel2 As DarkUI.Controls.DarkLabel
-    Friend WithEvents cmbPlayervarCompare As DarkUI.Controls.DarkComboBox
-    Friend WithEvents nudPlayerVariable As DarkUI.Controls.DarkNumericUpDown
-    Friend WithEvents chkPlayerSwitch As DarkUI.Controls.DarkCheckBox
-    Friend WithEvents cmbPlayerSwitch As DarkUI.Controls.DarkComboBox
-    Friend WithEvents cmbPlayerSwitchCompare As DarkUI.Controls.DarkComboBox
-    Friend WithEvents DarkLabel3 As DarkUI.Controls.DarkLabel
-    Friend WithEvents cmbHasItem As DarkUI.Controls.DarkComboBox
-    Friend WithEvents chkHasItem As DarkUI.Controls.DarkCheckBox
-    Friend WithEvents cmbSelfSwitch As DarkUI.Controls.DarkComboBox
-    Friend WithEvents chkSelfSwitch As DarkUI.Controls.DarkCheckBox
-    Friend WithEvents cmbSelfSwitchCompare As DarkUI.Controls.DarkComboBox
-    Friend WithEvents DarkLabel4 As DarkUI.Controls.DarkLabel
-    Friend WithEvents DarkGroupBox2 As DarkUI.Controls.DarkGroupBox
+    Friend WithEvents DarkGroupBox1 As System.Windows.Forms.GroupBox
+    Friend WithEvents chkPlayerVar As System.Windows.Forms.CheckBox
+    Friend WithEvents cmbPlayerVar As System.Windows.Forms.ComboBox
+    Friend WithEvents DarkLabel2 As System.Windows.Forms.Label
+    Friend WithEvents cmbPlayervarCompare As System.Windows.Forms.ComboBox
+    Friend WithEvents nudPlayerVariable As System.Windows.Forms.NumericUpDown
+    Friend WithEvents chkPlayerSwitch As System.Windows.Forms.CheckBox
+    Friend WithEvents cmbPlayerSwitch As System.Windows.Forms.ComboBox
+    Friend WithEvents cmbPlayerSwitchCompare As System.Windows.Forms.ComboBox
+    Friend WithEvents DarkLabel3 As System.Windows.Forms.Label
+    Friend WithEvents cmbHasItem As System.Windows.Forms.ComboBox
+    Friend WithEvents chkHasItem As System.Windows.Forms.CheckBox
+    Friend WithEvents cmbSelfSwitch As System.Windows.Forms.ComboBox
+    Friend WithEvents chkSelfSwitch As System.Windows.Forms.CheckBox
+    Friend WithEvents cmbSelfSwitchCompare As System.Windows.Forms.ComboBox
+    Friend WithEvents DarkLabel4 As System.Windows.Forms.Label
+    Friend WithEvents DarkGroupBox2 As System.Windows.Forms.GroupBox
     Friend WithEvents picGraphic As PictureBox
-    Friend WithEvents DarkGroupBox3 As DarkUI.Controls.DarkGroupBox
-    Friend WithEvents chkGlobal As DarkUI.Controls.DarkCheckBox
-    Friend WithEvents DarkLabel5 As DarkUI.Controls.DarkLabel
-    Friend WithEvents cmbMoveType As DarkUI.Controls.DarkComboBox
-    Friend WithEvents btnMoveRoute As DarkUI.Controls.DarkButton
-    Friend WithEvents DarkLabel6 As DarkUI.Controls.DarkLabel
-    Friend WithEvents cmbMoveSpeed As DarkUI.Controls.DarkComboBox
-    Friend WithEvents cmbMoveFreq As DarkUI.Controls.DarkComboBox
-    Friend WithEvents DarkLabel7 As DarkUI.Controls.DarkLabel
-    Friend WithEvents DarkGroupBox4 As DarkUI.Controls.DarkGroupBox
-    Friend WithEvents cmbPositioning As DarkUI.Controls.DarkComboBox
-    Friend WithEvents DarkGroupBox5 As DarkUI.Controls.DarkGroupBox
-    Friend WithEvents cmbTrigger As DarkUI.Controls.DarkComboBox
-    Friend WithEvents DarkGroupBox6 As DarkUI.Controls.DarkGroupBox
-    Friend WithEvents chkWalkAnim As DarkUI.Controls.DarkCheckBox
-    Friend WithEvents chkDirFix As DarkUI.Controls.DarkCheckBox
-    Friend WithEvents chkWalkThrough As DarkUI.Controls.DarkCheckBox
-    Friend WithEvents chkShowName As DarkUI.Controls.DarkCheckBox
-    Friend WithEvents DarkGroupBox7 As DarkUI.Controls.DarkGroupBox
-    Friend WithEvents cmbEventQuest As DarkUI.Controls.DarkComboBox
-    Friend WithEvents DarkLabel8 As DarkUI.Controls.DarkLabel
-    Friend WithEvents DarkLabel10 As DarkUI.Controls.DarkLabel
-    Friend WithEvents DarkLabel9 As DarkUI.Controls.DarkLabel
+    Friend WithEvents DarkGroupBox3 As System.Windows.Forms.GroupBox
+    Friend WithEvents chkGlobal As System.Windows.Forms.CheckBox
+    Friend WithEvents DarkLabel5 As System.Windows.Forms.Label
+    Friend WithEvents cmbMoveType As System.Windows.Forms.ComboBox
+    Friend WithEvents btnMoveRoute As System.Windows.Forms.Button
+    Friend WithEvents DarkLabel6 As System.Windows.Forms.Label
+    Friend WithEvents cmbMoveSpeed As System.Windows.Forms.ComboBox
+    Friend WithEvents cmbMoveFreq As System.Windows.Forms.ComboBox
+    Friend WithEvents DarkLabel7 As System.Windows.Forms.Label
+    Friend WithEvents DarkGroupBox4 As System.Windows.Forms.GroupBox
+    Friend WithEvents cmbPositioning As System.Windows.Forms.ComboBox
+    Friend WithEvents DarkGroupBox5 As System.Windows.Forms.GroupBox
+    Friend WithEvents cmbTrigger As System.Windows.Forms.ComboBox
+    Friend WithEvents DarkGroupBox6 As System.Windows.Forms.GroupBox
+    Friend WithEvents chkWalkAnim As System.Windows.Forms.CheckBox
+    Friend WithEvents chkDirFix As System.Windows.Forms.CheckBox
+    Friend WithEvents chkWalkThrough As System.Windows.Forms.CheckBox
+    Friend WithEvents chkShowName As System.Windows.Forms.CheckBox
+    Friend WithEvents DarkGroupBox7 As System.Windows.Forms.GroupBox
+    Friend WithEvents cmbEventQuest As System.Windows.Forms.ComboBox
+    Friend WithEvents DarkLabel8 As System.Windows.Forms.Label
+    Friend WithEvents DarkLabel10 As System.Windows.Forms.Label
+    Friend WithEvents DarkLabel9 As System.Windows.Forms.Label
     Friend WithEvents lstCommands As ListBox
-    Friend WithEvents DarkGroupBox8 As DarkUI.Controls.DarkGroupBox
-    Friend WithEvents btnAddCommand As DarkUI.Controls.DarkButton
-    Friend WithEvents btnDeleteCommand As DarkUI.Controls.DarkButton
-    Friend WithEvents btnEditCommand As DarkUI.Controls.DarkButton
-    Friend WithEvents btnClearCommand As DarkUI.Controls.DarkButton
+    Friend WithEvents DarkGroupBox8 As System.Windows.Forms.GroupBox
+    Friend WithEvents btnAddCommand As System.Windows.Forms.Button
+    Friend WithEvents btnDeleteCommand As System.Windows.Forms.Button
+    Friend WithEvents btnEditCommand As System.Windows.Forms.Button
+    Friend WithEvents btnClearCommand As System.Windows.Forms.Button
     Friend WithEvents fraCommands As Panel
-    Friend WithEvents btnLabeling As DarkUI.Controls.DarkButton
-    Friend WithEvents btnCancel As DarkUI.Controls.DarkButton
-    Friend WithEvents btnOk As DarkUI.Controls.DarkButton
-    Friend WithEvents btnCancelCommand As DarkUI.Controls.DarkButton
-    Friend WithEvents fraMoveRoute As DarkUI.Controls.DarkGroupBox
-    Friend WithEvents cmbEvent As DarkUI.Controls.DarkComboBox
+    Friend WithEvents btnLabeling As System.Windows.Forms.Button
+    Friend WithEvents btnCancel As System.Windows.Forms.Button
+    Friend WithEvents btnOk As System.Windows.Forms.Button
+    Friend WithEvents btnCancelCommand As System.Windows.Forms.Button
+    Friend WithEvents fraMoveRoute As System.Windows.Forms.GroupBox
+    Friend WithEvents cmbEvent As System.Windows.Forms.ComboBox
     Friend WithEvents lstMoveRoute As ListBox
-    Friend WithEvents DarkGroupBox10 As DarkUI.Controls.DarkGroupBox
+    Friend WithEvents DarkGroupBox10 As System.Windows.Forms.GroupBox
     Friend WithEvents lstvwMoveRoute As ListView
     Friend WithEvents ColumnHeader3 As ColumnHeader
     Friend WithEvents ColumnHeader4 As ColumnHeader
-    Friend WithEvents chkRepeatRoute As DarkUI.Controls.DarkCheckBox
-    Friend WithEvents chkIgnoreMove As DarkUI.Controls.DarkCheckBox
-    Friend WithEvents btnMoveRouteOk As DarkUI.Controls.DarkButton
-    Friend WithEvents btnMoveRouteCancel As DarkUI.Controls.DarkButton
-    Friend WithEvents fraGraphic As DarkUI.Controls.DarkGroupBox
-    Friend WithEvents DarkLabel11 As DarkUI.Controls.DarkLabel
-    Friend WithEvents cmbGraphic As DarkUI.Controls.DarkComboBox
-    Friend WithEvents DarkLabel12 As DarkUI.Controls.DarkLabel
-    Friend WithEvents nudGraphic As DarkUI.Controls.DarkNumericUpDown
-    Friend WithEvents DarkLabel13 As DarkUI.Controls.DarkLabel
+    Friend WithEvents chkRepeatRoute As System.Windows.Forms.CheckBox
+    Friend WithEvents chkIgnoreMove As System.Windows.Forms.CheckBox
+    Friend WithEvents btnMoveRouteOk As System.Windows.Forms.Button
+    Friend WithEvents btnMoveRouteCancel As System.Windows.Forms.Button
+    Friend WithEvents fraGraphic As System.Windows.Forms.GroupBox
+    Friend WithEvents DarkLabel11 As System.Windows.Forms.Label
+    Friend WithEvents cmbGraphic As System.Windows.Forms.ComboBox
+    Friend WithEvents DarkLabel12 As System.Windows.Forms.Label
+    Friend WithEvents nudGraphic As System.Windows.Forms.NumericUpDown
+    Friend WithEvents DarkLabel13 As System.Windows.Forms.Label
     Friend WithEvents picGraphicSel As PictureBox
-    Friend WithEvents btnGraphicOk As DarkUI.Controls.DarkButton
-    Friend WithEvents btnGraphicCancel As DarkUI.Controls.DarkButton
-    Friend WithEvents fraDialogue As DarkUI.Controls.DarkGroupBox
-    Friend WithEvents fraConditionalBranch As DarkUI.Controls.DarkGroupBox
-    Friend WithEvents optCondition0 As DarkUI.Controls.DarkRadioButton
-    Friend WithEvents cmbCondition_PlayerVarIndex As DarkUI.Controls.DarkComboBox
-    Friend WithEvents nudCondition_PlayerVarCondition As DarkUI.Controls.DarkNumericUpDown
-    Friend WithEvents cmbCondition_PlayerVarCompare As DarkUI.Controls.DarkComboBox
-    Friend WithEvents DarkLabel14 As DarkUI.Controls.DarkLabel
-    Friend WithEvents optCondition1 As DarkUI.Controls.DarkRadioButton
-    Friend WithEvents DarkLabel15 As DarkUI.Controls.DarkLabel
-    Friend WithEvents cmbCondtion_PlayerSwitchCondition As DarkUI.Controls.DarkComboBox
-    Friend WithEvents cmbCondition_PlayerSwitch As DarkUI.Controls.DarkComboBox
-    Friend WithEvents optCondition2 As DarkUI.Controls.DarkRadioButton
-    Friend WithEvents nudCondition_HasItem As DarkUI.Controls.DarkNumericUpDown
-    Friend WithEvents DarkLabel16 As DarkUI.Controls.DarkLabel
-    Friend WithEvents cmbCondition_HasItem As DarkUI.Controls.DarkComboBox
-    Friend WithEvents optCondition3 As DarkUI.Controls.DarkRadioButton
-    Friend WithEvents cmbCondition_ClassIs As DarkUI.Controls.DarkComboBox
-    Friend WithEvents optCondition4 As DarkUI.Controls.DarkRadioButton
-    Friend WithEvents cmbCondition_LearntSkill As DarkUI.Controls.DarkComboBox
-    Friend WithEvents optCondition5 As DarkUI.Controls.DarkRadioButton
-    Friend WithEvents cmbCondition_LevelCompare As DarkUI.Controls.DarkComboBox
-    Friend WithEvents nudCondition_LevelAmount As DarkUI.Controls.DarkNumericUpDown
-    Friend WithEvents optCondition6 As DarkUI.Controls.DarkRadioButton
-    Friend WithEvents cmbCondition_SelfSwitchCondition As DarkUI.Controls.DarkComboBox
-    Friend WithEvents DarkLabel17 As DarkUI.Controls.DarkLabel
-    Friend WithEvents cmbCondition_SelfSwitch As DarkUI.Controls.DarkComboBox
-    Friend WithEvents optCondition7 As DarkUI.Controls.DarkRadioButton
-    Friend WithEvents nudCondition_Quest As DarkUI.Controls.DarkNumericUpDown
-    Friend WithEvents DarkLabel18 As DarkUI.Controls.DarkLabel
-    Friend WithEvents fraConditions_Quest As DarkUI.Controls.DarkGroupBox
-    Friend WithEvents DarkLabel19 As DarkUI.Controls.DarkLabel
-    Friend WithEvents optCondition_Quest1 As DarkUI.Controls.DarkRadioButton
-    Friend WithEvents optCondition_Quest0 As DarkUI.Controls.DarkRadioButton
-    Friend WithEvents cmbCondition_General As DarkUI.Controls.DarkComboBox
-    Friend WithEvents nudCondition_QuestTask As DarkUI.Controls.DarkNumericUpDown
-    Friend WithEvents DarkLabel20 As DarkUI.Controls.DarkLabel
-    Friend WithEvents optCondition8 As DarkUI.Controls.DarkRadioButton
-    Friend WithEvents cmbCondition_Gender As DarkUI.Controls.DarkComboBox
-    Friend WithEvents btnConditionalBranchOk As DarkUI.Controls.DarkButton
-    Friend WithEvents btnConditionalBranchCancel As DarkUI.Controls.DarkButton
-    Friend WithEvents fraChangeItems As DarkUI.Controls.DarkGroupBox
-    Friend WithEvents fraPlayerSwitch As DarkUI.Controls.DarkGroupBox
-    Friend WithEvents cmbChangeItemIndex As DarkUI.Controls.DarkComboBox
-    Friend WithEvents DarkLabel21 As DarkUI.Controls.DarkLabel
-    Friend WithEvents optChangeItemSet As DarkUI.Controls.DarkRadioButton
-    Friend WithEvents optChangeItemRemove As DarkUI.Controls.DarkRadioButton
-    Friend WithEvents optChangeItemAdd As DarkUI.Controls.DarkRadioButton
-    Friend WithEvents nudChangeItemsAmount As DarkUI.Controls.DarkNumericUpDown
-    Friend WithEvents btnChangeItemsOk As DarkUI.Controls.DarkButton
-    Friend WithEvents btnChangeItemsCancel As DarkUI.Controls.DarkButton
-    Friend WithEvents cmbSwitch As DarkUI.Controls.DarkComboBox
-    Friend WithEvents DarkLabel22 As DarkUI.Controls.DarkLabel
-    Friend WithEvents DarkLabel23 As DarkUI.Controls.DarkLabel
-    Friend WithEvents cmbPlayerSwitchSet As DarkUI.Controls.DarkComboBox
-    Friend WithEvents btnSetPlayerSwitchOk As DarkUI.Controls.DarkButton
-    Friend WithEvents btnSetPlayerswitchCancel As DarkUI.Controls.DarkButton
-    Friend WithEvents fraAddText As DarkUI.Controls.DarkGroupBox
-    Friend WithEvents txtAddText_Text As DarkUI.Controls.DarkTextBox
-    Friend WithEvents DarkLabel24 As DarkUI.Controls.DarkLabel
-    Friend WithEvents optAddText_Player As DarkUI.Controls.DarkRadioButton
-    Friend WithEvents DarkLabel25 As DarkUI.Controls.DarkLabel
-    Friend WithEvents optAddText_Map As DarkUI.Controls.DarkRadioButton
-    Friend WithEvents btnAddTextOk As DarkUI.Controls.DarkButton
-    Friend WithEvents btnAddTextCancel As DarkUI.Controls.DarkButton
-    Friend WithEvents optAddText_Global As DarkUI.Controls.DarkRadioButton
-    Friend WithEvents btnShowTextOk As DarkUI.Controls.DarkButton
-    Friend WithEvents btnShowTextCancel As DarkUI.Controls.DarkButton
-    Friend WithEvents nudShowTextFace As DarkUI.Controls.DarkNumericUpDown
-    Friend WithEvents DarkLabel26 As DarkUI.Controls.DarkLabel
-    Friend WithEvents txtShowText As DarkUI.Controls.DarkTextBox
+    Friend WithEvents btnGraphicOk As System.Windows.Forms.Button
+    Friend WithEvents btnGraphicCancel As System.Windows.Forms.Button
+    Friend WithEvents fraDialogue As System.Windows.Forms.GroupBox
+    Friend WithEvents fraConditionalBranch As System.Windows.Forms.GroupBox
+    Friend WithEvents optCondition0 As System.Windows.Forms.RadioButton
+    Friend WithEvents cmbCondition_PlayerVarIndex As System.Windows.Forms.ComboBox
+    Friend WithEvents nudCondition_PlayerVarCondition As System.Windows.Forms.NumericUpDown
+    Friend WithEvents cmbCondition_PlayerVarCompare As System.Windows.Forms.ComboBox
+    Friend WithEvents DarkLabel14 As System.Windows.Forms.Label
+    Friend WithEvents optCondition1 As System.Windows.Forms.RadioButton
+    Friend WithEvents DarkLabel15 As System.Windows.Forms.Label
+    Friend WithEvents cmbCondtion_PlayerSwitchCondition As System.Windows.Forms.ComboBox
+    Friend WithEvents cmbCondition_PlayerSwitch As System.Windows.Forms.ComboBox
+    Friend WithEvents optCondition2 As System.Windows.Forms.RadioButton
+    Friend WithEvents nudCondition_HasItem As System.Windows.Forms.NumericUpDown
+    Friend WithEvents DarkLabel16 As System.Windows.Forms.Label
+    Friend WithEvents cmbCondition_HasItem As System.Windows.Forms.ComboBox
+    Friend WithEvents optCondition3 As System.Windows.Forms.RadioButton
+    Friend WithEvents cmbCondition_ClassIs As System.Windows.Forms.ComboBox
+    Friend WithEvents optCondition4 As System.Windows.Forms.RadioButton
+    Friend WithEvents cmbCondition_LearntSkill As System.Windows.Forms.ComboBox
+    Friend WithEvents optCondition5 As System.Windows.Forms.RadioButton
+    Friend WithEvents cmbCondition_LevelCompare As System.Windows.Forms.ComboBox
+    Friend WithEvents nudCondition_LevelAmount As System.Windows.Forms.NumericUpDown
+    Friend WithEvents optCondition6 As System.Windows.Forms.RadioButton
+    Friend WithEvents cmbCondition_SelfSwitchCondition As System.Windows.Forms.ComboBox
+    Friend WithEvents DarkLabel17 As System.Windows.Forms.Label
+    Friend WithEvents cmbCondition_SelfSwitch As System.Windows.Forms.ComboBox
+    Friend WithEvents optCondition7 As System.Windows.Forms.RadioButton
+    Friend WithEvents nudCondition_Quest As System.Windows.Forms.NumericUpDown
+    Friend WithEvents DarkLabel18 As System.Windows.Forms.Label
+    Friend WithEvents fraConditions_Quest As System.Windows.Forms.GroupBox
+    Friend WithEvents DarkLabel19 As System.Windows.Forms.Label
+    Friend WithEvents optCondition_Quest1 As System.Windows.Forms.RadioButton
+    Friend WithEvents optCondition_Quest0 As System.Windows.Forms.RadioButton
+    Friend WithEvents cmbCondition_General As System.Windows.Forms.ComboBox
+    Friend WithEvents nudCondition_QuestTask As System.Windows.Forms.NumericUpDown
+    Friend WithEvents DarkLabel20 As System.Windows.Forms.Label
+    Friend WithEvents optCondition8 As System.Windows.Forms.RadioButton
+    Friend WithEvents cmbCondition_Gender As System.Windows.Forms.ComboBox
+    Friend WithEvents btnConditionalBranchOk As System.Windows.Forms.Button
+    Friend WithEvents btnConditionalBranchCancel As System.Windows.Forms.Button
+    Friend WithEvents fraChangeItems As System.Windows.Forms.GroupBox
+    Friend WithEvents fraPlayerSwitch As System.Windows.Forms.GroupBox
+    Friend WithEvents cmbChangeItemIndex As System.Windows.Forms.ComboBox
+    Friend WithEvents DarkLabel21 As System.Windows.Forms.Label
+    Friend WithEvents optChangeItemSet As System.Windows.Forms.RadioButton
+    Friend WithEvents optChangeItemRemove As System.Windows.Forms.RadioButton
+    Friend WithEvents optChangeItemAdd As System.Windows.Forms.RadioButton
+    Friend WithEvents nudChangeItemsAmount As System.Windows.Forms.NumericUpDown
+    Friend WithEvents btnChangeItemsOk As System.Windows.Forms.Button
+    Friend WithEvents btnChangeItemsCancel As System.Windows.Forms.Button
+    Friend WithEvents cmbSwitch As System.Windows.Forms.ComboBox
+    Friend WithEvents DarkLabel22 As System.Windows.Forms.Label
+    Friend WithEvents DarkLabel23 As System.Windows.Forms.Label
+    Friend WithEvents cmbPlayerSwitchSet As System.Windows.Forms.ComboBox
+    Friend WithEvents btnSetPlayerSwitchOk As System.Windows.Forms.Button
+    Friend WithEvents btnSetPlayerswitchCancel As System.Windows.Forms.Button
+    Friend WithEvents fraAddText As System.Windows.Forms.GroupBox
+    Friend WithEvents txtAddText_Text As System.Windows.Forms.TextBox
+    Friend WithEvents DarkLabel24 As System.Windows.Forms.Label
+    Friend WithEvents optAddText_Player As System.Windows.Forms.RadioButton
+    Friend WithEvents DarkLabel25 As System.Windows.Forms.Label
+    Friend WithEvents optAddText_Map As System.Windows.Forms.RadioButton
+    Friend WithEvents btnAddTextOk As System.Windows.Forms.Button
+    Friend WithEvents btnAddTextCancel As System.Windows.Forms.Button
+    Friend WithEvents optAddText_Global As System.Windows.Forms.RadioButton
+    Friend WithEvents btnShowTextOk As System.Windows.Forms.Button
+    Friend WithEvents btnShowTextCancel As System.Windows.Forms.Button
+    Friend WithEvents nudShowTextFace As System.Windows.Forms.NumericUpDown
+    Friend WithEvents DarkLabel26 As System.Windows.Forms.Label
+    Friend WithEvents txtShowText As System.Windows.Forms.TextBox
     Friend WithEvents picShowTextFace As PictureBox
-    Friend WithEvents DarkLabel27 As DarkUI.Controls.DarkLabel
-    Friend WithEvents fraShowText As DarkUI.Controls.DarkGroupBox
-    Friend WithEvents fraSetFog As DarkUI.Controls.DarkGroupBox
-    Friend WithEvents btnSetFogOk As DarkUI.Controls.DarkButton
-    Friend WithEvents btnSetFogCancel As DarkUI.Controls.DarkButton
-    Friend WithEvents DarkLabel30 As DarkUI.Controls.DarkLabel
-    Friend WithEvents DarkLabel29 As DarkUI.Controls.DarkLabel
-    Friend WithEvents DarkLabel28 As DarkUI.Controls.DarkLabel
-    Friend WithEvents nudFogData2 As DarkUI.Controls.DarkNumericUpDown
-    Friend WithEvents nudFogData1 As DarkUI.Controls.DarkNumericUpDown
-    Friend WithEvents nudFogData0 As DarkUI.Controls.DarkNumericUpDown
-    Friend WithEvents fraPlayerWarp As DarkUI.Controls.DarkGroupBox
-    Friend WithEvents btnPlayerWarpOk As DarkUI.Controls.DarkButton
-    Friend WithEvents btnPlayerWarpCancel As DarkUI.Controls.DarkButton
-    Friend WithEvents DarkLabel31 As DarkUI.Controls.DarkLabel
-    Friend WithEvents cmbWarpPlayerDir As DarkUI.Controls.DarkComboBox
-    Friend WithEvents nudWPY As DarkUI.Controls.DarkNumericUpDown
-    Friend WithEvents DarkLabel32 As DarkUI.Controls.DarkLabel
-    Friend WithEvents nudWPX As DarkUI.Controls.DarkNumericUpDown
-    Friend WithEvents DarkLabel33 As DarkUI.Controls.DarkLabel
-    Friend WithEvents nudWPMap As DarkUI.Controls.DarkNumericUpDown
-    Friend WithEvents DarkLabel34 As DarkUI.Controls.DarkLabel
-    Friend WithEvents fraCompleteTask As DarkUI.Controls.DarkGroupBox
-    Friend WithEvents btnCompleteQuestTaskOk As DarkUI.Controls.DarkButton
-    Friend WithEvents btnCompleteQuestTaskCancel As DarkUI.Controls.DarkButton
-    Friend WithEvents DarkLabel35 As DarkUI.Controls.DarkLabel
-    Friend WithEvents DarkLabel36 As DarkUI.Controls.DarkLabel
-    Friend WithEvents nudCompleteQuestTask As DarkUI.Controls.DarkNumericUpDown
-    Friend WithEvents cmbCompleteQuest As DarkUI.Controls.DarkComboBox
-    Friend WithEvents fraPlayBGM As DarkUI.Controls.DarkGroupBox
-    Friend WithEvents cmbPlayBGM As DarkUI.Controls.DarkComboBox
-    Friend WithEvents btnPlayBgmOk As DarkUI.Controls.DarkButton
-    Friend WithEvents btnPlayBgmCancel As DarkUI.Controls.DarkButton
-    Friend WithEvents fraChangeSkills As DarkUI.Controls.DarkGroupBox
-    Friend WithEvents cmbChangeSkills As DarkUI.Controls.DarkComboBox
-    Friend WithEvents DarkLabel37 As DarkUI.Controls.DarkLabel
-    Friend WithEvents optChangeSkillsAdd As DarkUI.Controls.DarkRadioButton
-    Friend WithEvents btnChangeSkillsOk As DarkUI.Controls.DarkButton
-    Friend WithEvents btnChangeSkillsCancel As DarkUI.Controls.DarkButton
-    Friend WithEvents optChangeSkillsRemove As DarkUI.Controls.DarkRadioButton
-    Friend WithEvents fraChangeClass As DarkUI.Controls.DarkGroupBox
-    Friend WithEvents cmbChangeClass As DarkUI.Controls.DarkComboBox
-    Friend WithEvents DarkLabel38 As DarkUI.Controls.DarkLabel
-    Friend WithEvents btnChangeClassOk As DarkUI.Controls.DarkButton
-    Friend WithEvents btnChangeClassCancel As DarkUI.Controls.DarkButton
-    Friend WithEvents fraCreateLabel As DarkUI.Controls.DarkGroupBox
-    Friend WithEvents lblLabelName As DarkUI.Controls.DarkLabel
-    Friend WithEvents txtLabelName As DarkUI.Controls.DarkTextBox
-    Friend WithEvents btnCreatelabelOk As DarkUI.Controls.DarkButton
-    Friend WithEvents btnCreatelabelCancel As DarkUI.Controls.DarkButton
-    Friend WithEvents fraChangePK As DarkUI.Controls.DarkGroupBox
-    Friend WithEvents btnChangePkOk As DarkUI.Controls.DarkButton
-    Friend WithEvents btnChangePkCancel As DarkUI.Controls.DarkButton
-    Friend WithEvents cmbSetPK As DarkUI.Controls.DarkComboBox
-    Friend WithEvents fraPlaySound As DarkUI.Controls.DarkGroupBox
-    Friend WithEvents btnPlaySoundOk As DarkUI.Controls.DarkButton
-    Friend WithEvents btnPlaySoundCancel As DarkUI.Controls.DarkButton
-    Friend WithEvents cmbPlaySound As DarkUI.Controls.DarkComboBox
-    Friend WithEvents fraShowChatBubble As DarkUI.Controls.DarkGroupBox
-    Friend WithEvents DarkLabel39 As DarkUI.Controls.DarkLabel
-    Friend WithEvents txtChatbubbleText As DarkUI.Controls.DarkTextBox
-    Friend WithEvents DarkLabel40 As DarkUI.Controls.DarkLabel
-    Friend WithEvents cmbChatBubbleTarget As DarkUI.Controls.DarkComboBox
-    Friend WithEvents cmbChatBubbleTargetType As DarkUI.Controls.DarkComboBox
-    Friend WithEvents btnShowChatBubbleOk As DarkUI.Controls.DarkButton
-    Friend WithEvents btnShowChatBubbleCancel As DarkUI.Controls.DarkButton
-    Friend WithEvents DarkLabel41 As DarkUI.Controls.DarkLabel
-    Friend WithEvents fraMapTint As DarkUI.Controls.DarkGroupBox
-    Friend WithEvents btnMapTintOk As DarkUI.Controls.DarkButton
-    Friend WithEvents btnMapTintCancel As DarkUI.Controls.DarkButton
-    Friend WithEvents DarkLabel42 As DarkUI.Controls.DarkLabel
-    Friend WithEvents nudMapTintData3 As DarkUI.Controls.DarkNumericUpDown
-    Friend WithEvents nudMapTintData2 As DarkUI.Controls.DarkNumericUpDown
-    Friend WithEvents DarkLabel43 As DarkUI.Controls.DarkLabel
-    Friend WithEvents DarkLabel44 As DarkUI.Controls.DarkLabel
-    Friend WithEvents nudMapTintData1 As DarkUI.Controls.DarkNumericUpDown
-    Friend WithEvents nudMapTintData0 As DarkUI.Controls.DarkNumericUpDown
-    Friend WithEvents DarkLabel45 As DarkUI.Controls.DarkLabel
-    Friend WithEvents fraSetSelfSwitch As DarkUI.Controls.DarkGroupBox
-    Friend WithEvents cmbSetSelfSwitch As DarkUI.Controls.DarkComboBox
-    Friend WithEvents DarkLabel46 As DarkUI.Controls.DarkLabel
-    Friend WithEvents btnSelfswitchOk As DarkUI.Controls.DarkButton
-    Friend WithEvents btnSelfswitchCancel As DarkUI.Controls.DarkButton
-    Friend WithEvents DarkLabel47 As DarkUI.Controls.DarkLabel
-    Friend WithEvents cmbSetSelfSwitchTo As DarkUI.Controls.DarkComboBox
-    Friend WithEvents fraChangeSprite As DarkUI.Controls.DarkGroupBox
+    Friend WithEvents DarkLabel27 As System.Windows.Forms.Label
+    Friend WithEvents fraShowText As System.Windows.Forms.GroupBox
+    Friend WithEvents fraSetFog As System.Windows.Forms.GroupBox
+    Friend WithEvents btnSetFogOk As System.Windows.Forms.Button
+    Friend WithEvents btnSetFogCancel As System.Windows.Forms.Button
+    Friend WithEvents DarkLabel30 As System.Windows.Forms.Label
+    Friend WithEvents DarkLabel29 As System.Windows.Forms.Label
+    Friend WithEvents DarkLabel28 As System.Windows.Forms.Label
+    Friend WithEvents nudFogData2 As System.Windows.Forms.NumericUpDown
+    Friend WithEvents nudFogData1 As System.Windows.Forms.NumericUpDown
+    Friend WithEvents nudFogData0 As System.Windows.Forms.NumericUpDown
+    Friend WithEvents fraPlayerWarp As System.Windows.Forms.GroupBox
+    Friend WithEvents btnPlayerWarpOk As System.Windows.Forms.Button
+    Friend WithEvents btnPlayerWarpCancel As System.Windows.Forms.Button
+    Friend WithEvents DarkLabel31 As System.Windows.Forms.Label
+    Friend WithEvents cmbWarpPlayerDir As System.Windows.Forms.ComboBox
+    Friend WithEvents nudWPY As System.Windows.Forms.NumericUpDown
+    Friend WithEvents DarkLabel32 As System.Windows.Forms.Label
+    Friend WithEvents nudWPX As System.Windows.Forms.NumericUpDown
+    Friend WithEvents DarkLabel33 As System.Windows.Forms.Label
+    Friend WithEvents nudWPMap As System.Windows.Forms.NumericUpDown
+    Friend WithEvents DarkLabel34 As System.Windows.Forms.Label
+    Friend WithEvents fraCompleteTask As System.Windows.Forms.GroupBox
+    Friend WithEvents btnCompleteQuestTaskOk As System.Windows.Forms.Button
+    Friend WithEvents btnCompleteQuestTaskCancel As System.Windows.Forms.Button
+    Friend WithEvents DarkLabel35 As System.Windows.Forms.Label
+    Friend WithEvents DarkLabel36 As System.Windows.Forms.Label
+    Friend WithEvents nudCompleteQuestTask As System.Windows.Forms.NumericUpDown
+    Friend WithEvents cmbCompleteQuest As System.Windows.Forms.ComboBox
+    Friend WithEvents fraPlayBGM As System.Windows.Forms.GroupBox
+    Friend WithEvents cmbPlayBGM As System.Windows.Forms.ComboBox
+    Friend WithEvents btnPlayBgmOk As System.Windows.Forms.Button
+    Friend WithEvents btnPlayBgmCancel As System.Windows.Forms.Button
+    Friend WithEvents fraChangeSkills As System.Windows.Forms.GroupBox
+    Friend WithEvents cmbChangeSkills As System.Windows.Forms.ComboBox
+    Friend WithEvents DarkLabel37 As System.Windows.Forms.Label
+    Friend WithEvents optChangeSkillsAdd As System.Windows.Forms.RadioButton
+    Friend WithEvents btnChangeSkillsOk As System.Windows.Forms.Button
+    Friend WithEvents btnChangeSkillsCancel As System.Windows.Forms.Button
+    Friend WithEvents optChangeSkillsRemove As System.Windows.Forms.RadioButton
+    Friend WithEvents fraChangeClass As System.Windows.Forms.GroupBox
+    Friend WithEvents cmbChangeClass As System.Windows.Forms.ComboBox
+    Friend WithEvents DarkLabel38 As System.Windows.Forms.Label
+    Friend WithEvents btnChangeClassOk As System.Windows.Forms.Button
+    Friend WithEvents btnChangeClassCancel As System.Windows.Forms.Button
+    Friend WithEvents fraCreateLabel As System.Windows.Forms.GroupBox
+    Friend WithEvents lblLabelName As System.Windows.Forms.Label
+    Friend WithEvents txtLabelName As System.Windows.Forms.TextBox
+    Friend WithEvents btnCreatelabelOk As System.Windows.Forms.Button
+    Friend WithEvents btnCreatelabelCancel As System.Windows.Forms.Button
+    Friend WithEvents fraChangePK As System.Windows.Forms.GroupBox
+    Friend WithEvents btnChangePkOk As System.Windows.Forms.Button
+    Friend WithEvents btnChangePkCancel As System.Windows.Forms.Button
+    Friend WithEvents cmbSetPK As System.Windows.Forms.ComboBox
+    Friend WithEvents fraPlaySound As System.Windows.Forms.GroupBox
+    Friend WithEvents btnPlaySoundOk As System.Windows.Forms.Button
+    Friend WithEvents btnPlaySoundCancel As System.Windows.Forms.Button
+    Friend WithEvents cmbPlaySound As System.Windows.Forms.ComboBox
+    Friend WithEvents fraShowChatBubble As System.Windows.Forms.GroupBox
+    Friend WithEvents DarkLabel39 As System.Windows.Forms.Label
+    Friend WithEvents txtChatbubbleText As System.Windows.Forms.TextBox
+    Friend WithEvents DarkLabel40 As System.Windows.Forms.Label
+    Friend WithEvents cmbChatBubbleTarget As System.Windows.Forms.ComboBox
+    Friend WithEvents cmbChatBubbleTargetType As System.Windows.Forms.ComboBox
+    Friend WithEvents btnShowChatBubbleOk As System.Windows.Forms.Button
+    Friend WithEvents btnShowChatBubbleCancel As System.Windows.Forms.Button
+    Friend WithEvents DarkLabel41 As System.Windows.Forms.Label
+    Friend WithEvents fraMapTint As System.Windows.Forms.GroupBox
+    Friend WithEvents btnMapTintOk As System.Windows.Forms.Button
+    Friend WithEvents btnMapTintCancel As System.Windows.Forms.Button
+    Friend WithEvents DarkLabel42 As System.Windows.Forms.Label
+    Friend WithEvents nudMapTintData3 As System.Windows.Forms.NumericUpDown
+    Friend WithEvents nudMapTintData2 As System.Windows.Forms.NumericUpDown
+    Friend WithEvents DarkLabel43 As System.Windows.Forms.Label
+    Friend WithEvents DarkLabel44 As System.Windows.Forms.Label
+    Friend WithEvents nudMapTintData1 As System.Windows.Forms.NumericUpDown
+    Friend WithEvents nudMapTintData0 As System.Windows.Forms.NumericUpDown
+    Friend WithEvents DarkLabel45 As System.Windows.Forms.Label
+    Friend WithEvents fraSetSelfSwitch As System.Windows.Forms.GroupBox
+    Friend WithEvents cmbSetSelfSwitch As System.Windows.Forms.ComboBox
+    Friend WithEvents DarkLabel46 As System.Windows.Forms.Label
+    Friend WithEvents btnSelfswitchOk As System.Windows.Forms.Button
+    Friend WithEvents btnSelfswitchCancel As System.Windows.Forms.Button
+    Friend WithEvents DarkLabel47 As System.Windows.Forms.Label
+    Friend WithEvents cmbSetSelfSwitchTo As System.Windows.Forms.ComboBox
+    Friend WithEvents fraChangeSprite As System.Windows.Forms.GroupBox
     Friend WithEvents picChangeSprite As PictureBox
-    Friend WithEvents btnChangeSpriteOk As DarkUI.Controls.DarkButton
-    Friend WithEvents btnChangeSpriteCancel As DarkUI.Controls.DarkButton
-    Friend WithEvents DarkLabel48 As DarkUI.Controls.DarkLabel
-    Friend WithEvents nudChangeSprite As DarkUI.Controls.DarkNumericUpDown
-    Friend WithEvents fraPlayerVariable As DarkUI.Controls.DarkGroupBox
-    Friend WithEvents cmbVariable As DarkUI.Controls.DarkComboBox
-    Friend WithEvents DarkLabel49 As DarkUI.Controls.DarkLabel
-    Friend WithEvents optVariableAction0 As DarkUI.Controls.DarkRadioButton
-    Friend WithEvents optVariableAction1 As DarkUI.Controls.DarkRadioButton
-    Friend WithEvents nudVariableData1 As DarkUI.Controls.DarkNumericUpDown
-    Friend WithEvents nudVariableData0 As DarkUI.Controls.DarkNumericUpDown
-    Friend WithEvents optVariableAction3 As DarkUI.Controls.DarkRadioButton
-    Friend WithEvents nudVariableData3 As DarkUI.Controls.DarkNumericUpDown
-    Friend WithEvents optVariableAction2 As DarkUI.Controls.DarkRadioButton
-    Friend WithEvents btnPlayerVarOk As DarkUI.Controls.DarkButton
-    Friend WithEvents btnPlayerVarCancel As DarkUI.Controls.DarkButton
-    Friend WithEvents DarkLabel51 As DarkUI.Controls.DarkLabel
-    Friend WithEvents DarkLabel50 As DarkUI.Controls.DarkLabel
-    Friend WithEvents nudVariableData4 As DarkUI.Controls.DarkNumericUpDown
-    Friend WithEvents nudVariableData2 As DarkUI.Controls.DarkNumericUpDown
-    Friend WithEvents fraShowChoices As DarkUI.Controls.DarkGroupBox
-    Friend WithEvents DarkLabel52 As DarkUI.Controls.DarkLabel
-    Friend WithEvents txtChoicePrompt As DarkUI.Controls.DarkTextBox
-    Friend WithEvents btnShowChoicesOk As DarkUI.Controls.DarkButton
+    Friend WithEvents btnChangeSpriteOk As System.Windows.Forms.Button
+    Friend WithEvents btnChangeSpriteCancel As System.Windows.Forms.Button
+    Friend WithEvents DarkLabel48 As System.Windows.Forms.Label
+    Friend WithEvents nudChangeSprite As System.Windows.Forms.NumericUpDown
+    Friend WithEvents fraPlayerVariable As System.Windows.Forms.GroupBox
+    Friend WithEvents cmbVariable As System.Windows.Forms.ComboBox
+    Friend WithEvents DarkLabel49 As System.Windows.Forms.Label
+    Friend WithEvents optVariableAction0 As System.Windows.Forms.RadioButton
+    Friend WithEvents optVariableAction1 As System.Windows.Forms.RadioButton
+    Friend WithEvents nudVariableData1 As System.Windows.Forms.NumericUpDown
+    Friend WithEvents nudVariableData0 As System.Windows.Forms.NumericUpDown
+    Friend WithEvents optVariableAction3 As System.Windows.Forms.RadioButton
+    Friend WithEvents nudVariableData3 As System.Windows.Forms.NumericUpDown
+    Friend WithEvents optVariableAction2 As System.Windows.Forms.RadioButton
+    Friend WithEvents btnPlayerVarOk As System.Windows.Forms.Button
+    Friend WithEvents btnPlayerVarCancel As System.Windows.Forms.Button
+    Friend WithEvents DarkLabel51 As System.Windows.Forms.Label
+    Friend WithEvents DarkLabel50 As System.Windows.Forms.Label
+    Friend WithEvents nudVariableData4 As System.Windows.Forms.NumericUpDown
+    Friend WithEvents nudVariableData2 As System.Windows.Forms.NumericUpDown
+    Friend WithEvents fraShowChoices As System.Windows.Forms.GroupBox
+    Friend WithEvents DarkLabel52 As System.Windows.Forms.Label
+    Friend WithEvents txtChoicePrompt As System.Windows.Forms.TextBox
+    Friend WithEvents btnShowChoicesOk As System.Windows.Forms.Button
     Friend WithEvents picShowChoicesFace As PictureBox
-    Friend WithEvents btnShowChoicesCancel As DarkUI.Controls.DarkButton
-    Friend WithEvents DarkLabel53 As DarkUI.Controls.DarkLabel
-    Friend WithEvents nudShowChoicesFace As DarkUI.Controls.DarkNumericUpDown
-    Friend WithEvents DarkLabel56 As DarkUI.Controls.DarkLabel
-    Friend WithEvents DarkLabel57 As DarkUI.Controls.DarkLabel
-    Friend WithEvents DarkLabel55 As DarkUI.Controls.DarkLabel
-    Friend WithEvents DarkLabel54 As DarkUI.Controls.DarkLabel
-    Friend WithEvents txtChoices4 As DarkUI.Controls.DarkTextBox
-    Friend WithEvents txtChoices3 As DarkUI.Controls.DarkTextBox
-    Friend WithEvents txtChoices2 As DarkUI.Controls.DarkTextBox
-    Friend WithEvents txtChoices1 As DarkUI.Controls.DarkTextBox
-    Friend WithEvents fraBeginQuest As DarkUI.Controls.DarkGroupBox
-    Friend WithEvents cmbBeginQuest As DarkUI.Controls.DarkComboBox
-    Friend WithEvents DarkLabel58 As DarkUI.Controls.DarkLabel
-    Friend WithEvents btnBeginQuestOk As DarkUI.Controls.DarkButton
-    Friend WithEvents btnBeginQuestCancel As DarkUI.Controls.DarkButton
-    Friend WithEvents fraHidePic As DarkUI.Controls.DarkGroupBox
-    Friend WithEvents nudHidePic As DarkUI.Controls.DarkNumericUpDown
-    Friend WithEvents DarkLabel59 As DarkUI.Controls.DarkLabel
-    Friend WithEvents btnHidePicOk As DarkUI.Controls.DarkButton
-    Friend WithEvents btnHidePicCancel As DarkUI.Controls.DarkButton
-    Friend WithEvents fraGoToLabel As DarkUI.Controls.DarkGroupBox
-    Friend WithEvents txtGotoLabel As DarkUI.Controls.DarkTextBox
-    Friend WithEvents DarkLabel60 As DarkUI.Controls.DarkLabel
-    Friend WithEvents btnGoToLabelOk As DarkUI.Controls.DarkButton
-    Friend WithEvents btnGoToLabelCancel As DarkUI.Controls.DarkButton
-    Friend WithEvents fraPlayAnimation As DarkUI.Controls.DarkGroupBox
-    Friend WithEvents DarkLabel61 As DarkUI.Controls.DarkLabel
-    Friend WithEvents cmbPlayAnim As DarkUI.Controls.DarkComboBox
-    Friend WithEvents DarkLabel62 As DarkUI.Controls.DarkLabel
-    Friend WithEvents cmbAnimTargetType As DarkUI.Controls.DarkComboBox
-    Friend WithEvents nudPlayAnimTileY As DarkUI.Controls.DarkNumericUpDown
-    Friend WithEvents nudPlayAnimTileX As DarkUI.Controls.DarkNumericUpDown
-    Friend WithEvents cmbPlayAnimEvent As DarkUI.Controls.DarkComboBox
-    Friend WithEvents btnPlayAnimationOk As DarkUI.Controls.DarkButton
-    Friend WithEvents btnPlayAnimationCancel As DarkUI.Controls.DarkButton
-    Friend WithEvents lblPlayAnimY As DarkUI.Controls.DarkLabel
-    Friend WithEvents lblPlayAnimX As DarkUI.Controls.DarkLabel
-    Friend WithEvents fraChangeGender As DarkUI.Controls.DarkGroupBox
-    Friend WithEvents btnChangeGenderOk As DarkUI.Controls.DarkButton
-    Friend WithEvents btnChangeGenderCancel As DarkUI.Controls.DarkButton
-    Friend WithEvents optChangeSexFemale As DarkUI.Controls.DarkRadioButton
-    Friend WithEvents optChangeSexMale As DarkUI.Controls.DarkRadioButton
-    Friend WithEvents fraChangeLevel As DarkUI.Controls.DarkGroupBox
-    Friend WithEvents btnChangeLevelOk As DarkUI.Controls.DarkButton
-    Friend WithEvents btnChangeLevelCancel As DarkUI.Controls.DarkButton
-    Friend WithEvents DarkLabel65 As DarkUI.Controls.DarkLabel
-    Friend WithEvents nudChangeLevel As DarkUI.Controls.DarkNumericUpDown
-    Friend WithEvents fraOpenShop As DarkUI.Controls.DarkGroupBox
-    Friend WithEvents cmbOpenShop As DarkUI.Controls.DarkComboBox
-    Friend WithEvents btnOpenShopOk As DarkUI.Controls.DarkButton
-    Friend WithEvents btnOpenShopCancel As DarkUI.Controls.DarkButton
-    Friend WithEvents fraShowPic As DarkUI.Controls.DarkGroupBox
-    Friend WithEvents cmbPicIndex As DarkUI.Controls.DarkComboBox
-    Friend WithEvents DarkLabel66 As DarkUI.Controls.DarkLabel
-    Friend WithEvents DarkLabel67 As DarkUI.Controls.DarkLabel
-    Friend WithEvents DarkLabel68 As DarkUI.Controls.DarkLabel
-    Friend WithEvents nudPicOffsetY As DarkUI.Controls.DarkNumericUpDown
-    Friend WithEvents nudPicOffsetX As DarkUI.Controls.DarkNumericUpDown
-    Friend WithEvents DarkLabel69 As DarkUI.Controls.DarkLabel
-    Friend WithEvents cmbPicLoc As DarkUI.Controls.DarkComboBox
-    Friend WithEvents nudShowPicture As DarkUI.Controls.DarkNumericUpDown
+    Friend WithEvents btnShowChoicesCancel As System.Windows.Forms.Button
+    Friend WithEvents DarkLabel53 As System.Windows.Forms.Label
+    Friend WithEvents nudShowChoicesFace As System.Windows.Forms.NumericUpDown
+    Friend WithEvents DarkLabel56 As System.Windows.Forms.Label
+    Friend WithEvents DarkLabel57 As System.Windows.Forms.Label
+    Friend WithEvents DarkLabel55 As System.Windows.Forms.Label
+    Friend WithEvents DarkLabel54 As System.Windows.Forms.Label
+    Friend WithEvents txtChoices4 As System.Windows.Forms.TextBox
+    Friend WithEvents txtChoices3 As System.Windows.Forms.TextBox
+    Friend WithEvents txtChoices2 As System.Windows.Forms.TextBox
+    Friend WithEvents txtChoices1 As System.Windows.Forms.TextBox
+    Friend WithEvents fraBeginQuest As System.Windows.Forms.GroupBox
+    Friend WithEvents cmbBeginQuest As System.Windows.Forms.ComboBox
+    Friend WithEvents DarkLabel58 As System.Windows.Forms.Label
+    Friend WithEvents btnBeginQuestOk As System.Windows.Forms.Button
+    Friend WithEvents btnBeginQuestCancel As System.Windows.Forms.Button
+    Friend WithEvents fraHidePic As System.Windows.Forms.GroupBox
+    Friend WithEvents nudHidePic As System.Windows.Forms.NumericUpDown
+    Friend WithEvents DarkLabel59 As System.Windows.Forms.Label
+    Friend WithEvents btnHidePicOk As System.Windows.Forms.Button
+    Friend WithEvents btnHidePicCancel As System.Windows.Forms.Button
+    Friend WithEvents fraGoToLabel As System.Windows.Forms.GroupBox
+    Friend WithEvents txtGotoLabel As System.Windows.Forms.TextBox
+    Friend WithEvents DarkLabel60 As System.Windows.Forms.Label
+    Friend WithEvents btnGoToLabelOk As System.Windows.Forms.Button
+    Friend WithEvents btnGoToLabelCancel As System.Windows.Forms.Button
+    Friend WithEvents fraPlayAnimation As System.Windows.Forms.GroupBox
+    Friend WithEvents DarkLabel61 As System.Windows.Forms.Label
+    Friend WithEvents cmbPlayAnim As System.Windows.Forms.ComboBox
+    Friend WithEvents DarkLabel62 As System.Windows.Forms.Label
+    Friend WithEvents cmbAnimTargetType As System.Windows.Forms.ComboBox
+    Friend WithEvents nudPlayAnimTileY As System.Windows.Forms.NumericUpDown
+    Friend WithEvents nudPlayAnimTileX As System.Windows.Forms.NumericUpDown
+    Friend WithEvents cmbPlayAnimEvent As System.Windows.Forms.ComboBox
+    Friend WithEvents btnPlayAnimationOk As System.Windows.Forms.Button
+    Friend WithEvents btnPlayAnimationCancel As System.Windows.Forms.Button
+    Friend WithEvents lblPlayAnimY As System.Windows.Forms.Label
+    Friend WithEvents lblPlayAnimX As System.Windows.Forms.Label
+    Friend WithEvents fraChangeGender As System.Windows.Forms.GroupBox
+    Friend WithEvents btnChangeGenderOk As System.Windows.Forms.Button
+    Friend WithEvents btnChangeGenderCancel As System.Windows.Forms.Button
+    Friend WithEvents optChangeSexFemale As System.Windows.Forms.RadioButton
+    Friend WithEvents optChangeSexMale As System.Windows.Forms.RadioButton
+    Friend WithEvents fraChangeLevel As System.Windows.Forms.GroupBox
+    Friend WithEvents btnChangeLevelOk As System.Windows.Forms.Button
+    Friend WithEvents btnChangeLevelCancel As System.Windows.Forms.Button
+    Friend WithEvents DarkLabel65 As System.Windows.Forms.Label
+    Friend WithEvents nudChangeLevel As System.Windows.Forms.NumericUpDown
+    Friend WithEvents fraOpenShop As System.Windows.Forms.GroupBox
+    Friend WithEvents cmbOpenShop As System.Windows.Forms.ComboBox
+    Friend WithEvents btnOpenShopOk As System.Windows.Forms.Button
+    Friend WithEvents btnOpenShopCancel As System.Windows.Forms.Button
+    Friend WithEvents fraShowPic As System.Windows.Forms.GroupBox
+    Friend WithEvents cmbPicIndex As System.Windows.Forms.ComboBox
+    Friend WithEvents DarkLabel66 As System.Windows.Forms.Label
+    Friend WithEvents DarkLabel67 As System.Windows.Forms.Label
+    Friend WithEvents DarkLabel68 As System.Windows.Forms.Label
+    Friend WithEvents nudPicOffsetY As System.Windows.Forms.NumericUpDown
+    Friend WithEvents nudPicOffsetX As System.Windows.Forms.NumericUpDown
+    Friend WithEvents DarkLabel69 As System.Windows.Forms.Label
+    Friend WithEvents cmbPicLoc As System.Windows.Forms.ComboBox
+    Friend WithEvents nudShowPicture As System.Windows.Forms.NumericUpDown
     Friend WithEvents picShowPic As PictureBox
-    Friend WithEvents btnShowPicOk As DarkUI.Controls.DarkButton
-    Friend WithEvents btnShowPicCancel As DarkUI.Controls.DarkButton
-    Friend WithEvents DarkLabel71 As DarkUI.Controls.DarkLabel
-    Friend WithEvents DarkLabel70 As DarkUI.Controls.DarkLabel
-    Friend WithEvents fraSetWait As DarkUI.Controls.DarkGroupBox
-    Friend WithEvents btnSetWaitOk As DarkUI.Controls.DarkButton
-    Friend WithEvents btnSetWaitCancel As DarkUI.Controls.DarkButton
-    Friend WithEvents DarkLabel74 As DarkUI.Controls.DarkLabel
-    Friend WithEvents DarkLabel72 As DarkUI.Controls.DarkLabel
-    Friend WithEvents DarkLabel73 As DarkUI.Controls.DarkLabel
-    Friend WithEvents nudWaitAmount As DarkUI.Controls.DarkNumericUpDown
-    Friend WithEvents fraSetAccess As DarkUI.Controls.DarkGroupBox
-    Friend WithEvents btnSetAccessOk As DarkUI.Controls.DarkButton
-    Friend WithEvents btnSetAccessCancel As DarkUI.Controls.DarkButton
-    Friend WithEvents cmbSetAccess As DarkUI.Controls.DarkComboBox
-    Friend WithEvents fraEndQuest As DarkUI.Controls.DarkGroupBox
-    Friend WithEvents btnEndQuestOk As DarkUI.Controls.DarkButton
-    Friend WithEvents btnEndQuestCancel As DarkUI.Controls.DarkButton
-    Friend WithEvents cmbEndQuest As DarkUI.Controls.DarkComboBox
-    Friend WithEvents fraSetWeather As DarkUI.Controls.DarkGroupBox
-    Friend WithEvents DarkLabel75 As DarkUI.Controls.DarkLabel
-    Friend WithEvents CmbWeather As DarkUI.Controls.DarkComboBox
-    Friend WithEvents btnSetWeatherOk As DarkUI.Controls.DarkButton
-    Friend WithEvents btnSetWeatherCancel As DarkUI.Controls.DarkButton
-    Friend WithEvents DarkLabel76 As DarkUI.Controls.DarkLabel
-    Friend WithEvents nudWeatherIntensity As DarkUI.Controls.DarkNumericUpDown
-    Friend WithEvents fraGiveExp As DarkUI.Controls.DarkGroupBox
-    Friend WithEvents DarkLabel77 As DarkUI.Controls.DarkLabel
-    Friend WithEvents fraSpawnNpc As DarkUI.Controls.DarkGroupBox
-    Friend WithEvents cmbSpawnNpc As DarkUI.Controls.DarkComboBox
-    Friend WithEvents btnGiveExpOk As DarkUI.Controls.DarkButton
-    Friend WithEvents btnGiveExpCancel As DarkUI.Controls.DarkButton
-    Friend WithEvents nudGiveExp As DarkUI.Controls.DarkNumericUpDown
-    Friend WithEvents btnSpawnNpcOk As DarkUI.Controls.DarkButton
-    Friend WithEvents btnSpawnNpcCancel As DarkUI.Controls.DarkButton
-    Friend WithEvents fraCustomScript As DarkUI.Controls.DarkGroupBox
-    Friend WithEvents nudCustomScript As DarkUI.Controls.DarkNumericUpDown
-    Friend WithEvents DarkLabel78 As DarkUI.Controls.DarkLabel
-    Friend WithEvents btnCustomScriptCancel As DarkUI.Controls.DarkButton
-    Friend WithEvents btnCustomScriptOk As DarkUI.Controls.DarkButton
-    Friend WithEvents fraMoveRouteWait As DarkUI.Controls.DarkGroupBox
-    Friend WithEvents btnMoveWaitCancel As DarkUI.Controls.DarkButton
-    Friend WithEvents btnMoveWaitOk As DarkUI.Controls.DarkButton
-    Friend WithEvents DarkLabel79 As DarkUI.Controls.DarkLabel
-    Friend WithEvents cmbMoveWait As DarkUI.Controls.DarkComboBox
+    Friend WithEvents btnShowPicOk As System.Windows.Forms.Button
+    Friend WithEvents btnShowPicCancel As System.Windows.Forms.Button
+    Friend WithEvents DarkLabel71 As System.Windows.Forms.Label
+    Friend WithEvents DarkLabel70 As System.Windows.Forms.Label
+    Friend WithEvents fraSetWait As System.Windows.Forms.GroupBox
+    Friend WithEvents btnSetWaitOk As System.Windows.Forms.Button
+    Friend WithEvents btnSetWaitCancel As System.Windows.Forms.Button
+    Friend WithEvents DarkLabel74 As System.Windows.Forms.Label
+    Friend WithEvents DarkLabel72 As System.Windows.Forms.Label
+    Friend WithEvents DarkLabel73 As System.Windows.Forms.Label
+    Friend WithEvents nudWaitAmount As System.Windows.Forms.NumericUpDown
+    Friend WithEvents fraSetAccess As System.Windows.Forms.GroupBox
+    Friend WithEvents btnSetAccessOk As System.Windows.Forms.Button
+    Friend WithEvents btnSetAccessCancel As System.Windows.Forms.Button
+    Friend WithEvents cmbSetAccess As System.Windows.Forms.ComboBox
+    Friend WithEvents fraEndQuest As System.Windows.Forms.GroupBox
+    Friend WithEvents btnEndQuestOk As System.Windows.Forms.Button
+    Friend WithEvents btnEndQuestCancel As System.Windows.Forms.Button
+    Friend WithEvents cmbEndQuest As System.Windows.Forms.ComboBox
+    Friend WithEvents fraSetWeather As System.Windows.Forms.GroupBox
+    Friend WithEvents DarkLabel75 As System.Windows.Forms.Label
+    Friend WithEvents CmbWeather As System.Windows.Forms.ComboBox
+    Friend WithEvents btnSetWeatherOk As System.Windows.Forms.Button
+    Friend WithEvents btnSetWeatherCancel As System.Windows.Forms.Button
+    Friend WithEvents DarkLabel76 As System.Windows.Forms.Label
+    Friend WithEvents nudWeatherIntensity As System.Windows.Forms.NumericUpDown
+    Friend WithEvents fraGiveExp As System.Windows.Forms.GroupBox
+    Friend WithEvents DarkLabel77 As System.Windows.Forms.Label
+    Friend WithEvents fraSpawnNpc As System.Windows.Forms.GroupBox
+    Friend WithEvents cmbSpawnNpc As System.Windows.Forms.ComboBox
+    Friend WithEvents btnGiveExpOk As System.Windows.Forms.Button
+    Friend WithEvents btnGiveExpCancel As System.Windows.Forms.Button
+    Friend WithEvents nudGiveExp As System.Windows.Forms.NumericUpDown
+    Friend WithEvents btnSpawnNpcOk As System.Windows.Forms.Button
+    Friend WithEvents btnSpawnNpcCancel As System.Windows.Forms.Button
+    Friend WithEvents fraCustomScript As System.Windows.Forms.GroupBox
+    Friend WithEvents nudCustomScript As System.Windows.Forms.NumericUpDown
+    Friend WithEvents DarkLabel78 As System.Windows.Forms.Label
+    Friend WithEvents btnCustomScriptCancel As System.Windows.Forms.Button
+    Friend WithEvents btnCustomScriptOk As System.Windows.Forms.Button
+    Friend WithEvents fraMoveRouteWait As System.Windows.Forms.GroupBox
+    Friend WithEvents btnMoveWaitCancel As System.Windows.Forms.Button
+    Friend WithEvents btnMoveWaitOk As System.Windows.Forms.Button
+    Friend WithEvents DarkLabel79 As System.Windows.Forms.Label
+    Friend WithEvents cmbMoveWait As System.Windows.Forms.ComboBox
     Friend WithEvents pnlVariableSwitches As Panel
-    Friend WithEvents fraLabeling As DarkUI.Controls.DarkGroupBox
+    Friend WithEvents fraLabeling As System.Windows.Forms.GroupBox
     Friend WithEvents lstSwitches As ListBox
     Friend WithEvents lstVariables As ListBox
     Friend WithEvents lblRandomLabel36 As Label
@@ -6321,6 +5885,6 @@ Partial Class FrmEditor_Events
     Friend WithEvents btnRenameSwitch As Button
     Friend WithEvents btnLabel_Ok As Button
     Friend WithEvents pnlGraphicSel As Panel
-    Friend WithEvents cmbCondition_Time As DarkUI.Controls.DarkComboBox
-    Friend WithEvents optCondition9 As DarkUI.Controls.DarkRadioButton
+    Friend WithEvents cmbCondition_Time As System.Windows.Forms.ComboBox
+    Friend WithEvents optCondition9 As System.Windows.Forms.RadioButton
 End Class

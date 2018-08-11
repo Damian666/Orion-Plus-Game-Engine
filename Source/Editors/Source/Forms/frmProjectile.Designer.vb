@@ -22,22 +22,22 @@ Partial Class frmProjectile
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Me.DarkGroupBox1 = New DarkUI.Controls.DarkGroupBox()
+        Me.DarkGroupBox1 = New System.Windows.Forms.GroupBox()
         Me.lstIndex = New System.Windows.Forms.ListBox()
-        Me.DarkGroupBox2 = New DarkUI.Controls.DarkGroupBox()
-        Me.DarkLabel5 = New DarkUI.Controls.DarkLabel()
-        Me.DarkLabel4 = New DarkUI.Controls.DarkLabel()
-        Me.nudDamage = New DarkUI.Controls.DarkNumericUpDown()
-        Me.nudSpeed = New DarkUI.Controls.DarkNumericUpDown()
-        Me.DarkLabel3 = New DarkUI.Controls.DarkLabel()
-        Me.nudRange = New DarkUI.Controls.DarkNumericUpDown()
-        Me.nudPic = New DarkUI.Controls.DarkNumericUpDown()
-        Me.DarkLabel2 = New DarkUI.Controls.DarkLabel()
+        Me.DarkGroupBox2 = New System.Windows.Forms.GroupBox()
+        Me.DarkLabel5 = New System.Windows.Forms.Label()
+        Me.DarkLabel4 = New System.Windows.Forms.Label()
+        Me.nudDamage = New System.Windows.Forms.NumericUpDown()
+        Me.nudSpeed = New System.Windows.Forms.NumericUpDown()
+        Me.DarkLabel3 = New System.Windows.Forms.Label()
+        Me.nudRange = New System.Windows.Forms.NumericUpDown()
+        Me.nudPic = New System.Windows.Forms.NumericUpDown()
+        Me.DarkLabel2 = New System.Windows.Forms.Label()
         Me.picProjectile = New System.Windows.Forms.PictureBox()
-        Me.txtName = New DarkUI.Controls.DarkTextBox()
-        Me.DarkLabel1 = New DarkUI.Controls.DarkLabel()
-        Me.btnSave = New DarkUI.Controls.DarkButton()
-        Me.btnCancel = New DarkUI.Controls.DarkButton()
+        Me.txtName = New System.Windows.Forms.TextBox()
+        Me.DarkLabel1 = New System.Windows.Forms.Label()
+        Me.btnSave = New System.Windows.Forms.Button()
+        Me.btnCancel = New System.Windows.Forms.Button()
         Me.DarkGroupBox1.SuspendLayout()
         Me.DarkGroupBox2.SuspendLayout()
         CType(Me.nudDamage, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -50,7 +50,6 @@ Partial Class frmProjectile
         'DarkGroupBox1
         '
         Me.DarkGroupBox1.BackColor = System.Drawing.Color.FromArgb(CType(CType(45, Byte), Integer), CType(CType(45, Byte), Integer), CType(CType(48, Byte), Integer))
-        Me.DarkGroupBox1.BorderColor = System.Drawing.Color.FromArgb(CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer))
         Me.DarkGroupBox1.Controls.Add(Me.lstIndex)
         Me.DarkGroupBox1.ForeColor = System.Drawing.Color.Gainsboro
         Me.DarkGroupBox1.Location = New System.Drawing.Point(3, 3)
@@ -74,7 +73,6 @@ Partial Class frmProjectile
         'DarkGroupBox2
         '
         Me.DarkGroupBox2.BackColor = System.Drawing.Color.FromArgb(CType(CType(45, Byte), Integer), CType(CType(45, Byte), Integer), CType(CType(48, Byte), Integer))
-        Me.DarkGroupBox2.BorderColor = System.Drawing.Color.FromArgb(CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer))
         Me.DarkGroupBox2.Controls.Add(Me.DarkLabel5)
         Me.DarkGroupBox2.Controls.Add(Me.DarkLabel4)
         Me.DarkGroupBox2.Controls.Add(Me.nudDamage)
@@ -243,20 +241,20 @@ Partial Class frmProjectile
 
     End Sub
 
-    Friend WithEvents DarkGroupBox1 As DarkUI.Controls.DarkGroupBox
+    Friend WithEvents DarkGroupBox1 As System.Windows.Forms.GroupBox
     Friend WithEvents lstIndex As ListBox
-    Friend WithEvents DarkGroupBox2 As DarkUI.Controls.DarkGroupBox
-    Friend WithEvents txtName As DarkUI.Controls.DarkTextBox
-    Friend WithEvents DarkLabel1 As DarkUI.Controls.DarkLabel
+    Friend WithEvents DarkGroupBox2 As System.Windows.Forms.GroupBox
+    Friend WithEvents txtName As System.Windows.Forms.TextBox
+    Friend WithEvents DarkLabel1 As System.Windows.Forms.Label
     Friend WithEvents picProjectile As PictureBox
-    Friend WithEvents nudRange As DarkUI.Controls.DarkNumericUpDown
-    Friend WithEvents nudPic As DarkUI.Controls.DarkNumericUpDown
-    Friend WithEvents DarkLabel2 As DarkUI.Controls.DarkLabel
-    Friend WithEvents DarkLabel3 As DarkUI.Controls.DarkLabel
-    Friend WithEvents nudDamage As DarkUI.Controls.DarkNumericUpDown
-    Friend WithEvents nudSpeed As DarkUI.Controls.DarkNumericUpDown
-    Friend WithEvents DarkLabel4 As DarkUI.Controls.DarkLabel
-    Friend WithEvents DarkLabel5 As DarkUI.Controls.DarkLabel
-    Friend WithEvents btnSave As DarkUI.Controls.DarkButton
-    Friend WithEvents btnCancel As DarkUI.Controls.DarkButton
+    Friend WithEvents nudRange As System.Windows.Forms.NumericUpDown
+    Friend WithEvents nudPic As System.Windows.Forms.NumericUpDown
+    Friend WithEvents DarkLabel2 As System.Windows.Forms.Label
+    Friend WithEvents DarkLabel3 As System.Windows.Forms.Label
+    Friend WithEvents nudDamage As System.Windows.Forms.NumericUpDown
+    Friend WithEvents nudSpeed As System.Windows.Forms.NumericUpDown
+    Friend WithEvents DarkLabel4 As System.Windows.Forms.Label
+    Friend WithEvents DarkLabel5 As System.Windows.Forms.Label
+    Friend WithEvents btnSave As System.Windows.Forms.Button
+    Friend WithEvents btnCancel As System.Windows.Forms.Button
 End Class

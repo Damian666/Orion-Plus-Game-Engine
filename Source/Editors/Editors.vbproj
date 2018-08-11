@@ -50,11 +50,8 @@
     <OptionInfer>On</OptionInfer>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="ASFW">
-      <HintPath>..\..\ASFW.dll</HintPath>
-    </Reference>
-    <Reference Include="DarkUI">
-      <HintPath>.\DarkUI.dll</HintPath>
+    <Reference Include="ASFW, Version=1.0.6691.35832, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\CS-ASFW.1.0.0.5\lib\ASFW.dll</HintPath>
     </Reference>
     <Reference Include="SFML.Portable, Version=2.0.6778.23407, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\packages\SFML-Portable-2.1.1.5.0\lib\SFML.Portable.dll</HintPath>
@@ -95,18 +92,6 @@
       <DependentUpon>frmClasses.vb</DependentUpon>
     </Compile>
     <Compile Include="Source\Forms\frmClasses.vb">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Source\Forms\frmMapEditor.Designer.vb">
-      <DependentUpon>frmMapEditor.vb</DependentUpon>
-    </Compile>
-    <Compile Include="Source\Forms\frmMapEditor.vb">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Source\Forms\frmEvents.Designer.vb">
-      <DependentUpon>frmEvents.vb</DependentUpon>
-    </Compile>
-    <Compile Include="Source\Forms\frmEvents.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Source\Forms\frmHouse.Designer.vb">
@@ -201,12 +186,9 @@
     <Compile Include="Source\Modules\Objects\E_Items.vb" />
     <Compile Include="Source\Modules\Objects\E_Pets.vb" />
     <Compile Include="Source\Modules\Objects\E_Projectiles.vb" />
-    <Compile Include="Source\Modules\E_Weather.vb" />
     <Compile Include="Source\Modules\E_Sound.vb" />
     <Compile Include="Source\Modules\E_Text.vb" />
     <Compile Include="Source\Modules\Objects\E_Housing.vb" />
-    <Compile Include="Source\Modules\E_EventSystem.vb" />
-    <Compile Include="Source\Modules\E_AutoTiles.vb" />
     <Compile Include="Source\Modules\E_Graphics.vb" />
     <Compile Include="Source\Modules\E_DataBase.vb" />
     <Compile Include="Source\Modules\E_Crafting.vb" />
@@ -234,12 +216,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Source\Forms\frmClasses.resx">
       <DependentUpon>frmClasses.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Source\Forms\frmMapEditor.resx">
-      <DependentUpon>frmMapEditor.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Source\Forms\frmEvents.resx">
-      <DependentUpon>frmEvents.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Source\Forms\frmHouse.resx">
       <DependentUpon>frmHouse.vb</DependentUpon>

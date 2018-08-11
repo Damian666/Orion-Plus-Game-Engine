@@ -22,29 +22,29 @@ Partial Class FrmRecipe
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Me.DarkGroupBox1 = New DarkUI.Controls.DarkGroupBox()
+        Me.DarkGroupBox1 = New System.Windows.Forms.GroupBox()
         Me.lstIndex = New System.Windows.Forms.ListBox()
-        Me.DarkGroupBox2 = New DarkUI.Controls.DarkGroupBox()
-        Me.btnCancel = New DarkUI.Controls.DarkButton()
-        Me.btnDelete = New DarkUI.Controls.DarkButton()
-        Me.btnSave = New DarkUI.Controls.DarkButton()
-        Me.nudCreateTime = New DarkUI.Controls.DarkNumericUpDown()
-        Me.DarkLabel7 = New DarkUI.Controls.DarkLabel()
-        Me.DarkGroupBox3 = New DarkUI.Controls.DarkGroupBox()
-        Me.btnIngredientAdd = New DarkUI.Controls.DarkButton()
-        Me.numItemAmount = New DarkUI.Controls.DarkNumericUpDown()
-        Me.DarkLabel6 = New DarkUI.Controls.DarkLabel()
-        Me.cmbIngredient = New DarkUI.Controls.DarkComboBox()
-        Me.DarkLabel5 = New DarkUI.Controls.DarkLabel()
+        Me.DarkGroupBox2 = New System.Windows.Forms.GroupBox()
+        Me.btnCancel = New System.Windows.Forms.Button()
+        Me.btnDelete = New System.Windows.Forms.Button()
+        Me.btnSave = New System.Windows.Forms.Button()
+        Me.nudCreateTime = New System.Windows.Forms.NumericUpDown()
+        Me.DarkLabel7 = New System.Windows.Forms.Label()
+        Me.DarkGroupBox3 = New System.Windows.Forms.GroupBox()
+        Me.btnIngredientAdd = New System.Windows.Forms.Button()
+        Me.numItemAmount = New System.Windows.Forms.NumericUpDown()
+        Me.DarkLabel6 = New System.Windows.Forms.Label()
+        Me.cmbIngredient = New System.Windows.Forms.ComboBox()
+        Me.DarkLabel5 = New System.Windows.Forms.Label()
         Me.lstIngredients = New System.Windows.Forms.ListBox()
-        Me.nudAmount = New DarkUI.Controls.DarkNumericUpDown()
-        Me.DarkLabel4 = New DarkUI.Controls.DarkLabel()
-        Me.cmbMakeItem = New DarkUI.Controls.DarkComboBox()
-        Me.DarkLabel3 = New DarkUI.Controls.DarkLabel()
-        Me.cmbType = New DarkUI.Controls.DarkComboBox()
-        Me.DarkLabel2 = New DarkUI.Controls.DarkLabel()
-        Me.txtName = New DarkUI.Controls.DarkTextBox()
-        Me.DarkLabel1 = New DarkUI.Controls.DarkLabel()
+        Me.nudAmount = New System.Windows.Forms.NumericUpDown()
+        Me.DarkLabel4 = New System.Windows.Forms.Label()
+        Me.cmbMakeItem = New System.Windows.Forms.ComboBox()
+        Me.DarkLabel3 = New System.Windows.Forms.Label()
+        Me.cmbType = New System.Windows.Forms.ComboBox()
+        Me.DarkLabel2 = New System.Windows.Forms.Label()
+        Me.txtName = New System.Windows.Forms.TextBox()
+        Me.DarkLabel1 = New System.Windows.Forms.Label()
         Me.DarkGroupBox1.SuspendLayout()
         Me.DarkGroupBox2.SuspendLayout()
         CType(Me.nudCreateTime, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -56,7 +56,6 @@ Partial Class FrmRecipe
         'DarkGroupBox1
         '
         Me.DarkGroupBox1.BackColor = System.Drawing.Color.FromArgb(CType(CType(45, Byte), Integer), CType(CType(45, Byte), Integer), CType(CType(48, Byte), Integer))
-        Me.DarkGroupBox1.BorderColor = System.Drawing.Color.FromArgb(CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer))
         Me.DarkGroupBox1.Controls.Add(Me.lstIndex)
         Me.DarkGroupBox1.ForeColor = System.Drawing.Color.Gainsboro
         Me.DarkGroupBox1.Location = New System.Drawing.Point(3, 2)
@@ -80,7 +79,6 @@ Partial Class FrmRecipe
         'DarkGroupBox2
         '
         Me.DarkGroupBox2.BackColor = System.Drawing.Color.FromArgb(CType(CType(45, Byte), Integer), CType(CType(45, Byte), Integer), CType(CType(48, Byte), Integer))
-        Me.DarkGroupBox2.BorderColor = System.Drawing.Color.FromArgb(CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer))
         Me.DarkGroupBox2.Controls.Add(Me.btnCancel)
         Me.DarkGroupBox2.Controls.Add(Me.btnDelete)
         Me.DarkGroupBox2.Controls.Add(Me.btnSave)
@@ -152,7 +150,6 @@ Partial Class FrmRecipe
         'DarkGroupBox3
         '
         Me.DarkGroupBox3.BackColor = System.Drawing.Color.FromArgb(CType(CType(45, Byte), Integer), CType(CType(45, Byte), Integer), CType(CType(48, Byte), Integer))
-        Me.DarkGroupBox3.BorderColor = System.Drawing.Color.FromArgb(CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer))
         Me.DarkGroupBox3.Controls.Add(Me.btnIngredientAdd)
         Me.DarkGroupBox3.Controls.Add(Me.numItemAmount)
         Me.DarkGroupBox3.Controls.Add(Me.DarkLabel6)
@@ -198,8 +195,6 @@ Partial Class FrmRecipe
         'cmbIngredient
         '
         Me.cmbIngredient.BackColor = System.Drawing.Color.FromArgb(CType(CType(69, Byte), Integer), CType(CType(73, Byte), Integer), CType(CType(74, Byte), Integer))
-        Me.cmbIngredient.BorderColor = System.Drawing.Color.FromArgb(CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer))
-        Me.cmbIngredient.BorderStyle = System.Windows.Forms.ButtonBorderStyle.Solid
         Me.cmbIngredient.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed
         Me.cmbIngredient.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cmbIngredient.FlatStyle = System.Windows.Forms.FlatStyle.Flat
@@ -253,8 +248,6 @@ Partial Class FrmRecipe
         'cmbMakeItem
         '
         Me.cmbMakeItem.BackColor = System.Drawing.Color.FromArgb(CType(CType(69, Byte), Integer), CType(CType(73, Byte), Integer), CType(CType(74, Byte), Integer))
-        Me.cmbMakeItem.BorderColor = System.Drawing.Color.FromArgb(CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer))
-        Me.cmbMakeItem.BorderStyle = System.Windows.Forms.ButtonBorderStyle.Solid
         Me.cmbMakeItem.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed
         Me.cmbMakeItem.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cmbMakeItem.FlatStyle = System.Windows.Forms.FlatStyle.Flat
@@ -278,8 +271,6 @@ Partial Class FrmRecipe
         'cmbType
         '
         Me.cmbType.BackColor = System.Drawing.Color.FromArgb(CType(CType(69, Byte), Integer), CType(CType(73, Byte), Integer), CType(CType(74, Byte), Integer))
-        Me.cmbType.BorderColor = System.Drawing.Color.FromArgb(CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer))
-        Me.cmbType.BorderStyle = System.Windows.Forms.ButtonBorderStyle.Solid
         Me.cmbType.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed
         Me.cmbType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cmbType.FlatStyle = System.Windows.Forms.FlatStyle.Flat
@@ -345,27 +336,27 @@ Partial Class FrmRecipe
 
     End Sub
 
-    Friend WithEvents DarkGroupBox1 As DarkUI.Controls.DarkGroupBox
+    Friend WithEvents DarkGroupBox1 As System.Windows.Forms.GroupBox
     Friend WithEvents lstIndex As ListBox
-    Friend WithEvents DarkGroupBox2 As DarkUI.Controls.DarkGroupBox
-    Friend WithEvents txtName As DarkUI.Controls.DarkTextBox
-    Friend WithEvents DarkLabel1 As DarkUI.Controls.DarkLabel
-    Friend WithEvents cmbType As DarkUI.Controls.DarkComboBox
-    Friend WithEvents DarkLabel2 As DarkUI.Controls.DarkLabel
-    Friend WithEvents cmbMakeItem As DarkUI.Controls.DarkComboBox
-    Friend WithEvents DarkLabel3 As DarkUI.Controls.DarkLabel
-    Friend WithEvents nudAmount As DarkUI.Controls.DarkNumericUpDown
-    Friend WithEvents DarkLabel4 As DarkUI.Controls.DarkLabel
-    Friend WithEvents DarkGroupBox3 As DarkUI.Controls.DarkGroupBox
+    Friend WithEvents DarkGroupBox2 As System.Windows.Forms.GroupBox
+    Friend WithEvents txtName As System.Windows.Forms.TextBox
+    Friend WithEvents DarkLabel1 As System.Windows.Forms.Label
+    Friend WithEvents cmbType As System.Windows.Forms.ComboBox
+    Friend WithEvents DarkLabel2 As System.Windows.Forms.Label
+    Friend WithEvents cmbMakeItem As System.Windows.Forms.ComboBox
+    Friend WithEvents DarkLabel3 As System.Windows.Forms.Label
+    Friend WithEvents nudAmount As System.Windows.Forms.NumericUpDown
+    Friend WithEvents DarkLabel4 As System.Windows.Forms.Label
+    Friend WithEvents DarkGroupBox3 As System.Windows.Forms.GroupBox
     Friend WithEvents lstIngredients As ListBox
-    Friend WithEvents cmbIngredient As DarkUI.Controls.DarkComboBox
-    Friend WithEvents DarkLabel5 As DarkUI.Controls.DarkLabel
-    Friend WithEvents DarkLabel6 As DarkUI.Controls.DarkLabel
-    Friend WithEvents numItemAmount As DarkUI.Controls.DarkNumericUpDown
-    Friend WithEvents btnIngredientAdd As DarkUI.Controls.DarkButton
-    Friend WithEvents nudCreateTime As DarkUI.Controls.DarkNumericUpDown
-    Friend WithEvents DarkLabel7 As DarkUI.Controls.DarkLabel
-    Friend WithEvents btnCancel As DarkUI.Controls.DarkButton
-    Friend WithEvents btnDelete As DarkUI.Controls.DarkButton
-    Friend WithEvents btnSave As DarkUI.Controls.DarkButton
+    Friend WithEvents cmbIngredient As System.Windows.Forms.ComboBox
+    Friend WithEvents DarkLabel5 As System.Windows.Forms.Label
+    Friend WithEvents DarkLabel6 As System.Windows.Forms.Label
+    Friend WithEvents numItemAmount As System.Windows.Forms.NumericUpDown
+    Friend WithEvents btnIngredientAdd As System.Windows.Forms.Button
+    Friend WithEvents nudCreateTime As System.Windows.Forms.NumericUpDown
+    Friend WithEvents DarkLabel7 As System.Windows.Forms.Label
+    Friend WithEvents btnCancel As System.Windows.Forms.Button
+    Friend WithEvents btnDelete As System.Windows.Forms.Button
+    Friend WithEvents btnSave As System.Windows.Forms.Button
 End Class
