@@ -1,6 +1,7 @@
 ﻿Imports System.IO
 Imports ASFW
 Imports ASFW.IO.FileIO
+Imports Ini = ASFW.IO.FileIO.TextFile
 
 Friend Module S_Resources
 #Region "Globals & Types"
@@ -172,18 +173,13 @@ Friend Module S_Resources
 
     Sub LoadSkillExp()
         Dim i As Integer
-        Dim myXml As New XmlClass With {
-            .Filename = Application.StartupPath & "\Data\SkillExp.xml",
-            .Root = "Data"
-        }
-
-        myXml.LoadXml()
+        
+        Dim path = Application.StartupPath & "\Data\SkillExp.ini"
+        If Not File.Exists(path) Then File.Create(path).Dispose
 
         For i = 1 To 100
-            SkillExpTable(i) = myXml.ReadString("Level", i)
+            SkillExpTable(i) = Ini.GetVar(path, "Level", i)
         Next
-
-        myXml.CloseXml(False)
     End Sub
 #End Region
 

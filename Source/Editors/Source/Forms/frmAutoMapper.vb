@@ -1,4 +1,7 @@
-﻿Friend Class FrmAutoMapper
+﻿Imports System.IO
+Imports Ini = ASFW.IO.FileIO.TextFile
+
+Friend Class FrmAutoMapper
 #Region "Frm Code"
     Private Sub FrmAutoMapper_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         pnlResources.Top = 0
@@ -75,22 +78,16 @@
         Dim i As Integer
         Dim ResourceStr As String = ""
 
-        Dim myXml As New XmlClass With {
-            .Filename = IO.Path.Combine(Application.StartupPath, "Data", "AutoMapper.xml"),
-            .Root = "Options"
-        }
-
-        myXml.LoadXml()
-
+        Dim path = Application.StartupPath & "\Data\AutoMapper.ini"
+        If Not File.Exists(path) Then File.Create(path).Dispose
+        
         For i = 0 To lstResources.Items.Count - 1
             ResourceStr = CStr(ResourceStr & lstResources.Items(i))
             If i < lstResources.Items.Count - 1 Then ResourceStr = ResourceStr & ";"
         Next
 
-        myXml.WriteString("Resources", "ResourcesNum", ResourceStr)
-
-        myXml.CloseXml(True)
-
+        Ini.PutVar(path, "Resources", "ResourcesNum", ResourceStr)
+        
         pnlResources.Visible = False
     End Sub
 #End Region
@@ -133,28 +130,23 @@
 
     Private Sub BtnTileSetSave_Click(sender As Object, e As EventArgs) Handles btnTileSetSave.Click
         Dim Prefab As Integer, Layer As Integer
-        Dim myXml As New XmlClass With {
-            .Filename = IO.Path.Combine(Application.StartupPath, "Data", "AutoMapper.xml"),
-            .Root = "Options"
-        }
-
-        myXml.LoadXml()
+        
+        Dim path = Application.StartupPath & "\Data\AutoMapper.ini"
+        If Not File.Exists(path) Then File.Create(path).Dispose
 
         Prefab = cmbPrefab.SelectedIndex + 1
 
         For Layer = 1 To 5
             If Tile(Prefab).Layer(Layer).Tileset > 0 Then
-                myXml.WriteString("Prefab" & Prefab, "Layer" & Layer & "Tileset", Val(Tile(Prefab).Layer(Layer).Tileset))
-                myXml.WriteString("Prefab" & Prefab, "Layer" & Layer & "X", Val(Tile(Prefab).Layer(Layer).X))
-                myXml.WriteString("Prefab" & Prefab, "Layer" & Layer & "Y", Val(Tile(Prefab).Layer(Layer).Y))
-                myXml.WriteString("Prefab" & Prefab, "Layer" & Layer & "Autotile", Val(Tile(Prefab).Layer(Layer).AutoTile))
+                Ini.PutVar(Path, "Prefab" & Prefab, "Layer" & Layer & "Tileset", Val(Tile(Prefab).Layer(Layer).Tileset))
+                Ini.PutVar(Path, "Prefab" & Prefab, "Layer" & Layer & "X", Val(Tile(Prefab).Layer(Layer).X))
+                Ini.PutVar(Path, "Prefab" & Prefab, "Layer" & Layer & "Y", Val(Tile(Prefab).Layer(Layer).Y))
+                Ini.PutVar(Path, "Prefab" & Prefab, "Layer" & Layer & "Autotile", Val(Tile(Prefab).Layer(Layer).AutoTile))
             End If
         Next Layer
 
-        myXml.WriteString("Prefab" & Prefab, "Type", Val(Tile(Prefab).Type))
-
-        myXml.CloseXml(True)
-
+        Ini.PutVar(Path, "Prefab" & Prefab, "Type", Val(Tile(Prefab).Type))
+        
         pnlTileConfig.Visible = False
 
         LoadTilePrefab()

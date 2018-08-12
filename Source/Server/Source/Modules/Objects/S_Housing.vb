@@ -1,6 +1,8 @@
 ﻿Imports System.IO
 Imports ASFW
 
+Imports Ini = ASFW.IO.FileIO.TextFile
+
 Friend Module S_Housing
 #Region "Globals & Types"
     Friend MAX_HOUSES As Integer = 100
@@ -31,49 +33,34 @@ Friend Module S_Housing
 
 #Region "DataBase"
     Sub CreateHouses()
-        Dim myXml As New XmlClass With {
-            .Filename = Path.Combine(Application.StartupPath, "data", "houseconfig.xml"),
-            .Root = "Config"
-        }
+        
+        Dim path = Application.StartupPath & "\Data\HouseConfig.ini"
+        If Not File.Exists(path) Then File.Create(path).Dispose
 
-        myXml.NewXmlDocument()
-
-        myXml.LoadXml()
-
-        myXml.WriteString("House" & 1, "BaseMap", HouseConfig(1).BaseMap)
-        myXml.WriteString("House" & 1, "Name", HouseConfig(1).ConfigName)
-        myXml.WriteString("House" & 1, "MaxFurniture", HouseConfig(1).MaxFurniture)
-        myXml.WriteString("House" & 1, "Price", HouseConfig(1).Price)
-        myXml.WriteString("House" & 1, "X", HouseConfig(1).X)
-        myXml.WriteString("House" & 1, "Y", HouseConfig(1).Y)
-
-        myXml.CloseXml(True)
+        Ini.PutVar(path, "House" & 1, "BaseMap", HouseConfig(1).BaseMap)
+        Ini.PutVar(path, "House" & 1, "Name", HouseConfig(1).ConfigName)
+        Ini.PutVar(path, "House" & 1, "MaxFurniture", HouseConfig(1).MaxFurniture)
+        Ini.PutVar(path, "House" & 1, "Price", HouseConfig(1).Price)
+        Ini.PutVar(path, "House" & 1, "X", HouseConfig(1).X)
+        Ini.PutVar(path, "House" & 1, "Y", HouseConfig(1).Y)
     End Sub
 
     Sub LoadHouses()
         Dim i As Integer
-
-        If Not File.Exists(Path.Combine(Application.StartupPath, "data", "houseconfig.xml")) Then CreateHouses()
-
-        Dim myXml As New XmlClass With {
-            .Filename = Path.Combine(Application.StartupPath, "data", "houseconfig.xml"),
-            .Root = "Config"
-        }
-
-        myXml.LoadXml()
+                
+        Dim path = Application.StartupPath & "\Data\HouseConfig.ini"
+        If Not File.Exists(path) Then CreateHouses()
 
         For i = 1 To MAX_HOUSES
 
-            HouseConfig(i).BaseMap = Val(myXml.ReadString("House" & i, "BaseMap"))
-            HouseConfig(i).ConfigName = Trim$(myXml.ReadString("House" & i, "Name"))
-            HouseConfig(i).MaxFurniture = Val(myXml.ReadString("House" & i, "MaxFurniture"))
-            HouseConfig(i).Price = Val(myXml.ReadString("House" & i, "Price"))
-            HouseConfig(i).X = Val(myXml.ReadString("House" & i, "X"))
-            HouseConfig(i).Y = Val(myXml.ReadString("House" & i, "Y"))
+            HouseConfig(i).BaseMap = Val(Ini.GetVar(path, "House" & i, "BaseMap"))
+            HouseConfig(i).ConfigName = Trim$(Ini.GetVar(path, "House" & i, "Name"))
+            HouseConfig(i).MaxFurniture = Val(Ini.GetVar(path, "House" & i, "MaxFurniture"))
+            HouseConfig(i).Price = Val(Ini.GetVar(path, "House" & i, "Price"))
+            HouseConfig(i).X = Val(Ini.GetVar(path, "House" & i, "X"))
+            HouseConfig(i).Y = Val(Ini.GetVar(path, "House" & i, "Y"))
         Next
-
-        myXml.CloseXml(False)
-
+        
         For i = 1 To GetPlayersOnline()
             If IsPlaying(i) Then
                 SendHouseConfigs(i)
@@ -83,24 +70,19 @@ Friend Module S_Housing
     End Sub
 
     Sub SaveHouse(index As Integer)
-        Dim myXml As New XmlClass With {
-            .Filename = Path.Combine(Application.StartupPath, "data", "houseconfig.xml"),
-            .Root = "Config"
-        }
-
-        myXml.LoadXml()
+        
+        Dim path = Application.StartupPath & "\Data\HouseConfig.ini"
+        If Not File.Exists(path) Then File.Create(path).Dispose
 
         If index > 0 AndAlso index <= MAX_HOUSES Then
-            myXml.WriteString("House" & index, "BaseMap", HouseConfig(index).BaseMap)
-            myXml.WriteString("House" & index, "Name", HouseConfig(index).ConfigName)
-            myXml.WriteString("House" & index, "MaxFurniture", HouseConfig(index).MaxFurniture)
-            myXml.WriteString("House" & index, "Price", HouseConfig(index).Price)
-            myXml.WriteString("House" & index, "X", HouseConfig(index).X)
-            myXml.WriteString("House" & index, "Y", HouseConfig(index).Y)
+            Ini.PutVar(path, "House" & index, "BaseMap", HouseConfig(index).BaseMap)
+            Ini.PutVar(path, "House" & index, "Name", HouseConfig(index).ConfigName)
+            Ini.PutVar(path, "House" & index, "MaxFurniture", HouseConfig(index).MaxFurniture)
+            Ini.PutVar(path, "House" & index, "Price", HouseConfig(index).Price)
+            Ini.PutVar(path, "House" & index, "X", HouseConfig(index).X)
+            Ini.PutVar(path, "House" & index, "Y", HouseConfig(index).Y)
         End If
-
-        myXml.CloseXml(True)
-
+        
         LoadHouses()
 
     End Sub

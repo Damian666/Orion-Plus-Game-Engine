@@ -2,6 +2,8 @@
 Imports System.Windows.Forms
 Imports System.Linq
 
+Imports Ini = ASFW.IO.FileIO.TextFile
+
 Module C_DataBase
     Friend Function GetFileContents(fullPath As String, Optional ByRef errInfo As String = "") As String
         Dim strContents As String
@@ -160,12 +162,9 @@ Module C_DataBase
 
 #Region "Options"
     Friend Sub CreateOptions()
-        Dim myXml As New XmlClass With {
-            .Filename = Application.StartupPath & "\Data\Config.xml",
-            .Root = "Options"
-        }
-
-        myXml.NewXmlDocument()
+        
+        Dim path = Application.StartupPath & "\Data\Config.ini"
+        If Not File.Exists(path) Then File.Create(path).Dispose
 
         Options.Password = ""
         Options.SavePass = False
@@ -180,77 +179,67 @@ Module C_DataBase
         Options.HighEnd = 0
         Options.ShowNpcBar = 0
 
-        myXml.LoadXml()
+        Ini.PutVar(path, "UserInfo", "Username", Trim$(Options.Username))
+        Ini.PutVar(path, "UserInfo", "Password", Trim$(Options.Password))
+        Ini.PutVar(path, "UserInfo", "SavePass", Trim$(Options.SavePass))
 
-        myXml.WriteString("UserInfo", "Username", Trim$(Options.Username))
-        myXml.WriteString("UserInfo", "Password", Trim$(Options.Password))
-        myXml.WriteString("UserInfo", "SavePass", Trim$(Options.SavePass))
+        Ini.PutVar(path, "Connection", "Ip", Trim$(Options.Ip))
+        Ini.PutVar(path, "Connection", "Port", Trim$(Options.Port))
 
-        myXml.WriteString("Connection", "Ip", Trim$(Options.Ip))
-        myXml.WriteString("Connection", "Port", Trim$(Options.Port))
+        Ini.PutVar(path, "Sfx", "MenuMusic", Trim$(Options.MenuMusic))
+        Ini.PutVar(path, "Sfx", "Music", Trim$(Options.Music))
+        Ini.PutVar(path, "Sfx", "Sound", Trim$(Options.Sound))
+        Ini.PutVar(path, "Sfx", "Volume", Trim$(Options.Volume))
 
-        myXml.WriteString("Sfx", "MenuMusic", Trim$(Options.MenuMusic))
-        myXml.WriteString("Sfx", "Music", Trim$(Options.Music))
-        myXml.WriteString("Sfx", "Sound", Trim$(Options.Sound))
-        myXml.WriteString("Sfx", "Volume", Trim$(Options.Volume))
+        Ini.PutVar(path, "Misc", "ScreenSize", Trim$(Options.ScreenSize))
+        Ini.PutVar(path, "Misc", "HighEnd", Trim$(Options.HighEnd))
+        Ini.PutVar(path, "Misc", "ShowNpcBar", Trim$(Options.ShowNpcBar))
 
-        myXml.WriteString("Misc", "ScreenSize", Trim$(Options.ScreenSize))
-        myXml.WriteString("Misc", "HighEnd", Trim$(Options.HighEnd))
-        myXml.WriteString("Misc", "ShowNpcBar", Trim$(Options.ShowNpcBar))
-
-        myXml.CloseXml(True)
     End Sub
 
     Friend Sub SaveOptions()
-        Dim myXml As New XmlClass With {
-            .Filename = Application.StartupPath & "\Data\Config.xml",
-            .Root = "Options"
-        }
+        
+        Dim path = Application.StartupPath & "\Data\Config.ini"
+        If Not File.Exists(path) Then File.Create(path).Dispose
 
-        myXml.LoadXml()
+        Ini.PutVar(path, "UserInfo", "Username", Trim$(Options.Username))
+        Ini.PutVar(path, "UserInfo", "Password", Trim$(Options.Password))
+        Ini.PutVar(path, "UserInfo", "SavePass", Trim$(Options.SavePass))
 
-        myXml.WriteString("UserInfo", "Username", Trim$(Options.Username))
-        myXml.WriteString("UserInfo", "Password", Trim$(Options.Password))
-        myXml.WriteString("UserInfo", "SavePass", Trim$(Options.SavePass))
+        Ini.PutVar(path, "Connection", "Ip", Trim$(Options.Ip))
+        Ini.PutVar(path, "Connection", "Port", Trim$(Options.Port))
 
-        myXml.WriteString("Connection", "Ip", Trim$(Options.Ip))
-        myXml.WriteString("Connection", "Port", Trim$(Options.Port))
+        Ini.PutVar(path, "Sfx", "MenuMusic", Trim$(Options.MenuMusic))
+        Ini.PutVar(path, "Sfx", "Music", Trim$(Options.Music))
+        Ini.PutVar(path, "Sfx", "Sound", Trim$(Options.Sound))
+        Ini.PutVar(path, "Sfx", "Volume", Trim$(Options.Volume))
 
-        myXml.WriteString("Sfx", "MenuMusic", Trim$(Options.MenuMusic))
-        myXml.WriteString("Sfx", "Music", Trim$(Options.Music))
-        myXml.WriteString("Sfx", "Sound", Trim$(Options.Sound))
-        myXml.WriteString("Sfx", "Volume", Trim$(Options.Volume))
-
-        myXml.WriteString("Misc", "ScreenSize", Trim$(Options.ScreenSize))
-        myXml.WriteString("Misc", "HighEnd", Trim$(Options.HighEnd))
-        myXml.WriteString("Misc", "ShowNpcBar", Trim$(Options.ShowNpcBar))
-
-        myXml.CloseXml(True)
+        Ini.PutVar(path, "Misc", "ScreenSize", Trim$(Options.ScreenSize))
+        Ini.PutVar(path, "Misc", "HighEnd", Trim$(Options.HighEnd))
+        Ini.PutVar(path, "Misc", "ShowNpcBar", Trim$(Options.ShowNpcBar))
+        
     End Sub
 
     Friend Sub LoadOptions()
-        Dim myXml As New XmlClass With {
-            .Filename = Application.StartupPath & "\Data\Config.xml",
-            .Root = "Options"
-        }
+        
+        Dim path = Application.StartupPath & "\Data\Config.ini"
+        If Not File.Exists(path) Then File.Create(path).Dispose
 
-        myXml.LoadXml()
-        Options.Username = myXml.ReadString("UserInfo", "Username", "")
-        Options.Password = myXml.ReadString("UserInfo", "Password", "")
-        Options.SavePass = myXml.ReadString("UserInfo", "SavePass", "False")
+        Options.Username = Ini.GetVar(path, "UserInfo", "Username")
+        Options.Password = Ini.GetVar(path, "UserInfo", "Password")
+        Options.SavePass = Ini.GetVar(path, "UserInfo", "SavePass")
 
-        Options.Ip = myXml.ReadString("Connection", "Ip", "127.0.0.1")
-        Options.Port = Val(myXml.ReadString("Connection", "Port", "7001"))
+        Options.Ip = Ini.GetVar(path, "Connection", "Ip")
+        Options.Port = Val(Ini.GetVar(path, "Connection", "Port"))
 
-        Options.MenuMusic = myXml.ReadString("Sfx", "MenuMusic", "")
-        Options.Music = myXml.ReadString("Sfx", "Music", "1")
-        Options.Sound = myXml.ReadString("Sfx", "Sound", "1")
-        Options.Volume = Val(myXml.ReadString("Sfx", "Volume", "100"))
+        Options.MenuMusic = Ini.GetVar(path, "Sfx", "MenuMusic")
+        Options.Music = Ini.GetVar(path, "Sfx", "Music")
+        Options.Sound = Ini.GetVar(path, "Sfx", "Sound")
+        Options.Volume = Val(Ini.GetVar(path, "Sfx", "Volume"))
 
-        Options.ScreenSize = myXml.ReadString("Misc", "ScreenSize", "0")
-        Options.HighEnd = Val(myXml.ReadString("Misc", "HighEnd", "0"))
-        Options.ShowNpcBar = Val(myXml.ReadString("Misc", "ShowNpcBar", "1"))
-        myXml.CloseXml(True)
+        Options.ScreenSize = Ini.GetVar(path, "Misc", "ScreenSize")
+        Options.HighEnd = Val(Ini.GetVar(path, "Misc", "HighEnd"))
+        Options.ShowNpcBar = Val(Ini.GetVar(path, "Misc", "ShowNpcBar"))
 
         ' show in GUI
         If Options.Music = 1 Then

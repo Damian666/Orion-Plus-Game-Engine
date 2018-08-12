@@ -1,5 +1,6 @@
 ﻿Imports System.IO
 Imports System.Threading
+Imports Ini = ASFW.IO.FileIO.TextFile
 
 Module E_Loop
 #Region "Startup"
@@ -128,12 +129,9 @@ Module E_Loop
 
 #Region "Options"
     Friend Sub CreateOptions()
-        Dim myXml As New XmlClass With {
-            .Filename = Application.StartupPath & "\Data\Config.xml",
-            .Root = "Options"
-        }
-
-        myXml.NewXmlDocument()
+        
+        Dim path = Application.StartupPath & "\Data\Config.ini"
+        If Not File.Exists(path) Then File.Create(path).Dispose
 
         Options.Password = ""
         Options.SavePass = False
@@ -145,44 +143,35 @@ Module E_Loop
         Options.Sound = 1
         Options.Volume = 100
 
-        myXml.LoadXml()
+        Ini.PutVar(path, "UserInfo", "Username", Trim$(Options.Username))
+        Ini.PutVar(path, "UserInfo", "Password", Trim$(Options.Password))
+        Ini.PutVar(path, "UserInfo", "SavePass", Trim$(Options.SavePass))
 
-        myXml.WriteString("UserInfo", "Username", Trim$(Options.Username))
-        myXml.WriteString("UserInfo", "Password", Trim$(Options.Password))
-        myXml.WriteString("UserInfo", "SavePass", Trim$(Options.SavePass))
+        Ini.PutVar(path, "Connection", "Ip", Trim$(Options.IP))
+        Ini.PutVar(path, "Connection", "Port", Trim$(Options.Port))
 
-        myXml.WriteString("Connection", "Ip", Trim$(Options.IP))
-        myXml.WriteString("Connection", "Port", Trim$(Options.Port))
-
-        myXml.WriteString("Sfx", "MenuMusic", Trim$(Options.MenuMusic))
-        myXml.WriteString("Sfx", "Music", Trim$(Options.Music))
-        myXml.WriteString("Sfx", "Sound", Trim$(Options.Sound))
-        myXml.WriteString("Sfx", "Volume", Trim$(Options.Volume))
-
-        myXml.CloseXml(True)
+        Ini.PutVar(path, "Sfx", "MenuMusic", Trim$(Options.MenuMusic))
+        Ini.PutVar(path, "Sfx", "Music", Trim$(Options.Music))
+        Ini.PutVar(path, "Sfx", "Sound", Trim$(Options.Sound))
+        Ini.PutVar(path, "Sfx", "Volume", Trim$(Options.Volume))
     End Sub
 
     Friend Sub LoadOptions()
-        Dim myXml As New XmlClass With {
-            .Filename = Application.StartupPath & "\Data\Config.xml",
-            .Root = "Options"
-        }
+        
+        Dim path = Application.StartupPath & "\Data\Config.ini"
+        If Not File.Exists(path) Then File.Create(path).Dispose
 
-        myXml.LoadXml()
+        Options.Username = Ini.GetVar(path, "UserInfo", "Username")
+        Options.Password = Ini.GetVar(path, "UserInfo", "Password")
+        Options.SavePass = Ini.GetVar(path, "UserInfo", "SavePass")
 
-        Options.Username = myXml.ReadString("UserInfo", "Username", "")
-        Options.Password = myXml.ReadString("UserInfo", "Password", "")
-        Options.SavePass = myXml.ReadString("UserInfo", "SavePass", "False")
+        Options.IP = Ini.GetVar(path, "Connection", "Ip")
+        Options.Port = Val(Ini.GetVar(path, "Connection", "Port"))
 
-        Options.IP = myXml.ReadString("Connection", "Ip", "127.0.0.1")
-        Options.Port = Val(myXml.ReadString("Connection", "Port", "7001"))
-
-        Options.MenuMusic = myXml.ReadString("Sfx", "MenuMusic", "")
-        Options.Music = myXml.ReadString("Sfx", "Music", "1")
-        Options.Sound = myXml.ReadString("Sfx", "Sound", "1")
-        Options.Volume = Val(myXml.ReadString("Sfx", "Volume", "100"))
-
-        myXml.CloseXml(False)
+        Options.MenuMusic = Ini.GetVar(path, "Sfx", "MenuMusic")
+        Options.Music = Ini.GetVar(path, "Sfx", "Music")
+        Options.Sound = Ini.GetVar(path, "Sfx", "Sound")
+        Options.Volume = Val(Ini.GetVar(path, "Sfx", "Volume"))
 
         FrmLogin.txtLogin.Text = Options.Username
         FrmLogin.txtPassword.Text = Options.Password

@@ -1,6 +1,8 @@
 ﻿Imports System.IO
 Imports ASFW
 
+Imports Ini = ASFW.IO.FileIO.TextFile
+
 Friend Module S_Events
 #Region "Globals"
     Friend TempEventMap() As GlobalEventsStruct
@@ -357,14 +359,6 @@ Friend Module S_Events
 
 #Region "Database"
     Sub CreateSwitches()
-        Dim i As Integer
-        Dim myXml As New XmlClass With {
-            .Filename = Path.Combine(Application.StartupPath, "Data", "Switches.xml"),
-            .Root = "Data"
-        }
-
-        myXml.NewXmlDocument()
-
         For i = 1 To MaxSwitches
             Switches(i) = ""
         Next
@@ -373,13 +367,8 @@ Friend Module S_Events
     End Sub
 
     Sub CreateVariables()
-        Dim i As Integer
-        Dim myXml As New XmlClass With {
-            .Filename = Path.Combine(Application.StartupPath, "Data", "Variables.xml"),
-            .Root = "Data"
-        }
-
-        myXml.NewXmlDocument()
+        dim path = Application.StartupPath & "\Data\Variables.ini"
+        If Not File.Exists(path) Then File.Create(path).Dispose
 
         For i = 1 To MaxVariables
             Variables(i) = ""
@@ -389,78 +378,39 @@ Friend Module S_Events
     End Sub
 
     Sub SaveSwitches()
-        Dim i As Integer
-        Dim myXml As New XmlClass With {
-            .Filename = Path.Combine(Application.StartupPath, "Data", "Switches.xml"),
-            .Root = "Data"
-        }
-
-        myXml.LoadXml()
+        dim path = Application.StartupPath & "\Data\Switches.ini"
+        If Not File.Exists(path) Then File.Create(path).Dispose
 
         For i = 1 To MaxSwitches
-            myXml.WriteString("Switches", "Switch" & i & "Name", Switches(i))
+            Ini.PutVar(path, "Switches", i, Switches(i))
         Next
-
-        myXml.CloseXml(True)
     End Sub
 
     Sub SaveVariables()
-        Dim i As Integer
-        Dim myXml As New XmlClass With {
-            .Filename = Path.Combine(Application.StartupPath, "Data", "Variables.xml"),
-            .Root = "Data"
-        }
-
-        myXml.LoadXml()
+        dim path = Application.StartupPath & "\Data\Variables.ini"
+        If Not File.Exists(path) Then File.Create(path).Dispose
 
         For i = 1 To MaxVariables
-            myXml.WriteString("Variables", "Variable" & i & "Name", Variables(i))
+            Ini.PutVar(path, "Variables", i, Variables(i))
         Next
-
-        myXml.CloseXml(True)
     End Sub
 
     Sub LoadSwitches()
-        Dim i As Integer
-        Dim myXml As New XmlClass With {
-            .Filename = Path.Combine(Application.StartupPath, "Data", "Switches.xml"),
-            .Root = "Data"
-        }
-
-        If Not File.Exists(myXml.Filename) Then
-            CreateSwitches()
-            Exit Sub
-        End If
-
-        myXml.LoadXml()
+        dim path = Application.StartupPath & "\Data\Switches.ini"
+        If Not File.Exists(path) Then File.Create(path).Dispose
 
         For i = 1 To MaxSwitches
-            Switches(i) = myXml.ReadString("Switches", "Switch" & i & "Name")
+            Switches(i) = Ini.GetVar(path, "Switches", i)
         Next
-
-        myXml.CloseXml(False)
     End Sub
 
-    Sub LoadVariables()
-        Dim i As Integer
-        Dim myXml As New XmlClass With {
-            .Filename = Path.Combine(Application.StartupPath, "Data", "Variables.xml"),
-            .Root = "Data"
-        }
-
-        If Not File.Exists(myXml.Filename) Then
-            CreateVariables()
-            Exit Sub
-        End If
-
-        myXml.LoadXml()
+    Sub LoadVariables()        
+        dim path = Application.StartupPath & "\Data\Variables.ini"
+        If Not File.Exists(path) Then File.Create(path).Dispose
 
         For i = 1 To MaxVariables
-            Variables(i) = myXml.ReadString("Variables", "Variable" & i & "Name")
+            Variables(i) = Ini.GetVar(path, "Variables", i)
         Next
-
-        myXml.CloseXml(False)
-
     End Sub
 #End Region
 
