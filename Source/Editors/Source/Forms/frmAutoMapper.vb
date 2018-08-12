@@ -78,7 +78,7 @@ Friend Class FrmAutoMapper
         Dim i As Integer
         Dim ResourceStr As String = ""
 
-        Dim path = Application.StartupPath & "\Data\AutoMapper.ini"
+        Dim path = Environment.CurrentDirectory & "\Data\AutoMapper.ini"
         If Not File.Exists(path) Then File.Create(path).Dispose
         
         For i = 0 To lstResources.Items.Count - 1
@@ -131,7 +131,7 @@ Friend Class FrmAutoMapper
     Private Sub BtnTileSetSave_Click(sender As Object, e As EventArgs) Handles btnTileSetSave.Click
         Dim Prefab As Integer, Layer As Integer
         
-        Dim path = Application.StartupPath & "\Data\AutoMapper.ini"
+        Dim path = Environment.CurrentDirectory & "\Data\AutoMapper.ini"
         If Not File.Exists(path) Then File.Create(path).Dispose
 
         Prefab = cmbPrefab.SelectedIndex + 1

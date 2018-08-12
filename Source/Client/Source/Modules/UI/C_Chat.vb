@@ -1,4 +1,6 @@
-﻿Imports System.Windows.Forms
+Imports System
+Imports System.Collections.Generic
+Imports System.Windows.Forms
 
 Namespace Global.Engine
     Friend Structure ChatCursor
@@ -24,7 +26,7 @@ Namespace Global.Engine
             If CurrentMessage = Nothing Then CurrentMessage = ""
 
             Select Case evt.KeyChar
-                Case vbBack
+                Case Convert.ToChar(Keys.Back)
                     Exit Select
 
                 Case Else
@@ -115,3 +117,6 @@ Namespace Global.Engine
         Friend ChatInput As ChatData = New ChatData With {.Active = False, .HistoryLimit = 10, .MessageLimit = 100, .History = New List(Of String)(.HistoryLimit + 1), .CurrentMessage = "", .Cursor = New ChatCursor() With {.X = 0, .Y = 0}}
     End Module
 End Namespace
+
+
+

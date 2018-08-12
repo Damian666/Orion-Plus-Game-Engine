@@ -1,4 +1,6 @@
-﻿Imports System.Drawing
+Imports System
+Imports System.Collections.Generic
+Imports System.Drawing
 Imports System.Windows.Forms
 Imports ASFW
 Imports SFML.Graphics
@@ -33,7 +35,7 @@ Friend Module C_EventSystem
     Friend EventChatFace As Integer
 
     Friend RenameType As Integer
-    Friend Renameindex as integer
+    Friend Renameindex As Integer
     Friend EventChatTimer As Integer
 
     Friend EventChat As Boolean
@@ -63,7 +65,7 @@ Friend Module C_EventSystem
 
 #Region "Types"
     Friend Structure EventCommandRec
-        Dim Index as integer
+        Dim Index As Integer
         Dim Text1 As String
         Dim Text2 As String
         Dim Text3 As String
@@ -81,7 +83,7 @@ Friend Module C_EventSystem
     End Structure
 
     Friend Structure MoveRouteRec
-        Dim Index as integer
+        Dim Index As Integer
         Dim Data1 As Integer
         Dim Data2 As Integer
         Dim Data3 As Integer
@@ -108,17 +110,17 @@ Friend Module C_EventSystem
     Friend Structure EventPageRec
         'These are condition variables that decide if the event even appears to the player.
         Dim ChkVariable As Integer
-        Dim Variableindex as integer
+        Dim Variableindex As Integer
         Dim VariableCondition As Integer
         Dim VariableCompare As Integer
         Dim ChkSwitch As Integer
-        Dim Switchindex as integer
+        Dim Switchindex As Integer
         Dim SwitchCompare As Integer
         Dim ChkHasItem As Integer
-        Dim HasItemindex as integer
+        Dim HasItemindex As Integer
         Dim HasItemAmount As Integer
         Dim ChkSelfSwitch As Integer
-        Dim SelfSwitchindex as integer
+        Dim SelfSwitchindex As Integer
         Dim SelfSwitchCompare As Integer
         Dim ChkPlayerGender As Integer
         'End Conditions
@@ -423,7 +425,7 @@ Friend Module C_EventSystem
     End Sub
 
     Sub ClearEvent(ByVal EventNum As Integer)
-        If EventNum > Map.EventCount OrElse EventNum > UBound(Map.MapEvents) Then Exit Sub
+        If EventNum > Map.EventCount OrElse EventNum > Map.MapEvents.GetUpperBound(0) Then Exit Sub
         With Map.Events(EventNum)
             .Name = ""
             .PageCount = 0
@@ -611,11 +613,11 @@ newlist:
                                             FrmEditor_Events.lstCommands.Items.Add(indent & "@>" & "Conditional Branch: Player Switch [" & TmpEvent.Pages(CurPageNum).CommandList(curlist).Commands(i).ConditionalBranch.Data1 & ". " & Switches(TmpEvent.Pages(CurPageNum).CommandList(curlist).Commands(i).ConditionalBranch.Data1) & "] == " & "False")
                                         End If
                                     Case 2
-                                        FrmEditor_Events.lstCommands.Items.Add(indent & "@>" & "Conditional Branch: Player Has Item [" & Trim$(Item(TmpEvent.Pages(CurPageNum).CommandList(curlist).Commands(i).ConditionalBranch.Data1).Name) & "] x" & TmpEvent.Pages(CurPageNum).CommandList(curlist).Commands(i).ConditionalBranch.Data2)
+                                        FrmEditor_Events.lstCommands.Items.Add(indent & "@>" & "Conditional Branch: Player Has Item [" & Item(TmpEvent.Pages(CurPageNum).CommandList(curlist).Commands(i).ConditionalBranch.Data1).Name.Trim & "] x" & TmpEvent.Pages(CurPageNum).CommandList(curlist).Commands(i).ConditionalBranch.Data2)
                                     Case 3
-                                        FrmEditor_Events.lstCommands.Items.Add(indent & "@>" & "Conditional Branch: Player's Class Is [" & Trim$(Classes(TmpEvent.Pages(CurPageNum).CommandList(curlist).Commands(i).ConditionalBranch.Data1).Name) & "]")
+                                        FrmEditor_Events.lstCommands.Items.Add(indent & "@>" & "Conditional Branch: Player's Class Is [" & Classes(TmpEvent.Pages(CurPageNum).CommandList(curlist).Commands(i).ConditionalBranch.Data1).Name.Trim & "]")
                                     Case 4
-                                        FrmEditor_Events.lstCommands.Items.Add(indent & "@>" & "Conditional Branch: Player Knows Skill [" & Trim$(Skill(TmpEvent.Pages(CurPageNum).CommandList(curlist).Commands(i).ConditionalBranch.Data1).Name) & "]")
+                                        FrmEditor_Events.lstCommands.Items.Add(indent & "@>" & "Conditional Branch: Player Knows Skill [" & Skill(TmpEvent.Pages(CurPageNum).CommandList(curlist).Commands(i).ConditionalBranch.Data1).Name.Trim & "]")
                                     Case 5
                                         Select Case TmpEvent.Pages(CurPageNum).CommandList(curlist).Commands(i).ConditionalBranch.Data2
                                             Case 0
@@ -700,7 +702,7 @@ newlist:
                                 ReDim Preserve EventList(X)
                                 EventList(X).CommandList = curlist
                                 EventList(X).CommandNum = 0
-                                FrmEditor_Events.lstCommands.Items.Add(Mid(indent, 1, Len(indent) - 4) & " : " & "Else")
+                                FrmEditor_Events.lstCommands.Items.Add(indent.Substring(1, indent.Length - 4) & " : " & "Else")
                                 listleftoff(curlist) = i
                                 conditionalstage(curlist) = 2
                                 curlist = TmpEvent.Pages(CurPageNum).CommandList(curlist).Commands(i).ConditionalBranch.ElseCommandList
@@ -709,8 +711,8 @@ newlist:
                                 ReDim Preserve EventList(X)
                                 EventList(X).CommandList = curlist
                                 EventList(X).CommandNum = 0
-                                FrmEditor_Events.lstCommands.Items.Add(Mid(indent, 1, Len(indent) - 4) & " : " & "End Branch")
-                                indent = Mid(indent, 1, Len(indent) - 7)
+                                FrmEditor_Events.lstCommands.Items.Add(indent.Substring(1, indent.Length - 4) & " : " & "End Branch")
+                                indent = indent.Substring(1, indent.Length - 7)
                                 listleftoff(curlist) = i
                                 conditionalstage(curlist) = 0
                         End Select
@@ -722,20 +724,20 @@ newlist:
                                 EventList(X).CommandList = curlist
                                 EventList(X).CommandNum = i
                                 If TmpEvent.Pages(CurPageNum).CommandList(curlist).Commands(i).Data5 > 0 Then
-                                    FrmEditor_Events.lstCommands.Items.Add(indent & "@>" & "Show Choices - Prompt: " & Mid(TmpEvent.Pages(CurPageNum).CommandList(curlist).Commands(i).Text1, 1, 20) & "... - Face: " & TmpEvent.Pages(CurPageNum).CommandList(curlist).Commands(i).Data5)
+                                    FrmEditor_Events.lstCommands.Items.Add(indent & "@>" & "Show Choices - Prompt: " & TmpEvent.Pages(CurPageNum).CommandList(curlist).Commands(i).Text1.Substring(1, 20) & "... - Face: " & TmpEvent.Pages(CurPageNum).CommandList(curlist).Commands(i).Data5)
                                 Else
-                                    FrmEditor_Events.lstCommands.Items.Add(indent & "@>" & "Show Choices - Prompt: " & Mid(TmpEvent.Pages(CurPageNum).CommandList(curlist).Commands(i).Text1, 1, 20) & "... - No Face")
+                                    FrmEditor_Events.lstCommands.Items.Add(indent & "@>" & "Show Choices - Prompt: " & TmpEvent.Pages(CurPageNum).CommandList(curlist).Commands(i).Text1.Substring(1, 20) & "... - No Face")
                                 End If
                                 indent = indent & "       "
                                 listleftoff(curlist) = i
                                 conditionalstage(curlist) = 1
                                 GoTo newlist
                             Case 1
-                                If Trim$(TmpEvent.Pages(CurPageNum).CommandList(curlist).Commands(i).Text2) <> "" Then
+                                If TmpEvent.Pages(CurPageNum).CommandList(curlist).Commands(i).Text2.Trim <> "" Then
                                     ReDim Preserve EventList(X)
                                     EventList(X).CommandList = curlist
                                     EventList(X).CommandNum = 0
-                                    FrmEditor_Events.lstCommands.Items.Add(Mid(indent, 1, Len(indent) - 4) & " : " & "When [" & Trim$(TmpEvent.Pages(CurPageNum).CommandList(curlist).Commands(i).Text2) & "]")
+                                    FrmEditor_Events.lstCommands.Items.Add(indent.Substring(1, indent.Length - 4) & " : " & "When [" & TmpEvent.Pages(CurPageNum).CommandList(curlist).Commands(i).Text2.Trim & "]")
                                     listleftoff(curlist) = i
                                     conditionalstage(curlist) = 2
                                     curlist = TmpEvent.Pages(CurPageNum).CommandList(curlist).Commands(i).Data1
@@ -748,11 +750,11 @@ newlist:
                                     GoTo newlist
                                 End If
                             Case 2
-                                If Trim$(TmpEvent.Pages(CurPageNum).CommandList(curlist).Commands(i).Text3) <> "" Then
+                                If TmpEvent.Pages(CurPageNum).CommandList(curlist).Commands(i).Text3.Trim <> "" Then
                                     ReDim Preserve EventList(X)
                                     EventList(X).CommandList = curlist
                                     EventList(X).CommandNum = 0
-                                    FrmEditor_Events.lstCommands.Items.Add(Mid(indent, 1, Len(indent) - 4) & " : " & "When [" & Trim$(TmpEvent.Pages(CurPageNum).CommandList(curlist).Commands(i).Text3) & "]")
+                                    FrmEditor_Events.lstCommands.Items.Add(indent.Substring(1, indent.Length - 4) & " : " & "When [" & TmpEvent.Pages(CurPageNum).CommandList(curlist).Commands(i).Text3.Trim & "]")
                                     listleftoff(curlist) = i
                                     conditionalstage(curlist) = 3
                                     curlist = TmpEvent.Pages(CurPageNum).CommandList(curlist).Commands(i).Data2
@@ -765,11 +767,11 @@ newlist:
                                     GoTo newlist
                                 End If
                             Case 3
-                                If Trim$(TmpEvent.Pages(CurPageNum).CommandList(curlist).Commands(i).Text4) <> "" Then
+                                If TmpEvent.Pages(CurPageNum).CommandList(curlist).Commands(i).Text4.Trim <> "" Then
                                     ReDim Preserve EventList(X)
                                     EventList(X).CommandList = curlist
                                     EventList(X).CommandNum = 0
-                                    FrmEditor_Events.lstCommands.Items.Add(Mid(indent, 1, Len(indent) - 4) & " : " & "When [" & Trim$(TmpEvent.Pages(CurPageNum).CommandList(curlist).Commands(i).Text4) & "]")
+                                    FrmEditor_Events.lstCommands.Items.Add(indent.Substring(1, indent.Length - 4) & " : " & "When [" & TmpEvent.Pages(CurPageNum).CommandList(curlist).Commands(i).Text4.Trim & "]")
                                     listleftoff(curlist) = i
                                     conditionalstage(curlist) = 4
                                     curlist = TmpEvent.Pages(CurPageNum).CommandList(curlist).Commands(i).Data3
@@ -782,11 +784,11 @@ newlist:
                                     GoTo newlist
                                 End If
                             Case 4
-                                If Trim$(TmpEvent.Pages(CurPageNum).CommandList(curlist).Commands(i).Text5) <> "" Then
+                                If TmpEvent.Pages(CurPageNum).CommandList(curlist).Commands(i).Text5.Trim <> "" Then
                                     ReDim Preserve EventList(X)
                                     EventList(X).CommandList = curlist
                                     EventList(X).CommandNum = 0
-                                    FrmEditor_Events.lstCommands.Items.Add(Mid(indent, 1, Len(indent) - 4) & " : " & "When [" & Trim$(TmpEvent.Pages(CurPageNum).CommandList(curlist).Commands(i).Text5) & "]")
+                                    FrmEditor_Events.lstCommands.Items.Add(indent.Substring(1, indent.Length - 4) & " : " & "When [" & TmpEvent.Pages(CurPageNum).CommandList(curlist).Commands(i).Text5.Trim & "]")
                                     listleftoff(curlist) = i
                                     conditionalstage(curlist) = 5
                                     curlist = TmpEvent.Pages(CurPageNum).CommandList(curlist).Commands(i).Data4
@@ -802,8 +804,8 @@ newlist:
                                 ReDim Preserve EventList(X)
                                 EventList(X).CommandList = curlist
                                 EventList(X).CommandNum = 0
-                                FrmEditor_Events.lstCommands.Items.Add(Mid(indent, 1, Len(indent) - 4) & " : " & "Branch End")
-                                indent = Mid(indent, 1, Len(indent) - 7)
+                                FrmEditor_Events.lstCommands.Items.Add(indent.Substring(1, indent.Length - 4) & " : " & "Branch End")
+                                indent = indent.Substring(1, indent.Length - 7)
                                 listleftoff(curlist) = i
                                 conditionalstage(curlist) = 0
                         End Select
@@ -816,17 +818,17 @@ newlist:
                             Case EventType.EvAddText
                                 Select Case TmpEvent.Pages(CurPageNum).CommandList(curlist).Commands(i).Data2
                                     Case 0
-                                        FrmEditor_Events.lstCommands.Items.Add(indent & "@>" & "Add Text - " & Mid(TmpEvent.Pages(CurPageNum).CommandList(curlist).Commands(i).Text1, 1, 20) & "... - Color: " & GetColorString(TmpEvent.Pages(CurPageNum).CommandList(curlist).Commands(i).Data1) & " - Chat Type: Player")
+                                        FrmEditor_Events.lstCommands.Items.Add(indent & "@>" & "Add Text - " & TmpEvent.Pages(CurPageNum).CommandList(curlist).Commands(i).Text1.Substring(1, 20) & "... - Color: " & GetColorString(TmpEvent.Pages(CurPageNum).CommandList(curlist).Commands(i).Data1) & " - Chat Type: Player")
                                     Case 1
-                                        FrmEditor_Events.lstCommands.Items.Add(indent & "@>" & "Add Text - " & Mid(TmpEvent.Pages(CurPageNum).CommandList(curlist).Commands(i).Text1, 1, 20) & "... - Color: " & GetColorString(TmpEvent.Pages(CurPageNum).CommandList(curlist).Commands(i).Data1) & " - Chat Type: Map")
+                                        FrmEditor_Events.lstCommands.Items.Add(indent & "@>" & "Add Text - " & TmpEvent.Pages(CurPageNum).CommandList(curlist).Commands(i).Text1.Substring(1, 20) & "... - Color: " & GetColorString(TmpEvent.Pages(CurPageNum).CommandList(curlist).Commands(i).Data1) & " - Chat Type: Map")
                                     Case 2
-                                        FrmEditor_Events.lstCommands.Items.Add(indent & "@>" & "Add Text - " & Mid(TmpEvent.Pages(CurPageNum).CommandList(curlist).Commands(i).Text1, 1, 20) & "... - Color: " & GetColorString(TmpEvent.Pages(CurPageNum).CommandList(curlist).Commands(i).Data1) & " - Chat Type: Global")
+                                        FrmEditor_Events.lstCommands.Items.Add(indent & "@>" & "Add Text - " & TmpEvent.Pages(CurPageNum).CommandList(curlist).Commands(i).Text1.Substring(1, 20) & "... - Color: " & GetColorString(TmpEvent.Pages(CurPageNum).CommandList(curlist).Commands(i).Data1) & " - Chat Type: Global")
                                 End Select
                             Case EventType.EvShowText
                                 If TmpEvent.Pages(CurPageNum).CommandList(curlist).Commands(i).Data1 = 0 Then
-                                    FrmEditor_Events.lstCommands.Items.Add(indent & "@>" & "Show Text - " & Mid(TmpEvent.Pages(CurPageNum).CommandList(curlist).Commands(i).Text1, 1, 20) & "... - No Face")
+                                    FrmEditor_Events.lstCommands.Items.Add(indent & "@>" & "Show Text - " & TmpEvent.Pages(CurPageNum).CommandList(curlist).Commands(i).Text1.Substring(1, 20) & "... - No Face")
                                 Else
-                                    FrmEditor_Events.lstCommands.Items.Add(indent & "@>" & "Show Text - " & Mid(TmpEvent.Pages(CurPageNum).CommandList(curlist).Commands(i).Text1, 1, 20) & "... - Face: " & TmpEvent.Pages(CurPageNum).CommandList(curlist).Commands(i).Data1)
+                                    FrmEditor_Events.lstCommands.Items.Add(indent & "@>" & "Show Text - " & TmpEvent.Pages(CurPageNum).CommandList(curlist).Commands(i).Text1.Substring(1, 20) & "... - Face: " & TmpEvent.Pages(CurPageNum).CommandList(curlist).Commands(i).Data1)
                                 End If
                             Case EventType.EvPlayerVar
                                 Select Case TmpEvent.Pages(CurPageNum).CommandList(curlist).Commands(i).Data2
@@ -876,11 +878,11 @@ newlist:
                                 FrmEditor_Events.lstCommands.Items.Add(indent & "@>" & "Exit Event Processing")
                             Case EventType.EvChangeItems
                                 If TmpEvent.Pages(CurPageNum).CommandList(curlist).Commands(i).Data2 = 0 Then
-                                    FrmEditor_Events.lstCommands.Items.Add(indent & "@>" & "Set Item Amount of [" & Trim$(Item(TmpEvent.Pages(CurPageNum).CommandList(curlist).Commands(i).Data1).Name) & "] to " & TmpEvent.Pages(CurPageNum).CommandList(curlist).Commands(i).Data3)
+                                    FrmEditor_Events.lstCommands.Items.Add(indent & "@>" & "Set Item Amount of [" & Item(TmpEvent.Pages(CurPageNum).CommandList(curlist).Commands(i).Data1).Name.Trim & "] to " & TmpEvent.Pages(CurPageNum).CommandList(curlist).Commands(i).Data3)
                                 ElseIf TmpEvent.Pages(CurPageNum).CommandList(curlist).Commands(i).Data2 = 1 Then
-                                    FrmEditor_Events.lstCommands.Items.Add(indent & "@>" & "Give Player " & TmpEvent.Pages(CurPageNum).CommandList(curlist).Commands(i).Data3 & " " & Trim$(Item(TmpEvent.Pages(CurPageNum).CommandList(curlist).Commands(i).Data1).Name) & "(s)")
+                                    FrmEditor_Events.lstCommands.Items.Add(indent & "@>" & "Give Player " & TmpEvent.Pages(CurPageNum).CommandList(curlist).Commands(i).Data3 & " " & Item(TmpEvent.Pages(CurPageNum).CommandList(curlist).Commands(i).Data1).Name.Trim & "(s)")
                                 ElseIf TmpEvent.Pages(CurPageNum).CommandList(curlist).Commands(i).Data2 = 2 Then
-                                    FrmEditor_Events.lstCommands.Items.Add(indent & "@>" & "Take " & TmpEvent.Pages(CurPageNum).CommandList(curlist).Commands(i).Data3 & " " & Trim$(Item(TmpEvent.Pages(CurPageNum).CommandList(curlist).Commands(i).Data1).Name) & "(s) from Player.")
+                                    FrmEditor_Events.lstCommands.Items.Add(indent & "@>" & "Take " & TmpEvent.Pages(CurPageNum).CommandList(curlist).Commands(i).Data3 & " " & Item(TmpEvent.Pages(CurPageNum).CommandList(curlist).Commands(i).Data1).Name.Trim & "(s) from Player.")
                                 End If
                             Case EventType.EvRestoreHp
                                 FrmEditor_Events.lstCommands.Items.Add(indent & "@>" & "Restore Player HP")
@@ -892,12 +894,12 @@ newlist:
                                 FrmEditor_Events.lstCommands.Items.Add(indent & "@>" & "Set Player Level to " & TmpEvent.Pages(CurPageNum).CommandList(curlist).Commands(i).Data1)
                             Case EventType.EvChangeSkills
                                 If TmpEvent.Pages(CurPageNum).CommandList(curlist).Commands(i).Data2 = 0 Then
-                                    FrmEditor_Events.lstCommands.Items.Add(indent & "@>" & "Teach Player Skill [" & Trim$(Skill(TmpEvent.Pages(CurPageNum).CommandList(curlist).Commands(i).Data1).Name) & "]")
+                                    FrmEditor_Events.lstCommands.Items.Add(indent & "@>" & "Teach Player Skill [" & Skill(TmpEvent.Pages(CurPageNum).CommandList(curlist).Commands(i).Data1).Name.Trim & "]")
                                 ElseIf TmpEvent.Pages(CurPageNum).CommandList(curlist).Commands(i).Data2 = 1 Then
-                                    FrmEditor_Events.lstCommands.Items.Add(indent & "@>" & "Remove Player Skill [" & Trim$(Skill(TmpEvent.Pages(CurPageNum).CommandList(curlist).Commands(i).Data1).Name) & "]")
+                                    FrmEditor_Events.lstCommands.Items.Add(indent & "@>" & "Remove Player Skill [" & Skill(TmpEvent.Pages(CurPageNum).CommandList(curlist).Commands(i).Data1).Name.Trim & "]")
                                 End If
                             Case EventType.EvChangeClass
-                                FrmEditor_Events.lstCommands.Items.Add(indent & "@>" & "Set Player Class to " & Trim$(Classes(TmpEvent.Pages(CurPageNum).CommandList(curlist).Commands(i).Data1).Name))
+                                FrmEditor_Events.lstCommands.Items.Add(indent & "@>" & "Set Player Class to " & Classes(TmpEvent.Pages(CurPageNum).CommandList(curlist).Commands(i).Data1).Name.Trim)
                             Case EventType.EvChangeSprite
                                 FrmEditor_Events.lstCommands.Items.Add(indent & "@>" & "Set Player Sprite to " & TmpEvent.Pages(CurPageNum).CommandList(curlist).Commands(i).Data1)
                             Case EventType.EvChangeSex
@@ -929,26 +931,26 @@ newlist:
                                 End If
                             Case EventType.EvSetMoveRoute
                                 If TmpEvent.Pages(CurPageNum).CommandList(curlist).Commands(i).Data1 <= Map.EventCount Then
-                                    FrmEditor_Events.lstCommands.Items.Add(indent & "@>" & "Set Move Route for Event #" & TmpEvent.Pages(CurPageNum).CommandList(curlist).Commands(i).Data1 & " [" & Trim$(Map.Events(TmpEvent.Pages(CurPageNum).CommandList(curlist).Commands(i).Data1).Name) & "]")
+                                    FrmEditor_Events.lstCommands.Items.Add(indent & "@>" & "Set Move Route for Event #" & TmpEvent.Pages(CurPageNum).CommandList(curlist).Commands(i).Data1 & " [" & Map.Events(TmpEvent.Pages(CurPageNum).CommandList(curlist).Commands(i).Data1).Name.Trim & "]")
                                 Else
                                     FrmEditor_Events.lstCommands.Items.Add(indent & "@>" & "Set Move Route for COULD NOT FIND EVENT!")
                                 End If
                             Case EventType.EvPlayAnimation
                                 If TmpEvent.Pages(CurPageNum).CommandList(curlist).Commands(i).Data2 = 0 Then
-                                    FrmEditor_Events.lstCommands.Items.Add(indent & "@>" & "Play Animation " & TmpEvent.Pages(CurPageNum).CommandList(curlist).Commands(i).Data1 & " [" & Trim$(Animation(TmpEvent.Pages(CurPageNum).CommandList(curlist).Commands(i).Data1).Name) & "]" & " on Player")
+                                    FrmEditor_Events.lstCommands.Items.Add(indent & "@>" & "Play Animation " & TmpEvent.Pages(CurPageNum).CommandList(curlist).Commands(i).Data1 & " [" & Animation(TmpEvent.Pages(CurPageNum).CommandList(curlist).Commands(i).Data1).Name.Trim & "]" & " on Player")
                                 ElseIf TmpEvent.Pages(CurPageNum).CommandList(curlist).Commands(i).Data2 = 1 Then
-                                    FrmEditor_Events.lstCommands.Items.Add(indent & "@>" & "Play Animation " & TmpEvent.Pages(CurPageNum).CommandList(curlist).Commands(i).Data1 & " [" & Trim$(Animation(TmpEvent.Pages(CurPageNum).CommandList(curlist).Commands(i).Data1).Name) & "]" & " on Event #" & TmpEvent.Pages(CurPageNum).CommandList(curlist).Commands(i).Data3 & " [" & Trim$(Map.Events(TmpEvent.Pages(CurPageNum).CommandList(curlist).Commands(i).Data3).Name) & "]")
+                                    FrmEditor_Events.lstCommands.Items.Add(indent & "@>" & "Play Animation " & TmpEvent.Pages(CurPageNum).CommandList(curlist).Commands(i).Data1 & " [" & Animation(TmpEvent.Pages(CurPageNum).CommandList(curlist).Commands(i).Data1).Name.Trim & "]" & " on Event #" & TmpEvent.Pages(CurPageNum).CommandList(curlist).Commands(i).Data3 & " [" & Map.Events(TmpEvent.Pages(CurPageNum).CommandList(curlist).Commands(i).Data3).Name.Trim & "]")
                                 ElseIf TmpEvent.Pages(CurPageNum).CommandList(curlist).Commands(i).Data2 = 2 Then
-                                    FrmEditor_Events.lstCommands.Items.Add(indent & "@>" & "Play Animation " & TmpEvent.Pages(CurPageNum).CommandList(curlist).Commands(i).Data1 & " [" & Trim$(Animation(TmpEvent.Pages(CurPageNum).CommandList(curlist).Commands(i).Data1).Name) & "]" & " on Tile(" & TmpEvent.Pages(CurPageNum).CommandList(curlist).Commands(i).Data3 & "," & TmpEvent.Pages(CurPageNum).CommandList(curlist).Commands(i).Data4 & ")")
+                                    FrmEditor_Events.lstCommands.Items.Add(indent & "@>" & "Play Animation " & TmpEvent.Pages(CurPageNum).CommandList(curlist).Commands(i).Data1 & " [" & Animation(TmpEvent.Pages(CurPageNum).CommandList(curlist).Commands(i).Data1).Name.Trim & "]" & " on Tile(" & TmpEvent.Pages(CurPageNum).CommandList(curlist).Commands(i).Data3 & "," & TmpEvent.Pages(CurPageNum).CommandList(curlist).Commands(i).Data4 & ")")
                                 End If
                             Case EventType.EvCustomScript
                                 FrmEditor_Events.lstCommands.Items.Add(indent & "@>" & "Execute Custom Script Case: " & TmpEvent.Pages(CurPageNum).CommandList(curlist).Commands(i).Data1)
                             Case EventType.EvPlayBgm
-                                FrmEditor_Events.lstCommands.Items.Add(indent & "@>" & "Play BGM [" & Trim$(TmpEvent.Pages(CurPageNum).CommandList(curlist).Commands(i).Text1) & "]")
+                                FrmEditor_Events.lstCommands.Items.Add(indent & "@>" & "Play BGM [" & TmpEvent.Pages(CurPageNum).CommandList(curlist).Commands(i).Text1.Trim & "]")
                             Case EventType.EvFadeoutBgm
                                 FrmEditor_Events.lstCommands.Items.Add(indent & "@>" & "Fadeout BGM")
                             Case EventType.EvPlaySound
-                                FrmEditor_Events.lstCommands.Items.Add(indent & "@>" & "Play Sound [" & Trim$(TmpEvent.Pages(CurPageNum).CommandList(curlist).Commands(i).Text1) & "]")
+                                FrmEditor_Events.lstCommands.Items.Add(indent & "@>" & "Play Sound [" & TmpEvent.Pages(CurPageNum).CommandList(curlist).Commands(i).Text1.Trim & "]")
                             Case EventType.EvStopSound
                                 FrmEditor_Events.lstCommands.Items.Add(indent & "@>" & "Stop Sound")
                             Case EventType.EvOpenBank
@@ -956,7 +958,7 @@ newlist:
                             Case EventType.EvOpenMail
                                 FrmEditor_Events.lstCommands.Items.Add(indent & "@>" & "Open Mail Box")
                             Case EventType.EvOpenShop
-                                FrmEditor_Events.lstCommands.Items.Add(indent & "@>" & "Open Shop [" & CStr(TmpEvent.Pages(CurPageNum).CommandList(curlist).Commands(i).Data1) & ". " & Trim$(Shop(TmpEvent.Pages(CurPageNum).CommandList(curlist).Commands(i).Data1).Name) & "]")
+                                FrmEditor_Events.lstCommands.Items.Add(indent & "@>" & "Open Shop [" & CStr(TmpEvent.Pages(CurPageNum).CommandList(curlist).Commands(i).Data1) & ". " & Shop(TmpEvent.Pages(CurPageNum).CommandList(curlist).Commands(i).Data1).Name.Trim & "]")
                             Case EventType.EvSetAccess
                                 FrmEditor_Events.lstCommands.Items.Add(indent & "@>" & "Set Player Access [" & FrmEditor_Events.cmbSetAccess.Items(TmpEvent.Pages(CurPageNum).CommandList(curlist).Commands(i).Data1) & "]")
                             Case EventType.EvGiveExp
@@ -964,25 +966,25 @@ newlist:
                             Case EventType.EvShowChatBubble
                                 Select Case TmpEvent.Pages(CurPageNum).CommandList(curlist).Commands(i).Data1
                                     Case TargetType.Player
-                                        FrmEditor_Events.lstCommands.Items.Add(indent & "@>" & "Show Chat Bubble - " & Mid(TmpEvent.Pages(CurPageNum).CommandList(curlist).Commands(i).Text1, 1, 20) & "... - On Player")
+                                        FrmEditor_Events.lstCommands.Items.Add(indent & "@>" & "Show Chat Bubble - " & TmpEvent.Pages(CurPageNum).CommandList(curlist).Commands(i).Text1.Substring( 1, 20) & "... - On Player")
                                     Case TargetType.Npc
                                         If Map.Npc(TmpEvent.Pages(CurPageNum).CommandList(curlist).Commands(i).Data2) <= 0 Then
-                                            FrmEditor_Events.lstCommands.Items.Add(indent & "@>" & "Show Chat Bubble - " & Mid(TmpEvent.Pages(CurPageNum).CommandList(curlist).Commands(i).Text1, 1, 20) & "... - On NPC [" & CStr(TmpEvent.Pages(CurPageNum).CommandList(curlist).Commands(i).Data2) & ". ]")
+                                            FrmEditor_Events.lstCommands.Items.Add(indent & "@>" & "Show Chat Bubble - " & TmpEvent.Pages(CurPageNum).CommandList(curlist).Commands(i).Text1.Substring( 1, 20) & "... - On NPC [" & CStr(TmpEvent.Pages(CurPageNum).CommandList(curlist).Commands(i).Data2) & ". ]")
                                         Else
-                                            FrmEditor_Events.lstCommands.Items.Add(indent & "@>" & "Show Chat Bubble - " & Mid(TmpEvent.Pages(CurPageNum).CommandList(curlist).Commands(i).Text1, 1, 20) & "... - On NPC [" & CStr(TmpEvent.Pages(CurPageNum).CommandList(curlist).Commands(i).Data2) & ". " & Trim$(Npc(Map.Npc(TmpEvent.Pages(CurPageNum).CommandList(curlist).Commands(i).Data2)).Name) & "]")
+                                            FrmEditor_Events.lstCommands.Items.Add(indent & "@>" & "Show Chat Bubble - " & TmpEvent.Pages(CurPageNum).CommandList(curlist).Commands(i).Text1.Substring( 1, 20) & "... - On NPC [" & CStr(TmpEvent.Pages(CurPageNum).CommandList(curlist).Commands(i).Data2) & ". " & Npc(Map.Npc(TmpEvent.Pages(CurPageNum).CommandList(curlist).Commands(i).Data2)).Name.Trim & "]")
                                         End If
                                     Case TargetType.Event
-                                        FrmEditor_Events.lstCommands.Items.Add(indent & "@>" & "Show Chat Bubble - " & Mid(TmpEvent.Pages(CurPageNum).CommandList(curlist).Commands(i).Text1, 1, 20) & "... - On Event [" & CStr(TmpEvent.Pages(CurPageNum).CommandList(curlist).Commands(i).Data2) & ". " & Trim$(Map.Events(TmpEvent.Pages(CurPageNum).CommandList(curlist).Commands(i).Data2).Name) & "]")
+                                        FrmEditor_Events.lstCommands.Items.Add(indent & "@>" & "Show Chat Bubble - " & TmpEvent.Pages(CurPageNum).CommandList(curlist).Commands(i).Text1.Substring( 1, 20) & "... - On Event [" & CStr(TmpEvent.Pages(CurPageNum).CommandList(curlist).Commands(i).Data2) & ". " & Map.Events(TmpEvent.Pages(CurPageNum).CommandList(curlist).Commands(i).Data2).Name.Trim & "]")
                                 End Select
                             Case EventType.EvLabel
-                                FrmEditor_Events.lstCommands.Items.Add(indent & "@>" & "Label: [" & Trim$(TmpEvent.Pages(CurPageNum).CommandList(curlist).Commands(i).Text1) & "]")
+                                FrmEditor_Events.lstCommands.Items.Add(indent & "@>" & "Label: [" & TmpEvent.Pages(CurPageNum).CommandList(curlist).Commands(i).Text1.Trim & "]")
                             Case EventType.EvGotoLabel
-                                FrmEditor_Events.lstCommands.Items.Add(indent & "@>" & "Jump to Label: [" & Trim$(TmpEvent.Pages(CurPageNum).CommandList(curlist).Commands(i).Text1) & "]")
+                                FrmEditor_Events.lstCommands.Items.Add(indent & "@>" & "Jump to Label: [" & TmpEvent.Pages(CurPageNum).CommandList(curlist).Commands(i).Text1.Trim & "]")
                             Case EventType.EvSpawnNpc
                                 If Map.Npc(TmpEvent.Pages(CurPageNum).CommandList(curlist).Commands(i).Data1) <= 0 Then
                                     FrmEditor_Events.lstCommands.Items.Add(indent & "@>" & "Spawn NPC: [" & CStr(TmpEvent.Pages(CurPageNum).CommandList(curlist).Commands(i).Data1) & ". " & "]")
                                 Else
-                                    FrmEditor_Events.lstCommands.Items.Add(indent & "@>" & "Spawn NPC: [" & CStr(TmpEvent.Pages(CurPageNum).CommandList(curlist).Commands(i).Data1) & ". " & Trim$(Npc(Map.Npc(TmpEvent.Pages(CurPageNum).CommandList(curlist).Commands(i).Data1)).Name) & "]")
+                                    FrmEditor_Events.lstCommands.Items.Add(indent & "@>" & "Spawn NPC: [" & CStr(TmpEvent.Pages(CurPageNum).CommandList(curlist).Commands(i).Data1) & ". " & Npc(Map.Npc(TmpEvent.Pages(CurPageNum).CommandList(curlist).Commands(i).Data1)).Name.Trim & "]")
                                 End If
                             Case EventType.EvFadeIn
                                 FrmEditor_Events.lstCommands.Items.Add(indent & "@>" & "Fade In")
@@ -1010,25 +1012,25 @@ newlist:
                             Case EventType.EvWait
                                 FrmEditor_Events.lstCommands.Items.Add(indent & "@>" & "Wait " & CStr(TmpEvent.Pages(CurPageNum).CommandList(curlist).Commands(i).Data1) & " Ms")
                             Case EventType.EvBeginQuest
-                                FrmEditor_Events.lstCommands.Items.Add(indent & "@>" & "Begin Quest: " & CStr(TmpEvent.Pages(CurPageNum).CommandList(curlist).Commands(i).Data1) & ". " & Trim$(Quest(TmpEvent.Pages(CurPageNum).CommandList(curlist).Commands(i).Data1).Name))
+                                FrmEditor_Events.lstCommands.Items.Add(indent & "@>" & "Begin Quest: " & CStr(TmpEvent.Pages(CurPageNum).CommandList(curlist).Commands(i).Data1) & ". " & Quest(TmpEvent.Pages(CurPageNum).CommandList(curlist).Commands(i).Data1).Name.Trim)
                             Case EventType.EvEndQuest
-                                FrmEditor_Events.lstCommands.Items.Add(indent & "@>" & "End Quest: " & CStr(TmpEvent.Pages(CurPageNum).CommandList(curlist).Commands(i).Data1) & ". " & Trim$(Quest(TmpEvent.Pages(CurPageNum).CommandList(curlist).Commands(i).Data1).Name))
+                                FrmEditor_Events.lstCommands.Items.Add(indent & "@>" & "End Quest: " & CStr(TmpEvent.Pages(CurPageNum).CommandList(curlist).Commands(i).Data1) & ". " & Quest(TmpEvent.Pages(CurPageNum).CommandList(curlist).Commands(i).Data1).Name.Trim)
                             Case EventType.EvQuestTask
-                                FrmEditor_Events.lstCommands.Items.Add(indent & "@>" & "Complete Quest Task: " & CStr(TmpEvent.Pages(CurPageNum).CommandList(curlist).Commands(i).Data1) & ". " & Trim$(Quest(TmpEvent.Pages(CurPageNum).CommandList(curlist).Commands(i).Data1).Name) & " - Task# " & TmpEvent.Pages(CurPageNum).CommandList(curlist).Commands(i).Data2)
+                                FrmEditor_Events.lstCommands.Items.Add(indent & "@>" & "Complete Quest Task: " & CStr(TmpEvent.Pages(CurPageNum).CommandList(curlist).Commands(i).Data1) & ". " & Quest(TmpEvent.Pages(CurPageNum).CommandList(curlist).Commands(i).Data1).Name.Trim & " - Task# " & TmpEvent.Pages(CurPageNum).CommandList(curlist).Commands(i).Data2)
                             Case EventType.EvShowPicture
                                 Select Case TmpEvent.Pages(CurPageNum).CommandList(curlist).Commands(i).Data3
                                     Case 1
-                                        FrmEditor_Events.lstCommands.Items.Add(indent & "@>" & "Show Picture " & CStr(TmpEvent.Pages(CurPageNum).CommandList(curlist).Commands(i).Data1 + 1) & ": Pic=" & Str(TmpEvent.Pages(CurPageNum).CommandList(curlist).Commands(i).Data2) & " Top Left, X: " & Str(TmpEvent.Pages(CurPageNum).CommandList(curlist).Commands(i).Data4) & " Y: " & Str(TmpEvent.Pages(CurPageNum).CommandList(curlist).Commands(i).Data5))
+                                        FrmEditor_Events.lstCommands.Items.Add(indent & "@>" & "Show Picture " & CStr(TmpEvent.Pages(CurPageNum).CommandList(curlist).Commands(i).Data1 + 1) & ": Pic=" & TmpEvent.Pages(CurPageNum).CommandList(curlist).Commands(i).Data2 & " Top Left, X: " & TmpEvent.Pages(CurPageNum).CommandList(curlist).Commands(i).Data4 & " Y: " & TmpEvent.Pages(CurPageNum).CommandList(curlist).Commands(i).Data5)
                                     Case 2
-                                        FrmEditor_Events.lstCommands.Items.Add(indent & "@>" & "Show Picture " & CStr(TmpEvent.Pages(CurPageNum).CommandList(curlist).Commands(i).Data1 + 1) & ": Pic=" & Str(TmpEvent.Pages(CurPageNum).CommandList(curlist).Commands(i).Data2) & " Center Screen, X: " & Str(TmpEvent.Pages(CurPageNum).CommandList(curlist).Commands(i).Data4) & " Y: " & Str(TmpEvent.Pages(CurPageNum).CommandList(curlist).Commands(i).Data5))
+                                        FrmEditor_Events.lstCommands.Items.Add(indent & "@>" & "Show Picture " & CStr(TmpEvent.Pages(CurPageNum).CommandList(curlist).Commands(i).Data1 + 1) & ": Pic=" & TmpEvent.Pages(CurPageNum).CommandList(curlist).Commands(i).Data2 & " Center Screen, X: " & TmpEvent.Pages(CurPageNum).CommandList(curlist).Commands(i).Data4 & " Y: " & TmpEvent.Pages(CurPageNum).CommandList(curlist).Commands(i).Data5)
                                     Case 3
-                                        FrmEditor_Events.lstCommands.Items.Add(indent & "@>" & "Show Picture " & CStr(TmpEvent.Pages(CurPageNum).CommandList(curlist).Commands(i).Data1 + 1) & ": Pic=" & Str(TmpEvent.Pages(CurPageNum).CommandList(curlist).Commands(i).Data2) & " On Player, X: " & Str(TmpEvent.Pages(CurPageNum).CommandList(curlist).Commands(i).Data4) & " Y: " & Str(TmpEvent.Pages(CurPageNum).CommandList(curlist).Commands(i).Data5))
+                                        FrmEditor_Events.lstCommands.Items.Add(indent & "@>" & "Show Picture " & CStr(TmpEvent.Pages(CurPageNum).CommandList(curlist).Commands(i).Data1 + 1) & ": Pic=" & TmpEvent.Pages(CurPageNum).CommandList(curlist).Commands(i).Data2 & " On Player, X: " & TmpEvent.Pages(CurPageNum).CommandList(curlist).Commands(i).Data4 & " Y: " & TmpEvent.Pages(CurPageNum).CommandList(curlist).Commands(i).Data5)
                                 End Select
                             Case EventType.EvHidePicture
                                 FrmEditor_Events.lstCommands.Items.Add(indent & "@>" & "Hide Picture " & CStr(TmpEvent.Pages(CurPageNum).CommandList(curlist).Commands(i).Data1 + 1))
                             Case EventType.EvWaitMovement
                                 If TmpEvent.Pages(CurPageNum).CommandList(curlist).Commands(i).Data1 <= Map.EventCount Then
-                                    FrmEditor_Events.lstCommands.Items.Add(indent & "@>" & "Wait for Event #" & TmpEvent.Pages(CurPageNum).CommandList(curlist).Commands(i).Data1 & " [" & Trim$(Map.Events(TmpEvent.Pages(CurPageNum).CommandList(curlist).Commands(i).Data1).Name) & "] to complete move route.")
+                                    FrmEditor_Events.lstCommands.Items.Add(indent & "@>" & "Wait for Event #" & TmpEvent.Pages(CurPageNum).CommandList(curlist).Commands(i).Data1 & " [" & Map.Events(TmpEvent.Pages(CurPageNum).CommandList(curlist).Commands(i).Data1).Name.Trim & "] to complete move route.")
                                 Else
                                     FrmEditor_Events.lstCommands.Items.Add(indent & "@>" & "Wait for COULD NOT FIND EVENT to complete move route.")
                                 End If
@@ -1194,7 +1196,7 @@ newlist:
             Case EventType.EvShowText
                 TmpEvent.Pages(CurPageNum).CommandList(curlist).Commands(curslot).Index = Index
                 Dim tmptxt As String = ""
-                For i = 0 To UBound(FrmEditor_Events.txtShowText.Lines)
+                For i = 0 To FrmEditor_Events.txtShowText.Lines.GetUpperBound(0)
                     tmptxt = tmptxt & FrmEditor_Events.txtShowText.Lines(i)
                 Next
                 TmpEvent.Pages(CurPageNum).CommandList(curlist).Commands(curslot).Text1 = tmptxt
@@ -1477,7 +1479,7 @@ newlist:
 
         i = FrmEditor_Events.lstCommands.SelectedIndex
         If i = -1 Then Exit Sub
-        If i > UBound(EventList) Then Exit Sub
+        If i > EventList.GetUpperBound(0) Then Exit Sub
 
         FrmEditor_Events.fraConditionalBranch.Visible = False
         FrmEditor_Events.fraDialogue.BringToFront()
@@ -1724,7 +1726,7 @@ newlist:
                 FrmEditor_Events.cmbEvent.Enabled = True
                 For i = 1 To Map.EventCount
                     If i <> EditorEvent Then
-                        FrmEditor_Events.cmbEvent.Items.Add(Trim$(Map.Events(i).Name))
+                        FrmEditor_Events.cmbEvent.Items.Add(Map.Events(i).Name.Trim)
                         X = X + 1
                         ListOfEvents(X) = i
                         If i = TmpEvent.Pages(CurPageNum).CommandList(curlist).Commands(curslot).Data1 Then FrmEditor_Events.cmbEvent.SelectedIndex = X
@@ -1841,7 +1843,7 @@ newlist:
                 FrmEditor_Events.cmbPlayAnim.SelectedIndex = TmpEvent.Pages(CurPageNum).CommandList(curlist).Commands(curslot).Data1 - 1
                 FrmEditor_Events.cmbPlayAnimEvent.Items.Clear()
                 For i = 1 To Map.EventCount
-                    FrmEditor_Events.cmbPlayAnimEvent.Items.Add(i & ". " & Trim$(Map.Events(i).Name))
+                    FrmEditor_Events.cmbPlayAnimEvent.Items.Add(i & ". " & Map.Events(i).Name.Trim)
                 Next
                 FrmEditor_Events.cmbPlayAnimEvent.SelectedIndex = 0
                 If TmpEvent.Pages(CurPageNum).CommandList(curlist).Commands(curslot).Data2 = 0 Then
@@ -1867,7 +1869,7 @@ newlist:
                 FrmEditor_Events.fraCommands.Visible = False
             Case EventType.EvPlayBgm
                 IsEdit = True
-                For i = 1 To UBound(MusicCache)
+                For i = 1 To MusicCache.GetUpperBound(0)
                     If MusicCache(i) = TmpEvent.Pages(CurPageNum).CommandList(curlist).Commands(curslot).Text1 Then
                         FrmEditor_Events.cmbPlayBGM.SelectedIndex = i - 1
                     End If
@@ -1877,7 +1879,7 @@ newlist:
                 FrmEditor_Events.fraCommands.Visible = False
             Case EventType.EvPlaySound
                 IsEdit = True
-                For i = 1 To UBound(SoundCache)
+                For i = 1 To SoundCache.GetUpperBound(0)
                     If SoundCache(i) = TmpEvent.Pages(CurPageNum).CommandList(curlist).Commands(curslot).Text1 Then
                         FrmEditor_Events.cmbPlaySound.SelectedIndex = i - 1
                     End If
@@ -2009,7 +2011,7 @@ newlist:
                 FrmEditor_Events.cmbMoveWait.SelectedIndex = 0
                 For i = 1 To Map.EventCount
                     If i <> EditorEvent Then
-                        FrmEditor_Events.cmbMoveWait.Items.Add(Trim$(Map.Events(i).Name))
+                        FrmEditor_Events.cmbMoveWait.Items.Add(Map.Events(i).Name.Trim)
                         X = X + 1
                         ListOfEvents(X) = i
                         If i = TmpEvent.Pages(CurPageNum).CommandList(curlist).Commands(curslot).Data1 Then FrmEditor_Events.cmbMoveWait.SelectedIndex = X
@@ -2024,7 +2026,7 @@ newlist:
 
         i = FrmEditor_Events.lstCommands.SelectedIndex
         If i = -1 Then Exit Sub
-        If i > UBound(EventList) Then Exit Sub
+        If i > EventList.GetUpperBound(0) Then Exit Sub
         curlist = EventList(i).CommandList
         curslot = EventList(i).CommandNum
         If curlist = 0 Then Exit Sub
@@ -2085,7 +2087,7 @@ newlist:
 
         i = FrmEditor_Events.lstCommands.SelectedIndex
         If i = -1 Then Exit Sub
-        If i > UBound(EventList) Then Exit Sub
+        If i > EventList.GetUpperBound(0) Then Exit Sub
 
         curlist = EventList(i).CommandList
         curslot = EventList(i).CommandNum
@@ -2312,38 +2314,38 @@ newlist:
 #Region "Incoming Packets"
     Sub Packet_SpawnEvent(ByRef data() As Byte)
         Dim id As Integer
-        dim buffer as New ByteStream(Data)
-        id = Buffer.ReadInt32
+        Dim buffer As New ByteStream(data)
+        id = buffer.ReadInt32
         If id > Map.CurrentEvents Then
             Map.CurrentEvents = id
             ReDim Preserve Map.MapEvents(Map.CurrentEvents)
         End If
 
         With Map.MapEvents(id)
-            .Name = Buffer.ReadString
-            .dir = Buffer.ReadInt32
-            .ShowDir = .dir
-            .GraphicNum = Buffer.ReadInt32
-            .GraphicType = Buffer.ReadInt32
-            .GraphicX = Buffer.ReadInt32
-            .GraphicX2 = Buffer.ReadInt32
-            .GraphicY = Buffer.ReadInt32
-            .GraphicY2 = Buffer.ReadInt32
-            .MovementSpeed = Buffer.ReadInt32
+            .Name = buffer.ReadString
+            .Dir = buffer.ReadInt32
+            .ShowDir = .Dir
+            .GraphicNum = buffer.ReadInt32
+            .GraphicType = buffer.ReadInt32
+            .GraphicX = buffer.ReadInt32
+            .GraphicX2 = buffer.ReadInt32
+            .GraphicY = buffer.ReadInt32
+            .GraphicY2 = buffer.ReadInt32
+            .MovementSpeed = buffer.ReadInt32
             .Moving = 0
-            .X = Buffer.ReadInt32
-            .Y = Buffer.ReadInt32
+            .X = buffer.ReadInt32
+            .Y = buffer.ReadInt32
             .XOffset = 0
             .YOffset = 0
-            .Position = Buffer.ReadInt32
-            .Visible = Buffer.ReadInt32
-            .WalkAnim = Buffer.ReadInt32
-            .DirFix = Buffer.ReadInt32
-            .WalkThrough = Buffer.ReadInt32
-            .ShowName = Buffer.ReadInt32
-            .questnum = Buffer.ReadInt32
+            .Position = buffer.ReadInt32
+            .Visible = buffer.ReadInt32
+            .WalkAnim = buffer.ReadInt32
+            .DirFix = buffer.ReadInt32
+            .WalkThrough = buffer.ReadInt32
+            .ShowName = buffer.ReadInt32
+            .Questnum = buffer.ReadInt32
         End With
-        Buffer.Dispose()
+        buffer.Dispose()
 
     End Sub
 
@@ -2353,24 +2355,24 @@ newlist:
         Dim y As Integer
         Dim dir As Integer, showDir As Integer
         Dim movementSpeed As Integer
-        dim buffer as New ByteStream(Data)
-        id = Buffer.ReadInt32
-        X = Buffer.ReadInt32
-        Y = Buffer.ReadInt32
-        dir = Buffer.ReadInt32
-        ShowDir = Buffer.ReadInt32
-        MovementSpeed = Buffer.ReadInt32
+        Dim buffer As New ByteStream(data)
+        id = buffer.ReadInt32
+        x = buffer.ReadInt32
+        y = buffer.ReadInt32
+        dir = buffer.ReadInt32
+        showDir = buffer.ReadInt32
+        movementSpeed = buffer.ReadInt32
         If id > Map.CurrentEvents Then Exit Sub
 
         With Map.MapEvents(id)
-            .X = X
-            .Y = Y
-            .dir = dir
+            .X = x
+            .Y = y
+            .Dir = dir
             .XOffset = 0
             .YOffset = 0
             .Moving = 1
-            .ShowDir = ShowDir
-            .MovementSpeed = MovementSpeed
+            .ShowDir = showDir
+            .MovementSpeed = movementSpeed
 
             Select Case dir
                 Case DirectionType.Up
@@ -2390,13 +2392,13 @@ newlist:
     Sub Packet_EventDir(ByRef data() As Byte)
         Dim i As Integer
         Dim dir As Byte
-        dim buffer as New ByteStream(Data)
-        i = Buffer.ReadInt32
-        dir = Buffer.ReadInt32
+        Dim buffer As New ByteStream(data)
+        i = buffer.ReadInt32
+        dir = buffer.ReadInt32
         If i > Map.CurrentEvents Then Exit Sub
 
         With Map.MapEvents(i)
-            .dir = dir
+            .Dir = dir
             .ShowDir = dir
             .XOffset = 0
             .YOffset = 0
@@ -2407,121 +2409,121 @@ newlist:
 
     Sub Packet_SwitchesAndVariables(ByRef data() As Byte)
         Dim i As Integer
-        dim buffer as New ByteStream(Data)
+        Dim buffer As New ByteStream(data)
         For i = 1 To MaxSwitches
-            Switches(i) = Buffer.ReadString
+            Switches(i) = buffer.ReadString
         Next
         For i = 1 To MaxVariables
-            Variables(i) = Buffer.ReadString
+            Variables(i) = buffer.ReadString
         Next
 
-        Buffer.Dispose()
+        buffer.Dispose()
 
     End Sub
 
     Sub Packet_MapEventData(ByRef data() As Byte)
         Dim i As Integer, x As Integer, y As Integer, z As Integer, w As Integer
-        dim buffer as New ByteStream(Data)
+        Dim buffer As New ByteStream(data)
         'Event Data!
-        Map.EventCount = Buffer.ReadInt32
+        Map.EventCount = buffer.ReadInt32
         If Map.EventCount > 0 Then
             ReDim Map.Events(Map.EventCount)
             For i = 1 To Map.EventCount
                 With Map.Events(i)
-                    .Name = Buffer.ReadString
-                    .Globals = Buffer.ReadInt32
-                    .X = Buffer.ReadInt32
-                    .Y = Buffer.ReadInt32
-                    .PageCount = Buffer.ReadInt32
+                    .Name = buffer.ReadString
+                    .Globals = buffer.ReadInt32
+                    .X = buffer.ReadInt32
+                    .Y = buffer.ReadInt32
+                    .PageCount = buffer.ReadInt32
                 End With
                 If Map.Events(i).PageCount > 0 Then
                     ReDim Map.Events(i).Pages(Map.Events(i).PageCount)
-                    For X = 1 To Map.Events(i).PageCount
-                        With Map.Events(i).Pages(X)
-                            .chkVariable = Buffer.ReadInt32
-                            .VariableIndex = Buffer.ReadInt32
-                            .VariableCondition = Buffer.ReadInt32
-                            .VariableCompare = Buffer.ReadInt32
-                            .chkSwitch = Buffer.ReadInt32
-                            .SwitchIndex = Buffer.ReadInt32
-                            .SwitchCompare = Buffer.ReadInt32
-                            .chkHasItem = Buffer.ReadInt32
-                            .HasItemIndex = Buffer.ReadInt32
-                            .HasItemAmount = Buffer.ReadInt32
-                            .chkSelfSwitch = Buffer.ReadInt32
-                            .SelfSwitchIndex = Buffer.ReadInt32
-                            .SelfSwitchCompare = Buffer.ReadInt32
-                            .GraphicType = Buffer.ReadInt32
-                            .Graphic = Buffer.ReadInt32
-                            .GraphicX = Buffer.ReadInt32
-                            .GraphicY = Buffer.ReadInt32
-                            .GraphicX2 = Buffer.ReadInt32
-                            .GraphicY2 = Buffer.ReadInt32
-                            .MoveType = Buffer.ReadInt32
-                            .MoveSpeed = Buffer.ReadInt32
-                            .MoveFreq = Buffer.ReadInt32
-                            .MoveRouteCount = Buffer.ReadInt32
-                            .IgnoreMoveRoute = Buffer.ReadInt32
-                            .RepeatMoveRoute = Buffer.ReadInt32
+                    For x = 1 To Map.Events(i).PageCount
+                        With Map.Events(i).Pages(x)
+                            .ChkVariable = buffer.ReadInt32
+                            .Variableindex = buffer.ReadInt32
+                            .VariableCondition = buffer.ReadInt32
+                            .VariableCompare = buffer.ReadInt32
+                            .ChkSwitch = buffer.ReadInt32
+                            .Switchindex = buffer.ReadInt32
+                            .SwitchCompare = buffer.ReadInt32
+                            .ChkHasItem = buffer.ReadInt32
+                            .HasItemindex = buffer.ReadInt32
+                            .HasItemAmount = buffer.ReadInt32
+                            .ChkSelfSwitch = buffer.ReadInt32
+                            .SelfSwitchindex = buffer.ReadInt32
+                            .SelfSwitchCompare = buffer.ReadInt32
+                            .GraphicType = buffer.ReadInt32
+                            .Graphic = buffer.ReadInt32
+                            .GraphicX = buffer.ReadInt32
+                            .GraphicY = buffer.ReadInt32
+                            .GraphicX2 = buffer.ReadInt32
+                            .GraphicY2 = buffer.ReadInt32
+                            .MoveType = buffer.ReadInt32
+                            .MoveSpeed = buffer.ReadInt32
+                            .MoveFreq = buffer.ReadInt32
+                            .MoveRouteCount = buffer.ReadInt32
+                            .IgnoreMoveRoute = buffer.ReadInt32
+                            .RepeatMoveRoute = buffer.ReadInt32
                             If .MoveRouteCount > 0 Then
-                                ReDim Map.Events(i).Pages(X).MoveRoute(.MoveRouteCount)
-                                For Y = 1 To .MoveRouteCount
-                                    .MoveRoute(Y).Index = Buffer.ReadInt32
-                                    .MoveRoute(Y).Data1 = Buffer.ReadInt32
-                                    .MoveRoute(Y).Data2 = Buffer.ReadInt32
-                                    .MoveRoute(Y).Data3 = Buffer.ReadInt32
-                                    .MoveRoute(Y).Data4 = Buffer.ReadInt32
-                                    .MoveRoute(Y).Data5 = Buffer.ReadInt32
-                                    .MoveRoute(Y).Data6 = Buffer.ReadInt32
+                                ReDim Map.Events(i).Pages(x).MoveRoute(.MoveRouteCount)
+                                For y = 1 To .MoveRouteCount
+                                    .MoveRoute(y).Index = buffer.ReadInt32
+                                    .MoveRoute(y).Data1 = buffer.ReadInt32
+                                    .MoveRoute(y).Data2 = buffer.ReadInt32
+                                    .MoveRoute(y).Data3 = buffer.ReadInt32
+                                    .MoveRoute(y).Data4 = buffer.ReadInt32
+                                    .MoveRoute(y).Data5 = buffer.ReadInt32
+                                    .MoveRoute(y).Data6 = buffer.ReadInt32
                                 Next
                             End If
-                            .WalkAnim = Buffer.ReadInt32
-                            .DirFix = Buffer.ReadInt32
-                            .WalkThrough = Buffer.ReadInt32
-                            .ShowName = Buffer.ReadInt32
-                            .Trigger = Buffer.ReadInt32
-                            .CommandListCount = Buffer.ReadInt32
-                            .Position = Buffer.ReadInt32
-                            .Questnum = Buffer.ReadInt32
+                            .WalkAnim = buffer.ReadInt32
+                            .DirFix = buffer.ReadInt32
+                            .WalkThrough = buffer.ReadInt32
+                            .ShowName = buffer.ReadInt32
+                            .Trigger = buffer.ReadInt32
+                            .CommandListCount = buffer.ReadInt32
+                            .Position = buffer.ReadInt32
+                            .Questnum = buffer.ReadInt32
                         End With
-                        If Map.Events(i).Pages(X).CommandListCount > 0 Then
-                            ReDim Map.Events(i).Pages(X).CommandList(Map.Events(i).Pages(X).CommandListCount)
-                            For Y = 1 To Map.Events(i).Pages(X).CommandListCount
-                                Map.Events(i).Pages(X).CommandList(Y).CommandCount = Buffer.ReadInt32
-                                Map.Events(i).Pages(X).CommandList(Y).ParentList = Buffer.ReadInt32
-                                If Map.Events(i).Pages(X).CommandList(Y).CommandCount > 0 Then
-                                    ReDim Map.Events(i).Pages(X).CommandList(Y).Commands(Map.Events(i).Pages(X).CommandList(Y).CommandCount)
-                                    For z = 1 To Map.Events(i).Pages(X).CommandList(Y).CommandCount
-                                        With Map.Events(i).Pages(X).CommandList(Y).Commands(z)
-                                            .Index = Buffer.ReadInt32
-                                            .Text1 = Buffer.ReadString
-                                            .Text2 = Buffer.ReadString
-                                            .Text3 = Buffer.ReadString
-                                            .Text4 = Buffer.ReadString
-                                            .Text5 = Buffer.ReadString
-                                            .Data1 = Buffer.ReadInt32
-                                            .Data2 = Buffer.ReadInt32
-                                            .Data3 = Buffer.ReadInt32
-                                            .Data4 = Buffer.ReadInt32
-                                            .Data5 = Buffer.ReadInt32
-                                            .Data6 = Buffer.ReadInt32
-                                            .ConditionalBranch.CommandList = Buffer.ReadInt32
-                                            .ConditionalBranch.Condition = Buffer.ReadInt32
-                                            .ConditionalBranch.Data1 = Buffer.ReadInt32
-                                            .ConditionalBranch.Data2 = Buffer.ReadInt32
-                                            .ConditionalBranch.Data3 = Buffer.ReadInt32
-                                            .ConditionalBranch.ElseCommandList = Buffer.ReadInt32
-                                            .MoveRouteCount = Buffer.ReadInt32
+                        If Map.Events(i).Pages(x).CommandListCount > 0 Then
+                            ReDim Map.Events(i).Pages(x).CommandList(Map.Events(i).Pages(x).CommandListCount)
+                            For y = 1 To Map.Events(i).Pages(x).CommandListCount
+                                Map.Events(i).Pages(x).CommandList(y).CommandCount = buffer.ReadInt32
+                                Map.Events(i).Pages(x).CommandList(y).ParentList = buffer.ReadInt32
+                                If Map.Events(i).Pages(x).CommandList(y).CommandCount > 0 Then
+                                    ReDim Map.Events(i).Pages(x).CommandList(y).Commands(Map.Events(i).Pages(x).CommandList(y).CommandCount)
+                                    For z = 1 To Map.Events(i).Pages(x).CommandList(y).CommandCount
+                                        With Map.Events(i).Pages(x).CommandList(y).Commands(z)
+                                            .Index = buffer.ReadInt32
+                                            .Text1 = buffer.ReadString
+                                            .Text2 = buffer.ReadString
+                                            .Text3 = buffer.ReadString
+                                            .Text4 = buffer.ReadString
+                                            .Text5 = buffer.ReadString
+                                            .Data1 = buffer.ReadInt32
+                                            .Data2 = buffer.ReadInt32
+                                            .Data3 = buffer.ReadInt32
+                                            .Data4 = buffer.ReadInt32
+                                            .Data5 = buffer.ReadInt32
+                                            .Data6 = buffer.ReadInt32
+                                            .ConditionalBranch.CommandList = buffer.ReadInt32
+                                            .ConditionalBranch.Condition = buffer.ReadInt32
+                                            .ConditionalBranch.Data1 = buffer.ReadInt32
+                                            .ConditionalBranch.Data2 = buffer.ReadInt32
+                                            .ConditionalBranch.Data3 = buffer.ReadInt32
+                                            .ConditionalBranch.ElseCommandList = buffer.ReadInt32
+                                            .MoveRouteCount = buffer.ReadInt32
                                             If .MoveRouteCount > 0 Then
                                                 ReDim Preserve .MoveRoute(.MoveRouteCount)
                                                 For w = 1 To .MoveRouteCount
-                                                    .MoveRoute(w).Index = Buffer.ReadInt32
-                                                    .MoveRoute(w).Data1 = Buffer.ReadInt32
-                                                    .MoveRoute(w).Data2 = Buffer.ReadInt32
-                                                    .MoveRoute(w).Data3 = Buffer.ReadInt32
-                                                    .MoveRoute(w).Data4 = Buffer.ReadInt32
-                                                    .MoveRoute(w).Data5 = Buffer.ReadInt32
-                                                    .MoveRoute(w).Data6 = Buffer.ReadInt32
+                                                    .MoveRoute(w).Index = buffer.ReadInt32
+                                                    .MoveRoute(w).Data1 = buffer.ReadInt32
+                                                    .MoveRoute(w).Data2 = buffer.ReadInt32
+                                                    .MoveRoute(w).Data3 = buffer.ReadInt32
+                                                    .MoveRoute(w).Data4 = buffer.ReadInt32
+                                                    .MoveRoute(w).Data5 = buffer.ReadInt32
+                                                    .MoveRoute(w).Data6 = buffer.ReadInt32
                                                 Next
                                             End If
                                         End With
@@ -2534,22 +2536,22 @@ newlist:
             Next
         End If
         'End Event Data
-        Buffer.Dispose()
+        buffer.Dispose()
 
     End Sub
 
     Sub Packet_EventChat(ByRef data() As Byte)
         Dim i As Integer
         Dim choices As Integer
-        dim buffer as New ByteStream(Data)
-        EventReplyID = Buffer.ReadInt32
-        EventReplyPage = Buffer.ReadInt32
-        EventChatFace = Buffer.ReadInt32
-        EventText = Buffer.ReadString
+        Dim buffer As New ByteStream(data)
+        EventReplyId = buffer.ReadInt32
+        EventReplyPage = buffer.ReadInt32
+        EventChatFace = buffer.ReadInt32
+        EventText = buffer.ReadString
         If EventText = "" Then EventText = " "
         EventChat = True
         ShowEventLbl = True
-        choices = Buffer.ReadInt32
+        choices = buffer.ReadInt32
         InEvent = True
         For i = 1 To 4
             EventChoices(i) = ""
@@ -2560,13 +2562,13 @@ newlist:
         Else
             EventChatType = 1
             For i = 1 To choices
-                EventChoices(i) = Buffer.ReadString
+                EventChoices(i) = buffer.ReadString
                 EventChoiceVisible(i) = True
             Next
         End If
-        AnotherChat = Buffer.ReadInt32
+        AnotherChat = buffer.ReadInt32
 
-        Buffer.Dispose()
+        buffer.Dispose()
 
     End Sub
 
@@ -2579,25 +2581,25 @@ newlist:
     End Sub
 
     Sub Packet_HoldPlayer(ByRef data() As Byte)
-        dim buffer as New ByteStream(Data)
-        If Buffer.ReadInt32 = 0 Then
+        Dim buffer As New ByteStream(data)
+        If buffer.ReadInt32 = 0 Then
             HoldPlayer = True
         Else
             HoldPlayer = False
         End If
 
-        Buffer.Dispose()
+        buffer.Dispose()
 
     End Sub
 
     Sub Packet_PlayBGM(ByRef data() As Byte)
         Dim music As String
-        dim buffer as New ByteStream(Data)
-        music = Buffer.ReadString
+        Dim buffer As New ByteStream(data)
+        music = buffer.ReadString
 
         PlayMusic(music)
 
-        Buffer.Dispose()
+        buffer.Dispose()
     End Sub
 
     Sub Packet_FadeOutBGM(ByRef data() As Byte)
@@ -2607,12 +2609,12 @@ newlist:
 
     Sub Packet_PlaySound(ByRef data() As Byte)
         Dim sound As String
-        dim buffer as New ByteStream(Data)
-        sound = Buffer.ReadString
+        Dim buffer As New ByteStream(data)
+        sound = buffer.ReadString
 
         PlaySound(sound)
 
-        Buffer.Dispose()
+        buffer.Dispose()
     End Sub
 
     Sub Packet_StopSound(ByRef data() As Byte)
@@ -2621,8 +2623,8 @@ newlist:
 
     Sub Packet_SpecialEffect(ByRef data() As Byte)
         Dim effectType As Integer
-        dim buffer as New ByteStream(Data)
-        effectType = Buffer.ReadInt32
+        Dim buffer As New ByteStream(data)
+        effectType = buffer.ReadInt32
 
         Select Case effectType
             Case EffectTypeFadein
@@ -2636,51 +2638,51 @@ newlist:
             Case EffectTypeFlash
                 FlashTimer = GetTickCount() + 150
             Case EffectTypeFog
-                CurrentFog = Buffer.ReadInt32
-                CurrentFogSpeed = Buffer.ReadInt32
-                CurrentFogOpacity = Buffer.ReadInt32
+                CurrentFog = buffer.ReadInt32
+                CurrentFogSpeed = buffer.ReadInt32
+                CurrentFogOpacity = buffer.ReadInt32
             Case EffectTypeWeather
-                CurrentWeather = Buffer.ReadInt32
-                CurrentWeatherIntensity = Buffer.ReadInt32
+                CurrentWeather = buffer.ReadInt32
+                CurrentWeatherIntensity = buffer.ReadInt32
             Case EffectTypeTint
                 Map.HasMapTint = 1
-                CurrentTintR = Buffer.ReadInt32
-                CurrentTintG = Buffer.ReadInt32
-                CurrentTintB = Buffer.ReadInt32
-                CurrentTintA = Buffer.ReadInt32
+                CurrentTintR = buffer.ReadInt32
+                CurrentTintG = buffer.ReadInt32
+                CurrentTintB = buffer.ReadInt32
+                CurrentTintA = buffer.ReadInt32
         End Select
 
-        Buffer.Dispose()
+        buffer.Dispose()
     End Sub
 
 #End Region
 
 #Region "Outgoing Packets"
     Sub RequestSwitchesAndVariables()
-        dim buffer as New ByteStream(4)
+        Dim buffer As New ByteStream(4)
 
-        Buffer.WriteInt32(ClientPackets.CRequestSwitchesAndVariables)
-        Socket.SendData(Buffer.Data, Buffer.Head)
+        buffer.WriteInt32(ClientPacket.CRequestSwitchesAndVariables)
+        Network.SendData(buffer.ToPacket)
 
-        Buffer.Dispose()
+        buffer.Dispose()
     End Sub
 
     Sub SendSwitchesAndVariables()
         Dim i As Integer
-        dim buffer as New ByteStream(4)
+        Dim buffer As New ByteStream(4)
 
-        Buffer.WriteInt32(ClientPackets.CSwitchesAndVariables)
+        buffer.WriteInt32(ClientPacket.CSwitchesAndVariables)
 
         For i = 1 To MaxSwitches
-            buffer.WriteString((Trim$(Switches(i))))
+            buffer.WriteString((Switches(i).Trim))
         Next
         For i = 1 To MaxVariables
-            buffer.WriteString((Trim$(Variables(i))))
+            buffer.WriteString((Variables(i).Trim))
         Next
 
-        Socket.SendData(Buffer.Data, Buffer.Head)
+        Network.SendData(buffer.ToPacket)
 
-        Buffer.Dispose()
+        buffer.Dispose()
     End Sub
 #End Region
 
@@ -2701,7 +2703,7 @@ newlist:
                 Case 1
                     If FrmEditor_Events.nudGraphic.Value > 0 AndAlso FrmEditor_Events.nudGraphic.Value <= NumCharacters Then
                         'Load character from Contents into our sourceBitmap
-                        sourceBitmap = New Bitmap(Application.StartupPath & "/Data/graphics/characters/" & FrmEditor_Events.nudGraphic.Value & ".png")
+                        sourceBitmap = New Bitmap(Environment.CurrentDirectory & "/Data/graphics/characters/" & FrmEditor_Events.nudGraphic.Value & ".png")
                         targetBitmap = New Bitmap(sourceBitmap.Width, sourceBitmap.Height) 'Create our target Bitmap
 
                         g = Graphics.FromImage(targetBitmap)
@@ -2728,7 +2730,7 @@ newlist:
                 Case 2
                     If FrmEditor_Events.nudGraphic.Value > 0 AndAlso FrmEditor_Events.nudGraphic.Value <= NumTileSets Then
                         'Load tilesheet from Contents into our sourceBitmap
-                        sourceBitmap = New Bitmap(Application.StartupPath & "/Data/graphics/tilesets/" & FrmEditor_Events.nudGraphic.Value & ".png")
+                        sourceBitmap = New Bitmap(Environment.CurrentDirectory & "/Data/graphics/tilesets/" & FrmEditor_Events.nudGraphic.Value & ".png")
                         targetBitmap = New Bitmap(sourceBitmap.Width, sourceBitmap.Height) 'Create our target Bitmap
 
                         If TmpEvent.Pages(CurPageNum).GraphicX2 = 0 AndAlso TmpEvent.Pages(CurPageNum).GraphicY2 = 0 Then
@@ -2789,7 +2791,7 @@ newlist:
                     Case 1
                         If TmpEvent.Pages(CurPageNum).Graphic > 0 AndAlso TmpEvent.Pages(CurPageNum).Graphic <= NumCharacters Then
                             'Load character from Contents into our sourceBitmap
-                            sourceBitmap = New Bitmap(Application.StartupPath & GfxPath & "\characters\" & TmpEvent.Pages(CurPageNum).Graphic & ".png")
+                            sourceBitmap = New Bitmap(Environment.CurrentDirectory & GfxPath & "\characters\" & TmpEvent.Pages(CurPageNum).Graphic & ".png")
                             targetBitmap = New Bitmap(sourceBitmap.Width, sourceBitmap.Height) 'Create our target Bitmap
 
                             g = Graphics.FromImage(targetBitmap)
@@ -2811,7 +2813,7 @@ newlist:
                     Case 2
                         If TmpEvent.Pages(CurPageNum).Graphic > 0 AndAlso TmpEvent.Pages(CurPageNum).Graphic <= NumTileSets Then
                             'Load tilesheet from Contents into our sourceBitmap
-                            sourceBitmap = New Bitmap(Application.StartupPath & GfxPath & "tilesets\" & TmpEvent.Pages(CurPageNum).Graphic & ".png")
+                            sourceBitmap = New Bitmap(Environment.CurrentDirectory & GfxPath & "tilesets\" & TmpEvent.Pages(CurPageNum).Graphic & ".png")
                             targetBitmap = New Bitmap(sourceBitmap.Width, sourceBitmap.Height) 'Create our target Bitmap
 
                             If TmpEvent.Pages(CurPageNum).GraphicX2 = 0 AndAlso TmpEvent.Pages(CurPageNum).GraphicY2 = 0 Then
@@ -2869,10 +2871,10 @@ newlist:
 
         If Map.EventCount <= 0 Then Exit Sub
         For i = 1 To Map.EventCount
-            Width = 32
-            Height = 32
-            X = Map.Events(i).X * 32
-            Y = Map.Events(i).Y * 32
+            width = 32
+            height = 32
+            x = Map.Events(i).X * 32
+            y = Map.Events(i).Y * 32
             If Map.Events(i).PageCount <= 0 Then
                 With rec
                     .Y = 0
@@ -2988,34 +2990,34 @@ nextevent:
     Friend Sub DrawEvent(id As Integer) ' draw on map, outside the editor
         Dim x As Integer, y As Integer, width As Integer, height As Integer, sRect As Rectangle, anim As Integer, spritetop As Integer
 
-        If Map.MapEvents(Id).Visible = 0 Then Exit Sub
+        If Map.MapEvents(id).Visible = 0 Then Exit Sub
 
-        Select Case Map.MapEvents(Id).GraphicType
+        Select Case Map.MapEvents(id).GraphicType
             Case 0
                 Exit Sub
             Case 1
-                If Map.MapEvents(Id).GraphicNum <= 0 OrElse Map.MapEvents(Id).GraphicNum > NumCharacters Then Exit Sub
+                If Map.MapEvents(id).GraphicNum <= 0 OrElse Map.MapEvents(id).GraphicNum > NumCharacters Then Exit Sub
 
                 ' Reset frame
-                If Map.MapEvents(Id).Steps = 3 Then
-                    Anim = 0
-                ElseIf Map.MapEvents(Id).Steps = 1 Then
-                    Anim = 2
+                If Map.MapEvents(id).Steps = 3 Then
+                    anim = 0
+                ElseIf Map.MapEvents(id).Steps = 1 Then
+                    anim = 2
                 End If
 
-                Select Case Map.MapEvents(Id).dir
+                Select Case Map.MapEvents(id).Dir
                     Case DirectionType.Up
-                        If (Map.MapEvents(Id).YOffset > 8) Then Anim = Map.MapEvents(Id).Steps
+                        If (Map.MapEvents(id).YOffset > 8) Then anim = Map.MapEvents(id).Steps
                     Case DirectionType.Down
-                        If (Map.MapEvents(Id).YOffset < -8) Then Anim = Map.MapEvents(Id).Steps
+                        If (Map.MapEvents(id).YOffset < -8) Then anim = Map.MapEvents(id).Steps
                     Case DirectionType.Left
-                        If (Map.MapEvents(Id).XOffset > 8) Then Anim = Map.MapEvents(Id).Steps
+                        If (Map.MapEvents(id).XOffset > 8) Then anim = Map.MapEvents(id).Steps
                     Case DirectionType.Right
-                        If (Map.MapEvents(Id).XOffset < -8) Then Anim = Map.MapEvents(Id).Steps
+                        If (Map.MapEvents(id).XOffset < -8) Then anim = Map.MapEvents(id).Steps
                 End Select
 
                 ' Set the left
-                Select Case Map.MapEvents(Id).ShowDir
+                Select Case Map.MapEvents(id).ShowDir
                     Case DirectionType.Up
                         spritetop = 3
                     Case DirectionType.Right
@@ -3026,61 +3028,61 @@ nextevent:
                         spritetop = 1
                 End Select
 
-                If Map.MapEvents(Id).WalkAnim = 1 Then Anim = 0
-                If Map.MapEvents(Id).Moving = 0 Then Anim = Map.MapEvents(Id).GraphicX
+                If Map.MapEvents(id).WalkAnim = 1 Then anim = 0
+                If Map.MapEvents(id).Moving = 0 Then anim = Map.MapEvents(id).GraphicX
 
-                Width = CharacterGFXInfo(Map.MapEvents(Id).GraphicNum).Width / 4
-                Height = CharacterGFXInfo(Map.MapEvents(Id).GraphicNum).Height / 4
+                width = CharacterGfxInfo(Map.MapEvents(id).GraphicNum).Width / 4
+                height = CharacterGfxInfo(Map.MapEvents(id).GraphicNum).Height / 4
 
-                sRect = New Rectangle((Anim) * (CharacterGFXInfo(Map.MapEvents(Id).GraphicNum).Width / 4), spritetop * (CharacterGFXInfo(Map.MapEvents(Id).GraphicNum).Height / 4), (CharacterGFXInfo(Map.MapEvents(Id).GraphicNum).Width / 4), (CharacterGFXInfo(Map.MapEvents(Id).GraphicNum).Height / 4))
+                sRect = New Rectangle((anim) * (CharacterGfxInfo(Map.MapEvents(id).GraphicNum).Width / 4), spritetop * (CharacterGfxInfo(Map.MapEvents(id).GraphicNum).Height / 4), (CharacterGfxInfo(Map.MapEvents(id).GraphicNum).Width / 4), (CharacterGfxInfo(Map.MapEvents(id).GraphicNum).Height / 4))
                 ' Calculate the X
-                X = Map.MapEvents(Id).X * PicX + Map.MapEvents(Id).XOffset - ((CharacterGFXInfo(Map.MapEvents(Id).GraphicNum).Width / 4 - 32) / 2)
+                x = Map.MapEvents(id).X * PicX + Map.MapEvents(id).XOffset - ((CharacterGfxInfo(Map.MapEvents(id).GraphicNum).Width / 4 - 32) / 2)
 
                 ' Is the player's height more than 32..?
-                If (CharacterGFXInfo(Map.MapEvents(Id).GraphicNum).Height * 4) > 32 Then
+                If (CharacterGfxInfo(Map.MapEvents(id).GraphicNum).Height * 4) > 32 Then
                     ' Create a 32 pixel offset for larger sprites
-                    Y = Map.MapEvents(Id).Y * PicY + Map.MapEvents(Id).YOffset - ((CharacterGFXInfo(Map.MapEvents(Id).GraphicNum).Height / 4) - 32)
+                    y = Map.MapEvents(id).Y * PicY + Map.MapEvents(id).YOffset - ((CharacterGfxInfo(Map.MapEvents(id).GraphicNum).Height / 4) - 32)
                 Else
                     ' Proceed as normal
-                    Y = Map.MapEvents(Id).Y * PicY + Map.MapEvents(Id).YOffset
+                    y = Map.MapEvents(id).Y * PicY + Map.MapEvents(id).YOffset
                 End If
                 ' render the actual sprite
-                DrawCharacter(Map.MapEvents(Id).GraphicNum, X, Y, sRect)
+                DrawCharacter(Map.MapEvents(id).GraphicNum, x, y, sRect)
             Case 2
-                If Map.MapEvents(Id).GraphicNum < 1 OrElse Map.MapEvents(Id).GraphicNum > NumTileSets Then Exit Sub
-                If Map.MapEvents(Id).GraphicY2 > 0 OrElse Map.MapEvents(Id).GraphicX2 > 0 Then
+                If Map.MapEvents(id).GraphicNum < 1 OrElse Map.MapEvents(id).GraphicNum > NumTileSets Then Exit Sub
+                If Map.MapEvents(id).GraphicY2 > 0 OrElse Map.MapEvents(id).GraphicX2 > 0 Then
                     With sRect
-                        .X = Map.MapEvents(Id).GraphicX * 32
-                        .Y = Map.MapEvents(Id).GraphicY * 32
-                        .Width = Map.MapEvents(Id).GraphicX2 * 32
-                        .Height = Map.MapEvents(Id).GraphicY2 * 32
+                        .X = Map.MapEvents(id).GraphicX * 32
+                        .Y = Map.MapEvents(id).GraphicY * 32
+                        .Width = Map.MapEvents(id).GraphicX2 * 32
+                        .Height = Map.MapEvents(id).GraphicY2 * 32
                     End With
                 Else
                     With sRect
-                        .X = Map.MapEvents(Id).GraphicY * 32
+                        .X = Map.MapEvents(id).GraphicY * 32
                         .Height = .Top + 32
-                        .Y = Map.MapEvents(Id).GraphicX * 32
+                        .Y = Map.MapEvents(id).GraphicX * 32
                         .Width = .Left + 32
                     End With
                 End If
 
-                If TileSetTextureInfo(Map.MapEvents(Id).GraphicNum).IsLoaded = False Then
-                    LoadTexture(Map.MapEvents(Id).GraphicNum, 1)
+                If TileSetTextureInfo(Map.MapEvents(id).GraphicNum).IsLoaded = False Then
+                    LoadTexture(Map.MapEvents(id).GraphicNum, 1)
                 End If
                 ' we use it, lets update timer
-                With TileSetTextureInfo(Map.MapEvents(Id).GraphicNum)
+                With TileSetTextureInfo(Map.MapEvents(id).GraphicNum)
                     .TextureTimer = GetTickCount() + 100000
                 End With
 
-                X = Map.MapEvents(Id).X * 32
-                Y = Map.MapEvents(Id).Y * 32
-                X = X - ((sRect.Right - sRect.Left) / 2)
-                Y = Y - (sRect.Bottom - sRect.Top) + 32
+                x = Map.MapEvents(id).X * 32
+                y = Map.MapEvents(id).Y * 32
+                x = x - ((sRect.Right - sRect.Left) / 2)
+                y = y - (sRect.Bottom - sRect.Top) + 32
 
-                If Map.MapEvents(Id).GraphicY2 > 1 Then
-                    RenderSprite(TileSetSprite(Map.MapEvents(Id).GraphicNum), GameWindow, ConvertMapX(Map.MapEvents(Id).X * PicX), ConvertMapY(Map.MapEvents(Id).Y * PicY) - PicY, sRect.Left, sRect.Top, sRect.Width, sRect.Height)
+                If Map.MapEvents(id).GraphicY2 > 1 Then
+                    RenderSprite(TileSetSprite(Map.MapEvents(id).GraphicNum), GameWindow, ConvertMapX(Map.MapEvents(id).X * PicX), ConvertMapY(Map.MapEvents(id).Y * PicY) - PicY, sRect.Left, sRect.Top, sRect.Width, sRect.Height)
                 Else
-                    RenderSprite(TileSetSprite(Map.MapEvents(Id).GraphicNum), GameWindow, ConvertMapX(Map.MapEvents(Id).X * PicX), ConvertMapY(Map.MapEvents(Id).Y * PicY), sRect.Left, sRect.Top, sRect.Width, sRect.Height)
+                    RenderSprite(TileSetSprite(Map.MapEvents(id).GraphicNum), GameWindow, ConvertMapX(Map.MapEvents(id).X * PicX), ConvertMapY(Map.MapEvents(id).Y * PicY), sRect.Left, sRect.Top, sRect.Width, sRect.Height)
                 End If
 
         End Select
@@ -3092,21 +3094,21 @@ nextevent:
         Dim tmpY As Integer = 0
 
         'first render panel
-        RenderSprite(EventChatSprite, GameWindow, EventChatX, EventChatY, 0, 0, EventChatGFXInfo.Width, EventChatGFXInfo.Height)
+        RenderSprite(EventChatSprite, GameWindow, EventChatX, EventChatY, 0, 0, EventChatGfxInfo.Width, EventChatGfxInfo.Height)
 
-        With frmGame
+        With FrmGame
             'face
             If EventChatFace > 0 AndAlso EventChatFace < NumFaces Then
                 'render face
-                If FacesGFXInfo(EventChatFace).IsLoaded = False Then
+                If FacesGfxInfo(EventChatFace).IsLoaded = False Then
                     LoadTexture(EventChatFace, 7)
                 End If
 
                 'seeying we still use it, lets update timer
-                With FacesGFXInfo(EventChatFace)
+                With FacesGfxInfo(EventChatFace)
                     .TextureTimer = GetTickCount() + 100000
                 End With
-                RenderSprite(FacesSprite(EventChatFace), GameWindow, EventChatX + 12, EventChatY + 14, 0, 0, FacesGFXInfo(EventChatFace).Width, FacesGFXInfo(EventChatFace).Height)
+                RenderSprite(FacesSprite(EventChatFace), GameWindow, EventChatX + 12, EventChatY + 14, 0, 0, FacesGfxInfo(EventChatFace).Width, FacesGfxInfo(EventChatFace).Height)
                 EventChatTextX = 113
             Else
                 EventChatTextX = 14
@@ -3117,7 +3119,7 @@ nextevent:
             For i = 0 To txtArray.Count
                 If i = txtArray.Count Then Exit For
                 'draw text
-                DrawText(EventChatX + EventChatTextX, EventChatY + EventChatTextY + tmpY, Trim$(txtArray(i).Replace(vbCrLf, "")), SFML.Graphics.Color.White, SFML.Graphics.Color.Black, GameWindow, 13)
+                DrawText(EventChatX + EventChatTextX, EventChatY + EventChatTextY + tmpY, txtArray(i).Replace(Environment.NewLine, "").Trim, SFML.Graphics.Color.White, SFML.Graphics.Color.Black, GameWindow, 13)
                 tmpY = tmpY + 20
             Next
 
@@ -3126,30 +3128,30 @@ nextevent:
                 If EventChoiceVisible(1) Then
                     'Response1
                     temptext = EventChoices(1)
-                    DrawText(EventChatX + 10, EventChatY + 124, Trim(temptext), SFML.Graphics.Color.White, SFML.Graphics.Color.Black, GameWindow, 13)
+                    DrawText(EventChatX + 10, EventChatY + 124, temptext.Trim, SFML.Graphics.Color.White, SFML.Graphics.Color.Black, GameWindow, 13)
                 End If
 
                 If EventChoiceVisible(2) Then
                     'Response2
                     temptext = EventChoices(2)
-                    DrawText(EventChatX + 10, EventChatY + 146, Trim(temptext), SFML.Graphics.Color.White, SFML.Graphics.Color.Black, GameWindow, 13)
+                    DrawText(EventChatX + 10, EventChatY + 146, temptext.Trim, SFML.Graphics.Color.White, SFML.Graphics.Color.Black, GameWindow, 13)
                 End If
 
                 If EventChoiceVisible(3) Then
                     'Response3
                     temptext = EventChoices(3)
-                    DrawText(EventChatX + 226, EventChatY + 124, Trim(temptext), SFML.Graphics.Color.White, SFML.Graphics.Color.Black, GameWindow, 13)
+                    DrawText(EventChatX + 226, EventChatY + 124, temptext.Trim, SFML.Graphics.Color.White, SFML.Graphics.Color.Black, GameWindow, 13)
                 End If
 
                 If EventChoiceVisible(4) Then
                     'Response4
                     temptext = EventChoices(4)
-                    DrawText(EventChatX + 226, EventChatY + 146, Trim(temptext), SFML.Graphics.Color.White, SFML.Graphics.Color.Black, GameWindow, 13)
+                    DrawText(EventChatX + 226, EventChatY + 146, temptext.Trim, SFML.Graphics.Color.White, SFML.Graphics.Color.Black, GameWindow, 13)
                 End If
 
             Else
                 temptext = Strings.Get("events", "continue")
-                DrawText(EventChatX + 410, EventChatY + 156, Trim(temptext), SFML.Graphics.Color.White, SFML.Graphics.Color.Black, GameWindow, 13)
+                DrawText(EventChatX + 410, EventChatY + 156, temptext.Trim, SFML.Graphics.Color.White, SFML.Graphics.Color.Black, GameWindow, 13)
             End If
 
         End With
@@ -3161,42 +3163,42 @@ nextevent:
 
     Sub ProcessEventMovement(id As Integer)
 
-        If Id > Map.EventCount Then Exit Sub
-        If Id > Map.MapEvents.Length Then Exit Sub
+        If id > Map.EventCount Then Exit Sub
+        If id > Map.MapEvents.Length Then Exit Sub
 
-        If Map.MapEvents(Id).Moving = 1 Then
-            Select Case Map.MapEvents(Id).dir
+        If Map.MapEvents(id).Moving = 1 Then
+            Select Case Map.MapEvents(id).Dir
                 Case DirectionType.Up
-                    Map.MapEvents(Id).YOffset = Map.MapEvents(Id).YOffset - ((ElapsedTime / 1000) * (Map.MapEvents(Id).MovementSpeed * SizeX))
-                    If Map.MapEvents(Id).YOffset < 0 Then Map.MapEvents(Id).YOffset = 0
+                    Map.MapEvents(id).YOffset = Map.MapEvents(id).YOffset - ((ElapsedTime / 1000) * (Map.MapEvents(id).MovementSpeed * SizeX))
+                    If Map.MapEvents(id).YOffset < 0 Then Map.MapEvents(id).YOffset = 0
                 Case DirectionType.Down
-                    Map.MapEvents(Id).YOffset = Map.MapEvents(Id).YOffset + ((ElapsedTime / 1000) * (Map.MapEvents(Id).MovementSpeed * SizeX))
-                    If Map.MapEvents(Id).YOffset > 0 Then Map.MapEvents(Id).YOffset = 0
+                    Map.MapEvents(id).YOffset = Map.MapEvents(id).YOffset + ((ElapsedTime / 1000) * (Map.MapEvents(id).MovementSpeed * SizeX))
+                    If Map.MapEvents(id).YOffset > 0 Then Map.MapEvents(id).YOffset = 0
                 Case DirectionType.Left
-                    Map.MapEvents(Id).XOffset = Map.MapEvents(Id).XOffset - ((ElapsedTime / 1000) * (Map.MapEvents(Id).MovementSpeed * SizeX))
-                    If Map.MapEvents(Id).XOffset < 0 Then Map.MapEvents(Id).XOffset = 0
+                    Map.MapEvents(id).XOffset = Map.MapEvents(id).XOffset - ((ElapsedTime / 1000) * (Map.MapEvents(id).MovementSpeed * SizeX))
+                    If Map.MapEvents(id).XOffset < 0 Then Map.MapEvents(id).XOffset = 0
                 Case DirectionType.Right
-                    Map.MapEvents(Id).XOffset = Map.MapEvents(Id).XOffset + ((ElapsedTime / 1000) * (Map.MapEvents(Id).MovementSpeed * SizeX))
-                    If Map.MapEvents(Id).XOffset > 0 Then Map.MapEvents(Id).XOffset = 0
+                    Map.MapEvents(id).XOffset = Map.MapEvents(id).XOffset + ((ElapsedTime / 1000) * (Map.MapEvents(id).MovementSpeed * SizeX))
+                    If Map.MapEvents(id).XOffset > 0 Then Map.MapEvents(id).XOffset = 0
             End Select
             ' Check if completed walking over to the next tile
-            If Map.MapEvents(Id).Moving > 0 Then
-                If Map.MapEvents(Id).dir = DirectionType.Right OrElse Map.MapEvents(Id).dir = DirectionType.Down Then
-                    If (Map.MapEvents(Id).XOffset >= 0) AndAlso (Map.MapEvents(Id).YOffset >= 0) Then
-                        Map.MapEvents(Id).Moving = 0
-                        If Map.MapEvents(Id).Steps = 1 Then
-                            Map.MapEvents(Id).Steps = 3
+            If Map.MapEvents(id).Moving > 0 Then
+                If Map.MapEvents(id).Dir = DirectionType.Right OrElse Map.MapEvents(id).Dir = DirectionType.Down Then
+                    If (Map.MapEvents(id).XOffset >= 0) AndAlso (Map.MapEvents(id).YOffset >= 0) Then
+                        Map.MapEvents(id).Moving = 0
+                        If Map.MapEvents(id).Steps = 1 Then
+                            Map.MapEvents(id).Steps = 3
                         Else
-                            Map.MapEvents(Id).Steps = 1
+                            Map.MapEvents(id).Steps = 1
                         End If
                     End If
                 Else
-                    If (Map.MapEvents(Id).XOffset <= 0) AndAlso (Map.MapEvents(Id).YOffset <= 0) Then
-                        Map.MapEvents(Id).Moving = 0
-                        If Map.MapEvents(Id).Steps = 1 Then
-                            Map.MapEvents(Id).Steps = 3
+                    If (Map.MapEvents(id).XOffset <= 0) AndAlso (Map.MapEvents(id).YOffset <= 0) Then
+                        Map.MapEvents(id).Moving = 0
+                        If Map.MapEvents(id).Steps = 1 Then
+                            Map.MapEvents(id).Steps = 3
                         Else
-                            Map.MapEvents(Id).Steps = 1
+                            Map.MapEvents(id).Steps = 1
                         End If
                     End If
                 End If
@@ -3207,7 +3209,7 @@ nextevent:
 
     Friend Function GetColorString(color As Integer)
 
-        Select Case Color
+        Select Case color
             Case 0
                 GetColorString = "Black"
             Case 1
@@ -3266,7 +3268,7 @@ nextevent:
         Else
             EventChat = False
         End If
-        pnlEventChatVisible = False
+        PnlEventChatVisible = False
     End Sub
 
     Friend Sub ResetEventdata()
@@ -3275,7 +3277,7 @@ nextevent:
             Map.CurrentEvents = 0
             With Map.MapEvents(i)
                 .Name = ""
-                .dir = 0
+                .Dir = 0
                 .ShowDir = 0
                 .GraphicNum = 0
                 .GraphicType = 0
@@ -3295,10 +3297,1898 @@ nextevent:
                 .DirFix = 0
                 .WalkThrough = 0
                 .ShowName = 0
-                .questnum = 0
+                .Questnum = 0
             End With
         Next
     End Sub
 #End Region
 
 End Module
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

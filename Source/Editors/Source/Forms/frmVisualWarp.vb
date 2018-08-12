@@ -30,10 +30,10 @@ Friend Class FrmVisualWarp
 
         If lstMaps.SelectedIndex < 0 Then Exit Sub
 
-        If File.Exists(Application.StartupPath & "\Data\Cache\Map" & lstMaps.SelectedIndex + 1 & ".png") Then
+        If File.Exists(Environment.CurrentDirectory & "\Data\Cache\Map" & lstMaps.SelectedIndex + 1 & ".png") Then
             g = picPreview.CreateGraphics
 
-            Dim mapsprite As Bitmap = New Bitmap(Application.StartupPath & "\Data\Cache\Map" & lstMaps.SelectedIndex + 1 & ".png")
+            Dim mapsprite As Bitmap = New Bitmap(Environment.CurrentDirectory & "\Data\Cache\Map" & lstMaps.SelectedIndex + 1 & ".png")
 
             picPreview.Width = mapsprite.Width
             picPreview.Height = mapsprite.Height

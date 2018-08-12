@@ -9,16 +9,21 @@
     <Import_RootNamespace>Engine</Import_RootNamespace>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="$(MSBuildThisFileDirectory)Time.vb" />
-    <Compile Include="$(MSBuildThisFileDirectory)Globals\Constants.vb" />
-    <Compile Include="$(MSBuildThisFileDirectory)Globals\Enums.vb" />
-    <Compile Include="$(MSBuildThisFileDirectory)Configuration\Language.vb" />
-    <Compile Include="$(MSBuildThisFileDirectory)Packets.vb" />
-    <Compile Include="$(MSBuildThisFileDirectory)Strings.vb" />
-    <Compile Include="$(MSBuildThisFileDirectory)Types.vb" />
+    <Compile Include="$(MSBuildThisFileDirectory)Properties\GlobalAssemblyInfo.vb" />
+    <Compile Include="$(MSBuildThisFileDirectory)Source\Configuration\Controls.vb" />
+    <Compile Include="$(MSBuildThisFileDirectory)Source\Configuration\Encryption.vb" />
+    <Compile Include="$(MSBuildThisFileDirectory)Source\Configuration\Settings.vb" />
+    <Compile Include="$(MSBuildThisFileDirectory)Source\Globals\Paths.vb" />
+    <Compile Include="$(MSBuildThisFileDirectory)Source\Network\B_Config.vb" />
+    <Compile Include="$(MSBuildThisFileDirectory)Source\Time.vb" />
+    <Compile Include="$(MSBuildThisFileDirectory)Source\Globals\Constants.vb" />
+    <Compile Include="$(MSBuildThisFileDirectory)Source\Globals\Enums.vb" />
+    <Compile Include="$(MSBuildThisFileDirectory)Source\Configuration\Language.vb" />
+    <Compile Include="$(MSBuildThisFileDirectory)Source\Network\B_Packets.vb" />
+    <Compile Include="$(MSBuildThisFileDirectory)Source\Configuration\Strings%28RemoveSoon%29.vb" />
+    <Compile Include="$(MSBuildThisFileDirectory)Source\Types.vb" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="$(MSBuildThisFileDirectory)Globals\" />
-    <Folder Include="$(MSBuildThisFileDirectory)Configuration\" />
+    <Folder Include="$(MSBuildThisFileDirectory)Source\General\" />
   </ItemGroup>
 </Project>

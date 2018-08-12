@@ -9,13 +9,25 @@ Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "Server", "Source\Server\Ser
 EndProject
 Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "Bindings", "Source\Bindings\Bindings.shproj", "{71445CA4-1713-4144-8CF5-2AB69788D6FC}"
 EndProject
-Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "Editors", "Source\Editors\Editors.vbproj", "{332AA7A4-686D-4808-BA75-55D705118314}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Orion", "Orion", "{BB9F862F-345F-4761-BBAC-B0D306E95835}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "PJU", "PJU", "{428749CD-1C55-4B3E-A95F-6CE8185C1E85}"
+EndProject
+Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "Server_World", "..\..\..\Desktop\2d Game Engine Work\Project Unlimited New\Source\Server_World\Server_World.vbproj", "{8878F95A-9583-4BF3-810E-0E9DA653EECD}"
+EndProject
+Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "Server_Login", "..\..\..\Desktop\2d Game Engine Work\Project Unlimited New\Source\Server_Login\Server_Login.vbproj", "{82973FAA-213C-47F6-A005-D21470F8BD17}"
+EndProject
+Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "Client_Launcher", "..\..\..\Desktop\2d Game Engine Work\Project Unlimited New\Source\Client_Launcher\Client_Launcher.vbproj", "{81BE0C3F-616D-4621-8750-75B04C7DDCFC}"
+EndProject
+Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "Client_Game", "..\..\..\Desktop\2d Game Engine Work\Project Unlimited New\Source\Client_Game\Client_Game.vbproj", "{92668CEA-62A6-4E3F-8ABB-6F4CE67BC039}"
+EndProject
+Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "Bindings", "..\..\..\Desktop\2d Game Engine Work\Project Unlimited New\Source\Bindings\Bindings.shproj", "{7507CE88-AB8C-4CBD-AA1A-115505BC008E}"
 EndProject
 Global
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution
-		Source\Bindings\Bindings.projitems*{332aa7a4-686d-4808-ba75-55d705118314}*SharedItemsImports = 4
 		Source\Bindings\Bindings.projitems*{531b337c-bc02-44ed-90c2-c448fe5190a2}*SharedItemsImports = 4
 		Source\Bindings\Bindings.projitems*{71445ca4-1713-4144-8cf5-2ab69788d6fc}*SharedItemsImports = 13
+		..\..\..\Desktop\2d Game Engine Work\Project Unlimited New\Source\Bindings\Bindings.projitems*{7507ce88-ab8c-4cbd-aa1a-115505bc008e}*SharedItemsImports = 13
 		Source\Bindings\Bindings.projitems*{b554fd23-0844-49d1-a05a-d79cead3fa7a}*SharedItemsImports = 4
 	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -31,13 +43,29 @@ Global
 		{B554FD23-0844-49D1-A05A-D79CEAD3FA7A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B554FD23-0844-49D1-A05A-D79CEAD3FA7A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B554FD23-0844-49D1-A05A-D79CEAD3FA7A}.Release|Any CPU.Build.0 = Release|Any CPU
-		{332AA7A4-686D-4808-BA75-55D705118314}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{332AA7A4-686D-4808-BA75-55D705118314}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{332AA7A4-686D-4808-BA75-55D705118314}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{332AA7A4-686D-4808-BA75-55D705118314}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8878F95A-9583-4BF3-810E-0E9DA653EECD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8878F95A-9583-4BF3-810E-0E9DA653EECD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{82973FAA-213C-47F6-A005-D21470F8BD17}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{82973FAA-213C-47F6-A005-D21470F8BD17}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{81BE0C3F-616D-4621-8750-75B04C7DDCFC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{81BE0C3F-616D-4621-8750-75B04C7DDCFC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{81BE0C3F-616D-4621-8750-75B04C7DDCFC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{81BE0C3F-616D-4621-8750-75B04C7DDCFC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{92668CEA-62A6-4E3F-8ABB-6F4CE67BC039}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{92668CEA-62A6-4E3F-8ABB-6F4CE67BC039}.Release|Any CPU.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{531B337C-BC02-44ED-90C2-C448FE5190A2} = {BB9F862F-345F-4761-BBAC-B0D306E95835}
+		{B554FD23-0844-49D1-A05A-D79CEAD3FA7A} = {BB9F862F-345F-4761-BBAC-B0D306E95835}
+		{71445CA4-1713-4144-8CF5-2AB69788D6FC} = {BB9F862F-345F-4761-BBAC-B0D306E95835}
+		{8878F95A-9583-4BF3-810E-0E9DA653EECD} = {428749CD-1C55-4B3E-A95F-6CE8185C1E85}
+		{82973FAA-213C-47F6-A005-D21470F8BD17} = {428749CD-1C55-4B3E-A95F-6CE8185C1E85}
+		{81BE0C3F-616D-4621-8750-75B04C7DDCFC} = {428749CD-1C55-4B3E-A95F-6CE8185C1E85}
+		{92668CEA-62A6-4E3F-8ABB-6F4CE67BC039} = {428749CD-1C55-4B3E-A95F-6CE8185C1E85}
+		{7507CE88-AB8C-4CBD-AA1A-115505BC008E} = {428749CD-1C55-4B3E-A95F-6CE8185C1E85}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {81068886-B6EA-4538-A59C-BC678FE0DEAB}

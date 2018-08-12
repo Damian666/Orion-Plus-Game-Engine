@@ -1,4 +1,4 @@
-﻿Imports System.Drawing
+Imports System.Drawing
 Imports System.Windows.Forms
 Imports ASFW
 
@@ -191,8 +191,8 @@ Friend Module C_GuiFunctions
                     ElseIf X > ActionPanelX + SkillBtnX AndAlso X < ActionPanelX + SkillBtnX + 48 AndAlso Y > ActionPanelY + SkillBtnY AndAlso Y < ActionPanelY + SkillBtnY + 32 Then
                         PlaySound("Click.ogg")
                         Buffer = New ByteStream(4)
-                        Buffer.WriteInt32(ClientPackets.CSkills)
-                        Socket.SendData(Buffer.Data, Buffer.Head)
+                        Buffer.WriteInt32(ClientPacket.CSkills)
+                        Network.SendData(buffer.ToPacket)
                         Buffer.Dispose()
                         pnlSkillsVisible = Not pnlSkillsVisible
                         pnlInventoryVisible = False
@@ -201,7 +201,7 @@ Friend Module C_GuiFunctions
                         'Char
                     ElseIf X > ActionPanelX + CharBtnX AndAlso X < ActionPanelX + CharBtnX + 48 AndAlso Y > ActionPanelY + CharBtnY AndAlso Y < ActionPanelY + CharBtnY + 32 Then
                         PlaySound("Click.ogg")
-                        SendRequestPlayerData()
+                        Network.SendRequestPlayerData()
                         pnlCharacterVisible = Not pnlCharacterVisible
                         pnlInventoryVisible = False
                         pnlSkillsVisible = False
@@ -229,7 +229,7 @@ Friend Module C_GuiFunctions
                     ElseIf X > ActionPanelX + ExitBtnX AndAlso X < ActionPanelX + ExitBtnX + 48 AndAlso Y > ActionPanelY + ExitBtnY AndAlso Y < ActionPanelY + ExitBtnY + 32 Then
                         PlaySound("Click.ogg")
                         frmAdmin.Dispose()
-                        SendLeaveGame()
+                        Network.SendLeaveGame()
                         'DestroyGame()
 
                         CheckGuiClick = True
@@ -264,8 +264,8 @@ Friend Module C_GuiFunctions
                         CheckGuiClick = True
                     Else
                         Buffer = New ByteStream(4)
-                        Buffer.WriteInt32(ClientPackets.CSkills)
-                        Socket.SendData(Buffer.Data, Buffer.Head)
+                        Buffer.WriteInt32(ClientPacket.CSkills)
+                        Network.SendData(buffer.ToPacket)
                         Buffer.Dispose()
                         pnlSkillsVisible = True
                         AddText("Click on the skill you want to place here", QColorType.TellColor)
@@ -322,42 +322,42 @@ Friend Module C_GuiFunctions
                     If X > CharWindowX + StrengthUpgradeX AndAlso X < CharWindowX + StrengthUpgradeX + 10 AndAlso Y > CharWindowY + StrengthUpgradeY AndAlso Y < CharWindowY + StrengthUpgradeY + 10 Then
                         If Not GetPlayerPOINTS(MyIndex) = 0 Then
                             PlaySound("Click.ogg")
-                            SendTrainStat(1)
+                            Network.SendTrainStat(1)
                         End If
                     End If
                     'Endurance
                     If X > CharWindowX + EnduranceUpgradeX AndAlso X < CharWindowX + EnduranceUpgradeX + 10 AndAlso Y > CharWindowY + EnduranceUpgradeY AndAlso Y < CharWindowY + EnduranceUpgradeY + 10 Then
                         If Not GetPlayerPOINTS(MyIndex) = 0 Then
                             PlaySound("Click.ogg")
-                            SendTrainStat(2)
+                            Network.SendTrainStat(2)
                         End If
                     End If
                     'Vitality
                     If X > CharWindowX + VitalityUpgradeX AndAlso X < CharWindowX + VitalityUpgradeX + 10 AndAlso Y > CharWindowY + VitalityUpgradeY AndAlso Y < CharWindowY + VitalityUpgradeY + 10 Then
                         If Not GetPlayerPOINTS(MyIndex) = 0 Then
                             PlaySound("Click.ogg")
-                            SendTrainStat(3)
+                            Network.SendTrainStat(3)
                         End If
                     End If
                     'WillPower
                     If X > CharWindowX + LuckUpgradeX AndAlso X < CharWindowX + LuckUpgradeX + 10 AndAlso Y > CharWindowY + LuckUpgradeY AndAlso Y < CharWindowY + LuckUpgradeY + 10 Then
                         If Not GetPlayerPOINTS(MyIndex) = 0 Then
                             PlaySound("Click.ogg")
-                            SendTrainStat(4)
+                            Network.SendTrainStat(4)
                         End If
                     End If
                     'Intellect
                     If X > CharWindowX + IntellectUpgradeX AndAlso X < CharWindowX + IntellectUpgradeX + 10 AndAlso Y > CharWindowY + IntellectUpgradeY AndAlso Y < CharWindowY + IntellectUpgradeY + 10 Then
                         If Not GetPlayerPOINTS(MyIndex) = 0 Then
                             PlaySound("Click.ogg")
-                            SendTrainStat(5)
+                            Network.SendTrainStat(5)
                         End If
                     End If
                     'Spirit
                     If X > CharWindowX + SpiritUpgradeX AndAlso X < CharWindowX + SpiritUpgradeX + 10 AndAlso Y > CharWindowY + SpiritUpgradeY AndAlso Y < CharWindowY + SpiritUpgradeY + 10 Then
                         If Not GetPlayerPOINTS(MyIndex) = 0 Then
                             PlaySound("Click.ogg")
-                            SendTrainStat(6)
+                            Network.SendTrainStat(6)
                         End If
                     End If
                     CheckGuiClick = True
@@ -369,7 +369,7 @@ Friend Module C_GuiFunctions
                         PlaySound("Click.ogg")
                         Dim result1 As DialogResult = MessageBox.Show("Want to Unequip this?", GameName, MessageBoxButtons.YesNo)
                         If result1 = DialogResult.Yes Then
-                            SendUnequip(EqNum)
+                            Network.SendUnequip(EqNum)
                         End If
                         CheckGuiClick = True
                     End If
@@ -493,11 +493,11 @@ Friend Module C_GuiFunctions
                         If Y > EventChatY + 124 AndAlso Y < EventChatY + 124 + 13 Then
                             PlaySound("Click.ogg")
                             Buffer = New ByteStream(4)
-                            Buffer.WriteInt32(ClientPackets.CEventChatReply)
+                            Buffer.WriteInt32(ClientPacket.CEventChatReply)
                             Buffer.WriteInt32(EventReplyID)
                             Buffer.WriteInt32(EventReplyPage)
                             Buffer.WriteInt32(1)
-                            Socket.SendData(Buffer.Data, Buffer.Head)
+                            Network.SendData(buffer.ToPacket)
                             Buffer.Dispose()
                             ClearEventChat()
                             InEvent = False
@@ -511,11 +511,11 @@ Friend Module C_GuiFunctions
                         If Y > EventChatY + 146 AndAlso Y < EventChatY + 146 + 13 Then
                             PlaySound("Click.ogg")
                             Buffer = New ByteStream(4)
-                            Buffer.WriteInt32(ClientPackets.CEventChatReply)
+                            Buffer.WriteInt32(ClientPacket.CEventChatReply)
                             Buffer.WriteInt32(EventReplyID)
                             Buffer.WriteInt32(EventReplyPage)
                             Buffer.WriteInt32(2)
-                            Socket.SendData(Buffer.Data, Buffer.Head)
+                            Network.SendData(buffer.ToPacket)
                             Buffer.Dispose()
                             ClearEventChat()
                             InEvent = False
@@ -529,11 +529,11 @@ Friend Module C_GuiFunctions
                         If Y > EventChatY + 124 AndAlso Y < EventChatY + 124 + 13 Then
                             PlaySound("Click.ogg")
                             Buffer = New ByteStream(4)
-                            Buffer.WriteInt32(ClientPackets.CEventChatReply)
+                            Buffer.WriteInt32(ClientPacket.CEventChatReply)
                             Buffer.WriteInt32(EventReplyID)
                             Buffer.WriteInt32(EventReplyPage)
                             Buffer.WriteInt32(3)
-                            Socket.SendData(Buffer.Data, Buffer.Head)
+                            Network.SendData(buffer.ToPacket)
                             Buffer.Dispose()
                             ClearEventChat()
                             InEvent = False
@@ -547,11 +547,11 @@ Friend Module C_GuiFunctions
                         If Y > EventChatY + 146 AndAlso Y < EventChatY + 146 + 13 Then
                             PlaySound("Click.ogg")
                             Buffer = New ByteStream(4)
-                            Buffer.WriteInt32(ClientPackets.CEventChatReply)
+                            Buffer.WriteInt32(ClientPacket.CEventChatReply)
                             Buffer.WriteInt32(EventReplyID)
                             Buffer.WriteInt32(EventReplyPage)
                             Buffer.WriteInt32(4)
-                            Socket.SendData(Buffer.Data, Buffer.Head)
+                            Network.SendData(buffer.ToPacket)
                             Buffer.Dispose()
                             ClearEventChat()
                             InEvent = False
@@ -565,11 +565,11 @@ Friend Module C_GuiFunctions
                         If Y > EventChatY + 156 AndAlso Y < EventChatY + 156 + 13 Then
                             PlaySound("Click.ogg")
                             Buffer = New ByteStream(4)
-                            Buffer.WriteInt32(ClientPackets.CEventChatReply)
+                            Buffer.WriteInt32(ClientPacket.CEventChatReply)
                             Buffer.WriteInt32(EventReplyID)
                             Buffer.WriteInt32(EventReplyPage)
                             Buffer.WriteInt32(0)
-                            Socket.SendData(Buffer.Data, Buffer.Head)
+                            Network.SendData(buffer.ToPacket)
                             Buffer.Dispose()
                             ClearEventChat()
                             InEvent = False
@@ -622,7 +622,7 @@ Friend Module C_GuiFunctions
                 'check if they press the list
                 Dim tmpy As Integer = 10
                 For i = 1 To MaxActivequests
-                    If Len(Trim$(QuestNames(i))) > 0 Then
+                    If QuestNames(i).Trim.Length > 0 Then
                         If X > (QuestLogX + 7) AndAlso X < (QuestLogX + 7) + (GetTextWidth(QuestNames(i))) Then
                             If Y > (QuestLogY + tmpy) AndAlso Y < (QuestLogY + tmpy + 13) Then
                                 SelectedQuest = i
@@ -649,7 +649,7 @@ Friend Module C_GuiFunctions
                 'check if they press the list
                 Dim tmpy As Integer = 10
                 For i = 1 To MAX_RECIPE
-                    If Len(Trim$(RecipeNames(i))) > 0 Then
+                    If RecipeNames(i).Trim.Length > 0 Then
                         If X > (CraftPanelX + 12) AndAlso X < (CraftPanelX + 12) + (GetTextWidth(RecipeNames(i))) Then
                             If Y > (CraftPanelY + tmpy) AndAlso Y < (CraftPanelY + tmpy + 13) Then
                                 SelectedRecipe = i
@@ -775,7 +775,7 @@ Friend Module C_GuiFunctions
 
                     ' use item if not doing anything else
                     If Item(GetPlayerInvItemNum(MyIndex, InvNum)).Type = ItemType.None Then Exit Function
-                    SendUseItem(InvNum)
+                    Network.SendUseItem(InvNum)
                     Exit Function
                 End If
             End If
@@ -858,7 +858,7 @@ Friend Module C_GuiFunctions
                         If e.Location.X >= recPos.Left AndAlso e.Location.X <= recPos.Right Then
                             If e.Location.Y >= recPos.Top AndAlso e.Location.Y <= recPos.Bottom Then '
                                 If DragInvSlotNum <> i Then
-                                    SendChangeInvSlots(DragInvSlotNum, i)
+                                    Network.SendChangeInvSlots(DragInvSlotNum, i)
                                     Exit For
                                 End If
                             End If
@@ -883,13 +883,13 @@ Friend Module C_GuiFunctions
                     If Player(MyIndex).InHouse = MyIndex Then
                         If Item(PlayerInv(FurnitureSelected).Num).Type = ItemType.Furniture Then
                             Buffer = New ByteStream(4)
-                            Buffer.WriteInt32(ClientPackets.CPlaceFurniture)
+                            Buffer.WriteInt32(ClientPacket.CPlaceFurniture)
                             i = CurX
                             Buffer.WriteInt32(i)
                             i = CurY
                             Buffer.WriteInt32(i)
                             Buffer.WriteInt32(FurnitureSelected)
-                            Socket.SendData(Buffer.Data, Buffer.Head)
+                            Network.SendData(buffer.ToPacket)
                             Buffer.Dispose()
 
                             FurnitureSelected = 0
@@ -999,7 +999,7 @@ Friend Module C_GuiFunctions
                                     frmGame.txtCurrency.Focus()
                                 End If
                             Else
-                                SendDropItem(InvNum, 0)
+                                Network.SendDropItem(InvNum, 0)
                             End If
                         End If
                     End If
@@ -1026,7 +1026,7 @@ Friend Module C_GuiFunctions
                     If skillnum <> 0 Then
                         Dim result1 As DialogResult = MessageBox.Show("Want to forget this skill?", GameName, MessageBoxButtons.YesNo)
                         If result1 = DialogResult.Yes Then
-                            ForgetSkill(skillnum)
+                            Network.ForgetSkill(skillnum)
                             Exit Function
                         End If
                     End If
@@ -1058,7 +1058,7 @@ Friend Module C_GuiFunctions
                     Select Case ShopAction
                         Case 0 ' no action, give cost
                             With Shop(InShop).TradeItem(shopItem)
-                                AddText("You can buy this item for " & .CostValue & " " & Trim$(Item(.CostItem).Name) & ".", ColorType.Yellow)
+                                AddText("You can buy this item for " & .CostValue & " " & Item(.CostItem).Name.Trim & ".", ColorType.Yellow)
                             End With
                         Case 1 ' buy item
                             ' buy item code
@@ -1086,8 +1086,8 @@ Friend Module C_GuiFunctions
                         If Y > ShopWindowY + ShopButtonCloseY AndAlso Y < ShopWindowY + ShopButtonCloseY + ButtonGFXInfo.Height Then
                             dim buffer as ByteStream
                             Buffer = New ByteStream(4)
-                            Buffer.WriteInt32(ClientPackets.CCloseShop)
-                            Socket.SendData(Buffer.Data, Buffer.Head)
+                            Buffer.WriteInt32(ClientPacket.CCloseShop)
+                            Network.SendData(buffer.ToPacket)
                             Buffer.Dispose()
                             pnlShopVisible = False
                             InShop = 0
@@ -1447,3 +1447,366 @@ Friend Module C_GuiFunctions
 #End Region
 
 End Module
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,4 +1,4 @@
-﻿Imports System.Drawing
+Imports System.Drawing
 Imports ASFW
 
 Module C_Banks
@@ -54,42 +54,42 @@ Module C_Banks
     Friend Sub DepositItem(invslot As Integer, amount As Integer)
         Dim buffer As New ByteStream(4)
 
-        buffer.WriteInt32(ClientPackets.CDepositItem)
+        buffer.WriteInt32(ClientPacket.CDepositItem)
         buffer.WriteInt32(invslot)
         buffer.WriteInt32(amount)
 
-        Socket.SendData(buffer.Data, buffer.Head)
+        Network.SendData(buffer.ToPacket)
         buffer.Dispose()
     End Sub
 
     Friend Sub WithdrawItem(bankslot As Integer, amount As Integer)
         Dim buffer As New ByteStream(4)
 
-        buffer.WriteInt32(ClientPackets.CWithdrawItem)
+        buffer.WriteInt32(ClientPacket.CWithdrawItem)
         buffer.WriteInt32(bankslot)
         buffer.WriteInt32(amount)
 
-        Socket.SendData(buffer.Data, buffer.Head)
+        Network.SendData(buffer.ToPacket)
         buffer.Dispose()
     End Sub
 
     Friend Sub ChangeBankSlots(oldSlot As Integer, newSlot As Integer)
         Dim buffer As New ByteStream(4)
 
-        buffer.WriteInt32(ClientPackets.CChangeBankSlots)
+        buffer.WriteInt32(ClientPacket.CChangeBankSlots)
         buffer.WriteInt32(oldSlot)
         buffer.WriteInt32(newSlot)
 
-        Socket.SendData(buffer.Data, buffer.Head)
+        Network.SendData(buffer.ToPacket)
         buffer.Dispose()
     End Sub
 
     Friend Sub CloseBank()
         Dim buffer As New ByteStream(4)
 
-        buffer.WriteInt32(ClientPackets.CCloseBank)
+        buffer.WriteInt32(ClientPacket.CCloseBank)
 
-        Socket.SendData(buffer.Data, buffer.Head)
+        Network.SendData(buffer.ToPacket)
         buffer.Dispose()
 
         InBank = False
@@ -200,3 +200,6 @@ Module C_Banks
     End Sub
 #End Region
 End Module
+
+
+

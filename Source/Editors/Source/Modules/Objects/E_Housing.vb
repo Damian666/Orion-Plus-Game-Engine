@@ -1,4 +1,4 @@
-﻿Imports System.IO
+Imports System.IO
 Imports ASFW
 Imports SFML.Graphics
 Imports SFML.Window
@@ -81,7 +81,7 @@ Friend Module E_Housing
         Dim buffer As New ByteStream(data)
         For i = 1 To MAX_HOUSES
             With House(i)
-                .ConfigName = Trim$(buffer.ReadString)
+                .ConfigName = buffer.ReadString.Trim
                 .BaseMap = buffer.ReadInt32
                 .X = buffer.ReadInt32
                 .Y = buffer.ReadInt32
@@ -114,7 +114,7 @@ Friend Module E_Housing
         Dim buffer As ByteStream
         buffer = New ByteStream(4)
 
-        buffer.WriteInt32(ClientPackets.CBuyHouse)
+        buffer.WriteInt32(ClientPacket.CBuyHouse)
         buffer.WriteInt32(Accepted)
         Socket.SendData(buffer.Data, buffer.Head)
 
@@ -125,7 +125,7 @@ Friend Module E_Housing
         Dim buffer As ByteStream
         buffer = New ByteStream(4)
 
-        buffer.WriteInt32(ClientPackets.CVisit)
+        buffer.WriteInt32(ClientPacket.CVisit)
         buffer.WriteString((Name))
         Socket.SendData(buffer.Data, buffer.Head)
 
@@ -136,7 +136,7 @@ Friend Module E_Housing
         Dim buffer As ByteStream
         buffer = New ByteStream(4)
 
-        buffer.WriteInt32(ClientPackets.CAcceptVisit)
+        buffer.WriteInt32(ClientPacket.CAcceptVisit)
         buffer.WriteInt32(Accepted)
         Socket.SendData(buffer.Data, buffer.Head)
 
@@ -152,7 +152,7 @@ Friend Module E_Housing
         Editorindex = FrmHouse.lstIndex.SelectedIndex + 1
 
         With House(Editorindex)
-            FrmHouse.txtName.Text = Trim$(.ConfigName)
+            FrmHouse.txtName.Text = .ConfigName.Trim
             If .BaseMap = 0 Then .BaseMap = 1
             FrmHouse.nudBaseMap.Value = .BaseMap
             If .X = 0 Then .X = 1
@@ -192,7 +192,7 @@ Friend Module E_Housing
             For i = 1 To MAX_HOUSES
                 If House_Changed(i) Then
                     Buffer.WriteInt32(i)
-                    Buffer.WriteString((Trim$(House(i).ConfigName)))
+                    Buffer.WriteString((House(i).ConfigName.Trim))
                     Buffer.WriteInt32(House(i).BaseMap)
                     Buffer.WriteInt32(House(i).X)
                     Buffer.WriteInt32(House(i).Y)
@@ -227,7 +227,7 @@ Friend Module E_Housing
         Dim i As Integer
         i = 1
 
-        While File.Exists(Application.StartupPath & GFX_PATH & "Furniture\" & i & GFX_EXT)
+        While File.Exists(Environment.CurrentDirectory & GFX_PATH & "Furniture\" & i & GFX_EXT)
             NumFurniture = NumFurniture + 1
             i = i + 1
         End While
@@ -238,3 +238,6 @@ Friend Module E_Housing
 #End Region
 
 End Module
+
+
+

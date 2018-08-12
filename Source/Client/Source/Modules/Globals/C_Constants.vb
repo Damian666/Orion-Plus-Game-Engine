@@ -1,4 +1,4 @@
-﻿Imports System.Drawing
+Imports System.Drawing
 
 Module C_Constants
 
@@ -104,3 +104,6 @@ Module C_Constants
     Friend Const DialogueTypeTrade As Byte = 5
 
 End Module
+
+
+

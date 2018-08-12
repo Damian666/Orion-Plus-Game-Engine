@@ -1,12 +1,14 @@
-﻿Friend Class FrmOptions
+﻿Imports System
+
+Friend Class FrmOptions
 #Region "Options"
 
     Private Sub scrlVolume_ValueChanged(sender As Object, e As EventArgs) Handles scrlVolume.ValueChanged
-        Options.Volume = scrlVolume.Value
+        Configuration.Settings.Volume = scrlVolume.Value
 
-        MaxVolume = Options.Volume
+        MaxVolume = Configuration.Settings.Volume
 
-        lblVolume.Text = "Volume: " & Options.Volume
+        lblVolume.Text = "Volume: " & Configuration.Settings.Volume
 
         If Not MusicPlayer Is Nothing Then MusicPlayer.Volume() = MaxVolume
 
@@ -15,11 +17,11 @@
     Private Sub btnSaveSettings_Click(sender As Object, e As EventArgs) Handles btnSaveSettings.Click
         'music
         If optMOn.Checked = True Then
-            Options.Music = 1
+            Configuration.Settings.Music = 1
             ' start music playing
-            PlayMusic(Trim$(Map.Music))
+            PlayMusic(Map.Music.Trim)
         Else
-            Options.Music = 0
+            Configuration.Settings.Music = 0
             ' stop music playing
             StopMusic()
             CurMusic = ""
@@ -27,34 +29,30 @@
 
         'sound
         If optSOn.Checked = True Then
-            Options.Sound = 1
+            Configuration.Settings.Sound = 1
         Else
-            Options.Sound = 0
+            Configuration.Settings.Sound = 0
             StopSound()
         End If
 
         'screensize
-        Options.ScreenSize = cmbScreenSize.SelectedIndex
+        Configuration.Settings.ScreenSize = cmbScreenSize.SelectedIndex
 
         If chkHighEnd.Checked Then
-            Options.HighEnd = 1
+            Configuration.Settings.HighEnd = 1
         Else
-            Options.HighEnd = 0
+            Configuration.Settings.HighEnd = 0
         End If
 
         If chkNpcBars.Checked Then
-            Options.ShowNpcBar = 1
+            Configuration.Settings.ShowNpcBar = 1
         Else
-            Options.ShowNpcBar = 0
+            Configuration.Settings.ShowNpcBar = 0
         End If
 
-        ' save to config.ini
-        SaveOptions()
+        Configuration.SaveSettings()
 
-        'reload options
-        LoadOptions()
-
-        RePositionGUI()
+        RePositionGui()
 
         Me.Visible = False
     End Sub

@@ -1,4 +1,4 @@
-﻿Imports System.IO
+Imports System.IO
 Imports Ini = ASFW.IO.FileIO.TextFile
 
 Module E_AutoMap
@@ -100,7 +100,7 @@ Module E_AutoMap
         Dim Prefab As Integer, Layer As Integer
 
 
-        Dim path = Application.StartupPath & "\Data\AutoMapper.ini"
+        Dim path = Environment.CurrentDirectory & "\Data\AutoMapper.ini"
         If Not File.Exists(path) Then File.Create(path).Dispose
 
         ReDim Tile(TilePrefab.Count - 1)
@@ -173,7 +173,7 @@ Module E_AutoMap
         ResourceFreq = buffer.ReadInt32
 
         
-        Dim path = Application.StartupPath & "\Data\AutoMapper.ini"
+        Dim path = Environment.CurrentDirectory & "\Data\AutoMapper.ini"
         If Not File.Exists(path) Then File.Create(path).Dispose
 
         Ini.PutVar(Path, "Resources", "ResourcesNum", buffer.ReadString())
@@ -208,7 +208,7 @@ Module E_AutoMap
 
     Friend Sub SendSaveAutoMapper()
 
-        Dim path = Application.StartupPath & "\Data\AutoMapper.ini"
+        Dim path = Environment.CurrentDirectory & "\Data\AutoMapper.ini"
         If Not File.Exists(path) Then File.Create(path).Dispose
 
         Dim buffer As New ASFW.ByteStream(4)
@@ -244,3 +244,6 @@ Module E_AutoMap
     End Sub
 #End Region
 End Module
+
+
+

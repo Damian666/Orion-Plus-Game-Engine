@@ -170,16 +170,16 @@ Friend Class frmClasses
 
     Sub DrawPreview()
 
-        If File.Exists(Application.StartupPath & GFX_PATH & "Characters\" & nudMaleSprite.Value & GFX_EXT) Then
-            picMale.Width = Image.FromFile(Application.StartupPath & GFX_PATH & "characters\" & nudMaleSprite.Value & GFX_EXT).Width \ 4
-            picMale.Height = Image.FromFile(Application.StartupPath & GFX_PATH & "characters\" & nudMaleSprite.Value & GFX_EXT).Height \ 4
-            picMale.BackgroundImage = Image.FromFile(Application.StartupPath & GFX_PATH & "Characters\" & nudMaleSprite.Value & GFX_EXT)
+        If File.Exists(Environment.CurrentDirectory & GFX_PATH & "Characters\" & nudMaleSprite.Value & GFX_EXT) Then
+            picMale.Width = Image.FromFile(Environment.CurrentDirectory & GFX_PATH & "characters\" & nudMaleSprite.Value & GFX_EXT).Width \ 4
+            picMale.Height = Image.FromFile(Environment.CurrentDirectory & GFX_PATH & "characters\" & nudMaleSprite.Value & GFX_EXT).Height \ 4
+            picMale.BackgroundImage = Image.FromFile(Environment.CurrentDirectory & GFX_PATH & "Characters\" & nudMaleSprite.Value & GFX_EXT)
         End If
 
-        If File.Exists(Application.StartupPath & GFX_PATH & "Characters\" & nudFemaleSprite.Value & GFX_EXT) Then
-            picFemale.Width = Image.FromFile(Application.StartupPath & GFX_PATH & "characters\" & nudFemaleSprite.Value & GFX_EXT).Width \ 4
-            picFemale.Height = Image.FromFile(Application.StartupPath & GFX_PATH & "characters\" & nudFemaleSprite.Value & GFX_EXT).Height \ 4
-            picFemale.BackgroundImage = Image.FromFile(Application.StartupPath & GFX_PATH & "Characters\" & nudFemaleSprite.Value & GFX_EXT)
+        If File.Exists(Environment.CurrentDirectory & GFX_PATH & "Characters\" & nudFemaleSprite.Value & GFX_EXT) Then
+            picFemale.Width = Image.FromFile(Environment.CurrentDirectory & GFX_PATH & "characters\" & nudFemaleSprite.Value & GFX_EXT).Width \ 4
+            picFemale.Height = Image.FromFile(Environment.CurrentDirectory & GFX_PATH & "characters\" & nudFemaleSprite.Value & GFX_EXT).Height \ 4
+            picFemale.BackgroundImage = Image.FromFile(Environment.CurrentDirectory & GFX_PATH & "Characters\" & nudFemaleSprite.Value & GFX_EXT)
         End If
 
     End Sub

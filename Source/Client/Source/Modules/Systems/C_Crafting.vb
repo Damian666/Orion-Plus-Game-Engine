@@ -1,4 +1,4 @@
-﻿Imports System.Drawing
+Imports System.Drawing
 Imports ASFW
 
 Friend Module C_Crafting
@@ -93,7 +93,7 @@ Friend Module C_Crafting
         n = Buffer.ReadInt32
 
         ' Update the Recipe
-        Recipe(n).Name = Trim$(Buffer.ReadString)
+        Recipe(n).Name = Buffer.ReadString.Trim
         Recipe(n).RecipeType = Buffer.ReadInt32
         Recipe(n).MakeItemNum = Buffer.ReadInt32
         Recipe(n).MakeItemAmount = Buffer.ReadInt32
@@ -147,9 +147,9 @@ Friend Module C_Crafting
     Sub SendRequestRecipes()
         dim buffer as New ByteStream(4)
 
-        Buffer.WriteInt32(ClientPackets.CRequestRecipes)
+        Buffer.WriteInt32(ClientPacket.CRequestRecipes)
 
-        Socket.SendData(Buffer.Data, Buffer.Head)
+        Network.SendData(buffer.ToPacket)
         Buffer.Dispose()
     End Sub
 
@@ -158,7 +158,7 @@ Friend Module C_Crafting
 
         Buffer.WriteInt32(EditorPackets.RequestEditRecipes)
 
-        Socket.SendData(Buffer.Data, Buffer.Head)
+        Network.SendData(buffer.ToPacket)
         Buffer.Dispose()
     End Sub
 
@@ -169,7 +169,7 @@ Friend Module C_Crafting
 
         Buffer.WriteInt32(RecipeNum)
 
-        buffer.WriteString((Trim$(Recipe(recipeNum).Name)))
+        buffer.WriteString((Recipe(recipeNum).Name.Trim))
         buffer.WriteInt32(Recipe(RecipeNum).RecipeType)
         Buffer.WriteInt32(Recipe(RecipeNum).MakeItemNum)
         Buffer.WriteInt32(Recipe(RecipeNum).MakeItemAmount)
@@ -181,7 +181,7 @@ Friend Module C_Crafting
 
         Buffer.WriteInt32(Recipe(RecipeNum).CreateTime)
 
-        Socket.SendData(Buffer.Data, Buffer.Head)
+        Network.SendData(buffer.ToPacket)
         Buffer.Dispose()
     End Sub
 
@@ -208,12 +208,12 @@ Friend Module C_Crafting
 
         'all seems fine...
 
-        Buffer.WriteInt32(ClientPackets.CStartCraft)
+        Buffer.WriteInt32(ClientPacket.CStartCraft)
 
         Buffer.WriteInt32(recipeindex)
         Buffer.WriteInt32(Amount)
 
-        Socket.SendData(Buffer.Data, Buffer.Head)
+        Network.SendData(buffer.ToPacket)
 
         Buffer.Dispose()
 
@@ -231,9 +231,9 @@ Friend Module C_Crafting
     Sub SendCloseCraft()
         dim buffer as New ByteStream(4)
 
-        Buffer.WriteInt32(ClientPackets.CCloseCraft)
+        Buffer.WriteInt32(ClientPacket.CCloseCraft)
 
-        Socket.SendData(Buffer.Data, Buffer.Head)
+        Network.SendData(buffer.ToPacket)
 
         Buffer.Dispose()
     End Sub
@@ -248,12 +248,12 @@ Friend Module C_Crafting
         For i = 1 To MAX_RECIPE
             If chkKnownOnlyChecked = True Then
                 If Player(MyIndex).RecipeLearned(i) = 1 Then
-                    RecipeNames(x) = Trim$(Recipe(i).Name)
+                    RecipeNames(x) = Recipe(i).Name.Trim
                     x = x + 1
                 End If
             Else
-                If Len(Trim(Recipe(i).Name)) > 0 Then
-                    RecipeNames(x) = Trim$(Recipe(i).Name)
+                If Recipe(i).Name.Trim.Length > 0 Then
+                    RecipeNames(x) = Recipe(i).Name.Trim
                     x = x + 1
                 End If
             End If
@@ -299,7 +299,7 @@ Friend Module C_Crafting
         GetRecipeIndex = 0
 
         For i = 1 To MAX_RECIPE
-            If Trim$(Recipe(i).Name) = Trim$(RecipeName) Then
+            If Recipe(i).Name.Trim = RecipeName.Trim Then
                 GetRecipeIndex = i
                 Exit For
             End If
@@ -318,8 +318,8 @@ Friend Module C_Crafting
 
         'draw recipe names
         For i = 1 To MAX_RECIPE
-            If Len(Trim$(RecipeNames(i))) > 0 Then
-                DrawText(CraftPanelX + 12, CraftPanelY + y, Trim$(RecipeNames(i)), SFML.Graphics.Color.White, SFML.Graphics.Color.Black, GameWindow)
+            If RecipeNames(i).Trim.Length > 0 Then
+                DrawText(CraftPanelX + 12, CraftPanelY + y, RecipeNames(i).Trim, SFML.Graphics.Color.White, SFML.Graphics.Color.Black, GameWindow)
                 y = y + 20
             End If
         Next
@@ -339,7 +339,7 @@ Friend Module C_Crafting
         'amount controls
         RenderSprite(CharPanelMinSprite, GameWindow, CraftPanelX + 340, CraftPanelY + 422, 0, 0, CharPanelMinGFXInfo.Width, CharPanelMinGFXInfo.Height)
 
-        DrawText(CraftPanelX + 367, CraftPanelY + 418, Trim$(CraftAmountValue), SFML.Graphics.Color.Black, SFML.Graphics.Color.White, GameWindow)
+        DrawText(CraftPanelX + 367, CraftPanelY + 418, CraftAmountValue, SFML.Graphics.Color.Black, SFML.Graphics.Color.White, GameWindow)
 
         RenderSprite(CharPanelPlusSprite, GameWindow, CraftPanelX + 392, CraftPanelY + 422, 0, 0, CharPanelPlusGFXInfo.Width, CharPanelPlusGFXInfo.Height)
 
@@ -357,9 +357,9 @@ Friend Module C_Crafting
 
             RenderSprite(ItemsSprite(picProductIndex), GameWindow, CraftPanelX + 267, CraftPanelY + 20, 0, 0, ItemsGFXInfo(picProductIndex).Width, ItemsGFXInfo(picProductIndex).Height)
 
-            DrawText(CraftPanelX + 310, CraftPanelY + 20, Trim$(lblProductNameText), SFML.Graphics.Color.White, SFML.Graphics.Color.Black, GameWindow)
+            DrawText(CraftPanelX + 310, CraftPanelY + 20, lblProductNameText.Trim, SFML.Graphics.Color.White, SFML.Graphics.Color.Black, GameWindow)
 
-            DrawText(CraftPanelX + 310, CraftPanelY + 35, Trim$(lblProductAmountText), SFML.Graphics.Color.White, SFML.Graphics.Color.Black, GameWindow)
+            DrawText(CraftPanelX + 310, CraftPanelY + 35, lblProductAmountText.Trim, SFML.Graphics.Color.White, SFML.Graphics.Color.Black, GameWindow)
         End If
 
         y = 107
@@ -377,9 +377,9 @@ Friend Module C_Crafting
 
                 RenderSprite(ItemsSprite(picMaterialIndex(i)), GameWindow, CraftPanelX + 275, CraftPanelY + y, 0, 0, ItemsGFXInfo(picMaterialIndex(i)).Width, ItemsGFXInfo(picMaterialIndex(i)).Height)
 
-                DrawText(CraftPanelX + 315, CraftPanelY + y, Trim$(lblMaterialName(i)), SFML.Graphics.Color.White, SFML.Graphics.Color.Black, GameWindow)
+                DrawText(CraftPanelX + 315, CraftPanelY + y, lblMaterialName(i).Trim, SFML.Graphics.Color.White, SFML.Graphics.Color.Black, GameWindow)
 
-                DrawText(CraftPanelX + 315, CraftPanelY + y + 15, Trim$(lblMaterialAmount(i)), SFML.Graphics.Color.White, SFML.Graphics.Color.Black, GameWindow)
+                DrawText(CraftPanelX + 315, CraftPanelY + y + 15, lblMaterialAmount(i).Trim, SFML.Graphics.Color.White, SFML.Graphics.Color.Black, GameWindow)
 
                 y = y + 63
             End If
@@ -423,3 +423,615 @@ Friend Module C_Crafting
 #End Region
 
 End Module
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

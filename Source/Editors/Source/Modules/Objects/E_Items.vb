@@ -1,4 +1,4 @@
-﻿Imports System.IO
+Imports System.IO
 Imports ASFW
 Imports SFML.Graphics
 
@@ -68,7 +68,7 @@ Friend Module E_Items
         Item(n).TwoHanded = buffer.ReadInt32()
         Item(n).LevelReq = buffer.ReadInt32()
         Item(n).Mastery = buffer.ReadInt32()
-        Item(n).Name = Trim$(buffer.ReadString())
+        Item(n).Name = buffer.ReadString().Trim
         Item(n).Paperdoll = buffer.ReadInt32()
         Item(n).Pic = buffer.ReadInt32()
         Item(n).Price = buffer.ReadInt32()
@@ -80,7 +80,7 @@ Friend Module E_Items
         Item(n).RandomMax = buffer.ReadInt32()
 
         Item(n).Stackable = buffer.ReadInt32()
-        Item(n).Description = Trim$(buffer.ReadString())
+        Item(n).Description = buffer.ReadString().Trim
 
         For i = 0 To StatType.Count - 1
             Item(n).Stat_Req(i) = buffer.ReadInt32()
@@ -117,7 +117,7 @@ Friend Module E_Items
     Sub SendRequestItems()
         Dim buffer As New ByteStream(4)
 
-        buffer.WriteInt32(ClientPackets.CRequestItems)
+        buffer.WriteInt32(ClientPacket.CRequestItems)
         Socket.SendData(buffer.Data, buffer.Head)
         buffer.Dispose()
     End Sub
@@ -142,7 +142,7 @@ Friend Module E_Items
         buffer.WriteInt32(Item(itemNum).TwoHanded)
         buffer.WriteInt32(Item(itemNum).LevelReq)
         buffer.WriteInt32(Item(itemNum).Mastery)
-        buffer.WriteString((Trim$(Item(itemNum).Name)))
+        buffer.WriteString((Item(itemNum).Name.Trim))
         buffer.WriteInt32(Item(itemNum).Paperdoll)
         buffer.WriteInt32(Item(itemNum).Pic)
         buffer.WriteInt32(Item(itemNum).Price)
@@ -154,7 +154,7 @@ Friend Module E_Items
         buffer.WriteInt32(Item(itemNum).RandomMax)
 
         buffer.WriteInt32(Item(itemNum).Stackable)
-        buffer.WriteString((Trim$(Item(itemNum).Description)))
+        buffer.WriteString((Item(itemNum).Description.Trim))
 
         For i = 0 To StatType.Count - 1
             buffer.WriteInt32(Item(itemNum).Stat_Req(i))
@@ -205,7 +205,7 @@ Friend Module E_Items
 
             ' Add the names
             For i = 1 To MAX_ITEMS
-                .lstIndex.Items.Add(i & ": " & Trim$(Item(i).Name))
+                .lstIndex.Items.Add(i & ": " & Item(i).Name.Trim)
             Next
 
             .Show()
@@ -258,8 +258,8 @@ Friend Module E_Items
                 frmItem.cmbRecipe.Items.Add(i & ": " & Recipe(i).Name)
             Next
 
-            frmItem.txtName.Text = Trim$(.Name)
-            frmItem.txtDescription.Text = Trim$(.Description)
+            frmItem.txtName.Text = .Name.Trim
+            frmItem.txtDescription.Text = .Description.Trim
 
             If .Pic > frmItem.nudPic.Maximum Then .Pic = 0
             frmItem.nudPic.Value = .Pic
@@ -425,7 +425,7 @@ Friend Module E_Items
         Dim i As Integer
         i = 1
 
-        While File.Exists(Application.StartupPath & GFX_PATH & "Items\" & i & GFX_EXT)
+        While File.Exists(Environment.CurrentDirectory & GFX_PATH & "Items\" & i & GFX_EXT)
             NumItems = NumItems + 1
             i = i + 1
         End While
@@ -442,8 +442,8 @@ Friend Module E_Items
             Exit Sub
         End If
 
-        If File.Exists(Application.StartupPath & GFX_PATH & "items\" & itemnum & GFX_EXT) Then
-            FrmItem.picItem.BackgroundImage = Drawing.Image.FromFile(Application.StartupPath & GFX_PATH & "items\" & itemnum & GFX_EXT)
+        If File.Exists(Environment.CurrentDirectory & GFX_PATH & "items\" & itemnum & GFX_EXT) Then
+            FrmItem.picItem.BackgroundImage = Drawing.Image.FromFile(Environment.CurrentDirectory & GFX_PATH & "items\" & itemnum & GFX_EXT)
         End If
 
     End Sub
@@ -458,8 +458,8 @@ Friend Module E_Items
             Exit Sub
         End If
 
-        If File.Exists(Application.StartupPath & GFX_PATH & "paperdolls\" & Sprite & GFX_EXT) Then
-            FrmItem.picPaperdoll.BackgroundImage = Drawing.Image.FromFile(Application.StartupPath & GFX_PATH & "paperdolls\" & Sprite & GFX_EXT)
+        If File.Exists(Environment.CurrentDirectory & GFX_PATH & "paperdolls\" & Sprite & GFX_EXT) Then
+            FrmItem.picPaperdoll.BackgroundImage = Drawing.Image.FromFile(Environment.CurrentDirectory & GFX_PATH & "paperdolls\" & Sprite & GFX_EXT)
         End If
     End Sub
 
@@ -531,3 +531,729 @@ Friend Module E_Items
 #End Region
 
 End Module
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

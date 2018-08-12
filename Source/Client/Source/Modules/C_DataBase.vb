@@ -1,8 +1,9 @@
-﻿Imports System.IO
+Imports System.IO
 Imports System.Windows.Forms
 Imports System.Linq
 
 Imports Ini = ASFW.IO.FileIO.TextFile
+Imports System
 
 Module C_DataBase
     Friend Function GetFileContents(fullPath As String, Optional ByRef errInfo As String = "") As String
@@ -25,7 +26,7 @@ Module C_DataBase
         Dim i As Integer
         i = 1
 
-        While File.Exists(Application.StartupPath & GfxPath & "characters\" & i & GfxExt)
+        While File.Exists(Environment.CurrentDirectory & GfxPath & "characters\" & i & GfxExt)
             NumCharacters = NumCharacters + 1
             i = i + 1
         End While
@@ -37,7 +38,7 @@ Module C_DataBase
         Dim i As Integer
         i = 1
 
-        While File.Exists(Application.StartupPath & GfxPath & "paperdolls\" & i & GfxExt)
+        While File.Exists(Environment.CurrentDirectory & GfxPath & "paperdolls\" & i & GfxExt)
             NumPaperdolls = NumPaperdolls + 1
             i = i + 1
         End While
@@ -49,7 +50,7 @@ Module C_DataBase
         Dim i As Integer
         i = 1
 
-        While File.Exists(Application.StartupPath & GfxPath & "animations\" & i & GfxExt)
+        While File.Exists(Environment.CurrentDirectory & GfxPath & "animations\" & i & GfxExt)
             NumAnimations = NumAnimations + 1
             i = i + 1
         End While
@@ -61,7 +62,7 @@ Module C_DataBase
         Dim i As Integer
         i = 1
 
-        While File.Exists(Application.StartupPath & GfxPath & "SkillIcons\" & i & GfxExt)
+        While File.Exists(Environment.CurrentDirectory & GfxPath & "SkillIcons\" & i & GfxExt)
             NumSkillIcons = NumSkillIcons + 1
             i = i + 1
         End While
@@ -73,7 +74,7 @@ Module C_DataBase
         Dim i As Integer
         i = 1
 
-        While File.Exists(Application.StartupPath & GfxPath & "Faces\" & i & GfxExt)
+        While File.Exists(Environment.CurrentDirectory & GfxPath & "Faces\" & i & GfxExt)
             NumFaces = NumFaces + 1
             i = i + 1
         End While
@@ -85,7 +86,7 @@ Module C_DataBase
         Dim i As Integer
         i = 1
 
-        While File.Exists(Application.StartupPath & GfxPath & "Fogs\" & i & GfxExt)
+        While File.Exists(Environment.CurrentDirectory & GfxPath & "Fogs\" & i & GfxExt)
             NumFogs = NumFogs + 1
             i = i + 1
         End While
@@ -97,7 +98,7 @@ Module C_DataBase
         Dim i As Integer
         i = 1
 
-        While File.Exists(Application.StartupPath & GfxPath & "Emotes\" & i & GfxExt)
+        While File.Exists(Environment.CurrentDirectory & GfxPath & "Emotes\" & i & GfxExt)
             NumEmotes = NumEmotes + 1
             i = i + 1
         End While
@@ -109,7 +110,7 @@ Module C_DataBase
         Dim i As Integer
         i = 1
 
-        While File.Exists(Application.StartupPath & GfxPath & "Panoramas\" & i & GfxExt)
+        While File.Exists(Environment.CurrentDirectory & GfxPath & "Panoramas\" & i & GfxExt)
             NumPanorama = NumPanorama + 1
             i = i + 1
         End While
@@ -121,7 +122,7 @@ Module C_DataBase
         Dim i As Integer
         i = 1
 
-        While File.Exists(Application.StartupPath & GfxPath & "Parallax\" & i & GfxExt)
+        While File.Exists(Environment.CurrentDirectory & GfxPath & "Parallax\" & i & GfxExt)
             NumParallax = NumParallax + 1
             i = i + 1
         End While
@@ -130,8 +131,8 @@ Module C_DataBase
     End Sub
 
     Friend Sub CacheMusic()
-        Dim files As String() = Directory.GetFiles(Application.StartupPath & MusicPath, "*.ogg")
-        Dim maxNum As String = Directory.GetFiles(Application.StartupPath & MusicPath, "*.ogg").Count
+        Dim files As String() = Directory.GetFiles(Environment.CurrentDirectory & MusicPath, "*.ogg")
+        Dim maxNum As String = Directory.GetFiles(Environment.CurrentDirectory & MusicPath, "*.ogg").Count
         Dim counter As Integer = 1
 
         For Each FileName In files
@@ -145,8 +146,8 @@ Module C_DataBase
     End Sub
 
     Friend Sub CacheSound()
-        Dim files As String() = Directory.GetFiles(Application.StartupPath & SoundPath, "*.ogg")
-        Dim maxNum As String = Directory.GetFiles(Application.StartupPath & SoundPath, "*.ogg").Count
+        Dim files As String() = Directory.GetFiles(Environment.CurrentDirectory & SoundPath, "*.ogg")
+        Dim maxNum As String = Directory.GetFiles(Environment.CurrentDirectory & SoundPath, "*.ogg").Count
         Dim counter As Integer = 1
 
         For Each FileName In files
@@ -159,109 +160,7 @@ Module C_DataBase
 
     End Sub
 #End Region
-
-#Region "Options"
-    Friend Sub CreateOptions()
-        
-        Dim path = Application.StartupPath & "\Data\Config.ini"
-        If Not File.Exists(path) Then File.Create(path).Dispose
-
-        Options.Password = ""
-        Options.SavePass = False
-        Options.Username = ""
-        Options.Ip = "127.0.0.1"
-        Options.Port = 7001
-        Options.MenuMusic = ""
-        Options.Music = 1
-        Options.Sound = 1
-        Options.Volume = 100
-        Options.ScreenSize = 0
-        Options.HighEnd = 0
-        Options.ShowNpcBar = 0
-
-        Ini.PutVar(path, "UserInfo", "Username", Trim$(Options.Username))
-        Ini.PutVar(path, "UserInfo", "Password", Trim$(Options.Password))
-        Ini.PutVar(path, "UserInfo", "SavePass", Trim$(Options.SavePass))
-
-        Ini.PutVar(path, "Connection", "Ip", Trim$(Options.Ip))
-        Ini.PutVar(path, "Connection", "Port", Trim$(Options.Port))
-
-        Ini.PutVar(path, "Sfx", "MenuMusic", Trim$(Options.MenuMusic))
-        Ini.PutVar(path, "Sfx", "Music", Trim$(Options.Music))
-        Ini.PutVar(path, "Sfx", "Sound", Trim$(Options.Sound))
-        Ini.PutVar(path, "Sfx", "Volume", Trim$(Options.Volume))
-
-        Ini.PutVar(path, "Misc", "ScreenSize", Trim$(Options.ScreenSize))
-        Ini.PutVar(path, "Misc", "HighEnd", Trim$(Options.HighEnd))
-        Ini.PutVar(path, "Misc", "ShowNpcBar", Trim$(Options.ShowNpcBar))
-
-    End Sub
-
-    Friend Sub SaveOptions()
-        
-        Dim path = Application.StartupPath & "\Data\Config.ini"
-        If Not File.Exists(path) Then File.Create(path).Dispose
-
-        Ini.PutVar(path, "UserInfo", "Username", Trim$(Options.Username))
-        Ini.PutVar(path, "UserInfo", "Password", Trim$(Options.Password))
-        Ini.PutVar(path, "UserInfo", "SavePass", Trim$(Options.SavePass))
-
-        Ini.PutVar(path, "Connection", "Ip", Trim$(Options.Ip))
-        Ini.PutVar(path, "Connection", "Port", Trim$(Options.Port))
-
-        Ini.PutVar(path, "Sfx", "MenuMusic", Trim$(Options.MenuMusic))
-        Ini.PutVar(path, "Sfx", "Music", Trim$(Options.Music))
-        Ini.PutVar(path, "Sfx", "Sound", Trim$(Options.Sound))
-        Ini.PutVar(path, "Sfx", "Volume", Trim$(Options.Volume))
-
-        Ini.PutVar(path, "Misc", "ScreenSize", Trim$(Options.ScreenSize))
-        Ini.PutVar(path, "Misc", "HighEnd", Trim$(Options.HighEnd))
-        Ini.PutVar(path, "Misc", "ShowNpcBar", Trim$(Options.ShowNpcBar))
-        
-    End Sub
-
-    Friend Sub LoadOptions()
-        
-        Dim path = Application.StartupPath & "\Data\Config.ini"
-        If Not File.Exists(path) Then File.Create(path).Dispose
-
-        Options.Username = Ini.GetVar(path, "UserInfo", "Username")
-        Options.Password = Ini.GetVar(path, "UserInfo", "Password")
-        Options.SavePass = Ini.GetVar(path, "UserInfo", "SavePass")
-
-        Options.Ip = Ini.GetVar(path, "Connection", "Ip")
-        Options.Port = Val(Ini.GetVar(path, "Connection", "Port"))
-
-        Options.MenuMusic = Ini.GetVar(path, "Sfx", "MenuMusic")
-        Options.Music = Ini.GetVar(path, "Sfx", "Music")
-        Options.Sound = Ini.GetVar(path, "Sfx", "Sound")
-        Options.Volume = Val(Ini.GetVar(path, "Sfx", "Volume"))
-
-        Options.ScreenSize = Ini.GetVar(path, "Misc", "ScreenSize")
-        Options.HighEnd = Val(Ini.GetVar(path, "Misc", "HighEnd"))
-        Options.ShowNpcBar = Val(Ini.GetVar(path, "Misc", "ShowNpcBar"))
-
-        ' show in GUI
-        If Options.Music = 1 Then
-            FrmOptions.optMOn.Checked = True
-        Else
-            FrmOptions.optMOff.Checked = False
-        End If
-
-        If Options.Music = 1 Then
-            FrmOptions.optSOn.Checked = True
-        Else
-            FrmOptions.optSOff.Checked = False
-        End If
-
-        FrmOptions.lblVolume.Text = "Volume: " & Options.Volume
-        FrmOptions.scrlVolume.Value = Options.Volume
-
-        FrmOptions.cmbScreenSize.SelectedIndex = Options.ScreenSize
-
-    End Sub
-#End Region
-
+    
 #Region "Blood"
 
     Sub ClearBlood()
@@ -360,13 +259,13 @@ Module C_DataBase
         AnimInstance(index).X = 0
         AnimInstance(index).Y = 0
 
-        For i = 0 To UBound(AnimInstance(index).Used)
+        For i = 0 To AnimInstance(index).Used.GetUpperBound(0)
             AnimInstance(index).Used(i) = False
         Next
-        For i = 0 To UBound(AnimInstance(index).Timer)
+        For i = 0 To AnimInstance(index).Timer.GetUpperBound(0)
             AnimInstance(index).Timer(i) = False
         Next
-        For i = 0 To UBound(AnimInstance(index).FrameIndex)
+        For i = 0 To AnimInstance(index).FrameIndex.GetUpperBound(0)
             AnimInstance(index).FrameIndex(i) = False
         Next
 
@@ -394,3 +293,6 @@ Module C_DataBase
 #End Region
 
 End Module
+
+
+

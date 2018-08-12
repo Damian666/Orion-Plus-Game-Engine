@@ -1,11 +1,13 @@
-﻿Friend Class FrmAdmin
+﻿Imports System
+
+Friend Class FrmAdmin
     Private Sub FrmAdmin_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         ' set values for admin panel
         cmbSpawnItem.Items.Clear()
 
         ' Add the names
         For i = 1 To MAX_ITEMS
-            cmbSpawnItem.Items.Add(i & ": " & Trim$(Item(i).Name))
+            cmbSpawnItem.Items.Add(i & ": " & Item(i).Name.Trim)
         Next
     End Sub
 
@@ -19,7 +21,7 @@
 
         ' Check to make sure its a valid map #
         If nudAdminMap.Value > 0 AndAlso nudAdminMap.Value <= MAX_MAPS Then
-            WarpTo(nudAdminMap.Value)
+            Network.WarpTo(nudAdminMap.Value)
         Else
             AddText("Invalid map number.", ColorType.BrightRed)
         End If
@@ -31,9 +33,9 @@
             Exit Sub
         End If
 
-        If Len(Trim$(txtAdminName.Text)) < 1 Then Exit Sub
+        If txtAdminName.Text.Trim.Length < 1 Then Exit Sub
 
-        SendBan(Trim$(txtAdminName.Text))
+        Network.SendBan(txtAdminName.Text.Trim)
     End Sub
 
     Private Sub BtnAdminKick_Click(sender As Object, e As EventArgs) Handles btnAdminKick.Click
@@ -42,9 +44,9 @@
             Exit Sub
         End If
 
-        If Len(Trim$(txtAdminName.Text)) < 1 Then Exit Sub
+        If txtAdminName.Text.Trim.Length < 1 Then Exit Sub
 
-        SendKick(Trim$(txtAdminName.Text))
+        Network.SendKick(txtAdminName.Text.Trim)
     End Sub
 
     Private Sub BtnAdminWarp2Me_Click(sender As Object, e As EventArgs) Handles btnAdminWarp2Me.Click
@@ -53,11 +55,12 @@
             Exit Sub
         End If
 
-        If Len(Trim$(txtAdminName.Text)) < 1 Then Exit Sub
+        If txtAdminName.Text.Trim.Length < 1 Then Exit Sub
 
-        If IsNumeric(Trim$(txtAdminName.Text)) Then Exit Sub
+        
+        If Single.TryParse(txtAdminName.Text.Trim, 0) Then Exit Sub
 
-        WarpToMe(Trim$(txtAdminName.Text))
+        Network.WarpToMe(txtAdminName.Text.Trim)
     End Sub
 
     Private Sub BtnAdminWarpMe2_Click(sender As Object, e As EventArgs) Handles btnAdminWarpMe2.Click
@@ -66,15 +69,15 @@
             Exit Sub
         End If
 
-        If Len(Trim$(txtAdminName.Text)) < 1 Then
+        If txtAdminName.Text.Trim.Length < 1 Then
             Exit Sub
         End If
 
-        If IsNumeric(Trim$(txtAdminName.Text)) Then
+        If Single.TryParse(txtAdminName.Text.Trim, 0) Then
             Exit Sub
         End If
 
-        WarpMeTo(Trim$(txtAdminName.Text))
+        Network.WarpMeTo(txtAdminName.Text.Trim)
     End Sub
 
     Private Sub BtnAdminSetAccess_Click(sender As Object, e As EventArgs) Handles btnAdminSetAccess.Click
@@ -83,15 +86,15 @@
             Exit Sub
         End If
 
-        If Len(Trim$(txtAdminName.Text)) < 2 Then
+        If txtAdminName.Text.Trim.Length < 2 Then
             Exit Sub
         End If
 
-        If IsNumeric(Trim$(txtAdminName.Text)) OrElse cmbAccess.SelectedIndex < 0 Then
+        If Single.TryParse(txtAdminName.Text.Trim, 0) OrElse cmbAccess.SelectedIndex < 0 Then
             Exit Sub
         End If
 
-        SendSetAccess(Trim$(txtAdminName.Text), cmbAccess.SelectedIndex)
+        Network.SendSetAccess(txtAdminName.Text.Trim, cmbAccess.SelectedIndex)
     End Sub
 
     Private Sub BtnAdminSetSprite_Click(sender As Object, e As EventArgs) Handles btnAdminSetSprite.Click
@@ -102,7 +105,7 @@
 
         If nudAdminSprite.Value < 1 Then Exit Sub
 
-        SendSetSprite(nudAdminSprite.Value)
+        Network.SendSetSprite(nudAdminSprite.Value)
     End Sub
 #End Region
 
@@ -123,7 +126,7 @@
             AddText("You need to be a high enough staff member to do this!", QColorType.AlertColor)
             Exit Sub
         End If
-        SendRequestMapreport()
+        Network.SendRequestMapreport()
     End Sub
 
     Private Sub LstMaps_DoubleClick(sender As Object, e As EventArgs) Handles lstMaps.DoubleClick
@@ -134,7 +137,7 @@
 
         ' Check to make sure its a valid map #
         If lstMaps.FocusedItem.Index + 1 > 0 AndAlso lstMaps.FocusedItem.Index + 1 <= MAX_MAPS Then
-            WarpTo(lstMaps.FocusedItem.Index + 1)
+            Network.WarpTo(lstMaps.FocusedItem.Index + 1)
         Else
             AddText("Invalid map number: " & lstMaps.FocusedItem.Index + 1, QColorType.AlertColor)
         End If
@@ -156,7 +159,7 @@
             Exit Sub
         End If
 
-        SendSpawnItem(cmbSpawnItem.SelectedIndex + 1, nudSpawnItemAmount.Value)
+        Network.SendSpawnItem(cmbSpawnItem.SelectedIndex + 1, nudSpawnItemAmount.Value)
     End Sub
 
     Private Sub BtnLevelUp_Click(sender As Object, e As EventArgs) Handles btnLevelUp.Click
@@ -165,7 +168,7 @@
             Exit Sub
         End If
 
-        SendRequestLevelUp()
+        Network.SendRequestLevelUp()
 
     End Sub
 

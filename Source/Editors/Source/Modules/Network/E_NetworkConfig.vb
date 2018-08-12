@@ -1,11 +1,11 @@
-﻿Imports ASFW.Network
+Imports ASFW.Network
 
 Friend Module E_NetworkConfig
     Friend WithEvents Socket As Client
 
     Friend Sub InitNetwork()
         If Not Socket Is Nothing Then Return
-        Socket = New Client(ServerPackets.COUNT)
+        Socket = New Client(ServerPacket.COUNT)
         PacketRouter()
     End Sub
 
@@ -42,3 +42,6 @@ Friend Module E_NetworkConfig
 #End Region
 
 End Module
+
+
+

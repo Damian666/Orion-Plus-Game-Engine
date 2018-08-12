@@ -1,4 +1,4 @@
-﻿Friend Module C_AutoTiles
+Friend Module C_AutoTiles
 #Region "Globals and Types"
     ' Autotiles
     Friend Const AutoInner As Byte = 1
@@ -841,3 +841,6 @@
         RenderSprite(TileSetSprite(Map.Tile(X, Y).Layer(layerNum).Tileset), GameWindow, destX, destY, Autotile(X, Y).Layer(layerNum).srcX(quarterNum) + xOffset, Autotile(X, Y).Layer(layerNum).srcY(quarterNum) + yOffset, 16, 16)
     End Sub
 End Module
+
+
+

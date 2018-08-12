@@ -1,4 +1,6 @@
-﻿Imports System.IO
+Imports System
+Imports System.Diagnostics
+Imports System.IO
 Imports System.Threading
 Imports System.Windows.Forms
 
@@ -14,6 +16,9 @@ Module C_General
         SFML.Portable.Activate()
 
         SetStatus(Strings.Get("loadscreen", "loading"))
+
+        ' Generate Random Seed
+        Randomize()
 
         FrmMenu.Visible = True
 
@@ -67,28 +72,19 @@ Module C_General
         ClearPets()
 
         GettingMap = True
-        vbQuote = Chr(34) ' "
 
         ' Update the form with the game's name before it's loaded
-        frmGame.Text = GameName
+        FrmGame.Text = GameName
 
         SetStatus(Strings.Get("loadscreen", "options"))
 
         ' load options
-        If File.Exists(Application.StartupPath & "\Data\Config.xml") Then
-            LoadOptions()
-        Else
-            CreateOptions()
-        End If
-
-        ' randomize rnd's seed
-        Randomize()
-
+        Configuration.LoadSettings()
+        
         SetStatus(Strings.Get("loadscreen", "network"))
 
         FrmMenu.Text = GameName
-
-        ' DX7 Master Object is already created, early binding
+        
         SetStatus(Strings.Get("loadscreen", "graphics"))
         CheckTilesets()
         CheckCharacters()
@@ -110,8 +106,8 @@ Module C_General
         InitGraphics()
 
         ' check if we have main-menu music
-        If Options.Music = 1 AndAlso Len(Trim$(Options.MenuMusic)) > 0 Then
-            PlayMusic(Trim$(Options.MenuMusic))
+        If Configuration.Settings.Music = 1 AndAlso Configuration.Settings.MenuMusic.Trim.Length > 0 Then
+            PlayMusic(Configuration.Settings.MenuMusic.Trim)
             MusicPlayer.Volume() = 100
         End If
 
@@ -129,97 +125,91 @@ Module C_General
         DirArrowY(4) = 12
 
         'set gui switches
-        HUDVisible = True
+        HudVisible = True
 
         SetStatus(Strings.Get("loadscreen", "starting"))
-        started = True
-        frmmenuvisible = True
-        pnlloadvisible = False
+        Started = True
+        Frmmenuvisible = True
+        Pnlloadvisible = False
 
-        pnlInventoryVisible = True
+        PnlInventoryVisible = True
 
-        InitNetwork()
+        Network.Initialize()
 
         GameLoop()
     End Sub
 
     Friend Function IsLoginLegal(username As String, password As String) As Boolean
-        Return Len(Trim$(Username)) >= 3 AndAlso Len(Trim$(Password)) >= 3
+        Return username.Trim.Length >= 3 AndAlso password.Trim.Length >= 3
     End Function
 
-    Friend Function IsStringLegal(sInput As String) As Boolean
-        Dim i As Integer
-
-        ' Prevent high ascii chars
-        For i = 1 To Len(sInput)
-
-            If (Asc(Mid$(sInput, i, 1))) < 32 OrElse Asc(Mid$(sInput, i, 1)) > 126 Then
-                MsgBox(Strings.Get("mainmenu", "stringlegal"), vbOKOnly, GameName)
-                IsStringLegal = False
-                Exit Function
+    Friend Function IsStringLegal(value As String) As Boolean
+        For Each c In value
+            If Not Char.IsLetterOrDigit(c) Then
+                MessageBox.Show(Strings.Get("mainmenu", "stringlegal"), GameName, MessageBoxButtons.Ok )
+                Return False
             End If
-
         Next
 
-        IsStringLegal = True
+        Return True
     End Function
 
     Sub GameInit()
-        pnlloadvisible = False
+        Pnlloadvisible = False
 
         ' Set the focus
-        frmGame.picscreen.Focus()
+        FrmGame.picscreen.Focus()
 
         'stop the song playing
         StopMusic()
     End Sub
 
     Friend Sub SetStatus(caption As String)
-        FrmMenu.lblStatus.Text = Caption
+        FrmMenu.lblStatus.Text = caption
     End Sub
 
     Friend Sub MenuState(state As Integer)
-        pnlloadvisible = True
-        frmmenuvisible = False
-        Select Case State
+        Pnlloadvisible = True
+        Frmmenuvisible = False
+        Select Case state
             Case MenuStateAddchar
-                pnlCharCreateVisible = False
-                pnlLoginVisible = False
-                pnlRegisterVisible = False
-                pnlCreditsVisible = False
+                PnlCharCreateVisible = False
+                PnlLoginVisible = False
+                PnlRegisterVisible = False
+                PnlCreditsVisible = False
 
                 If ConnectToServer(1) Then
                     SetStatus(Strings.Get("mainmenu", "sendaddchar"))
 
                     If FrmMenu.rdoMale.Checked = True Then
-                        SendAddChar(SelectedChar, FrmMenu.txtCharName.Text, SexType.Male, FrmMenu.cmbClass.SelectedIndex + 1, newCharSprite)
+                        Network.SendAddChar(SelectedChar, FrmMenu.txtCharName.Text, SexType.Male, FrmMenu.cmbClass.SelectedIndex + 1, NewCharSprite)
                     Else
-                        SendAddChar(SelectedChar, FrmMenu.txtCharName.Text, SexType.Female, FrmMenu.cmbClass.SelectedIndex + 1, newCharSprite)
+                        Network.SendAddChar(SelectedChar, FrmMenu.txtCharName.Text, SexType.Female, FrmMenu.cmbClass.SelectedIndex + 1, NewCharSprite)
                     End If
                 End If
 
             Case MenuStateNewaccount
-                pnlLoginVisible = False
-                pnlCharCreateVisible = False
-                pnlRegisterVisible = False
-                pnlCreditsVisible = False
+                PnlLoginVisible = False
+                PnlCharCreateVisible = False
+                PnlRegisterVisible = False
+                PnlCreditsVisible = False
 
                 If ConnectToServer(1) Then
                     SetStatus(Strings.Get("mainmenu", "sendnewacc"))
-                    SendNewAccount(FrmMenu.txtRuser.Text, FrmMenu.txtRPass.Text)
+                    Network.SendNewAccount(FrmMenu.txtRuser.Text, FrmMenu.txtRPass.Text)
                 End If
 
             Case MenuStateLogin
-                pnlLoginVisible = False
-                pnlCharCreateVisible = False
-                pnlRegisterVisible = False
-                pnlCreditsVisible = False
-                tempUserName = FrmMenu.txtLogin.Text
-                tempPassword = FrmMenu.txtPassword.Text
+                PnlLoginVisible = False
+                PnlCharCreateVisible = False
+                PnlRegisterVisible = False
+                PnlCreditsVisible = False
+                TempUserName = FrmMenu.txtLogin.Text
+                TempPassword = FrmMenu.txtPassword.Text
 
                 If ConnectToServer(1) Then
                     SetStatus(Strings.Get("mainmenu", "sendlogin"))
-                    SendLogin(FrmMenu.txtLogin.Text, FrmMenu.txtPassword.Text)
+                    Network.SendLogin(FrmMenu.txtLogin.Text, FrmMenu.txtPassword.Text)
                     Exit Sub
                 End If
         End Select
@@ -231,7 +221,7 @@ Module C_General
         ConnectToServer = False
 
         ' Check to see if we are already connected, if so just exit
-        If Socket.IsConnected() Then
+        If Network.IsConnected() Then
             ConnectToServer = True
             Exit Function
         End If
@@ -239,18 +229,18 @@ Module C_General
         If i = 4 Then Exit Function
         until = GetTickCount() + 3500
 
-        Connect()
+        Network.Connect(Configuration.Settings.Ip, Configuration.Settings.Port)
 
         SetStatus(Strings.Get("mainmenu", "connectserver", i))
 
         ' Wait until connected or a few seconds have passed and report the server being down
-        Do While (Not Socket.IsConnected()) AndAlso (GetTickCount() <= until)
+        Do While (Not Network.IsConnected()) AndAlso (GetTickCount() <= until)
             Application.DoEvents()
             Thread.Sleep(10)
         Loop
 
         ' return value
-        If Socket.IsConnected() Then
+        If Network.IsConnected() Then
             ConnectToServer = True
         End If
 
@@ -263,21 +253,21 @@ Module C_General
     Friend Sub RePositionGui()
 
         'first change the tiles
-        If Options.ScreenSize = 0 Then ' 800x600
+        If Configuration.Settings.ScreenSize = 0 Then ' 800x600
             ScreenMapx = 25
             ScreenMapy = 19
-        ElseIf Options.ScreenSize = 1 Then '1024x768
+        ElseIf Configuration.Settings.ScreenSize = 1 Then '1024x768
             ScreenMapx = 31
             ScreenMapy = 24
-        ElseIf Options.ScreenSize = 2 Then
+        ElseIf Configuration.Settings.ScreenSize = 2 Then
             ScreenMapx = 35
             ScreenMapy = 26
         End If
 
         'then the window
-        frmGame.ClientSize = New Drawing.Size((ScreenMapx) * PicX + PicX, (ScreenMapy) * PicY + PicY)
-        frmGame.picscreen.Width = (ScreenMapx) * PicX + PicX
-        frmGame.picscreen.Height = (ScreenMapy) * PicY + PicY
+        FrmGame.ClientSize = New Drawing.Size((ScreenMapx) * PicX + PicX, (ScreenMapy) * PicY + PicY)
+        FrmGame.picscreen.Width = (ScreenMapx) * PicX + PicX
+        FrmGame.picscreen.Height = (ScreenMapy) * PicY + PicY
 
         HalfX = ((ScreenMapx) \ 2) * PicX
         HalfY = ((ScreenMapy) \ 2) * PicY
@@ -290,22 +280,22 @@ Module C_General
 
         'chatwindow
         ChatWindowX = 1
-        ChatWindowY = frmGame.Height - ChatWindowGFXInfo.Height - 65
+        ChatWindowY = FrmGame.Height - ChatWindowGfxInfo.Height - 65
 
         MyChatX = 1
-        MyChatY = frmGame.Height - 60
+        MyChatY = FrmGame.Height - 60
 
         'hotbar
-        If Options.ScreenSize = 0 Then
-            HotbarX = HUDWindowX + HUDPanelGFXInfo.Width + 20
+        If Configuration.Settings.ScreenSize = 0 Then
+            HotbarX = HudWindowX + HudPanelGfxInfo.Width + 20
             HotbarY = 5
 
             'petbar
             PetbarX = HotbarX
             PetbarY = HotbarY + 34
         Else
-            HotbarX = ChatWindowX + MyChatWindowGFXInfo.Width + 50
-            HotbarY = frmGame.Height - HotBarGFXInfo.Height - 45
+            HotbarX = ChatWindowX + MyChatWindowGfxInfo.Width + 50
+            HotbarY = FrmGame.Height - HotBarGfxInfo.Height - 45
 
             'petbar
             PetbarX = HotbarX
@@ -313,42 +303,42 @@ Module C_General
         End If
 
         'action panel
-        ActionPanelX = frmGame.Width - ActionPanelGFXInfo.Width - 25
-        ActionPanelY = frmGame.Height - ActionPanelGFXInfo.Height - 45
+        ActionPanelX = FrmGame.Width - ActionPanelGfxInfo.Width - 25
+        ActionPanelY = FrmGame.Height - ActionPanelGfxInfo.Height - 45
 
         'Char Window
-        CharWindowX = frmGame.Width - CharPanelGFXInfo.Width - 26
-        CharWindowY = frmGame.Height - CharPanelGFXInfo.Height - ActionPanelGFXInfo.Height - 50
+        CharWindowX = FrmGame.Width - CharPanelGfxInfo.Width - 26
+        CharWindowY = FrmGame.Height - CharPanelGfxInfo.Height - ActionPanelGfxInfo.Height - 50
 
         'inv Window
-        InvWindowX = frmGame.Width - InvPanelGFXInfo.Width - 26
-        InvWindowY = frmGame.Height - InvPanelGFXInfo.Height - ActionPanelGFXInfo.Height - 50
+        InvWindowX = FrmGame.Width - InvPanelGfxInfo.Width - 26
+        InvWindowY = FrmGame.Height - InvPanelGfxInfo.Height - ActionPanelGfxInfo.Height - 50
 
         'skill window
-        SkillWindowX = frmGame.Width - SkillPanelGFXInfo.Width - 26
-        SkillWindowY = frmGame.Height - SkillPanelGFXInfo.Height - ActionPanelGFXInfo.Height - 50
+        SkillWindowX = FrmGame.Width - SkillPanelGfxInfo.Width - 26
+        SkillWindowY = FrmGame.Height - SkillPanelGfxInfo.Height - ActionPanelGfxInfo.Height - 50
 
         'petstat window
         PetStatX = PetbarX
-        PetStatY = PetbarY - PetStatsGFXInfo.Height - 10
+        PetStatY = PetbarY - PetStatsGfxInfo.Height - 10
     End Sub
 
-    Friend Sub DestroyGame()
+    Friend Sub Terminate()
         'SendLeaveGame()
         ' break out of GameLoop
         InGame = False
 
         DestroyGraphics()
         GameDestroyed = True
-        DestroyNetwork()
+        Network.Destroy()
         Application.Exit()
         End
     End Sub
 
     Friend Sub CheckDir(dirPath As String)
 
-        If Not IO.Directory.Exists(DirPath) Then
-            IO.Directory.CreateDirectory(DirPath)
+        If Not IO.Directory.Exists(dirPath) Then
+            IO.Directory.CreateDirectory(dirPath)
         End If
 
     End Sub
@@ -356,13 +346,23 @@ Module C_General
     Friend Function GetExceptionInfo(ex As Exception) As String
         Dim result As String
         Dim hr As Integer = Runtime.InteropServices.Marshal.GetHRForException(ex)
-        Result = ex.GetType.ToString & "(0x" & hr.ToString("X8") & "): " & ex.Message & Environment.NewLine & ex.StackTrace & Environment.NewLine
+        result = ex.GetType.ToString & "(0x" & hr.ToString("X8") & "): " & ex.Message & Environment.NewLine & ex.StackTrace & Environment.NewLine
         Dim st As StackTrace = New StackTrace(ex, True)
         For Each sf As StackFrame In st.GetFrames
             If sf.GetFileLineNumber() > 0 Then
-                Result &= "Line:" & sf.GetFileLineNumber() & " Filename: " & IO.Path.GetFileName(sf.GetFileName) & Environment.NewLine
+                result &= "Line:" & sf.GetFileLineNumber() & " Filename: " & IO.Path.GetFileName(sf.GetFileName) & Environment.NewLine
             End If
         Next
-        Return Result
+        Return result
+    End Function
+
+    Private randomGenerator As Random
+    Friend Sub Randomize()
+        randomGenerator = New Random
+    End Sub
+
+    Friend Function Rand(maxVal As Integer, Optional ByVal minVal As Integer = 0) As Integer
+        If minVal < maxVal Then Return randomGenerator.Next(minVal, maxVal)
+        Return randomGenerator.Next(maxVal, minVal)
     End Function
 End Module

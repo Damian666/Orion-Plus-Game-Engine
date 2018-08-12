@@ -74,8 +74,8 @@ Friend Class frmShop
 
     Private Sub ScrlFace_Scroll(sender As Object, e As EventArgs) Handles nudFace.ValueChanged
 
-        If File.Exists(Application.StartupPath & GFX_PATH & "Faces\" & nudFace.Value & GFX_EXT) Then
-            Me.picFace.BackgroundImage = Image.FromFile(Application.StartupPath & GFX_PATH & "Faces\" & nudFace.Value & GFX_EXT)
+        If File.Exists(Environment.CurrentDirectory & GFX_PATH & "Faces\" & nudFace.Value & GFX_EXT) Then
+            Me.picFace.BackgroundImage = Image.FromFile(Environment.CurrentDirectory & GFX_PATH & "Faces\" & nudFace.Value & GFX_EXT)
         End If
 
         Shop(Editorindex).Face = nudFace.Value

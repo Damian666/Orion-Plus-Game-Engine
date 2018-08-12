@@ -1,66 +1,66 @@
-﻿Imports ASFW
+Imports ASFW
 Imports ASFW.IO
 
 Module E_NetworkReceive
     Sub PacketRouter()
-        Socket.PacketId(ServerPackets.SAlertMsg) = AddressOf Packet_AlertMSG
-        Socket.PacketId(ServerPackets.SKeyPair) = AddressOf Packet_KeyPair
+        Socket.PacketId(ServerPacket.SAlertMsg) = AddressOf Packet_AlertMSG
+        Socket.PacketId(ServerPacket.SKeyPair) = AddressOf Packet_KeyPair
 
-        Socket.PacketId(ServerPackets.SLoginOk) = AddressOf Packet_LoginOk
-        Socket.PacketId(ServerPackets.SClassesData) = AddressOf Packet_ClassesData
+        Socket.PacketId(ServerPacket.SLoginOk) = AddressOf Packet_LoginOk
+        Socket.PacketId(ServerPacket.SClassesData) = AddressOf Packet_ClassesData
         
-        Socket.PacketId(ServerPackets.SItemEditor) = AddressOf Packet_EditItem
-        Socket.PacketId(ServerPackets.SUpdateItem) = AddressOf Packet_UpdateItem
+        Socket.PacketId(ServerPacket.SItemEditor) = AddressOf Packet_EditItem
+        Socket.PacketId(ServerPacket.SUpdateItem) = AddressOf Packet_UpdateItem
 
-        Socket.PacketId(ServerPackets.SREditor) = AddressOf Packet_ResourceEditor
+        Socket.PacketId(ServerPacket.SREditor) = AddressOf Packet_ResourceEditor
 
-        Socket.PacketId(ServerPackets.SNpcEditor) = AddressOf Packet_NPCEditor
-        Socket.PacketId(ServerPackets.SUpdateNpc) = AddressOf Packet_UpdateNPC
+        Socket.PacketId(ServerPacket.SNpcEditor) = AddressOf Packet_NPCEditor
+        Socket.PacketId(ServerPacket.SUpdateNpc) = AddressOf Packet_UpdateNPC
 
-        Socket.PacketId(ServerPackets.SEditMap) = AddressOf Packet_EditMap
+        Socket.PacketId(ServerPacket.SEditMap) = AddressOf Packet_EditMap
 
-        Socket.PacketId(ServerPackets.SShopEditor) = AddressOf Packet_EditShop
-        Socket.PacketId(ServerPackets.SUpdateShop) = AddressOf Packet_UpdateShop
+        Socket.PacketId(ServerPacket.SShopEditor) = AddressOf Packet_EditShop
+        Socket.PacketId(ServerPacket.SUpdateShop) = AddressOf Packet_UpdateShop
 
-        Socket.PacketId(ServerPackets.SSkillEditor) = AddressOf Packet_EditSkill
-        Socket.PacketId(ServerPackets.SUpdateSkill) = AddressOf Packet_UpdateSkill
+        Socket.PacketId(ServerPacket.SSkillEditor) = AddressOf Packet_EditSkill
+        Socket.PacketId(ServerPacket.SUpdateSkill) = AddressOf Packet_UpdateSkill
 
-        Socket.PacketId(ServerPackets.SResourceEditor) = AddressOf Packet_ResourceEditor
-        Socket.PacketId(ServerPackets.SUpdateResource) = AddressOf Packet_UpdateResource
+        Socket.PacketId(ServerPacket.SResourceEditor) = AddressOf Packet_ResourceEditor
+        Socket.PacketId(ServerPacket.SUpdateResource) = AddressOf Packet_UpdateResource
 
-        Socket.PacketId(ServerPackets.SAnimationEditor) = AddressOf Packet_EditAnimation
-        Socket.PacketId(ServerPackets.SUpdateAnimation) = AddressOf Packet_UpdateAnimation
+        Socket.PacketId(ServerPacket.SAnimationEditor) = AddressOf Packet_EditAnimation
+        Socket.PacketId(ServerPacket.SUpdateAnimation) = AddressOf Packet_UpdateAnimation
 
-        Socket.PacketId(ServerPackets.SGameData) = AddressOf Packet_GameData
+        Socket.PacketId(ServerPacket.SGameData) = AddressOf Packet_GameData
 
         'quests
-        Socket.PacketId(ServerPackets.SQuestEditor) = AddressOf Packet_QuestEditor
-        Socket.PacketId(ServerPackets.SUpdateQuest) = AddressOf Packet_UpdateQuest
+        Socket.PacketId(ServerPacket.SQuestEditor) = AddressOf Packet_QuestEditor
+        Socket.PacketId(ServerPacket.SUpdateQuest) = AddressOf Packet_UpdateQuest
 
         'Housing
-        Socket.PacketId(ServerPackets.SHouseConfigs) = AddressOf Packet_HouseConfigurations
-        Socket.PacketId(ServerPackets.SFurniture) = AddressOf Packet_Furniture
-        Socket.PacketId(ServerPackets.SHouseEdit) = AddressOf Packet_EditHouses
+        Socket.PacketId(ServerPacket.SHouseConfigs) = AddressOf Packet_HouseConfigurations
+        Socket.PacketId(ServerPacket.SFurniture) = AddressOf Packet_Furniture
+        Socket.PacketId(ServerPacket.SHouseEdit) = AddressOf Packet_EditHouses
         
-        Socket.PacketId(ServerPackets.SProjectileEditor) = AddressOf HandleProjectileEditor
-        Socket.PacketId(ServerPackets.SUpdateProjectile) = AddressOf HandleUpdateProjectile
-        Socket.PacketId(ServerPackets.SMapProjectile) = AddressOf HandleMapProjectile
+        Socket.PacketId(ServerPacket.SProjectileEditor) = AddressOf HandleProjectileEditor
+        Socket.PacketId(ServerPacket.SUpdateProjectile) = AddressOf HandleUpdateProjectile
+        Socket.PacketId(ServerPacket.SMapProjectile) = AddressOf HandleMapProjectile
 
         'craft
-        Socket.PacketId(ServerPackets.SUpdateRecipe) = AddressOf Packet_UpdateRecipe
-        Socket.PacketId(ServerPackets.SRecipeEditor) = AddressOf Packet_RecipeEditor
+        Socket.PacketId(ServerPacket.SUpdateRecipe) = AddressOf Packet_UpdateRecipe
+        Socket.PacketId(ServerPacket.SRecipeEditor) = AddressOf Packet_RecipeEditor
 
-        Socket.PacketId(ServerPackets.SClassEditor) = AddressOf Packet_ClassEditor
+        Socket.PacketId(ServerPacket.SClassEditor) = AddressOf Packet_ClassEditor
 
         'Auto Mapper
-        Socket.PacketId(ServerPackets.SAutoMapper) = AddressOf Packet_AutoMapper
+        Socket.PacketId(ServerPacket.SAutoMapper) = AddressOf Packet_AutoMapper
 
         'pets
-        Socket.PacketId(ServerPackets.SPetEditor) = AddressOf Packet_PetEditor
-        Socket.PacketId(ServerPackets.SUpdatePet) = AddressOf Packet_UpdatePet
+        Socket.PacketId(ServerPacket.SPetEditor) = AddressOf Packet_PetEditor
+        Socket.PacketId(ServerPacket.SUpdatePet) = AddressOf Packet_UpdatePet
 
 
-        Socket.PacketId(ServerPackets.SNews) = AddressOf Packet_News
+        Socket.PacketId(ServerPacket.SNews) = AddressOf Packet_News
     End Sub
 
     Private Sub Packet_News(ByRef data() As Byte)
@@ -173,7 +173,7 @@ Module E_NetworkReceive
         i = buffer.ReadInt32
         ' Update the Npc
         Npc(i).Animation = buffer.ReadInt32()
-        Npc(i).AttackSay = Trim(buffer.ReadString())
+        Npc(i).AttackSay = buffer.ReadString().Trim
         Npc(i).Behaviour = buffer.ReadInt32()
         ReDim Npc(i).DropChance(5)
         ReDim Npc(i).DropItem(5)
@@ -187,7 +187,7 @@ Module E_NetworkReceive
         Npc(i).Exp = buffer.ReadInt32()
         Npc(i).Faction = buffer.ReadInt32()
         Npc(i).Hp = buffer.ReadInt32()
-        Npc(i).Name = Trim(buffer.ReadString())
+        Npc(i).Name = buffer.ReadString().Trim
         Npc(i).Range = buffer.ReadInt32()
         Npc(i).SpawnTime = buffer.ReadInt32()
         Npc(i).SpawnSecs = buffer.ReadInt32()
@@ -226,7 +226,7 @@ Module E_NetworkReceive
         shopnum = Buffer.ReadInt32
 
         Shop(shopnum).BuyRate = Buffer.ReadInt32()
-        Shop(shopnum).Name = Trim(Buffer.ReadString())
+        Shop(shopnum).Name = Buffer.ReadString().Trim
         Shop(shopnum).Face = Buffer.ReadInt32()
 
         For i = 0 To MAX_TRADES
@@ -264,7 +264,7 @@ Module E_NetworkReceive
         Skill(skillnum).LevelReq = Buffer.ReadInt32()
         Skill(skillnum).Map = Buffer.ReadInt32()
         Skill(skillnum).MpCost = Buffer.ReadInt32()
-        Skill(skillnum).Name = Trim(Buffer.ReadString())
+        Skill(skillnum).Name = Buffer.ReadString().Trim
         Skill(skillnum).Range = Buffer.ReadInt32()
         Skill(skillnum).SkillAnim = Buffer.ReadInt32()
         Skill(skillnum).StunDuration = Buffer.ReadInt32()
@@ -295,16 +295,16 @@ Module E_NetworkReceive
         ResourceNum = Buffer.ReadInt32
 
         Resource(ResourceNum).Animation = Buffer.ReadInt32()
-        Resource(ResourceNum).EmptyMessage = Trim(Buffer.ReadString())
+        Resource(ResourceNum).EmptyMessage = Buffer.ReadString().Trim
         Resource(ResourceNum).ExhaustedImage = Buffer.ReadInt32()
         Resource(ResourceNum).Health = Buffer.ReadInt32()
         Resource(ResourceNum).ExpReward = Buffer.ReadInt32()
         Resource(ResourceNum).ItemReward = Buffer.ReadInt32()
-        Resource(ResourceNum).Name = Trim(Buffer.ReadString())
+        Resource(ResourceNum).Name = Buffer.ReadString().Trim
         Resource(ResourceNum).ResourceImage = Buffer.ReadInt32()
         Resource(ResourceNum).ResourceType = Buffer.ReadInt32()
         Resource(ResourceNum).RespawnTime = Buffer.ReadInt32()
-        Resource(ResourceNum).SuccessMessage = Trim(Buffer.ReadString())
+        Resource(ResourceNum).SuccessMessage = Buffer.ReadString().Trim
         Resource(ResourceNum).LvlRequired = Buffer.ReadInt32()
         Resource(ResourceNum).ToolRequired = Buffer.ReadInt32()
         Resource(ResourceNum).Walkthrough = Buffer.ReadInt32()
@@ -337,8 +337,8 @@ Module E_NetworkReceive
             Animation(n).LoopTime(i) = Buffer.ReadInt32()
         Next
 
-        Animation(n).Name = Trim$(Buffer.ReadString)
-        Animation(n).Sound = Trim$(Buffer.ReadString)
+        Animation(n).Name = Buffer.ReadString.Trim
+        Animation(n).Sound = Buffer.ReadString.Trim
 
         If Animation(n).Name Is Nothing Then Animation(n).Name = ""
         If Animation(n).Sound Is Nothing Then Animation(n).Sound = ""
@@ -370,8 +370,8 @@ Module E_NetworkReceive
         For i = 1 To Max_Classes
 
             With Classes(i)
-                .Name = Trim(Buffer.ReadString)
-                .Desc = Trim$(Buffer.ReadString)
+                .Name = Buffer.ReadString.Trim
+                .Desc = Buffer.ReadString.Trim
 
                 .Vital(VitalType.HP) = Buffer.ReadInt32
                 .Vital(VitalType.MP) = Buffer.ReadInt32
@@ -447,7 +447,7 @@ Module E_NetworkReceive
             Item(n).TwoHanded = Buffer.ReadInt32()
             Item(n).LevelReq = Buffer.ReadInt32()
             Item(n).Mastery = Buffer.ReadInt32()
-            Item(n).Name = Trim$(Buffer.ReadString())
+            Item(n).Name = Buffer.ReadString().Trim
             Item(n).Paperdoll = Buffer.ReadInt32()
             Item(n).Pic = Buffer.ReadInt32()
             Item(n).Price = Buffer.ReadInt32()
@@ -459,7 +459,7 @@ Module E_NetworkReceive
             Item(n).RandomMax = Buffer.ReadInt32()
 
             Item(n).Stackable = Buffer.ReadInt32()
-            Item(n).Description = Trim$(Buffer.ReadString())
+            Item(n).Description = Buffer.ReadString().Trim
 
             For z = 0 To StatType.Count - 1
                 Item(n).Stat_Req(z) = Buffer.ReadInt32()
@@ -513,8 +513,8 @@ Module E_NetworkReceive
                 Animation(n).LoopTime(z) = Buffer.ReadInt32()
             Next
 
-            Animation(n).Name = Trim(Buffer.ReadString)
-            Animation(n).Sound = Trim(Buffer.ReadString)
+            Animation(n).Name = Buffer.ReadString.Trim
+            Animation(n).Sound = Buffer.ReadString.Trim
 
             If Animation(n).Name Is Nothing Then Animation(n).Name = ""
             If Animation(n).Sound Is Nothing Then Animation(n).Sound = ""
@@ -537,7 +537,7 @@ Module E_NetworkReceive
             n = Buffer.ReadInt32
             ' Update the Npc
             Npc(n).Animation = Buffer.ReadInt32()
-            Npc(n).AttackSay = Trim(Buffer.ReadString())
+            Npc(n).AttackSay = Buffer.ReadString().Trim
             Npc(n).Behaviour = Buffer.ReadInt32()
             For z = 1 To 5
                 Npc(n).DropChance(z) = Buffer.ReadInt32()
@@ -548,7 +548,7 @@ Module E_NetworkReceive
             Npc(n).Exp = Buffer.ReadInt32()
             Npc(n).Faction = Buffer.ReadInt32()
             Npc(n).Hp = Buffer.ReadInt32()
-            Npc(n).Name = Trim(Buffer.ReadString())
+            Npc(n).Name = Buffer.ReadString().Trim
             Npc(n).Range = Buffer.ReadInt32()
             Npc(n).SpawnTime = Buffer.ReadInt32()
             Npc(n).SpawnSecs = Buffer.ReadInt32()
@@ -586,7 +586,7 @@ Module E_NetworkReceive
             n = Buffer.ReadInt32
 
             Shop(n).BuyRate = Buffer.ReadInt32()
-            Shop(n).Name = Trim(Buffer.ReadString())
+            Shop(n).Name = Buffer.ReadString().Trim
             Shop(n).Face = Buffer.ReadInt32()
 
             For z = 0 To MAX_TRADES
@@ -626,7 +626,7 @@ Module E_NetworkReceive
             Skill(n).LevelReq = Buffer.ReadInt32()
             Skill(n).Map = Buffer.ReadInt32()
             Skill(n).MpCost = Buffer.ReadInt32()
-            Skill(n).Name = Trim(Buffer.ReadString())
+            Skill(n).Name = Buffer.ReadString().Trim
             Skill(n).Range = Buffer.ReadInt32()
             Skill(n).SkillAnim = Buffer.ReadInt32()
             Skill(n).StunDuration = Buffer.ReadInt32()
@@ -658,16 +658,16 @@ Module E_NetworkReceive
             n = Buffer.ReadInt32
 
             Resource(n).Animation = Buffer.ReadInt32()
-            Resource(n).EmptyMessage = Trim(Buffer.ReadString())
+            Resource(n).EmptyMessage = Buffer.ReadString().Trim
             Resource(n).ExhaustedImage = Buffer.ReadInt32()
             Resource(n).Health = Buffer.ReadInt32()
             Resource(n).ExpReward = Buffer.ReadInt32()
             Resource(n).ItemReward = Buffer.ReadInt32()
-            Resource(n).Name = Trim(Buffer.ReadString())
+            Resource(n).Name = Buffer.ReadString().Trim
             Resource(n).ResourceImage = Buffer.ReadInt32()
             Resource(n).ResourceType = Buffer.ReadInt32()
             Resource(n).RespawnTime = Buffer.ReadInt32()
-            Resource(n).SuccessMessage = Trim(Buffer.ReadString())
+            Resource(n).SuccessMessage = Buffer.ReadString().Trim
             Resource(n).LvlRequired = Buffer.ReadInt32()
             Resource(n).ToolRequired = Buffer.ReadInt32()
             Resource(n).Walkthrough = Buffer.ReadInt32()
@@ -693,3 +693,141 @@ Module E_NetworkReceive
 
 
 End Module
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

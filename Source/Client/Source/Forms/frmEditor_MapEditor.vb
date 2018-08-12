@@ -1,4 +1,5 @@
-﻿Imports System.Drawing
+﻿Imports System
+Imports System.Drawing
 Imports System.IO
 Imports System.Windows.Forms
 Imports ASFW
@@ -141,11 +142,11 @@ Public Class FrmEditor_MapEditor
         End If
 
         EditorMap_DrawMapItem()
-        lblMapItem.Text = "Item: " & scrlMapItem.Value & ". " & Trim$(Item(scrlMapItem.Value).Name) & " x" & scrlMapItemValue.Value
+        lblMapItem.Text = "Item: " & scrlMapItem.Value & ". " & Item(scrlMapItem.Value).Name.Trim & " x" & scrlMapItemValue.Value
     End Sub
 
     Private Sub ScrlMapItemValue_Scroll(ByVal sender As Object, ByVal e As EventArgs) Handles scrlMapItemValue.ValueChanged
-        lblMapItem.Text = Trim$(Item(scrlMapItem.Value).Name) & " x" & scrlMapItemValue.Value
+        lblMapItem.Text = Item(scrlMapItem.Value).Name.Trim & " x" & scrlMapItemValue.Value
     End Sub
 
     Private Sub BtnMapItem_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnMapItem.Click
@@ -164,12 +165,12 @@ Public Class FrmEditor_MapEditor
 
         scrlMapItem.Maximum = MAX_ITEMS
         scrlMapItem.Value = 1
-        lblMapItem.Text = Trim$(Item(scrlMapItem.Value).Name) & " x" & scrlMapItemValue.Value
+        lblMapItem.Text = Item(scrlMapItem.Value).Name.Trim & " x" & scrlMapItemValue.Value
         EditorMap_DrawMapItem()
     End Sub
 
     Private Sub ScrlMapKey_Scroll(ByVal sender As Object, ByVal e As EventArgs) Handles scrlMapKey.ValueChanged
-        lblMapKey.Text = "Item: " & Trim$(Item(scrlMapKey.Value).Name)
+        lblMapKey.Text = "Item: " & Item(scrlMapKey.Value).Name.Trim
         EditorMap_DrawKey()
     End Sub
 
@@ -191,7 +192,7 @@ Public Class FrmEditor_MapEditor
         scrlMapKey.Value = 1
         chkMapKey.Checked = True
         EditorMap_DrawKey()
-        lblMapKey.Text = "Item: " & Trim$(Item(scrlMapKey.Value).Name)
+        lblMapKey.Text = "Item: " & Item(scrlMapKey.Value).Name.Trim
     End Sub
 
     Private Sub ScrlKeyX_Scroll(ByVal sender As Object, ByVal e As EventArgs) Handles scrlKeyX.ValueChanged
@@ -411,28 +412,28 @@ Public Class FrmEditor_MapEditor
         Dim Y As Integer, y2 As Integer
         Dim tempArr(,) As TileRec
 
-        If Not IsNumeric(txtMaxX.Text) Then txtMaxX.Text = Map.MaxX
-        If Val(txtMaxX.Text) < ScreenMapx Then txtMaxX.Text = ScreenMapx
-        If Val(txtMaxX.Text) > Byte.MaxValue Then txtMaxX.Text = Byte.MaxValue
-        If Not IsNumeric(txtMaxY.Text) Then txtMaxY.Text = Map.MaxY
-        If Val(txtMaxY.Text) < ScreenMapy Then txtMaxY.Text = ScreenMapy
-        If Val(txtMaxY.Text) > Byte.MaxValue Then txtMaxY.Text = Byte.MaxValue
+        If Not Single.TryParse(txtMaxX.Text, 0) Then txtMaxX.Text = Map.MaxX
+        If CInt(txtMaxX.Text) < ScreenMapx Then txtMaxX.Text = ScreenMapx
+        If CInt(txtMaxX.Text) > Byte.MaxValue Then txtMaxX.Text = Byte.MaxValue
+        If Not Single.TryParse(txtMaxY.Text, 0) Then txtMaxY.Text = Map.MaxY
+        If CInt(txtMaxY.Text) < ScreenMapy Then txtMaxY.Text = ScreenMapy
+        If CInt(txtMaxY.Text) > Byte.MaxValue Then txtMaxY.Text = Byte.MaxValue
 
         With Map
-            .Name = Trim$(txtName.Text)
+            .Name = txtName.Text.Trim
             If lstMusic.SelectedIndex >= 0 Then
                 .Music = lstMusic.Items(lstMusic.SelectedIndex).ToString
             Else
                 .Music = ""
             End If
-            .Up = Val(txtUp.Text)
-            .Down = Val(txtDown.Text)
-            .Left = Val(txtLeft.Text)
-            .Right = Val(txtRight.Text)
+            .Up = CInt(txtUp.Text)
+            .Down = CInt(txtDown.Text)
+            .Left = CInt(txtLeft.Text)
+            .Right = CInt(txtRight.Text)
             .Moral = cmbMoral.SelectedIndex
-            .BootMap = Val(txtBootMap.Text)
-            .BootX = Val(txtBootX.Text)
-            .BootY = Val(txtBootY.Text)
+            .BootMap = CInt(txtBootMap.Text)
+            .BootX = CInt(txtBootX.Text)
+            .BootY = CInt(txtBootY.Text)
 
             ' set the data before changing it
             tempArr = Map.Tile.Clone
@@ -440,8 +441,8 @@ Public Class FrmEditor_MapEditor
             x2 = Map.MaxX
             y2 = Map.MaxY
             ' change the data
-            .MaxX = Val(txtMaxX.Text)
-            .MaxY = Val(txtMaxY.Text)
+            .MaxX = CInt(txtMaxX.Text)
+            .MaxY = CInt(txtMaxY.Text)
             ReDim Map.Tile(0 To .MaxX, 0 To .MaxY)
 
             ReDim Autotile(0 To .MaxX, 0 To .MaxY)
@@ -574,24 +575,24 @@ Public Class FrmEditor_MapEditor
     Public Sub MapPropertiesInit()
         Dim X As Integer, Y As Integer, i As Integer
 
-        txtName.Text = Trim$(Map.Name)
+        txtName.Text = Map.Name.Trim
 
         ' find the music we have set
 
         lstMusic.Items.Clear()
         lstMusic.Items.Add("None")
 
-        If UBound(MusicCache) > 0 Then
-            For i = 1 To UBound(MusicCache)
+        If MusicCache.GetUpperBound(0) > 0 Then
+            For i = 1 To MusicCache.GetUpperBound(0)
                 lstMusic.Items.Add(MusicCache(i))
             Next
         End If
 
-        If Trim$(Map.Music) = "None" Then
+        If Map.Music.Trim = "None" Then
             lstMusic.SelectedIndex = 0
         Else
             For i = 1 To lstMusic.Items.Count
-                If lstMusic.Items(i - 1).ToString = Trim$(Map.Music) Then
+                If lstMusic.Items(i - 1).ToString = Map.Music.Trim Then
                     lstMusic.SelectedIndex = i - 1
                     Exit For
                 End If
@@ -614,7 +615,7 @@ Public Class FrmEditor_MapEditor
             If Map.Npc(X) = 0 Then
                 lstMapNpc.Items.Add("No NPC")
             Else
-                lstMapNpc.Items.Add(X & ": " & Trim$(Npc(Map.Npc(X)).Name))
+                lstMapNpc.Items.Add(X & ": " & Npc(Map.Npc(X)).Name.Trim)
             End If
 
         Next
@@ -623,7 +624,7 @@ Public Class FrmEditor_MapEditor
         cmbNpcList.Items.Add("No NPC")
 
         For Y = 1 To MAX_NPCS
-            cmbNpcList.Items.Add(Y & ": " & Trim$(Npc(Y).Name))
+            cmbNpcList.Items.Add(Y & ": " & Npc(Y).Name.Trim)
         Next
 
         lblMap.Text = "Current map: " & "?"
@@ -963,11 +964,10 @@ Public Class FrmEditor_MapEditor
     End Sub
 
     Public Sub MapEditorCancel()
-        Dim Buffer As ByteStream
-        Buffer = New ByteStream(4)
-        Buffer.WriteInt32(ClientPackets.CNeedMap)
+        Dim Buffer As New ByteStream(4)
+        Buffer.WriteInt32(ClientPacket.CNeedMap)
         Buffer.WriteInt32(1)
-        Socket.SendData(Buffer.Data, Buffer.Head)
+        Network.SendData(buffer.ToPacket)
         InMapEditor = False
         Visible = False
         GettingMap = True
@@ -1039,7 +1039,7 @@ Public Class FrmEditor_MapEditor
         If CurLayer = 0 Then Exit Sub
 
         ' ask to clear layer
-        If MsgBox("Are you sure you wish to clear this layer?", vbYesNo, "MapEditor") = vbYes Then
+        If MessageBox.Show("Are you sure you wish to clear this layer?", "MapEditor", MessageBoxButtons.YesNo) = DialogResult.Yes Then
             For X = 0 To Map.MaxX
                 For Y = 0 To Map.MaxY
                     With Map.Tile(X, Y)
@@ -1061,7 +1061,7 @@ Public Class FrmEditor_MapEditor
 
         CurLayer = cmbLayers.SelectedIndex + 1
 
-        If MsgBox("Are you sure you wish to fill this layer?", vbYesNo, "Map Editor") = vbYes Then
+        If MessageBox.Show("Are you sure you wish to fill this layer?", "Map Editor", MessageBoxButtons.YesNo) = DialogResult.Yes Then
             If theAutotile > 0 Then
                 For X = 0 To Map.MaxX
                     For Y = 0 To Map.MaxY
@@ -1107,7 +1107,7 @@ Public Class FrmEditor_MapEditor
         Dim X As Integer
         Dim Y As Integer
 
-        If MsgBox("Are you sure you wish to clear the attributes on this map?", vbYesNo, "MapEditor") = vbYes Then
+        If MessageBox.Show("Are you sure you wish to clear the attributes on this map?", "MapEditor", MessageBoxButtons.YesNo) = DialogResult.Yes Then
 
             For X = 0 To Map.MaxX
                 For Y = 0 To Map.MaxY
@@ -1122,7 +1122,7 @@ Public Class FrmEditor_MapEditor
     Public Sub MapEditorLeaveMap()
 
         If InMapEditor Then
-            If MsgBox("Save changes to current map?", vbYesNo) = vbYes Then
+            If MessageBox.Show("Save changes to current map?", "", MessageBoxButtons.YesNo) = DialogResult.Yes Then
                 MapEditorSend()
             Else
                 MapEditorCancel()
@@ -1217,8 +1217,8 @@ Public Class FrmEditor_MapEditor
             Exit Sub
         End If
 
-        If File.Exists(Application.StartupPath & GfxPath & "items\" & itemnum & GfxExt) Then
-            Me.picMapItem.BackgroundImage = Drawing.Image.FromFile(Application.StartupPath & GfxPath & "items\" & itemnum & GfxExt)
+        If File.Exists(Environment.CurrentDirectory & GfxPath & "items\" & itemnum & GfxExt) Then
+            Me.picMapItem.BackgroundImage = Drawing.Image.FromFile(Environment.CurrentDirectory & GfxPath & "items\" & itemnum & GfxExt)
         End If
 
     End Sub
@@ -1233,8 +1233,8 @@ Public Class FrmEditor_MapEditor
             Exit Sub
         End If
 
-        If File.Exists(Application.StartupPath & GfxPath & "items\" & itemnum & GfxExt) Then
-            Me.picMapKey.BackgroundImage = Drawing.Image.FromFile(Application.StartupPath & GfxPath & "items\" & itemnum & GfxExt)
+        If File.Exists(Environment.CurrentDirectory & GfxPath & "items\" & itemnum & GfxExt) Then
+            Me.picMapKey.BackgroundImage = Drawing.Image.FromFile(Environment.CurrentDirectory & GfxPath & "items\" & itemnum & GfxExt)
         End If
 
     End Sub

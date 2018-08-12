@@ -9,7 +9,7 @@
     <OutputType>WinExe</OutputType>
     <StartupObject>Engine.My.MyApplication</StartupObject>
     <RootNamespace>Engine</RootNamespace>
-    <AssemblyName>Orion+ Client</AssemblyName>
+    <AssemblyName>Client</AssemblyName>
     <FileAlignment>512</FileAlignment>
     <MyType>WindowsForms</MyType>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
@@ -59,6 +59,7 @@
     <PlatformTarget>AnyCPU</PlatformTarget>
     <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
     <Prefer32Bit>false</Prefer32Bit>
+    <DefineConstants>CLIENT</DefineConstants>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|AnyCPU'">
     <DefineTrace>true</DefineTrace>
@@ -69,6 +70,7 @@
     <PlatformTarget>AnyCPU</PlatformTarget>
     <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
     <Prefer32Bit>false</Prefer32Bit>
+    <DefineConstants>CLIENT</DefineConstants>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="ASFW, Version=1.0.6691.35832, Culture=neutral, processorArchitecture=MSIL">
@@ -83,15 +85,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Import Include="Microsoft.VisualBasic" />
-    <Import Include="System" />
-    <Import Include="System.Collections" />
-    <Import Include="System.Collections.Generic" />
-    <Import Include="System.Diagnostics" />
-  </ItemGroup>
-  <ItemGroup>
-    <Compile Include="ApplicationEvents.vb" />
-    <Compile Include="GlobalSuppressions.vb" />
     <Compile Include="My Project\Resources.Designer.vb">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -109,7 +102,6 @@
     <Compile Include="Source\Forms\frmEditor_MapEditor.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Source\Modules\C_Options.vb" />
     <Compile Include="Source\Modules\Objects\C_Items.vb" />
     <Compile Include="Source\Modules\Objects\C_Maps.vb" />
     <Compile Include="Source\Modules\Objects\C_Resources.vb" />
@@ -174,7 +166,6 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
-    <Compile Include="Source\Modules\Network\C_NetworkConfig.vb" />
     <Compile Include="Source\Modules\Network\C_NetworkReceive.vb" />
     <Compile Include="Source\Modules\Network\C_NetworkSend.vb" />
   </ItemGroup>
@@ -964,6 +955,9 @@
     <Content Include="Resources\ScreenShot.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Source\SFML\" />
   </ItemGroup>
   <Import Project="..\Bindings\Bindings.projitems" Label="Shared" />
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
