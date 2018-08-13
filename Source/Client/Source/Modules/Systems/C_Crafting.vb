@@ -85,6 +85,100 @@ Friend Module C_Crafting
     End Sub
 #End Region
 
+    #Region "Editor"
+
+    Friend Sub RecipeEditorInit()
+        Dim i As Integer
+
+        With FrmRecipe
+            Editor = EDITOR_RECIPE
+            .lstIndex.Items.Clear()
+
+            ' Add the names
+            For i = 1 To MAX_RECIPE
+                .lstIndex.Items.Add(i & ": " & Recipe(i).Name.Trim)
+            Next
+
+            'fill comboboxes
+            .cmbMakeItem.Items.Clear()
+            .cmbIngredient.Items.Clear()
+
+            .cmbMakeItem.Items.Add("None")
+            .cmbIngredient.Items.Add("None")
+            For i = 1 To MAX_ITEMS
+                .cmbMakeItem.Items.Add(Item(i).Name.Trim)
+                .cmbIngredient.Items.Add(Item(i).Name.Trim)
+            Next
+
+            .Show()
+            .lstIndex.SelectedIndex = 0
+        End With
+
+        Editorindex = FrmRecipe.lstIndex.SelectedIndex + 1
+
+        With Recipe(Editorindex)
+            FrmRecipe.txtName.Text = .Name.Trim
+
+            FrmRecipe.lstIngredients.Items.Clear()
+
+            FrmRecipe.cmbType.SelectedIndex = .RecipeType
+            FrmRecipe.cmbMakeItem.SelectedIndex = .MakeItemNum
+
+            If .MakeItemAmount < 1 Then .MakeItemAmount = 1
+            FrmRecipe.nudAmount.Value = .MakeItemAmount
+
+            If .CreateTime < 1 Then .CreateTime = 1
+            FrmRecipe.nudCreateTime.Value = .CreateTime
+
+            UpdateIngredient()
+        End With
+
+        RecipeChanged(Editorindex) = True
+
+    End Sub
+
+    Friend Sub RecipeEditorCancel()
+        Editor = 0
+        FrmRecipe.Visible = False
+        ClearChanged_Recipe()
+        ClearRecipes()
+        SendRequestRecipes()
+    End Sub
+
+    Friend Sub RecipeEditorOk()
+        Dim i As Integer
+
+        For i = 1 To MAX_RECIPE
+            If RecipeChanged(i) Then
+                SendSaveRecipe(i)
+            End If
+        Next
+
+        FrmRecipe.Visible = False
+        Editor = 0
+        ClearChanged_Recipe()
+    End Sub
+
+    Friend Sub UpdateIngredient()
+        Dim i As Integer
+        FrmRecipe.lstIngredients.Items.Clear()
+
+        For i = 1 To MAX_INGREDIENT
+            With Recipe(Editorindex).Ingredients(i)
+                ' if none, show as none
+                If .ItemNum <= 0 AndAlso .Value = 0 Then
+                    FrmRecipe.lstIngredients.Items.Add("Empty")
+                Else
+                    FrmRecipe.lstIngredients.Items.Add(Item(.ItemNum).Name.Trim & " X " & .Value)
+                End If
+
+            End With
+        Next
+
+        FrmRecipe.lstIngredients.SelectedIndex = 0
+    End Sub
+#End Region
+
 #Region "Incoming Packets"
     Sub Packet_UpdateRecipe(ByRef data() As Byte)
         Dim n As Integer, i As Integer

@@ -1,7 +1,7 @@
 Imports System
 Imports System.IO
 Imports ASFW
-
+Imports ASFW.IO.FileIO
 Imports Ini = ASFW.IO.FileIO.TextFile
 
 Friend Module S_Housing
@@ -33,33 +33,36 @@ Friend Module S_Housing
 #End Region
 
 #Region "DataBase"
-    Sub CreateHouses()
-
-        Dim path = Environment.CurrentDirectory & "\Data\HouseConfig.ini"
-        If Not File.Exists(path) Then File.Create(path).Dispose
-
-        Ini.PutVar(path, "House" & 1, "BaseMap", 0)
-        Ini.PutVar(path, "House" & 1, "Name", "")
-        Ini.PutVar(path, "House" & 1, "MaxFurniture", 0)
-        Ini.PutVar(path, "House" & 1, "Price",0)
-        Ini.PutVar(path, "House" & 1, "X", 0)
-        Ini.PutVar(path, "House" & 1, "Y", 0)
-    End Sub
-
-    Sub LoadHouses()
-        Dim i As Integer
-
-        Dim path = Environment.CurrentDirectory & "\Data\HouseConfig.ini"
-        If Not File.Exists(path) Then CreateHouses()
+    Sub CheckHouses()
+        Dim cd = Environment.CurrentDirectory & "\Data\Houses\"
+        If Not Directory.Exists(cd) Then Directory.CreateDirectory(cd)
 
         For i = 1 To MAX_HOUSES
-            Integer.TryParse(Ini.GetVar(path, "House" & i, "BaseMap"),HouseConfig(i).BaseMap)
-            HouseConfig(i).ConfigName = Ini.Read(path, "House" & i, "Name").Trim
-            Integer.TryParse(Ini.GetVar(path, "House" & i, "MaxFurniture"),HouseConfig(i).MaxFurniture)
-            Integer.TryParse(Ini.GetVar(path, "House" & i, "Price"),HouseConfig(i).Price)
-            Integer.TryParse(Ini.GetVar(path, "House" & i, "X"),HouseConfig(i).X)
-            Integer.TryParse(Ini.GetVar(path, "House" & i, "Y"),HouseConfig(i).Y)
+
+            If Not File.Exists(cd & i & "bin") Then
+                SaveAnimation(i)
+            End If
+
         Next
+    End Sub
+
+    Sub LoadHouse(housenum As Integer)
+        Dim cf = Environment.CurrentDirectory & "\Data\Houses\" & housenum & "bin"
+
+        Dim reader As New ByteStream()
+        BinaryFile.Load(cf, reader)
+
+        HouseConfig(housenum).ConfigName = reader.ReadString()
+        HouseConfig(housenum).BaseMap = reader.ReadInt32()
+        HouseConfig(housenum).MaxFurniture = reader.ReadInt32()
+        HouseConfig(housenum).Price = reader.ReadInt32()
+        HouseConfig(housenum).X = reader.ReadInt32()
+        HouseConfig(housenum).Y = reader.ReadInt32()
+        HouseConfig(housenum).BaseMap = reader.ReadInt32()
+        
+        If HouseConfig(housenum).ConfigName Is Nothing Then
+            HouseConfig(housenum).ConfigName = ""
+        End If
 
         For i = 1 To GetPlayersOnline()
             If Network.IsPlaying(i) Then
@@ -69,22 +72,33 @@ Friend Module S_Housing
 
     End Sub
 
-    Sub SaveHouse(index As Integer)
+    Sub LoadHouses()
+        Dim cd = Environment.CurrentDirectory & "\Data\Houses\"
+        If Not Directory.Exists(cd) Then Directory.CreateDirectory(cd)
 
-        Dim path = Environment.CurrentDirectory & "\Data\HouseConfig.ini"
-        If Not File.Exists(path) Then File.Create(path).Dispose
+        CheckHouses()
 
-        If index > 0 AndAlso index <= MAX_HOUSES Then
-            Ini.PutVar(path, "House" & index, "BaseMap", HouseConfig(index).BaseMap)
-            Ini.PutVar(path, "House" & index, "Name", HouseConfig(index).ConfigName)
-            Ini.PutVar(path, "House" & index, "MaxFurniture", HouseConfig(index).MaxFurniture)
-            Ini.PutVar(path, "House" & index, "Price", HouseConfig(index).Price)
-            Ini.PutVar(path, "House" & index, "X", HouseConfig(index).X)
-            Ini.PutVar(path, "House" & index, "Y", HouseConfig(index).Y)
-        End If
+        For i = 1 To MAX_ANIMATIONS
+            LoadHouse(i)
+        Next
+    End Sub
 
-        LoadHouses()
+    Sub SaveHouse(housenum As Integer)
+        Dim cf = Environment.CurrentDirectory & "\Data\Houses\" & housenum & "bin"
 
+        Dim writer As New ByteStream()
+        BinaryFile.Load(cf, writer)
+
+        writer.WriteString(HouseConfig(housenum).ConfigName)
+         writer.WriteInt32(HouseConfig(housenum).BaseMap)
+        writer.WriteInt32( HouseConfig(housenum).MaxFurniture)
+        writer.WriteInt32( HouseConfig(housenum).Price)
+        writer.WriteInt32( HouseConfig(housenum).X)
+        writer.WriteInt32( HouseConfig(housenum).Y)
+        writer.WriteInt32( HouseConfig(housenum).BaseMap)
+        
+        BinaryFile.Save(cf, writer)
+        
     End Sub
 
     Sub SaveHouses()

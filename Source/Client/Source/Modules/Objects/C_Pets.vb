@@ -3,7 +3,7 @@ Imports ASFW
 
 Module C_Pets
 #Region "Globals etc"
-    Friend Pet() As PetRec
+    Friend Pet(MAX_PETS) As PetRec
 
     Friend Const PetbarTop As Byte = 2
     Friend Const PetbarLeft As Byte = 2
@@ -11,6 +11,9 @@ Module C_Pets
     Friend Const MaxPetbar As Byte = 7
     Friend Const PetHpBarWidth As Integer = 129
     Friend Const PetMpBarWidth As Integer = 129
+    Friend InitPetEditor As Boolean
+    Friend Const EDITOR_PET As Byte = 7
+    Friend Pet_Changed() As Boolean
 
     Friend PetSkillBuffer As Integer
     Friend PetSkillBufferTimer As Integer
@@ -136,6 +139,57 @@ Module C_Pets
 
     End Sub
 
+    Friend Sub SendRequestEditPet()
+        dim buffer as ByteStream
+        Buffer = New ByteStream(4)
+
+        Buffer.WriteInt32(EditorPackets.CRequestEditPet)
+
+        Network.SendData(buffer.ToPacket)
+
+        Buffer.Dispose()
+
+    End Sub
+
+    Friend Sub SendSavePet(petNum As Integer)
+        dim buffer as ByteStream
+        Dim i As Integer
+
+        Buffer = New ByteStream(4)
+        Buffer.WriteInt32(EditorPackets.CSavePet)
+        Buffer.WriteInt32(petNum)
+
+        With Pet(petNum)
+            Buffer.WriteInt32(.Num)
+            buffer.WriteString((.Name.Trim))
+            buffer.WriteInt32(.Sprite)
+            Buffer.WriteInt32(.Range)
+            Buffer.WriteInt32(.Level)
+            Buffer.WriteInt32(.MaxLevel)
+            Buffer.WriteInt32(.ExpGain)
+            Buffer.WriteInt32(.LevelPnts)
+            Buffer.WriteInt32(.StatType)
+            Buffer.WriteInt32(.LevelingType)
+
+            For i = 1 To StatType.Count - 1
+                Buffer.WriteInt32(.Stat(i))
+            Next
+
+            For i = 1 To 4
+                Buffer.WriteInt32(.Skill(i))
+            Next
+
+            Buffer.WriteInt32(.Evolvable)
+            Buffer.WriteInt32(.EvolveLevel)
+            Buffer.WriteInt32(.EvolveNum)
+        End With
+
+        Network.SendData(buffer.ToPacket)
+
+        Buffer.Dispose()
+
+    End Sub
+
     Sub SendUsePetSkill(skill As Integer)
         Dim buffer As New ByteStream(4)
 
@@ -171,6 +225,11 @@ Module C_Pets
 #End Region
 
 #Region "Incoming Packets"
+    
+    Friend Sub Packet_PetEditor(ByRef data() As Byte)
+        InitPetEditor = True
+    End Sub
+
     Friend Sub Packet_UpdatePlayerPet(ByRef data() As Byte)
         Dim n As Integer, i As Integer
         Dim buffer As New ByteStream(data)
@@ -665,6 +724,139 @@ Module C_Pets
 
     End Function
 #End Region
+
+    #Region "Editor"
+    Friend Sub PetEditorInit()
+        Dim i As Integer
+
+        If frmPet.Visible = False Then Exit Sub
+        EditorIndex = frmPet.lstIndex.SelectedIndex + 1
+
+        With frmPet
+            'populate skill combo's
+            .cmbSkill1.Items.Clear()
+            .cmbSkill2.Items.Clear()
+            .cmbSkill3.Items.Clear()
+            .cmbSkill4.Items.Clear()
+
+            .cmbSkill1.Items.Add("None")
+            .cmbSkill2.Items.Add("None")
+            .cmbSkill3.Items.Add("None")
+            .cmbSkill4.Items.Add("None")
+
+            For i = 1 To MAX_SKILLS
+                .cmbSkill1.Items.Add(i & ": " & Skill(i).Name)
+                .cmbSkill2.Items.Add(i & ": " & Skill(i).Name)
+                .cmbSkill3.Items.Add(i & ": " & Skill(i).Name)
+                .cmbSkill4.Items.Add(i & ": " & Skill(i).Name)
+            Next
+            .txtName.Text = Pet(EditorIndex).Name.Trim
+            If Pet(EditorIndex).Sprite < 0 OrElse Pet(EditorIndex).Sprite > .nudSprite.Maximum Then Pet(EditorIndex).Sprite = 0
+
+            .nudSprite.Value = Pet(EditorIndex).Sprite
+            .EditorPet_DrawPet()
+
+            .nudRange.Value = Pet(EditorIndex).Range
+
+            .nudStrength.Value = Pet(EditorIndex).Stat(StatType.Strength)
+            .nudEndurance.Value = Pet(EditorIndex).Stat(StatType.Endurance)
+            .nudVitality.Value = Pet(EditorIndex).Stat(StatType.Vitality)
+            .nudLuck.Value = Pet(EditorIndex).Stat(StatType.Luck)
+            .nudIntelligence.Value = Pet(EditorIndex).Stat(StatType.Intelligence)
+            .nudSpirit.Value = Pet(EditorIndex).Stat(StatType.Spirit)
+            .nudLevel.Value = Pet(EditorIndex).Level
+
+            If Pet(EditorIndex).StatType = 1 Then
+                .optCustomStats.Checked = True
+                .pnlCustomStats.Visible = True
+            Else
+                .optAdoptStats.Checked = True
+                .pnlCustomStats.Visible = False
+            End If
+
+            .nudPetExp.Value = Pet(EditorIndex).ExpGain
+
+            .nudPetPnts.Value = Pet(EditorIndex).LevelPnts
+
+            .nudMaxLevel.Value = Pet(EditorIndex).MaxLevel
+
+            'Set skills
+            .cmbSkill1.SelectedIndex = Pet(EditorIndex).Skill(1)
+
+            .cmbSkill2.SelectedIndex = Pet(EditorIndex).Skill(2)
+
+            .cmbSkill3.SelectedIndex = Pet(EditorIndex).Skill(3)
+
+            .cmbSkill4.SelectedIndex = Pet(EditorIndex).Skill(4)
+
+            If Pet(EditorIndex).LevelingType = 1 Then
+                .optLevel.Checked = True
+
+                .pnlPetlevel.Visible = True
+                .pnlPetlevel.BringToFront()
+                .nudPetExp.Value = Pet(EditorIndex).ExpGain
+                If Pet(EditorIndex).MaxLevel > 0 Then .nudMaxLevel.Value = Pet(EditorIndex).MaxLevel
+                .nudPetPnts.Value = Pet(EditorIndex).LevelPnts
+            Else
+                .optDoNotLevel.Checked = True
+
+                .pnlPetlevel.Visible = False
+                .nudPetExp.Value = Pet(EditorIndex).ExpGain
+                .nudMaxLevel.Value = Pet(EditorIndex).MaxLevel
+                .nudPetPnts.Value = Pet(EditorIndex).LevelPnts
+            End If
+
+            If Pet(EditorIndex).Evolvable = 1 Then
+                .chkEvolve.Checked = True
+            Else
+                .chkEvolve.Checked = False
+            End If
+
+            .nudEvolveLvl.Value = Pet(EditorIndex).EvolveLevel
+            .cmbEvolve.SelectedIndex = Pet(EditorIndex).EvolveNum
+        End With
+
+        ClearChanged_Pet()
+
+        Pet_Changed(EditorIndex) = True
+
+    End Sub
+
+    Friend Sub PetEditorOk()
+        Dim i As Integer
+
+        For i = 1 To MAX_PETS
+            If Pet_Changed(i) Then
+                SendSavePet(i)
+            End If
+        Next
+
+        frmPet.Dispose()
+
+        Editor = 0
+        ClearChanged_Pet()
+
+    End Sub
+
+    Friend Sub PetEditorCancel()
+
+        Editor = 0
+
+        frmPet.Dispose()
+
+        ClearChanged_Pet()
+        ClearPets()
+        SendRequestPets()
+
+    End Sub
+
+    Friend Sub ClearChanged_Pet()
+
+        ReDim Pet_Changed(MAX_PETS)
+
+    End Sub
+#End Region
+
 
 End Module
 

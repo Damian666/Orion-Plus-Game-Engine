@@ -90,6 +90,24 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <Compile Include="Source\Forms\Editors\FrmAnimation.Designer.vb">
+      <DependentUpon>frmAnimation.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Source\Forms\Editors\frmAnimation.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Source\Forms\Editors\frmAutoMapper.Designer.vb">
+      <DependentUpon>frmAutoMapper.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Source\Forms\Editors\frmAutoMapper.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Source\Forms\Editors\frmClasses.Designer.vb">
+      <DependentUpon>frmClasses.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Source\Forms\Editors\frmClasses.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Source\Forms\frmEditor_Events.Designer.vb">
       <DependentUpon>frmEditor_Events.vb</DependentUpon>
     </Compile>
@@ -102,10 +120,80 @@
     <Compile Include="Source\Forms\frmEditor_MapEditor.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Source\Forms\Editors\frmHouse.Designer.vb">
+      <DependentUpon>frmHouse.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Source\Forms\Editors\frmHouse.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Source\Forms\Editors\frmItem.Designer.vb">
+      <DependentUpon>frmItem.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Source\Forms\Editors\frmItem.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Source\Forms\Editors\frmNPC.Designer.vb">
+      <DependentUpon>frmNPC.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Source\Forms\Editors\frmNPC.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Source\Forms\Editors\frmPet.Designer.vb">
+      <DependentUpon>frmPet.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Source\Forms\Editors\frmPet.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Source\Forms\Editors\frmProjectile.Designer.vb">
+      <DependentUpon>frmProjectile.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Source\Forms\Editors\frmProjectile.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Source\Forms\Editors\frmQuest.Designer.vb">
+      <DependentUpon>frmQuest.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Source\Forms\Editors\frmQuest.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Source\Forms\Editors\frmRecipe.Designer.vb">
+      <DependentUpon>frmRecipe.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Source\Forms\Editors\frmRecipe.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Source\Forms\Editors\frmResource.Designer.vb">
+      <DependentUpon>frmResource.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Source\Forms\Editors\frmResource.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Source\Forms\Editors\frmShop.Designer.vb">
+      <DependentUpon>frmShop.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Source\Forms\Editors\frmShop.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Source\Forms\Editors\frmSkill.Designer.vb">
+      <DependentUpon>frmSkill.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Source\Forms\Editors\frmSkill.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Source\Forms\Editors\frmVisualWarp.Designer.vb">
+      <DependentUpon>frmVisualWarp.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Source\Forms\Editors\frmVisualWarp.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Source\Modules\Editor\E_AutoMap.vb" />
+    <Compile Include="Source\Modules\Editor\E_Editors.vb" />
     <Compile Include="Source\Modules\Objects\C_Items.vb" />
     <Compile Include="Source\Modules\Objects\C_Maps.vb" />
+    <Compile Include="Source\Modules\Objects\C_Pets.vb" />
     <Compile Include="Source\Modules\Objects\C_Resources.vb" />
     <Compile Include="Source\Modules\Systems\C_Banks.vb" />
+    <Compile Include="Source\Modules\Systems\C_Crafting.vb" />
     <Compile Include="Source\Modules\Systems\C_Shops.vb" />
     <Compile Include="Source\Modules\Systems\C_Trade.vb" />
     <Compile Include="Source\Modules\UI\C_Chat.vb" />
@@ -134,7 +222,6 @@
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Source\Modules\Objects\C_AutoTiles.vb" />
-    <Compile Include="Source\Modules\Systems\C_Crafting.vb" />
     <Compile Include="Source\Modules\Systems\C_EventSystem.vb" />
     <Compile Include="Source\Modules\UI\C_GuiFunctions.vb" />
     <Compile Include="Source\Modules\Globals\C_Variables.vb" />
@@ -144,7 +231,6 @@
     <Compile Include="Source\Modules\UI\C_HotBar.vb" />
     <Compile Include="Source\Modules\Systems\C_Housing.vb" />
     <Compile Include="Source\Modules\Systems\C_Parties.vb" />
-    <Compile Include="Source\Modules\Objects\C_Pets.vb" />
     <Compile Include="Source\Modules\Objects\C_Player.vb" />
     <Compile Include="Source\Modules\Objects\C_Projectiles.vb" />
     <Compile Include="Source\Modules\Systems\C_Quest.vb" />
@@ -174,6 +260,15 @@
       <DependentUpon>frmAdmin.vb</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
+    <EmbeddedResource Include="Source\Forms\Editors\frmAnimation.resx">
+      <DependentUpon>frmAnimation.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Source\Forms\Editors\frmAutoMapper.resx">
+      <DependentUpon>frmAutoMapper.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Source\Forms\Editors\frmClasses.resx">
+      <DependentUpon>frmClasses.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Source\Forms\frmEditor_Events.resx">
       <DependentUpon>frmEditor_Events.vb</DependentUpon>
     </EmbeddedResource>
@@ -182,6 +277,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Source\Forms\frmGame.resx">
       <DependentUpon>frmGame.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Source\Forms\Editors\frmHouse.resx">
+      <DependentUpon>frmHouse.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Source\Forms\Editors\frmItem.resx">
+      <DependentUpon>frmItem.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Source\Forms\frmMenu.resx">
       <DependentUpon>frmMenu.vb</DependentUpon>
@@ -192,8 +293,35 @@
       <SubType>Designer</SubType>
       <LastGenOutput>Resources.Designer.vb</LastGenOutput>
     </EmbeddedResource>
+    <EmbeddedResource Include="Source\Forms\Editors\frmNPC.resx">
+      <DependentUpon>frmNPC.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Source\Forms\frmOptions.resx">
       <DependentUpon>frmOptions.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Source\Forms\Editors\frmPet.resx">
+      <DependentUpon>frmPet.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Source\Forms\Editors\frmProjectile.resx">
+      <DependentUpon>frmProjectile.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Source\Forms\Editors\frmQuest.resx">
+      <DependentUpon>frmQuest.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Source\Forms\Editors\frmRecipe.resx">
+      <DependentUpon>frmRecipe.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Source\Forms\Editors\frmResource.resx">
+      <DependentUpon>frmResource.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Source\Forms\Editors\frmShop.resx">
+      <DependentUpon>frmShop.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Source\Forms\Editors\frmSkill.resx">
+      <DependentUpon>frmSkill.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Source\Forms\Editors\frmVisualWarp.resx">
+      <DependentUpon>frmVisualWarp.vb</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

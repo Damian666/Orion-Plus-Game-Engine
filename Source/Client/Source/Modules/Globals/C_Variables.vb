@@ -177,6 +177,45 @@ Module C_Variables
 
     Friend ShowAnimLayers As Boolean
     Friend ShowAnimTimer As Integer
+
+        ' Editor edited items array
+    Friend Item_Changed(MAX_ITEMS) As Boolean
+    Friend NPC_Changed(MAX_NPCS) As Boolean
+    Friend Resource_Changed(MAX_NPCS) As Boolean
+    Friend Animation_Changed(MAX_ANIMATIONS) As Boolean
+    Friend Skill_Changed(MAX_SKILLS) As Boolean
+    Friend Shop_Changed(MAX_SHOPS) As Boolean
+
+    'Editors
+    Friend InitEditor As Boolean
+    Friend InitMapEditor As Boolean
+    Friend InitItemEditor As Boolean
+    Friend InitResourceEditor As Boolean
+    Friend InitNPCEditor As Boolean
+    Friend InitSkillEditor As Boolean
+    Friend InitShopEditor As Boolean
+    Friend InitAnimationEditor As Boolean
+    Friend InitClassEditor As Boolean
+    Friend InitAutoMapper As Boolean
+
+    Friend InitMapProperties As Boolean
+
+    ' Game editor constants
+    Friend Const EDITOR_ITEM As Byte = 1
+    Friend Const EDITOR_NPC As Byte = 2
+    Friend Const EDITOR_SKILL As Byte = 3
+    Friend Const EDITOR_SHOP As Byte = 4
+    Friend Const EDITOR_RESOURCE As Byte = 5
+    Friend Const EDITOR_ANIMATION As Byte = 6
+    Friend Const EDITOR_QUEST As Byte = 7
+    Friend Const EDITOR_HOUSE As Byte = 8
+    Friend Const EDITOR_RECIPE As Byte = 9
+    Friend Const EDITOR_CLASSES As Byte = 10
+
+    ' Game editors
+    Friend AnimEditorFrame(1) As Integer
+    Friend AnimEditorTimer(1) As Integer
+    
 End Module
 
 

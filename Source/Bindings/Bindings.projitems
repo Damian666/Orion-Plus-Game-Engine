@@ -22,4 +22,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Source\Network\B_Packets.vb" />
     <Compile Include="$(MSBuildThisFileDirectory)Source\Types.vb" />
   </ItemGroup>
+  <ItemGroup>
+    <Folder Include="$(MSBuildThisFileDirectory)Source\Database\" />
+  </ItemGroup>
 </Project>

@@ -182,6 +182,84 @@ Friend Module C_Housing
     End Sub
 #End Region
 
+    #Region "Editor"
+    Friend Sub HouseEditorInit()
+
+        If FrmHouse.Visible = False Then Exit Sub
+
+        Editorindex = FrmHouse.lstIndex.SelectedIndex + 1
+
+        With House(Editorindex)
+            FrmHouse.txtName.Text = .ConfigName.Trim
+            If .BaseMap = 0 Then .BaseMap = 1
+            FrmHouse.nudBaseMap.Value = .BaseMap
+            If .X = 0 Then .X = 1
+            FrmHouse.nudX.Value = .X
+            If .Y = 0 Then .Y = 1
+            FrmHouse.nudY.Value = .Y
+            FrmHouse.nudPrice.Value = .Price
+            FrmHouse.nudFurniture.Value = .MaxFurniture
+        End With
+
+        HouseChanged(Editorindex) = True
+
+    End Sub
+
+    Friend Sub HouseEditorCancel()
+
+        Editor = 0
+        FrmHouse.Dispose()
+
+        ClearChanged_House()
+
+    End Sub
+
+    Friend Sub HouseEditorOk()
+        Dim i As Integer, Buffer As ByteStream, count As Integer
+        Buffer = New ByteStream(4)
+
+        Buffer.WriteInt32(EditorPackets.SaveHouses)
+
+        For i = 1 To MAXHOUSES
+            If HouseChanged(i) Then count = count + 1
+        Next
+
+        Buffer.WriteInt32(count)
+
+        If count > 0 Then
+            For i = 1 To MAXHOUSES
+                If HouseChanged(i) Then
+                    Buffer.WriteInt32(i)
+                    Buffer.WriteString((House(i).ConfigName.Trim))
+                    Buffer.WriteInt32(House(i).BaseMap)
+                    Buffer.WriteInt32(House(i).X)
+                    Buffer.WriteInt32(House(i).Y)
+                    Buffer.WriteInt32(House(i).Price)
+                    Buffer.WriteInt32(House(i).MaxFurniture)
+                End If
+            Next
+        End If
+
+        Network.SendData(buffer.ToPacket)
+        Buffer.Dispose()
+        FrmHouse.Dispose()
+        Editor = 0
+
+        ClearChanged_House()
+
+    End Sub
+
+    Friend Sub ClearChanged_House()
+
+        For i = 1 To MAXHOUSES
+            HouseChanged(i) = Nothing
+        Next i
+
+        ReDim HouseChanged(MAXHOUSES)
+    End Sub
+
+#End Region
+
 #Region "Drawing"
     Friend Sub CheckFurniture()
         Dim i As Integer

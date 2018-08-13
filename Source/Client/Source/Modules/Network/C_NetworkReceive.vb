@@ -148,6 +148,45 @@ Namespace Network
 
             Socket.PacketId(ServerPacket.SClock) = AddressOf Packet_Clock
             Socket.PacketId(ServerPacket.STime) = AddressOf Packet_Time
+
+
+            ' EDITOR RIPS
+
+            'quests
+            Socket.PacketId(ServerPacket.SQuestEditor) = AddressOf Packet_QuestEditor
+
+            'Housing
+            Socket.PacketId(ServerPacket.SHouseConfigs) = AddressOf Packet_HouseConfigurations
+            Socket.PacketId(ServerPacket.SFurniture) = AddressOf Packet_Furniture
+            Socket.PacketId(ServerPacket.SHouseEdit) = AddressOf Packet_EditHouses
+
+            Socket.PacketId(ServerPacket.SProjectileEditor) = AddressOf HandleProjectileEditor
+            Socket.PacketId(ServerPacket.SMapProjectile) = AddressOf HandleMapProjectile
+
+            'craft
+            Socket.PacketId(ServerPacket.SRecipeEditor) = AddressOf Packet_RecipeEditor
+
+            Socket.PacketId(ServerPacket.SClassEditor) = AddressOf Packet_ClassEditor
+
+            'Auto Mapper
+            Socket.PacketId(ServerPacket.SAutoMapper) = AddressOf Packet_AutoMapper
+
+            'pets
+            Socket.PacketId(ServerPacket.SPetEditor) = AddressOf Packet_PetEditor
+
+            Socket.PacketId(ServerPacket.SItemEditor) = AddressOf Packet_EditItem
+
+            Socket.PacketId(ServerPacket.SREditor) = AddressOf Packet_ResourceEditor
+
+            Socket.PacketId(ServerPacket.SNpcEditor) = AddressOf Packet_NPCEditor
+
+            Socket.PacketId(ServerPacket.SShopEditor) = AddressOf Packet_EditShop
+            Socket.PacketId(ServerPacket.SSkillEditor) = AddressOf Packet_EditSkill
+
+            Socket.PacketId(ServerPacket.SResourceEditor) = AddressOf Packet_ResourceEditor
+
+            Socket.PacketId(ServerPacket.SAnimationEditor) = AddressOf Packet_EditAnimation
+
         End Sub
 
         Private Sub Packet_AlertMSG(ByRef data() As Byte)
@@ -187,7 +226,7 @@ Namespace Network
             buffer.Dispose()
 
             Pnlloadvisible = True
-            SetStatus(Configuration.Language.gamegui.datarecieve)
+            SetStatus(Configuration.Language.GameGui.datarecieve)
         End Sub
 
         Private Sub Packet_LoginOk(ByRef data() As Byte)
@@ -205,10 +244,7 @@ Namespace Network
             End If
 
             Configuration.SaveSettings()
-
-            ' Request classes.
-            SendRequestClasses()
-
+            
             Dim buffer As New ByteStream(data)
             ' Now we can receive char data
             MaxChars = buffer.ReadInt32
@@ -1581,6 +1617,35 @@ Namespace Network
         Private Sub Packet_LeftGame(ByRef data() As Byte)
             Terminate()
         End Sub
+
+    ''' EDITOR RIPS '''
+    Private Sub Packet_NPCEditor(ByRef data() As Byte)
+        Dim buffer As New ByteStream(data)
+        InitNPCEditor = True
+
+        buffer.Dispose()
+    End Sub
+
+    Private Sub Packet_EditShop(ByRef data() As Byte)
+        InitShopEditor = True
+    End Sub
+
+    Private Sub Packet_EditSkill(ByRef data() As Byte)
+        InitSkillEditor = True
+    End Sub
+
+    Private Sub Packet_ResourceEditor(ByRef data() As Byte)
+        InitResourceEditor = True
+    End Sub
+
+    Private Sub Packet_EditAnimation(ByRef data() As Byte)
+        InitAnimationEditor = True
+    End Sub
+
+    Private Sub Packet_ClassEditor(ByRef data() As Byte)
+        InitClassEditor = True
+    End Sub
+        
     End Module
 End Namespace
 

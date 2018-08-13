@@ -118,6 +118,58 @@ Friend Class FrmAdmin
 
         SendRequestEditMap()
     End Sub
+
+    Private Sub BtnItemEditor_Click(sender As Object, e As EventArgs) Handles btnItemEditor.Click
+        SendRequestEditItem()
+    End Sub
+
+    Private Sub BtnResourceEditor_Click(sender As Object, e As EventArgs) Handles btnResourceEditor.Click
+        Network.SendRequestEditResource()
+    End Sub
+
+    Private Sub BtnNPCEditor_Click(sender As Object, e As EventArgs) Handles btnNPCEditor.Click
+        Network.SendRequestEditNpc()
+    End Sub
+
+    Private Sub BtnSkillEditor_Click(sender As Object, e As EventArgs) Handles btnSkillEditor.Click
+        Network.SendRequestEditSkill()
+    End Sub
+
+    Private Sub BtnShopEditor_Click(sender As Object, e As EventArgs) Handles btnShopEditor.Click
+        Network.SendRequestEditShop()
+    End Sub
+
+    Private Sub BtnAnimationEditor_Click(sender As Object, e As EventArgs) Handles btnAnimationEditor.Click
+        Network.SendRequestEditAnimation()
+    End Sub
+
+    Private Sub BtnQuest_Click(sender As Object, e As EventArgs) Handles btnQuest.Click
+        SendRequestEditQuest()
+    End Sub
+
+    Private Sub BtnhouseEditor_Click(sender As Object, e As EventArgs) Handles btnhouseEditor.Click
+        SendRequestEditHouse()
+    End Sub
+
+    Private Sub BtnProjectiles_Click(sender As Object, e As EventArgs) Handles btnProjectiles.Click
+        SendRequestEditProjectiles()
+    End Sub
+
+    Private Sub BtnClassEditor_Click(sender As Object, e As EventArgs) Handles btnClassEditor.Click
+        Network.SendRequestEditClass()
+    End Sub
+
+    Private Sub BtnAutoMapper_Click(sender As Object, e As EventArgs) Handles btnAutoMapper.Click
+        SendRequestAutoMapper()
+    End Sub
+
+    Private Sub BtnRecipeEditor_Click(sender As Object, e As EventArgs) Handles btnRecipeEditor.Click
+        SendRequestEditRecipes()
+    End Sub
+
+    Private Sub BtnPetEditor_Click(sender As Object, e As EventArgs) Handles btnPetEditor.Click
+        SendRequestEditPet()
+    End Sub
 #End Region
 
 #Region "Map Report"

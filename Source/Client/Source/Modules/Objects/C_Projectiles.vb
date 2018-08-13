@@ -39,67 +39,101 @@ Friend Module C_Projectiles
 #End Region
 
 #Region "Sending"
+    Sub SendRequestEditProjectiles()
+        Dim buffer As ByteStream
 
-    Sub SendRequestProjectiles()
-        dim buffer as New ByteStream(4)
-
-        Buffer.WriteInt32(ClientPacket.CRequestProjectiles)
-
+        buffer = New ByteStream(4)
+        buffer.WriteInt32(EditorPackets.RequestEditProjectiles)
         Network.SendData(buffer.ToPacket)
-        Buffer.Dispose()
+        buffer.Dispose()
 
     End Sub
 
-    Sub SendClearProjectile(projectileNum As Integer, collisionindex as integer, collisionType As Byte, collisionZone As Integer)
-        dim buffer as New ByteStream(4)
+    Sub SendSaveProjectile(ProjectileNum As Integer)
+        Dim buffer As ByteStream
 
-        Buffer.WriteInt32(ClientPacket.CClearProjectile)
-        Buffer.WriteInt32(ProjectileNum)
-        Buffer.WriteInt32(CollisionIndex)
-        Buffer.WriteInt32(CollisionType)
-        Buffer.WriteInt32(CollisionZone)
+        buffer = New ByteStream(4)
+
+        buffer.WriteInt32(EditorPackets.SaveProjectile)
+        buffer.WriteInt32(ProjectileNum)
+
+        buffer.WriteString((Projectiles(ProjectileNum).Name.Trim))
+        buffer.WriteInt32(Projectiles(ProjectileNum).Sprite)
+        buffer.WriteInt32(Projectiles(ProjectileNum).Range)
+        buffer.WriteInt32(Projectiles(ProjectileNum).Speed)
+        buffer.WriteInt32(Projectiles(ProjectileNum).Damage)
 
         Network.SendData(buffer.ToPacket)
-        Buffer.Dispose()
+        buffer.Dispose()
+
+    End Sub
+
+
+    Sub SendRequestProjectiles()
+        Dim buffer As New ByteStream(4)
+
+        buffer.WriteInt32(ClientPacket.CRequestProjectiles)
+
+        Network.SendData(buffer.ToPacket)
+        buffer.Dispose()
+
+    End Sub
+
+    Sub SendClearProjectile(projectileNum As Integer, collisionindex As Integer, collisionType As Byte, collisionZone As Integer)
+        Dim buffer As New ByteStream(4)
+
+        buffer.WriteInt32(ClientPacket.CClearProjectile)
+        buffer.WriteInt32(projectileNum)
+        buffer.WriteInt32(collisionindex)
+        buffer.WriteInt32(collisionType)
+        buffer.WriteInt32(collisionZone)
+
+        Network.SendData(buffer.ToPacket)
+        buffer.Dispose()
 
     End Sub
 
 #End Region
 
 #Region "Recieving"
+    Friend Sub HandleProjectileEditor(ByRef data() As Byte)
+
+        InitProjectileEditor = True
+
+    End Sub
 
     Friend Sub HandleUpdateProjectile(ByRef data() As Byte)
         Dim projectileNum As Integer
-        dim buffer as New ByteStream(Data)
-        ProjectileNum = Buffer.ReadInt32
+        Dim buffer As New ByteStream(data)
+        projectileNum = buffer.ReadInt32
 
-        Projectiles(ProjectileNum).Name = Buffer.ReadString
-        Projectiles(ProjectileNum).Sprite = Buffer.ReadInt32
-        Projectiles(ProjectileNum).Range = Buffer.ReadInt32
-        Projectiles(ProjectileNum).Speed = Buffer.ReadInt32
-        Projectiles(ProjectileNum).Damage = Buffer.ReadInt32
+        Projectiles(projectileNum).Name = buffer.ReadString
+        Projectiles(projectileNum).Sprite = buffer.ReadInt32
+        Projectiles(projectileNum).Range = buffer.ReadInt32
+        Projectiles(projectileNum).Speed = buffer.ReadInt32
+        Projectiles(projectileNum).Damage = buffer.ReadInt32
 
-        Buffer.Dispose()
+        buffer.Dispose()
 
     End Sub
 
     Friend Sub HandleMapProjectile(ByRef data() As Byte)
         Dim i As Integer
-        dim buffer as New ByteStream(Data)
-        i = Buffer.ReadInt32
+        Dim buffer As New ByteStream(data)
+        i = buffer.ReadInt32
 
         With MapProjectiles(i)
-            .ProjectileNum = Buffer.ReadInt32
-            .Owner = Buffer.ReadInt32
-            .OwnerType = Buffer.ReadInt32
-            .dir = Buffer.ReadInt32
-            .X = Buffer.ReadInt32
-            .Y = Buffer.ReadInt32
+            .ProjectileNum = buffer.ReadInt32
+            .Owner = buffer.ReadInt32
+            .OwnerType = buffer.ReadInt32
+            .Dir = buffer.ReadInt32
+            .X = buffer.ReadInt32
+            .Y = buffer.ReadInt32
             .Range = 0
             .Timer = GetTickCount() + 60000
         End With
 
-        Buffer.Dispose()
+        buffer.Dispose()
 
     End Sub
 
@@ -115,25 +149,25 @@ Friend Module C_Projectiles
 
     End Sub
 
-    Sub ClearProjectile(index as integer)
+    Sub ClearProjectile(index As Integer)
 
-        Projectiles(Index).Name = ""
-        Projectiles(Index).Sprite = 0
-        Projectiles(Index).Range = 0
-        Projectiles(Index).Speed = 0
-        Projectiles(Index).Damage = 0
+        Projectiles(index).Name = ""
+        Projectiles(index).Sprite = 0
+        Projectiles(index).Range = 0
+        Projectiles(index).Speed = 0
+        Projectiles(index).Damage = 0
 
     End Sub
 
     Sub ClearMapProjectile(projectileNum As Integer)
 
-        MapProjectiles(ProjectileNum).ProjectileNum = 0
-        MapProjectiles(ProjectileNum).Owner = 0
-        MapProjectiles(ProjectileNum).OwnerType = 0
-        MapProjectiles(ProjectileNum).X = 0
-        MapProjectiles(ProjectileNum).Y = 0
-        MapProjectiles(ProjectileNum).dir = 0
-        MapProjectiles(ProjectileNum).Timer = 0
+        MapProjectiles(projectileNum).ProjectileNum = 0
+        MapProjectiles(projectileNum).Owner = 0
+        MapProjectiles(projectileNum).OwnerType = 0
+        MapProjectiles(projectileNum).X = 0
+        MapProjectiles(projectileNum).Y = 0
+        MapProjectiles(projectileNum).Dir = 0
+        MapProjectiles(projectileNum).Timer = 0
 
     End Sub
 
@@ -159,7 +193,7 @@ Friend Module C_Projectiles
     Friend Sub DrawProjectile(projectileNum As Integer)
         Dim rec As Rect
         Dim canClearProjectile As Boolean
-        Dim collisionindex as integer
+        Dim collisionindex As Integer
         Dim collisionType As Byte
         Dim collisionZone As Integer
         Dim xOffset As Integer, yOffset As Integer
@@ -168,56 +202,56 @@ Friend Module C_Projectiles
         Dim sprite As Integer
 
         ' check to see if it's time to move the Projectile
-        If GetTickCount() > MapProjectiles(ProjectileNum).TravelTime Then
-            Select Case MapProjectiles(ProjectileNum).dir
+        If GetTickCount() > MapProjectiles(projectileNum).TravelTime Then
+            Select Case MapProjectiles(projectileNum).Dir
                 Case DirectionType.Up
-                    MapProjectiles(ProjectileNum).Y = MapProjectiles(ProjectileNum).Y - 1
+                    MapProjectiles(projectileNum).Y = MapProjectiles(projectileNum).Y - 1
                 Case DirectionType.Down
-                    MapProjectiles(ProjectileNum).Y = MapProjectiles(ProjectileNum).Y + 1
+                    MapProjectiles(projectileNum).Y = MapProjectiles(projectileNum).Y + 1
                 Case DirectionType.Left
-                    MapProjectiles(ProjectileNum).X = MapProjectiles(ProjectileNum).X - 1
+                    MapProjectiles(projectileNum).X = MapProjectiles(projectileNum).X - 1
                 Case DirectionType.Right
-                    MapProjectiles(ProjectileNum).X = MapProjectiles(ProjectileNum).X + 1
+                    MapProjectiles(projectileNum).X = MapProjectiles(projectileNum).X + 1
             End Select
-            MapProjectiles(ProjectileNum).TravelTime = GetTickCount() + Projectiles(MapProjectiles(ProjectileNum).ProjectileNum).Speed
-            MapProjectiles(ProjectileNum).Range = MapProjectiles(ProjectileNum).Range + 1
+            MapProjectiles(projectileNum).TravelTime = GetTickCount() + Projectiles(MapProjectiles(projectileNum).ProjectileNum).Speed
+            MapProjectiles(projectileNum).Range = MapProjectiles(projectileNum).Range + 1
         End If
 
-        X = MapProjectiles(ProjectileNum).X
-        Y = MapProjectiles(ProjectileNum).Y
+        x = MapProjectiles(projectileNum).X
+        y = MapProjectiles(projectileNum).Y
 
         'Check if its been going for over 1 minute, if so clear.
-        If MapProjectiles(ProjectileNum).Timer < GetTickCount() Then CanClearProjectile = True
+        If MapProjectiles(projectileNum).Timer < GetTickCount() Then canClearProjectile = True
 
-        If X > Map.MaxX OrElse X < 0 Then CanClearProjectile = True
-        If Y > Map.MaxY OrElse Y < 0 Then CanClearProjectile = True
+        If x > Map.MaxX OrElse x < 0 Then canClearProjectile = True
+        If y > Map.MaxY OrElse y < 0 Then canClearProjectile = True
 
         'Check for blocked wall collision
-        If CanClearProjectile = False Then 'Add a check to prevent crashing
-            If Map.Tile(X, Y).Type = TileType.Blocked Then CanClearProjectile = True
+        If canClearProjectile = False Then 'Add a check to prevent crashing
+            If Map.Tile(x, y).Type = TileType.Blocked Then canClearProjectile = True
         End If
 
         'Check for npc collision
         For i = 1 To MAX_MAP_NPCS
-            If MapNpc(i).X = X AndAlso MapNpc(i).Y = Y Then
-                CanClearProjectile = True
-                CollisionIndex = i
-                CollisionType = TargetType.Npc
-                CollisionZone = -1
+            If MapNpc(i).X = x AndAlso MapNpc(i).Y = y Then
+                canClearProjectile = True
+                collisionindex = i
+                collisionType = TargetType.Npc
+                collisionZone = -1
                 Exit For
             End If
         Next
 
         'Check for player collision
         For i = 1 To MAX_PLAYERS
-            If IsPlaying(i) AndAlso GetPlayerMap(i) = GetPlayerMap(MyIndex) Then
-                If GetPlayerX(i) = X AndAlso GetPlayerY(i) = Y Then
-                    CanClearProjectile = True
-                    CollisionIndex = i
-                    CollisionType = TargetType.Player
-                    CollisionZone = -1
-                    If MapProjectiles(ProjectileNum).OwnerType = TargetType.Player Then
-                        If MapProjectiles(ProjectileNum).Owner = i Then CanClearProjectile = False ' Reset if its the owner of projectile
+            If IsPlaying(i) AndAlso GetPlayerMap(i) = GetPlayerMap(Myindex) Then
+                If GetPlayerX(i) = x AndAlso GetPlayerY(i) = y Then
+                    canClearProjectile = True
+                    collisionindex = i
+                    collisionType = TargetType.Player
+                    collisionZone = -1
+                    If MapProjectiles(projectileNum).OwnerType = TargetType.Player Then
+                        If MapProjectiles(projectileNum).Owner = i Then canClearProjectile = False ' Reset if its the owner of projectile
                     End If
                     Exit For
                 End If
@@ -226,59 +260,130 @@ Friend Module C_Projectiles
         Next
 
         'Check if it has hit its maximum range
-        If MapProjectiles(ProjectileNum).Range >= Projectiles(MapProjectiles(ProjectileNum).ProjectileNum).Range + 1 Then CanClearProjectile = True
+        If MapProjectiles(projectileNum).Range >= Projectiles(MapProjectiles(projectileNum).ProjectileNum).Range + 1 Then canClearProjectile = True
 
         'Clear the projectile if possible
-        If CanClearProjectile = True Then
+        If canClearProjectile = True Then
             'Only send the clear to the server if you're the projectile caster or the one hit (only if owner is not a player)
-            If (MapProjectiles(ProjectileNum).OwnerType = TargetType.Player AndAlso MapProjectiles(ProjectileNum).Owner = MyIndex) Then
-                SendClearProjectile(ProjectileNum, CollisionIndex, CollisionType, CollisionZone)
+            If (MapProjectiles(projectileNum).OwnerType = TargetType.Player AndAlso MapProjectiles(projectileNum).Owner = Myindex) Then
+                SendClearProjectile(projectileNum, collisionindex, collisionType, collisionZone)
             End If
 
-            ClearMapProjectile(ProjectileNum)
+            ClearMapProjectile(projectileNum)
             Exit Sub
         End If
 
-        Sprite = Projectiles(MapProjectiles(ProjectileNum).ProjectileNum).Sprite
-        If Sprite < 1 OrElse Sprite > NumProjectiles Then Exit Sub
+        sprite = Projectiles(MapProjectiles(projectileNum).ProjectileNum).Sprite
+        If sprite < 1 OrElse sprite > NumProjectiles Then Exit Sub
 
-        If ProjectileGFXInfo(Sprite).IsLoaded = False Then
-            LoadTexture(Sprite, 11)
+        If ProjectileGfxInfo(sprite).IsLoaded = False Then
+            LoadTexture(sprite, 11)
         End If
 
         'seeying we still use it, lets update timer
-        With ProjectileGFXInfo(Sprite)
+        With ProjectileGfxInfo(sprite)
             .TextureTimer = GetTickCount() + 100000
         End With
 
         ' src rect
         With rec
             .Top = 0
-            .Bottom = ProjectileGFXInfo(Sprite).Height
-            .Left = MapProjectiles(ProjectileNum).dir * PicX
+            .Bottom = ProjectileGfxInfo(sprite).Height
+            .Left = MapProjectiles(projectileNum).Dir * PicX
             .Right = .Left + PicX
         End With
 
         'Find the offset
-        Select Case MapProjectiles(ProjectileNum).dir
+        Select Case MapProjectiles(projectileNum).Dir
             Case DirectionType.Up
-                YOffset = ((MapProjectiles(ProjectileNum).TravelTime - GetTickCount()) / Projectiles(MapProjectiles(ProjectileNum).ProjectileNum).Speed) * PicY
+                yOffset = ((MapProjectiles(projectileNum).TravelTime - GetTickCount()) / Projectiles(MapProjectiles(projectileNum).ProjectileNum).Speed) * PicY
             Case DirectionType.Down
-                YOffset = -((MapProjectiles(ProjectileNum).TravelTime - GetTickCount()) / Projectiles(MapProjectiles(ProjectileNum).ProjectileNum).Speed) * PicY
+                yOffset = -((MapProjectiles(projectileNum).TravelTime - GetTickCount()) / Projectiles(MapProjectiles(projectileNum).ProjectileNum).Speed) * PicY
             Case DirectionType.Left
-                XOffset = ((MapProjectiles(ProjectileNum).TravelTime - GetTickCount()) / Projectiles(MapProjectiles(ProjectileNum).ProjectileNum).Speed) * PicX
+                xOffset = ((MapProjectiles(projectileNum).TravelTime - GetTickCount()) / Projectiles(MapProjectiles(projectileNum).ProjectileNum).Speed) * PicX
             Case DirectionType.Right
-                XOffset = -((MapProjectiles(ProjectileNum).TravelTime - GetTickCount()) / Projectiles(MapProjectiles(ProjectileNum).ProjectileNum).Speed) * PicX
+                xOffset = -((MapProjectiles(projectileNum).TravelTime - GetTickCount()) / Projectiles(MapProjectiles(projectileNum).ProjectileNum).Speed) * PicX
         End Select
 
-        X = ConvertMapX(X * PicX)
-        Y = ConvertMapY(Y * PicY)
+        x = ConvertMapX(x * PicX)
+        y = ConvertMapY(y * PicY)
 
-        Dim tmpSprite As Sprite = New Sprite(ProjectileGFX(Sprite)) With {
+        Dim tmpSprite As Sprite = New Sprite(ProjectileGfx(sprite)) With {
             .TextureRect = New IntRect(rec.Left, rec.Top, 32, 32),
-            .Position = New Vector2f(X, Y)
+            .Position = New Vector2f(x, y)
         }
         GameWindow.Draw(tmpSprite)
+
+    End Sub
+
+    Friend Sub EditorProjectile_DrawProjectile()
+        Dim iconnum As Integer
+
+        iconnum = frmProjectile.nudPic.Value
+
+        If iconnum < 1 OrElse iconnum > NumProjectiles Then
+            frmProjectile.picProjectile.BackgroundImage = Nothing
+            Exit Sub
+        End If
+
+        If File.Exists(Environment.CurrentDirectory & GfxPath & "Projectiles\" & iconnum & GFXEXT) Then
+            frmProjectile.picProjectile.BackgroundImage = System.Drawing.Image.FromFile(Environment.CurrentDirectory & GfxPath & "Projectiles\" & iconnum & GFXEXT)
+        End If
+
+    End Sub
+
+#End Region
+
+    #Region "Projectile Editor"
+
+    Friend Sub ProjectileEditorInit()
+
+        If frmProjectile.Visible = False Then Exit Sub
+        EditorIndex = frmProjectile.lstIndex.SelectedIndex + 1
+
+        With Projectiles(EditorIndex)
+            frmProjectile.txtName.Text = .Name.Trim
+            frmProjectile.nudPic.Value = .Sprite
+            frmProjectile.nudRange.Value = .Range
+            frmProjectile.nudSpeed.Value = .Speed
+            frmProjectile.nudDamage.Value = .Damage
+        End With
+
+        ProjectileChanged(EditorIndex) = True
+
+    End Sub
+
+    Friend Sub ProjectileEditorOk()
+        Dim i As Integer
+
+        For i = 1 To MAXPROJECTILES
+            If ProjectileChanged(i) Then
+                Call SendSaveProjectile(i)
+            End If
+        Next
+
+        frmProjectile.Dispose()
+        Editor = 0
+        ClearChanged_Projectile()
+
+    End Sub
+
+    Friend Sub ProjectileEditorCancel()
+
+        Editor = 0
+        frmProjectile.Dispose()
+        ClearChanged_Projectile()
+        ClearProjectiles()
+        SendRequestProjectiles()
+
+    End Sub
+
+    Friend Sub ClearChanged_Projectile()
+        Dim i As Integer
+
+        For i = 0 To MAXPROJECTILES
+            ProjectileChanged(i) = False
+        Next
 
     End Sub
 
