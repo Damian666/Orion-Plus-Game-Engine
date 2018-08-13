@@ -1,4 +1,5 @@
 ﻿Imports System
+Imports System.Windows.Forms
 
 Module B_Packets
     ' Packets sent by server to client

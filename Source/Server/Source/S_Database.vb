@@ -76,7 +76,7 @@ Module modDatabase
             ReDim Classes(i).MaleSprite(tmpArray.GetUpperBound(0))
             ' loop through converting strings to values and store in the sprite array
             For n = 0 To tmpArray.GetUpperBound(0)
-                Classes(i).MaleSprite(n) = CInt(tmpArray(n))
+                Integer.TryParse(tmpArray(n), Classes(i).MaleSprite(n))
             Next
 
             ' read string of sprites
@@ -87,27 +87,27 @@ Module modDatabase
             ReDim Classes(i).FemaleSprite(tmpArray.GetUpperBound(0))
             ' loop through converting strings to values and store in the sprite array
             For n = 0 To tmpArray.GetUpperBound(0)
-                Classes(i).FemaleSprite(n) = CInt(tmpArray(n))
+                Integer.TryParse(tmpArray(n), Classes(i).FemaleSprite(n))
             Next
 
             ' continue
-            Classes(i).Stat(StatType.Strength) = CInt(Ini.GetVar(path, "CLASS" & i, "Str"))
-            Classes(i).Stat(StatType.Endurance) = CInt(Ini.GetVar(path, "CLASS" & i, "End"))
-            Classes(i).Stat(StatType.Vitality) = CInt(Ini.GetVar(path, "CLASS" & i, "Vit"))
-            Classes(i).Stat(StatType.Luck) = CInt(Ini.GetVar(path, "CLASS" & i, "Luck"))
-            Classes(i).Stat(StatType.Intelligence) = CInt(Ini.GetVar(path, "CLASS" & i, "Int"))
-            Classes(i).Stat(StatType.Spirit) = CInt(Ini.GetVar(path, "CLASS" & i, "Speed"))
-
-            Classes(i).BaseExp = CInt(Ini.GetVar(path, "CLASS" & i, "BaseExp"))
-
-            Classes(i).StartMap = CInt(Ini.GetVar(path, "CLASS" & i, "StartMap"))
-            Classes(i).StartX = CInt(Ini.GetVar(path, "CLASS" & i, "StartX"))
-            Classes(i).StartY = CInt(Ini.GetVar(path, "CLASS" & i, "StartY"))
+            Integer.TryParse(Ini.GetVar(path, "CLASS" & i, "Str"),Classes(i).Stat(StatType.Strength))
+            Integer.TryParse(Ini.GetVar(path, "CLASS" & i, "End"),Classes(i).Stat(StatType.Endurance))
+            Integer.TryParse(Ini.GetVar(path, "CLASS" & i, "Vit"),Classes(i).Stat(StatType.Vitality))
+            Integer.TryParse(Ini.GetVar(path, "CLASS" & i, "Luck"),Classes(i).Stat(StatType.Luck))
+            Integer.TryParse(Ini.GetVar(path, "CLASS" & i, "Int"),Classes(i).Stat(StatType.Intelligence))
+            Integer.TryParse(Ini.GetVar(path, "CLASS" & i, "Speed"),Classes(i).Stat(StatType.Spirit))
+            
+            Integer.TryParse(Ini.GetVar(path, "CLASS" & i, "BaseExp"),Classes(i).BaseExp)
+            
+            Integer.TryParse(Ini.GetVar(path, "CLASS" & i, "StartMap"),Classes(i).StartMap)
+            Integer.TryParse(Ini.GetVar(path, "CLASS" & i, "StartX"),Classes(i).StartX)
+            Integer.TryParse(Ini.GetVar(path, "CLASS" & i, "StartY"),Classes(i).StartY)
 
             ' loop for items & values
             For x = 1 To 5
-                Classes(i).StartItem(x) = CInt(Ini.GetVar(path, "CLASS" & i, "StartItem" & x))
-                Classes(i).StartValue(x) = CInt(Ini.GetVar(path, "CLASS" & i, "StartValue" & x))
+            Integer.TryParse(Ini.GetVar(path, "CLASS" & i, "StartItem" & x),Classes(i).StartItem(x))
+            Integer.TryParse(Ini.GetVar(path, "CLASS" & i, "StartValue" & x),Classes(i).StartValue(x))
             Next
         Next
 

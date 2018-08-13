@@ -173,12 +173,12 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Data\AutoMapper.xml">
+    <None Include="Data\AutoMapper.ini">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Data\SkillExp.xml">
+    </None>
+    <None Include="Data\SkillExp.ini">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
+    </None>
     <Content Include="Icon.ico" />
     <Content Include="Data\News.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>

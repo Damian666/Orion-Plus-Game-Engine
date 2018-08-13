@@ -180,7 +180,7 @@ Friend Module S_Resources
         If Not File.Exists(path) Then File.Create(path).Dispose
 
         For i = 1 To 100
-            SkillExpTable(i) = Ini.GetVar(path, "Level", i)
+            Integer.TryParse(Ini.GetVar(path, "Level", i),SkillExpTable(i))
         Next
     End Sub
 #End Region

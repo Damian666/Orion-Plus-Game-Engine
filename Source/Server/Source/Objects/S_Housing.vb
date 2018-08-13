@@ -38,12 +38,12 @@ Friend Module S_Housing
         Dim path = Environment.CurrentDirectory & "\Data\HouseConfig.ini"
         If Not File.Exists(path) Then File.Create(path).Dispose
 
-        Ini.PutVar(path, "House" & 1, "BaseMap", HouseConfig(1).BaseMap)
-        Ini.PutVar(path, "House" & 1, "Name", HouseConfig(1).ConfigName)
-        Ini.PutVar(path, "House" & 1, "MaxFurniture", HouseConfig(1).MaxFurniture)
-        Ini.PutVar(path, "House" & 1, "Price", HouseConfig(1).Price)
-        Ini.PutVar(path, "House" & 1, "X", HouseConfig(1).X)
-        Ini.PutVar(path, "House" & 1, "Y", HouseConfig(1).Y)
+        Ini.PutVar(path, "House" & 1, "BaseMap", 0)
+        Ini.PutVar(path, "House" & 1, "Name", "")
+        Ini.PutVar(path, "House" & 1, "MaxFurniture", 0)
+        Ini.PutVar(path, "House" & 1, "Price",0)
+        Ini.PutVar(path, "House" & 1, "X", 0)
+        Ini.PutVar(path, "House" & 1, "Y", 0)
     End Sub
 
     Sub LoadHouses()
@@ -53,13 +53,12 @@ Friend Module S_Housing
         If Not File.Exists(path) Then CreateHouses()
 
         For i = 1 To MAX_HOUSES
-
-            HouseConfig(i).BaseMap = CInt(Ini.GetVar(path, "House" & i, "BaseMap"))
-            HouseConfig(i).ConfigName = Ini.GetVar(path, "House" & i, "Name").Trim
-            HouseConfig(i).MaxFurniture = CInt(Ini.GetVar(path, "House" & i, "MaxFurniture"))
-            HouseConfig(i).Price = CInt(Ini.GetVar(path, "House" & i, "Price"))
-            HouseConfig(i).X = CInt(Ini.GetVar(path, "House" & i, "X"))
-            HouseConfig(i).Y = CInt(Ini.GetVar(path, "House" & i, "Y"))
+            Integer.TryParse(Ini.GetVar(path, "House" & i, "BaseMap"),HouseConfig(i).BaseMap)
+            HouseConfig(i).ConfigName = Ini.Read(path, "House" & i, "Name").Trim
+            Integer.TryParse(Ini.GetVar(path, "House" & i, "MaxFurniture"),HouseConfig(i).MaxFurniture)
+            Integer.TryParse(Ini.GetVar(path, "House" & i, "Price"),HouseConfig(i).Price)
+            Integer.TryParse(Ini.GetVar(path, "House" & i, "X"),HouseConfig(i).X)
+            Integer.TryParse(Ini.GetVar(path, "House" & i, "Y"),HouseConfig(i).Y)
         Next
 
         For i = 1 To GetPlayersOnline()

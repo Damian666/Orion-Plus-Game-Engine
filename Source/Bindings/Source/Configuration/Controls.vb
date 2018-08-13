@@ -34,7 +34,7 @@ Namespace Configuration
         ''' </summary>
         Private Sub CheckIO(cd As String, cf As String)
             If Not Directory.Exists(cd) Then Directory.CreateDirectory(cd)
-            If Not File.Exists(cf) Then File.Create(cf).Dispose()
+            If Not File.Exists(cd & cf) Then File.Create(cd & cf).Dispose()
             If Controls Is Nothing Then Controls = New ControlsDef
         End Sub
         

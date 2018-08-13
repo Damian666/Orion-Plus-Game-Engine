@@ -105,23 +105,23 @@ Module S_AutoMap
 
         Dim path = Environment.CurrentDirectory & "\Data\AutoMapper.ini"
         If Not File.Exists(path) Then File.Create(path).Dispose
+        
+        ResourcesNum = Ini.GetVar(path, "Config", "ResourceVals")
+        _resources = ResourcesNum.Split(";")
 
         ReDim Tile(TilePrefab.Count - 1)
         For prefab = 1 To TilePrefab.Count - 1
 
             ReDim Tile(prefab).Layer(LayerType.Count - 1)
+
+            Integer.TryParse(Ini.GetVar(path, "Prefab" & prefab & "_Type", "Value"),Tile(prefab).Type)
             For layer = 1 To LayerType.Count - 1
-                Tile(prefab).Layer(layer).Tileset = CInt(Ini.GetVar(path, "Prefab" & prefab, "Layer" & layer & "Tileset"))
-                Tile(prefab).Layer(layer).X = CInt(Ini.GetVar(path, "Prefab" & prefab, "Layer" & layer & "X"))
-                Tile(prefab).Layer(layer).Y = CInt(Ini.GetVar(path, "Prefab" & prefab, "Layer" & layer & "Y"))
-                Tile(prefab).Layer(layer).AutoTile = CInt(Ini.GetVar(path, "Prefab" & prefab, "Layer" & layer & "Autotile"))
+                Integer.TryParse(Ini.Read(path, "Prefab" & prefab & "_Layer" & layer, "Autotile"),Tile(prefab).Layer(layer).AutoTile)
+                Integer.TryParse(Ini.Read(path, "Prefab" & prefab & "_Layer" & layer, "Tileset"),Tile(prefab).Layer(layer).Tileset)
+                Integer.TryParse(Ini.Read(path, "Prefab" & prefab & "_Layer" & layer, "X"),Tile(prefab).Layer(layer).X)
+                Integer.TryParse(Ini.Read(path, "Prefab" & prefab & "_Layer" & layer, "Y"),Tile(prefab).Layer(layer).Y)
             Next layer
-            Tile(prefab).Type = CInt(Ini.GetVar(path, "Prefab" & prefab, "Type"))
-        Next prefab
-
-        ResourcesNum = Ini.GetVar(path, "Resources", "ResourcesNum")
-        _resources = ResourcesNum.Split(";")
-
+        Next
     End Sub
 
     ''' <summary>
