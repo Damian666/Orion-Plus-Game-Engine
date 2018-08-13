@@ -9,11 +9,7 @@ Friend Module modPaths
         Return Environment.GetFolderPath(Environment.SpecialFolder.Fonts) & "\"
     End Function
     Friend Function Path_Local() As String
-#If CLIENT Then
         Return Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) & "\" & Application.CompanyName & "\" & Application.ProductName & "\"
-#ElseIf SERVER Then
-        Return Environment.CurrentDirectory & "\Settings.xml"
-#End If
     End Function
 
 #If Not SERVER Then

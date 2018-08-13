@@ -15,7 +15,7 @@ Module C_General
     Sub Startup()
         SFML.Portable.Activate()
 
-        SetStatus(Strings.Get("loadscreen", "loading"))
+        SetStatus(Configuration.Language.loadscreen.loading)
 
         ' Generate Random Seed
         Randomize()
@@ -76,16 +76,16 @@ Module C_General
         ' Update the form with the game's name before it's loaded
         FrmGame.Text = GameName
 
-        SetStatus(Strings.Get("loadscreen", "options"))
+        SetStatus(Configuration.Language.loadscreen.options)
 
         ' load options
         Configuration.LoadSettings()
         
-        SetStatus(Strings.Get("loadscreen", "network"))
+        SetStatus(Configuration.Language.loadscreen.network)
 
         FrmMenu.Text = GameName
         
-        SetStatus(Strings.Get("loadscreen", "graphics"))
+        SetStatus(Configuration.Language.loadscreen.graphics)
         CheckTilesets()
         CheckCharacters()
         CheckPaperdolls()
@@ -127,7 +127,7 @@ Module C_General
         'set gui switches
         HudVisible = True
 
-        SetStatus(Strings.Get("loadscreen", "starting"))
+        SetStatus(Configuration.Language.loadscreen.starting)
         Started = True
         Frmmenuvisible = True
         Pnlloadvisible = False
@@ -146,7 +146,7 @@ Module C_General
     Friend Function IsStringLegal(value As String) As Boolean
         For Each c In value
             If Not Char.IsLetterOrDigit(c) Then
-                MessageBox.Show(Strings.Get("mainmenu", "stringlegal"), GameName, MessageBoxButtons.Ok )
+                MessageBox.Show(Configuration.Language.mainmenu.stringlegal, GameName, MessageBoxButtons.Ok )
                 Return False
             End If
         Next
@@ -179,7 +179,7 @@ Module C_General
                 PnlCreditsVisible = False
 
                 If ConnectToServer(1) Then
-                    SetStatus(Strings.Get("mainmenu", "sendaddchar"))
+                    SetStatus(Configuration.Language.mainmenu.sendaddchar)
 
                     If FrmMenu.rdoMale.Checked = True Then
                         Network.SendAddChar(SelectedChar, FrmMenu.txtCharName.Text, SexType.Male, FrmMenu.cmbClass.SelectedIndex + 1, NewCharSprite)
@@ -195,7 +195,7 @@ Module C_General
                 PnlCreditsVisible = False
 
                 If ConnectToServer(1) Then
-                    SetStatus(Strings.Get("mainmenu", "sendnewacc"))
+                    SetStatus(Configuration.Language.mainmenu.sendnewacc)
                     Network.SendNewAccount(FrmMenu.txtRuser.Text, FrmMenu.txtRPass.Text)
                 End If
 
@@ -208,7 +208,7 @@ Module C_General
                 TempPassword = FrmMenu.txtPassword.Text
 
                 If ConnectToServer(1) Then
-                    SetStatus(Strings.Get("mainmenu", "sendlogin"))
+                    SetStatus(Configuration.Language.mainmenu.sendlogin)
                     Network.SendLogin(FrmMenu.txtLogin.Text, FrmMenu.txtPassword.Text)
                     Exit Sub
                 End If
@@ -231,7 +231,7 @@ Module C_General
 
         Network.Connect(Configuration.Settings.Ip, Configuration.Settings.Port)
 
-        SetStatus(Strings.Get("mainmenu", "connectserver", i))
+        SetStatus(String.Format(Configuration.Language.mainmenu.connectserver, i))
 
         ' Wait until connected or a few seconds have passed and report the server being down
         Do While (Not Network.IsConnected()) AndAlso (GetTickCount() <= until)

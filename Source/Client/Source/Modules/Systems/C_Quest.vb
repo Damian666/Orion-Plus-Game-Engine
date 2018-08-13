@@ -485,11 +485,11 @@ Friend Module C_Quest
 
         'Quest Status
         If Player(Myindex).PlayerQuest(questNum).Status = QuestStatusType.Started Then
-            QuestStatus2Text = Strings.Get("quests", "queststarted")
-            AbandonQuestText = Strings.Get("quests", "questcancel")
+            QuestStatus2Text = Configuration.Language.quests.queststarted
+            AbandonQuestText = Configuration.Language.quests.questcancel
             AbandonQuestVisible = True
         ElseIf Player(Myindex).PlayerQuest(questNum).Status = QuestStatusType.Completed Then
-            QuestStatus2Text = Strings.Get("quests", "questcomplete")
+            QuestStatus2Text = Configuration.Language.quests.questcomplete
             AbandonQuestVisible = False
         Else
             QuestStatus2Text = "???"
@@ -502,45 +502,45 @@ Friend Module C_Quest
                 Dim curCount As Integer = Player(Myindex).PlayerQuest(questNum).CurrentCount
                 Dim maxAmount As Integer = Quest(questNum).Task(curTask).Amount
                 Dim npcName As String = Npc(Quest(questNum).Task(curTask).Npc).Name
-                ActualTaskText = Strings.Get("quests", "questgoslay", curCount, maxAmount, npcName)'"Defeat " & CurCount & "/" & MaxAmount & " " & NpcName
+                ActualTaskText = String.Format(Configuration.Language.quests.questgoslay, curCount, maxAmount, npcName)'"Defeat " & CurCount & "/" & MaxAmount & " " & NpcName
                 'gather x amount of items
             Case QuestType.Collect
                 Dim curCount As Integer = Player(Myindex).PlayerQuest(questNum).CurrentCount
                 Dim maxAmount As Integer = Quest(questNum).Task(curTask).Amount
                 Dim itemName As String = Item(Quest(questNum).Task(curTask).Item).Name
-                ActualTaskText = Strings.Get("quests", "questgocollect", curCount, maxAmount, itemName)'"Collect " & CurCount & "/" & MaxAmount & " " & ItemName
+                ActualTaskText = String.Format(Configuration.Language.quests.questgocollect, curCount, maxAmount, itemName)'"Collect " & CurCount & "/" & MaxAmount & " " & ItemName
                 'go talk to npc
             Case QuestType.Talk
                 Dim npcName As String = Npc(Quest(questNum).Task(curTask).Npc).Name
-                ActualTaskText = Strings.Get("quests", "questtalkto", npcName)'"Go talk to  " & NpcName
+                ActualTaskText = String.Format(Configuration.Language.quests.questtalkto, npcName)'"Go talk to  " & NpcName
                 'reach certain map
             Case QuestType.Reach
                 Dim mapName As String = MapNames(Quest(questNum).Task(curTask).Map)
-                ActualTaskText = Strings.Get("quests", "questgoto", mapName)'"Go to " & MapName
+                ActualTaskText = String.Format(Configuration.Language.quests.questgoto, mapName)'"Go to " & MapName
             Case QuestType.Give
                 'give x amount of items to npc
                 Dim npcName As String = Npc(Quest(questNum).Task(curTask).Npc).Name
                 Dim curCount As Integer = Player(Myindex).PlayerQuest(questNum).CurrentCount
                 Dim maxAmount As Integer = Quest(questNum).Task(curTask).Amount
                 Dim itemName As String = Item(Quest(questNum).Task(curTask).Item).Name
-                ActualTaskText = Strings.Get("quests", "questgive", npcName, itemName, curCount, maxAmount)'"Give " & NpcName & " the " & ItemName & CurCount & "/" & MaxAmount & " they requested"
+                ActualTaskText = String.Format(Configuration.Language.quests.questgive, npcName, itemName, curCount, maxAmount)'"Give " & NpcName & " the " & ItemName & CurCount & "/" & MaxAmount & " they requested"
                 'defeat certain amount of players
             Case QuestType.Kill
                 Dim curCount As Integer = Player(Myindex).PlayerQuest(questNum).CurrentCount
                 Dim maxAmount As Integer = Quest(questNum).Task(curTask).Amount
-                ActualTaskText = Strings.Get("quests", "questkill", curCount, maxAmount)'"Defeat " & CurCount & "/" & MaxAmount & " Players in Battle"
+                ActualTaskText = String.Format(Configuration.Language.quests.questkill, curCount, maxAmount)'"Defeat " & CurCount & "/" & MaxAmount & " Players in Battle"
                 'go collect resources
             Case QuestType.Gather
                 Dim curCount As Integer = Player(Myindex).PlayerQuest(questNum).CurrentCount
                 Dim maxAmount As Integer = Quest(questNum).Task(curTask).Amount
                 Dim resourceName As String = Resource(Quest(questNum).Task(curTask).Resource).Name
-                ActualTaskText = Strings.Get("quests", "questgather", curCount, maxAmount, resourceName)'"Gather " & CurCount & "/" & MaxAmount & " " & ResourceName
+                ActualTaskText = String.Format(Configuration.Language.quests.questgather, curCount, maxAmount, resourceName)'"Gather " & CurCount & "/" & MaxAmount & " " & ResourceName
                 'fetch x amount of items from npc
             Case QuestType.Fetch
                 Dim npcName As String = Item(Quest(questNum).Task(curTask).Npc).Name
                 Dim maxAmount As Integer = Quest(questNum).Task(curTask).Amount
                 Dim itemName As String = Item(Quest(questNum).Task(curTask).Item).Name
-                ActualTaskText = Strings.Get("quests", "questfetch", itemName, maxAmount, npcName) '"Fetch " & ItemName & "X" & MaxAmount & " from " & NpcName
+                ActualTaskText = String.Format(Configuration.Language.quests.questfetch, itemName, maxAmount, npcName) '"Fetch " & ItemName & "X" & MaxAmount & " from " & NpcName
             Case Else
                 'ToDo
                 ActualTaskText = "errr..."

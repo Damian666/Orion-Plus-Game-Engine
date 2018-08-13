@@ -18,7 +18,7 @@ Friend Class FrmMenu
     ''' On load, get GUI ready.
     ''' </summary>
     Private Sub Frmmenu_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        Strings.Init(0, "English")
+        Configuration.LoadLanguage("English")
 
         LoadMenuGraphics()
 
@@ -117,50 +117,50 @@ Friend Class FrmMenu
         'set text for controls from language file
 
         'main
-        lblStatusHeader.Text = Strings.Get("mainmenu", "serverstatus")
-        lblNewsHeader.Text = Strings.Get("mainmenu", "newsheader")
-        lblNews.Text = Strings.Get("mainmenu", "news")
-        btnPlay.Text = Strings.Get("mainmenu", "buttonplay")
-        btnRegister.Text = Strings.Get("mainmenu", "buttonregister")
-        btnCredits.Text = Strings.Get("mainmenu", "buttoncredits")
-        btnExit.Text = Strings.Get("mainmenu", "buttonexit")
+        lblStatusHeader.Text = Configuration.Language.mainmenu.serverstatus
+        lblNewsHeader.Text = Configuration.Language.mainmenu.newsheader
+        lblNews.Text = Configuration.Language.mainmenu.news
+        btnPlay.Text = Configuration.Language.mainmenu.buttonplay
+        btnRegister.Text = Configuration.Language.mainmenu.buttonregister
+        btnCredits.Text = Configuration.Language.mainmenu.buttoncredits
+        btnExit.Text = Configuration.Language.mainmenu.buttonexit
 
         'logon panel
-        lblLogin.Text = Strings.Get("mainmenu", "login")
-        lblLoginName.Text = Strings.Get("mainmenu", "loginname")
-        lblLoginPass.Text = Strings.Get("mainmenu", "loginpass")
-        chkSavePass.Text = Strings.Get("mainmenu", "loginchkbox")
-        btnLogin.Text = Strings.Get("mainmenu", "loginbutton")
+        lblLogin.Text = Configuration.Language.mainmenu.login
+        lblLoginName.Text = Configuration.Language.mainmenu.loginname
+        lblLoginPass.Text = Configuration.Language.mainmenu.loginpass
+        chkSavePass.Text = Configuration.Language.mainmenu.loginchkbox
+        btnLogin.Text = Configuration.Language.mainmenu.loginbutton
 
         'new char panel
-        lblNewChar.Text = Strings.Get("mainmenu", "newchar")
-        lblNewCharName.Text = Strings.Get("mainmenu", "newcharname")
-        lblNewCharClass.Text = Strings.Get("mainmenu", "newcharclass")
-        lblNewCharGender.Text = Strings.Get("mainmenu", "newchargender")
-        rdoMale.Text = Strings.Get("mainmenu", "newcharmale")
-        rdoFemale.Text = Strings.Get("mainmenu", "newcharfemale")
-        lblNewCharSprite.Text = Strings.Get("mainmenu", "newcharsprite")
-        btnCreateCharacter.Text = Strings.Get("mainmenu", "newcharbutton")
+        lblNewChar.Text = Configuration.Language.mainmenu.newchar
+        lblNewCharName.Text = Configuration.Language.mainmenu.newcharname
+        lblNewCharClass.Text = Configuration.Language.mainmenu.newcharclass
+        lblNewCharGender.Text = Configuration.Language.mainmenu.newchargender
+        rdoMale.Text = Configuration.Language.mainmenu.newcharmale
+        rdoFemale.Text = Configuration.Language.mainmenu.newcharfemale
+        lblNewCharSprite.Text = Configuration.Language.mainmenu.newcharsprite
+        btnCreateCharacter.Text = Configuration.Language.mainmenu.newcharbutton
 
         'char select
-        lblCharSelect.Text = Strings.Get("mainmenu", "selchar")
-        btnNewChar.Text = Strings.Get("mainmenu", "selcharnew")
-        btnUseChar.Text = Strings.Get("mainmenu", "selcharuse")
-        btnDelChar.Text = Strings.Get("mainmenu", "selchardel")
+        lblCharSelect.Text = Configuration.Language.mainmenu.selchar
+        btnNewChar.Text = Configuration.Language.mainmenu.selcharnew
+        btnUseChar.Text = Configuration.Language.mainmenu.selcharuse
+        btnDelChar.Text = Configuration.Language.mainmenu.selchardel
 
         'new account
-        lblNewAccount.Text = Strings.Get("mainmenu", "newacc")
-        lblNewAccName.Text = Strings.Get("mainmenu", "newaccname")
-        lblNewAccPass.Text = Strings.Get("mainmenu", "newaccpass")
-        lblNewAccPass2.Text = Strings.Get("mainmenu", "newaccpass2")
+        lblNewAccount.Text = Configuration.Language.mainmenu.newacc
+        lblNewAccName.Text = Configuration.Language.mainmenu.newaccname
+        lblNewAccPass.Text = Configuration.Language.mainmenu.newaccpass
+        lblNewAccPass2.Text = Configuration.Language.mainmenu.newaccpass2
 
         'credits
-        lblCreditsTop.Text = Strings.Get("mainmenu", "credits")
+        lblCreditsTop.Text = Configuration.Language.mainmenu.credits
 
         'ip config
-        lblIpConfig.Text = Strings.Get("mainmenu", "ipconfig")
-        lblIpAdress.Text = Strings.Get("mainmenu", "ipconfigadres")
-        lblPort.Text = Strings.Get("mainmenu", "ipconfigport")
+        lblIpConfig.Text = Configuration.Language.mainmenu.ipconfig
+        lblIpAdress.Text = Configuration.Language.mainmenu.ipconfigadres
+        lblPort.Text = Configuration.Language.mainmenu.ipconfigport
     End Sub
 
     ''' <summary>

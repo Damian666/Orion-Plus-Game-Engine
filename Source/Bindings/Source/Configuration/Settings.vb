@@ -34,31 +34,49 @@ End Class
 Namespace Configuration
     Friend Module modSettings
         Public Settings As New SettingsDef
+        
+        ''' <summary>
+        ''' Checks for path, file, and object existance and creates them if missing.
+        ''' </summary>
+        Private Sub CheckIO(cd As String, cf As String)
+            If Not Directory.Exists(cd) Then Directory.CreateDirectory(cd)
+            If Not File.Exists(cf) Then File.Create(cf).Dispose()
+            If Settings Is Nothing Then Settings = New SettingsDef
+        End Sub
 
         ''' <summary>
         ''' Loads settings file.
         ''' </summary>
         Friend Sub LoadSettings()
-            Dim cf As String = Path_Local() & "\Settings.xml"
+            Dim cd = Environment.CurrentDirectory
+            Dim cf = "\Settings.xml"
 
-            ' If we don't have one then create and use it.
-            If Not File.Exists(cf) Then
-                File.Create(cf).Dispose()
-                Serial.SaveXml(Of SettingsDef)(cf, New SettingsDef)
-                Return
-            End If
+#If CLIENT Then
+            ' Use local path if App Dir contains no override.            
+            If Not File.Exists(cd & cf) Then cd = Path_Local()
+#End If
 
-            ' We had a file so use it.
-            Settings = CType(Serial.LoadXml(Of SettingsDef)(cf), SettingsDef)
+            Try ' Load the file
+                Settings = Serial.LoadXml(Of SettingsDef)(cf)
+            Catch ' The file is missing or incompatible so overwrite it.
+                If File.Exists(cd & cf) Then File.Delete(cd & cf)
+                SaveSettings()
+            End Try
         End Sub
 
         ''' <summary>
         ''' Saves settings file.
         ''' </summary>
         Friend Sub SaveSettings()
-            ' Save/Overwrite the settings file.
-            Dim cf = Environment.CurrentDirectory & "\Settings.xml"
-            Serial.SaveXml(Of SettingsDef)(cf, Settings)
+#If CLIENT Then
+            Dim cd = Environment.CurrentDirectory
+#ElseIf SERVER Then
+            Dim cd = Path_Local()
+#End If
+            Dim cf = "\Settings.xml"
+
+            CheckIO(cd, cf)
+            Serial.SaveXml(Of SettingsDef)(cd & cf, Settings)
         End Sub
     End Module
 End Namespace

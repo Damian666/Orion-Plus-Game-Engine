@@ -921,9 +921,6 @@
     <Content Include="Data\Graphics\Tilesets\6.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Data\Languages\Client_English.xml">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
     <Content Include="Icon.ico" />
     <Content Include="License\Eclipse Public License v1.1.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>

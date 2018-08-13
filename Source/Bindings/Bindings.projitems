@@ -12,18 +12,14 @@
     <Compile Include="$(MSBuildThisFileDirectory)Properties\GlobalAssemblyInfo.vb" />
     <Compile Include="$(MSBuildThisFileDirectory)Source\Configuration\Controls.vb" />
     <Compile Include="$(MSBuildThisFileDirectory)Source\Configuration\Encryption.vb" />
+    <Compile Include="$(MSBuildThisFileDirectory)Source\Configuration\Language.vb" />
     <Compile Include="$(MSBuildThisFileDirectory)Source\Configuration\Settings.vb" />
     <Compile Include="$(MSBuildThisFileDirectory)Source\Globals\Paths.vb" />
     <Compile Include="$(MSBuildThisFileDirectory)Source\Network\B_Config.vb" />
     <Compile Include="$(MSBuildThisFileDirectory)Source\Time.vb" />
     <Compile Include="$(MSBuildThisFileDirectory)Source\Globals\Constants.vb" />
     <Compile Include="$(MSBuildThisFileDirectory)Source\Globals\Enums.vb" />
-    <Compile Include="$(MSBuildThisFileDirectory)Source\Configuration\Language.vb" />
     <Compile Include="$(MSBuildThisFileDirectory)Source\Network\B_Packets.vb" />
-    <Compile Include="$(MSBuildThisFileDirectory)Source\Configuration\Strings%28RemoveSoon%29.vb" />
     <Compile Include="$(MSBuildThisFileDirectory)Source\Types.vb" />
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="$(MSBuildThisFileDirectory)Source\General\" />
   </ItemGroup>
 </Project>

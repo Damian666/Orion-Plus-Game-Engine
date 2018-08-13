@@ -262,11 +262,11 @@ Namespace Network
             buffer.Dispose()
         End Sub
 
-        Friend Sub SendMotdChange(motd As String)
+        Friend Sub SendMotdChange(welcome As String)
             Dim buffer As New ByteStream(4)
 
             buffer.WriteInt32(ClientPacket.CSetMotd)
-            buffer.WriteString((motd))
+            buffer.WriteString((welcome))
 
             Socket.SendData(buffer.ToPacket)
             buffer.Dispose()

@@ -1,4 +1,5 @@
 ﻿#If CLIENT Then
+Imports System
 Imports System.IO
 Imports ASFW.IO.Serialization
 Imports Keys = SFML.Window.Keyboard.Key
@@ -28,22 +29,42 @@ Namespace Configuration
     Friend Module modControls
         Public Controls As New ControlsDef
 
+        ''' <summary>
+        ''' Checks for path, file, and object existance and creates them if missing.
+        ''' </summary>
+        Private Sub CheckIO(cd As String, cf As String)
+            If Not Directory.Exists(cd) Then Directory.CreateDirectory(cd)
+            If Not File.Exists(cf) Then File.Create(cf).Dispose()
+            If Controls Is Nothing Then Controls = New ControlsDef
+        End Sub
+        
+        ''' <summary>
+        ''' Loads controls file.
+        ''' </summary>
         Friend Sub LoadControls()
-            Dim cf As String = Path_Local() & "\Controls.xml"
+            Dim cd = Environment.CurrentDirectory
+            Dim cf = "\Controls.xml"
+            
+            ' Use local path if App Dir contains no override.            
+            If Not File.Exists(cd & cf) Then cd = Path_Local()
 
-            If Not Directory.Exists(Path_Local()) Then Directory.CreateDirectory(Path_Local())
-
-            If Not File.Exists(cf) Then
-                File.Create(cf).Dispose()
-                SaveXml(Of ControlsDef)(cf, New ControlsDef)
-            End If
-
-            Controls = LoadXml(Of ControlsDef)(cf)
+            Try ' Load the file
+                Controls = LoadXml(Of ControlsDef)(cf)
+            Catch ' The file is missing or incompatible so overwrite it.
+                If File.Exists(cd & cf) Then File.Delete(cd & cf)
+                SaveControls()
+            End Try
         End Sub
 
+        ''' <summary>
+        ''' Saves controls file.
+        ''' </summary>
         Friend Sub SaveControls()
-            Dim cf As String = Path_Local() & "\Controls.xml"
-            SaveXml(Of ControlsDef)(cf, Controls)
+            Dim cd = Environment.CurrentDirectory
+            Dim cf = "\Controls.xml"
+
+            CheckIO(cd, cf)
+            SaveXml(Of ControlsDef)(cd & cf, Controls)
         End Sub
     End Module
 End Namespace

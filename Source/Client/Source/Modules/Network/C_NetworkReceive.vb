@@ -187,7 +187,7 @@ Namespace Network
             buffer.Dispose()
 
             Pnlloadvisible = True
-            SetStatus(Strings.Get("gamegui", "datarecieve"))
+            SetStatus(Configuration.Language.gamegui.datarecieve)
         End Sub
 
         Private Sub Packet_LoginOk(ByRef data() As Byte)

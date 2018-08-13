@@ -3150,7 +3150,7 @@ nextevent:
                 End If
 
             Else
-                temptext = Strings.Get("events", "continue")
+                temptext = Configuration.Language.events._continue
                 DrawText(EventChatX + 410, EventChatY + 156, temptext.Trim, SFML.Graphics.Color.White, SFML.Graphics.Color.Black, GameWindow, 13)
             End If
 
