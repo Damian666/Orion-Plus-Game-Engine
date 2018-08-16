@@ -20,14 +20,14 @@ _**GAMEPLAY**_
 - [x] NPC/Computer Characters for attacking
 - [x] Items & Spells
 - [x] Housing
-- [ ] Event System
--(Needs updated, this list is sloppy and doesnt list everything)
+- [x] Event System
+- [ ] (Needs updated, this list is sloppy and doesnt list everything)
 
 _**DEVELOPMENT**_
 
 - [x] The client has editors for the world (maps), items, spells, animations, 
 - [x] npcs, and more from the in game admin panel.
-- [] (Needs updated, this list is sloppy and doesnt list everything)
+- [ ] (Needs updated, this list is sloppy and doesnt list everything)
 
 
 ## **Contact/Support**
