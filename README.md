@@ -14,18 +14,20 @@ The official Orion+ Engine repository can be found at [Orion+ Github](https://gi
 ## **Current Features**
 
 _**GAMEPLAY**_
-	- [x] Basic Character Creation/Class Selection
-	- [x] Movement/Attacking
-	- [x] NPC/Computer Characters for attacking
-	- [x] Items & Spells
-	- [x] Housing
-	- [x] Event System
-	-(Needs updated, this list is sloppy and doesnt list everything)
+
+- [x] Basic Character Creation/Class Selection
+- [x] Movement/Attacking
+- [x] NPC/Computer Characters for attacking
+- [x] Items & Spells
+- [x] Housing
+- [x] Event System
+-(Needs updated, this list is sloppy and doesnt list everything)
 
 _**DEVELOPMENT**_
-	- [x] The client has editors for the world (maps), items, spells, animations, 
-	- [x] npcs, and more from the in game admin panel.
-	- [x] (Needs updated, this list is sloppy and doesnt list everything)
+
+- [x] The client has editors for the world (maps), items, spells, animations, 
+- [x] npcs, and more from the in game admin panel.
+- [x] (Needs updated, this list is sloppy and doesnt list everything)
 
 
 ## **Contact/Support**
