@@ -1,5 +1,4 @@
 # **Orion+ Game Engine**
-# **********************
 
 Orion is a Tile-Based 2D ORPG game engine. It targets new and advanced developers under the VB.net language with its 
 simple and flexible systems. These systems offer a lot of power to expand gameplay far greater than its base while leaving
@@ -8,12 +7,11 @@ plenty of room to experiment and afford the performance loss for less experience
 Currently Orion features a Client, Server, and Auto-Update/Launcher applications taking advantage of the powerful Winforms
 Gui design.
 
-The official Orion+ Engine repository can be found at: [Orion+ Github](https://github.com/Damian666/Orion-Plus-Game-Engine/)
+The official Orion+ Engine repository can be found at [Orion+ Github](https://github.com/Damian666/Orion-Plus-Game-Engine/)
 
-# **Current Features**
-# **********************
+## **Current Features**
 
-## **GAMEPLAY**
+_**GAMEPLAY**_
 
 	- Basic Character Creation/Class Selection
 	- Movement/Attacking
@@ -23,15 +21,14 @@ The official Orion+ Engine repository can be found at: [Orion+ Github](https://g
 	- Event System
 	-(Needs updated, this list is sloppy and doesnt list everything)
 
-## **DEVELOPMENT**
+_**DEVELOPMENT**_
 
 	- The client has editors for the world (maps), items, spells, animations, 
 	- npcs, and more from the in game admin panel.
 	- (Needs updated, this list is sloppy and doesnt list everything)
 
 
-# **Contact/Support**
-# *******************
+## **Contact/Support**
 
 If you have any questions/requests about the engine or would like to report any bugs or glitches with the base engine please
 post an 'issue' on the [Github Issues Page](https://github.com/Damian666/Orion-Plus-Game-Engine/issues/).
@@ -39,3 +36,6 @@ post an 'issue' on the [Github Issues Page](https://github.com/Damian666/Orion-P
 Additionally you may post [Github Issues Page](http://ascensiongamedev.com/orion-game-engine) which is the official forum 
 thread where the engine is advertised/discussed.
 
+## **Credits**
+
+[Credits and Contributions](/CREDITS)
