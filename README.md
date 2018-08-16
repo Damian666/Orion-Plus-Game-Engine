@@ -20,14 +20,14 @@ _**GAMEPLAY**_
 - [x] NPC/Computer Characters for attacking
 - [x] Items & Spells
 - [x] Housing
-- [x] Event System
+- [ ] Event System
 -(Needs updated, this list is sloppy and doesnt list everything)
 
 _**DEVELOPMENT**_
 
 - [x] The client has editors for the world (maps), items, spells, animations, 
 - [x] npcs, and more from the in game admin panel.
-- [x] (Needs updated, this list is sloppy and doesnt list everything)
+- [] (Needs updated, this list is sloppy and doesnt list everything)
 
 
 ## **Contact/Support**
@@ -37,6 +37,3 @@ post an 'issue' on the [Github Issues Page](https://github.com/Damian666/Orion-P
 
 Additionally you may post [Ascension Forum](http://ascensiongamedev.com/orion-game-engine) which is the official forum 
 thread where the engine is advertised/discussed.
-
-(Note For Later) use '- [x]' for marking that a feature is done and '- [ ]' to mark a non completed feature so the features
-list can look more professional AND let users know of future developments.
