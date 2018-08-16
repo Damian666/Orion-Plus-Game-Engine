@@ -9,23 +9,23 @@ Gui design.
 
 The official Orion+ Engine repository can be found at [Orion+ Github](https://github.com/Damian666/Orion-Plus-Game-Engine/)
 
+[Credits and Contributions](/CREDITS)
+
 ## **Current Features**
 
 _**GAMEPLAY**_
-
-	- Basic Character Creation/Class Selection
-	- Movement/Attacking
-	- NPC/Computer Characters for attacking
-	- Items & Spells
-	- Housing
-	- Event System
+	- [x] Basic Character Creation/Class Selection
+	- [x] Movement/Attacking
+	- [x] NPC/Computer Characters for attacking
+	- [x] Items & Spells
+	- [x] Housing
+	- [x] Event System
 	-(Needs updated, this list is sloppy and doesnt list everything)
 
 _**DEVELOPMENT**_
-
-	- The client has editors for the world (maps), items, spells, animations, 
-	- npcs, and more from the in game admin panel.
-	- (Needs updated, this list is sloppy and doesnt list everything)
+	- [x] The client has editors for the world (maps), items, spells, animations, 
+	- [x] npcs, and more from the in game admin panel.
+	- [x] (Needs updated, this list is sloppy and doesnt list everything)
 
 
 ## **Contact/Support**
@@ -33,9 +33,8 @@ _**DEVELOPMENT**_
 If you have any questions/requests about the engine or would like to report any bugs or glitches with the base engine please
 post an 'issue' on the [Github Issues Page](https://github.com/Damian666/Orion-Plus-Game-Engine/issues/).
 
-Additionally you may post [Github Issues Page](http://ascensiongamedev.com/orion-game-engine) which is the official forum 
+Additionally you may post [Ascension Forum](http://ascensiongamedev.com/orion-game-engine) which is the official forum 
 thread where the engine is advertised/discussed.
 
-## **Credits**
-
-[Credits and Contributions](/CREDITS)
+(Note For Later) use '- [x]' for marking that a feature is done and '- [ ]' to mark a non completed feature so the features
+list can look more professional AND let users know of future developments.
