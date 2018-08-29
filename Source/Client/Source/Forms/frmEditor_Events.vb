@@ -1107,7 +1107,7 @@ Public Class FrmEditor_Events
     End Sub
 #End Region
 
-#Region "QuestIcon"
+#Region "Quest"
     Private Sub CmbEventQuest_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbEventQuest.SelectedIndexChanged
         TmpEvent.Pages(CurPageNum).Questnum = cmbEventQuest.SelectedIndex
     End Sub

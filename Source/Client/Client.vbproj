@@ -100,16 +100,16 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <Compile Include="Source\Forms\frmEditor_Events.Designer.vb">
-      <DependentUpon>frmEditor_Events.vb</DependentUpon>
+    <Compile Include="Source\Forms\FrmEditor_Events.Designer.vb">
+      <DependentUpon>FrmEditor_Events.vb</DependentUpon>
     </Compile>
-    <Compile Include="Source\Forms\frmEditor_Events.vb">
+    <Compile Include="Source\Forms\FrmEditor_Events.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Source\Forms\frmEditor_MapEditor.designer.vb">
-      <DependentUpon>frmEditor_MapEditor.vb</DependentUpon>
+    <Compile Include="Source\Forms\FrmEditor_MapEditor.designer.vb">
+      <DependentUpon>FrmEditor_MapEditor.vb</DependentUpon>
     </Compile>
-    <Compile Include="Source\Forms\frmEditor_MapEditor.vb">
+    <Compile Include="Source\Forms\FrmEditor_MapEditor.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Source\Modules\C_Options.vb" />
@@ -120,28 +120,28 @@
     <Compile Include="Source\Modules\Systems\C_Shops.vb" />
     <Compile Include="Source\Modules\Systems\C_Trade.vb" />
     <Compile Include="Source\Modules\UI\C_Chat.vb" />
-    <Compile Include="Source\Forms\frmAdmin.Designer.vb">
-      <DependentUpon>frmAdmin.vb</DependentUpon>
+    <Compile Include="Source\Forms\FrmAdmin.Designer.vb">
+      <DependentUpon>FrmAdmin.vb</DependentUpon>
     </Compile>
-    <Compile Include="Source\Forms\frmAdmin.vb">
+    <Compile Include="Source\Forms\FrmAdmin.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Source\Forms\frmGame.Designer.vb">
-      <DependentUpon>frmGame.vb</DependentUpon>
+    <Compile Include="Source\Forms\FrmGame.Designer.vb">
+      <DependentUpon>FrmGame.vb</DependentUpon>
     </Compile>
-    <Compile Include="Source\Forms\frmGame.vb">
+    <Compile Include="Source\Forms\FrmGame.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Source\Forms\frmMenu.Designer.vb">
-      <DependentUpon>frmMenu.vb</DependentUpon>
+    <Compile Include="Source\Forms\FrmMenu.Designer.vb">
+      <DependentUpon>FrmMenu.vb</DependentUpon>
     </Compile>
-    <Compile Include="Source\Forms\frmMenu.vb">
+    <Compile Include="Source\Forms\FrmMenu.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Source\Forms\frmOptions.Designer.vb">
-      <DependentUpon>frmOptions.vb</DependentUpon>
+    <Compile Include="Source\Forms\FrmOptions.Designer.vb">
+      <DependentUpon>FrmOptions.vb</DependentUpon>
     </Compile>
-    <Compile Include="Source\Forms\frmOptions.vb">
+    <Compile Include="Source\Forms\FrmOptions.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Source\Modules\Objects\C_AutoTiles.vb" />
@@ -182,21 +182,21 @@
     <Compile Include="Source\Modules\Network\C_NetworkSend.vb" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Source\Forms\frmAdmin.resx">
-      <DependentUpon>frmAdmin.vb</DependentUpon>
+    <EmbeddedResource Include="Source\Forms\FrmAdmin.resx">
+      <DependentUpon>FrmAdmin.vb</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="Source\Forms\frmEditor_Events.resx">
-      <DependentUpon>frmEditor_Events.vb</DependentUpon>
+    <EmbeddedResource Include="Source\Forms\FrmEditor_Events.resx">
+      <DependentUpon>FrmEditor_Events.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Source\Forms\frmEditor_MapEditor.resx">
-      <DependentUpon>frmEditor_MapEditor.vb</DependentUpon>
+    <EmbeddedResource Include="Source\Forms\FrmEditor_MapEditor.resx">
+      <DependentUpon>FrmEditor_MapEditor.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Source\Forms\frmGame.resx">
-      <DependentUpon>frmGame.vb</DependentUpon>
+    <EmbeddedResource Include="Source\Forms\FrmGame.resx">
+      <DependentUpon>FrmGame.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Source\Forms\frmMenu.resx">
-      <DependentUpon>frmMenu.vb</DependentUpon>
+    <EmbeddedResource Include="Source\Forms\FrmMenu.resx">
+      <DependentUpon>FrmMenu.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="My Project\Resources.resx">
       <Generator>PublicVbMyResourcesResXFileCodeGenerator</Generator>
@@ -204,8 +204,8 @@
       <SubType>Designer</SubType>
       <LastGenOutput>Resources.Designer.vb</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Include="Source\Forms\frmOptions.resx">
-      <DependentUpon>frmOptions.vb</DependentUpon>
+    <EmbeddedResource Include="Source\Forms\FrmOptions.resx">
+      <DependentUpon>FrmOptions.vb</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

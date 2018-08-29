@@ -377,7 +377,7 @@ Module E_Loop
         End If
 
         If QuestEditorShow = True Then
-            With frmQuest
+            With FrmQuest
                 Editor = EDITOR_TASKS
                 .lstIndex.Items.Clear()
                 .cmbQuestReq.Items.Clear()

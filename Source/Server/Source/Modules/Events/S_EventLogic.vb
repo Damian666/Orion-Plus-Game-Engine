@@ -1262,8 +1262,7 @@ Friend Module S_EventLogic
                                                             buffer.WriteString((Trim(ParseEventText(i, Map(GetPlayerMap(i)).Events(.EventId).Pages(.PageId).CommandList(.CurList).Commands(.CurSlot).Text1))))
                                                             buffer.WriteInt32(0)
 
-                                                            Addlog("Sent SMSG: SEventChat evShowText", PACKET_LOG)
-                                                            Console.WriteLine("Sent SMSG: SEventChat evShowText")
+                                                            AddDebug("Sent SMSG: SEventChat evShowText")
 
                                                             If Map(GetPlayerMap(i)).Events(.EventId).Pages(.PageId).CommandList(.CurList).CommandCount > .CurSlot Then
                                                                 If Map(GetPlayerMap(i)).Events(.EventId).Pages(.PageId).CommandList(.CurList).Commands(.CurSlot + 1).Index = EventType.EvShowText OrElse Map(GetPlayerMap(i)).Events(.EventId).Pages(.PageId).CommandList(.CurList).Commands(.CurSlot + 1).Index = EventType.EvShowChoices Then
@@ -1287,8 +1286,7 @@ Friend Module S_EventLogic
                                                             buffer.WriteInt32(Map(GetPlayerMap(i)).Events(.EventId).Pages(.PageId).CommandList(.CurList).Commands(.CurSlot).Data5)
                                                             buffer.WriteString((Trim(ParseEventText(i, Map(GetPlayerMap(i)).Events(.EventId).Pages(.PageId).CommandList(.CurList).Commands(.CurSlot).Text1))))
 
-                                                            Addlog("Sent SMSG: SEventChat evShowChoices", PACKET_LOG)
-                                                            Console.WriteLine("Sent SMSG: SEventChat")
+                                                            AddDebug("Sent SMSG: SEventChat evShowChoices")
 
                                                             If Len(Trim$(Map(GetPlayerMap(i)).Events(.EventId).Pages(.PageId).CommandList(.CurList).Commands(.CurSlot).Text2)) > 0 Then
                                                                 w = 1
@@ -1894,7 +1892,7 @@ Friend Module S_EventLogic
                                                             'SendMailBox(i)
                                                         Case EventType.EvBeginQuest
                                                             If CanStartQuest(i, Map(GetPlayerMap(i)).Events(.EventId).Pages(.PageId).CommandList(.CurList).Commands(.CurSlot).Data1) Then
-                                                                QuestMessage(i, Map(GetPlayerMap(i)).Events(.EventId).Pages(.PageId).CommandList(.CurList).Commands(.CurSlot).Data1, Quest(Map(GetPlayerMap(i)).Events(.EventId).Pages(.PageId).CommandList(.CurList).Commands(.CurSlot).Data1).QuestLog, Map(GetPlayerMap(i)).Events(.EventId).Pages(.PageId).CommandList(.CurList).Commands(.CurSlot).Data1)
+                                                                QuestMessage(i, Map(GetPlayerMap(i)).Events(.EventId).Pages(.PageId).CommandList(.CurList).Commands(.CurSlot).Data1, Quest(Map(GetPlayerMap(i)).Events(.EventId).Pages(.PageId).CommandList(.CurList).Commands(.CurSlot).Data1).Chat(1), Map(GetPlayerMap(i)).Events(.EventId).Pages(.PageId).CommandList(.CurList).Commands(.CurSlot).Data1)
                                                             End If
                                                         Case EventType.EvEndQuest
                                                             If CanEndQuest(i, Map(GetPlayerMap(i)).Events(.EventId).Pages(.PageId).CommandList(.CurList).Commands(.CurSlot).Data1) Then

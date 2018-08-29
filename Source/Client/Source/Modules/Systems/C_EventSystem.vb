@@ -3045,7 +3045,17 @@ nextevent:
                     Y = Map.MapEvents(Id).Y * PicY + Map.MapEvents(Id).YOffset
                 End If
                 ' render the actual sprite
-                DrawCharacter(Map.MapEvents(Id).GraphicNum, X, Y, sRect)
+                DrawCharacter(Map.MapEvents(id).GraphicNum, x, y, sRect)
+
+                If Map.MapEvents(id).Questnum > 0 Then
+                    If CanStartQuest(Map.MapEvents(id).Questnum) Then
+                        If Player(Myindex).PlayerQuest(Map.MapEvents(id).Questnum).Status = QuestStatusType.NotStarted Then
+                            DrawEmotes(x, y, 5)
+                        End If
+                    ElseIf Player(Myindex).PlayerQuest(Map.MapEvents(id).Questnum).Status = QuestStatusType.Started Then
+                        DrawEmotes(x, y, 9)
+                    End If
+                End If
             Case 2
                 If Map.MapEvents(Id).GraphicNum < 1 OrElse Map.MapEvents(Id).GraphicNum > NumTileSets Then Exit Sub
                 If Map.MapEvents(Id).GraphicY2 > 0 OrElse Map.MapEvents(Id).GraphicX2 > 0 Then
@@ -3083,6 +3093,15 @@ nextevent:
                     RenderSprite(TileSetSprite(Map.MapEvents(Id).GraphicNum), GameWindow, ConvertMapX(Map.MapEvents(Id).X * PicX), ConvertMapY(Map.MapEvents(Id).Y * PicY), sRect.Left, sRect.Top, sRect.Width, sRect.Height)
                 End If
 
+                If Map.MapEvents(id).Questnum > 0 Then
+                    If CanStartQuest(Map.MapEvents(id).Questnum) Then
+                        If Player(Myindex).PlayerQuest(Map.MapEvents(id).Questnum).Status = QuestStatusType.NotStarted Then
+                            DrawEmotes(x, y, 5)
+                        End If
+                    ElseIf Player(Myindex).PlayerQuest(Map.MapEvents(id).QuestNum).Status = QuestStatusType.Started Then
+                        DrawEmotes(x, y, 9)
+                    End If
+                End If
         End Select
 
     End Sub

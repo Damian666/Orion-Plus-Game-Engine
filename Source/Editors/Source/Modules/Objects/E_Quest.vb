@@ -108,10 +108,10 @@ Friend Module E_Quest
 #Region "Quest Editor"
     Friend Sub QuestEditorInit()
 
-        If frmQuest.Visible = False Then Exit Sub
-        EditorIndex = frmQuest.lstIndex.SelectedIndex + 1
+        If FrmQuest.Visible = False Then Exit Sub
+        EditorIndex = FrmQuest.lstIndex.SelectedIndex + 1
 
-        With frmQuest
+        With FrmQuest
             .txtName.Text = Trim$(Quest(EditorIndex).Name)
 
             If Quest(EditorIndex).Repeat = 1 Then
@@ -184,7 +184,7 @@ Friend Module E_Quest
 
             .lstTasks.Items.Clear()
             For i = 1 To Quest(EditorIndex).TaskCount
-                frmQuest.lstTasks.Items.Add(i & ":" & Quest(EditorIndex).Task(i).TaskLog)
+                FrmQuest.lstTasks.Items.Add(i & ":" & Quest(EditorIndex).Task(i).TaskLog)
             Next
 
             .rdbNoneReq.Checked = True
@@ -203,7 +203,7 @@ Friend Module E_Quest
             End If
         Next
 
-        frmQuest.Dispose()
+        FrmQuest.Dispose()
         Editor = 0
         ClearChanged_Quest()
 
@@ -211,7 +211,7 @@ Friend Module E_Quest
 
     Friend Sub QuestEditorCancel()
         Editor = 0
-        frmQuest.Dispose()
+        FrmQuest.Dispose()
         ClearChanged_Quest()
         ClearQuests()
         SendRequestQuests()
@@ -482,7 +482,7 @@ Friend Module E_Quest
     Friend Sub LoadRequirement(QuestNum As Integer, ReqNum As Integer)
         Dim i As Integer
 
-        With frmQuest
+        With FrmQuest
             'Populate combo boxes
             .cmbItemReq.Items.Clear()
             .cmbItemReq.Items.Add("None")
@@ -535,7 +535,7 @@ Friend Module E_Quest
         Dim TaskToLoad As TaskRec
         TaskToLoad = Quest(QuestNum).Task(TaskNum)
 
-        With frmQuest
+        With FrmQuest
             'Load the task type
             Select Case TaskToLoad.Order
                 Case 0

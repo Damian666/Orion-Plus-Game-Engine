@@ -1,5 +1,5 @@
 ﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
-Partial Class frmQuest
+Partial Class FrmQuest
     Inherits System.Windows.Forms.Form
 
     'Form overrides dispose to clean up the component list.
@@ -22,6 +22,7 @@ Partial Class frmQuest
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(FrmQuest))
         Me.fraQuestList = New DarkUI.Controls.DarkGroupBox()
         Me.lstIndex = New System.Windows.Forms.ListBox()
         Me.DarkGroupBox2 = New DarkUI.Controls.DarkGroupBox()
@@ -293,6 +294,7 @@ Partial Class frmQuest
         Me.nudItemRewValue.Name = "nudItemRewValue"
         Me.nudItemRewValue.Size = New System.Drawing.Size(99, 20)
         Me.nudItemRewValue.TabIndex = 8
+        Me.nudItemRewValue.Value = New Decimal(New Integer() {0, 0, 0, 0})
         '
         'DarkLabel7
         '
@@ -309,6 +311,10 @@ Partial Class frmQuest
         Me.cmbItemReward.BackColor = System.Drawing.Color.FromArgb(CType(CType(69, Byte), Integer), CType(CType(73, Byte), Integer), CType(CType(74, Byte), Integer))
         Me.cmbItemReward.BorderColor = System.Drawing.Color.FromArgb(CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer))
         Me.cmbItemReward.BorderStyle = System.Windows.Forms.ButtonBorderStyle.Solid
+        Me.cmbItemReward.ButtonColor = System.Drawing.Color.FromArgb(CType(CType(43, Byte), Integer), CType(CType(43, Byte), Integer), CType(CType(43, Byte), Integer))
+        Me.cmbItemReward.ButtonIcon = CType(resources.GetObject("cmbItemReward.ButtonIcon"), System.Drawing.Bitmap)
+        Me.cmbItemReward.DrawDropdownHoverOutline = False
+        Me.cmbItemReward.DrawFocusRectangle = False
         Me.cmbItemReward.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed
         Me.cmbItemReward.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cmbItemReward.FlatStyle = System.Windows.Forms.FlatStyle.Flat
@@ -318,6 +324,8 @@ Partial Class frmQuest
         Me.cmbItemReward.Name = "cmbItemReward"
         Me.cmbItemReward.Size = New System.Drawing.Size(115, 21)
         Me.cmbItemReward.TabIndex = 6
+        Me.cmbItemReward.Text = Nothing
+        Me.cmbItemReward.TextPadding = New System.Windows.Forms.Padding(2)
         '
         'DarkLabel6
         '
@@ -338,6 +346,7 @@ Partial Class frmQuest
         Me.nudExpReward.Name = "nudExpReward"
         Me.nudExpReward.Size = New System.Drawing.Size(80, 20)
         Me.nudExpReward.TabIndex = 4
+        Me.nudExpReward.Value = New Decimal(New Integer() {0, 0, 0, 0})
         '
         'DarkLabel5
         '
@@ -679,6 +688,10 @@ Partial Class frmQuest
         Me.cmbResource.BackColor = System.Drawing.Color.FromArgb(CType(CType(69, Byte), Integer), CType(CType(73, Byte), Integer), CType(CType(74, Byte), Integer))
         Me.cmbResource.BorderColor = System.Drawing.Color.FromArgb(CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer))
         Me.cmbResource.BorderStyle = System.Windows.Forms.ButtonBorderStyle.Solid
+        Me.cmbResource.ButtonColor = System.Drawing.Color.FromArgb(CType(CType(43, Byte), Integer), CType(CType(43, Byte), Integer), CType(CType(43, Byte), Integer))
+        Me.cmbResource.ButtonIcon = CType(resources.GetObject("cmbResource.ButtonIcon"), System.Drawing.Bitmap)
+        Me.cmbResource.DrawDropdownHoverOutline = False
+        Me.cmbResource.DrawFocusRectangle = False
         Me.cmbResource.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed
         Me.cmbResource.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cmbResource.FlatStyle = System.Windows.Forms.FlatStyle.Flat
@@ -688,12 +701,18 @@ Partial Class frmQuest
         Me.cmbResource.Name = "cmbResource"
         Me.cmbResource.Size = New System.Drawing.Size(121, 21)
         Me.cmbResource.TabIndex = 20
+        Me.cmbResource.Text = Nothing
+        Me.cmbResource.TextPadding = New System.Windows.Forms.Padding(2)
         '
         'cmbMap
         '
         Me.cmbMap.BackColor = System.Drawing.Color.FromArgb(CType(CType(69, Byte), Integer), CType(CType(73, Byte), Integer), CType(CType(74, Byte), Integer))
         Me.cmbMap.BorderColor = System.Drawing.Color.FromArgb(CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer))
         Me.cmbMap.BorderStyle = System.Windows.Forms.ButtonBorderStyle.Solid
+        Me.cmbMap.ButtonColor = System.Drawing.Color.FromArgb(CType(CType(43, Byte), Integer), CType(CType(43, Byte), Integer), CType(CType(43, Byte), Integer))
+        Me.cmbMap.ButtonIcon = CType(resources.GetObject("cmbMap.ButtonIcon"), System.Drawing.Bitmap)
+        Me.cmbMap.DrawDropdownHoverOutline = False
+        Me.cmbMap.DrawFocusRectangle = False
         Me.cmbMap.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed
         Me.cmbMap.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cmbMap.FlatStyle = System.Windows.Forms.FlatStyle.Flat
@@ -703,12 +722,18 @@ Partial Class frmQuest
         Me.cmbMap.Name = "cmbMap"
         Me.cmbMap.Size = New System.Drawing.Size(121, 21)
         Me.cmbMap.TabIndex = 19
+        Me.cmbMap.Text = Nothing
+        Me.cmbMap.TextPadding = New System.Windows.Forms.Padding(2)
         '
         'cmbItem
         '
         Me.cmbItem.BackColor = System.Drawing.Color.FromArgb(CType(CType(69, Byte), Integer), CType(CType(73, Byte), Integer), CType(CType(74, Byte), Integer))
         Me.cmbItem.BorderColor = System.Drawing.Color.FromArgb(CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer))
         Me.cmbItem.BorderStyle = System.Windows.Forms.ButtonBorderStyle.Solid
+        Me.cmbItem.ButtonColor = System.Drawing.Color.FromArgb(CType(CType(43, Byte), Integer), CType(CType(43, Byte), Integer), CType(CType(43, Byte), Integer))
+        Me.cmbItem.ButtonIcon = CType(resources.GetObject("cmbItem.ButtonIcon"), System.Drawing.Bitmap)
+        Me.cmbItem.DrawDropdownHoverOutline = False
+        Me.cmbItem.DrawFocusRectangle = False
         Me.cmbItem.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed
         Me.cmbItem.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cmbItem.FlatStyle = System.Windows.Forms.FlatStyle.Flat
@@ -718,12 +743,18 @@ Partial Class frmQuest
         Me.cmbItem.Name = "cmbItem"
         Me.cmbItem.Size = New System.Drawing.Size(121, 21)
         Me.cmbItem.TabIndex = 18
+        Me.cmbItem.Text = Nothing
+        Me.cmbItem.TextPadding = New System.Windows.Forms.Padding(2)
         '
         'cmbNpc
         '
         Me.cmbNpc.BackColor = System.Drawing.Color.FromArgb(CType(CType(69, Byte), Integer), CType(CType(73, Byte), Integer), CType(CType(74, Byte), Integer))
         Me.cmbNpc.BorderColor = System.Drawing.Color.FromArgb(CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer))
         Me.cmbNpc.BorderStyle = System.Windows.Forms.ButtonBorderStyle.Solid
+        Me.cmbNpc.ButtonColor = System.Drawing.Color.FromArgb(CType(CType(43, Byte), Integer), CType(CType(43, Byte), Integer), CType(CType(43, Byte), Integer))
+        Me.cmbNpc.ButtonIcon = CType(resources.GetObject("cmbNpc.ButtonIcon"), System.Drawing.Bitmap)
+        Me.cmbNpc.DrawDropdownHoverOutline = False
+        Me.cmbNpc.DrawFocusRectangle = False
         Me.cmbNpc.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed
         Me.cmbNpc.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cmbNpc.FlatStyle = System.Windows.Forms.FlatStyle.Flat
@@ -733,6 +764,8 @@ Partial Class frmQuest
         Me.cmbNpc.Name = "cmbNpc"
         Me.cmbNpc.Size = New System.Drawing.Size(121, 21)
         Me.cmbNpc.TabIndex = 17
+        Me.cmbNpc.Text = Nothing
+        Me.cmbNpc.TextPadding = New System.Windows.Forms.Padding(2)
         '
         'DarkLabel17
         '
@@ -762,6 +795,7 @@ Partial Class frmQuest
         Me.nudAmount.Name = "nudAmount"
         Me.nudAmount.Size = New System.Drawing.Size(120, 20)
         Me.nudAmount.TabIndex = 14
+        Me.nudAmount.Value = New Decimal(New Integer() {0, 0, 0, 0})
         '
         'DarkLabel15
         '
@@ -935,6 +969,7 @@ Partial Class frmQuest
         Me.nudTakeAmount.Name = "nudTakeAmount"
         Me.nudTakeAmount.Size = New System.Drawing.Size(70, 20)
         Me.nudTakeAmount.TabIndex = 7
+        Me.nudTakeAmount.Value = New Decimal(New Integer() {0, 0, 0, 0})
         '
         'DarkLabel23
         '
@@ -951,6 +986,10 @@ Partial Class frmQuest
         Me.cmbEndItem.BackColor = System.Drawing.Color.FromArgb(CType(CType(69, Byte), Integer), CType(CType(73, Byte), Integer), CType(CType(74, Byte), Integer))
         Me.cmbEndItem.BorderColor = System.Drawing.Color.FromArgb(CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer))
         Me.cmbEndItem.BorderStyle = System.Windows.Forms.ButtonBorderStyle.Solid
+        Me.cmbEndItem.ButtonColor = System.Drawing.Color.FromArgb(CType(CType(43, Byte), Integer), CType(CType(43, Byte), Integer), CType(CType(43, Byte), Integer))
+        Me.cmbEndItem.ButtonIcon = CType(resources.GetObject("cmbEndItem.ButtonIcon"), System.Drawing.Bitmap)
+        Me.cmbEndItem.DrawDropdownHoverOutline = False
+        Me.cmbEndItem.DrawFocusRectangle = False
         Me.cmbEndItem.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed
         Me.cmbEndItem.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cmbEndItem.FlatStyle = System.Windows.Forms.FlatStyle.Flat
@@ -960,6 +999,8 @@ Partial Class frmQuest
         Me.cmbEndItem.Name = "cmbEndItem"
         Me.cmbEndItem.Size = New System.Drawing.Size(137, 21)
         Me.cmbEndItem.TabIndex = 5
+        Me.cmbEndItem.Text = Nothing
+        Me.cmbEndItem.TextPadding = New System.Windows.Forms.Padding(2)
         '
         'DarkLabel24
         '
@@ -979,6 +1020,7 @@ Partial Class frmQuest
         Me.nudGiveAmount.Name = "nudGiveAmount"
         Me.nudGiveAmount.Size = New System.Drawing.Size(70, 20)
         Me.nudGiveAmount.TabIndex = 3
+        Me.nudGiveAmount.Value = New Decimal(New Integer() {0, 0, 0, 0})
         '
         'DarkLabel22
         '
@@ -995,6 +1037,10 @@ Partial Class frmQuest
         Me.cmbStartItem.BackColor = System.Drawing.Color.FromArgb(CType(CType(69, Byte), Integer), CType(CType(73, Byte), Integer), CType(CType(74, Byte), Integer))
         Me.cmbStartItem.BorderColor = System.Drawing.Color.FromArgb(CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer))
         Me.cmbStartItem.BorderStyle = System.Windows.Forms.ButtonBorderStyle.Solid
+        Me.cmbStartItem.ButtonColor = System.Drawing.Color.FromArgb(CType(CType(43, Byte), Integer), CType(CType(43, Byte), Integer), CType(CType(43, Byte), Integer))
+        Me.cmbStartItem.ButtonIcon = CType(resources.GetObject("cmbStartItem.ButtonIcon"), System.Drawing.Bitmap)
+        Me.cmbStartItem.DrawDropdownHoverOutline = False
+        Me.cmbStartItem.DrawFocusRectangle = False
         Me.cmbStartItem.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed
         Me.cmbStartItem.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cmbStartItem.FlatStyle = System.Windows.Forms.FlatStyle.Flat
@@ -1004,6 +1050,8 @@ Partial Class frmQuest
         Me.cmbStartItem.Name = "cmbStartItem"
         Me.cmbStartItem.Size = New System.Drawing.Size(137, 21)
         Me.cmbStartItem.TabIndex = 1
+        Me.cmbStartItem.Text = Nothing
+        Me.cmbStartItem.TextPadding = New System.Windows.Forms.Padding(2)
         '
         'DarkLabel21
         '
@@ -1020,6 +1068,10 @@ Partial Class frmQuest
         Me.cmbClassReq.BackColor = System.Drawing.Color.FromArgb(CType(CType(69, Byte), Integer), CType(CType(73, Byte), Integer), CType(CType(74, Byte), Integer))
         Me.cmbClassReq.BorderColor = System.Drawing.Color.FromArgb(CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer))
         Me.cmbClassReq.BorderStyle = System.Windows.Forms.ButtonBorderStyle.Solid
+        Me.cmbClassReq.ButtonColor = System.Drawing.Color.FromArgb(CType(CType(43, Byte), Integer), CType(CType(43, Byte), Integer), CType(CType(43, Byte), Integer))
+        Me.cmbClassReq.ButtonIcon = CType(resources.GetObject("cmbClassReq.ButtonIcon"), System.Drawing.Bitmap)
+        Me.cmbClassReq.DrawDropdownHoverOutline = False
+        Me.cmbClassReq.DrawFocusRectangle = False
         Me.cmbClassReq.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed
         Me.cmbClassReq.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cmbClassReq.FlatStyle = System.Windows.Forms.FlatStyle.Flat
@@ -1029,6 +1081,8 @@ Partial Class frmQuest
         Me.cmbClassReq.Name = "cmbClassReq"
         Me.cmbClassReq.Size = New System.Drawing.Size(159, 21)
         Me.cmbClassReq.TabIndex = 9
+        Me.cmbClassReq.Text = Nothing
+        Me.cmbClassReq.TextPadding = New System.Windows.Forms.Padding(2)
         '
         'DarkLabel20
         '
@@ -1055,6 +1109,10 @@ Partial Class frmQuest
         Me.cmbQuestReq.BackColor = System.Drawing.Color.FromArgb(CType(CType(69, Byte), Integer), CType(CType(73, Byte), Integer), CType(CType(74, Byte), Integer))
         Me.cmbQuestReq.BorderColor = System.Drawing.Color.FromArgb(CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer))
         Me.cmbQuestReq.BorderStyle = System.Windows.Forms.ButtonBorderStyle.Solid
+        Me.cmbQuestReq.ButtonColor = System.Drawing.Color.FromArgb(CType(CType(43, Byte), Integer), CType(CType(43, Byte), Integer), CType(CType(43, Byte), Integer))
+        Me.cmbQuestReq.ButtonIcon = CType(resources.GetObject("cmbQuestReq.ButtonIcon"), System.Drawing.Bitmap)
+        Me.cmbQuestReq.DrawDropdownHoverOutline = False
+        Me.cmbQuestReq.DrawFocusRectangle = False
         Me.cmbQuestReq.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed
         Me.cmbQuestReq.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cmbQuestReq.FlatStyle = System.Windows.Forms.FlatStyle.Flat
@@ -1064,6 +1122,8 @@ Partial Class frmQuest
         Me.cmbQuestReq.Name = "cmbQuestReq"
         Me.cmbQuestReq.Size = New System.Drawing.Size(159, 21)
         Me.cmbQuestReq.TabIndex = 6
+        Me.cmbQuestReq.Text = Nothing
+        Me.cmbQuestReq.TextPadding = New System.Windows.Forms.Padding(2)
         '
         'DarkLabel19
         '
@@ -1090,6 +1150,10 @@ Partial Class frmQuest
         Me.cmbItemReq.BackColor = System.Drawing.Color.FromArgb(CType(CType(69, Byte), Integer), CType(CType(73, Byte), Integer), CType(CType(74, Byte), Integer))
         Me.cmbItemReq.BorderColor = System.Drawing.Color.FromArgb(CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer))
         Me.cmbItemReq.BorderStyle = System.Windows.Forms.ButtonBorderStyle.Solid
+        Me.cmbItemReq.ButtonColor = System.Drawing.Color.FromArgb(CType(CType(43, Byte), Integer), CType(CType(43, Byte), Integer), CType(CType(43, Byte), Integer))
+        Me.cmbItemReq.ButtonIcon = CType(resources.GetObject("cmbItemReq.ButtonIcon"), System.Drawing.Bitmap)
+        Me.cmbItemReq.DrawDropdownHoverOutline = False
+        Me.cmbItemReq.DrawFocusRectangle = False
         Me.cmbItemReq.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed
         Me.cmbItemReq.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cmbItemReq.FlatStyle = System.Windows.Forms.FlatStyle.Flat
@@ -1099,6 +1163,8 @@ Partial Class frmQuest
         Me.cmbItemReq.Name = "cmbItemReq"
         Me.cmbItemReq.Size = New System.Drawing.Size(159, 21)
         Me.cmbItemReq.TabIndex = 3
+        Me.cmbItemReq.Text = Nothing
+        Me.cmbItemReq.TextPadding = New System.Windows.Forms.Padding(2)
         '
         'DarkLabel18
         '
@@ -1130,7 +1196,7 @@ Partial Class frmQuest
         Me.rdbNoneReq.TabStop = True
         Me.rdbNoneReq.Text = "None"
         '
-        'frmEditor_Quest
+        'frmQuest
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
@@ -1142,11 +1208,11 @@ Partial Class frmQuest
         Me.Controls.Add(Me.DarkLabel8)
         Me.Controls.Add(Me.DarkGroupBox2)
         Me.Controls.Add(Me.fraQuestList)
-        Me.Controls.Add(Me.fraRequirements)
         Me.Controls.Add(Me.fraTasks)
+        Me.Controls.Add(Me.fraRequirements)
         Me.ForeColor = System.Drawing.Color.Gainsboro
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
-        Me.Name = "frmEditor_Quest"
+        Me.Name = "frmQuest"
         Me.Text = "Quest Editor"
         Me.fraQuestList.ResumeLayout(False)
         Me.DarkGroupBox2.ResumeLayout(False)
