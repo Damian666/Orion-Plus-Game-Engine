@@ -445,7 +445,7 @@ Module E_Loop
         If InitResourceEditor = True Then
             Dim i As Integer
 
-            With frmResource
+            With FrmResource
                 Editor = EDITOR_RESOURCE
                 .lstIndex.Items.Clear()
 

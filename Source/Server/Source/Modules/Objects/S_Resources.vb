@@ -305,7 +305,7 @@ Friend Module S_Resources
 
     Sub Packet_SaveResource(index As Integer, ByRef data() As Byte)
         Dim resourcenum As Integer
-        Dim buffer As New ByteStream(4)
+        Dim buffer As New ByteStream(data)
 
         AddDebug("Recieved EMSG: SaveResource")
 
@@ -315,7 +315,7 @@ Friend Module S_Resources
         resourcenum = buffer.ReadInt32
 
         ' Prevent hacking
-        If resourcenum < 0 OrElse resourcenum > MAX_RESOURCES Then Exit Sub
+        If resourcenum <= 0 OrElse resourcenum > MAX_RESOURCES Then Exit Sub
 
         Resource(resourcenum).Animation = buffer.ReadInt32()
         Resource(resourcenum).EmptyMessage = buffer.ReadString()

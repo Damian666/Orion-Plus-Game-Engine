@@ -789,10 +789,10 @@ Module E_Editors
     Friend Sub ResourceEditorInit()
         Dim i As Integer
 
-        If frmResource.Visible = False Then Exit Sub
-        Editorindex = frmResource.lstIndex.SelectedIndex + 1
+        If FrmResource.Visible = False Then Exit Sub
+        Editorindex = FrmResource.lstIndex.SelectedIndex + 1
 
-        With frmResource
+        With FrmResource
             'populate combo boxes
             .cmbRewardItem.Items.Clear()
             .cmbRewardItem.Items.Add("None")
@@ -825,7 +825,7 @@ Module E_Editors
         End With
 
 
-        frmResource.Visible = True
+        FrmResource.Visible = True
 
         EditorResource_DrawSprite()
 
@@ -841,14 +841,14 @@ Module E_Editors
             End If
         Next
 
-        frmResource.Visible = False
+        FrmResource.Visible = False
         Editor = 0
         ClearChanged_Resource()
     End Sub
 
     Friend Sub ResourceEditorCancel()
         Editor = 0
-        frmResource.Visible = False
+        FrmResource.Visible = False
         ClearChanged_Resource()
         ClearResources()
         SendRequestResources()

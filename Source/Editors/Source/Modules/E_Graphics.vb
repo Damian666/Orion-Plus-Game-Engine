@@ -1433,24 +1433,24 @@ Module E_Graphics
         Dim Sprite As Integer
 
         ' normal sprite
-        Sprite = frmResource.nudNormalPic.Value
+        Sprite = FrmResource.nudNormalPic.Value
 
         If Sprite < 1 OrElse Sprite > NumResources Then
-            frmResource.picNormalpic.BackgroundImage = Nothing
+            FrmResource.picNormalpic.BackgroundImage = Nothing
         Else
             If File.Exists(Application.StartupPath & GFX_PATH & "resources\" & Sprite & GFX_EXT) Then
-                frmResource.picNormalpic.BackgroundImage = Drawing.Image.FromFile(Application.StartupPath & GFX_PATH & "resources\" & Sprite & GFX_EXT)
+                FrmResource.picNormalpic.BackgroundImage = Drawing.Image.FromFile(Application.StartupPath & GFX_PATH & "resources\" & Sprite & GFX_EXT)
             End If
         End If
 
         ' exhausted sprite
-        Sprite = frmResource.nudExhaustedPic.Value
+        Sprite = FrmResource.nudExhaustedPic.Value
 
         If Sprite < 1 OrElse Sprite > NumResources Then
-            frmResource.picExhaustedPic.BackgroundImage = Nothing
+            FrmResource.picExhaustedPic.BackgroundImage = Nothing
         Else
             If File.Exists(Application.StartupPath & GFX_PATH & "resources\" & Sprite & GFX_EXT) Then
-                frmResource.picExhaustedPic.BackgroundImage = Drawing.Image.FromFile(Application.StartupPath & GFX_PATH & "resources\" & Sprite & GFX_EXT)
+                FrmResource.picExhaustedPic.BackgroundImage = Drawing.Image.FromFile(Application.StartupPath & GFX_PATH & "resources\" & Sprite & GFX_EXT)
             End If
         End If
     End Sub
