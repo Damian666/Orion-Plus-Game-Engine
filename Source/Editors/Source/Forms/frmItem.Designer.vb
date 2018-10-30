@@ -194,6 +194,7 @@ Partial Class FrmItem
         '
         Me.fraBasics.BackColor = System.Drawing.Color.FromArgb(CType(CType(45, Byte), Integer), CType(CType(45, Byte), Integer), CType(CType(48, Byte), Integer))
         Me.fraBasics.BorderColor = System.Drawing.Color.FromArgb(CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer))
+        Me.fraBasics.Controls.Add(Me.fraPet)
         Me.fraBasics.Controls.Add(Me.txtDescription)
         Me.fraBasics.Controls.Add(Me.DarkLabel10)
         Me.fraBasics.Controls.Add(Me.cmbAnimation)
@@ -219,7 +220,6 @@ Partial Class FrmItem
         Me.fraBasics.Controls.Add(Me.fraSkill)
         Me.fraBasics.Controls.Add(Me.fraRecipe)
         Me.fraBasics.Controls.Add(Me.fraVitals)
-        Me.fraBasics.Controls.Add(Me.fraPet)
         Me.fraBasics.ForeColor = System.Drawing.Color.Gainsboro
         Me.fraBasics.Location = New System.Drawing.Point(217, 37)
         Me.fraBasics.Name = "fraBasics"
@@ -341,7 +341,7 @@ Partial Class FrmItem
         Me.cmbBind.Name = "cmbBind"
         Me.cmbBind.Size = New System.Drawing.Size(158, 21)
         Me.cmbBind.TabIndex = 14
-        Me.cmbBind.Text = Nothing
+        Me.cmbBind.Text = "None"
         Me.cmbBind.TextPadding = New System.Windows.Forms.Padding(2)
         '
         'DarkLabel6
@@ -382,7 +382,7 @@ Partial Class FrmItem
         Me.cmbSubType.Name = "cmbSubType"
         Me.cmbSubType.Size = New System.Drawing.Size(121, 21)
         Me.cmbSubType.TabIndex = 11
-        Me.cmbSubType.Text = Nothing
+        Me.cmbSubType.Text = "None"
         Me.cmbSubType.TextPadding = New System.Windows.Forms.Padding(2)
         '
         'DarkLabel5
@@ -414,7 +414,7 @@ Partial Class FrmItem
         Me.cmbType.Name = "cmbType"
         Me.cmbType.Size = New System.Drawing.Size(121, 21)
         Me.cmbType.TabIndex = 9
-        Me.cmbType.Text = Nothing
+        Me.cmbType.Text = "None"
         Me.cmbType.TextPadding = New System.Windows.Forms.Padding(2)
         '
         'DarkLabel4
@@ -1505,10 +1505,10 @@ Partial Class FrmItem
         Me.Controls.Add(Me.btnRequirements)
         Me.Controls.Add(Me.btnBasics)
         Me.Controls.Add(Me.DarkGroupBox1)
-        Me.Controls.Add(Me.fraRequirements)
         Me.Controls.Add(Me.fraBasics)
         Me.Controls.Add(Me.fraEquipment)
         Me.Controls.Add(Me.fraFurniture)
+        Me.Controls.Add(Me.fraRequirements)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.Name = "FrmItem"
         Me.Text = "Item Editor"

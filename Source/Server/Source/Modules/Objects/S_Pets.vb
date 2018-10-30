@@ -2266,7 +2266,7 @@ Module S_Pets
         Select Case Vital
             Case VitalType.HP
                 Buffer.WriteInt32(GetPetMaxVital(Index, VitalType.HP))
-                Buffer.WriteInt32(GetPetMaxVital(Index, VitalType.HP))
+                buffer.WriteInt32(GetPetVital(index, VitalType.HP))
 
             Case VitalType.MP
                 Buffer.WriteInt32(GetPetMaxVital(Index, VitalType.MP))

@@ -2088,12 +2088,13 @@ Module C_Graphics
 
         If PetAlive(MyIndex) Then
             ' draw own health bar
-            If Player(MyIndex).Pet.Health > 0 AndAlso Player(MyIndex).Pet.Health <= Player(MyIndex).Pet.MaxHp Then
+            If Player(Myindex).Pet.Health > 0 AndAlso Player(Myindex).Pet.Health <= Player(Myindex).Pet.MaxHp Then
+                'Debug.Print("pethealth:" & Player(Myindex).Pet.Health)
                 ' lock to Player
-                tmpX = Player(MyIndex).Pet.X * PicX + Player(MyIndex).Pet.XOffset
-                tmpY = Player(MyIndex).Pet.Y * PicX + Player(MyIndex).Pet.YOffset + 35
+                tmpX = Player(Myindex).Pet.X * PicX + Player(Myindex).Pet.XOffset
+                tmpY = Player(Myindex).Pet.Y * PicX + Player(Myindex).Pet.YOffset + 35
                 ' calculate the width to fill
-                barWidth = ((Player(MyIndex).Pet.Health) / (Player(MyIndex).Pet.MaxHp)) * 32
+                barWidth = ((Player(Myindex).Pet.Health) / (Player(Myindex).Pet.MaxHp)) * 32
                 ' draw bars
                 rec(1) = New Rectangle(ConvertMapX(tmpX), ConvertMapY(tmpY), barWidth, 4)
                 Dim rectShape As New RectangleShape(New Vector2f(barWidth, 4)) With {

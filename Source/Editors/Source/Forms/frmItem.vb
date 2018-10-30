@@ -148,6 +148,12 @@
             fraRecipe.Visible = False
         End If
 
+        If cmbType.SelectedIndex = ItemType.Pet Then
+            fraPet.Visible = True
+        Else
+            fraPet.Visible = False
+        End If
+
         Item(Editorindex).Type = cmbType.SelectedIndex
     End Sub
 
@@ -454,6 +460,7 @@
         End If
         EditorItem_DrawFurniture()
     End Sub
+
 #End Region
 
 End Class
