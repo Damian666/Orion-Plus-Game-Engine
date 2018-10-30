@@ -505,8 +505,8 @@ Module E_NetworkReceive
         Npc(i).SpawnSecs = buffer.ReadInt32()
         Npc(i).Sprite = buffer.ReadInt32()
 
-        For i = 0 To StatType.Count - 1
-            Npc(i).Stat(i) = buffer.ReadInt32()
+        For x = 0 To StatType.Count - 1
+            Npc(i).Stat(x) = buffer.ReadInt32()
         Next
 
         Npc(i).QuestNum = buffer.ReadInt32()
