@@ -8,6 +8,7 @@ Module S_AutoMap
     ' Map analysis and tips: Richard Johnson, Luan Meireles (Alenzinho)
 
 #Region "Globals And Types"
+
     Private _mapOrientation() As MapOrientationRec
 
     Friend MapStart As Integer = 1
@@ -89,9 +90,11 @@ Module S_AutoMap
         Dim TileEndY As Integer
         Dim Tile(,) As TilePrefab
     End Structure
+
 #End Region
 
 #Region "Loading Functions"
+
     ''' <summary>
     ''' Loads TilePrefab from the Automapper.ini
     ''' </summary>
@@ -191,9 +194,11 @@ Module S_AutoMap
     Function HaveDetails(prefab As TilePrefab) As Boolean
         HaveDetails = Not (prefab = TilePrefab.Water OrElse prefab = TilePrefab.River)
     End Function
+
 #End Region
 
 #Region "Incoming Packets"
+
     Sub Packet_RequestAutoMap(index As Integer, ByRef data() As Byte)
         AddDebug("Recieved EMSG: RequestAutoMap")
 
@@ -246,9 +251,11 @@ Module S_AutoMap
         StartAutomapper(MapStart, MapSize, MapX, MapY)
 
     End Sub
+
 #End Region
 
 #Region "Outgoing Packets"
+
     Sub SendAutoMapper(index As Integer)
         Dim buffer As ByteStream, Prefab As Integer
         Dim myXml As New XmlClass With {
@@ -292,9 +299,11 @@ Module S_AutoMap
 
         buffer.Dispose()
     End Sub
+
 #End Region
 
 #Region "Creation Functions"
+
     Sub AddTile(prefab As TilePrefab, mapNum As Integer, x As Integer, y As Integer)
         Dim tileDest As TileRec
         Dim cleanNextTiles As Boolean
@@ -698,7 +707,6 @@ SelectMap:
         Tile(TilePrefab.Mountain).Layer(2).X = oldX
         Tile(TilePrefab.Mountain).Layer(2).Y = oldY
     End Sub
-
 
     Sub MarkMountain(mapNum As Integer, x As Integer, y As Integer, width As Integer, height As Integer)
         Dim pX As Integer, pY As Integer
@@ -1497,8 +1505,7 @@ ChangeDir:
         Console.WriteLine("Done " & totalMaps & " maps in " & CDbl(startTick / 1000) & "s")
 
     End Sub
+
 #End Region
-
-
 
 End Module

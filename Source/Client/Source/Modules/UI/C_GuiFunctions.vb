@@ -3,19 +3,20 @@ Imports System.Windows.Forms
 Imports ASFW
 
 Friend Module C_GuiFunctions
+
     Friend Sub CheckGuiMove(x As Integer, y As Integer)
         Dim eqNum As Integer, invNum As Integer, skillslot As Integer
         Dim bankitem As Integer, shopslot As Integer, tradeNum As Integer
 
         ShowItemDesc = False
         'Charpanel
-        If pnlCharacterVisible Then
-            If X > CharWindowX AndAlso X < CharWindowX + CharPanelGFXInfo.Width Then
-                If Y > CharWindowY AndAlso Y < CharWindowY + CharPanelGFXInfo.Height Then
-                    eqNum = IsEqItem(X, Y)
+        If PnlCharacterVisible Then
+            If x > CharWindowX AndAlso x < CharWindowX + CharPanelGfxInfo.Width Then
+                If y > CharWindowY AndAlso y < CharWindowY + CharPanelGfxInfo.Height Then
+                    eqNum = IsEqItem(x, y)
                     If eqNum <> 0 Then
-                        UpdateDescWindow(GetPlayerEquipment(MyIndex, eqNum), 0, eqNum, 1)
-                        LastItemDesc = GetPlayerEquipment(MyIndex, eqNum) ' set it so you don't re-set values
+                        UpdateDescWindow(GetPlayerEquipment(Myindex, eqNum), 0, eqNum, 1)
+                        LastItemDesc = GetPlayerEquipment(Myindex, eqNum) ' set it so you don't re-set values
                         ShowItemDesc = True
                         Exit Sub
                     Else
@@ -27,29 +28,29 @@ Friend Module C_GuiFunctions
         End If
 
         'inventory
-        If pnlInventoryVisible Then
-            If AboveInvpanel(X, Y) Then
-                InvX = X
-                InvY = Y
+        If PnlInventoryVisible Then
+            If AboveInvpanel(x, y) Then
+                InvX = x
+                InvY = y
 
                 If DragInvSlotNum > 0 Then
                     If InTrade Then Exit Sub
                     If InBank OrElse InShop Then Exit Sub
-                    DrawInventoryItem(X, Y)
+                    DrawInventoryItem(x, y)
                     ShowItemDesc = False
                     LastItemDesc = 0 ' no item was last loaded
                 Else
-                    InvNum = IsInvItem(X, Y)
+                    invNum = IsInvItem(x, y)
 
-                    If InvNum <> 0 Then
+                    If invNum <> 0 Then
                         ' exit out if we're offering that item
                         For i = 1 To MAX_INV
-                            If TradeYourOffer(i).Num = InvNum Then
+                            If TradeYourOffer(i).Num = invNum Then
                                 Exit Sub
                             End If
                         Next
-                        UpdateDescWindow(GetPlayerInvItemNum(MyIndex, InvNum), GetPlayerInvItemValue(MyIndex, InvNum), InvNum, 0)
-                        LastItemDesc = GetPlayerInvItemNum(MyIndex, InvNum) ' set it so you don't re-set values
+                        UpdateDescWindow(GetPlayerInvItemNum(Myindex, invNum), GetPlayerInvItemValue(Myindex, invNum), invNum, 0)
+                        LastItemDesc = GetPlayerInvItemNum(Myindex, invNum) ' set it so you don't re-set values
                         ShowItemDesc = True
                         Exit Sub
                     Else
@@ -61,19 +62,19 @@ Friend Module C_GuiFunctions
         End If
 
         'skills
-        If pnlSkillsVisible = True Then
-            If AboveSkillpanel(X, Y) Then
-                SkillX = X
-                SkillY = Y
+        If PnlSkillsVisible = True Then
+            If AboveSkillpanel(x, y) Then
+                SkillX = x
+                SkillY = y
 
                 If DragSkillSlotNum > 0 Then
                     If InTrade Then Exit Sub
                     If InBank OrElse InShop Then Exit Sub
-                    DrawSkillItem(X, Y)
+                    DrawSkillItem(x, y)
                     LastSkillDesc = 0 ' no item was last loaded
                     ShowSkillDesc = False
                 Else
-                    skillslot = IsPlayerSkill(X, Y)
+                    skillslot = IsPlayerSkill(x, y)
 
                     If skillslot <> 0 Then
                         UpdateSkillWindow(PlayerSkills(skillslot))
@@ -90,15 +91,15 @@ Friend Module C_GuiFunctions
         End If
 
         'bank
-        If pnlBankVisible = True Then
-            If AboveBankpanel(X, Y) Then
-                BankX = X
-                BankY = Y
+        If PnlBankVisible = True Then
+            If AboveBankpanel(x, y) Then
+                BankX = x
+                BankY = y
 
                 If DragBankSlotNum > 0 Then
-                    DrawBankItem(X, Y)
+                    DrawBankItem(x, y)
                 Else
-                    bankitem = IsBankItem(X, Y)
+                    bankitem = IsBankItem(x, y)
 
                     If bankitem <> 0 Then
 
@@ -115,9 +116,9 @@ Friend Module C_GuiFunctions
         End If
 
         'shop
-        If pnlShopVisible = True Then
-            If AboveShoppanel(X, Y) Then
-                shopslot = IsShopItem(X, Y)
+        If PnlShopVisible = True Then
+            If AboveShoppanel(x, y) Then
+                shopslot = IsShopItem(x, y)
 
                 If shopslot <> 0 Then
 
@@ -134,17 +135,17 @@ Friend Module C_GuiFunctions
         End If
 
         'trade
-        If pnlTradeVisible = True Then
-            If AboveTradepanel(X, Y) Then
-                TradeX = X
-                TradeY = Y
+        If PnlTradeVisible = True Then
+            If AboveTradepanel(x, y) Then
+                TradeX = x
+                TradeY = y
 
                 'ours
-                TradeNum = IsTradeItem(X, Y, True)
+                tradeNum = IsTradeItem(x, y, True)
 
-                If TradeNum <> 0 Then
-                    UpdateDescWindow(GetPlayerInvItemNum(MyIndex, TradeYourOffer(TradeNum).Num), TradeYourOffer(TradeNum).Value, TradeNum, 4)
-                    LastItemDesc = GetPlayerInvItemNum(MyIndex, TradeYourOffer(TradeNum).Num) ' set it so you don't re-set values
+                If tradeNum <> 0 Then
+                    UpdateDescWindow(GetPlayerInvItemNum(Myindex, TradeYourOffer(tradeNum).Num), TradeYourOffer(tradeNum).Value, tradeNum, 4)
+                    LastItemDesc = GetPlayerInvItemNum(Myindex, TradeYourOffer(tradeNum).Num) ' set it so you don't re-set values
                     ShowItemDesc = True
                     Exit Sub
                 Else
@@ -153,11 +154,11 @@ Friend Module C_GuiFunctions
                 End If
 
                 'theirs
-                TradeNum = IsTradeItem(X, Y, False)
+                tradeNum = IsTradeItem(x, y, False)
 
-                If TradeNum <> 0 Then
-                    UpdateDescWindow(TradeTheirOffer(TradeNum).Num, TradeTheirOffer(TradeNum).Value, TradeNum, 4)
-                    LastItemDesc = TradeTheirOffer(TradeNum).Num ' set it so you don't re-set values
+                If tradeNum <> 0 Then
+                    UpdateDescWindow(TradeTheirOffer(tradeNum).Num, TradeTheirOffer(tradeNum).Value, tradeNum, 4)
+                    LastItemDesc = TradeTheirOffer(tradeNum).Num ' set it so you don't re-set values
                     ShowItemDesc = True
                     Exit Sub
                 Else
@@ -172,63 +173,63 @@ Friend Module C_GuiFunctions
     Friend Function CheckGuiClick(x As Integer, y As Integer, e As MouseEventArgs) As Boolean
         Dim eqNum As Integer, invNum As Integer
         Dim slotnum As Integer, hotbarslot As Integer
-        dim buffer as ByteStream
+        Dim buffer As ByteStream
 
         CheckGuiClick = False
         'action panel
-        If HUDVisible AndAlso HideGui = False Then
-            If AboveActionPanel(X, Y) Then
+        If HudVisible AndAlso HideGui = False Then
+            If AboveActionPanel(x, y) Then
                 ' left click
                 If e.Button = MouseButtons.Left Then
                     'Inventory
-                    If X > ActionPanelX + InvBtnX AndAlso X < ActionPanelX + InvBtnX + 48 AndAlso Y > ActionPanelY + InvBtnY AndAlso Y < ActionPanelY + InvBtnY + 32 Then
+                    If x > ActionPanelX + InvBtnX AndAlso x < ActionPanelX + InvBtnX + 48 AndAlso y > ActionPanelY + InvBtnY AndAlso y < ActionPanelY + InvBtnY + 32 Then
                         PlaySound("Click.ogg")
-                        pnlInventoryVisible = Not pnlInventoryVisible
-                        pnlCharacterVisible = False
-                        pnlSkillsVisible = False
+                        PnlInventoryVisible = Not PnlInventoryVisible
+                        PnlCharacterVisible = False
+                        PnlSkillsVisible = False
                         CheckGuiClick = True
                         'Skills
-                    ElseIf X > ActionPanelX + SkillBtnX AndAlso X < ActionPanelX + SkillBtnX + 48 AndAlso Y > ActionPanelY + SkillBtnY AndAlso Y < ActionPanelY + SkillBtnY + 32 Then
+                    ElseIf x > ActionPanelX + SkillBtnX AndAlso x < ActionPanelX + SkillBtnX + 48 AndAlso y > ActionPanelY + SkillBtnY AndAlso y < ActionPanelY + SkillBtnY + 32 Then
                         PlaySound("Click.ogg")
-                        Buffer = New ByteStream(4)
-                        Buffer.WriteInt32(ClientPackets.CSkills)
-                        Socket.SendData(Buffer.Data, Buffer.Head)
-                        Buffer.Dispose()
-                        pnlSkillsVisible = Not pnlSkillsVisible
-                        pnlInventoryVisible = False
-                        pnlCharacterVisible = False
+                        buffer = New ByteStream(4)
+                        buffer.WriteInt32(ClientPackets.CSkills)
+                        Socket.SendData(buffer.Data, buffer.Head)
+                        buffer.Dispose()
+                        PnlSkillsVisible = Not PnlSkillsVisible
+                        PnlInventoryVisible = False
+                        PnlCharacterVisible = False
                         CheckGuiClick = True
                         'Char
-                    ElseIf X > ActionPanelX + CharBtnX AndAlso X < ActionPanelX + CharBtnX + 48 AndAlso Y > ActionPanelY + CharBtnY AndAlso Y < ActionPanelY + CharBtnY + 32 Then
+                    ElseIf x > ActionPanelX + CharBtnX AndAlso x < ActionPanelX + CharBtnX + 48 AndAlso y > ActionPanelY + CharBtnY AndAlso y < ActionPanelY + CharBtnY + 32 Then
                         PlaySound("Click.ogg")
                         SendRequestPlayerData()
-                        pnlCharacterVisible = Not pnlCharacterVisible
-                        pnlInventoryVisible = False
-                        pnlSkillsVisible = False
+                        PnlCharacterVisible = Not PnlCharacterVisible
+                        PnlInventoryVisible = False
+                        PnlSkillsVisible = False
                         CheckGuiClick = True
                         'Quest
-                    ElseIf X > ActionPanelX + QuestBtnX AndAlso X < ActionPanelX + QuestBtnX + 48 AndAlso Y > ActionPanelY + QuestBtnY AndAlso Y < ActionPanelY + QuestBtnY + 32 Then
+                    ElseIf x > ActionPanelX + QuestBtnX AndAlso x < ActionPanelX + QuestBtnX + 48 AndAlso y > ActionPanelY + QuestBtnY AndAlso y < ActionPanelY + QuestBtnY + 32 Then
                         UpdateQuestLog()
                         ' show the window
-                        pnlInventoryVisible = False
-                        pnlCharacterVisible = False
+                        PnlInventoryVisible = False
+                        PnlCharacterVisible = False
                         RefreshQuestLog()
-                        pnlQuestLogVisible = Not pnlQuestLogVisible
+                        PnlQuestLogVisible = Not PnlQuestLogVisible
                         CheckGuiClick = True
                         'Options
-                    ElseIf X > ActionPanelX + OptBtnX AndAlso X < ActionPanelX + OptBtnX + 48 AndAlso Y > ActionPanelY + OptBtnY AndAlso Y < ActionPanelY + OptBtnY + 32 Then
+                    ElseIf x > ActionPanelX + OptBtnX AndAlso x < ActionPanelX + OptBtnX + 48 AndAlso y > ActionPanelY + OptBtnY AndAlso y < ActionPanelY + OptBtnY + 32 Then
                         PlaySound("Click.ogg")
-                        pnlCharacterVisible = False
-                        pnlInventoryVisible = False
-                        pnlSkillsVisible = False
+                        PnlCharacterVisible = False
+                        PnlInventoryVisible = False
+                        PnlSkillsVisible = False
 
                         OptionsVisible = Not OptionsVisible
-                        frmOptions.BringToFront()
+                        FrmOptions.BringToFront()
                         CheckGuiClick = True
                         'Exit
-                    ElseIf X > ActionPanelX + ExitBtnX AndAlso X < ActionPanelX + ExitBtnX + 48 AndAlso Y > ActionPanelY + ExitBtnY AndAlso Y < ActionPanelY + ExitBtnY + 32 Then
+                    ElseIf x > ActionPanelX + ExitBtnX AndAlso x < ActionPanelX + ExitBtnX + 48 AndAlso y > ActionPanelY + ExitBtnY AndAlso y < ActionPanelY + ExitBtnY + 32 Then
                         PlaySound("Click.ogg")
-                        frmAdmin.Dispose()
+                        FrmAdmin.Dispose()
                         SendLeaveGame()
                         'DestroyGame()
 
@@ -238,13 +239,13 @@ Friend Module C_GuiFunctions
             End If
 
             'hotbar
-            If AboveHotbar(X, Y) Then
+            If AboveHotbar(x, y) Then
 
                 hotbarslot = IsHotBarSlot(e.Location.X, e.Location.Y)
 
                 If e.Button = MouseButtons.Left Then
                     If hotbarslot > 0 Then
-                        slotnum = Player(MyIndex).Hotbar(hotbarslot).Slot
+                        slotnum = Player(Myindex).Hotbar(hotbarslot).Slot
 
                         If slotnum <> 0 Then
                             PlaySound("Click.ogg")
@@ -254,7 +255,7 @@ Friend Module C_GuiFunctions
                         CheckGuiClick = True
                     End If
                 ElseIf e.Button = MouseButtons.Right Then ' right click
-                    If Player(MyIndex).Hotbar(hotbarslot).Slot > 0 Then
+                    If Player(Myindex).Hotbar(hotbarslot).Slot > 0 Then
                         'forget hotbar skill
                         Dim result1 As DialogResult = MessageBox.Show("Want to Delete this from your hotbar?", GameName, MessageBoxButtons.YesNo)
                         If result1 = DialogResult.Yes Then
@@ -263,11 +264,11 @@ Friend Module C_GuiFunctions
 
                         CheckGuiClick = True
                     Else
-                        Buffer = New ByteStream(4)
-                        Buffer.WriteInt32(ClientPackets.CSkills)
-                        Socket.SendData(Buffer.Data, Buffer.Head)
-                        Buffer.Dispose()
-                        pnlSkillsVisible = True
+                        buffer = New ByteStream(4)
+                        buffer.WriteInt32(ClientPackets.CSkills)
+                        Socket.SendData(buffer.Data, buffer.Head)
+                        buffer.Dispose()
+                        PnlSkillsVisible = True
                         AddText("Click on the skill you want to place here", QColorType.TellColor)
                         SelSkillSlot = True
                         SelHotbarSlot = IsHotBarSlot(e.Location.X, e.Location.Y)
@@ -276,8 +277,8 @@ Friend Module C_GuiFunctions
                 CheckGuiClick = True
             End If
 
-            If AbovePetbar(X, Y) Then
-                If Player(MyIndex).Pet.Num > 0 Then
+            If AbovePetbar(x, y) Then
+                If Player(Myindex).Pet.Num > 0 Then
                     hotbarslot = IsPetBarSlot(e.Location.X, e.Location.Y)
 
                     If e.Button = MouseButtons.Left Then
@@ -293,7 +294,7 @@ Friend Module C_GuiFunctions
                                 End If
 
                             ElseIf hotbarslot >= 4 AndAlso hotbarslot <= 7 Then
-                                slotnum = Player(MyIndex).Pet.Skill(hotbarslot - 3)
+                                slotnum = Player(Myindex).Pet.Skill(hotbarslot - 3)
 
                                 If slotnum <> 0 Then
                                     PlaySound("Click.ogg")
@@ -312,50 +313,50 @@ Friend Module C_GuiFunctions
         End If
 
         'Charpanel
-        If pnlCharacterVisible Then
-            If AboveCharpanel(X, Y) Then
+        If PnlCharacterVisible Then
+            If AboveCharpanel(x, y) Then
                 ' left click
                 If e.Button = MouseButtons.Left Then
 
                     'lets see if they want to upgrade
                     'Strenght
-                    If X > CharWindowX + StrengthUpgradeX AndAlso X < CharWindowX + StrengthUpgradeX + 10 AndAlso Y > CharWindowY + StrengthUpgradeY AndAlso Y < CharWindowY + StrengthUpgradeY + 10 Then
-                        If Not GetPlayerPOINTS(MyIndex) = 0 Then
+                    If x > CharWindowX + StrengthUpgradeX AndAlso x < CharWindowX + StrengthUpgradeX + 10 AndAlso y > CharWindowY + StrengthUpgradeY AndAlso y < CharWindowY + StrengthUpgradeY + 10 Then
+                        If Not GetPlayerPoints(Myindex) = 0 Then
                             PlaySound("Click.ogg")
                             SendTrainStat(1)
                         End If
                     End If
                     'Endurance
-                    If X > CharWindowX + EnduranceUpgradeX AndAlso X < CharWindowX + EnduranceUpgradeX + 10 AndAlso Y > CharWindowY + EnduranceUpgradeY AndAlso Y < CharWindowY + EnduranceUpgradeY + 10 Then
-                        If Not GetPlayerPOINTS(MyIndex) = 0 Then
+                    If x > CharWindowX + EnduranceUpgradeX AndAlso x < CharWindowX + EnduranceUpgradeX + 10 AndAlso y > CharWindowY + EnduranceUpgradeY AndAlso y < CharWindowY + EnduranceUpgradeY + 10 Then
+                        If Not GetPlayerPoints(Myindex) = 0 Then
                             PlaySound("Click.ogg")
                             SendTrainStat(2)
                         End If
                     End If
                     'Vitality
-                    If X > CharWindowX + VitalityUpgradeX AndAlso X < CharWindowX + VitalityUpgradeX + 10 AndAlso Y > CharWindowY + VitalityUpgradeY AndAlso Y < CharWindowY + VitalityUpgradeY + 10 Then
-                        If Not GetPlayerPOINTS(MyIndex) = 0 Then
+                    If x > CharWindowX + VitalityUpgradeX AndAlso x < CharWindowX + VitalityUpgradeX + 10 AndAlso y > CharWindowY + VitalityUpgradeY AndAlso y < CharWindowY + VitalityUpgradeY + 10 Then
+                        If Not GetPlayerPoints(Myindex) = 0 Then
                             PlaySound("Click.ogg")
                             SendTrainStat(3)
                         End If
                     End If
                     'WillPower
-                    If X > CharWindowX + LuckUpgradeX AndAlso X < CharWindowX + LuckUpgradeX + 10 AndAlso Y > CharWindowY + LuckUpgradeY AndAlso Y < CharWindowY + LuckUpgradeY + 10 Then
-                        If Not GetPlayerPOINTS(MyIndex) = 0 Then
+                    If x > CharWindowX + LuckUpgradeX AndAlso x < CharWindowX + LuckUpgradeX + 10 AndAlso y > CharWindowY + LuckUpgradeY AndAlso y < CharWindowY + LuckUpgradeY + 10 Then
+                        If Not GetPlayerPoints(Myindex) = 0 Then
                             PlaySound("Click.ogg")
                             SendTrainStat(4)
                         End If
                     End If
                     'Intellect
-                    If X > CharWindowX + IntellectUpgradeX AndAlso X < CharWindowX + IntellectUpgradeX + 10 AndAlso Y > CharWindowY + IntellectUpgradeY AndAlso Y < CharWindowY + IntellectUpgradeY + 10 Then
-                        If Not GetPlayerPOINTS(MyIndex) = 0 Then
+                    If x > CharWindowX + IntellectUpgradeX AndAlso x < CharWindowX + IntellectUpgradeX + 10 AndAlso y > CharWindowY + IntellectUpgradeY AndAlso y < CharWindowY + IntellectUpgradeY + 10 Then
+                        If Not GetPlayerPoints(Myindex) = 0 Then
                             PlaySound("Click.ogg")
                             SendTrainStat(5)
                         End If
                     End If
                     'Spirit
-                    If X > CharWindowX + SpiritUpgradeX AndAlso X < CharWindowX + SpiritUpgradeX + 10 AndAlso Y > CharWindowY + SpiritUpgradeY AndAlso Y < CharWindowY + SpiritUpgradeY + 10 Then
-                        If Not GetPlayerPOINTS(MyIndex) = 0 Then
+                    If x > CharWindowX + SpiritUpgradeX AndAlso x < CharWindowX + SpiritUpgradeX + 10 AndAlso y > CharWindowY + SpiritUpgradeY AndAlso y < CharWindowY + SpiritUpgradeY + 10 Then
+                        If Not GetPlayerPoints(Myindex) = 0 Then
                             PlaySound("Click.ogg")
                             SendTrainStat(6)
                         End If
@@ -363,13 +364,13 @@ Friend Module C_GuiFunctions
                     CheckGuiClick = True
                 ElseIf e.Button = MouseButtons.Right Then
                     'first check for equip
-                    EqNum = IsEqItem(X, Y)
+                    eqNum = IsEqItem(x, y)
 
-                    If EqNum <> 0 Then
+                    If eqNum <> 0 Then
                         PlaySound("Click.ogg")
                         Dim result1 As DialogResult = MessageBox.Show("Want to Unequip this?", GameName, MessageBoxButtons.YesNo)
                         If result1 = DialogResult.Yes Then
-                            SendUnequip(EqNum)
+                            SendUnequip(eqNum)
                         End If
                         CheckGuiClick = True
                     End If
@@ -377,18 +378,18 @@ Friend Module C_GuiFunctions
             End If
 
             'Inventory panel
-        ElseIf pnlInventoryVisible Then
-            If AboveInvpanel(X, Y) Then
-                InvNum = IsInvItem(e.Location.X, e.Location.Y)
+        ElseIf PnlInventoryVisible Then
+            If AboveInvpanel(x, y) Then
+                invNum = IsInvItem(e.Location.X, e.Location.Y)
 
                 If e.Button = MouseButtons.Left Then
-                    If InvNum <> 0 Then
+                    If invNum <> 0 Then
                         If InTrade Then Exit Function
                         If InBank OrElse InShop Then Exit Function
 
-                        If Item(GetPlayerInvItemNum(MyIndex, InvNum)).Type = ItemType.Furniture Then
+                        If Item(GetPlayerInvItemNum(Myindex, invNum)).Type = ItemType.Furniture Then
                             PlaySound("Click.ogg")
-                            FurnitureSelected = InvNum
+                            FurnitureSelected = invNum
                             CheckGuiClick = True
                         End If
 
@@ -399,7 +400,7 @@ Friend Module C_GuiFunctions
 
         If DialogPanelVisible Then
             'ok button
-            If X > DialogPanelX + OkButtonX AndAlso X < DialogPanelX + OkButtonX + ButtonGFXInfo.Width AndAlso Y > DialogPanelY + OkButtonY AndAlso Y < DialogPanelY + OkButtonY + ButtonGFXInfo.Height Then
+            If x > DialogPanelX + OkButtonX AndAlso x < DialogPanelX + OkButtonX + ButtonGfxInfo.Width AndAlso y > DialogPanelY + OkButtonY AndAlso y < DialogPanelY + OkButtonY + ButtonGfxInfo.Height Then
                 VbKeyDown = False
                 VbKeyUp = False
                 VbKeyLeft = False
@@ -425,7 +426,7 @@ Friend Module C_GuiFunctions
                 DialogPanelVisible = False
             End If
             'cancel button
-            If X > DialogPanelX + CancelButtonX AndAlso X < DialogPanelX + CancelButtonX + ButtonGFXInfo.Width AndAlso Y > DialogPanelY + CancelButtonY AndAlso Y < DialogPanelY + CancelButtonY + ButtonGFXInfo.Height Then
+            If x > DialogPanelX + CancelButtonX AndAlso x < DialogPanelX + CancelButtonX + ButtonGfxInfo.Width AndAlso y > DialogPanelY + CancelButtonY AndAlso y < DialogPanelY + CancelButtonY + ButtonGfxInfo.Height Then
                 VbKeyDown = False
                 VbKeyUp = False
                 VbKeyLeft = False
@@ -448,10 +449,10 @@ Friend Module C_GuiFunctions
             CheckGuiClick = True
         End If
 
-        If pnlBankVisible = True Then
-            If AboveBankpanel(X, Y) Then
-                If X > BankWindowX + 140 AndAlso X < BankWindowX + 140 + GetTextWidth("Close Bank", 15) Then
-                    If Y > BankWindowY + BankPanelGFXInfo.Height - 15 AndAlso Y < BankWindowY + BankPanelGFXInfo.Height Then
+        If PnlBankVisible = True Then
+            If AboveBankpanel(x, y) Then
+                If x > BankWindowX + 140 AndAlso x < BankWindowX + 140 + GetTextWidth("Close Bank", 15) Then
+                    If y > BankWindowY + BankPanelGfxInfo.Height - 15 AndAlso y < BankWindowY + BankPanelGfxInfo.Height Then
                         PlaySound("Click.ogg")
                         CloseBank()
                     End If
@@ -461,19 +462,19 @@ Friend Module C_GuiFunctions
         End If
 
         'trade
-        If pnlTradeVisible = True Then
-            If AboveTradepanel(X, Y) Then
+        If PnlTradeVisible = True Then
+            If AboveTradepanel(x, y) Then
                 'accept button
-                If X > TradeWindowX + TradeButtonAcceptX AndAlso X < TradeWindowX + TradeButtonAcceptX + ButtonGFXInfo.Width Then
-                    If Y > TradeWindowY + TradeButtonAcceptY AndAlso Y < TradeWindowY + TradeButtonAcceptY + ButtonGFXInfo.Height Then
+                If x > TradeWindowX + TradeButtonAcceptX AndAlso x < TradeWindowX + TradeButtonAcceptX + ButtonGfxInfo.Width Then
+                    If y > TradeWindowY + TradeButtonAcceptY AndAlso y < TradeWindowY + TradeButtonAcceptY + ButtonGfxInfo.Height Then
                         PlaySound("Click.ogg")
                         AcceptTrade()
                     End If
                 End If
 
                 'decline button
-                If X > TradeWindowX + TradeButtonDeclineX AndAlso X < TradeWindowX + TradeButtonDeclineX + ButtonGFXInfo.Width Then
-                    If Y > TradeWindowY + TradeButtonDeclineY AndAlso Y < TradeWindowY + TradeButtonDeclineY + ButtonGFXInfo.Height Then
+                If x > TradeWindowX + TradeButtonDeclineX AndAlso x < TradeWindowX + TradeButtonDeclineX + ButtonGfxInfo.Width Then
+                    If y > TradeWindowY + TradeButtonDeclineY AndAlso y < TradeWindowY + TradeButtonDeclineY + ButtonGfxInfo.Height Then
                         PlaySound("Click.ogg")
                         DeclineTrade()
                     End If
@@ -485,20 +486,20 @@ Friend Module C_GuiFunctions
         End If
 
         'eventchat
-        If pnlEventChatVisible = True Then
-            If AboveEventChat(X, Y) Then
+        If PnlEventChatVisible = True Then
+            If AboveEventChat(x, y) Then
                 'Response1
                 If EventChoiceVisible(1) Then
-                    If X > EventChatX + 10 AndAlso X < EventChatX + 10 + GetTextWidth(EventChoices(1)) Then
-                        If Y > EventChatY + 124 AndAlso Y < EventChatY + 124 + 13 Then
+                    If x > EventChatX + 10 AndAlso x < EventChatX + 10 + GetTextWidth(EventChoices(1)) Then
+                        If y > EventChatY + 124 AndAlso y < EventChatY + 124 + 13 Then
                             PlaySound("Click.ogg")
-                            Buffer = New ByteStream(4)
-                            Buffer.WriteInt32(ClientPackets.CEventChatReply)
-                            Buffer.WriteInt32(EventReplyID)
-                            Buffer.WriteInt32(EventReplyPage)
-                            Buffer.WriteInt32(1)
-                            Socket.SendData(Buffer.Data, Buffer.Head)
-                            Buffer.Dispose()
+                            buffer = New ByteStream(4)
+                            buffer.WriteInt32(ClientPackets.CEventChatReply)
+                            buffer.WriteInt32(EventReplyId)
+                            buffer.WriteInt32(EventReplyPage)
+                            buffer.WriteInt32(1)
+                            Socket.SendData(buffer.Data, buffer.Head)
+                            buffer.Dispose()
                             ClearEventChat()
                             InEvent = False
                         End If
@@ -507,16 +508,16 @@ Friend Module C_GuiFunctions
 
                 'Response2
                 If EventChoiceVisible(2) Then
-                    If X > EventChatX + 10 AndAlso X < EventChatX + 10 + GetTextWidth(EventChoices(2)) Then
-                        If Y > EventChatY + 146 AndAlso Y < EventChatY + 146 + 13 Then
+                    If x > EventChatX + 10 AndAlso x < EventChatX + 10 + GetTextWidth(EventChoices(2)) Then
+                        If y > EventChatY + 146 AndAlso y < EventChatY + 146 + 13 Then
                             PlaySound("Click.ogg")
-                            Buffer = New ByteStream(4)
-                            Buffer.WriteInt32(ClientPackets.CEventChatReply)
-                            Buffer.WriteInt32(EventReplyID)
-                            Buffer.WriteInt32(EventReplyPage)
-                            Buffer.WriteInt32(2)
-                            Socket.SendData(Buffer.Data, Buffer.Head)
-                            Buffer.Dispose()
+                            buffer = New ByteStream(4)
+                            buffer.WriteInt32(ClientPackets.CEventChatReply)
+                            buffer.WriteInt32(EventReplyId)
+                            buffer.WriteInt32(EventReplyPage)
+                            buffer.WriteInt32(2)
+                            Socket.SendData(buffer.Data, buffer.Head)
+                            buffer.Dispose()
                             ClearEventChat()
                             InEvent = False
                         End If
@@ -525,16 +526,16 @@ Friend Module C_GuiFunctions
 
                 'Response3
                 If EventChoiceVisible(3) Then
-                    If X > EventChatX + 226 AndAlso X < EventChatX + 226 + GetTextWidth(EventChoices(3)) Then
-                        If Y > EventChatY + 124 AndAlso Y < EventChatY + 124 + 13 Then
+                    If x > EventChatX + 226 AndAlso x < EventChatX + 226 + GetTextWidth(EventChoices(3)) Then
+                        If y > EventChatY + 124 AndAlso y < EventChatY + 124 + 13 Then
                             PlaySound("Click.ogg")
-                            Buffer = New ByteStream(4)
-                            Buffer.WriteInt32(ClientPackets.CEventChatReply)
-                            Buffer.WriteInt32(EventReplyID)
-                            Buffer.WriteInt32(EventReplyPage)
-                            Buffer.WriteInt32(3)
-                            Socket.SendData(Buffer.Data, Buffer.Head)
-                            Buffer.Dispose()
+                            buffer = New ByteStream(4)
+                            buffer.WriteInt32(ClientPackets.CEventChatReply)
+                            buffer.WriteInt32(EventReplyId)
+                            buffer.WriteInt32(EventReplyPage)
+                            buffer.WriteInt32(3)
+                            Socket.SendData(buffer.Data, buffer.Head)
+                            buffer.Dispose()
                             ClearEventChat()
                             InEvent = False
                         End If
@@ -543,16 +544,16 @@ Friend Module C_GuiFunctions
 
                 'Response4
                 If EventChoiceVisible(4) Then
-                    If X > EventChatX + 226 AndAlso X < EventChatX + 226 + GetTextWidth(EventChoices(4)) Then
-                        If Y > EventChatY + 146 AndAlso Y < EventChatY + 146 + 13 Then
+                    If x > EventChatX + 226 AndAlso x < EventChatX + 226 + GetTextWidth(EventChoices(4)) Then
+                        If y > EventChatY + 146 AndAlso y < EventChatY + 146 + 13 Then
                             PlaySound("Click.ogg")
-                            Buffer = New ByteStream(4)
-                            Buffer.WriteInt32(ClientPackets.CEventChatReply)
-                            Buffer.WriteInt32(EventReplyID)
-                            Buffer.WriteInt32(EventReplyPage)
-                            Buffer.WriteInt32(4)
-                            Socket.SendData(Buffer.Data, Buffer.Head)
-                            Buffer.Dispose()
+                            buffer = New ByteStream(4)
+                            buffer.WriteInt32(ClientPackets.CEventChatReply)
+                            buffer.WriteInt32(EventReplyId)
+                            buffer.WriteInt32(EventReplyPage)
+                            buffer.WriteInt32(4)
+                            Socket.SendData(buffer.Data, buffer.Head)
+                            buffer.Dispose()
                             ClearEventChat()
                             InEvent = False
                         End If
@@ -561,16 +562,16 @@ Friend Module C_GuiFunctions
 
                 'continue
                 If EventChatType <> 1 Then
-                    If X > EventChatX + 410 AndAlso X < EventChatX + 410 + GetTextWidth("Continue") Then
-                        If Y > EventChatY + 156 AndAlso Y < EventChatY + 156 + 13 Then
+                    If x > EventChatX + 410 AndAlso x < EventChatX + 410 + GetTextWidth("Continue") Then
+                        If y > EventChatY + 156 AndAlso y < EventChatY + 156 + 13 Then
                             PlaySound("Click.ogg")
-                            Buffer = New ByteStream(4)
-                            Buffer.WriteInt32(ClientPackets.CEventChatReply)
-                            Buffer.WriteInt32(EventReplyID)
-                            Buffer.WriteInt32(EventReplyPage)
-                            Buffer.WriteInt32(0)
-                            Socket.SendData(Buffer.Data, Buffer.Head)
-                            Buffer.Dispose()
+                            buffer = New ByteStream(4)
+                            buffer.WriteInt32(ClientPackets.CEventChatReply)
+                            buffer.WriteInt32(EventReplyId)
+                            buffer.WriteInt32(EventReplyPage)
+                            buffer.WriteInt32(0)
+                            Socket.SendData(buffer.Data, buffer.Head)
+                            buffer.Dispose()
                             ClearEventChat()
                             InEvent = False
                         End If
@@ -581,35 +582,35 @@ Friend Module C_GuiFunctions
         End If
 
         'right click
-        If pnlRClickVisible = True Then
-            If AboveRClickPanel(X, Y) Then
+        If PnlRClickVisible = True Then
+            If AboveRClickPanel(x, y) Then
                 'trade
-                If X > RClickX + (RClickGFXInfo.Width \ 2) - (GetTextWidth("Invite to Trade") \ 2) AndAlso X < RClickX + (RClickGFXInfo.Width \ 2) - (GetTextWidth("Invite to Trade") \ 2) + GetTextWidth("Invite to Trade") Then
-                    If Y > RClickY + 35 AndAlso Y < RClickY + 35 + 12 Then
-                        If myTarget > 0 Then
-                            SendTradeRequest(Player(myTarget).Name)
+                If x > RClickX + (RClickGfxInfo.Width \ 2) - (GetTextWidth("Invite to Trade") \ 2) AndAlso x < RClickX + (RClickGfxInfo.Width \ 2) - (GetTextWidth("Invite to Trade") \ 2) + GetTextWidth("Invite to Trade") Then
+                    If y > RClickY + 35 AndAlso y < RClickY + 35 + 12 Then
+                        If MyTarget > 0 Then
+                            SendTradeRequest(Player(MyTarget).Name)
                         End If
-                        pnlRClickVisible = False
+                        PnlRClickVisible = False
                     End If
                 End If
 
                 'party
-                If X > RClickX + (RClickGFXInfo.Width \ 2) - (GetTextWidth("Invite to Party") \ 2) AndAlso X < RClickX + (RClickGFXInfo.Width \ 2) - (GetTextWidth("Invite to Party") \ 2) + GetTextWidth("Invite to Party") Then
-                    If Y > RClickY + 60 AndAlso Y < RClickY + 60 + 12 Then
-                        If myTarget > 0 Then
-                            SendPartyRequest(Player(myTarget).Name)
+                If x > RClickX + (RClickGfxInfo.Width \ 2) - (GetTextWidth("Invite to Party") \ 2) AndAlso x < RClickX + (RClickGfxInfo.Width \ 2) - (GetTextWidth("Invite to Party") \ 2) + GetTextWidth("Invite to Party") Then
+                    If y > RClickY + 60 AndAlso y < RClickY + 60 + 12 Then
+                        If MyTarget > 0 Then
+                            SendPartyRequest(Player(MyTarget).Name)
                         End If
-                        pnlRClickVisible = False
+                        PnlRClickVisible = False
                     End If
                 End If
 
                 'House
-                If X > RClickX + (RClickGFXInfo.Width \ 2) - (GetTextWidth("Invite to House") \ 2) AndAlso X < RClickX + (RClickGFXInfo.Width \ 2) - (GetTextWidth("Invite to House") \ 2) + GetTextWidth("Invite to House") Then
-                    If Y > RClickY + 85 AndAlso Y < RClickY + 85 + 12 Then
-                        If myTarget > 0 Then
-                            SendInvite(Player(myTarget).Name)
+                If x > RClickX + (RClickGfxInfo.Width \ 2) - (GetTextWidth("Invite to House") \ 2) AndAlso x < RClickX + (RClickGfxInfo.Width \ 2) - (GetTextWidth("Invite to House") \ 2) + GetTextWidth("Invite to House") Then
+                    If y > RClickY + 85 AndAlso y < RClickY + 85 + 12 Then
+                        If MyTarget > 0 Then
+                            SendInvite(Player(MyTarget).Name)
                         End If
-                        pnlRClickVisible = False
+                        PnlRClickVisible = False
                     End If
                 End If
 
@@ -617,14 +618,14 @@ Friend Module C_GuiFunctions
             End If
         End If
 
-        If pnlQuestLogVisible Then
-            If AboveQuestPanel(X, Y) Then
+        If PnlQuestLogVisible Then
+            If AboveQuestPanel(x, y) Then
                 'check if they press the list
                 Dim tmpy As Integer = 10
                 For i = 1 To MaxActivequests
                     If Len(Trim$(QuestNames(i))) > 0 Then
-                        If X > (QuestLogX + 7) AndAlso X < (QuestLogX + 7) + (GetTextWidth(QuestNames(i))) Then
-                            If Y > (QuestLogY + tmpy) AndAlso Y < (QuestLogY + tmpy + 13) Then
+                        If x > (QuestLogX + 7) AndAlso x < (QuestLogX + 7) + (GetTextWidth(QuestNames(i))) Then
+                            If y > (QuestLogY + tmpy) AndAlso y < (QuestLogY + tmpy + 13) Then
                                 SelectedQuest = i
                                 LoadQuestlogBox()
                             End If
@@ -634,8 +635,8 @@ Friend Module C_GuiFunctions
                 Next
 
                 'close button
-                If X > (QuestLogX + 195) AndAlso X < (QuestLogX + 290) Then
-                    If Y > (QuestLogY + 358) AndAlso Y < (QuestLogY + 375) Then
+                If x > (QuestLogX + 195) AndAlso x < (QuestLogX + 290) Then
+                    If y > (QuestLogY + 358) AndAlso y < (QuestLogY + 375) Then
                         ResetQuestLog()
                     End If
 
@@ -644,14 +645,14 @@ Friend Module C_GuiFunctions
             End If
         End If
 
-        If pnlCraftVisible Then
-            If AboveCraftPanel(X, Y) Then
+        If PnlCraftVisible Then
+            If AboveCraftPanel(x, y) Then
                 'check if they press the list
                 Dim tmpy As Integer = 10
                 For i = 1 To MAX_RECIPE
                     If Len(Trim$(RecipeNames(i))) > 0 Then
-                        If X > (CraftPanelX + 12) AndAlso X < (CraftPanelX + 12) + (GetTextWidth(RecipeNames(i))) Then
-                            If Y > (CraftPanelY + tmpy) AndAlso Y < (CraftPanelY + tmpy + 13) Then
+                        If x > (CraftPanelX + 12) AndAlso x < (CraftPanelX + 12) + (GetTextWidth(RecipeNames(i))) Then
+                            If y > (CraftPanelY + tmpy) AndAlso y < (CraftPanelY + tmpy + 13) Then
                                 SelectedRecipe = i
                                 CraftingInit()
                             End If
@@ -661,8 +662,8 @@ Friend Module C_GuiFunctions
                 Next
 
                 'start button
-                If X > (CraftPanelX + 256) AndAlso X < (CraftPanelX + 330) Then
-                    If Y > (CraftPanelY + 415) AndAlso Y < (CraftPanelY + 437) Then
+                If x > (CraftPanelX + 256) AndAlso x < (CraftPanelX + 330) Then
+                    If y > (CraftPanelY + 415) AndAlso y < (CraftPanelY + 437) Then
                         If SelectedRecipe > 0 Then
                             CraftProgressValue = 0
                             SendCraftIt(RecipeNames(SelectedRecipe), CraftAmountValue)
@@ -671,18 +672,18 @@ Friend Module C_GuiFunctions
                 End If
 
                 'close button
-                If X > (CraftPanelX + 614) AndAlso X < (CraftPanelX + 689) Then
-                    If Y > (CraftPanelY + 472) AndAlso Y < (CraftPanelY + 494) Then
+                If x > (CraftPanelX + 614) AndAlso x < (CraftPanelX + 689) Then
+                    If y > (CraftPanelY + 472) AndAlso y < (CraftPanelY + 494) Then
                         ResetCraftPanel()
-                        pnlCraftVisible = False
+                        PnlCraftVisible = False
                         InCraft = False
                         SendCloseCraft()
                     End If
                 End If
 
                 'minus
-                If X > (CraftPanelX + 340) AndAlso X < (CraftPanelX + 340 + 10) Then
-                    If Y > (CraftPanelY + 422) AndAlso Y < (CraftPanelY + 422 + 10) Then
+                If x > (CraftPanelX + 340) AndAlso x < (CraftPanelX + 340 + 10) Then
+                    If y > (CraftPanelY + 422) AndAlso y < (CraftPanelY + 422 + 10) Then
                         If CraftAmountValue > 1 Then
                             CraftAmountValue = CraftAmountValue - 1
                         End If
@@ -690,8 +691,8 @@ Friend Module C_GuiFunctions
                 End If
 
                 'plus
-                If X > (CraftPanelX + 392) AndAlso X < (CraftPanelX + 392 + 10) Then
-                    If Y > (CraftPanelY + 422) AndAlso Y < (CraftPanelY + 422 + 10) Then
+                If x > (CraftPanelX + 392) AndAlso x < (CraftPanelX + 392 + 10) Then
+                    If y > (CraftPanelY + 422) AndAlso y < (CraftPanelY + 422 + 10) Then
                         If CraftAmountValue < 100 Then
                             CraftAmountValue = CraftAmountValue + 1
                         End If
@@ -710,26 +711,26 @@ Friend Module C_GuiFunctions
         Dim multiplier As Double
         Dim i As Integer
 
-        If pnlInventoryVisible Then
-            If AboveInvpanel(X, Y) Then
+        If PnlInventoryVisible Then
+            If AboveInvpanel(x, y) Then
                 DragInvSlotNum = 0
-                InvNum = IsInvItem(InvX, InvY)
+                invNum = IsInvItem(InvX, InvY)
 
-                If InvNum <> 0 Then
+                If invNum <> 0 Then
 
                     ' are we in a shop?
                     If InShop > 0 Then
                         Select Case ShopAction
                             Case 0 ' nothing, give value
                                 multiplier = Shop(InShop).BuyRate / 100
-                                Value = Item(GetPlayerInvItemNum(MyIndex, InvNum)).Price * multiplier
-                                If Value > 0 Then
-                                    AddText("You can sell this item for " & Value & " gold.", QColorType.TellColor)
+                                value = Item(GetPlayerInvItemNum(Myindex, invNum)).Price * multiplier
+                                If value > 0 Then
+                                    AddText("You can sell this item for " & value & " gold.", QColorType.TellColor)
                                 Else
                                     AddText("The shop does not want this item.", QColorType.AlertColor)
                                 End If
                             Case 2 ' 2 = sell
-                                SellItem(InvNum)
+                                SellItem(invNum)
                         End Select
 
                         Exit Function
@@ -737,17 +738,17 @@ Friend Module C_GuiFunctions
 
                     ' in bank?
                     If InBank Then
-                        If Item(GetPlayerInvItemNum(MyIndex, InvNum)).Type = ItemType.Currency OrElse Item(GetPlayerInvItemNum(MyIndex, InvNum)).Stackable = 1 Then
+                        If Item(GetPlayerInvItemNum(Myindex, invNum)).Type = ItemType.Currency OrElse Item(GetPlayerInvItemNum(Myindex, invNum)).Stackable = 1 Then
                             CurrencyMenu = 2 ' deposit
-                            frmGame.lblCurrency.Text = "How many do you want to deposit?"
-                            tmpCurrencyItem = InvNum
-                            frmGame.txtCurrency.Text = ""
-                            frmGame.pnlCurrency.Visible = True
-                            frmGame.pnlCurrency.BringToFront()
-                            frmGame.txtCurrency.Focus()
+                            FrmGame.lblCurrency.Text = "How many do you want to deposit?"
+                            TmpCurrencyItem = invNum
+                            FrmGame.txtCurrency.Text = ""
+                            FrmGame.pnlCurrency.Visible = True
+                            FrmGame.pnlCurrency.BringToFront()
+                            FrmGame.txtCurrency.Focus()
                             Exit Function
                         End If
-                        DepositItem(InvNum, 0)
+                        DepositItem(invNum, 0)
                         Exit Function
                     End If
 
@@ -755,35 +756,35 @@ Friend Module C_GuiFunctions
                     If InTrade = True Then
                         ' exit out if we're offering that item
                         For i = 1 To MAX_INV
-                            If TradeYourOffer(i).Num = InvNum Then
+                            If TradeYourOffer(i).Num = invNum Then
                                 Exit Function
                             End If
                         Next
-                        If Item(GetPlayerInvItemNum(MyIndex, InvNum)).Type = ItemType.Currency OrElse Item(GetPlayerInvItemNum(MyIndex, InvNum)).Stackable = 1 Then
+                        If Item(GetPlayerInvItemNum(Myindex, invNum)).Type = ItemType.Currency OrElse Item(GetPlayerInvItemNum(Myindex, invNum)).Stackable = 1 Then
                             CurrencyMenu = 4 ' trade
-                            frmGame.lblCurrency.Text = "How many do you want to trade?"
-                            tmpCurrencyItem = InvNum
-                            frmGame.txtCurrency.Text = ""
-                            frmGame.pnlCurrency.Visible = True
-                            frmGame.pnlCurrency.BringToFront()
-                            frmGame.txtCurrency.Focus()
+                            FrmGame.lblCurrency.Text = "How many do you want to trade?"
+                            TmpCurrencyItem = invNum
+                            FrmGame.txtCurrency.Text = ""
+                            FrmGame.pnlCurrency.Visible = True
+                            FrmGame.pnlCurrency.BringToFront()
+                            FrmGame.txtCurrency.Focus()
                             Exit Function
                         End If
-                        TradeItem(InvNum, 0)
+                        TradeItem(invNum, 0)
                         Exit Function
                     End If
 
                     ' use item if not doing anything else
-                    If Item(GetPlayerInvItemNum(MyIndex, InvNum)).Type = ItemType.None Then Exit Function
-                    SendUseItem(InvNum)
+                    If Item(GetPlayerInvItemNum(Myindex, invNum)).Type = ItemType.None Then Exit Function
+                    SendUseItem(invNum)
                     Exit Function
                 End If
             End If
         End If
 
         'Skill panel
-        If pnlSkillsVisible = True Then
-            If AboveSkillpanel(X, Y) Then
+        If PnlSkillsVisible = True Then
+            If AboveSkillpanel(x, y) Then
 
                 skillnum = IsPlayerSkill(SkillX, SkillY)
 
@@ -795,39 +796,39 @@ Friend Module C_GuiFunctions
         End If
 
         'Bank panel
-        If pnlBankVisible = True Then
-            If AboveBankpanel(X, Y) Then
+        If PnlBankVisible = True Then
+            If AboveBankpanel(x, y) Then
 
                 DragBankSlotNum = 0
 
-                BankItem = IsBankItem(BankX, BankY)
-                If BankItem <> 0 Then
-                    If GetBankItemNum(BankItem) = ItemType.None Then Exit Function
+                bankItem = IsBankItem(BankX, BankY)
+                If bankItem <> 0 Then
+                    If GetBankItemNum(bankItem) = ItemType.None Then Exit Function
 
-                    If Item(GetBankItemNum(BankItem)).Type = ItemType.Currency OrElse Item(GetBankItemNum(BankItem)).Stackable = 1 Then
+                    If Item(GetBankItemNum(bankItem)).Type = ItemType.Currency OrElse Item(GetBankItemNum(bankItem)).Stackable = 1 Then
                         CurrencyMenu = 3 ' withdraw
-                        frmGame.lblCurrency.Text = "How many do you want to withdraw?"
-                        tmpCurrencyItem = BankItem
-                        frmGame.txtCurrency.Text = ""
-                        frmGame.pnlCurrency.Visible = True
-                        frmGame.txtCurrency.Focus()
+                        FrmGame.lblCurrency.Text = "How many do you want to withdraw?"
+                        TmpCurrencyItem = bankItem
+                        FrmGame.txtCurrency.Text = ""
+                        FrmGame.pnlCurrency.Visible = True
+                        FrmGame.txtCurrency.Focus()
                         Exit Function
                     End If
 
-                    WithdrawItem(BankItem, 0)
+                    WithdrawItem(bankItem, 0)
                     Exit Function
                 End If
             End If
         End If
 
         'trade panel
-        If pnlTradeVisible = True Then
+        If PnlTradeVisible = True Then
             'ours?
-            If AboveTradepanel(X, Y) Then
-                TradeNum = IsTradeItem(TradeX, TradeY, True)
+            If AboveTradepanel(x, y) Then
+                tradeNum = IsTradeItem(TradeX, TradeY, True)
 
-                If TradeNum <> 0 Then
-                    UntradeItem(TradeNum)
+                If tradeNum <> 0 Then
+                    UntradeItem(tradeNum)
                 End If
             End If
         End If
@@ -839,8 +840,8 @@ Friend Module C_GuiFunctions
         Dim hotbarslot As Integer
 
         'Inventory
-        If pnlInventoryVisible Then
-            If AboveInvpanel(X, Y) Then
+        If PnlInventoryVisible Then
+            If AboveInvpanel(x, y) Then
                 If InTrade > 0 Then Exit Function
                 If InBank OrElse InShop Then Exit Function
 
@@ -869,7 +870,7 @@ Friend Module C_GuiFunctions
                 End If
 
                 DragInvSlotNum = 0
-            ElseIf AboveHotbar(X, Y) Then
+            ElseIf AboveHotbar(x, y) Then
                 If DragInvSlotNum > 0 Then
                     hotbarslot = IsHotBarSlot(e.Location.X, e.Location.Y)
                     If hotbarslot > 0 Then
@@ -880,17 +881,17 @@ Friend Module C_GuiFunctions
                 DragInvSlotNum = 0
             Else
                 If FurnitureSelected > 0 Then
-                    If Player(MyIndex).InHouse = MyIndex Then
+                    If Player(Myindex).InHouse = Myindex Then
                         If Item(PlayerInv(FurnitureSelected).Num).Type = ItemType.Furniture Then
-                            Buffer = New ByteStream(4)
-                            Buffer.WriteInt32(ClientPackets.CPlaceFurniture)
+                            buffer = New ByteStream(4)
+                            buffer.WriteInt32(ClientPackets.CPlaceFurniture)
                             i = CurX
-                            Buffer.WriteInt32(i)
+                            buffer.WriteInt32(i)
                             i = CurY
-                            Buffer.WriteInt32(i)
-                            Buffer.WriteInt32(FurnitureSelected)
-                            Socket.SendData(Buffer.Data, Buffer.Head)
-                            Buffer.Dispose()
+                            buffer.WriteInt32(i)
+                            buffer.WriteInt32(FurnitureSelected)
+                            Socket.SendData(buffer.Data, buffer.Head)
+                            buffer.Dispose()
 
                             FurnitureSelected = 0
                         End If
@@ -900,8 +901,8 @@ Friend Module C_GuiFunctions
         End If
 
         'skills
-        If pnlSkillsVisible Then
-            If AboveSkillpanel(X, Y) Then
+        If PnlSkillsVisible Then
+            If AboveSkillpanel(x, y) Then
                 If InTrade > 0 Then Exit Function
                 If InBank OrElse InShop Then Exit Function
 
@@ -930,7 +931,7 @@ Friend Module C_GuiFunctions
                 End If
 
                 DragSkillSlotNum = 0
-            ElseIf AboveHotbar(X, Y) Then
+            ElseIf AboveHotbar(x, y) Then
                 If DragSkillSlotNum > 0 Then
                     hotbarslot = IsHotBarSlot(e.Location.X, e.Location.Y)
                     If hotbarslot > 0 Then
@@ -943,8 +944,8 @@ Friend Module C_GuiFunctions
         End If
 
         'bank
-        If pnlBankVisible = True Then
-            If AboveBankpanel(X, Y) Then
+        If PnlBankVisible = True Then
+            If AboveBankpanel(x, y) Then
                 ' TODO : Add sub to change bankslots client side first so there's no delay in switching
                 If DragBankSlotNum > 0 Then
                     For i = 1 To MAX_BANK
@@ -955,8 +956,8 @@ Friend Module C_GuiFunctions
                             .Width = PicX
                         End With
 
-                        If X >= recPos.Left AndAlso X <= recPos.Right Then
-                            If Y >= recPos.Top AndAlso Y <= recPos.Bottom Then
+                        If x >= recPos.Left AndAlso x <= recPos.Right Then
+                            If y >= recPos.Top AndAlso y <= recPos.Bottom Then
                                 If DragBankSlotNum <> i Then
                                     ChangeBankSlots(DragBankSlotNum, i)
                                     Exit For
@@ -976,30 +977,30 @@ Friend Module C_GuiFunctions
         Dim invNum As Integer, skillnum As Integer, bankNum As Integer, shopItem As Integer
 
         'Inventory
-        If pnlInventoryVisible Then
-            If AboveInvpanel(X, Y) Then
-                InvNum = IsInvItem(e.Location.X, e.Location.Y)
+        If PnlInventoryVisible Then
+            If AboveInvpanel(x, y) Then
+                invNum = IsInvItem(e.Location.X, e.Location.Y)
 
                 If e.Button = MouseButtons.Left Then
-                    If InvNum <> 0 Then
+                    If invNum <> 0 Then
                         If InTrade Then Exit Function
                         If InBank OrElse InShop Then Exit Function
-                        DragInvSlotNum = InvNum
+                        DragInvSlotNum = invNum
                     End If
                 ElseIf e.Button = MouseButtons.Right Then
                     If Not InBank AndAlso Not InShop AndAlso Not InTrade Then
-                        If InvNum <> 0 Then
-                            If Item(GetPlayerInvItemNum(MyIndex, InvNum)).Type = ItemType.Currency OrElse Item(GetPlayerInvItemNum(MyIndex, InvNum)).Stackable = 1 Then
-                                If GetPlayerInvItemValue(MyIndex, InvNum) > 0 Then
+                        If invNum <> 0 Then
+                            If Item(GetPlayerInvItemNum(Myindex, invNum)).Type = ItemType.Currency OrElse Item(GetPlayerInvItemNum(Myindex, invNum)).Stackable = 1 Then
+                                If GetPlayerInvItemValue(Myindex, invNum) > 0 Then
                                     CurrencyMenu = 1 ' drop
-                                    frmGame.lblCurrency.Text = "How many do you want to drop?"
-                                    tmpCurrencyItem = InvNum
-                                    frmGame.txtCurrency.Text = ""
-                                    frmGame.pnlCurrency.Visible = True
-                                    frmGame.txtCurrency.Focus()
+                                    FrmGame.lblCurrency.Text = "How many do you want to drop?"
+                                    TmpCurrencyItem = invNum
+                                    FrmGame.txtCurrency.Text = ""
+                                    FrmGame.pnlCurrency.Visible = True
+                                    FrmGame.txtCurrency.Focus()
                                 End If
                             Else
-                                SendDropItem(InvNum, 0)
+                                SendDropItem(invNum, 0)
                             End If
                         End If
                     End If
@@ -1008,8 +1009,8 @@ Friend Module C_GuiFunctions
         End If
 
         'skills
-        If pnlSkillsVisible = True Then
-            If AboveSkillpanel(X, Y) Then
+        If PnlSkillsVisible = True Then
+            If AboveSkillpanel(x, y) Then
                 skillnum = IsPlayerSkill(e.Location.X, e.Location.Y)
                 If e.Button = MouseButtons.Left Then
                     If skillnum <> 0 Then
@@ -1035,9 +1036,9 @@ Friend Module C_GuiFunctions
         End If
 
         'Bank
-        If pnlBankVisible = True Then
-            If AboveBankpanel(X, Y) Then
-                bankNum = IsBankItem(X, Y)
+        If PnlBankVisible = True Then
+            If AboveBankpanel(x, y) Then
+                bankNum = IsBankItem(x, y)
 
                 If bankNum <> 0 Then
 
@@ -1050,9 +1051,9 @@ Friend Module C_GuiFunctions
         End If
 
         'Shop
-        If pnlShopVisible = True Then
-            If AboveShoppanel(X, Y) Then
-                shopItem = IsShopItem(X, Y)
+        If PnlShopVisible = True Then
+            If AboveShoppanel(x, y) Then
+                shopItem = IsShopItem(x, y)
 
                 If shopItem > 0 Then
                     Select Case ShopAction
@@ -1066,30 +1067,30 @@ Friend Module C_GuiFunctions
                     End Select
                 Else
                     ' check for buy button
-                    If X > ShopWindowX + ShopButtonBuyX AndAlso X < ShopWindowX + ShopButtonBuyX + ButtonGFXInfo.Width Then
-                        If Y > ShopWindowY + ShopButtonBuyY AndAlso Y < ShopWindowY + ShopButtonBuyY + ButtonGFXInfo.Height Then
+                    If x > ShopWindowX + ShopButtonBuyX AndAlso x < ShopWindowX + ShopButtonBuyX + ButtonGfxInfo.Width Then
+                        If y > ShopWindowY + ShopButtonBuyY AndAlso y < ShopWindowY + ShopButtonBuyY + ButtonGfxInfo.Height Then
                             If ShopAction = 1 Then Exit Function
                             ShopAction = 1 ' buying an item
                             AddText("Click on the item in the shop you wish to buy.", ColorType.Yellow)
                         End If
                     End If
                     ' check for sell button
-                    If X > ShopWindowX + ShopButtonSellX AndAlso X < ShopWindowX + ShopButtonSellX + ButtonGFXInfo.Width Then
-                        If Y > ShopWindowY + ShopButtonSellY AndAlso Y < ShopWindowY + ShopButtonSellY + ButtonGFXInfo.Height Then
+                    If x > ShopWindowX + ShopButtonSellX AndAlso x < ShopWindowX + ShopButtonSellX + ButtonGfxInfo.Width Then
+                        If y > ShopWindowY + ShopButtonSellY AndAlso y < ShopWindowY + ShopButtonSellY + ButtonGfxInfo.Height Then
                             If ShopAction = 2 Then Exit Function
                             ShopAction = 2 ' selling an item
                             AddText("Double-click on the item in your inventory you wish to sell.", ColorType.Yellow)
                         End If
                     End If
                     ' check for close button
-                    If X > ShopWindowX + ShopButtonCloseX AndAlso X < ShopWindowX + ShopButtonCloseX + ButtonGFXInfo.Width Then
-                        If Y > ShopWindowY + ShopButtonCloseY AndAlso Y < ShopWindowY + ShopButtonCloseY + ButtonGFXInfo.Height Then
-                            dim buffer as ByteStream
-                            Buffer = New ByteStream(4)
-                            Buffer.WriteInt32(ClientPackets.CCloseShop)
-                            Socket.SendData(Buffer.Data, Buffer.Head)
-                            Buffer.Dispose()
-                            pnlShopVisible = False
+                    If x > ShopWindowX + ShopButtonCloseX AndAlso x < ShopWindowX + ShopButtonCloseX + ButtonGfxInfo.Width Then
+                        If y > ShopWindowY + ShopButtonCloseY AndAlso y < ShopWindowY + ShopButtonCloseY + ButtonGfxInfo.Height Then
+                            Dim buffer As ByteStream
+                            buffer = New ByteStream(4)
+                            buffer.WriteInt32(ClientPackets.CCloseShop)
+                            Socket.SendData(buffer.Data, buffer.Head)
+                            buffer.Dispose()
+                            PnlShopVisible = False
                             InShop = 0
                             ShopAction = 0
                         End If
@@ -1098,13 +1099,13 @@ Friend Module C_GuiFunctions
             End If
         End If
 
-        If HUDVisible = True Then
-            If AboveChatScrollUp(X, Y) Then
-                If ScrollMod + FirstLineIndex < MaxChatDisplayLines Then
+        If HudVisible = True Then
+            If AboveChatScrollUp(x, y) Then
+                If ScrollMod + FirstLineindex < MaxChatDisplayLines Then
                     ScrollMod = ScrollMod + 1
                 End If
             End If
-            If AboveChatScrollDown(X, Y) Then
+            If AboveChatScrollDown(x, y) Then
                 If ScrollMod - 1 >= 0 Then
                     ScrollMod = ScrollMod - 1
                 End If
@@ -1114,6 +1115,7 @@ Friend Module C_GuiFunctions
     End Function
 
 #Region "Support Functions"
+
     Function IsEqItem(x As Single, y As Single) As Integer
         Dim tempRec As Rect
         Dim i As Integer
@@ -1121,7 +1123,7 @@ Friend Module C_GuiFunctions
 
         For i = 1 To EquipmentType.Count - 1
 
-            If GetPlayerEquipment(MyIndex, i) > 0 AndAlso GetPlayerEquipment(MyIndex, i) <= MAX_ITEMS Then
+            If GetPlayerEquipment(Myindex, i) > 0 AndAlso GetPlayerEquipment(Myindex, i) <= MAX_ITEMS Then
 
                 With tempRec
                     .Top = CharWindowY + EqTop + ((EqOffsetY + 32) * ((i - 1) \ EqColumns))
@@ -1130,8 +1132,8 @@ Friend Module C_GuiFunctions
                     .Right = .Left + PicX
                 End With
 
-                If X >= tempRec.Left AndAlso X <= tempRec.Right Then
-                    If Y >= tempRec.Top AndAlso Y <= tempRec.Bottom Then
+                If x >= tempRec.Left AndAlso x <= tempRec.Right Then
+                    If y >= tempRec.Top AndAlso y <= tempRec.Bottom Then
                         IsEqItem = i
                         Exit Function
                     End If
@@ -1149,7 +1151,7 @@ Friend Module C_GuiFunctions
 
         For i = 1 To MAX_INV
 
-            If GetPlayerInvItemNum(MyIndex, i) > 0 AndAlso GetPlayerInvItemNum(MyIndex, i) <= MAX_ITEMS Then
+            If GetPlayerInvItemNum(Myindex, i) > 0 AndAlso GetPlayerInvItemNum(Myindex, i) <= MAX_ITEMS Then
 
                 With tempRec
                     .Top = InvWindowY + InvTop + ((InvOffsetY + 32) * ((i - 1) \ InvColumns))
@@ -1158,8 +1160,8 @@ Friend Module C_GuiFunctions
                     .Right = .Left + PicX
                 End With
 
-                If X >= tempRec.Left AndAlso X <= tempRec.Right Then
-                    If Y >= tempRec.Top AndAlso Y <= tempRec.Bottom Then
+                If x >= tempRec.Left AndAlso x <= tempRec.Right Then
+                    If y >= tempRec.Top AndAlso y <= tempRec.Bottom Then
                         IsInvItem = i
                         Exit Function
                     End If
@@ -1187,8 +1189,8 @@ Friend Module C_GuiFunctions
                     .Right = .Left + PicX
                 End With
 
-                If X >= tempRec.Left AndAlso X <= tempRec.Right Then
-                    If Y >= tempRec.Top AndAlso Y <= tempRec.Bottom Then
+                If x >= tempRec.Left AndAlso x <= tempRec.Right Then
+                    If y >= tempRec.Top AndAlso y <= tempRec.Bottom Then
                         IsPlayerSkill = i
                         Exit Function
                     End If
@@ -1215,8 +1217,8 @@ Friend Module C_GuiFunctions
                     .Right = .Left + PicX
                 End With
 
-                If X >= tempRec.Left AndAlso X <= tempRec.Right Then
-                    If Y >= tempRec.Top AndAlso Y <= tempRec.Bottom Then
+                If x >= tempRec.Left AndAlso x <= tempRec.Right Then
+                    If y >= tempRec.Top AndAlso y <= tempRec.Bottom Then
 
                         IsBankItem = i
                         Exit Function
@@ -1241,8 +1243,8 @@ Friend Module C_GuiFunctions
                     .Width = PicX
                 End With
 
-                If X >= tempRec.Left AndAlso X <= tempRec.Right Then
-                    If Y >= tempRec.Top AndAlso Y <= tempRec.Bottom Then
+                If x >= tempRec.Left AndAlso x <= tempRec.Right Then
+                    If y >= tempRec.Top AndAlso y <= tempRec.Bottom Then
                         IsShopItem = i
                         Exit Function
                     End If
@@ -1260,8 +1262,8 @@ Friend Module C_GuiFunctions
 
         For i = 1 To MAX_INV
 
-            If Yours Then
-                itemnum = GetPlayerInvItemNum(MyIndex, TradeYourOffer(i).Num)
+            If yours Then
+                itemnum = GetPlayerInvItemNum(Myindex, TradeYourOffer(i).Num)
 
                 With tempRec
                     .Top = TradeWindowY + OurTradeY + InvTop + ((InvOffsetY + 32) * ((i - 1) \ InvColumns))
@@ -1282,8 +1284,8 @@ Friend Module C_GuiFunctions
 
             If itemnum > 0 AndAlso itemnum <= MAX_ITEMS Then
 
-                If X >= tempRec.Left AndAlso X <= tempRec.Right Then
-                    If Y >= tempRec.Top AndAlso Y <= tempRec.Bottom Then
+                If x >= tempRec.Left AndAlso x <= tempRec.Right Then
+                    If y >= tempRec.Top AndAlso y <= tempRec.Bottom Then
                         IsTradeItem = i
                         Exit Function
                     End If
@@ -1298,8 +1300,8 @@ Friend Module C_GuiFunctions
     Function AboveActionPanel(x As Single, y As Single) As Boolean
         AboveActionPanel = False
 
-        If X > ActionPanelX AndAlso X < ActionPanelX + ActionPanelGFXInfo.Width Then
-            If Y > ActionPanelY AndAlso Y < ActionPanelY + ActionPanelGFXInfo.Height Then
+        If x > ActionPanelX AndAlso x < ActionPanelX + ActionPanelGfxInfo.Width Then
+            If y > ActionPanelY AndAlso y < ActionPanelY + ActionPanelGfxInfo.Height Then
                 AboveActionPanel = True
             End If
         End If
@@ -1308,8 +1310,8 @@ Friend Module C_GuiFunctions
     Function AboveHotbar(x As Single, y As Single) As Boolean
         AboveHotbar = False
 
-        If X > HotbarX AndAlso X < HotbarX + HotBarGFXInfo.Width Then
-            If Y > HotbarY AndAlso Y < HotbarY + HotBarGFXInfo.Height Then
+        If x > HotbarX AndAlso x < HotbarX + HotBarGfxInfo.Width Then
+            If y > HotbarY AndAlso y < HotbarY + HotBarGfxInfo.Height Then
                 AboveHotbar = True
             End If
         End If
@@ -1318,8 +1320,8 @@ Friend Module C_GuiFunctions
     Function AbovePetbar(x As Single, y As Single) As Boolean
         AbovePetbar = False
 
-        If X > PetbarX AndAlso X < PetbarX + PetbarGFXInfo.Width Then
-            If Y > PetbarY AndAlso Y < PetbarY + HotBarGFXInfo.Height Then
+        If x > PetbarX AndAlso x < PetbarX + PetbarGfxInfo.Width Then
+            If y > PetbarY AndAlso y < PetbarY + HotBarGfxInfo.Height Then
                 AbovePetbar = True
             End If
         End If
@@ -1328,8 +1330,8 @@ Friend Module C_GuiFunctions
     Function AboveInvpanel(x As Single, y As Single) As Boolean
         AboveInvpanel = False
 
-        If X > InvWindowX AndAlso X < InvWindowX + InvPanelGFXInfo.Width Then
-            If Y > InvWindowY AndAlso Y < InvWindowY + InvPanelGFXInfo.Height Then
+        If x > InvWindowX AndAlso x < InvWindowX + InvPanelGfxInfo.Width Then
+            If y > InvWindowY AndAlso y < InvWindowY + InvPanelGfxInfo.Height Then
                 AboveInvpanel = True
             End If
         End If
@@ -1338,8 +1340,8 @@ Friend Module C_GuiFunctions
     Function AboveCharpanel(x As Single, y As Single) As Boolean
         AboveCharpanel = False
 
-        If X > CharWindowX AndAlso X < CharWindowX + CharPanelGFXInfo.Width Then
-            If Y > CharWindowY AndAlso Y < CharWindowY + CharPanelGFXInfo.Height Then
+        If x > CharWindowX AndAlso x < CharWindowX + CharPanelGfxInfo.Width Then
+            If y > CharWindowY AndAlso y < CharWindowY + CharPanelGfxInfo.Height Then
                 AboveCharpanel = True
             End If
         End If
@@ -1348,8 +1350,8 @@ Friend Module C_GuiFunctions
     Function AboveSkillpanel(x As Single, y As Single) As Boolean
         AboveSkillpanel = False
 
-        If X > SkillWindowX AndAlso X < SkillWindowX + SkillPanelGFXInfo.Width Then
-            If Y > SkillWindowY AndAlso Y < SkillWindowY + SkillPanelGFXInfo.Height Then
+        If x > SkillWindowX AndAlso x < SkillWindowX + SkillPanelGfxInfo.Width Then
+            If y > SkillWindowY AndAlso y < SkillWindowY + SkillPanelGfxInfo.Height Then
                 AboveSkillpanel = True
             End If
         End If
@@ -1358,8 +1360,8 @@ Friend Module C_GuiFunctions
     Function AboveBankpanel(x As Single, y As Single) As Boolean
         AboveBankpanel = False
 
-        If X > BankWindowX AndAlso X < BankWindowX + BankPanelGFXInfo.Width Then
-            If Y > BankWindowY AndAlso Y < BankWindowY + BankPanelGFXInfo.Height Then
+        If x > BankWindowX AndAlso x < BankWindowX + BankPanelGfxInfo.Width Then
+            If y > BankWindowY AndAlso y < BankWindowY + BankPanelGfxInfo.Height Then
                 AboveBankpanel = True
             End If
         End If
@@ -1368,8 +1370,8 @@ Friend Module C_GuiFunctions
     Function AboveShoppanel(x As Single, y As Single) As Boolean
         AboveShoppanel = False
 
-        If X > ShopWindowX AndAlso X < ShopWindowX + ShopPanelGFXInfo.Width Then
-            If Y > ShopWindowY AndAlso Y < ShopWindowY + ShopPanelGFXInfo.Height Then
+        If x > ShopWindowX AndAlso x < ShopWindowX + ShopPanelGfxInfo.Width Then
+            If y > ShopWindowY AndAlso y < ShopWindowY + ShopPanelGfxInfo.Height Then
                 AboveShoppanel = True
             End If
         End If
@@ -1378,8 +1380,8 @@ Friend Module C_GuiFunctions
     Function AboveTradepanel(x As Single, y As Single) As Boolean
         AboveTradepanel = False
 
-        If X > TradeWindowX AndAlso X < TradeWindowX + TradePanelGFXInfo.Width Then
-            If Y > TradeWindowY AndAlso Y < TradeWindowY + TradePanelGFXInfo.Height Then
+        If x > TradeWindowX AndAlso x < TradeWindowX + TradePanelGfxInfo.Width Then
+            If y > TradeWindowY AndAlso y < TradeWindowY + TradePanelGfxInfo.Height Then
                 AboveTradepanel = True
             End If
         End If
@@ -1388,8 +1390,8 @@ Friend Module C_GuiFunctions
     Function AboveEventChat(x As Single, y As Single) As Boolean
         AboveEventChat = False
 
-        If X > EventChatX AndAlso X < EventChatX + EventChatGFXInfo.Width Then
-            If Y > EventChatY AndAlso Y < EventChatY + EventChatGFXInfo.Height Then
+        If x > EventChatX AndAlso x < EventChatX + EventChatGfxInfo.Width Then
+            If y > EventChatY AndAlso y < EventChatY + EventChatGfxInfo.Height Then
                 AboveEventChat = True
             End If
         End If
@@ -1398,8 +1400,8 @@ Friend Module C_GuiFunctions
     Function AboveChatScrollUp(x As Single, y As Single) As Boolean
         AboveChatScrollUp = False
 
-        If X > ChatWindowX + ChatWindowGFXInfo.Width - 24 AndAlso X < ChatWindowX + ChatWindowGFXInfo.Width Then
-            If Y > ChatWindowY AndAlso Y < ChatWindowY + 24 Then 'ChatWindowGFXInfo.height Then
+        If x > ChatWindowX + ChatWindowGfxInfo.Width - 24 AndAlso x < ChatWindowX + ChatWindowGfxInfo.Width Then
+            If y > ChatWindowY AndAlso y < ChatWindowY + 24 Then 'ChatWindowGFXInfo.height Then
                 AboveChatScrollUp = True
             End If
         End If
@@ -1408,8 +1410,8 @@ Friend Module C_GuiFunctions
     Function AboveChatScrollDown(x As Single, y As Single) As Boolean
         AboveChatScrollDown = False
 
-        If X > ChatWindowX + ChatWindowGFXInfo.Width - 24 AndAlso X < ChatWindowX + ChatWindowGFXInfo.Width Then
-            If Y > ChatWindowY + ChatWindowGFXInfo.Height - 24 AndAlso Y < ChatWindowY + ChatWindowGFXInfo.Height Then
+        If x > ChatWindowX + ChatWindowGfxInfo.Width - 24 AndAlso x < ChatWindowX + ChatWindowGfxInfo.Width Then
+            If y > ChatWindowY + ChatWindowGfxInfo.Height - 24 AndAlso y < ChatWindowY + ChatWindowGfxInfo.Height Then
                 AboveChatScrollDown = True
             End If
         End If
@@ -1418,8 +1420,8 @@ Friend Module C_GuiFunctions
     Function AboveRClickPanel(x As Single, y As Single) As Boolean
         AboveRClickPanel = False
 
-        If X > RClickX AndAlso X < RClickX + RClickGFXInfo.Width Then
-            If Y > RClickY AndAlso Y < RClickY + RClickGFXInfo.Height Then
+        If x > RClickX AndAlso x < RClickX + RClickGfxInfo.Width Then
+            If y > RClickY AndAlso y < RClickY + RClickGfxInfo.Height Then
                 AboveRClickPanel = True
             End If
         End If
@@ -1428,8 +1430,8 @@ Friend Module C_GuiFunctions
     Function AboveQuestPanel(x As Single, y As Single) As Boolean
         AboveQuestPanel = False
 
-        If X > QuestLogX AndAlso X < QuestLogX + QuestGFXInfo.Width Then
-            If Y > QuestLogY AndAlso Y < QuestLogY + QuestGFXInfo.Height Then
+        If x > QuestLogX AndAlso x < QuestLogX + QuestGfxInfo.Width Then
+            If y > QuestLogY AndAlso y < QuestLogY + QuestGfxInfo.Height Then
                 AboveQuestPanel = True
             End If
         End If
@@ -1438,12 +1440,13 @@ Friend Module C_GuiFunctions
     Function AboveCraftPanel(x As Single, y As Single) As Boolean
         AboveCraftPanel = False
 
-        If X > CraftPanelX AndAlso X < CraftPanelX + CraftGFXInfo.Width Then
-            If Y > CraftPanelY AndAlso Y < CraftPanelY + CraftGFXInfo.Height Then
+        If x > CraftPanelX AndAlso x < CraftPanelX + CraftGfxInfo.Width Then
+            If y > CraftPanelY AndAlso y < CraftPanelY + CraftGfxInfo.Height Then
                 AboveCraftPanel = True
             End If
         End If
     End Function
+
 #End Region
 
 End Module

@@ -33,12 +33,12 @@ Friend Module S_NetworkConfig
         End Try
     End Function
 
-    Function IsLoggedIn(index as integer) As Boolean
-        Return Len(Trim$(Player(Index).Login)) > 0
+    Function IsLoggedIn(index As Integer) As Boolean
+        Return Len(Trim$(Player(index).Login)) > 0
     End Function
 
-    Function IsPlaying(index as integer) As Boolean
-        Return TempPlayer(Index).InGame
+    Function IsPlaying(index As Integer) As Boolean
+        Return TempPlayer(index).InGame
     End Function
 
     Function IsMultiAccounts(Login As String) As Boolean
@@ -57,30 +57,30 @@ Friend Module S_NetworkConfig
         Next
     End Sub
 
-    Sub SendDataToAllBut(index as integer, ByRef data() As Byte, head As Integer)
+    Sub SendDataToAllBut(index As Integer, ByRef data() As Byte, head As Integer)
         For i As Integer = 1 To GetPlayersOnline()
-            If IsPlaying(i) AndAlso i <> Index Then
-                Socket.SendDataTo(i, Data, head)
+            If IsPlaying(i) AndAlso i <> index Then
+                Socket.SendDataTo(i, data, head)
             End If
         Next
     End Sub
 
-    Sub SendDataToMapBut(index as integer, mapNum as Integer, ByRef data() As Byte, head As Integer)
+    Sub SendDataToMapBut(index As Integer, mapNum As Integer, ByRef data() As Byte, head As Integer)
         For i As Integer = 1 To GetPlayersOnline()
-            If IsPlaying(i) AndAlso GetPlayerMap(i) = MapNum AndAlso i <> Index Then
-                Socket.SendDataTo(i, Data, head)
+            If IsPlaying(i) AndAlso GetPlayerMap(i) = mapNum AndAlso i <> index Then
+                Socket.SendDataTo(i, data, head)
             End If
         Next
     End Sub
 
-    Sub SendDataToMap(mapNum as Integer, ByRef data() As Byte, head As Integer)
+    Sub SendDataToMap(mapNum As Integer, ByRef data() As Byte, head As Integer)
         Dim i As Integer
 
         For i = 1 To GetPlayersOnline()
 
             If IsPlaying(i) Then
-                If GetPlayerMap(i) = MapNum Then
-                    Socket.SendDataTo(i, Data, head)
+                If GetPlayerMap(i) = mapNum Then
+                    Socket.SendDataTo(i, data, head)
                 End If
             End If
 
@@ -89,18 +89,19 @@ Friend Module S_NetworkConfig
     End Sub
 
 #Region " Events "
-    Friend Sub Socket_ConnectionReceived(index as integer) Handles Socket.ConnectionReceived
+
+    Friend Sub Socket_ConnectionReceived(index As Integer) Handles Socket.ConnectionReceived
         Console.WriteLine("Connection received on index[" & index & "] - IP[" & Socket.ClientIp(index) & "]")
         SendKeyPair(index)
         SendNews(index)
     End Sub
 
-    Friend Sub Socket_ConnectionLost(index as integer) Handles Socket.ConnectionLost
+    Friend Sub Socket_ConnectionLost(index As Integer) Handles Socket.ConnectionLost
         Console.WriteLine("Connection lost on index[" & index & "] - IP[" & Socket.ClientIp(index) & "]")
         LeftGame(index)
     End Sub
 
-    Friend Sub Socket_CrashReport(index as integer, err As String) Handles Socket.CrashReport
+    Friend Sub Socket_CrashReport(index As Integer, err As String) Handles Socket.CrashReport
         Console.WriteLine("There was a network error -> Index[" & index & "]")
         Console.WriteLine("Report: " & err)
         LeftGame(index)
@@ -125,5 +126,7 @@ Friend Module S_NetworkConfig
         Dim BreakPointDummy As Integer = 0
         'Put breakline on BreakPointDummy to look at what is contained in data at runtime in the VS logger.
     End Sub
+
 #End Region
+
 End Module

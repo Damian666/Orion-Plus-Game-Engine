@@ -5,6 +5,7 @@ Imports ASFW.IO.FileIO
 Module modDatabase
 
 #Region "Classes"
+
     Friend Sub CreateClasses()
         Dim myXml As New XmlClass With {
             .Filename = Path.Combine(Application.StartupPath, "data", "Classes.xml"),
@@ -203,9 +204,11 @@ Module modDatabase
     Function GetClassName(ClassNum As Integer) As String
         GetClassName = Trim$(Classes(ClassNum).Name)
     End Function
+
 #End Region
 
 #Region "Maps"
+
     Sub CheckMaps()
         For i = 1 To MAX_MAPS
             If Not File.Exists(Path.Combine(Application.StartupPath, "data", "maps", String.Format("map{0}.dat", i))) Then
@@ -221,35 +224,35 @@ Module modDatabase
         Next
     End Sub
 
-    Sub ClearMap(mapNum as Integer)
+    Sub ClearMap(mapNum As Integer)
         Dim x As Integer
         Dim y As Integer
-        Map(MapNum) = Nothing
-        Map(MapNum).Tileset = 1
-        Map(MapNum).Name = ""
-        Map(MapNum).MaxX = MAX_MAPX
-        Map(MapNum).MaxY = MAX_MAPY
-        ReDim Map(MapNum).Npc(MAX_MAP_NPCS)
-        ReDim Map(MapNum).Tile(Map(MapNum).MaxX, Map(MapNum).MaxY)
+        Map(mapNum) = Nothing
+        Map(mapNum).Tileset = 1
+        Map(mapNum).Name = ""
+        Map(mapNum).MaxX = MAX_MAPX
+        Map(mapNum).MaxY = MAX_MAPY
+        ReDim Map(mapNum).Npc(MAX_MAP_NPCS)
+        ReDim Map(mapNum).Tile(Map(mapNum).MaxX, Map(mapNum).MaxY)
 
         For x = 0 To MAX_MAPX
             For y = 0 To MAX_MAPY
-                ReDim Map(MapNum).Tile(x, y).Layer(LayerType.Count - 1)
+                ReDim Map(mapNum).Tile(x, y).Layer(LayerType.Count - 1)
             Next
         Next
 
-        Map(MapNum).EventCount = 0
-        ReDim Map(MapNum).Events(0)
+        Map(mapNum).EventCount = 0
+        ReDim Map(mapNum).Events(0)
 
         ' Reset the values for if a player is on the map or not
-        PlayersOnMap(MapNum) = False
-        Map(MapNum).Tileset = 1
-        Map(MapNum).Name = ""
-        Map(MapNum).Music = ""
-        Map(MapNum).MaxX = MAX_MAPX
-        Map(MapNum).MaxY = MAX_MAPY
+        PlayersOnMap(mapNum) = False
+        Map(mapNum).Tileset = 1
+        Map(mapNum).Name = ""
+        Map(mapNum).Music = ""
+        Map(mapNum).MaxX = MAX_MAPX
+        Map(mapNum).MaxY = MAX_MAPY
 
-        ClearTempTile(MapNum)
+        ClearTempTile(mapNum)
 
     End Sub
 
@@ -263,83 +266,83 @@ Module modDatabase
 
     End Sub
 
-    Sub SaveMap(mapNum as Integer)
+    Sub SaveMap(mapNum As Integer)
         Dim filename As String
         Dim x As Integer, y As Integer, l As Integer
 
-        filename = Path.Combine(Application.StartupPath, "data", "maps", String.Format("map{0}.dat", MapNum))
+        filename = Path.Combine(Application.StartupPath, "data", "maps", String.Format("map{0}.dat", mapNum))
         Dim writer As New ByteStream(100)
-        writer.WriteString(Map(MapNum).Name)
-        writer.WriteString(Map(MapNum).Music)
-        writer.WriteInt32(Map(MapNum).Revision)
-        writer.WriteByte(Map(MapNum).Moral)
-        writer.WriteInt32(Map(MapNum).Tileset)
-        writer.WriteInt32(Map(MapNum).Up)
-        writer.WriteInt32(Map(MapNum).Down)
-        writer.WriteInt32(Map(MapNum).Left)
-        writer.WriteInt32(Map(MapNum).Right)
-        writer.WriteInt32(Map(MapNum).BootMap)
-        writer.WriteByte(Map(MapNum).BootX)
-        writer.WriteByte(Map(MapNum).BootY)
-        writer.WriteByte(Map(MapNum).MaxX)
-        writer.WriteByte(Map(MapNum).MaxY)
-        writer.WriteByte(Map(MapNum).WeatherType)
-        writer.WriteInt32(Map(MapNum).Fogindex)
-        writer.WriteInt32(Map(MapNum).WeatherIntensity)
-        writer.WriteByte(Map(MapNum).FogAlpha)
-        writer.WriteByte(Map(MapNum).FogSpeed)
-        writer.WriteByte(Map(MapNum).HasMapTint)
-        writer.WriteByte(Map(MapNum).MapTintR)
-        writer.WriteByte(Map(MapNum).MapTintG)
-        writer.WriteByte(Map(MapNum).MapTintB)
-        writer.WriteByte(Map(MapNum).MapTintA)
+        writer.WriteString(Map(mapNum).Name)
+        writer.WriteString(Map(mapNum).Music)
+        writer.WriteInt32(Map(mapNum).Revision)
+        writer.WriteByte(Map(mapNum).Moral)
+        writer.WriteInt32(Map(mapNum).Tileset)
+        writer.WriteInt32(Map(mapNum).Up)
+        writer.WriteInt32(Map(mapNum).Down)
+        writer.WriteInt32(Map(mapNum).Left)
+        writer.WriteInt32(Map(mapNum).Right)
+        writer.WriteInt32(Map(mapNum).BootMap)
+        writer.WriteByte(Map(mapNum).BootX)
+        writer.WriteByte(Map(mapNum).BootY)
+        writer.WriteByte(Map(mapNum).MaxX)
+        writer.WriteByte(Map(mapNum).MaxY)
+        writer.WriteByte(Map(mapNum).WeatherType)
+        writer.WriteInt32(Map(mapNum).Fogindex)
+        writer.WriteInt32(Map(mapNum).WeatherIntensity)
+        writer.WriteByte(Map(mapNum).FogAlpha)
+        writer.WriteByte(Map(mapNum).FogSpeed)
+        writer.WriteByte(Map(mapNum).HasMapTint)
+        writer.WriteByte(Map(mapNum).MapTintR)
+        writer.WriteByte(Map(mapNum).MapTintG)
+        writer.WriteByte(Map(mapNum).MapTintB)
+        writer.WriteByte(Map(mapNum).MapTintA)
 
-        writer.WriteByte(Map(MapNum).Instanced)
-        writer.WriteByte(Map(MapNum).Panorama)
-        writer.WriteByte(Map(MapNum).Parallax)
+        writer.WriteByte(Map(mapNum).Instanced)
+        writer.WriteByte(Map(mapNum).Panorama)
+        writer.WriteByte(Map(mapNum).Parallax)
 
-        For x = 0 To Map(MapNum).MaxX
-            For y = 0 To Map(MapNum).MaxY
-                writer.WriteInt32(Map(MapNum).Tile(x, y).Data1)
-                writer.WriteInt32(Map(MapNum).Tile(x, y).Data2)
-                writer.WriteInt32(Map(MapNum).Tile(x, y).Data3)
-                writer.WriteByte(Map(MapNum).Tile(x, y).DirBlock)
+        For x = 0 To Map(mapNum).MaxX
+            For y = 0 To Map(mapNum).MaxY
+                writer.WriteInt32(Map(mapNum).Tile(x, y).Data1)
+                writer.WriteInt32(Map(mapNum).Tile(x, y).Data2)
+                writer.WriteInt32(Map(mapNum).Tile(x, y).Data3)
+                writer.WriteByte(Map(mapNum).Tile(x, y).DirBlock)
                 For l = 0 To LayerType.Count - 1
-                    writer.WriteByte(Map(MapNum).Tile(x, y).Layer(l).Tileset)
-                    writer.WriteByte(Map(MapNum).Tile(x, y).Layer(l).X)
-                    writer.WriteByte(Map(MapNum).Tile(x, y).Layer(l).Y)
-                    writer.WriteByte(Map(MapNum).Tile(x, y).Layer(l).AutoTile)
+                    writer.WriteByte(Map(mapNum).Tile(x, y).Layer(l).Tileset)
+                    writer.WriteByte(Map(mapNum).Tile(x, y).Layer(l).X)
+                    writer.WriteByte(Map(mapNum).Tile(x, y).Layer(l).Y)
+                    writer.WriteByte(Map(mapNum).Tile(x, y).Layer(l).AutoTile)
                 Next
-                writer.WriteByte(Map(MapNum).Tile(x, y).Type)
+                writer.WriteByte(Map(mapNum).Tile(x, y).Type)
             Next
         Next
 
         For x = 1 To MAX_MAP_NPCS
-            writer.WriteInt32(Map(MapNum).Npc(x))
+            writer.WriteInt32(Map(mapNum).Npc(x))
         Next
 
         BinaryFile.Save(filename, writer)
 
     End Sub
 
-    Sub SaveMapEvent(mapNum as Integer)
+    Sub SaveMapEvent(mapNum As Integer)
         Dim myXml As New XmlClass With {
-            .Filename = Application.StartupPath & "\data\maps\map" & MapNum & "_eventdata.xml",
+            .Filename = Application.StartupPath & "\data\maps\map" & mapNum & "_eventdata.xml",
             .Root = "Data"
         }
 
-        If Not File.Exists(Application.StartupPath & "\data\maps\map" & MapNum & "_eventdata.xml") Then
+        If Not File.Exists(Application.StartupPath & "\data\maps\map" & mapNum & "_eventdata.xml") Then
             myXml.NewXmlDocument()
         End If
 
         myXml.LoadXml()
 
         'This is for event saving, it is in .xml files because there are non-limited values (strings) that cannot easily be loaded/saved in the normal manner.
-        myXml.WriteString("Events", "EventCount", Val(Map(MapNum).EventCount))
+        myXml.WriteString("Events", "EventCount", Val(Map(mapNum).EventCount))
 
-        If Map(MapNum).EventCount > 0 Then
-            For i = 1 To Map(MapNum).EventCount
-                With Map(MapNum).Events(i)
+        If Map(mapNum).EventCount > 0 Then
+            For i = 1 To Map(mapNum).EventCount
+                With Map(mapNum).Events(i)
                     myXml.WriteString("Event" & i, "Name", .Name)
                     myXml.WriteString("Event" & i, "Global", Val(.Globals))
                     myXml.WriteString("Event" & i, "x", Val(.X))
@@ -347,23 +350,23 @@ Module modDatabase
                     myXml.WriteString("Event" & i, "PageCount", Val(.PageCount))
 
                 End With
-                If Map(MapNum).Events(i).PageCount > 0 Then
-                    For x = 1 To Map(MapNum).Events(i).PageCount
-                        With Map(MapNum).Events(i).Pages(x)
-                            myXml.WriteString("Event" & i & "Page" & x, "chkVariable", Val(.chkVariable))
+                If Map(mapNum).Events(i).PageCount > 0 Then
+                    For x = 1 To Map(mapNum).Events(i).PageCount
+                        With Map(mapNum).Events(i).Pages(x)
+                            myXml.WriteString("Event" & i & "Page" & x, "chkVariable", Val(.ChkVariable))
                             myXml.WriteString("Event" & i & "Page" & x, "VariableIndex", Val(.Variableindex))
                             myXml.WriteString("Event" & i & "Page" & x, "VariableCondition", Val(.VariableCondition))
                             myXml.WriteString("Event" & i & "Page" & x, "VariableCompare", Val(.VariableCompare))
 
-                            myXml.WriteString("Event" & i & "Page" & x, "chkSwitch", Val(.chkSwitch))
+                            myXml.WriteString("Event" & i & "Page" & x, "chkSwitch", Val(.ChkSwitch))
                             myXml.WriteString("Event" & i & "Page" & x, "SwitchIndex", Val(.Switchindex))
                             myXml.WriteString("Event" & i & "Page" & x, "SwitchCompare", Val(.SwitchCompare))
 
-                            myXml.WriteString("Event" & i & "Page" & x, "chkHasItem", Val(.chkHasItem))
+                            myXml.WriteString("Event" & i & "Page" & x, "chkHasItem", Val(.ChkHasItem))
                             myXml.WriteString("Event" & i & "Page" & x, "HasItemIndex", Val(.HasItemindex))
                             myXml.WriteString("Event" & i & "Page" & x, "HasItemAmount", Val(.HasItemAmount))
 
-                            myXml.WriteString("Event" & i & "Page" & x, "chkSelfSwitch", Val(.chkSelfSwitch))
+                            myXml.WriteString("Event" & i & "Page" & x, "chkSelfSwitch", Val(.ChkSelfSwitch))
                             myXml.WriteString("Event" & i & "Page" & x, "SelfSwitchIndex", Val(.SelfSwitchindex))
                             myXml.WriteString("Event" & i & "Page" & x, "SelfSwitchCompare", Val(.SelfSwitchCompare))
 
@@ -385,7 +388,7 @@ Module modDatabase
 
                             If .MoveRouteCount > 0 Then
                                 For y = 1 To .MoveRouteCount
-                                    myXml.WriteString("Event" & i & "Page" & x, "MoveRoute" & y & "Index", Val(.MoveRoute(y).index))
+                                    myXml.WriteString("Event" & i & "Page" & x, "MoveRoute" & y & "Index", Val(.MoveRoute(y).Index))
                                     myXml.WriteString("Event" & i & "Page" & x, "MoveRoute" & y & "Data1", Val(.MoveRoute(y).Data1))
                                     myXml.WriteString("Event" & i & "Page" & x, "MoveRoute" & y & "Data2", Val(.MoveRoute(y).Data2))
                                     myXml.WriteString("Event" & i & "Page" & x, "MoveRoute" & y & "Data3", Val(.MoveRoute(y).Data3))
@@ -405,18 +408,18 @@ Module modDatabase
                             myXml.WriteString("Event" & i & "Page" & x, "Position", Val(.Position))
                             myXml.WriteString("Event" & i & "Page" & x, "QuestNum", Val(.QuestNum))
 
-                            myXml.WriteString("Event" & i & "Page" & x, "PlayerGender", Val(.chkPlayerGender))
+                            myXml.WriteString("Event" & i & "Page" & x, "PlayerGender", Val(.ChkPlayerGender))
 
                         End With
 
-                        If Map(MapNum).Events(i).Pages(x).CommandListCount > 0 Then
-                            For y = 1 To Map(MapNum).Events(i).Pages(x).CommandListCount
-                                myXml.WriteString("Event" & i & "Page" & x, "CommandList" & y & "CommandCount", Val(Map(MapNum).Events(i).Pages(x).CommandList(y).CommandCount))
-                                myXml.WriteString("Event" & i & "Page" & x, "CommandList" & y & "ParentList", Val(Map(MapNum).Events(i).Pages(x).CommandList(y).ParentList))
+                        If Map(mapNum).Events(i).Pages(x).CommandListCount > 0 Then
+                            For y = 1 To Map(mapNum).Events(i).Pages(x).CommandListCount
+                                myXml.WriteString("Event" & i & "Page" & x, "CommandList" & y & "CommandCount", Val(Map(mapNum).Events(i).Pages(x).CommandList(y).CommandCount))
+                                myXml.WriteString("Event" & i & "Page" & x, "CommandList" & y & "ParentList", Val(Map(mapNum).Events(i).Pages(x).CommandList(y).ParentList))
 
-                                If Map(MapNum).Events(i).Pages(x).CommandList(y).CommandCount > 0 Then
-                                    For z = 1 To Map(MapNum).Events(i).Pages(x).CommandList(y).CommandCount
-                                        With Map(MapNum).Events(i).Pages(x).CommandList(y).Commands(z)
+                                If Map(mapNum).Events(i).Pages(x).CommandList(y).CommandCount > 0 Then
+                                    For z = 1 To Map(mapNum).Events(i).Pages(x).CommandList(y).CommandCount
+                                        With Map(mapNum).Events(i).Pages(x).CommandList(y).Commands(z)
                                             myXml.WriteString("Event" & i & "Page" & x, "CommandList" & y & "Command" & z & "Index", Val(.Index))
                                             myXml.WriteString("Event" & i & "Page" & x, "CommandList" & y & "Command" & z & "Text1", .Text1)
                                             myXml.WriteString("Event" & i & "Page" & x, "CommandList" & y & "Command" & z & "Text2", .Text2)
@@ -439,7 +442,7 @@ Module modDatabase
 
                                             If .MoveRouteCount > 0 Then
                                                 For w = 1 To .MoveRouteCount
-                                                    myXml.WriteString("Event" & i & "Page" & x, "CommandList" & y & "Command" & z & "MoveRoute" & w & "Index", Val(.MoveRoute(w).index))
+                                                    myXml.WriteString("Event" & i & "Page" & x, "CommandList" & y & "Command" & z & "MoveRoute" & w & "Index", Val(.MoveRoute(w).Index))
                                                     myXml.WriteString("Event" & i & "Page" & x, "CommandList" & y & "Command" & z & "MoveRoute" & w & "Data1", Val(.MoveRoute(w).Data1))
                                                     myXml.WriteString("Event" & i & "Page" & x, "CommandList" & y & "Command" & z & "MoveRoute" & w & "Data2", Val(.MoveRoute(w).Data2))
                                                     myXml.WriteString("Event" & i & "Page" & x, "CommandList" & y & "Command" & z & "MoveRoute" & w & "Data3", Val(.MoveRoute(w).Data3))
@@ -461,51 +464,51 @@ Module modDatabase
         myXml.CloseXml(True)
     End Sub
 
-    Sub LoadMapEvent(mapNum as Integer)
+    Sub LoadMapEvent(mapNum As Integer)
         Dim myXml As New XmlClass With {
-            .Filename = Application.StartupPath & "\data\maps\map" & MapNum & "_eventdata.xml",
+            .Filename = Application.StartupPath & "\data\maps\map" & mapNum & "_eventdata.xml",
             .Root = "Data"
         }
 
         myXml.LoadXml()
-        Map(MapNum).EventCount = Val(myXml.ReadString("Events", "EventCount"))
+        Map(mapNum).EventCount = Val(myXml.ReadString("Events", "EventCount"))
 
-        If Not Map(MapNum).EventCount > 0 Then
+        If Not Map(mapNum).EventCount > 0 Then
             myXml.CloseXml(False)
             Exit Sub
         End If
 
         Dim i As Integer, x As Integer, y As Integer, p As Integer
 
-        ReDim Map(MapNum).Events(Map(MapNum).EventCount)
-        For i = 1 To Map(MapNum).EventCount
+        ReDim Map(mapNum).Events(Map(mapNum).EventCount)
+        For i = 1 To Map(mapNum).EventCount
             If Val(myXml.ReadString("Event" & i, "PageCount")) > 0 Then
 
-                With Map(MapNum).Events(i)
+                With Map(mapNum).Events(i)
                     .Name = myXml.ReadString("Event" & i, "Name")
                     .Globals = Val(myXml.ReadString("Event" & i, "Global"))
                     .X = Val(myXml.ReadString("Event" & i, "x"))
                     .Y = Val(myXml.ReadString("Event" & i, "y"))
                     .PageCount = Val(myXml.ReadString("Event" & i, "PageCount"))
                 End With
-                If Map(MapNum).Events(i).PageCount > 0 Then
-                    ReDim Map(MapNum).Events(i).Pages(Map(MapNum).Events(i).PageCount)
-                    For x = 1 To Map(MapNum).Events(i).PageCount
-                        With Map(MapNum).Events(i).Pages(x)
-                            .chkVariable = Val(myXml.ReadString("Event" & i & "Page" & x, "chkVariable"))
+                If Map(mapNum).Events(i).PageCount > 0 Then
+                    ReDim Map(mapNum).Events(i).Pages(Map(mapNum).Events(i).PageCount)
+                    For x = 1 To Map(mapNum).Events(i).PageCount
+                        With Map(mapNum).Events(i).Pages(x)
+                            .ChkVariable = Val(myXml.ReadString("Event" & i & "Page" & x, "chkVariable"))
                             .Variableindex = Val(myXml.ReadString("Event" & i & "Page" & x, "VariableIndex"))
                             .VariableCondition = Val(myXml.ReadString("Event" & i & "Page" & x, "VariableCondition"))
                             .VariableCompare = Val(myXml.ReadString("Event" & i & "Page" & x, "VariableCompare"))
 
-                            .chkSwitch = Val(myXml.ReadString("Event" & i & "Page" & x, "chkSwitch"))
+                            .ChkSwitch = Val(myXml.ReadString("Event" & i & "Page" & x, "chkSwitch"))
                             .Switchindex = Val(myXml.ReadString("Event" & i & "Page" & x, "SwitchIndex"))
                             .SwitchCompare = Val(myXml.ReadString("Event" & i & "Page" & x, "SwitchCompare"))
 
-                            .chkHasItem = Val(myXml.ReadString("Event" & i & "Page" & x, "chkHasItem"))
+                            .ChkHasItem = Val(myXml.ReadString("Event" & i & "Page" & x, "chkHasItem"))
                             .HasItemindex = Val(myXml.ReadString("Event" & i & "Page" & x, "HasItemIndex"))
                             .HasItemAmount = Val(myXml.ReadString("Event" & i & "Page" & x, "HasItemAmount"))
 
-                            .chkSelfSwitch = Val(myXml.ReadString("Event" & i & "Page" & x, "chkSelfSwitch"))
+                            .ChkSelfSwitch = Val(myXml.ReadString("Event" & i & "Page" & x, "chkSelfSwitch"))
                             .SelfSwitchindex = Val(myXml.ReadString("Event" & i & "Page" & x, "SelfSwitchIndex"))
                             .SelfSwitchCompare = Val(myXml.ReadString("Event" & i & "Page" & x, "SelfSwitchCompare"))
 
@@ -526,9 +529,9 @@ Module modDatabase
                             .MoveRouteCount = Val(myXml.ReadString("Event" & i & "Page" & x, "MoveRouteCount"))
 
                             If .MoveRouteCount > 0 Then
-                                ReDim Map(MapNum).Events(i).Pages(x).MoveRoute(.MoveRouteCount)
+                                ReDim Map(mapNum).Events(i).Pages(x).MoveRoute(.MoveRouteCount)
                                 For y = 1 To .MoveRouteCount
-                                    .MoveRoute(y).index = Val(myXml.ReadString("Event" & i & "Page" & x, "MoveRoute" & y & "Index"))
+                                    .MoveRoute(y).Index = Val(myXml.ReadString("Event" & i & "Page" & x, "MoveRoute" & y & "Index"))
                                     .MoveRoute(y).Data1 = Val(myXml.ReadString("Event" & i & "Page" & x, "MoveRoute" & y & "Data1"))
                                     .MoveRoute(y).Data2 = Val(myXml.ReadString("Event" & i & "Page" & x, "MoveRoute" & y & "Data2"))
                                     .MoveRoute(y).Data3 = Val(myXml.ReadString("Event" & i & "Page" & x, "MoveRoute" & y & "Data3"))
@@ -548,18 +551,18 @@ Module modDatabase
                             .Position = Val(myXml.ReadString("Event" & i & "Page" & x, "Position"))
                             .QuestNum = Val(myXml.ReadString("Event" & i & "Page" & x, "QuestNum"))
 
-                            .chkPlayerGender = Val(myXml.ReadString("Event" & i & "Page" & x, "PlayerGender"))
+                            .ChkPlayerGender = Val(myXml.ReadString("Event" & i & "Page" & x, "PlayerGender"))
                         End With
 
-                        If Map(MapNum).Events(i).Pages(x).CommandListCount > 0 Then
-                            ReDim Map(MapNum).Events(i).Pages(x).CommandList(Map(MapNum).Events(i).Pages(x).CommandListCount)
-                            For y = 1 To Map(MapNum).Events(i).Pages(x).CommandListCount
-                                Map(MapNum).Events(i).Pages(x).CommandList(y).CommandCount = Val(myXml.ReadString("Event" & i & "Page" & x, "CommandList" & y & "CommandCount"))
-                                Map(MapNum).Events(i).Pages(x).CommandList(y).ParentList = Val(myXml.ReadString("Event" & i & "Page" & x, "CommandList" & y & "ParentList"))
-                                If Map(MapNum).Events(i).Pages(x).CommandList(y).CommandCount > 0 Then
-                                    ReDim Map(MapNum).Events(i).Pages(x).CommandList(y).Commands(Map(MapNum).Events(i).Pages(x).CommandList(y).CommandCount)
-                                    For p = 1 To Map(MapNum).Events(i).Pages(x).CommandList(y).CommandCount
-                                        With Map(MapNum).Events(i).Pages(x).CommandList(y).Commands(p)
+                        If Map(mapNum).Events(i).Pages(x).CommandListCount > 0 Then
+                            ReDim Map(mapNum).Events(i).Pages(x).CommandList(Map(mapNum).Events(i).Pages(x).CommandListCount)
+                            For y = 1 To Map(mapNum).Events(i).Pages(x).CommandListCount
+                                Map(mapNum).Events(i).Pages(x).CommandList(y).CommandCount = Val(myXml.ReadString("Event" & i & "Page" & x, "CommandList" & y & "CommandCount"))
+                                Map(mapNum).Events(i).Pages(x).CommandList(y).ParentList = Val(myXml.ReadString("Event" & i & "Page" & x, "CommandList" & y & "ParentList"))
+                                If Map(mapNum).Events(i).Pages(x).CommandList(y).CommandCount > 0 Then
+                                    ReDim Map(mapNum).Events(i).Pages(x).CommandList(y).Commands(Map(mapNum).Events(i).Pages(x).CommandList(y).CommandCount)
+                                    For p = 1 To Map(mapNum).Events(i).Pages(x).CommandList(y).CommandCount
+                                        With Map(mapNum).Events(i).Pages(x).CommandList(y).Commands(p)
                                             .Index = Val(myXml.ReadString("Event" & i & "Page" & x, "CommandList" & y & "Command" & p & "Index"))
                                             .Text1 = myXml.ReadString("Event" & i & "Page" & x, "CommandList" & y & "Command" & p & "Text1")
                                             .Text2 = myXml.ReadString("Event" & i & "Page" & x, "CommandList" & y & "Command" & p & "Text2")
@@ -582,7 +585,7 @@ Module modDatabase
                                             If .MoveRouteCount > 0 Then
                                                 ReDim .MoveRoute(.MoveRouteCount)
                                                 For w = 1 To .MoveRouteCount
-                                                    .MoveRoute(w).index = Val(myXml.ReadString("Event" & i & "Page" & x, "CommandList" & y & "Command" & p & "MoveRoute" & w & "Index"))
+                                                    .MoveRoute(w).Index = Val(myXml.ReadString("Event" & i & "Page" & x, "CommandList" & y & "Command" & p & "MoveRoute" & w & "Index"))
                                                     .MoveRoute(w).Data1 = Val(myXml.ReadString("Event" & i & "Page" & x, "CommandList" & y & "Command" & p & "MoveRoute" & w & "Data1"))
                                                     .MoveRoute(w).Data2 = Val(myXml.ReadString("Event" & i & "Page" & x, "CommandList" & y & "Command" & p & "MoveRoute" & w & "Data2"))
                                                     .MoveRoute(w).Data3 = Val(myXml.ReadString("Event" & i & "Page" & x, "CommandList" & y & "Command" & p & "MoveRoute" & w & "Data3"))
@@ -614,77 +617,77 @@ Module modDatabase
         Next
     End Sub
 
-    Sub LoadMap(mapNum as Integer)
+    Sub LoadMap(mapNum As Integer)
         Dim filename As String
         Dim x As Integer
         Dim y As Integer
         Dim l As Integer
 
-        filename = Path.Combine(Application.StartupPath, "data", "maps", String.Format("map{0}.dat", MapNum))
+        filename = Path.Combine(Application.StartupPath, "data", "maps", String.Format("map{0}.dat", mapNum))
         Dim reader As New ByteStream()
         BinaryFile.Load(filename, reader)
 
-        Map(MapNum).Name = reader.ReadString()
-        Map(MapNum).Music = reader.ReadString()
-        Map(MapNum).Revision = reader.ReadInt32()
-        Map(MapNum).Moral = reader.ReadByte()
-        Map(MapNum).Tileset = reader.ReadInt32()
-        Map(MapNum).Up = reader.ReadInt32()
-        Map(MapNum).Down = reader.ReadInt32()
-        Map(MapNum).Left = reader.ReadInt32()
-        Map(MapNum).Right = reader.ReadInt32()
-        Map(MapNum).BootMap = reader.ReadInt32()
-        Map(MapNum).BootX = reader.ReadByte()
-        Map(MapNum).BootY = reader.ReadByte()
-        Map(MapNum).MaxX = reader.ReadByte()
-        Map(MapNum).MaxY = reader.ReadByte()
-        Map(MapNum).WeatherType = reader.ReadByte()
-        Map(MapNum).Fogindex = reader.ReadInt32()
-        Map(MapNum).WeatherIntensity = reader.ReadInt32()
-        Map(MapNum).FogAlpha = reader.ReadByte()
-        Map(MapNum).FogSpeed = reader.ReadByte()
-        Map(MapNum).HasMapTint = reader.ReadByte()
-        Map(MapNum).MapTintR = reader.ReadByte()
-        Map(MapNum).MapTintG = reader.ReadByte()
-        Map(MapNum).MapTintB = reader.ReadByte()
-        Map(MapNum).MapTintA = reader.ReadByte()
-        Map(MapNum).Instanced = reader.ReadByte()
-        Map(MapNum).Panorama = reader.ReadByte()
-        Map(MapNum).Parallax = reader.ReadByte()
+        Map(mapNum).Name = reader.ReadString()
+        Map(mapNum).Music = reader.ReadString()
+        Map(mapNum).Revision = reader.ReadInt32()
+        Map(mapNum).Moral = reader.ReadByte()
+        Map(mapNum).Tileset = reader.ReadInt32()
+        Map(mapNum).Up = reader.ReadInt32()
+        Map(mapNum).Down = reader.ReadInt32()
+        Map(mapNum).Left = reader.ReadInt32()
+        Map(mapNum).Right = reader.ReadInt32()
+        Map(mapNum).BootMap = reader.ReadInt32()
+        Map(mapNum).BootX = reader.ReadByte()
+        Map(mapNum).BootY = reader.ReadByte()
+        Map(mapNum).MaxX = reader.ReadByte()
+        Map(mapNum).MaxY = reader.ReadByte()
+        Map(mapNum).WeatherType = reader.ReadByte()
+        Map(mapNum).Fogindex = reader.ReadInt32()
+        Map(mapNum).WeatherIntensity = reader.ReadInt32()
+        Map(mapNum).FogAlpha = reader.ReadByte()
+        Map(mapNum).FogSpeed = reader.ReadByte()
+        Map(mapNum).HasMapTint = reader.ReadByte()
+        Map(mapNum).MapTintR = reader.ReadByte()
+        Map(mapNum).MapTintG = reader.ReadByte()
+        Map(mapNum).MapTintB = reader.ReadByte()
+        Map(mapNum).MapTintA = reader.ReadByte()
+        Map(mapNum).Instanced = reader.ReadByte()
+        Map(mapNum).Panorama = reader.ReadByte()
+        Map(mapNum).Parallax = reader.ReadByte()
 
         ' have to set the tile()
-        ReDim Map(MapNum).Tile(Map(MapNum).MaxX, Map(MapNum).MaxY)
+        ReDim Map(mapNum).Tile(Map(mapNum).MaxX, Map(mapNum).MaxY)
 
-        For x = 0 To Map(MapNum).MaxX
-            For y = 0 To Map(MapNum).MaxY
-                Map(MapNum).Tile(x, y).Data1 = reader.ReadInt32()
-                Map(MapNum).Tile(x, y).Data2 = reader.ReadInt32()
-                Map(MapNum).Tile(x, y).Data3 = reader.ReadInt32()
-                Map(MapNum).Tile(x, y).DirBlock = reader.ReadByte()
-                ReDim Map(MapNum).Tile(x, y).Layer(LayerType.Count - 1)
+        For x = 0 To Map(mapNum).MaxX
+            For y = 0 To Map(mapNum).MaxY
+                Map(mapNum).Tile(x, y).Data1 = reader.ReadInt32()
+                Map(mapNum).Tile(x, y).Data2 = reader.ReadInt32()
+                Map(mapNum).Tile(x, y).Data3 = reader.ReadInt32()
+                Map(mapNum).Tile(x, y).DirBlock = reader.ReadByte()
+                ReDim Map(mapNum).Tile(x, y).Layer(LayerType.Count - 1)
                 For l = 0 To LayerType.Count - 1
-                    Map(MapNum).Tile(x, y).Layer(l).Tileset = reader.ReadByte()
-                    Map(MapNum).Tile(x, y).Layer(l).X = reader.ReadByte()
-                    Map(MapNum).Tile(x, y).Layer(l).Y = reader.ReadByte()
-                    Map(MapNum).Tile(x, y).Layer(l).AutoTile = reader.ReadByte()
+                    Map(mapNum).Tile(x, y).Layer(l).Tileset = reader.ReadByte()
+                    Map(mapNum).Tile(x, y).Layer(l).X = reader.ReadByte()
+                    Map(mapNum).Tile(x, y).Layer(l).Y = reader.ReadByte()
+                    Map(mapNum).Tile(x, y).Layer(l).AutoTile = reader.ReadByte()
                 Next
-                Map(MapNum).Tile(x, y).Type = reader.ReadByte()
+                Map(mapNum).Tile(x, y).Type = reader.ReadByte()
             Next
         Next
 
         For x = 1 To MAX_MAP_NPCS
-            Map(MapNum).Npc(x) = reader.ReadInt32()
-            MapNpc(MapNum).Npc(x).Num = Map(MapNum).Npc(x)
+            Map(mapNum).Npc(x) = reader.ReadInt32()
+            MapNpc(mapNum).Npc(x).Num = Map(mapNum).Npc(x)
         Next
 
-        ClearTempTile(MapNum)
-        CacheResources(MapNum)
+        ClearTempTile(mapNum)
+        CacheResources(mapNum)
 
-        If Map(MapNum).Name Is Nothing Then Map(MapNum).Name = ""
-        If Map(MapNum).Music Is Nothing Then Map(MapNum).Music = ""
+        If Map(mapNum).Name Is Nothing Then Map(mapNum).Name = ""
+        If Map(mapNum).Music Is Nothing Then Map(mapNum).Music = ""
 
-        If File.Exists(Application.StartupPath & "\data\maps\map" & MapNum & "_eventdata.xml") Then
-            LoadMapEvent(MapNum)
+        If File.Exists(Application.StartupPath & "\data\maps\map" & mapNum & "_eventdata.xml") Then
+            LoadMapEvent(mapNum)
         End If
 
     End Sub
@@ -698,24 +701,24 @@ Module modDatabase
 
     End Sub
 
-    Sub ClearTempTile(mapNum as Integer)
+    Sub ClearTempTile(mapNum As Integer)
         Dim y As Integer
         Dim x As Integer
-        TempTile(MapNum).DoorTimer = 0
-        ReDim TempTile(MapNum).DoorOpen(Map(MapNum).MaxX, Map(MapNum).MaxY)
+        TempTile(mapNum).DoorTimer = 0
+        ReDim TempTile(mapNum).DoorOpen(Map(mapNum).MaxX, Map(mapNum).MaxY)
 
-        For x = 0 To Map(MapNum).MaxX
-            For y = 0 To Map(MapNum).MaxY
-                TempTile(MapNum).DoorOpen(x, y) = False
+        For x = 0 To Map(mapNum).MaxX
+            For y = 0 To Map(mapNum).MaxY
+                TempTile(mapNum).DoorOpen(x, y) = False
             Next
         Next
 
     End Sub
 
-    Sub ClearMapItem(index as integer, mapNum as Integer)
-        MapItem(MapNum, index) = Nothing
-        MapItem(MapNum, index).RandData.Prefix = ""
-        MapItem(MapNum, index).RandData.Suffix = ""
+    Sub ClearMapItem(index As Integer, mapNum As Integer)
+        MapItem(mapNum, index) = Nothing
+        MapItem(mapNum, index).RandData.Prefix = ""
+        MapItem(mapNum, index).RandData.Suffix = ""
     End Sub
 
     Sub ClearMapItems()
@@ -733,6 +736,7 @@ Module modDatabase
 #End Region
 
 #Region "Npc's"
+
     Sub SaveNpcs()
         Dim i As Integer
 
@@ -853,11 +857,11 @@ Module modDatabase
 
     End Sub
 
-    Sub ClearMapNpc(index as integer, mapNum as Integer)
-        MapNpc(MapNum).Npc(index) = Nothing
+    Sub ClearMapNpc(index As Integer, mapNum As Integer)
+        MapNpc(mapNum).Npc(index) = Nothing
 
-        ReDim MapNpc(MapNum).Npc(index).Vital(VitalType.Count)
-        ReDim MapNpc(MapNum).Npc(index).SkillCD(MAX_NPC_SKILLS)
+        ReDim MapNpc(mapNum).Npc(index).Vital(VitalType.Count)
+        ReDim MapNpc(mapNum).Npc(index).SkillCd(MAX_NPC_SKILLS)
     End Sub
 
     Sub ClearAllMapNpcs()
@@ -870,7 +874,7 @@ Module modDatabase
 
     End Sub
 
-    Sub ClearMapNpcs(mapNum as Integer)
+    Sub ClearMapNpcs(mapNum As Integer)
         Dim x As Integer
         Dim y As Integer
 
@@ -881,7 +885,7 @@ Module modDatabase
 
     End Sub
 
-    Sub ClearNpc(index as integer)
+    Sub ClearNpc(index As Integer)
         Npc(index) = Nothing
         Npc(index).Name = ""
         Npc(index).AttackSay = ""
@@ -904,6 +908,7 @@ Module modDatabase
 #End Region
 
 #Region "Shops"
+
     Sub SaveShops()
         Dim i As Integer
 
@@ -984,7 +989,7 @@ Module modDatabase
 
     End Sub
 
-    Sub ClearShop(index as integer)
+    Sub ClearShop(index As Integer)
         Dim i As Integer
 
         Shop(index) = Nothing
@@ -1006,6 +1011,7 @@ Module modDatabase
 #End Region
 
 #Region "Skills"
+
     Sub SaveSkills()
         Dim i As Integer
         Console.WriteLine("Saving skills... ")
@@ -1119,7 +1125,7 @@ Module modDatabase
 
     End Sub
 
-    Sub ClearSkill(index as integer)
+    Sub ClearSkill(index As Integer)
         Skill(index) = Nothing
         Skill(index).Name = ""
         Skill(index).LevelReq = 1 'Needs to be 1 for the skill editor
@@ -1135,6 +1141,7 @@ Module modDatabase
 #End Region
 
 #Region "Accounts"
+
     Function AccountExist(Name As String) As Boolean
         Return File.Exists(Application.StartupPath & "\Data\Accounts\" & Trim$(Name) & "\Data.bin")
     End Function
@@ -1147,7 +1154,7 @@ Module modDatabase
         Return reader.ReadString().Trim.ToUpper = Password.Trim.ToUpper
     End Function
 
-    Sub AddAccount(index as integer, Name As String, Password As String)
+    Sub AddAccount(index As Integer, Name As String, Password As String)
         ClearPlayer(index)
 
         Player(index).Login = Name
@@ -1163,6 +1170,7 @@ Module modDatabase
 #End Region
 
 #Region "Players"
+
     Sub SaveAllPlayersOnline()
         For i = 1 To GetPlayersOnline()
             If Not IsPlaying(i) Then Continue For
@@ -1171,7 +1179,7 @@ Module modDatabase
         Next
     End Sub
 
-    Sub SavePlayer(index as integer)
+    Sub SavePlayer(index As Integer)
         Dim playername As String = Trim$(Player(index).Login)
         Dim filename As String = Application.StartupPath & "\Data\Accounts\" & playername
         CheckDir(filename) : filename += "\Data.bin"
@@ -1190,7 +1198,7 @@ Module modDatabase
 
     End Sub
 
-    Sub LoadPlayer(index as integer, Name As String)
+    Sub LoadPlayer(index As Integer, Name As String)
         Dim filename As String = Application.StartupPath & "\Data\Accounts\" & Name.Trim() & "\Data.bin"
         ClearPlayer(index)
         Dim reader As New ByteStream()
@@ -1206,8 +1214,9 @@ Module modDatabase
 
     End Sub
 
-    Sub ClearPlayer(index as integer)
-        ReDim TempPlayer(index).SkillCD(MAX_PLAYER_SKILLS)
+    Sub ClearPlayer(index As Integer)
+        ReDim TempPlayer(index).SkillCd(MAX_PLAYER_SKILLS)
+        ReDim TempPlayer(index).PetSkillCd(4)
 
         Player(index).Login = ""
         Player(index).Password = ""
@@ -1223,11 +1232,12 @@ Module modDatabase
 #End Region
 
 #Region "Bank"
-    Friend Sub LoadBank(index as integer, Name As String)
+
+    Friend Sub LoadBank(index As Integer, Name As String)
         Dim filename As String = Application.StartupPath & "\Data\Accounts\" & Name.Trim() & "\Bank.bin"
 
         ClearBank(index)
-        
+
         If Not File.Exists(filename) Then
             SaveBank(index)
             Exit Sub
@@ -1252,7 +1262,7 @@ Module modDatabase
         Next
     End Sub
 
-    Sub SaveBank(index as integer)
+    Sub SaveBank(index As Integer)
         Dim filename = Application.StartupPath & "\Data\Accounts\" & Player(index).Login.Trim() & "\Bank.bin"
 
         Dim writer As New ByteStream(100)
@@ -1285,7 +1295,7 @@ Module modDatabase
         BinaryFile.Save(filename, writer)
     End Sub
 
-    Sub ClearBank(index as integer)
+    Sub ClearBank(index As Integer)
         ReDim Bank(index).Item(MAX_BANK)
         ReDim Bank(index).ItemRand(MAX_BANK)
 
@@ -1309,7 +1319,8 @@ Module modDatabase
 #End Region
 
 #Region "Characters"
-    Sub ClearCharacter(index as integer, CharNum As Integer)
+
+    Sub ClearCharacter(index As Integer, CharNum As Integer)
         Player(index).Character(CharNum).Classes = 0
         Player(index).Character(CharNum).Dir = 0
 
@@ -1453,7 +1464,7 @@ Module modDatabase
 
     End Sub
 
-    Sub LoadCharacter(index as integer, CharNum As Integer)
+    Sub LoadCharacter(index As Integer, CharNum As Integer)
         Dim filename As String = Application.StartupPath & "\Data\Accounts\" & Player(index).Login.Trim & "\" & CharNum & ".bin"
 
         ClearCharacter(index, CharNum)
@@ -1603,7 +1614,7 @@ Module modDatabase
 
     End Sub
 
-    Sub SaveCharacter(index as integer, CharNum As Integer)
+    Sub SaveCharacter(index As Integer, CharNum As Integer)
         Dim filename As String = Application.StartupPath & "\Data\Accounts\" & Player(index).Login.Trim & "\" & CharNum & ".bin"
 
         Dim writer As New ByteStream(100)
@@ -1737,11 +1748,11 @@ Module modDatabase
         BinaryFile.Save(filename, writer)
     End Sub
 
-    Function CharExist(index as integer, CharNum As Integer) As Boolean
+    Function CharExist(index As Integer, CharNum As Integer) As Boolean
         Return Player(index).Character(CharNum).Name.Trim.Length > 0
     End Function
 
-    Sub AddChar(index as integer, CharNum As Integer, Name As String, Sex As Byte, ClassNum As Byte, Sprite As Integer)
+    Sub AddChar(index As Integer, CharNum As Integer, Name As String, Sex As Byte, ClassNum As Byte, Sprite As Integer)
         Dim n As Integer, i As Integer
 
         If Len(Trim$(Player(index).Character(CharNum).Name)) = 0 Then
@@ -1829,6 +1840,7 @@ Module modDatabase
 #End Region
 
 #Region "Options"
+
     Friend Sub SaveOptions()
         Dim myXml As New XmlClass With {
             .Filename = Path.Combine(Application.StartupPath, "Data", "Config.xml"),
@@ -1876,10 +1888,10 @@ Module modDatabase
 
     Friend Function GetFileContents(fullPath As String) As String
         Dim strContents = ""
-        Dim objReader As StreamReader 
-        If Not File.Exists(FullPath) Then File.Create(FullPath).Dispose()
+        Dim objReader As StreamReader
+        If Not File.Exists(fullPath) Then File.Create(fullPath).Dispose()
         Try
-            objReader = New StreamReader(FullPath)
+            objReader = New StreamReader(fullPath)
             strContents = objReader.ReadToEnd()
             objReader.Close()
         Catch
@@ -1910,7 +1922,7 @@ Module modDatabase
         Dim contents As String
         Dim bAns = False
         Dim objReader As StreamWriter
-        fullpath = Path.Combine(Application.StartupPath, "data", FN)
+        fullpath = Path.Combine(Application.StartupPath, "data", fn)
         contents = GetFileContents(fullpath)
         contents = contents & vbNewLine & strData
         Try
@@ -1926,6 +1938,7 @@ Module modDatabase
 #End Region
 
 #Region "Banning"
+
     Sub ServerBanIndex(BanPlayerindex As Integer)
         Dim filename As String
         Dim IP As String
@@ -1981,7 +1994,7 @@ Module modDatabase
 
     End Function
 
-    Sub BanIndex(BanPlayerindex as integer, BannedByindex as integer)
+    Sub BanIndex(BanPlayerindex As Integer, BannedByindex As Integer)
         Dim filename As String = Application.StartupPath & "\Data\banlist.txt"
         Dim IP As String, i As Integer
 
@@ -2005,9 +2018,11 @@ Module modDatabase
         Addlog(GetPlayerName(BannedByindex) & " has banned " & GetPlayerName(BanPlayerindex) & ".", ADMIN_LOG)
         AlertMsg(BanPlayerindex, "You have been banned by " & GetPlayerName(BannedByindex) & "!")
     End Sub
+
 #End Region
 
 #Region "Data Functions"
+
     Function ClassData() As Byte()
         Dim i As Integer, n As Integer, q As Integer
         Dim buffer As New ByteStream(4)
@@ -2169,8 +2184,6 @@ Module modDatabase
         buffer.WriteInt32(Skill(skillnum).KnockBackTiles)
         Return buffer.ToArray
     End Function
-
-
 
 #End Region
 

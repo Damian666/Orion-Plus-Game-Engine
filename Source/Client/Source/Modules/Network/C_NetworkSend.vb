@@ -1,12 +1,12 @@
 ﻿Imports System.Windows.Forms
 Imports ASFW
-Imports ASFW.IO
 
 Module C_NetworkSend
-    Friend Sub SendNewAccount(name As String, password As String)
-        dim buffer as New ByteStream(4)
 
-        Buffer.WriteInt32(ClientPackets.CNewAccount)
+    Friend Sub SendNewAccount(name As String, password As String)
+        Dim buffer As New ByteStream(4)
+
+        buffer.WriteInt32(ClientPackets.CNewAccount)
         buffer.WriteString((EKeyPair.EncryptString(name)))
         buffer.WriteString((EKeyPair.EncryptString(password)))
         Socket.SendData(buffer.Data, buffer.Head)
@@ -201,8 +201,6 @@ Module C_NetworkSend
         buffer.Dispose()
     End Sub
 
-
-
     Sub SendRequestAnimations()
         Dim buffer As New ByteStream(4)
 
@@ -321,8 +319,6 @@ Module C_NetworkSend
         buffer.Dispose()
     End Sub
 
-
-
     Sub PlayerSearch(curX As Integer, curY As Integer, rClick As Byte)
         Dim buffer As New ByteStream(4)
 
@@ -349,87 +345,88 @@ Module C_NetworkSend
     End Sub
 
     Friend Sub SendLeaveGame()
-        dim buffer as New ByteStream(4)
+        Dim buffer As New ByteStream(4)
 
-        Buffer.WriteInt32(ClientPackets.CQuit)
+        buffer.WriteInt32(ClientPackets.CQuit)
 
-        Socket.SendData(Buffer.Data, Buffer.Head)
-        Buffer.Dispose()
+        Socket.SendData(buffer.Data, buffer.Head)
+        buffer.Dispose()
     End Sub
 
     Sub SendUnequip(eqNum As Integer)
-        dim buffer as New ByteStream(4)
+        Dim buffer As New ByteStream(4)
 
-        Buffer.WriteInt32(ClientPackets.CUnequip)
-        Buffer.WriteInt32(EqNum)
+        buffer.WriteInt32(ClientPackets.CUnequip)
+        buffer.WriteInt32(eqNum)
 
-        Socket.SendData(Buffer.Data, Buffer.Head)
-        Buffer.Dispose()
+        Socket.SendData(buffer.Data, buffer.Head)
+        buffer.Dispose()
     End Sub
 
     Friend Sub ForgetSkill(skillslot As Integer)
-        dim buffer as New ByteStream(4)
+        Dim buffer As New ByteStream(4)
 
         ' Check for subscript out of range
-        If Skillslot < 1 OrElse Skillslot > MAX_PLAYER_SKILLS Then Exit Sub
+        If skillslot < 1 OrElse skillslot > MAX_PLAYER_SKILLS Then Exit Sub
 
         ' dont let them forget a skill which is in CD
-        If SkillCD(Skillslot) > 0 Then
+        If SkillCd(skillslot) > 0 Then
             AddText("Cannot forget a skill which is cooling down!", QColorType.AlertColor)
             Exit Sub
         End If
 
         ' dont let them forget a skill which is buffered
-        If SkillBuffer = Skillslot Then
+        If SkillBuffer = skillslot Then
             AddText("Cannot forget a skill which you are casting!", QColorType.AlertColor)
             Exit Sub
         End If
 
-        If PlayerSkills(Skillslot) > 0 Then
-            Buffer.WriteInt32(ClientPackets.CForgetSkill)
-            Buffer.WriteInt32(Skillslot)
-            Socket.SendData(Buffer.Data, Buffer.Head)
+        If PlayerSkills(skillslot) > 0 Then
+            buffer.WriteInt32(ClientPackets.CForgetSkill)
+            buffer.WriteInt32(skillslot)
+            Socket.SendData(buffer.Data, buffer.Head)
         Else
             AddText("No skill found.", QColorType.AlertColor)
         End If
 
-        Buffer.Dispose()
+        buffer.Dispose()
     End Sub
 
     Friend Sub SendRequestMapreport()
-        dim buffer as New ByteStream(4)
+        Dim buffer As New ByteStream(4)
 
-        Buffer.WriteInt32(ClientPackets.CMapReport)
+        buffer.WriteInt32(ClientPackets.CMapReport)
 
-        Socket.SendData(Buffer.Data, Buffer.Head)
-        Buffer.Dispose()
+        Socket.SendData(buffer.Data, buffer.Head)
+        buffer.Dispose()
     End Sub
 
     Friend Sub SendRequestAdmin()
-        dim buffer as New ByteStream(4)
+        Dim buffer As New ByteStream(4)
 
-        Buffer.WriteInt32(ClientPackets.CAdmin)
+        buffer.WriteInt32(ClientPackets.CAdmin)
 
-        Socket.SendData(Buffer.Data, Buffer.Head)
-        Buffer.Dispose()
+        Socket.SendData(buffer.Data, buffer.Head)
+        buffer.Dispose()
     End Sub
 
     Friend Sub SendRequestClasses()
-        dim buffer as New ByteStream(4)
+        Dim buffer As New ByteStream(4)
 
-        Buffer.WriteInt32(ClientPackets.CRequestClasses)
+        buffer.WriteInt32(ClientPackets.CRequestClasses)
 
-        Socket.SendData(Buffer.Data, Buffer.Head)
-        Buffer.Dispose()
+        Socket.SendData(buffer.Data, buffer.Head)
+        buffer.Dispose()
     End Sub
 
     Friend Sub SendUseEmote(emote As Integer)
-        dim buffer as New ByteStream(4)
+        Dim buffer As New ByteStream(4)
 
-        Buffer.WriteInt32(ClientPackets.CEmote)
-        Buffer.WriteInt32(Emote)
+        buffer.WriteInt32(ClientPackets.CEmote)
+        buffer.WriteInt32(emote)
 
-        Socket.SendData(Buffer.Data, Buffer.Head)
-        Buffer.Dispose()
+        Socket.SendData(buffer.Data, buffer.Head)
+        buffer.Dispose()
     End Sub
+
 End Module

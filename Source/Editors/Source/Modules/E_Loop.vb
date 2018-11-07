@@ -2,7 +2,9 @@
 Imports System.Threading
 
 Module E_Loop
+
 #Region "Startup"
+
     Friend Sub Main()
 
         'check if we are in the right place...
@@ -148,9 +150,11 @@ Module E_Loop
         GameLoop()
 
     End Sub
+
 #End Region
 
 #Region "Options"
+
     Friend Sub CreateOptions()
         Dim myXml As New XmlClass With {
             .Filename = Application.StartupPath & "\Data\Config.xml",
@@ -211,6 +215,7 @@ Module E_Loop
         FrmLogin.txtLogin.Text = Options.Username
         FrmLogin.txtPassword.Text = Options.Password
     End Sub
+
 #End Region
 
     Sub GameLoop()

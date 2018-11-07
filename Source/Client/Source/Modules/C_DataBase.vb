@@ -1,8 +1,9 @@
 ﻿Imports System.IO
-Imports System.Windows.Forms
 Imports System.Linq
+Imports System.Windows.Forms
 
 Module C_DataBase
+
     Friend Function GetFileContents(fullPath As String, Optional ByRef errInfo As String = "") As String
         Dim strContents As String
         Dim objReader As StreamReader
@@ -156,9 +157,11 @@ Module C_DataBase
         Next
 
     End Sub
+
 #End Region
 
 #Region "Options"
+
     Friend Sub CreateOptions()
         Dim myXml As New XmlClass With {
             .Filename = Application.StartupPath & "\Data\Config.xml",
@@ -271,6 +274,7 @@ Module C_DataBase
         FrmOptions.cmbScreenSize.SelectedIndex = Options.ScreenSize
 
     End Sub
+
 #End Region
 
 #Region "Blood"
@@ -284,6 +288,7 @@ Module C_DataBase
 #End Region
 
 #Region "Npc's"
+
     Sub ClearNpcs()
         Dim i As Integer
 
@@ -311,9 +316,11 @@ Module C_DataBase
 
         ReDim Npc(index).Skill(6)
     End Sub
+
 #End Region
 
 #Region "Animations"
+
     Sub ClearAnimation(index As Integer)
         Animation(index) = Nothing
         Animation(index) = New AnimationRec
@@ -384,9 +391,11 @@ Module C_DataBase
         AnimInstance(index).LockType = 0
         AnimInstance(index).lockindex = 0
     End Sub
+
 #End Region
 
 #Region "Skills"
+
     Sub ClearSkills()
         Dim i As Integer
 
@@ -402,6 +411,7 @@ Module C_DataBase
             .Name = ""
         }
     End Sub
+
 #End Region
 
 End Module

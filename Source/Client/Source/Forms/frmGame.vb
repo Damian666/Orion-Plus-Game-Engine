@@ -1,9 +1,11 @@
 ﻿Imports System.Windows.Forms
-Imports Engine
 
 Friend Class FrmGame
+
 #Region "Frm Code"
+
     Private Const CpNocloseButton As Integer = &H200
+
     Protected Overrides ReadOnly Property CreateParams() As CreateParams
         Get
             Dim myCp As CreateParams = MyBase.CreateParams
@@ -13,9 +15,9 @@ Friend Class FrmGame
     End Property
 
     Private Sub FrmMainGame_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        RePositionGUI()
+        RePositionGui()
 
-        frmAdmin.Visible = False
+        FrmAdmin.Visible = False
     End Sub
 
     Private Sub FrmMainGame_Closing(sender As Object, e As EventArgs) Handles MyBase.Closing
@@ -64,49 +66,49 @@ Friend Class FrmGame
 
         'hotbar
         If e.KeyCode = Keys.NumPad1 Then
-            skillnum = Player(MyIndex).Hotbar(1).Slot
+            skillnum = Player(Myindex).Hotbar(1).Slot
 
             If skillnum <> 0 Then
                 PlayerCastSkill(skillnum)
             End If
         End If
         If e.KeyCode = Keys.NumPad2 Then
-            skillnum = Player(MyIndex).Hotbar(2).Slot
+            skillnum = Player(Myindex).Hotbar(2).Slot
 
             If skillnum <> 0 Then
                 PlayerCastSkill(skillnum)
             End If
         End If
         If e.KeyCode = Keys.NumPad3 Then
-            skillnum = Player(MyIndex).Hotbar(3).Slot
+            skillnum = Player(Myindex).Hotbar(3).Slot
 
             If skillnum <> 0 Then
                 PlayerCastSkill(skillnum)
             End If
         End If
         If e.KeyCode = Keys.NumPad4 Then
-            skillnum = Player(MyIndex).Hotbar(4).Slot
+            skillnum = Player(Myindex).Hotbar(4).Slot
 
             If skillnum <> 0 Then
                 PlayerCastSkill(skillnum)
             End If
         End If
         If e.KeyCode = Keys.NumPad5 Then
-            skillnum = Player(MyIndex).Hotbar(5).Slot
+            skillnum = Player(Myindex).Hotbar(5).Slot
 
             If skillnum <> 0 Then
                 PlayerCastSkill(skillnum)
             End If
         End If
         If e.KeyCode = Keys.NumPad6 Then
-            skillnum = Player(MyIndex).Hotbar(6).Slot
+            skillnum = Player(Myindex).Hotbar(6).Slot
 
             If skillnum <> 0 Then
                 PlayerCastSkill(skillnum)
             End If
         End If
         If e.KeyCode = Keys.NumPad7 Then
-            skillnum = Player(MyIndex).Hotbar(7).Slot
+            skillnum = Player(Myindex).Hotbar(7).Slot
 
             If skillnum <> 0 Then
                 PlayerCastSkill(skillnum)
@@ -115,7 +117,7 @@ Friend Class FrmGame
 
         'admin
         If e.KeyCode = Keys.Insert Then
-            If Player(MyIndex).Access > 0 Then
+            If Player(Myindex).Access > 0 Then
                 SendRequestAdmin()
             End If
         End If
@@ -128,23 +130,23 @@ Friend Class FrmGame
         If Not ChatInput.Active Then
             'inventory
             If e.KeyCode = Keys.I Then
-                pnlInventoryVisible = Not pnlInventoryVisible
+                PnlInventoryVisible = Not PnlInventoryVisible
             End If
             'Character window
             If e.KeyCode = Keys.C Then
-                pnlCharacterVisible = Not pnlCharacterVisible
+                PnlCharacterVisible = Not PnlCharacterVisible
             End If
             'quest window
             If e.KeyCode = Keys.Q Then
-                pnlQuestLogVisible = Not pnlQuestLogVisible
+                PnlQuestLogVisible = Not PnlQuestLogVisible
             End If
             'options window
             If e.KeyCode = Keys.O Then
-                frmOptions.Visible = Not frmOptions.Visible
+                FrmOptions.Visible = Not FrmOptions.Visible
             End If
             'skill window
             If e.KeyCode = Keys.K Then
-                pnlSkillsVisible = Not pnlSkillsVisible
+                PnlSkillsVisible = Not PnlSkillsVisible
             End If
         End If
 
@@ -154,24 +156,26 @@ Friend Class FrmGame
         If IsNumeric(txtCurrency.Text) Then
             Select Case CurrencyMenu
                 Case 1 ' drop item
-                    SendDropItem(tmpCurrencyItem, Val(txtCurrency.Text))
+                    SendDropItem(TmpCurrencyItem, Val(txtCurrency.Text))
                 Case 2 ' deposit item
-                    DepositItem(tmpCurrencyItem, Val(txtCurrency.Text))
+                    DepositItem(TmpCurrencyItem, Val(txtCurrency.Text))
                 Case 3 ' withdraw item
-                    WithdrawItem(tmpCurrencyItem, Val(txtCurrency.Text))
+                    WithdrawItem(TmpCurrencyItem, Val(txtCurrency.Text))
                 Case 4 ' trade item
-                    TradeItem(tmpCurrencyItem, Val(txtCurrency.Text))
+                    TradeItem(TmpCurrencyItem, Val(txtCurrency.Text))
             End Select
         End If
 
         pnlCurrency.Visible = False
-        tmpCurrencyItem = 0
+        TmpCurrencyItem = 0
         txtCurrency.Text = ""
         CurrencyMenu = 0 ' clear
     End Sub
+
 #End Region
 
 #Region "PicScreen Code"
+
     Private Sub Picscreen_MouseDown(sender As Object, e As MouseEventArgs) Handles picscreen.MouseDown
         If Not CheckGuiClick(e.X, e.Y, e) Then
 
@@ -184,7 +188,7 @@ Friend Class FrmGame
 
                 ' if we're in the middle of choose the trade target or not
                 If Not TradeRequest Then
-                    If PetAlive(MyIndex) Then
+                    If PetAlive(Myindex) Then
                         If IsInBounds() Then
                             PetMove(CurX, CurY)
                         End If
@@ -193,20 +197,20 @@ Friend Class FrmGame
                     PlayerSearch(CurX, CurY, 0)
                 Else
                     ' trading
-                    SendTradeRequest(Player(myTarget).Name)
+                    SendTradeRequest(Player(MyTarget).Name)
                 End If
-                pnlRClickVisible = False
+                PnlRClickVisible = False
                 ShowPetStats = False
 
                 ' right click
             ElseIf e.Button = MouseButtons.Right Then
                 If ShiftDown OrElse VbKeyShift = True Then
                     ' admin warp if we're pressing shift and right clicking
-                    If GetPlayerAccess(MyIndex) >= 2 Then AdminWarp(CurX, CurY)
+                    If GetPlayerAccess(Myindex) >= 2 Then AdminWarp(CurX, CurY)
                 Else
                     ' rightclick menu
-                    If PetAlive(MyIndex) Then
-                        If IsInBounds() AndAlso CurX = Player(MyIndex).Pet.X And CurY = Player(MyIndex).Pet.Y Then
+                    If PetAlive(Myindex) Then
+                        If IsInBounds() AndAlso CurX = Player(Myindex).Pet.X And CurY = Player(Myindex).Pet.Y Then
                             ShowPetStats = True
                         End If
                     Else
@@ -219,7 +223,7 @@ Friend Class FrmGame
 
         CheckGuiMouseDown(e.X, e.Y, e)
 
-        If Not frmAdmin.Visible OrElse Not frmOptions.Visible Then Focus()
+        If Not FrmAdmin.Visible OrElse Not FrmOptions.Visible Then Focus()
 
     End Sub
 
@@ -264,49 +268,49 @@ Friend Class FrmGame
 
         'hotbar
         If e.KeyCode = Keys.NumPad1 Then
-            num = Player(MyIndex).Hotbar(1).Slot
+            num = Player(Myindex).Hotbar(1).Slot
 
             If num <> 0 Then
                 SendUseHotbarSlot(1)
             End If
         End If
         If e.KeyCode = Keys.NumPad2 Then
-            num = Player(MyIndex).Hotbar(2).Slot
+            num = Player(Myindex).Hotbar(2).Slot
 
             If num <> 0 Then
                 SendUseHotbarSlot(2)
             End If
         End If
         If e.KeyCode = Keys.NumPad3 Then
-            num = Player(MyIndex).Hotbar(3).Slot
+            num = Player(Myindex).Hotbar(3).Slot
 
             If num <> 0 Then
                 SendUseHotbarSlot(3)
             End If
         End If
         If e.KeyCode = Keys.NumPad4 Then
-            num = Player(MyIndex).Hotbar(4).Slot
+            num = Player(Myindex).Hotbar(4).Slot
 
             If num <> 0 Then
                 SendUseHotbarSlot(4)
             End If
         End If
         If e.KeyCode = Keys.NumPad5 Then
-            num = Player(MyIndex).Hotbar(5).Slot
+            num = Player(Myindex).Hotbar(5).Slot
 
             If num <> 0 Then
                 SendUseHotbarSlot(5)
             End If
         End If
         If e.KeyCode = Keys.NumPad6 Then
-            num = Player(MyIndex).Hotbar(6).Slot
+            num = Player(Myindex).Hotbar(6).Slot
 
             If num <> 0 Then
                 SendUseHotbarSlot(6)
             End If
         End If
         If e.KeyCode = Keys.NumPad7 Then
-            num = Player(MyIndex).Hotbar(7).Slot
+            num = Player(Myindex).Hotbar(7).Slot
 
             If num <> 0 Then
                 SendUseHotbarSlot(7)
@@ -315,7 +319,7 @@ Friend Class FrmGame
 
         'admin
         If e.KeyCode = Keys.Insert Then
-            If Player(MyIndex).Access > 0 Then
+            If Player(Myindex).Access > 0 Then
                 SendRequestAdmin()
             End If
         End If
@@ -369,15 +373,18 @@ Friend Class FrmGame
     Private ReadOnly _nonAcceptableKeys() As Keys = {Keys.NumPad0, Keys.NumPad1, Keys.NumPad2, Keys.NumPad3, Keys.NumPad4, Keys.NumPad5, Keys.NumPad6, Keys.NumPad7, Keys.NumPad8, Keys.NumPad9}
 
     Friend Function IsAcceptable(keyData As Keys) As Boolean
-        Dim index as integer = Array.IndexOf(_nonAcceptableKeys, keyData)
+        Dim index As Integer = Array.IndexOf(_nonAcceptableKeys, keyData)
         Return index >= 0
     End Function
 
 #End Region
 
 #Region "Crafting"
+
     Private Sub ChkKnownOnly_CheckedChanged(sender As Object, e As EventArgs)
         CraftingInit()
     End Sub
+
 #End Region
+
 End Class

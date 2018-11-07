@@ -1,6 +1,5 @@
-﻿Imports ASFW
+﻿Module S_GameLogic
 
-Module S_GameLogic
     Function GetTotalMapPlayers(mapNum As Integer) As Integer
         Dim i As Integer, n As Integer
         n = 0

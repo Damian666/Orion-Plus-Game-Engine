@@ -8,8 +8,8 @@ Module E_Text
     Friend Const MyChatTextLimit As Integer = 55
     Friend Const MyAmountValueLimit As Integer = 3
     Friend Const AllChatLineWidth As Integer = 55
-    Friend FirstLineindex as integer = 0
-    Friend LastLineindex as integer = 0
+    Friend FirstLineindex As Integer = 0
+    Friend LastLineindex As Integer = 0
     Friend ScrollMod As Integer = 0
 
     ' Game text buffer
@@ -69,7 +69,7 @@ Module E_Text
         DrawText(TextX, TextY, Trim$(Npc(npcNum).Name), color, backcolor, GameWindow)
     End Sub
 
-    Friend Sub DrawEventName(index as integer)
+    Friend Sub DrawEventName(index As Integer)
         Dim TextX As Integer
         Dim TextY As Integer
         Dim color As Color, backcolor As Color
@@ -80,23 +80,23 @@ Module E_Text
         color = Color.Yellow
         backcolor = Color.Black
 
-        Name = Trim$(Map.MapEvents(Index).Name)
+        Name = Trim$(Map.MapEvents(index).Name)
         ' calc pos
-        TextX = ConvertMapX(Map.MapEvents(Index).X * PIC_X) + Map.MapEvents(Index).XOffset + (PIC_X \ 2) - GetTextWidth(Trim$(Name)) / 2
-        If Map.MapEvents(Index).GraphicType = 0 Then
-            TextY = ConvertMapY(Map.MapEvents(Index).Y * PIC_Y) + Map.MapEvents(Index).YOffset - 16
-        ElseIf Map.MapEvents(Index).GraphicType = 1 Then
-            If Map.MapEvents(Index).GraphicNum < 1 OrElse Map.MapEvents(Index).GraphicNum > NumCharacters Then
-                TextY = ConvertMapY(Map.MapEvents(Index).Y * PIC_Y) + Map.MapEvents(Index).YOffset - 16
+        TextX = ConvertMapX(Map.MapEvents(index).X * PIC_X) + Map.MapEvents(index).XOffset + (PIC_X \ 2) - GetTextWidth(Trim$(Name)) / 2
+        If Map.MapEvents(index).GraphicType = 0 Then
+            TextY = ConvertMapY(Map.MapEvents(index).Y * PIC_Y) + Map.MapEvents(index).YOffset - 16
+        ElseIf Map.MapEvents(index).GraphicType = 1 Then
+            If Map.MapEvents(index).GraphicNum < 1 OrElse Map.MapEvents(index).GraphicNum > NumCharacters Then
+                TextY = ConvertMapY(Map.MapEvents(index).Y * PIC_Y) + Map.MapEvents(index).YOffset - 16
             Else
                 ' Determine location for text
-                TextY = ConvertMapY(Map.MapEvents(Index).Y * PIC_Y) + Map.MapEvents(Index).YOffset - (CharacterGFXInfo(Map.MapEvents(Index).GraphicNum).height / 4) + 16
+                TextY = ConvertMapY(Map.MapEvents(index).Y * PIC_Y) + Map.MapEvents(index).YOffset - (CharacterGFXInfo(Map.MapEvents(index).GraphicNum).height / 4) + 16
             End If
-        ElseIf Map.MapEvents(Index).GraphicType = 2 Then
-            If Map.MapEvents(Index).GraphicY2 > 0 Then
-                TextY = ConvertMapY(Map.MapEvents(Index).Y * PIC_Y) + Map.MapEvents(Index).YOffset - (Map.MapEvents(Index).GraphicY2 * PIC_Y) + 16
+        ElseIf Map.MapEvents(index).GraphicType = 2 Then
+            If Map.MapEvents(index).GraphicY2 > 0 Then
+                TextY = ConvertMapY(Map.MapEvents(index).Y * PIC_Y) + Map.MapEvents(index).YOffset - (Map.MapEvents(index).GraphicY2 * PIC_Y) + 16
             Else
-                TextY = ConvertMapY(Map.MapEvents(Index).Y * PIC_Y) + Map.MapEvents(Index).YOffset - 32 + 16
+                TextY = ConvertMapY(Map.MapEvents(index).Y * PIC_Y) + Map.MapEvents(index).YOffset - 32 + 16
             End If
         End If
 
@@ -272,17 +272,17 @@ Module E_Text
     Friend Function Explode(str As String, splitChars As Char()) As String()
 
         Dim parts As New List(Of String)()
-        Dim startindex as integer = 0
+        Dim startindex As Integer = 0
         Explode = Nothing
         While True
-            Dim index as integer = str.IndexOfAny(splitChars, startIndex)
+            Dim index As Integer = str.IndexOfAny(splitChars, startindex)
 
             If index = -1 Then
-                parts.Add(str.Substring(startIndex))
+                parts.Add(str.Substring(startindex))
                 Return parts.ToArray()
             End If
 
-            Dim word As String = str.Substring(startIndex, index - startIndex)
+            Dim word As String = str.Substring(startindex, index - startindex)
             Dim nextChar As Char = str.Substring(index, 1)(0)
             ' Dashes and the likes should stick to the word occuring before it. Whitespace doesn't have to.
             If Char.IsWhiteSpace(nextChar) Then
@@ -292,7 +292,7 @@ Module E_Text
                 parts.Add(word + nextChar)
             End If
 
-            startIndex = index + 1
+            startindex = index + 1
         End While
 
     End Function

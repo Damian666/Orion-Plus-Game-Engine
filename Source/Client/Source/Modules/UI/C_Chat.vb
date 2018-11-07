@@ -1,6 +1,7 @@
 ﻿Imports System.Windows.Forms
 
 Namespace Global.Engine
+
     Friend Structure ChatCursor
         Friend X As Integer
         Friend Y As Integer
@@ -109,6 +110,7 @@ Namespace Global.Engine
 
             Return True
         End Function
+
     End Structure
 
     Module ChatModule

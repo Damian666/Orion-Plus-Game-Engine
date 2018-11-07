@@ -1,6 +1,7 @@
 ﻿Imports ASFW
 
 Friend Module S_EventLogic
+
     Friend Sub RemoveDeadEvents()
         Dim i As Integer, mapNum As Integer, x As Integer, id As Integer, page As Integer, compare As Integer
 
@@ -2612,4 +2613,5 @@ Friend Module S_EventLogic
         End If
 
     End Sub
+
 End Module

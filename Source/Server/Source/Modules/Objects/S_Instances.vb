@@ -1,10 +1,12 @@
 ﻿Module S_Instances
+
     Structure InstancedMap
         Dim OriginalMap As Integer
     End Structure
 
     'Consts
     Friend Const INSTANCED_MAP_MASK As Integer = 16777216 '1 << 24
+
     Friend Const MAP_NUMBER_MASK As Integer = INSTANCED_MAP_MASK - 1
 
     Friend Const MAX_INSTANCED_MAPS As Integer = 100
@@ -35,10 +37,10 @@
         FindFreeInstanceMapSlot = -1
     End Function
 
-    Friend Function CreateInstance(mapNum as Integer) As Integer
+    Friend Function CreateInstance(mapNum As Integer) As Integer
         Dim i As Integer, slot As Integer
 
-        If MapNum <= 0 OrElse MapNum > MAX_MAPS Then
+        If mapNum <= 0 OrElse mapNum > MAX_MAPS Then
             CreateInstance = -1
             Exit Function
         End If
@@ -50,19 +52,19 @@
             Exit Function
         End If
 
-        InstancedMaps(slot).OriginalMap = MapNum
+        InstancedMaps(slot).OriginalMap = mapNum
 
         'Copy Map Data
-        Map(slot + MAX_MAPS) = Map(MapNum)
+        Map(slot + MAX_MAPS) = Map(mapNum)
 
         'Copy Map Item Data
 
         For i = 1 To MAX_MAP_ITEMS
-            MapItem(slot + MAX_MAPS, i) = MapItem(MapNum, i)
+            MapItem(slot + MAX_MAPS, i) = MapItem(mapNum, i)
         Next
 
         'Copy Map NPCs
-        MapNpc(slot + MAX_MAPS) = MapNpc(MapNum)
+        MapNpc(slot + MAX_MAPS) = MapNpc(mapNum)
 
         'Re-Cache Resource
         CacheResources(slot + MAX_MAPS)
@@ -87,11 +89,12 @@
         InstancedMaps(Slot).OriginalMap = 0
     End Sub
 
-    Friend Function IsInstancedMap(mapNum as Integer) As Boolean
-        IsInstancedMap = MapNum > MAX_MAPS AndAlso MapNum <= MAX_CACHED_MAPS
+    Friend Function IsInstancedMap(mapNum As Integer) As Boolean
+        IsInstancedMap = mapNum > MAX_MAPS AndAlso mapNum <= MAX_CACHED_MAPS
     End Function
 
-    Friend Function GetInstanceBaseMap(mapNum as Integer) As Integer
-        GetInstanceBaseMap = InstancedMaps(MapNum - MAX_MAPS).OriginalMap
+    Friend Function GetInstanceBaseMap(mapNum As Integer) As Integer
+        GetInstanceBaseMap = InstancedMaps(mapNum - MAX_MAPS).OriginalMap
     End Function
+
 End Module

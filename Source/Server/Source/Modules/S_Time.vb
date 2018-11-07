@@ -1,6 +1,7 @@
 ﻿Imports ASFW
 
 Friend Module modTime
+
     Sub InitTime()
         ' Add handlers to time events
         AddHandler Time.Instance.OnTimeChanged, AddressOf HandleTimeChanged
@@ -26,13 +27,13 @@ Friend Module modTime
         SendGameClockToAll()
     End Sub
 
-    Sub SendGameClockTo(index as integer)
-        dim buffer as New ByteStream(4)
+    Sub SendGameClockTo(index As Integer)
+        Dim buffer As New ByteStream(4)
 
-        Buffer.WriteInt32(ServerPackets.SClock)
-        Buffer.WriteInt32(Time.Instance.GameSpeed)
-        Buffer.WriteBytes(BitConverter.GetBytes(Time.Instance.Time.Ticks))
-        Socket.SendDataTo(Index, Buffer.Data, Buffer.Head)
+        buffer.WriteInt32(ServerPackets.SClock)
+        buffer.WriteInt32(Time.Instance.GameSpeed)
+        buffer.WriteBytes(BitConverter.GetBytes(Time.Instance.Time.Ticks))
+        Socket.SendDataTo(index, buffer.Data, buffer.Head)
 
         AddDebug("Sent SMSG: SClock")
 
@@ -51,12 +52,12 @@ Friend Module modTime
         Next
     End Sub
 
-    Sub SendTimeTo(index as integer)
-        dim buffer as New ByteStream(4)
+    Sub SendTimeTo(index As Integer)
+        Dim buffer As New ByteStream(4)
 
-        Buffer.WriteInt32(ServerPackets.STime)
-        Buffer.WriteByte(Time.Instance.TimeOfDay)
-        Socket.SendDataTo(Index, Buffer.Data, Buffer.Head)
+        buffer.WriteInt32(ServerPackets.STime)
+        buffer.WriteByte(Time.Instance.TimeOfDay)
+        Socket.SendDataTo(index, buffer.Data, buffer.Head)
 
         AddDebug("Sent SMSG: STime")
 
@@ -75,4 +76,5 @@ Friend Module modTime
         Next
 
     End Sub
+
 End Module

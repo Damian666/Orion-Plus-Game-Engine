@@ -2,9 +2,12 @@
 Imports SFML.Window
 
 Friend Module E_AutoTiles
+
 #Region "Globals and Types"
+
     ' Autotiles
     Friend Const AUTO_INNER As Byte = 1
+
     Friend Const AUTO_OUTER As Byte = 2
     Friend Const AUTO_HORIZONTAL As Byte = 3
     Friend Const AUTO_VERTICAL As Byte = 4
@@ -12,6 +15,7 @@ Friend Module E_AutoTiles
 
     ' Autotile types
     Friend Const AUTOTILE_NONE As Byte = 0
+
     Friend Const AUTOTILE_NORMAL As Byte = 1
     Friend Const AUTOTILE_FAKE As Byte = 2
     Friend Const AUTOTILE_ANIM As Byte = 3
@@ -20,11 +24,13 @@ Friend Module E_AutoTiles
 
     ' Rendering
     Friend Const RENDER_STATE_NONE As Integer = 0
+
     Friend Const RENDER_STATE_NORMAL As Integer = 1
     Friend Const RENDER_STATE_AUTOTILE As Integer = 2
 
     ' autotiling
     Friend autoInner(4) As PointRec
+
     Friend autoNW(4) As PointRec
     Friend autoNE(4) As PointRec
     Friend autoSW(4) As PointRec
@@ -32,6 +38,7 @@ Friend Module E_AutoTiles
 
     ' Map animations
     Friend waterfallFrame As Integer
+
     Friend autoTileFrame As Integer
 
     Friend Autotile(,) As AutotileRec
@@ -52,6 +59,7 @@ Friend Module E_AutoTiles
         Dim Layer() As QuarterTileRec '1 To MapLayer.Count - 1
         Dim ExLayer() As QuarterTileRec '1 To ExMapLayer.Count - 1
     End Structure
+
 #End Region
 
     '\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
@@ -204,7 +212,7 @@ Friend Module E_AutoTiles
         ' We also give letters to each subtile for easy rendering tweaks. ;]
         ' First, we need to re-size the array
 
-        ReDim Autotile(Map.MaxX,Map.MaxY)
+        ReDim Autotile(Map.MaxX, Map.MaxY)
         For X = 0 To Map.MaxX
             For Y = 0 To Map.MaxY
                 ReDim Autotile(X, Y).Layer(LayerType.Count - 1)
@@ -829,4 +837,5 @@ Friend Module E_AutoTiles
         GameWindow.Draw(tmpSprite)
 
     End Sub
+
 End Module

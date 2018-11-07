@@ -5,13 +5,15 @@ Imports SFML.Graphics
 Imports SFML.Window
 
 Friend Module C_Housing
+
 #Region "Globals & Types"
+
     Friend MaxHouses As Integer = 100
 
     Friend FurnitureCount As Integer
     Friend FurnitureHouse As Integer
     Friend FurnitureSelected As Integer
-    Friend HouseTileindex as integer
+    Friend HouseTileindex As Integer
 
     Friend House() As HouseRec
     Friend HouseConfig() As HouseRec
@@ -36,33 +38,35 @@ Friend Module C_Housing
     End Structure
 
     Structure PlayerHouseRec
-        Dim Houseindex as integer
+        Dim Houseindex As Integer
         Dim FurnitureCount As Integer
         Dim Furniture() As FurnitureRec
     End Structure
+
 #End Region
 
 #Region "Incoming Packets"
+
     Sub Packet_HouseConfigurations(ByRef data() As Byte)
         Dim i As Integer
-        dim buffer as New ByteStream(Data)
+        Dim buffer As New ByteStream(data)
         For i = 1 To MaxHouses
             HouseConfig(i).ConfigName = buffer.ReadString
-            HouseConfig(i).BaseMap = Buffer.ReadInt32
-            HouseConfig(i).MaxFurniture = Buffer.ReadInt32
-            HouseConfig(i).Price = Buffer.ReadInt32
+            HouseConfig(i).BaseMap = buffer.ReadInt32
+            HouseConfig(i).MaxFurniture = buffer.ReadInt32
+            HouseConfig(i).Price = buffer.ReadInt32
         Next
 
-        Buffer.Dispose()
+        buffer.Dispose()
 
     End Sub
 
     Sub Packet_HouseOffer(ByRef data() As Byte)
         Dim i As Integer
-        dim buffer as New ByteStream(Data)
-        i = Buffer.ReadInt32
+        Dim buffer As New ByteStream(data)
+        i = buffer.ReadInt32
 
-        Buffer.Dispose()
+        buffer.Dispose()
 
         DialogType = DialogueTypeBuyhome
         If HouseConfig(i).MaxFurniture > 0 Then
@@ -78,14 +82,14 @@ Friend Module C_Housing
 
         UpdateDialog = True
 
-        Buffer.Dispose()
+        buffer.Dispose()
 
     End Sub
 
     Sub Packet_Visit(ByRef data() As Byte)
         Dim i As Integer
-        dim buffer as New ByteStream(Data)
-        i = Buffer.ReadInt32
+        Dim buffer As New ByteStream(data)
+        i = buffer.ReadInt32
 
         DialogType = DialogueTypeVisit
 
@@ -93,7 +97,7 @@ Friend Module C_Housing
         DialogMsg2 = ""
         DialogMsg3 = ""
 
-        Buffer.Dispose()
+        buffer.Dispose()
 
         UpdateDialog = True
 
@@ -101,69 +105,71 @@ Friend Module C_Housing
 
     Sub Packet_Furniture(ByRef data() As Byte)
         Dim i As Integer
-        dim buffer as New ByteStream(Data)
-        FurnitureHouse = Buffer.ReadInt32
-        FurnitureCount = Buffer.ReadInt32
+        Dim buffer As New ByteStream(data)
+        FurnitureHouse = buffer.ReadInt32
+        FurnitureCount = buffer.ReadInt32
 
         ReDim Furniture(FurnitureCount)
         If FurnitureCount > 0 Then
             For i = 1 To FurnitureCount
-                Furniture(i).ItemNum = Buffer.ReadInt32
-                Furniture(i).X = Buffer.ReadInt32
-                Furniture(i).Y = Buffer.ReadInt32
+                Furniture(i).ItemNum = buffer.ReadInt32
+                Furniture(i).X = buffer.ReadInt32
+                Furniture(i).Y = buffer.ReadInt32
             Next
         End If
 
-        Buffer.Dispose()
+        buffer.Dispose()
 
     End Sub
 
     Sub Packet_EditHouses(ByRef data() As Byte)
-        dim buffer as New ByteStream(Data)
+        Dim buffer As New ByteStream(data)
         Dim i As Integer
         For i = 1 To MaxHouses
             With House(i)
-                .ConfigName = Trim$(Buffer.ReadString)
-                .BaseMap = Buffer.ReadInt32
-                .X = Buffer.ReadInt32
-                .Y = Buffer.ReadInt32
-                .Price = Buffer.ReadInt32
-                .MaxFurniture = Buffer.ReadInt32
+                .ConfigName = Trim$(buffer.ReadString)
+                .BaseMap = buffer.ReadInt32
+                .X = buffer.ReadInt32
+                .Y = buffer.ReadInt32
+                .Price = buffer.ReadInt32
+                .MaxFurniture = buffer.ReadInt32
             End With
         Next
 
         HouseEdit = True
 
-        Buffer.Dispose()
+        buffer.Dispose()
 
     End Sub
+
 #End Region
 
 #Region "Outgoing Packets"
+
     Friend Sub SendRequestEditHouse()
-        dim buffer as New ByteStream(4)
+        Dim buffer As New ByteStream(4)
 
-        Buffer.WriteInt32(EditorPackets.RequestEditHouse)
+        buffer.WriteInt32(EditorPackets.RequestEditHouse)
 
-        Socket.SendData(Buffer.Data, Buffer.Head)
-        Buffer.Dispose()
+        Socket.SendData(buffer.Data, buffer.Head)
+        buffer.Dispose()
 
     End Sub
 
     Friend Sub SendBuyHouse(accepted As Byte)
-        dim buffer as New ByteStream(4)
+        Dim buffer As New ByteStream(4)
 
-        Buffer.WriteInt32(ClientPackets.CBuyHouse)
-        Buffer.WriteInt32(Accepted)
+        buffer.WriteInt32(ClientPackets.CBuyHouse)
+        buffer.WriteInt32(accepted)
 
-        Socket.SendData(Buffer.Data, Buffer.Head)
-        Buffer.Dispose()
+        Socket.SendData(buffer.Data, buffer.Head)
+        buffer.Dispose()
     End Sub
 
     Friend Sub SendInvite(name As String)
-        dim buffer as New ByteStream(4)
+        Dim buffer As New ByteStream(4)
 
-        Buffer.WriteInt32(ClientPackets.CVisit)
+        buffer.WriteInt32(ClientPackets.CVisit)
         buffer.WriteString((name))
 
         Socket.SendData(buffer.Data, buffer.Head)
@@ -179,9 +185,11 @@ Friend Module C_Housing
         Socket.SendData(buffer.Data, buffer.Head)
         buffer.Dispose()
     End Sub
+
 #End Region
 
 #Region "Drawing"
+
     Friend Sub CheckFurniture()
         Dim i As Integer
         i = 1
@@ -243,6 +251,7 @@ Friend Module C_Housing
         Next
 
     End Sub
+
 #End Region
 
 End Module

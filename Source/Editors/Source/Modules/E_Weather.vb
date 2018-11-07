@@ -153,7 +153,7 @@ Friend Module E_Weather
         If Not Options.Sound = 1 OrElse Not File.Exists(Application.StartupPath & SOUND_PATH & FileName) Then Exit Sub
         If CurWeatherMusic = FileName Then Exit Sub
 
-        dim buffer as SoundBuffer
+        Dim buffer As SoundBuffer
         If WeatherSoundPlayer Is Nothing Then
             WeatherSoundPlayer = New Sound()
         Else
@@ -176,4 +176,5 @@ Friend Module E_Weather
 
         CurWeatherMusic = ""
     End Sub
+
 End Module

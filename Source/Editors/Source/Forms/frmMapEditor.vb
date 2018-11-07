@@ -161,9 +161,11 @@ Friend Class frmMapEditor
         pnlDirBlock.Visible = False
 
     End Sub
+
 #End Region
 
 #Region "Toolbar"
+
     Private Sub TsbSave_Click(sender As Object, e As EventArgs) Handles tsbSave.Click
         HideCursor = True
         ScreenShotTimer = GetTickCount() + 500
@@ -195,9 +197,11 @@ Friend Class frmMapEditor
         ScreenShotTimer = GetTickCount() + 1000
         TakeScreenShot = True
     End Sub
+
 #End Region
 
 #Region "PicScreen"
+
     Private Sub Picscreen_MouseDown(sender As Object, e As MouseEventArgs) Handles picScreen.MouseDown
         If e.X > pnlBack2.Width - 32 OrElse e.Y > pnlBack2.Height - 32 Then Exit Sub
         MapEditorMouseDown(e.Button, e.X, e.Y, False)
@@ -234,6 +238,7 @@ Friend Class frmMapEditor
 #End Region
 
 #Region "Attributes"
+
     Private Sub LblVisualWarp_Click(sender As Object, e As EventArgs) Handles lblVisualWarp.Click
         fraMapWarp.Visible = False
         FrmVisualWarp.Visible = True
@@ -477,7 +482,7 @@ Friend Class frmMapEditor
     End Sub
 
     Private Sub BtnHouseTileOk_Click(sender As Object, e As EventArgs) Handles btnHouseTileOk.Click
-        HouseTileIndex = scrlBuyHouse.Value
+        HouseTileindex = scrlBuyHouse.Value
         pnlAttributes.Visible = False
         fraBuyHouse.Visible = False
     End Sub
@@ -485,6 +490,7 @@ Friend Class frmMapEditor
 #End Region
 
 #Region "Map Settings"
+
     Private Sub TxtName_TextChanged(sender As Object, e As EventArgs) Handles txtName.TextChanged
         Map.Name = Trim$(txtName.Text)
     End Sub
@@ -539,7 +545,7 @@ Friend Class frmMapEditor
     End Sub
 
     Private Sub ScrlFog_Scroll(sender As Object, e As EventArgs) Handles nudFog.ValueChanged
-        Map.FogIndex = nudFog.Value
+        Map.Fogindex = nudFog.Value
         CurrentFog = nudFog.Value
     End Sub
 
@@ -598,7 +604,7 @@ Friend Class frmMapEditor
         With Map
 
             ' set the data before changing it
-            ReDim tempArr(.MaxX,.MaxY)
+            ReDim tempArr(.MaxX, .MaxY)
             For X = 0 To .MaxX
                 For Y = 0 To .MaxY
                     ReDim tempArr(X, Y).Layer(LayerType.Count - 1)
@@ -624,8 +630,8 @@ Friend Class frmMapEditor
             .MaxX = nudMaxX.Value
             .MaxY = nudMaxY.Value
 
-            ReDim Map.Tile(.MaxX,.MaxY)
-            ReDim Autotile(.MaxX,.MaxY)
+            ReDim Map.Tile(.MaxX, .MaxY)
+            ReDim Autotile(.MaxX, .MaxY)
 
             If x2 > .MaxX Then x2 = .MaxX
             If y2 > .MaxY Then y2 = .MaxY
@@ -712,6 +718,7 @@ Friend Class frmMapEditor
 #End Region
 
 #Region "Npc's"
+
     Private Sub LstMapNpc_SelectedIndexChanged(sender As Object, e As EventArgs) Handles lstMapNpc.SelectedIndexChanged
         cmbNpcList.SelectedItem = lstMapNpc.SelectedItem
     End Sub

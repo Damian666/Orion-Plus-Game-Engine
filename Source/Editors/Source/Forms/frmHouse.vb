@@ -71,4 +71,5 @@
     Private Sub BtnCancel_Click(sender As Object, e As EventArgs) Handles btnCancel.Click
         HouseEditorCancel()
     End Sub
+
 End Class

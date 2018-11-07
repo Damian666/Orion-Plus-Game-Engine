@@ -1,5 +1,7 @@
 ﻿Friend Class FrmAutoMapper
+
 #Region "Frm Code"
+
     Private Sub FrmAutoMapper_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         pnlResources.Top = 0
         pnlResources.Left = 0
@@ -46,6 +48,7 @@
 #End Region
 
 #Region "Resources"
+
     Private Sub LstResources_SelectedIndexChanged(sender As Object, e As EventArgs) Handles lstResources.SelectedIndexChanged
         If lstResources.SelectedIndex < 0 Then Exit Sub
         txtResource.Text = lstResources.Items.Item(lstResources.SelectedIndex)
@@ -93,6 +96,7 @@
 
         pnlResources.Visible = False
     End Sub
+
 #End Region
 
 #Region "TileSet"

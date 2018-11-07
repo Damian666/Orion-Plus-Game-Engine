@@ -1,4 +1,5 @@
 ﻿Friend Class FrmLogin
+
     Private Sub FrmLogin_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         Main()
     End Sub
@@ -49,6 +50,7 @@
     End Sub
 
 #Region "Editors"
+
     Private Sub BtnMapEditor_Click(sender As Object, e As EventArgs) Handles btnMapEditor.Click
         SendEditorRequestMap(1)
     End Sub

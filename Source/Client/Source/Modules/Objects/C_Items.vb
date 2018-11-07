@@ -3,17 +3,22 @@ Imports System.Windows.Forms
 Imports ASFW
 
 Module C_Items
+
 #Region "Globals & Types"
+
     ' inv drag + drop
     Friend DragInvSlotNum As Integer
+
     Friend InvX As Integer
     Friend InvY As Integer
 
     Friend InvItemFrame(MAX_INV) As Byte ' Used for animated items
     Friend LastItemDesc As Integer ' Stores the last item we showed in desc
+
 #End Region
 
 #Region "DataBase"
+
     Friend Sub CheckItems()
         Dim i As Integer
         i = 1
@@ -52,9 +57,11 @@ Module C_Items
         Next
 
     End Sub
+
 #End Region
 
 #Region "Incoming Packets"
+
     Friend Sub Packet_UpdateItem(ByRef data() As Byte)
         Dim n As Integer, i As Integer
         Dim buffer As New ByteStream(data)
@@ -123,9 +130,11 @@ Module C_Items
         CurrencyMenu = 0 ' clear
 
     End Sub
+
 #End Region
 
 #Region "Outgoing Packets"
+
     Sub SendRequestItems()
         Dim buffer As New ByteStream(4)
 
@@ -134,9 +143,6 @@ Module C_Items
         Socket.SendData(buffer.Data, buffer.Head)
         buffer.Dispose()
     End Sub
-#End Region
-
-#Region "Drawing"
 
 #End Region
 

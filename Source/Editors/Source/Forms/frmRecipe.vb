@@ -65,4 +65,5 @@
     Private Sub NudCreateTime_ValueChanged(sender As Object, e As EventArgs) Handles nudCreateTime.ValueChanged
         Recipe(Editorindex).CreateTime = nudCreateTime.Value
     End Sub
+
 End Class

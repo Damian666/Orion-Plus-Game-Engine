@@ -19,58 +19,85 @@ Module E_Graphics
 
     'TileSets
     Friend TileSetTexture() As Texture
+
     Friend TileSetSprite() As Sprite
     Friend TileSetTextureInfo() As GraphicInfo
+
     'Characters
     Friend CharacterGFX() As Texture
+
     Friend CharacterSprite() As Sprite
     Friend CharacterGFXInfo() As GraphicInfo
+
     'Paperdolls
     Friend PaperDollGFX() As Texture
+
     Friend PaperDollSprite() As Sprite
     Friend PaperDollGFXInfo() As GraphicInfo
+
     'Items
     Friend ItemsGFX() As Texture
+
     Friend ItemsSprite() As Sprite
     Friend ItemsGFXInfo() As GraphicInfo
+
     'Resources
     Friend ResourcesGFX() As Texture
+
     Friend ResourcesSprite() As Sprite
     Friend ResourcesGFXInfo() As GraphicInfo
+
     'Animations
     Friend AnimationsGFX() As Texture
+
     Friend AnimationsSprite() As Sprite
     Friend AnimationsGFXInfo() As GraphicInfo
+
     'Skills
     Friend SkillIconsGFX() As Texture
+
     Friend SkillIconsSprite() As Sprite
     Friend SkillIconsGFXInfo() As GraphicInfo
+
     'Housing
     Friend FurnitureGFX() As Texture
+
     Friend FurnitureSprite() As Sprite
     Friend FurnitureGFXInfo() As GraphicInfo
+
     'Faces
     Friend FacesGFX() As Texture
+
     Friend FacesSprite() As Sprite
     Friend FacesGFXInfo() As GraphicInfo
+
     'Projectiles
     Friend ProjectileGFX() As Texture
+
     Friend ProjectileSprite() As Sprite
     Friend ProjectileGFXInfo() As GraphicInfo
+
     'Fogs
     Friend FogGFX() As Texture
+
     Friend FogSprite() As Sprite
     Friend FogGFXInfo() As GraphicInfo
+
     'Door
     Friend DoorGFX As Texture
+
     Friend DoorSprite As Sprite
     Friend DoorGFXInfo As GraphicInfo
+
     'Directions
     Friend DirectionsGfx As Texture
+
     Friend DirectionsSprite As Sprite
     Friend DirectionsGFXInfo As GraphicInfo
+
     'Weather
     Friend WeatherGFX As Texture
+
     Friend WeatherSprite As Sprite
     Friend WeatherGFXInfo As GraphicInfo
 
@@ -115,7 +142,7 @@ Module E_Graphics
 
         TilesetWindow = New RenderWindow(frmMapEditor.picBackSelect.Handle)
 
-        EditorItem_Furniture = New RenderWindow(frmItem.picFurniture.Handle)
+        EditorItem_Furniture = New RenderWindow(FrmItem.picFurniture.Handle)
 
         EditorSkill_Icon = New RenderWindow(frmSkill.picSprite.Handle)
 
@@ -216,167 +243,167 @@ Module E_Graphics
 
     End Sub
 
-    Friend Sub LoadTexture(index as integer, TexType As Byte)
+    Friend Sub LoadTexture(index As Integer, TexType As Byte)
 
         If TexType = 1 Then 'tilesets
-            If Index <= 0 OrElse Index > NumTileSets Then Exit Sub
+            If index <= 0 OrElse index > NumTileSets Then Exit Sub
 
             'Load texture first, dont care about memory streams (just use the filename)
-            TileSetTexture(Index) = New Texture(Application.StartupPath & GFX_PATH & "tilesets\" & Index & GFX_EXT)
-            TileSetSprite(Index) = New Sprite(TileSetTexture(Index))
+            TileSetTexture(index) = New Texture(Application.StartupPath & GFX_PATH & "tilesets\" & index & GFX_EXT)
+            TileSetSprite(index) = New Sprite(TileSetTexture(index))
 
             'Cache the width and height
-            With TileSetTextureInfo(Index)
-                .width = TileSetTexture(Index).Size.X
-                .height = TileSetTexture(Index).Size.Y
+            With TileSetTextureInfo(index)
+                .width = TileSetTexture(index).Size.X
+                .height = TileSetTexture(index).Size.Y
                 .IsLoaded = True
                 .TextureTimer = GetTickCount() + 100000
             End With
 
         ElseIf TexType = 2 Then 'characters
-            If Index <= 0 OrElse Index > NumCharacters Then Exit Sub
+            If index <= 0 OrElse index > NumCharacters Then Exit Sub
 
             'Load texture first, dont care about memory streams (just use the filename)
-            CharacterGFX(Index) = New Texture(Application.StartupPath & GFX_PATH & "characters\" & Index & GFX_EXT)
-            CharacterSprite(Index) = New Sprite(CharacterGFX(Index))
+            CharacterGFX(index) = New Texture(Application.StartupPath & GFX_PATH & "characters\" & index & GFX_EXT)
+            CharacterSprite(index) = New Sprite(CharacterGFX(index))
 
             'Cache the width and height
-            With CharacterGFXInfo(Index)
-                .width = CharacterGFX(Index).Size.X
-                .height = CharacterGFX(Index).Size.Y
+            With CharacterGFXInfo(index)
+                .width = CharacterGFX(index).Size.X
+                .height = CharacterGFX(index).Size.Y
                 .IsLoaded = True
                 .TextureTimer = GetTickCount() + 100000
             End With
 
         ElseIf TexType = 3 Then 'paperdoll
-            If Index <= 0 OrElse Index > NumPaperdolls Then Exit Sub
+            If index <= 0 OrElse index > NumPaperdolls Then Exit Sub
 
             'Load texture first, dont care about memory streams (just use the filename)
-            PaperDollGFX(Index) = New Texture(Application.StartupPath & GFX_PATH & "Paperdolls\" & Index & GFX_EXT)
-            PaperDollSprite(Index) = New Sprite(PaperDollGFX(Index))
+            PaperDollGFX(index) = New Texture(Application.StartupPath & GFX_PATH & "Paperdolls\" & index & GFX_EXT)
+            PaperDollSprite(index) = New Sprite(PaperDollGFX(index))
 
             'Cache the width and height
-            With PaperDollGFXInfo(Index)
-                .width = PaperDollGFX(Index).Size.X
-                .height = PaperDollGFX(Index).Size.Y
+            With PaperDollGFXInfo(index)
+                .width = PaperDollGFX(index).Size.X
+                .height = PaperDollGFX(index).Size.Y
                 .IsLoaded = True
                 .TextureTimer = GetTickCount() + 100000
             End With
 
         ElseIf TexType = 4 Then 'items
-            If Index <= 0 OrElse Index > NumItems Then Exit Sub
+            If index <= 0 OrElse index > NumItems Then Exit Sub
 
             'Load texture first, dont care about memory streams (just use the filename)
-            ItemsGFX(Index) = New Texture(Application.StartupPath & GFX_PATH & "items\" & Index & GFX_EXT)
-            ItemsSprite(Index) = New Sprite(ItemsGFX(Index))
+            ItemsGFX(index) = New Texture(Application.StartupPath & GFX_PATH & "items\" & index & GFX_EXT)
+            ItemsSprite(index) = New Sprite(ItemsGFX(index))
 
             'Cache the width and height
-            With ItemsGFXInfo(Index)
-                .width = ItemsGFX(Index).Size.X
-                .height = ItemsGFX(Index).Size.Y
+            With ItemsGFXInfo(index)
+                .width = ItemsGFX(index).Size.X
+                .height = ItemsGFX(index).Size.Y
                 .IsLoaded = True
                 .TextureTimer = GetTickCount() + 100000
             End With
 
         ElseIf TexType = 5 Then 'resources
-            If Index <= 0 OrElse Index > NumResources Then Exit Sub
+            If index <= 0 OrElse index > NumResources Then Exit Sub
 
             'Load texture first, dont care about memory streams (just use the filename)
-            ResourcesGFX(Index) = New Texture(Application.StartupPath & GFX_PATH & "resources\" & Index & GFX_EXT)
-            ResourcesSprite(Index) = New Sprite(ResourcesGFX(Index))
+            ResourcesGFX(index) = New Texture(Application.StartupPath & GFX_PATH & "resources\" & index & GFX_EXT)
+            ResourcesSprite(index) = New Sprite(ResourcesGFX(index))
 
             'Cache the width and height
-            With ResourcesGFXInfo(Index)
-                .width = ResourcesGFX(Index).Size.X
-                .height = ResourcesGFX(Index).Size.Y
+            With ResourcesGFXInfo(index)
+                .width = ResourcesGFX(index).Size.X
+                .height = ResourcesGFX(index).Size.Y
                 .IsLoaded = True
                 .TextureTimer = GetTickCount() + 100000
             End With
 
         ElseIf TexType = 6 Then 'animations
-            If Index <= 0 OrElse Index > NumAnimations Then Exit Sub
+            If index <= 0 OrElse index > NumAnimations Then Exit Sub
 
             'Load texture first, dont care about memory streams (just use the filename)
-            AnimationsGFX(Index) = New Texture(Application.StartupPath & GFX_PATH & "Animations\" & Index & GFX_EXT)
-            AnimationsSprite(Index) = New Sprite(AnimationsGFX(Index))
+            AnimationsGFX(index) = New Texture(Application.StartupPath & GFX_PATH & "Animations\" & index & GFX_EXT)
+            AnimationsSprite(index) = New Sprite(AnimationsGFX(index))
 
             'Cache the width and height
-            With AnimationsGFXInfo(Index)
-                .width = AnimationsGFX(Index).Size.X
-                .height = AnimationsGFX(Index).Size.Y
+            With AnimationsGFXInfo(index)
+                .width = AnimationsGFX(index).Size.X
+                .height = AnimationsGFX(index).Size.Y
                 .IsLoaded = True
                 .TextureTimer = GetTickCount() + 100000
             End With
 
         ElseIf TexType = 7 Then 'faces
-            If Index <= 0 OrElse Index > NumFaces Then Exit Sub
+            If index <= 0 OrElse index > NumFaces Then Exit Sub
 
             'Load texture first, dont care about memory streams (just use the filename)
-            FacesGFX(Index) = New Texture(Application.StartupPath & GFX_PATH & "Faces\" & Index & GFX_EXT)
-            FacesSprite(Index) = New Sprite(FacesGFX(Index))
+            FacesGFX(index) = New Texture(Application.StartupPath & GFX_PATH & "Faces\" & index & GFX_EXT)
+            FacesSprite(index) = New Sprite(FacesGFX(index))
 
             'Cache the width and height
-            With FacesGFXInfo(Index)
-                .width = FacesGFX(Index).Size.X
-                .height = FacesGFX(Index).Size.Y
+            With FacesGFXInfo(index)
+                .width = FacesGFX(index).Size.X
+                .height = FacesGFX(index).Size.Y
                 .IsLoaded = True
                 .TextureTimer = GetTickCount() + 100000
             End With
 
         ElseIf TexType = 8 Then 'fogs
-            If Index <= 0 OrElse Index > NumFogs Then Exit Sub
+            If index <= 0 OrElse index > NumFogs Then Exit Sub
 
             'Load texture first, dont care about memory streams (just use the filename)
-            FogGFX(Index) = New Texture(Application.StartupPath & GFX_PATH & "Fogs\" & Index & GFX_EXT)
-            FogSprite(Index) = New Sprite(FogGFX(Index))
+            FogGFX(index) = New Texture(Application.StartupPath & GFX_PATH & "Fogs\" & index & GFX_EXT)
+            FogSprite(index) = New Sprite(FogGFX(index))
 
             'Cache the width and height
-            With FogGFXInfo(Index)
-                .width = FogGFX(Index).Size.X
-                .height = FogGFX(Index).Size.Y
+            With FogGFXInfo(index)
+                .width = FogGFX(index).Size.X
+                .height = FogGFX(index).Size.Y
                 .IsLoaded = True
                 .TextureTimer = GetTickCount() + 100000
             End With
 
         ElseIf TexType = 9 Then 'skill icons
-            If Index <= 0 OrElse Index > NumSkillIcons Then Exit Sub
+            If index <= 0 OrElse index > NumSkillIcons Then Exit Sub
 
             'Load texture first, dont care about memory streams (just use the filename)
-            SkillIconsGFX(Index) = New Texture(Application.StartupPath & GFX_PATH & "SkillIcons\" & Index & GFX_EXT)
-            SkillIconsSprite(Index) = New Sprite(SkillIconsGFX(Index))
+            SkillIconsGFX(index) = New Texture(Application.StartupPath & GFX_PATH & "SkillIcons\" & index & GFX_EXT)
+            SkillIconsSprite(index) = New Sprite(SkillIconsGFX(index))
 
             'Cache the width and height
-            With SkillIconsGFXInfo(Index)
-                .width = SkillIconsGFX(Index).Size.X
-                .height = SkillIconsGFX(Index).Size.Y
+            With SkillIconsGFXInfo(index)
+                .width = SkillIconsGFX(index).Size.X
+                .height = SkillIconsGFX(index).Size.Y
                 .IsLoaded = True
                 .TextureTimer = GetTickCount() + 100000
             End With
         ElseIf TexType = 10 Then 'furniture
-            If Index <= 0 OrElse Index > NumFurniture Then Exit Sub
+            If index <= 0 OrElse index > NumFurniture Then Exit Sub
 
             'Load texture first, dont care about memory streams (just use the filename)
-            FurnitureGFX(Index) = New Texture(Application.StartupPath & GFX_PATH & "Furniture\" & Index & GFX_EXT)
-            FurnitureSprite(Index) = New Sprite(FurnitureGFX(Index))
+            FurnitureGFX(index) = New Texture(Application.StartupPath & GFX_PATH & "Furniture\" & index & GFX_EXT)
+            FurnitureSprite(index) = New Sprite(FurnitureGFX(index))
 
             'Cache the width and height
-            With FurnitureGFXInfo(Index)
-                .width = FurnitureGFX(Index).Size.X
-                .height = FurnitureGFX(Index).Size.Y
+            With FurnitureGFXInfo(index)
+                .width = FurnitureGFX(index).Size.X
+                .height = FurnitureGFX(index).Size.Y
                 .IsLoaded = True
                 .TextureTimer = GetTickCount() + 100000
             End With
         ElseIf TexType = 11 Then 'projectiles
-            If Index <= 0 OrElse Index > NumProjectiles Then Exit Sub
+            If index <= 0 OrElse index > NumProjectiles Then Exit Sub
 
             'Load texture first, dont care about memory streams (just use the filename)
-            ProjectileGFX(Index) = New Texture(Application.StartupPath & GFX_PATH & "Projectiles\" & Index & GFX_EXT)
-            ProjectileSprite(Index) = New Sprite(ProjectileGFX(Index))
+            ProjectileGFX(index) = New Texture(Application.StartupPath & GFX_PATH & "Projectiles\" & index & GFX_EXT)
+            ProjectileSprite(index) = New Sprite(ProjectileGFX(index))
 
             'Cache the width and height
-            With ProjectileGFXInfo(Index)
-                .width = ProjectileGFX(Index).Size.X
-                .height = ProjectileGFX(Index).Size.Y
+            With ProjectileGFXInfo(index)
+                .width = ProjectileGFX(index).Size.X
+                .height = ProjectileGFX(index).Size.Y
                 .IsLoaded = True
                 .TextureTimer = GetTickCount() + 100000
             End With
@@ -1029,8 +1056,8 @@ Module E_Graphics
                 ' Resources
                 If NumResources > 0 Then
                     If Resources_Init Then
-                        If Resource_Index > 0 Then
-                            For I = 1 To Resource_Index
+                        If Resource_index > 0 Then
+                            For I = 1 To Resource_index
                                 If MapResource(I).Y = Y Then
                                     DrawMapResource(I)
                                 End If

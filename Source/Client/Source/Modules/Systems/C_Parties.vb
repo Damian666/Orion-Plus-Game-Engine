@@ -6,6 +6,7 @@ Imports SFML.Window
 Module C_Parties
 
 #Region "Types and Globals"
+
     Friend Party As PartyRec
 
     Friend Structure PartyRec
@@ -13,9 +14,11 @@ Module C_Parties
         Dim Member() As Integer
         Dim MemberCount As Integer
     End Structure
+
 #End Region
 
 #Region "Database"
+
     Sub ClearParty()
         Party = New PartyRec With {
             .Leader = 0,
@@ -23,81 +26,85 @@ Module C_Parties
         }
         ReDim Party.Member(MAX_PARTY_MEMBERS)
     End Sub
+
 #End Region
 
 #Region "Incoming Packets"
+
     Sub Packet_PartyInvite(ByRef data() As Byte)
         Dim name As String
-        dim buffer as New ByteStream(Data)
-        Name = Buffer.ReadString
+        Dim buffer As New ByteStream(data)
+        name = buffer.ReadString
 
         DialogType = DialogueTypeParty
 
         DialogMsg1 = "Party Invite"
-        DialogMsg2 = Trim$(Name) & " has invited you to a party. Would you like to join?"
+        DialogMsg2 = Trim$(name) & " has invited you to a party. Would you like to join?"
 
         UpdateDialog = True
 
-        Buffer.Dispose()
+        buffer.Dispose()
     End Sub
 
     Sub Packet_PartyUpdate(ByRef data() As Byte)
         Dim I As Integer, inParty As Integer
-        dim buffer as New ByteStream(Data)
-        InParty = Buffer.ReadInt32
+        Dim buffer As New ByteStream(data)
+        inParty = buffer.ReadInt32
 
         ' exit out if we're not in a party
-        If InParty = 0 Then
+        If inParty = 0 Then
             ClearParty()
             ' exit out early
-            Buffer.Dispose()
+            buffer.Dispose()
             Exit Sub
         End If
 
         ' carry on otherwise
-        Party.Leader = Buffer.ReadInt32
+        Party.Leader = buffer.ReadInt32
         For I = 1 To MAX_PARTY_MEMBERS
-            Party.Member(I) = Buffer.ReadInt32
+            Party.Member(I) = buffer.ReadInt32
         Next
-        Party.MemberCount = Buffer.ReadInt32
+        Party.MemberCount = buffer.ReadInt32
 
-        Buffer.Dispose()
+        buffer.Dispose()
     End Sub
 
     Sub Packet_PartyVitals(ByRef data() As Byte)
-        Dim playerNum As Integer, partyindex as integer
-        dim buffer as New ByteStream(Data)
+        Dim playerNum As Integer, partyindex As Integer
+        Dim buffer As New ByteStream(data)
         ' which player?
-        playerNum = Buffer.ReadInt32
+        playerNum = buffer.ReadInt32
 
         ' find the party number
         For I = 1 To MAX_PARTY_MEMBERS
             If Party.Member(I) = playerNum Then
-                partyIndex = I
+                partyindex = I
             End If
         Next
 
         ' exit out if wrong data
-        If partyIndex <= 0 OrElse partyIndex > MAX_PARTY_MEMBERS Then Exit Sub
+        If partyindex <= 0 OrElse partyindex > MAX_PARTY_MEMBERS Then Exit Sub
 
         ' set vitals
-        Player(playerNum).MaxHP = Buffer.ReadInt32
-        Player(playerNum).Vital(VitalType.HP) = Buffer.ReadInt32
+        Player(playerNum).MaxHp = buffer.ReadInt32
+        Player(playerNum).Vital(VitalType.HP) = buffer.ReadInt32
 
-        Player(playerNum).MaxMP = Buffer.ReadInt32
-        Player(playerNum).Vital(VitalType.MP) = Buffer.ReadInt32
+        Player(playerNum).MaxMp = buffer.ReadInt32
+        Player(playerNum).Vital(VitalType.MP) = buffer.ReadInt32
 
-        Player(playerNum).MaxSP = Buffer.ReadInt32
-        Player(playerNum).Vital(VitalType.SP) = Buffer.ReadInt32
+        Player(playerNum).MaxSp = buffer.ReadInt32
+        Player(playerNum).Vital(VitalType.SP) = buffer.ReadInt32
 
-        Buffer.Dispose()
+        buffer.Dispose()
     End Sub
+
 #End Region
 
 #Region "Outgoing Packets"
+
     Friend Sub SendPartyRequest(name As String)
-        dim buffer as New ByteStream(4)
-        Buffer.WriteInt32(ClientPackets.CRequestParty)
+        Dim buffer As New ByteStream(4)
+        buffer.WriteInt32(ClientPackets.CRequestParty)
         buffer.WriteString((name))
 
         Socket.SendData(buffer.Data, buffer.Head)
@@ -140,9 +147,11 @@ Module C_Parties
         Socket.SendData(buffer.Data, buffer.Head)
         buffer.Dispose()
     End Sub
+
 #End Region
 
 #Region "Drawing"
+
     Friend Sub DrawParty()
         Dim I As Integer, x As Integer, y As Integer, barwidth As Integer, playerNum As Integer, theName As String
         Dim rec(1) As Rectangle
@@ -227,6 +236,7 @@ Module C_Parties
             Next
         End If
     End Sub
+
 #End Region
 
 End Module

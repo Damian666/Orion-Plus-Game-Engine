@@ -1,12 +1,14 @@
 ﻿Imports System.IO
 Imports ASFW
-Imports ASFW.IO
 Imports ASFW.IO.FileIO
 
 Friend Module S_Quest
+
 #Region "Constants"
+
     'Constants
     Friend Const MAX_QUESTS As Integer = 250
+
     'Friend Const MAX_TASKS As Byte = 10
     'Friend Const MAX_REQUIREMENTS As Byte = 10
     Friend Const MAX_ACTIVEQUESTS = 10
@@ -76,9 +78,11 @@ Friend Module S_Quest
         Dim Task() As TaskRec
 
     End Structure
+
 #End Region
 
 #Region "Database"
+
     Sub SaveQuests()
         Dim I As Integer
         For I = 1 To MAX_QUESTS
@@ -275,9 +279,11 @@ Friend Module S_Quest
             ClearQuest(I)
         Next
     End Sub
+
 #End Region
 
 #Region "Incoming Packets"
+
     Sub Packet_RequestEditQuest(index As Integer, ByRef data() As Byte)
         ' Prevent hacking
         If GetPlayerAccess(index) < AdminType.Developer Then Exit Sub
@@ -407,9 +413,11 @@ Friend Module S_Quest
 
         buffer.Dispose()
     End Sub
+
 #End Region
 
 #Region "Outgoing packets"
+
     Sub SendQuests(index As Integer)
         Dim I As Integer
 
@@ -574,6 +582,7 @@ Friend Module S_Quest
         buffer.Dispose()
 
     End Sub
+
 #End Region
 
 #Region "Functions"
@@ -852,6 +861,7 @@ Friend Module S_Quest
         SendPlayerData(index)
         SendPlayerQuest(index, QuestNum)
     End Sub
+
 #End Region
 
 End Module

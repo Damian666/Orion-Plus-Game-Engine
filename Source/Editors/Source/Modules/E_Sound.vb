@@ -2,8 +2,10 @@
 Imports SFML.Audio
 
 Module E_Sound
+
     'Music + Sound Players
     Friend SoundPlayer As Sound
+
     Friend ExtraSoundPlayer As Sound
     Friend MusicPlayer As Music
     Friend PreviewPlayer As Music
@@ -34,7 +36,6 @@ Module E_Sound
             Try
                 CurMusic = FileName
                 FadeOutSwitch = True
-
             Catch ex As Exception
 
             End Try
@@ -58,7 +59,6 @@ Module E_Sound
                 PreviewPlayer.Loop() = True
                 PreviewPlayer.Volume() = 75
                 PreviewPlayer.Play()
-
             Catch ex As Exception
 
             End Try
@@ -85,7 +85,7 @@ Module E_Sound
     Sub PlaySound(FileName As String, Optional Looped As Boolean = False)
         If Not Options.Sound = 1 OrElse Not File.Exists(Application.StartupPath & SOUND_PATH & FileName) Then Exit Sub
 
-        dim buffer as SoundBuffer
+        Dim buffer As SoundBuffer
         If SoundPlayer Is Nothing Then
             SoundPlayer = New Sound()
             buffer = New SoundBuffer(Application.StartupPath & SOUND_PATH & FileName)
@@ -121,7 +121,7 @@ Module E_Sound
         If Not Options.Sound = 1 OrElse Not File.Exists(Application.StartupPath & SOUND_PATH & FileName) Then Exit Sub
         'If FileName = CurExtraSound Then Exit Sub
 
-        dim buffer as SoundBuffer
+        Dim buffer As SoundBuffer
         If ExtraSoundPlayer Is Nothing Then
             ExtraSoundPlayer = New Sound()
             buffer = New SoundBuffer(Application.StartupPath & SOUND_PATH & FileName)
@@ -181,4 +181,5 @@ Module E_Sound
         MusicPlayer.Volume() = MusicPlayer.Volume() - 3
 
     End Sub
+
 End Module

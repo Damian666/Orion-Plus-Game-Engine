@@ -14,23 +14,28 @@ Module C_Constants
 
     ' path constants
     Friend Const SoundPath As String = "\Data\sound\"
+
     Friend Const MusicPath As String = "\Data\music\"
 
     ' Font variables
     Friend Const FontName As String = "Arial.ttf"
+
     Friend Const FontSize As Byte = 13
 
     ' Log Path and variables
     Friend Const LogDebug As String = "debug.txt"
+
     Friend Const LogPath As String = "\Data\logs\"
 
     ' Gfx Path and variables
     Friend Const GfxPath As String = "\Data\graphics\"
+
     Friend Const GfxGuiPath As String = "\Data\graphics\gui\"
     Friend Const GfxExt As String = ".png"
 
     ' Menu states
     Friend Const MenuStateNewaccount As Byte = 0
+
     Friend Const MenuStateDelaccount As Byte = 1
     Friend Const MenuStateLogin As Byte = 2
     Friend Const MenuStateGetchars As Byte = 3
@@ -47,14 +52,17 @@ Module C_Constants
 
     ' Speed moving vars
     Friend Const WalkSpeed As Byte = 6
+
     Friend Const RunSpeed As Byte = 10
 
     ' Tile size constants
     Friend Const PicX As Integer = 32
+
     Friend Const PicY As Integer = 32
 
     ' Sprite, item, skill size constants
     Friend Const SizeX As Integer = 32
+
     Friend Const SizeY As Integer = 32
 
     ' ********************************************************
@@ -69,6 +77,7 @@ Module C_Constants
 
     ' Map constants
     Friend ScreenMapx As Byte = 35
+
     Friend ScreenMapy As Byte = 26
 
     Friend ItemRarityColor0 = SFML.Graphics.Color.White ' white
@@ -80,6 +89,7 @@ Module C_Constants
 
     ' Used to check if in editor or not and variables for use in editor
     Public InMapEditor As Boolean
+
     Public EditorTileX As Integer
     Public EditorTileY As Integer
     Public EditorTileWidth As Integer
@@ -98,6 +108,7 @@ Module C_Constants
 
     'dialog types
     Friend Const DialogueTypeBuyhome As Byte = 1
+
     Friend Const DialogueTypeVisit As Byte = 2
     Friend Const DialogueTypeParty As Byte = 3
     Friend Const DialogueTypeQuest As Byte = 4

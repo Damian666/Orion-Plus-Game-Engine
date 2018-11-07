@@ -9,6 +9,7 @@ Friend Module C_HotBar
 
     'hotbar constants
     Friend Const HotbarTop As Byte = 2
+
     Friend Const HotbarLeft As Byte = 2
     Friend Const HotbarOffsetX As Byte = 2
 
@@ -31,8 +32,8 @@ Friend Module C_HotBar
                 .Right = .Left + PicX
             End With
 
-            If X >= tempRec.Left AndAlso X <= tempRec.Right Then
-                If Y >= tempRec.Top AndAlso Y <= tempRec.Bottom Then
+            If x >= tempRec.Left AndAlso x <= tempRec.Right Then
+                If y >= tempRec.Top AndAlso y <= tempRec.Bottom Then
                     IsHotBarSlot = i
                     Exit Function
                 End If
@@ -42,58 +43,58 @@ Friend Module C_HotBar
     End Function
 
     Friend Sub SendSetHotbarSlot(slot As Integer, num As Integer, type As Integer)
-        dim buffer as New ByteStream(4)
+        Dim buffer As New ByteStream(4)
 
-        Buffer.WriteInt32(ClientPackets.CSetHotbarSlot)
+        buffer.WriteInt32(ClientPackets.CSetHotbarSlot)
 
-        Buffer.WriteInt32(Slot)
-        Buffer.WriteInt32(Num)
-        Buffer.WriteInt32(Type)
+        buffer.WriteInt32(slot)
+        buffer.WriteInt32(num)
+        buffer.WriteInt32(type)
 
-        Socket.SendData(Buffer.Data, Buffer.Head)
-        Buffer.Dispose()
+        Socket.SendData(buffer.Data, buffer.Head)
+        buffer.Dispose()
     End Sub
 
     Friend Sub SendDeleteHotbar(slot As Integer)
-        dim buffer as New ByteStream(4)
-        Buffer.WriteInt32(ClientPackets.CDeleteHotbarSlot)
+        Dim buffer As New ByteStream(4)
+        buffer.WriteInt32(ClientPackets.CDeleteHotbarSlot)
 
-        Buffer.WriteInt32(Slot)
+        buffer.WriteInt32(slot)
 
-        Socket.SendData(Buffer.Data, Buffer.Head)
-        Buffer.Dispose()
+        Socket.SendData(buffer.Data, buffer.Head)
+        buffer.Dispose()
     End Sub
 
     Friend Sub SendUseHotbarSlot(slot As Integer)
-        dim buffer as New ByteStream(4)
+        Dim buffer As New ByteStream(4)
 
-        Buffer.WriteInt32(ClientPackets.CUseHotbarSlot)
+        buffer.WriteInt32(ClientPackets.CUseHotbarSlot)
 
-        Buffer.WriteInt32(Slot)
+        buffer.WriteInt32(slot)
 
-        Socket.SendData(Buffer.Data, Buffer.Head)
-        Buffer.Dispose()
+        Socket.SendData(buffer.Data, buffer.Head)
+        buffer.Dispose()
     End Sub
 
     Sub DrawHotbar()
         Dim i As Integer, num As Integer, pic As Integer
         Dim rec As Rectangle, recPos As Rectangle
 
-        RenderSprite(HotBarSprite, GameWindow, HotbarX, HotbarY, 0, 0, HotBarGFXInfo.Width, HotBarGFXInfo.Height)
+        RenderSprite(HotBarSprite, GameWindow, HotbarX, HotbarY, 0, 0, HotBarGfxInfo.Width, HotBarGfxInfo.Height)
 
         For i = 1 To MaxHotbar
-            If Player(MyIndex).Hotbar(i).sType = 1 Then
-                num = PlayerSkills(Player(MyIndex).Hotbar(i).Slot)
+            If Player(Myindex).Hotbar(i).SType = 1 Then
+                num = PlayerSkills(Player(Myindex).Hotbar(i).Slot)
 
                 If num > 0 Then
                     pic = Skill(num).Icon
 
-                    If SkillIconsGFXInfo(pic).IsLoaded = False Then
+                    If SkillIconsGfxInfo(pic).IsLoaded = False Then
                         LoadTexture(pic, 9)
                     End If
 
                     'seeying we still use it, lets update timer
-                    With SkillIconsGFXInfo(pic)
+                    With SkillIconsGfxInfo(pic)
                         .TextureTimer = GetTickCount() + 100000
                     End With
 
@@ -104,7 +105,7 @@ Friend Module C_HotBar
                         .Width = 32
                     End With
 
-                    If Not SkillCD(i) = 0 Then
+                    If Not SkillCd(i) = 0 Then
                         rec.X = 32
                         rec.Width = 32
                     End If
@@ -119,18 +120,18 @@ Friend Module C_HotBar
                     RenderSprite(SkillIconsSprite(pic), GameWindow, recPos.X, recPos.Y, rec.X, rec.Y, rec.Width, rec.Height)
                 End If
 
-            ElseIf Player(MyIndex).Hotbar(i).sType = 2 Then
-                num = PlayerInv(Player(MyIndex).Hotbar(i).Slot).Num
+            ElseIf Player(Myindex).Hotbar(i).SType = 2 Then
+                num = PlayerInv(Player(Myindex).Hotbar(i).Slot).Num
 
                 If num > 0 Then
                     pic = Item(num).Pic
 
-                    If ItemsGFXInfo(pic).IsLoaded = False Then
+                    If ItemsGfxInfo(pic).IsLoaded = False Then
                         LoadTexture(pic, 4)
                     End If
 
                     'seeying we still use it, lets update timer
-                    With ItemsGFXInfo(pic)
+                    With ItemsGfxInfo(pic)
                         .TextureTimer = GetTickCount() + 100000
                     End With
 
@@ -154,4 +155,5 @@ Friend Module C_HotBar
         Next
 
     End Sub
+
 End Module

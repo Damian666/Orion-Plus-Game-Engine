@@ -3,25 +3,25 @@
 Friend Class frmShop
 
     Private Sub TxtName_TextChanged(sender As Object, e As EventArgs) Handles txtName.TextChanged
-        Dim tmpindex as integer
+        Dim tmpindex As Integer
 
-        If EditorIndex = 0 Then Exit Sub
-        tmpIndex = lstIndex.SelectedIndex
-        Shop(EditorIndex).Name = Trim$(txtName.Text)
-        lstIndex.Items.RemoveAt(EditorIndex - 1)
-        lstIndex.Items.Insert(EditorIndex - 1, EditorIndex & ": " & Shop(EditorIndex).Name)
-        lstIndex.SelectedIndex = tmpIndex
+        If Editorindex = 0 Then Exit Sub
+        tmpindex = lstIndex.SelectedIndex
+        Shop(Editorindex).Name = Trim$(txtName.Text)
+        lstIndex.Items.RemoveAt(Editorindex - 1)
+        lstIndex.Items.Insert(Editorindex - 1, Editorindex & ": " & Shop(Editorindex).Name)
+        lstIndex.SelectedIndex = tmpindex
     End Sub
 
     Private Sub ScrlBuy_Scroll(sender As Object, e As EventArgs) Handles nudBuy.ValueChanged
-        Shop(EditorIndex).BuyRate = nudBuy.Value
+        Shop(Editorindex).BuyRate = nudBuy.Value
     End Sub
 
     Private Sub BtnUpdate_Click(sender As Object, e As EventArgs) Handles btnUpdate.Click
-        Dim index as integer
-        Index = lstTradeItem.SelectedIndex + 1
-        If Index = 0 Then Exit Sub
-        With Shop(EditorIndex).TradeItem(Index)
+        Dim index As Integer
+        index = lstTradeItem.SelectedIndex + 1
+        If index = 0 Then Exit Sub
+        With Shop(Editorindex).TradeItem(index)
             .Item = cmbItem.SelectedIndex
             .ItemValue = nudItemValue.Value
             .CostItem = cmbCostItem.SelectedIndex
@@ -31,10 +31,10 @@ Friend Class frmShop
     End Sub
 
     Private Sub BtnDeleteTrade_Click(sender As Object, e As EventArgs) Handles btnDeleteTrade.Click
-        Dim index as integer
-        Index = lstTradeItem.SelectedIndex + 1
-        If Index = 0 Then Exit Sub
-        With Shop(EditorIndex).TradeItem(Index)
+        Dim index As Integer
+        index = lstTradeItem.SelectedIndex + 1
+        If index = 0 Then Exit Sub
+        With Shop(Editorindex).TradeItem(index)
             .Item = 0
             .ItemValue = 0
             .CostItem = 0
@@ -60,14 +60,14 @@ Friend Class frmShop
     End Sub
 
     Private Sub BtnDelete_Click(sender As Object, e As EventArgs) Handles btnDelete.Click
-        Dim tmpindex as integer
+        Dim tmpindex As Integer
 
-        ClearShop(EditorIndex)
+        ClearShop(Editorindex)
 
-        tmpIndex = lstIndex.SelectedIndex
-        lstIndex.Items.RemoveAt(EditorIndex - 1)
-        lstIndex.Items.Insert(EditorIndex - 1, EditorIndex & ": " & Shop(EditorIndex).Name)
-        lstIndex.SelectedIndex = tmpIndex
+        tmpindex = lstIndex.SelectedIndex
+        lstIndex.Items.RemoveAt(Editorindex - 1)
+        lstIndex.Items.Insert(Editorindex - 1, Editorindex & ": " & Shop(Editorindex).Name)
+        lstIndex.SelectedIndex = tmpindex
 
         ShopEditorInit()
     End Sub
@@ -80,4 +80,5 @@ Friend Class frmShop
 
         Shop(Editorindex).Face = nudFace.Value
     End Sub
+
 End Class

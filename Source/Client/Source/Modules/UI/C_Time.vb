@@ -1,20 +1,19 @@
-﻿Imports System.Runtime.InteropServices.Marshal
-Imports ASFW
-Imports Engine
+﻿Imports ASFW
 
 Friend Module C_Time
-    Sub Packet_Clock(ByRef data() As Byte)
-        dim buffer as New ByteStream(Data)
-        Time.Instance.GameSpeed = Buffer.ReadInt32()
-        Time.Instance.Time = New Date(BitConverter.ToInt64(Buffer.ReadBytes(), 0))
 
-        Buffer.Dispose()
+    Sub Packet_Clock(ByRef data() As Byte)
+        Dim buffer As New ByteStream(data)
+        Time.Instance.GameSpeed = buffer.ReadInt32()
+        Time.Instance.Time = New Date(BitConverter.ToInt64(buffer.ReadBytes(), 0))
+
+        buffer.Dispose()
     End Sub
 
     Sub Packet_Time(ByRef data() As Byte)
-        dim buffer as New ByteStream(Data)
+        Dim buffer As New ByteStream(data)
 
-        Time.Instance.TimeOfDay = Buffer.ReadByte
+        Time.Instance.TimeOfDay = buffer.ReadByte
 
         Select Case Time.Instance.TimeOfDay
             Case TimeOfDay.Dawn
@@ -34,6 +33,7 @@ Friend Module C_Time
                 Exit Select
         End Select
 
-        Buffer.Dispose()
+        buffer.Dispose()
     End Sub
+
 End Module

@@ -2,7 +2,9 @@
 Imports ASFW
 
 Friend Module S_Housing
+
 #Region "Globals & Types"
+
     Friend MAX_HOUSES As Integer = 100
 
     Friend HouseConfig() As HouseRec
@@ -27,9 +29,11 @@ Friend Module S_Housing
         Dim FurnitureCount As Integer
         Dim Furniture() As FurnitureRec
     End Structure
+
 #End Region
 
 #Region "DataBase"
+
     Sub CreateHouses()
         Dim myXml As New XmlClass With {
             .Filename = Path.Combine(Application.StartupPath, "data", "houseconfig.xml"),
@@ -113,9 +117,11 @@ Friend Module S_Housing
         Next
 
     End Sub
+
 #End Region
 
 #Region "Incoming Packets"
+
     Sub Packet_BuyHouse(index As Integer, ByRef data() As Byte)
         Dim i As Integer, price As Integer
         Dim buffer As New ByteStream(data)
@@ -506,6 +512,7 @@ Friend Module S_Housing
 #End Region
 
 #Region "OutGoing Packets"
+
     Sub SendHouseConfigs(index As Integer)
         Dim buffer As New ByteStream(4), i As Integer
 
@@ -548,6 +555,7 @@ Friend Module S_Housing
         buffer.Dispose()
 
     End Sub
+
 #End Region
 
 End Module

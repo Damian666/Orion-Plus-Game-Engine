@@ -6,6 +6,7 @@ Imports SFML.Window
 Friend Module E_Housing
 
 #Region "Globals & Types"
+
     Friend MAX_HOUSES As Integer = 100
 
     Friend FurnitureCount As Integer
@@ -40,9 +41,11 @@ Friend Module E_Housing
         Dim FurnitureCount As Integer
         Dim Furniture() As FurnitureRec
     End Structure
+
 #End Region
 
 #Region "Incoming Packets"
+
     Sub Packet_HouseConfigurations(ByRef data() As Byte)
         Dim i As Integer
         Dim buffer As New ByteStream(data)
@@ -95,9 +98,11 @@ Friend Module E_Housing
         buffer.Dispose()
 
     End Sub
+
 #End Region
 
 #Region "Outgoing Packets"
+
     Friend Sub SendRequestEditHouse()
         Dim buffer As ByteStream
 
@@ -142,9 +147,11 @@ Friend Module E_Housing
 
         buffer.Dispose()
     End Sub
+
 #End Region
 
 #Region "Editor"
+
     Friend Sub HouseEditorInit()
 
         If FrmHouse.Visible = False Then Exit Sub
@@ -223,6 +230,7 @@ Friend Module E_Housing
 #End Region
 
 #Region "Drawing"
+
     Friend Sub CheckFurniture()
         Dim i As Integer
         i = 1
@@ -284,6 +292,7 @@ Friend Module E_Housing
         Next
 
     End Sub
+
 #End Region
 
 End Module

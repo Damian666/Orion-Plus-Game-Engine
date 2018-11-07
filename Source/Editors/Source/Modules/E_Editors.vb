@@ -3,6 +3,7 @@
 Module E_Editors
 
 #Region "Animation Editor"
+
     Friend Sub AnimationEditorInit()
 
         If FrmAnimation.Visible = False Then Exit Sub
@@ -654,13 +655,13 @@ Module E_Editors
         End If
 
     End Sub
-#End Region
-
-#Region "Item Editor"
 
 #End Region
+
+
 
 #Region "Npc Editor"
+
     Friend Sub NpcEditorInit()
         Dim i As Integer
 
@@ -783,9 +784,11 @@ Module E_Editors
             NPC_Changed(i) = False
         Next
     End Sub
+
 #End Region
 
 #Region "Resource Editor"
+
     Friend Sub ResourceEditorInit()
         Dim i As Integer
 
@@ -824,7 +827,6 @@ Module E_Editors
             .nudLvlReq.Value = Resource(Editorindex).LvlRequired
         End With
 
-
         FrmResource.Visible = True
 
         EditorResource_DrawSprite()
@@ -853,9 +855,11 @@ Module E_Editors
         ClearResources()
         SendRequestResources()
     End Sub
+
 #End Region
 
 #Region "Skill Editor"
+
     Friend Sub SkillEditorInit()
         Dim i As Integer
 
@@ -969,9 +973,11 @@ Module E_Editors
             Skill_Changed(i) = False
         Next
     End Sub
+
 #End Region
 
 #Region "Shop editor"
+
     Friend Sub ShopEditorInit()
         Dim i As Integer
 
@@ -1053,6 +1059,7 @@ Module E_Editors
             Shop_Changed(i) = False
         Next
     End Sub
+
 #End Region
 
 #Region "Class Editor"

@@ -1,9 +1,12 @@
 ﻿Imports ASFW
 
 Friend Module E_Quest
+
 #Region "Global Info"
+
     'Constants
     Friend Const MAX_QUESTS As Integer = 250
+
     'Friend Const MAX_REQUIREMENTS As Byte = 10
     'Friend Const MAX_TASKS As Byte = 10
     Friend Const EDITOR_TASKS As Byte = 7
@@ -49,6 +52,7 @@ Friend Module E_Quest
 
     'here we store temp info because off UpdateUI >.<
     Friend UpdateQuestWindow As Boolean
+
     Friend UpdateQuestChat As Boolean
     Friend QuestNum As Integer
     Friend QuestNumForStart As Integer
@@ -103,26 +107,28 @@ Friend Module E_Quest
         Dim Task() As TaskRec
 
     End Structure
+
 #End Region
 
 #Region "Quest Editor"
+
     Friend Sub QuestEditorInit()
 
         If FrmQuest.Visible = False Then Exit Sub
-        EditorIndex = FrmQuest.lstIndex.SelectedIndex + 1
+        Editorindex = FrmQuest.lstIndex.SelectedIndex + 1
 
         With FrmQuest
-            .txtName.Text = Trim$(Quest(EditorIndex).Name)
+            .txtName.Text = Trim$(Quest(Editorindex).Name)
 
-            If Quest(EditorIndex).Repeat = 1 Then
+            If Quest(Editorindex).Repeat = 1 Then
                 .chkRepeat.Checked = True
             Else
                 .chkRepeat.Checked = False
             End If
 
-            .txtStartText.Text = Trim$(Quest(EditorIndex).Chat(1))
-            .txtProgressText.Text = Trim$(Quest(EditorIndex).Chat(2))
-            .txtEndText.Text = Trim$(Quest(EditorIndex).Chat(3))
+            .txtStartText.Text = Trim$(Quest(Editorindex).Chat(1))
+            .txtProgressText.Text = Trim$(Quest(Editorindex).Chat(2))
+            .txtEndText.Text = Trim$(Quest(Editorindex).Chat(3))
 
             .cmbStartItem.Items.Clear()
             .cmbItemReq.Items.Clear()
@@ -151,46 +157,45 @@ Friend Module E_Quest
                 .cmbClassReq.Items.Add(Trim(Classes(i).Name))
             Next
 
-            .cmbStartItem.SelectedIndex = Quest(EditorIndex).QuestGiveItem
-            .cmbEndItem.SelectedIndex = Quest(EditorIndex).QuestRemoveItem
+            .cmbStartItem.SelectedIndex = Quest(Editorindex).QuestGiveItem
+            .cmbEndItem.SelectedIndex = Quest(Editorindex).QuestRemoveItem
 
-            .nudGiveAmount.Value = Quest(EditorIndex).QuestGiveItemValue
+            .nudGiveAmount.Value = Quest(Editorindex).QuestGiveItemValue
 
-            .nudTakeAmount.Value = Quest(EditorIndex).QuestRemoveItemValue
+            .nudTakeAmount.Value = Quest(Editorindex).QuestRemoveItemValue
 
             .lstRewards.Items.Clear()
-            For i = 1 To Quest(EditorIndex).RewardCount
-                .lstRewards.Items.Add(i & ":" & Quest(EditorIndex).RewardItemAmount(i) & " X " & Trim(Item(Quest(EditorIndex).RewardItem(i)).Name))
+            For i = 1 To Quest(Editorindex).RewardCount
+                .lstRewards.Items.Add(i & ":" & Quest(Editorindex).RewardItemAmount(i) & " X " & Trim(Item(Quest(Editorindex).RewardItem(i)).Name))
             Next
 
-            .nudExpReward.Value = Quest(EditorIndex).RewardExp
-
+            .nudExpReward.Value = Quest(Editorindex).RewardExp
 
             .lstRequirements.Items.Clear()
 
-            For i = 1 To Quest(EditorIndex).ReqCount
+            For i = 1 To Quest(Editorindex).ReqCount
 
-                Select Case Quest(EditorIndex).Requirement(i)
+                Select Case Quest(Editorindex).Requirement(i)
                     Case 1
-                        .lstRequirements.Items.Add(i & ":" & "Item Requirement: " & Trim(Item(Quest(EditorIndex).RequirementIndex(i)).Name))
+                        .lstRequirements.Items.Add(i & ":" & "Item Requirement: " & Trim(Item(Quest(Editorindex).RequirementIndex(i)).Name))
                     Case 2
-                        .lstRequirements.Items.Add(i & ":" & "Quest Requirement: " & Trim(Quest(Quest(EditorIndex).RequirementIndex(i)).Name))
+                        .lstRequirements.Items.Add(i & ":" & "Quest Requirement: " & Trim(Quest(Quest(Editorindex).RequirementIndex(i)).Name))
                     Case 3
-                        .lstRequirements.Items.Add(i & ":" & "Class Requirement: " & Trim(Classes(Quest(EditorIndex).RequirementIndex(i)).Name))
+                        .lstRequirements.Items.Add(i & ":" & "Class Requirement: " & Trim(Classes(Quest(Editorindex).RequirementIndex(i)).Name))
                     Case Else
                         .lstRequirements.Items.Add(i & ":")
                 End Select
             Next
 
             .lstTasks.Items.Clear()
-            For i = 1 To Quest(EditorIndex).TaskCount
-                FrmQuest.lstTasks.Items.Add(i & ":" & Quest(EditorIndex).Task(i).TaskLog)
+            For i = 1 To Quest(Editorindex).TaskCount
+                FrmQuest.lstTasks.Items.Add(i & ":" & Quest(Editorindex).Task(i).TaskLog)
             Next
 
             .rdbNoneReq.Checked = True
         End With
 
-        Quest_Changed(EditorIndex) = True
+        Quest_Changed(Editorindex) = True
 
     End Sub
 
@@ -224,9 +229,11 @@ Friend Module E_Quest
             Quest_Changed(I) = False
         Next
     End Sub
+
 #End Region
 
 #Region "DataBase"
+
     Sub ClearQuest(QuestNum As Integer)
         Dim I As Integer
 
@@ -287,89 +294,92 @@ Friend Module E_Quest
             ClearQuest(I)
         Next
     End Sub
+
 #End Region
 
 #Region "Incoming Packets"
+
     Friend Sub Packet_QuestEditor(ByRef data() As Byte)
         QuestEditorShow = True
     End Sub
 
     Friend Sub Packet_UpdateQuest(ByRef data() As Byte)
         Dim QuestNum As Integer
-        dim buffer as New ByteStream(Data)
-        QuestNum = Buffer.ReadInt32
+        Dim buffer As New ByteStream(data)
+        QuestNum = buffer.ReadInt32
 
         ' Update the Quest
-        Quest(QuestNum).Name = Buffer.ReadString
-        Quest(QuestNum).QuestLog = Buffer.ReadString
-        Quest(QuestNum).Repeat = Buffer.ReadInt32
-        Quest(QuestNum).Cancelable = Buffer.ReadInt32
+        Quest(QuestNum).Name = buffer.ReadString
+        Quest(QuestNum).QuestLog = buffer.ReadString
+        Quest(QuestNum).Repeat = buffer.ReadInt32
+        Quest(QuestNum).Cancelable = buffer.ReadInt32
 
-        Quest(QuestNum).ReqCount = Buffer.ReadInt32
+        Quest(QuestNum).ReqCount = buffer.ReadInt32
         ReDim Quest(QuestNum).Requirement(Quest(QuestNum).ReqCount)
         ReDim Quest(QuestNum).RequirementIndex(Quest(QuestNum).ReqCount)
         For I = 1 To Quest(QuestNum).ReqCount
-            Quest(QuestNum).Requirement(I) = Buffer.ReadInt32
-            Quest(QuestNum).RequirementIndex(I) = Buffer.ReadInt32
+            Quest(QuestNum).Requirement(I) = buffer.ReadInt32
+            Quest(QuestNum).RequirementIndex(I) = buffer.ReadInt32
         Next
 
-        Quest(QuestNum).QuestGiveItem = Buffer.ReadInt32
-        Quest(QuestNum).QuestGiveItemValue = Buffer.ReadInt32
-        Quest(QuestNum).QuestRemoveItem = Buffer.ReadInt32
-        Quest(QuestNum).QuestRemoveItemValue = Buffer.ReadInt32
+        Quest(QuestNum).QuestGiveItem = buffer.ReadInt32
+        Quest(QuestNum).QuestGiveItemValue = buffer.ReadInt32
+        Quest(QuestNum).QuestRemoveItem = buffer.ReadInt32
+        Quest(QuestNum).QuestRemoveItemValue = buffer.ReadInt32
 
         For I = 1 To 3
-            Quest(QuestNum).Chat(I) = Buffer.ReadString
+            Quest(QuestNum).Chat(I) = buffer.ReadString
         Next
 
-        Quest(QuestNum).RewardCount = Buffer.ReadInt32
+        Quest(QuestNum).RewardCount = buffer.ReadInt32
         ReDim Quest(QuestNum).RewardItem(Quest(QuestNum).RewardCount)
         ReDim Quest(QuestNum).RewardItemAmount(Quest(QuestNum).RewardCount)
         For i = 1 To Quest(QuestNum).RewardCount
-            Quest(QuestNum).RewardItem(i) = Buffer.ReadInt32
-            Quest(QuestNum).RewardItemAmount(i) = Buffer.ReadInt32
+            Quest(QuestNum).RewardItem(i) = buffer.ReadInt32
+            Quest(QuestNum).RewardItemAmount(i) = buffer.ReadInt32
         Next
 
-        Quest(QuestNum).RewardExp = Buffer.ReadInt32
+        Quest(QuestNum).RewardExp = buffer.ReadInt32
 
-        Quest(QuestNum).TaskCount = Buffer.ReadInt32
+        Quest(QuestNum).TaskCount = buffer.ReadInt32
         ReDim Quest(QuestNum).Task(Quest(QuestNum).TaskCount)
         For I = 1 To Quest(QuestNum).TaskCount
-            Quest(QuestNum).Task(I).Order = Buffer.ReadInt32
-            Quest(QuestNum).Task(I).Npc = Buffer.ReadInt32
-            Quest(QuestNum).Task(I).Item = Buffer.ReadInt32
-            Quest(QuestNum).Task(I).Map = Buffer.ReadInt32
-            Quest(QuestNum).Task(I).Resource = Buffer.ReadInt32
-            Quest(QuestNum).Task(I).Amount = Buffer.ReadInt32
-            Quest(QuestNum).Task(I).Speech = Buffer.ReadString
-            Quest(QuestNum).Task(I).TaskLog = Buffer.ReadString
-            Quest(QuestNum).Task(I).QuestEnd = Buffer.ReadInt32
-            Quest(QuestNum).Task(I).TaskType = Buffer.ReadInt32
+            Quest(QuestNum).Task(I).Order = buffer.ReadInt32
+            Quest(QuestNum).Task(I).Npc = buffer.ReadInt32
+            Quest(QuestNum).Task(I).Item = buffer.ReadInt32
+            Quest(QuestNum).Task(I).Map = buffer.ReadInt32
+            Quest(QuestNum).Task(I).Resource = buffer.ReadInt32
+            Quest(QuestNum).Task(I).Amount = buffer.ReadInt32
+            Quest(QuestNum).Task(I).Speech = buffer.ReadString
+            Quest(QuestNum).Task(I).TaskLog = buffer.ReadString
+            Quest(QuestNum).Task(I).QuestEnd = buffer.ReadInt32
+            Quest(QuestNum).Task(I).TaskType = buffer.ReadInt32
         Next
 
-        Buffer.Dispose()
+        buffer.Dispose()
     End Sub
 
 #End Region
 
 #Region "Outgoing Packets"
-    Friend Sub SendRequestEditQuest()
-        dim buffer as ByteStream
 
-        Buffer = New ByteStream(4)
-        Buffer.WriteInt32(EditorPackets.RequestEditQuest)
-        Socket.SendData(Buffer.Data, Buffer.Head)
-        Buffer.Dispose()
+    Friend Sub SendRequestEditQuest()
+        Dim buffer As ByteStream
+
+        buffer = New ByteStream(4)
+        buffer.WriteInt32(EditorPackets.RequestEditQuest)
+        Socket.SendData(buffer.Data, buffer.Head)
+        buffer.Dispose()
 
     End Sub
 
     Friend Sub SendSaveQuest(QuestNum As Integer)
-        dim buffer as ByteStream
+        Dim buffer As ByteStream
 
-        Buffer = New ByteStream(4)
+        buffer = New ByteStream(4)
 
-        Buffer.WriteInt32(EditorPackets.SaveQuest)
-        Buffer.WriteInt32(QuestNum)
+        buffer.WriteInt32(EditorPackets.SaveQuest)
+        buffer.WriteInt32(QuestNum)
 
         buffer.WriteString((Trim(Quest(QuestNum).Name)))
         buffer.WriteString((Trim(Quest(QuestNum).QuestLog)))
@@ -410,56 +420,57 @@ Friend Module E_Quest
             buffer.WriteString((Trim(Quest(QuestNum).Task(I).Speech)))
             buffer.WriteString((Trim(Quest(QuestNum).Task(I).TaskLog)))
             buffer.WriteInt32(Quest(QuestNum).Task(I).QuestEnd)
-            Buffer.WriteInt32(Quest(QuestNum).Task(I).TaskType)
+            buffer.WriteInt32(Quest(QuestNum).Task(I).TaskType)
         Next
 
-        Socket.SendData(Buffer.Data, Buffer.Head)
-        Buffer.Dispose()
+        Socket.SendData(buffer.Data, buffer.Head)
+        buffer.Dispose()
 
     End Sub
 
     Sub SendRequestQuests()
-        dim buffer as ByteStream
+        Dim buffer As ByteStream
 
-        Buffer = New ByteStream(4)
-        Buffer.WriteInt32(ClientPackets.CRequestQuests)
-        Socket.SendData(Buffer.Data, Buffer.Head)
-        Buffer.Dispose()
+        buffer = New ByteStream(4)
+        buffer.WriteInt32(ClientPackets.CRequestQuests)
+        Socket.SendData(buffer.Data, buffer.Head)
+        buffer.Dispose()
 
     End Sub
 
     Friend Sub UpdateQuestLog()
-        dim buffer as ByteStream
+        Dim buffer As ByteStream
 
-        Buffer = New ByteStream(4)
-        Buffer.WriteInt32(ClientPackets.CQuestLogUpdate)
-        Socket.SendData(Buffer.Data, Buffer.Head)
-        Buffer.Dispose()
+        buffer = New ByteStream(4)
+        buffer.WriteInt32(ClientPackets.CQuestLogUpdate)
+        Socket.SendData(buffer.Data, buffer.Head)
+        buffer.Dispose()
 
     End Sub
 
     Friend Sub PlayerHandleQuest(QuestNum As Integer, Order As Integer)
-        dim buffer as ByteStream
+        Dim buffer As ByteStream
 
-        Buffer = New ByteStream(4)
+        buffer = New ByteStream(4)
 
-        Buffer.WriteInt32(ClientPackets.CPlayerHandleQuest)
-        Buffer.WriteInt32(QuestNum)
-        Buffer.WriteInt32(Order) '1=accept quest, 2=cancel quest
-        Socket.SendData(Buffer.Data, Buffer.Head)
-        Buffer.Dispose()
+        buffer.WriteInt32(ClientPackets.CPlayerHandleQuest)
+        buffer.WriteInt32(QuestNum)
+        buffer.WriteInt32(Order) '1=accept quest, 2=cancel quest
+        Socket.SendData(buffer.Data, buffer.Head)
+        buffer.Dispose()
     End Sub
 
     Friend Sub QuestReset(QuestNum As Integer)
-        dim buffer as ByteStream
+        Dim buffer As ByteStream
 
-        Buffer = New ByteStream(4)
-        Buffer.WriteInt32(ClientPackets.CQuestReset)
-        Buffer.WriteInt32(QuestNum)
-        Socket.SendData(Buffer.Data, Buffer.Head)
-        Buffer.Dispose()
+        buffer = New ByteStream(4)
+        buffer.WriteInt32(ClientPackets.CQuestReset)
+        buffer.WriteInt32(QuestNum)
+        Socket.SendData(buffer.Data, buffer.Head)
+        buffer.Dispose()
 
     End Sub
+
 #End Region
 
 #Region "Support Functions"
@@ -479,6 +490,7 @@ Friend Module E_Quest
 #End Region
 
 #Region "Misc Functions"
+
     Friend Sub LoadRequirement(QuestNum As Integer, ReqNum As Integer)
         Dim i As Integer
 
@@ -658,6 +670,7 @@ Friend Module E_Quest
             .lblTaskNum.Text = "Task Number: " & TaskNum
         End With
     End Sub
+
 #End Region
 
 End Module

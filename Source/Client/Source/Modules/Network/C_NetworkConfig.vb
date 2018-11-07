@@ -1,5 +1,4 @@
-﻿Imports System.Windows.Forms
-Imports ASFW.Network
+﻿Imports ASFW.Network
 
 Friend Module C_NetworkConfig
     Friend WithEvents Socket As Client
@@ -11,7 +10,7 @@ Friend Module C_NetworkConfig
     End Sub
 
     Friend Sub Connect()
-        Socket.Connect(Options.IP, Options.Port)
+        Socket.Connect(Options.Ip, Options.Port)
     End Sub
 
     Friend Sub DestroyNetwork()
@@ -21,6 +20,7 @@ Friend Module C_NetworkConfig
     End Sub
 
 #Region " Events "
+
     Private Sub Socket_ConnectionSuccess() Handles Socket.ConnectionSuccess
 
     End Sub
@@ -40,7 +40,9 @@ Friend Module C_NetworkConfig
         DestroyNetwork()
         DestroyGame()
     End Sub
+
 #If DEBUG Then
+
     Private Sub Socket_TrafficReceived(size As Integer, ByRef data() As Byte) Handles Socket.TrafficReceived
         Console.WriteLine("Traffic Received : [Size: " & size & "]")
         Dim tmpData = data
@@ -58,7 +60,9 @@ Friend Module C_NetworkConfig
 #Enable Warning BC42024 ' Unused local variable
         'Put breakline on BreakPointDummy to look at what is contained in data at runtime in the VS logger.
     End Sub
+
 #End If
+
 #End Region
 
 End Module

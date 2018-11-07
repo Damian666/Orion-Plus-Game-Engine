@@ -1,14 +1,14 @@
 ﻿Friend Structure E_Options
-    dim Username As String
-    dim Password As String
-    dim SavePass As Boolean
+    Dim Username As String
+    Dim Password As String
+    Dim SavePass As Boolean
 
-    dim MenuMusic As String
-    dim Music As Byte
-    dim Sound As Byte
-    dim Volume As Single
+    Dim MenuMusic As String
+    Dim Music As Byte
+    Dim Sound As Byte
+    Dim Volume As Single
 
-    dim IP As String
-    dim Port As Integer
-    dim ScreenSize As Byte
+    Dim IP As String
+    Dim Port As Integer
+    Dim ScreenSize As Byte
 End Structure

@@ -67,10 +67,10 @@ Module C_General
         ClearPets()
 
         GettingMap = True
-        vbQuote = Chr(34) ' "
+        VbQuote = Chr(34) ' "
 
         ' Update the form with the game's name before it's loaded
-        frmGame.Text = GameName
+        FrmGame.Text = GameName
 
         SetStatus(Strings.Get("loadscreen", "options"))
 
@@ -129,14 +129,14 @@ Module C_General
         DirArrowY(4) = 12
 
         'set gui switches
-        HUDVisible = True
+        HudVisible = True
 
         SetStatus(Strings.Get("loadscreen", "starting"))
-        started = True
-        frmmenuvisible = True
-        pnlloadvisible = False
+        Started = True
+        Frmmenuvisible = True
+        Pnlloadvisible = False
 
-        pnlInventoryVisible = True
+        PnlInventoryVisible = True
 
         InitNetwork()
 
@@ -144,7 +144,7 @@ Module C_General
     End Sub
 
     Friend Function IsLoginLegal(username As String, password As String) As Boolean
-        Return Len(Trim$(Username)) >= 3 AndAlso Len(Trim$(Password)) >= 3
+        Return Len(Trim$(username)) >= 3 AndAlso Len(Trim$(password)) >= 3
     End Function
 
     Friend Function IsStringLegal(sInput As String) As Boolean
@@ -165,44 +165,44 @@ Module C_General
     End Function
 
     Sub GameInit()
-        pnlloadvisible = False
+        Pnlloadvisible = False
 
         ' Set the focus
-        frmGame.picscreen.Focus()
+        FrmGame.picscreen.Focus()
 
         'stop the song playing
         StopMusic()
     End Sub
 
     Friend Sub SetStatus(caption As String)
-        FrmMenu.lblStatus.Text = Caption
+        FrmMenu.lblStatus.Text = caption
     End Sub
 
     Friend Sub MenuState(state As Integer)
-        pnlloadvisible = True
-        frmmenuvisible = False
-        Select Case State
+        Pnlloadvisible = True
+        Frmmenuvisible = False
+        Select Case state
             Case MenuStateAddchar
-                pnlCharCreateVisible = False
-                pnlLoginVisible = False
-                pnlRegisterVisible = False
-                pnlCreditsVisible = False
+                PnlCharCreateVisible = False
+                PnlLoginVisible = False
+                PnlRegisterVisible = False
+                PnlCreditsVisible = False
 
                 If ConnectToServer(1) Then
                     SetStatus(Strings.Get("mainmenu", "sendaddchar"))
 
                     If FrmMenu.rdoMale.Checked = True Then
-                        SendAddChar(SelectedChar, FrmMenu.txtCharName.Text, SexType.Male, FrmMenu.cmbClass.SelectedIndex + 1, newCharSprite)
+                        SendAddChar(SelectedChar, FrmMenu.txtCharName.Text, SexType.Male, FrmMenu.cmbClass.SelectedIndex + 1, NewCharSprite)
                     Else
-                        SendAddChar(SelectedChar, FrmMenu.txtCharName.Text, SexType.Female, FrmMenu.cmbClass.SelectedIndex + 1, newCharSprite)
+                        SendAddChar(SelectedChar, FrmMenu.txtCharName.Text, SexType.Female, FrmMenu.cmbClass.SelectedIndex + 1, NewCharSprite)
                     End If
                 End If
 
             Case MenuStateNewaccount
-                pnlLoginVisible = False
-                pnlCharCreateVisible = False
-                pnlRegisterVisible = False
-                pnlCreditsVisible = False
+                PnlLoginVisible = False
+                PnlCharCreateVisible = False
+                PnlRegisterVisible = False
+                PnlCreditsVisible = False
 
                 If ConnectToServer(1) Then
                     SetStatus(Strings.Get("mainmenu", "sendnewacc"))
@@ -210,12 +210,12 @@ Module C_General
                 End If
 
             Case MenuStateLogin
-                pnlLoginVisible = False
-                pnlCharCreateVisible = False
-                pnlRegisterVisible = False
-                pnlCreditsVisible = False
-                tempUserName = FrmMenu.txtLogin.Text
-                tempPassword = FrmMenu.txtPassword.Text
+                PnlLoginVisible = False
+                PnlCharCreateVisible = False
+                PnlRegisterVisible = False
+                PnlCreditsVisible = False
+                TempUserName = FrmMenu.txtLogin.Text
+                TempPassword = FrmMenu.txtPassword.Text
 
                 If ConnectToServer(1) Then
                     SetStatus(Strings.Get("mainmenu", "sendlogin"))
@@ -275,9 +275,9 @@ Module C_General
         End If
 
         'then the window
-        frmGame.ClientSize = New Drawing.Size((ScreenMapx) * PicX + PicX, (ScreenMapy) * PicY + PicY)
-        frmGame.picscreen.Width = (ScreenMapx) * PicX + PicX
-        frmGame.picscreen.Height = (ScreenMapy) * PicY + PicY
+        FrmGame.ClientSize = New Drawing.Size((ScreenMapx) * PicX + PicX, (ScreenMapy) * PicY + PicY)
+        FrmGame.picscreen.Width = (ScreenMapx) * PicX + PicX
+        FrmGame.picscreen.Height = (ScreenMapy) * PicY + PicY
 
         HalfX = ((ScreenMapx) \ 2) * PicX
         HalfY = ((ScreenMapy) \ 2) * PicY
@@ -290,22 +290,22 @@ Module C_General
 
         'chatwindow
         ChatWindowX = 1
-        ChatWindowY = frmGame.Height - ChatWindowGFXInfo.Height - 65
+        ChatWindowY = FrmGame.Height - ChatWindowGfxInfo.Height - 65
 
         MyChatX = 1
-        MyChatY = frmGame.Height - 60
+        MyChatY = FrmGame.Height - 60
 
         'hotbar
         If Options.ScreenSize = 0 Then
-            HotbarX = HUDWindowX + HUDPanelGFXInfo.Width + 20
+            HotbarX = HudWindowX + HudPanelGfxInfo.Width + 20
             HotbarY = 5
 
             'petbar
             PetbarX = HotbarX
             PetbarY = HotbarY + 34
         Else
-            HotbarX = ChatWindowX + MyChatWindowGFXInfo.Width + 50
-            HotbarY = frmGame.Height - HotBarGFXInfo.Height - 45
+            HotbarX = ChatWindowX + MyChatWindowGfxInfo.Width + 50
+            HotbarY = FrmGame.Height - HotBarGfxInfo.Height - 45
 
             'petbar
             PetbarX = HotbarX
@@ -313,24 +313,24 @@ Module C_General
         End If
 
         'action panel
-        ActionPanelX = frmGame.Width - ActionPanelGFXInfo.Width - 25
-        ActionPanelY = frmGame.Height - ActionPanelGFXInfo.Height - 45
+        ActionPanelX = FrmGame.Width - ActionPanelGfxInfo.Width - 25
+        ActionPanelY = FrmGame.Height - ActionPanelGfxInfo.Height - 45
 
         'Char Window
-        CharWindowX = frmGame.Width - CharPanelGFXInfo.Width - 26
-        CharWindowY = frmGame.Height - CharPanelGFXInfo.Height - ActionPanelGFXInfo.Height - 50
+        CharWindowX = FrmGame.Width - CharPanelGfxInfo.Width - 26
+        CharWindowY = FrmGame.Height - CharPanelGfxInfo.Height - ActionPanelGfxInfo.Height - 50
 
         'inv Window
-        InvWindowX = frmGame.Width - InvPanelGFXInfo.Width - 26
-        InvWindowY = frmGame.Height - InvPanelGFXInfo.Height - ActionPanelGFXInfo.Height - 50
+        InvWindowX = FrmGame.Width - InvPanelGfxInfo.Width - 26
+        InvWindowY = FrmGame.Height - InvPanelGfxInfo.Height - ActionPanelGfxInfo.Height - 50
 
         'skill window
-        SkillWindowX = frmGame.Width - SkillPanelGFXInfo.Width - 26
-        SkillWindowY = frmGame.Height - SkillPanelGFXInfo.Height - ActionPanelGFXInfo.Height - 50
+        SkillWindowX = FrmGame.Width - SkillPanelGfxInfo.Width - 26
+        SkillWindowY = FrmGame.Height - SkillPanelGfxInfo.Height - ActionPanelGfxInfo.Height - 50
 
         'petstat window
         PetStatX = PetbarX
-        PetStatY = PetbarY - PetStatsGFXInfo.Height - 10
+        PetStatY = PetbarY - PetStatsGfxInfo.Height - 10
     End Sub
 
     Friend Sub DestroyGame()
@@ -347,8 +347,8 @@ Module C_General
 
     Friend Sub CheckDir(dirPath As String)
 
-        If Not IO.Directory.Exists(DirPath) Then
-            IO.Directory.CreateDirectory(DirPath)
+        If Not IO.Directory.Exists(dirPath) Then
+            IO.Directory.CreateDirectory(dirPath)
         End If
 
     End Sub
@@ -356,13 +356,14 @@ Module C_General
     Friend Function GetExceptionInfo(ex As Exception) As String
         Dim result As String
         Dim hr As Integer = Runtime.InteropServices.Marshal.GetHRForException(ex)
-        Result = ex.GetType.ToString & "(0x" & hr.ToString("X8") & "): " & ex.Message & Environment.NewLine & ex.StackTrace & Environment.NewLine
+        result = ex.GetType.ToString & "(0x" & hr.ToString("X8") & "): " & ex.Message & Environment.NewLine & ex.StackTrace & Environment.NewLine
         Dim st As StackTrace = New StackTrace(ex, True)
         For Each sf As StackFrame In st.GetFrames
             If sf.GetFileLineNumber() > 0 Then
-                Result &= "Line:" & sf.GetFileLineNumber() & " Filename: " & IO.Path.GetFileName(sf.GetFileName) & Environment.NewLine
+                result &= "Line:" & sf.GetFileLineNumber() & " Filename: " & IO.Path.GetFileName(sf.GetFileName) & Environment.NewLine
             End If
         Next
-        Return Result
+        Return result
     End Function
+
 End Module

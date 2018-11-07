@@ -2,6 +2,7 @@
 Imports ASFW
 
 Friend Module C_Crafting
+
 #Region "Globals & Types"
 
     Friend RecipeChanged(MAX_RECIPE) As Boolean
@@ -26,7 +27,7 @@ Friend Module C_Crafting
 
     Friend CraftAmountValue As Byte
     Friend CraftProgressValue As Integer
-    Friend PicProductindex as integer
+    Friend PicProductindex As Integer
     Friend LblProductNameText As String
     Friend LblProductAmountText As String
 
@@ -56,6 +57,7 @@ Friend Module C_Crafting
 #End Region
 
 #Region "Database"
+
     Sub ClearRecipes()
         Dim i As Integer
 
@@ -68,10 +70,10 @@ Friend Module C_Crafting
     End Sub
 
     Sub ClearRecipe(num As Integer)
-        Recipe(Num).Name = ""
-        Recipe(Num).RecipeType = 0
-        Recipe(Num).MakeItemNum = 0
-        ReDim Recipe(Num).Ingredients(MAX_INGREDIENT)
+        Recipe(num).Name = ""
+        Recipe(num).RecipeType = 0
+        Recipe(num).MakeItemNum = 0
+        ReDim Recipe(num).Ingredients(MAX_INGREDIENT)
     End Sub
 
     Friend Sub ClearChanged_Recipe()
@@ -83,29 +85,31 @@ Friend Module C_Crafting
 
         ReDim RecipeChanged(MAX_RECIPE)
     End Sub
+
 #End Region
 
 #Region "Incoming Packets"
+
     Sub Packet_UpdateRecipe(ByRef data() As Byte)
         Dim n As Integer, i As Integer
-        dim buffer as New ByteStream(Data)
+        Dim buffer As New ByteStream(data)
         'recipe index
-        n = Buffer.ReadInt32
+        n = buffer.ReadInt32
 
         ' Update the Recipe
-        Recipe(n).Name = Trim$(Buffer.ReadString)
-        Recipe(n).RecipeType = Buffer.ReadInt32
-        Recipe(n).MakeItemNum = Buffer.ReadInt32
-        Recipe(n).MakeItemAmount = Buffer.ReadInt32
+        Recipe(n).Name = Trim$(buffer.ReadString)
+        Recipe(n).RecipeType = buffer.ReadInt32
+        Recipe(n).MakeItemNum = buffer.ReadInt32
+        Recipe(n).MakeItemAmount = buffer.ReadInt32
 
         For i = 1 To MAX_INGREDIENT
-            Recipe(n).Ingredients(i).ItemNum = Buffer.ReadInt32()
-            Recipe(n).Ingredients(i).Value = Buffer.ReadInt32()
+            Recipe(n).Ingredients(i).ItemNum = buffer.ReadInt32()
+            Recipe(n).Ingredients(i).Value = buffer.ReadInt32()
         Next
 
-        Recipe(n).CreateTime = Buffer.ReadInt32
+        Recipe(n).CreateTime = buffer.ReadInt32
 
-        Buffer.Dispose()
+        buffer.Dispose()
 
     End Sub
 
@@ -115,12 +119,12 @@ Friend Module C_Crafting
 
     Sub Packet_SendPlayerRecipe(ByRef data() As Byte)
         Dim i As Integer
-        dim buffer as New ByteStream(Data)
+        Dim buffer As New ByteStream(data)
         For i = 1 To MAX_RECIPE
-            Player(MyIndex).RecipeLearned(i) = Buffer.ReadInt32
+            Player(Myindex).RecipeLearned(i) = buffer.ReadInt32
         Next
 
-        Buffer.Dispose()
+        buffer.Dispose()
     End Sub
 
     Sub Packet_OpenCraft(ByRef data() As Byte)
@@ -129,8 +133,8 @@ Friend Module C_Crafting
 
     Sub Packet_UpdateCraft(ByRef data() As Byte)
         Dim done As Byte
-        dim buffer as New ByteStream(Data)
-        done = Buffer.ReadInt32
+        Dim buffer As New ByteStream(data)
+        done = buffer.ReadInt32
 
         If done = 1 Then
             InitCrafting = True
@@ -139,68 +143,70 @@ Friend Module C_Crafting
             CraftTimerEnabled = True
         End If
 
-        Buffer.Dispose()
+        buffer.Dispose()
     End Sub
+
 #End Region
 
 #Region "OutGoing Packets"
+
     Sub SendRequestRecipes()
-        dim buffer as New ByteStream(4)
+        Dim buffer As New ByteStream(4)
 
-        Buffer.WriteInt32(ClientPackets.CRequestRecipes)
+        buffer.WriteInt32(ClientPackets.CRequestRecipes)
 
-        Socket.SendData(Buffer.Data, Buffer.Head)
-        Buffer.Dispose()
+        Socket.SendData(buffer.Data, buffer.Head)
+        buffer.Dispose()
     End Sub
 
     Sub SendRequestEditRecipes()
-        dim buffer as New ByteStream(4)
+        Dim buffer As New ByteStream(4)
 
-        Buffer.WriteInt32(EditorPackets.RequestEditRecipes)
+        buffer.WriteInt32(EditorPackets.RequestEditRecipes)
 
-        Socket.SendData(Buffer.Data, Buffer.Head)
-        Buffer.Dispose()
+        Socket.SendData(buffer.Data, buffer.Head)
+        buffer.Dispose()
     End Sub
 
     Sub SendSaveRecipe(recipeNum As Integer)
-        dim buffer as New ByteStream(4)
+        Dim buffer As New ByteStream(4)
 
-        Buffer.WriteInt32(EditorPackets.SaveRecipe)
+        buffer.WriteInt32(EditorPackets.SaveRecipe)
 
-        Buffer.WriteInt32(RecipeNum)
+        buffer.WriteInt32(recipeNum)
 
         buffer.WriteString((Trim$(Recipe(recipeNum).Name)))
-        buffer.WriteInt32(Recipe(RecipeNum).RecipeType)
-        Buffer.WriteInt32(Recipe(RecipeNum).MakeItemNum)
-        Buffer.WriteInt32(Recipe(RecipeNum).MakeItemAmount)
+        buffer.WriteInt32(Recipe(recipeNum).RecipeType)
+        buffer.WriteInt32(Recipe(recipeNum).MakeItemNum)
+        buffer.WriteInt32(Recipe(recipeNum).MakeItemAmount)
 
         For i = 1 To MAX_INGREDIENT
-            Buffer.WriteInt32(Recipe(RecipeNum).Ingredients(i).ItemNum)
-            Buffer.WriteInt32(Recipe(RecipeNum).Ingredients(i).Value)
+            buffer.WriteInt32(Recipe(recipeNum).Ingredients(i).ItemNum)
+            buffer.WriteInt32(Recipe(recipeNum).Ingredients(i).Value)
         Next
 
-        Buffer.WriteInt32(Recipe(RecipeNum).CreateTime)
+        buffer.WriteInt32(Recipe(recipeNum).CreateTime)
 
-        Socket.SendData(Buffer.Data, Buffer.Head)
-        Buffer.Dispose()
+        Socket.SendData(buffer.Data, buffer.Head)
+        buffer.Dispose()
     End Sub
 
     Friend Sub SendCraftIt(recipeName As String, amount As Integer)
-        dim buffer as New ByteStream(4), i As Integer
-        Dim recipeindex as integer
+        Dim buffer As New ByteStream(4), i As Integer
+        Dim recipeindex As Integer
 
-        recipeindex = GetRecipeIndex(RecipeName)
+        recipeindex = GetRecipeIndex(recipeName)
 
         If recipeindex <= 0 Then Exit Sub
 
         'check,check, double check
 
         'we dont even know the damn recipe xD
-        If Player(MyIndex).RecipeLearned(recipeindex) = 0 Then Exit Sub
+        If Player(Myindex).RecipeLearned(recipeindex) = 0 Then Exit Sub
 
         'enough ingredients?
         For i = 1 To MAX_INGREDIENT
-            If Recipe(recipeindex).Ingredients(i).ItemNum > 0 AndAlso HasItem(MyIndex, Recipe(recipeindex).Ingredients(i).ItemNum) < (Amount * Recipe(recipeindex).Ingredients(i).Value) Then
+            If Recipe(recipeindex).Ingredients(i).ItemNum > 0 AndAlso HasItem(Myindex, Recipe(recipeindex).Ingredients(i).ItemNum) < (amount * Recipe(recipeindex).Ingredients(i).Value) Then
                 AddText(Strings.Get("crafting", "notenough"), ColorType.Red)
                 Exit Sub
             End If
@@ -208,46 +214,48 @@ Friend Module C_Crafting
 
         'all seems fine...
 
-        Buffer.WriteInt32(ClientPackets.CStartCraft)
+        buffer.WriteInt32(ClientPackets.CStartCraft)
 
-        Buffer.WriteInt32(recipeindex)
-        Buffer.WriteInt32(Amount)
+        buffer.WriteInt32(recipeindex)
+        buffer.WriteInt32(amount)
 
-        Socket.SendData(Buffer.Data, Buffer.Head)
+        Socket.SendData(buffer.Data, buffer.Head)
 
-        Buffer.Dispose()
+        buffer.Dispose()
 
         CraftTimer = GetTickCount()
         CraftTimerEnabled = True
 
-        btnCraftEnabled = False
-        btnCraftStopEnabled = False
-        btnCraftStopEnabled = False
-        nudCraftAmountEnabled = False
-        lstRecipeEnabled = False
-        chkKnownOnlyEnabled = False
+        BtnCraftEnabled = False
+        BtnCraftStopEnabled = False
+        BtnCraftStopEnabled = False
+        NudCraftAmountEnabled = False
+        LstRecipeEnabled = False
+        ChkKnownOnlyEnabled = False
     End Sub
 
     Sub SendCloseCraft()
-        dim buffer as New ByteStream(4)
+        Dim buffer As New ByteStream(4)
 
-        Buffer.WriteInt32(ClientPackets.CCloseCraft)
+        buffer.WriteInt32(ClientPackets.CCloseCraft)
 
-        Socket.SendData(Buffer.Data, Buffer.Head)
+        Socket.SendData(buffer.Data, buffer.Head)
 
-        Buffer.Dispose()
+        buffer.Dispose()
     End Sub
+
 #End Region
 
 #Region "Functions"
+
     Friend Sub CraftingInit()
         Dim i As Integer, x As Integer
 
         x = 1
 
         For i = 1 To MAX_RECIPE
-            If chkKnownOnlyChecked = True Then
-                If Player(MyIndex).RecipeLearned(i) = 1 Then
+            If ChkKnownOnlyChecked = True Then
+                If Player(Myindex).RecipeLearned(i) = 1 Then
                     RecipeNames(x) = Trim$(Recipe(i).Name)
                     x = x + 1
                 End If
@@ -265,29 +273,29 @@ Friend Module C_Crafting
 
         LoadRecipe(RecipeNames(SelectedRecipe))
 
-        pnlCraftVisible = True
+        PnlCraftVisible = True
     End Sub
 
     Sub LoadRecipe(recipeName As String)
-        Dim recipeindex as integer
+        Dim recipeindex As Integer
 
-        recipeindex = GetRecipeIndex(RecipeName)
+        recipeindex = GetRecipeIndex(recipeName)
 
         If recipeindex <= 0 Then Exit Sub
 
-        picProductIndex = Item(Recipe(recipeindex).MakeItemNum).Pic
-        lblProductNameText = Item(Recipe(recipeindex).MakeItemNum).Name
-        lblProductAmountText = "X 1"
+        PicProductindex = Item(Recipe(recipeindex).MakeItemNum).Pic
+        LblProductNameText = Item(Recipe(recipeindex).MakeItemNum).Name
+        LblProductAmountText = "X 1"
 
         For i = 1 To MAX_INGREDIENT
             If Recipe(recipeindex).Ingredients(i).ItemNum > 0 Then
-                picMaterialIndex(i) = Item(Recipe(recipeindex).Ingredients(i).ItemNum).Pic
-                lblMaterialName(i) = Item(Recipe(recipeindex).Ingredients(i).ItemNum).Name
-                lblMaterialAmount(i) = "X " & HasItem(MyIndex, Recipe(recipeindex).Ingredients(i).ItemNum) & "/" & Recipe(recipeindex).Ingredients(i).Value
+                PicMaterialIndex(i) = Item(Recipe(recipeindex).Ingredients(i).ItemNum).Pic
+                LblMaterialName(i) = Item(Recipe(recipeindex).Ingredients(i).ItemNum).Name
+                LblMaterialAmount(i) = "X " & HasItem(Myindex, Recipe(recipeindex).Ingredients(i).ItemNum) & "/" & Recipe(recipeindex).Ingredients(i).Value
             Else
-                picMaterialIndex(i) = 0
-                lblMaterialName(i) = ""
-                lblMaterialAmount(i) = ""
+                PicMaterialIndex(i) = 0
+                LblMaterialName(i) = ""
+                LblMaterialAmount(i) = ""
             End If
         Next
 
@@ -299,7 +307,7 @@ Friend Module C_Crafting
         GetRecipeIndex = 0
 
         For i = 1 To MAX_RECIPE
-            If Trim$(Recipe(i).Name) = Trim$(RecipeName) Then
+            If Trim$(Recipe(i).Name) = Trim$(recipeName) Then
                 GetRecipeIndex = i
                 Exit For
             End If
@@ -312,7 +320,7 @@ Friend Module C_Crafting
         Dim rec As Rectangle, pgbvalue As Integer
 
         'first render panel
-        RenderSprite(CraftSprite, GameWindow, CraftPanelX, CraftPanelY, 0, 0, CraftGFXInfo.Width, CraftGFXInfo.Height)
+        RenderSprite(CraftSprite, GameWindow, CraftPanelX, CraftPanelY, 0, 0, CraftGfxInfo.Width, CraftGfxInfo.Height)
 
         y = 10
 
@@ -329,57 +337,57 @@ Friend Module C_Crafting
 
         With rec
             .Y = 0
-            .Height = ProgBarGFXInfo.Height
+            .Height = ProgBarGfxInfo.Height
             .X = 0
-            .Width = pgbvalue * ProgBarGFXInfo.Width / 100
+            .Width = pgbvalue * ProgBarGfxInfo.Width / 100
         End With
 
         RenderSprite(ProgBarSprite, GameWindow, CraftPanelX + 410, CraftPanelY + 417, rec.X, rec.Y, rec.Width, rec.Height)
 
         'amount controls
-        RenderSprite(CharPanelMinSprite, GameWindow, CraftPanelX + 340, CraftPanelY + 422, 0, 0, CharPanelMinGFXInfo.Width, CharPanelMinGFXInfo.Height)
+        RenderSprite(CharPanelMinSprite, GameWindow, CraftPanelX + 340, CraftPanelY + 422, 0, 0, CharPanelMinGfxInfo.Width, CharPanelMinGfxInfo.Height)
 
         DrawText(CraftPanelX + 367, CraftPanelY + 418, Trim$(CraftAmountValue), SFML.Graphics.Color.Black, SFML.Graphics.Color.White, GameWindow)
 
-        RenderSprite(CharPanelPlusSprite, GameWindow, CraftPanelX + 392, CraftPanelY + 422, 0, 0, CharPanelPlusGFXInfo.Width, CharPanelPlusGFXInfo.Height)
+        RenderSprite(CharPanelPlusSprite, GameWindow, CraftPanelX + 392, CraftPanelY + 422, 0, 0, CharPanelPlusGfxInfo.Width, CharPanelPlusGfxInfo.Height)
 
         If SelectedRecipe = 0 Then Exit Sub
 
-        If picProductIndex > 0 Then
-            If ItemsGFXInfo(picProductIndex).IsLoaded = False Then
-                LoadTexture(picProductIndex, 4)
+        If PicProductindex > 0 Then
+            If ItemsGfxInfo(PicProductindex).IsLoaded = False Then
+                LoadTexture(PicProductindex, 4)
             End If
 
             'seeying we still use it, lets update timer
-            With ItemsGFXInfo(picProductIndex)
+            With ItemsGfxInfo(PicProductindex)
                 .TextureTimer = GetTickCount() + 100000
             End With
 
-            RenderSprite(ItemsSprite(picProductIndex), GameWindow, CraftPanelX + 267, CraftPanelY + 20, 0, 0, ItemsGFXInfo(picProductIndex).Width, ItemsGFXInfo(picProductIndex).Height)
+            RenderSprite(ItemsSprite(PicProductindex), GameWindow, CraftPanelX + 267, CraftPanelY + 20, 0, 0, ItemsGfxInfo(PicProductindex).Width, ItemsGfxInfo(PicProductindex).Height)
 
-            DrawText(CraftPanelX + 310, CraftPanelY + 20, Trim$(lblProductNameText), SFML.Graphics.Color.White, SFML.Graphics.Color.Black, GameWindow)
+            DrawText(CraftPanelX + 310, CraftPanelY + 20, Trim$(LblProductNameText), SFML.Graphics.Color.White, SFML.Graphics.Color.Black, GameWindow)
 
-            DrawText(CraftPanelX + 310, CraftPanelY + 35, Trim$(lblProductAmountText), SFML.Graphics.Color.White, SFML.Graphics.Color.Black, GameWindow)
+            DrawText(CraftPanelX + 310, CraftPanelY + 35, Trim$(LblProductAmountText), SFML.Graphics.Color.White, SFML.Graphics.Color.Black, GameWindow)
         End If
 
         y = 107
 
         For i = 1 To MAX_INGREDIENT
-            If picMaterialIndex(i) > 0 Then
-                If ItemsGFXInfo(picMaterialIndex(i)).IsLoaded = False Then
-                    LoadTexture(picMaterialIndex(i), 4)
+            If PicMaterialIndex(i) > 0 Then
+                If ItemsGfxInfo(PicMaterialIndex(i)).IsLoaded = False Then
+                    LoadTexture(PicMaterialIndex(i), 4)
                 End If
 
                 'seeying we still use it, lets update timer
-                With ItemsGFXInfo(picMaterialIndex(i))
+                With ItemsGfxInfo(PicMaterialIndex(i))
                     .TextureTimer = GetTickCount() + 100000
                 End With
 
-                RenderSprite(ItemsSprite(picMaterialIndex(i)), GameWindow, CraftPanelX + 275, CraftPanelY + y, 0, 0, ItemsGFXInfo(picMaterialIndex(i)).Width, ItemsGFXInfo(picMaterialIndex(i)).Height)
+                RenderSprite(ItemsSprite(PicMaterialIndex(i)), GameWindow, CraftPanelX + 275, CraftPanelY + y, 0, 0, ItemsGfxInfo(PicMaterialIndex(i)).Width, ItemsGfxInfo(PicMaterialIndex(i)).Height)
 
-                DrawText(CraftPanelX + 315, CraftPanelY + y, Trim$(lblMaterialName(i)), SFML.Graphics.Color.White, SFML.Graphics.Color.Black, GameWindow)
+                DrawText(CraftPanelX + 315, CraftPanelY + y, Trim$(LblMaterialName(i)), SFML.Graphics.Color.White, SFML.Graphics.Color.Black, GameWindow)
 
-                DrawText(CraftPanelX + 315, CraftPanelY + y + 15, Trim$(lblMaterialAmount(i)), SFML.Graphics.Color.White, SFML.Graphics.Color.Black, GameWindow)
+                DrawText(CraftPanelX + 315, CraftPanelY + y + 15, Trim$(LblMaterialAmount(i)), SFML.Graphics.Color.White, SFML.Graphics.Color.Black, GameWindow)
 
                 y = y + 63
             End If
@@ -399,23 +407,23 @@ Friend Module C_Crafting
 
         CraftAmountValue = 1
 
-        picProductIndex = 0
-        lblProductNameText = Strings.Get("crafting", "noneselected")
-        lblProductAmountText = "0"
+        PicProductindex = 0
+        LblProductNameText = Strings.Get("crafting", "noneselected")
+        LblProductAmountText = "0"
 
         For i = 1 To MAX_INGREDIENT
-            picMaterialIndex(i) = 0
-            lblMaterialName(i) = ""
-            lblMaterialAmount(i) = ""
+            PicMaterialIndex(i) = 0
+            LblMaterialName(i) = ""
+            LblMaterialAmount(i) = ""
         Next
 
         CraftTimerEnabled = False
 
-        btnCraftEnabled = True
-        btnCraftStopEnabled = True
-        nudCraftAmountEnabled = True
-        lstRecipeEnabled = True
-        chkKnownOnlyEnabled = True
+        BtnCraftEnabled = True
+        BtnCraftStopEnabled = True
+        NudCraftAmountEnabled = True
+        LstRecipeEnabled = True
+        ChkKnownOnlyEnabled = True
 
         SelectedRecipe = 0
     End Sub

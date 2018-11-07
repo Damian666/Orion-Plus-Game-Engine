@@ -6,22 +6,30 @@
 
     ' Used for closing key doors again
     Friend KeyTimer As Integer
+
     ' Used for gradually giving back npcs hp
     Friend GiveNPCHPTimer As Integer
+
     Friend GiveNPCMPTimer As Integer
 
     ' Used for logging
     Friend ServerLog As Boolean
+
     ' Text vars
     Friend vbQuote As String
+
     ' Maximum classes
     Friend Max_Classes As Byte
+
     ' Used for server loop
     Friend ServerOnline As Boolean
+
     ' Used for outputting text
     Friend NumLines As Integer
+
     ' Used to handle shutting down server with countdown.
     Friend isShuttingDown As Boolean
+
     Friend Secs As Integer
     Friend TempMapData As Byte
 

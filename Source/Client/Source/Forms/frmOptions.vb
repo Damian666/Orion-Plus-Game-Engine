@@ -1,4 +1,5 @@
 ﻿Friend Class FrmOptions
+
 #Region "Options"
 
     Private Sub scrlVolume_ValueChanged(sender As Object, e As EventArgs) Handles scrlVolume.ValueChanged
@@ -54,10 +55,11 @@
         'reload options
         LoadOptions()
 
-        RePositionGUI()
+        RePositionGui()
 
         Me.Visible = False
     End Sub
 
 #End Region
+
 End Class

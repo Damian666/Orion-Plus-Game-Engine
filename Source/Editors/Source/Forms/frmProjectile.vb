@@ -17,39 +17,39 @@
     End Sub
 
     Private Sub TxtName_TextChanged(sender As System.Object, e As EventArgs) Handles txtName.TextChanged
-        Dim tmpindex as integer
+        Dim tmpindex As Integer
 
-        If EditorIndex < 1 OrElse EditorIndex > MAX_PROJECTILES Then Exit Sub
+        If Editorindex < 1 OrElse Editorindex > MAX_PROJECTILES Then Exit Sub
 
-        tmpIndex = lstIndex.SelectedIndex
-        Projectiles(EditorIndex).Name = Trim$(txtName.Text)
-        lstIndex.Items.RemoveAt(EditorIndex - 1)
-        lstIndex.Items.Insert(EditorIndex - 1, EditorIndex & ": " & Projectiles(EditorIndex).Name)
-        lstIndex.SelectedIndex = tmpIndex
+        tmpindex = lstIndex.SelectedIndex
+        Projectiles(Editorindex).Name = Trim$(txtName.Text)
+        lstIndex.Items.RemoveAt(Editorindex - 1)
+        lstIndex.Items.Insert(Editorindex - 1, Editorindex & ": " & Projectiles(Editorindex).Name)
+        lstIndex.SelectedIndex = tmpindex
     End Sub
 
     Private Sub NudPic_ValueChanged(sender As Object, e As EventArgs) Handles nudPic.Click
-        If EditorIndex < 1 OrElse EditorIndex > MAX_PROJECTILES Then Exit Sub
+        If Editorindex < 1 OrElse Editorindex > MAX_PROJECTILES Then Exit Sub
 
-        Projectiles(EditorIndex).Sprite = nudPic.Value
+        Projectiles(Editorindex).Sprite = nudPic.Value
     End Sub
 
     Private Sub NudRange_ValueChanged(sender As Object, e As EventArgs) Handles nudRange.Click
-        If EditorIndex < 1 OrElse EditorIndex > MAX_PROJECTILES Then Exit Sub
+        If Editorindex < 1 OrElse Editorindex > MAX_PROJECTILES Then Exit Sub
 
-        Projectiles(EditorIndex).Range = nudRange.Value
+        Projectiles(Editorindex).Range = nudRange.Value
     End Sub
 
     Private Sub NudSpeed_ValueChanged(sender As Object, e As EventArgs) Handles nudSpeed.Click
-        If EditorIndex < 1 OrElse EditorIndex > MAX_PROJECTILES Then Exit Sub
+        If Editorindex < 1 OrElse Editorindex > MAX_PROJECTILES Then Exit Sub
 
-        Projectiles(EditorIndex).Speed = nudSpeed.Value
+        Projectiles(Editorindex).Speed = nudSpeed.Value
     End Sub
 
     Private Sub NudDamage_ValueChanged(sender As Object, e As EventArgs) Handles nudDamage.Click
-        If EditorIndex < 1 OrElse EditorIndex > MAX_PROJECTILES Then Exit Sub
+        If Editorindex < 1 OrElse Editorindex > MAX_PROJECTILES Then Exit Sub
 
-        Projectiles(EditorIndex).Damage = nudDamage.Value
+        Projectiles(Editorindex).Damage = nudDamage.Value
     End Sub
 
 End Class

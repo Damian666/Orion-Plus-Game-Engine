@@ -239,7 +239,6 @@ Module S_General
         ' reset shutdown value
         isShuttingDown = False
 
-
         ' Start listener now that everything is loaded
         Socket.StartListening(Options.Port, 5, 1)
 
@@ -258,6 +257,7 @@ Module S_General
     End Function
 
     Private handler As ConsoleEventDelegate
+
     ' Keeps it from getting garbage collected
     ' Pinvoke
     Private Delegate Function ConsoleEventDelegate(eventType As Integer) As Boolean
@@ -380,4 +380,5 @@ Module S_General
         End If
 
     End Sub
+
 End Module

@@ -2,20 +2,26 @@
 Imports ASFW
 
 Module C_Banks
+
 #Region "Globals & Types"
+
     Friend Bank As BankRec
 
     ' Stores the last bank item we showed in desc
     Friend LastBankDesc As Integer
+
     Friend InBank As Integer
 
     ' bank drag + drop
     Friend DragBankSlotNum As Integer
+
     Friend BankX As Integer
     Friend BankY As Integer
+
 #End Region
 
 #Region "Database"
+
     Sub ClearBank()
         ReDim Bank.Item(MAX_BANK)
         ReDim Bank.ItemRand(MAX_BANK)
@@ -23,9 +29,11 @@ Module C_Banks
             ReDim Bank.ItemRand(x).Stat(StatType.Count - 1)
         Next
     End Sub
+
 #End Region
 
 #Region "Incoming Packets"
+
     Friend Sub Packet_OpenBank(ByRef data() As Byte)
         Dim i As Integer, x As Integer
         Dim buffer As New ByteStream(data)
@@ -48,9 +56,11 @@ Module C_Banks
 
         buffer.Dispose()
     End Sub
+
 #End Region
 
 #Region "Outgoing Packets"
+
     Friend Sub DepositItem(invslot As Integer, amount As Integer)
         Dim buffer As New ByteStream(4)
 
@@ -95,9 +105,11 @@ Module C_Banks
         InBank = False
         PnlBankVisible = False
     End Sub
+
 #End Region
 
 #Region "Drawing"
+
     Sub DrawBank()
         Dim i As Integer, x As Integer, y As Integer, itemnum As Integer
         Dim amount As String
@@ -198,5 +210,7 @@ Module C_Banks
         RenderSprite(ItemsSprite(sprite), GameWindow, x + 16, y + 16, rec.X, rec.Y, rec.Width, rec.Height)
 
     End Sub
+
 #End Region
+
 End Module

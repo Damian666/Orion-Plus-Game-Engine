@@ -1,5 +1,6 @@
 ﻿Module S_RandomItems
-    Friend Sub ClearRandBank(index as integer, BankNum As Integer)
+
+    Friend Sub ClearRandBank(index As Integer, BankNum As Integer)
         Dim i As Integer
 
         Bank(index).ItemRand(BankNum).Prefix = ""
@@ -13,7 +14,7 @@
         Next i
     End Sub
 
-    Friend Sub ClearRandInv(index as integer, InvNum As Integer)
+    Friend Sub ClearRandInv(index As Integer, InvNum As Integer)
         Dim i As Integer
 
         Player(index).Character(TempPlayer(index).CurChar).RandInv(InvNum).Prefix = ""
@@ -27,7 +28,7 @@
         Next i
     End Sub
 
-    Friend Sub ClearRandEq(index as integer, Equipment As EquipmentType)
+    Friend Sub ClearRandEq(index As Integer, Equipment As EquipmentType)
         Dim i As Integer
 
         Player(index).Character(TempPlayer(index).CurChar).RandEquip(Equipment).Prefix = ""
@@ -41,7 +42,7 @@
         Next i
     End Sub
 
-    Friend Sub GivePlayerRandomItem(index as integer, itemnum As Integer, invslot As Integer)
+    Friend Sub GivePlayerRandomItem(index As Integer, itemnum As Integer, invslot As Integer)
         Dim RandomType As Integer, StatAmount As Integer, Rarity As Integer, TempNum As Integer, TempAmount As Double, i As Integer, ItemLevel As Integer
         Dim Prefix As String = ""
 
@@ -212,4 +213,5 @@
                 Player(index).Character(TempPlayer(index).CurChar).RandInv(invslot).Stat(StatType.Spirit) = ItemLevel + StatAmount
         End Select
     End Sub
+
 End Module

@@ -1,24 +1,25 @@
 ﻿Imports ASFW
 
 Module C_Player
-    Function IsPlaying(index as integer) As Boolean
+
+    Function IsPlaying(index As Integer) As Boolean
 
         ' if the player doesn't exist, the name will equal 0
-        If Len(GetPlayerName(Index)) > 0 Then
+        If Len(GetPlayerName(index)) > 0 Then
             IsPlaying = True
         End If
 
     End Function
 
-    Function GetPlayerName(index as integer) As String
+    Function GetPlayerName(index As Integer) As String
         GetPlayerName = ""
-        If Index > MAX_PLAYERS Then Exit Function
-        GetPlayerName = Trim$(Player(Index).Name)
+        If index > MAX_PLAYERS Then Exit Function
+        GetPlayerName = Trim$(Player(index).Name)
     End Function
 
     Sub CheckAttack()
         Dim attackspeed As Integer, x As Integer, y As Integer
-        dim buffer as New ByteStream(4)
+        Dim buffer As New ByteStream(4)
 
         If VbKeyControl Then
             If InEvent = True Then Exit Sub
@@ -26,16 +27,16 @@ Module C_Player
             If StunDuration > 0 Then Exit Sub ' stunned, can't attack
 
             ' speed from weapon
-            If GetPlayerEquipment(MyIndex, EquipmentType.Weapon) > 0 Then
-                attackspeed = Item(GetPlayerEquipment(MyIndex, EquipmentType.Weapon)).Speed * 1000
+            If GetPlayerEquipment(Myindex, EquipmentType.Weapon) > 0 Then
+                attackspeed = Item(GetPlayerEquipment(Myindex, EquipmentType.Weapon)).Speed * 1000
             Else
                 attackspeed = 1000
             End If
 
-            If Player(MyIndex).AttackTimer + attackspeed < GetTickCount() Then
-                If Player(MyIndex).Attacking = 0 Then
+            If Player(Myindex).AttackTimer + attackspeed < GetTickCount() Then
+                If Player(Myindex).Attacking = 0 Then
 
-                    With Player(MyIndex)
+                    With Player(Myindex)
                         .Attacking = 1
                         .AttackTimer = GetTickCount()
                     End With
@@ -44,31 +45,31 @@ Module C_Player
                 End If
             End If
 
-            Select Case Player(MyIndex).Dir
+            Select Case Player(Myindex).Dir
                 Case DirectionType.Up
-                    X = GetPlayerX(MyIndex)
-                    Y = GetPlayerY(MyIndex) - 1
+                    x = GetPlayerX(Myindex)
+                    y = GetPlayerY(Myindex) - 1
                 Case DirectionType.Down
-                    X = GetPlayerX(MyIndex)
-                    Y = GetPlayerY(MyIndex) + 1
+                    x = GetPlayerX(Myindex)
+                    y = GetPlayerY(Myindex) + 1
                 Case DirectionType.Left
-                    X = GetPlayerX(MyIndex) - 1
-                    Y = GetPlayerY(MyIndex)
+                    x = GetPlayerX(Myindex) - 1
+                    y = GetPlayerY(Myindex)
                 Case DirectionType.Right
-                    X = GetPlayerX(MyIndex) + 1
-                    Y = GetPlayerY(MyIndex)
+                    x = GetPlayerX(Myindex) + 1
+                    y = GetPlayerY(Myindex)
             End Select
 
-            If GetTickCount() > Player(MyIndex).EventTimer Then
+            If GetTickCount() > Player(Myindex).EventTimer Then
                 For i = 1 To Map.CurrentEvents
                     If Map.MapEvents(i).Visible = 1 Then
-                        If Map.MapEvents(i).X = X AndAlso Map.MapEvents(i).Y = Y Then
-                            Buffer = New ByteStream(4)
-                            Buffer.WriteInt32(ClientPackets.CEvent)
-                            Buffer.WriteInt32(i)
-                            Socket.SendData(Buffer.Data, Buffer.Head)
-                            Buffer.Dispose()
-                            Player(MyIndex).EventTimer = GetTickCount() + 200
+                        If Map.MapEvents(i).X = x AndAlso Map.MapEvents(i).Y = y Then
+                            buffer = New ByteStream(4)
+                            buffer.WriteInt32(ClientPackets.CEvent)
+                            buffer.WriteInt32(i)
+                            Socket.SendData(buffer.Data, buffer.Head)
+                            buffer.Dispose()
+                            Player(Myindex).EventTimer = GetTickCount() + 200
                         End If
                     End If
                 Next
@@ -82,40 +83,40 @@ Module C_Player
         If IsTryingToMove() AndAlso CanMove() Then
             ' Check if player has the shift key down for running
             If VbKeyShift Then
-                Player(MyIndex).Moving = MovementType.Running
+                Player(Myindex).Moving = MovementType.Running
             Else
-                Player(MyIndex).Moving = MovementType.Walking
+                Player(Myindex).Moving = MovementType.Walking
             End If
 
-            If Map.Tile(GetPlayerX(MyIndex), GetPlayerY(MyIndex)).Type = TileType.Door Then
-                With TempTile(GetPlayerX(MyIndex), GetPlayerY(MyIndex))
+            If Map.Tile(GetPlayerX(Myindex), GetPlayerY(Myindex)).Type = TileType.Door Then
+                With TempTile(GetPlayerX(Myindex), GetPlayerY(Myindex))
                     .DoorFrame = 1
                     .DoorAnimate = 1 ' 0 = nothing| 1 = opening | 2 = closing
                     .DoorTimer = GetTickCount()
                 End With
             End If
 
-            Select Case GetPlayerDir(MyIndex)
+            Select Case GetPlayerDir(Myindex)
                 Case DirectionType.Up
                     SendPlayerMove()
-                    Player(MyIndex).YOffset = PicY
-                    SetPlayerY(MyIndex, GetPlayerY(MyIndex) - 1)
+                    Player(Myindex).YOffset = PicY
+                    SetPlayerY(Myindex, GetPlayerY(Myindex) - 1)
                 Case DirectionType.Down
                     SendPlayerMove()
-                    Player(MyIndex).YOffset = PicY * -1
-                    SetPlayerY(MyIndex, GetPlayerY(MyIndex) + 1)
+                    Player(Myindex).YOffset = PicY * -1
+                    SetPlayerY(Myindex, GetPlayerY(Myindex) + 1)
                 Case DirectionType.Left
                     SendPlayerMove()
-                    Player(MyIndex).XOffset = PicX
-                    SetPlayerX(MyIndex, GetPlayerX(MyIndex) - 1)
+                    Player(Myindex).XOffset = PicX
+                    SetPlayerX(Myindex, GetPlayerX(Myindex) - 1)
                 Case DirectionType.Right
                     SendPlayerMove()
-                    Player(MyIndex).XOffset = PicX * -1
-                    SetPlayerX(MyIndex, GetPlayerX(MyIndex) + 1)
+                    Player(Myindex).XOffset = PicX * -1
+                    SetPlayerX(Myindex, GetPlayerX(Myindex) + 1)
             End Select
 
-            If Player(MyIndex).XOffset = 0 AndAlso Player(MyIndex).YOffset = 0 Then
-                If Map.Tile(GetPlayerX(MyIndex), GetPlayerY(MyIndex)).Type = TileType.Warp Then
+            If Player(Myindex).XOffset = 0 AndAlso Player(Myindex).YOffset = 0 Then
+                If Map.Tile(GetPlayerX(Myindex), GetPlayerY(Myindex)).Type = TileType.Warp Then
                     GettingMap = True
                 End If
             End If
@@ -146,7 +147,7 @@ Module C_Player
         End If
 
         ' Make sure they aren't trying to move when they are already moving
-        If Player(MyIndex).Moving <> 0 Then
+        If Player(Myindex).Moving <> 0 Then
             CanMove = False
             Exit Function
         End If
@@ -191,13 +192,13 @@ Module C_Player
             Exit Function
         End If
 
-        d = GetPlayerDir(MyIndex)
+        d = GetPlayerDir(Myindex)
 
         If DirUp Then
-            SetPlayerDir(MyIndex, DirectionType.Up)
+            SetPlayerDir(Myindex, DirectionType.Up)
 
             ' Check to see if they are trying to go out of bounds
-            If GetPlayerY(MyIndex) > 0 Then
+            If GetPlayerY(Myindex) > 0 Then
                 If CheckDirection(DirectionType.Up) Then
                     CanMove = False
 
@@ -208,7 +209,6 @@ Module C_Player
 
                     Exit Function
                 End If
-
             Else
 
                 ' Check if they can warp to a new map
@@ -224,10 +224,10 @@ Module C_Player
         End If
 
         If DirDown Then
-            SetPlayerDir(MyIndex, DirectionType.Down)
+            SetPlayerDir(Myindex, DirectionType.Down)
 
             ' Check to see if they are trying to go out of bounds
-            If GetPlayerY(MyIndex) < Map.MaxY Then
+            If GetPlayerY(Myindex) < Map.MaxY Then
                 If CheckDirection(DirectionType.Down) Then
                     CanMove = False
 
@@ -238,7 +238,6 @@ Module C_Player
 
                     Exit Function
                 End If
-
             Else
 
                 ' Check if they can warp to a new map
@@ -254,10 +253,10 @@ Module C_Player
         End If
 
         If DirLeft Then
-            SetPlayerDir(MyIndex, DirectionType.Left)
+            SetPlayerDir(Myindex, DirectionType.Left)
 
             ' Check to see if they are trying to go out of bounds
-            If GetPlayerX(MyIndex) > 0 Then
+            If GetPlayerX(Myindex) > 0 Then
                 If CheckDirection(DirectionType.Left) Then
                     CanMove = False
 
@@ -268,7 +267,6 @@ Module C_Player
 
                     Exit Function
                 End If
-
             Else
 
                 ' Check if they can warp to a new map
@@ -284,10 +282,10 @@ Module C_Player
         End If
 
         If DirRight Then
-            SetPlayerDir(MyIndex, DirectionType.Right)
+            SetPlayerDir(Myindex, DirectionType.Right)
 
             ' Check to see if they are trying to go out of bounds
-            If GetPlayerX(MyIndex) < Map.MaxX Then
+            If GetPlayerX(Myindex) < Map.MaxX Then
                 If CheckDirection(DirectionType.Right) Then
                     CanMove = False
 
@@ -298,7 +296,6 @@ Module C_Player
 
                     Exit Function
                 End If
-
             Else
 
                 ' Check if they can warp to a new map
@@ -322,54 +319,54 @@ Module C_Player
         CheckDirection = False
 
         ' check directional blocking
-        If IsDirBlocked(Map.Tile(GetPlayerX(MyIndex), GetPlayerY(MyIndex)).DirBlock, Direction + 1) Then
+        If IsDirBlocked(Map.Tile(GetPlayerX(Myindex), GetPlayerY(Myindex)).DirBlock, direction + 1) Then
             CheckDirection = True
             Exit Function
         End If
 
-        Select Case Direction
+        Select Case direction
             Case Enums.DirectionType.Up
-                X = GetPlayerX(MyIndex)
-                Y = GetPlayerY(MyIndex) - 1
+                x = GetPlayerX(Myindex)
+                y = GetPlayerY(Myindex) - 1
             Case Enums.DirectionType.Down
-                X = GetPlayerX(MyIndex)
-                Y = GetPlayerY(MyIndex) + 1
+                x = GetPlayerX(Myindex)
+                y = GetPlayerY(Myindex) + 1
             Case Enums.DirectionType.Left
-                X = GetPlayerX(MyIndex) - 1
-                Y = GetPlayerY(MyIndex)
+                x = GetPlayerX(Myindex) - 1
+                y = GetPlayerY(Myindex)
             Case Enums.DirectionType.Right
-                X = GetPlayerX(MyIndex) + 1
-                Y = GetPlayerY(MyIndex)
+                x = GetPlayerX(Myindex) + 1
+                y = GetPlayerY(Myindex)
         End Select
 
         ' Check to see if the map tile is blocked or not
-        If Map.Tile(X, Y).Type = TileType.Blocked Then
+        If Map.Tile(x, y).Type = TileType.Blocked Then
             CheckDirection = True
             Exit Function
         End If
 
         ' Check to see if the map tile is tree or not
-        If Map.Tile(X, Y).Type = TileType.Resource Then
+        If Map.Tile(x, y).Type = TileType.Resource Then
             CheckDirection = True
             Exit Function
         End If
 
         ' Check to see if the key door is open or not
-        If Map.Tile(X, Y).Type = TileType.Key Then
+        If Map.Tile(x, y).Type = TileType.Key Then
             ' This actually checks if its open or not
-            If TempTile(X, Y).DoorOpen = False Then
+            If TempTile(x, y).DoorOpen = False Then
                 CheckDirection = True
                 Exit Function
             End If
         End If
 
-        If FurnitureHouse > 0 AndAlso FurnitureHouse = Player(MyIndex).InHouse Then
+        If FurnitureHouse > 0 AndAlso FurnitureHouse = Player(Myindex).InHouse Then
             If FurnitureCount > 0 Then
                 For i = 1 To FurnitureCount
                     If Item(Furniture(i).ItemNum).Data3 = 0 Then
-                        If X >= Furniture(i).X AndAlso X <= Furniture(i).X + Item(Furniture(i).ItemNum).FurnitureWidth - 1 Then
-                            If Y <= Furniture(i).Y AndAlso Y >= Furniture(i).Y - Item(Furniture(i).ItemNum).FurnitureHeight Then
-                                z = Item(Furniture(i).ItemNum).FurnitureBlocks(X - Furniture(i).X, ((Furniture(i).Y - Y) * -1) + Item(Furniture(i).ItemNum).FurnitureHeight)
+                        If x >= Furniture(i).X AndAlso x <= Furniture(i).X + Item(Furniture(i).ItemNum).FurnitureWidth - 1 Then
+                            If y <= Furniture(i).Y AndAlso y >= Furniture(i).Y - Item(Furniture(i).ItemNum).FurnitureHeight Then
+                                z = Item(Furniture(i).ItemNum).FurnitureBlocks(x - Furniture(i).X, ((Furniture(i).Y - y) * -1) + Item(Furniture(i).ItemNum).FurnitureHeight)
                                 If z = 1 Then CheckDirection = True : Exit Function
                             End If
                         End If
@@ -380,19 +377,19 @@ Module C_Player
 
         ' Check to see if a player is already on that tile
         For i = 1 To MAX_PLAYERS
-            If IsPlaying(i) AndAlso GetPlayerMap(i) = GetPlayerMap(MyIndex) Then
-                If Player(i).InHouse = Player(MyIndex).InHouse Then
-                    If GetPlayerX(i) = X Then
-                        If GetPlayerY(i) = Y Then
+            If IsPlaying(i) AndAlso GetPlayerMap(i) = GetPlayerMap(Myindex) Then
+                If Player(i).InHouse = Player(Myindex).InHouse Then
+                    If GetPlayerX(i) = x Then
+                        If GetPlayerY(i) = y Then
                             CheckDirection = True
                             Exit Function
-                        ElseIf Player(i).Pet.X = X AndAlso Player(i).Pet.Alive = True Then
-                            If Player(i).Pet.Y = Y Then
+                        ElseIf Player(i).Pet.X = x AndAlso Player(i).Pet.Alive = True Then
+                            If Player(i).Pet.Y = y Then
                                 CheckDirection = True
                                 Exit Function
                             End If
                         End If
-                    ElseIf Player(i).Pet.X = X AndAlso Player(i).Pet.Y = Y AndAlso Player(i).Pet.Alive = True Then
+                    ElseIf Player(i).Pet.X = x AndAlso Player(i).Pet.Y = y AndAlso Player(i).Pet.Alive = True Then
                         CheckDirection = True
                         Exit Function
                     End If
@@ -402,7 +399,7 @@ Module C_Player
 
         ' Check to see if a npc is already on that tile
         For i = 1 To MAX_MAP_NPCS
-            If MapNpc(i).Num > 0 AndAlso MapNpc(i).X = X AndAlso MapNpc(i).Y = Y Then
+            If MapNpc(i).Num > 0 AndAlso MapNpc(i).X = x AndAlso MapNpc(i).Y = y Then
                 CheckDirection = True
                 Exit Function
             End If
@@ -410,7 +407,7 @@ Module C_Player
 
         For i = 1 To Map.CurrentEvents
             If Map.MapEvents(i).Visible = 1 Then
-                If Map.MapEvents(i).X = X AndAlso Map.MapEvents(i).Y = Y Then
+                If Map.MapEvents(i).X = x AndAlso Map.MapEvents(i).Y = y Then
                     If Map.MapEvents(i).WalkThrough = 0 Then
                         CheckDirection = True
                         Exit Function
@@ -421,49 +418,49 @@ Module C_Player
 
     End Function
 
-    Sub ProcessMovement(index as integer)
+    Sub ProcessMovement(index As Integer)
         Dim movementSpeed As Integer
 
         ' Check if player is walking, and if so process moving them over
-        Select Case Player(Index).Moving
-            Case MovementType.Walking : MovementSpeed = ((ElapsedTime / 1000) * (WalkSpeed * SizeX))
-            Case MovementType.Running : MovementSpeed = ((ElapsedTime / 1000) * (RunSpeed * SizeX))
+        Select Case Player(index).Moving
+            Case MovementType.Walking : movementSpeed = ((ElapsedTime / 1000) * (WalkSpeed * SizeX))
+            Case MovementType.Running : movementSpeed = ((ElapsedTime / 1000) * (RunSpeed * SizeX))
             Case Else : Exit Sub
         End Select
 
-        Select Case GetPlayerDir(Index)
+        Select Case GetPlayerDir(index)
             Case DirectionType.Up
-                Player(Index).YOffset = Player(Index).YOffset - MovementSpeed
-                If Player(Index).YOffset < 0 Then Player(Index).YOffset = 0
+                Player(index).YOffset = Player(index).YOffset - movementSpeed
+                If Player(index).YOffset < 0 Then Player(index).YOffset = 0
             Case DirectionType.Down
-                Player(Index).YOffset = Player(Index).YOffset + MovementSpeed
-                If Player(Index).YOffset > 0 Then Player(Index).YOffset = 0
+                Player(index).YOffset = Player(index).YOffset + movementSpeed
+                If Player(index).YOffset > 0 Then Player(index).YOffset = 0
             Case DirectionType.Left
-                Player(Index).XOffset = Player(Index).XOffset - MovementSpeed
-                If Player(Index).XOffset < 0 Then Player(Index).XOffset = 0
+                Player(index).XOffset = Player(index).XOffset - movementSpeed
+                If Player(index).XOffset < 0 Then Player(index).XOffset = 0
             Case DirectionType.Right
-                Player(Index).XOffset = Player(Index).XOffset + MovementSpeed
-                If Player(Index).XOffset > 0 Then Player(Index).XOffset = 0
+                Player(index).XOffset = Player(index).XOffset + movementSpeed
+                If Player(index).XOffset > 0 Then Player(index).XOffset = 0
         End Select
 
         ' Check if completed walking over to the next tile
-        If Player(Index).Moving > 0 Then
-            If GetPlayerDir(Index) = DirectionType.Right OrElse GetPlayerDir(Index) = DirectionType.Down Then
-                If (Player(Index).XOffset >= 0) AndAlso (Player(Index).YOffset >= 0) Then
-                    Player(Index).Moving = 0
-                    If Player(Index).Steps = 1 Then
-                        Player(Index).Steps = 3
+        If Player(index).Moving > 0 Then
+            If GetPlayerDir(index) = DirectionType.Right OrElse GetPlayerDir(index) = DirectionType.Down Then
+                If (Player(index).XOffset >= 0) AndAlso (Player(index).YOffset >= 0) Then
+                    Player(index).Moving = 0
+                    If Player(index).Steps = 1 Then
+                        Player(index).Steps = 3
                     Else
-                        Player(Index).Steps = 1
+                        Player(index).Steps = 1
                     End If
                 End If
             Else
-                If (Player(Index).XOffset <= 0) AndAlso (Player(Index).YOffset <= 0) Then
-                    Player(Index).Moving = 0
-                    If Player(Index).Steps = 1 Then
-                        Player(Index).Steps = 3
+                If (Player(index).XOffset <= 0) AndAlso (Player(index).YOffset <= 0) Then
+                    Player(index).Moving = 0
+                    If Player(index).Steps = 1 Then
+                        Player(index).Steps = 3
                     Else
-                        Player(Index).Steps = 1
+                        Player(index).Steps = 1
                     End If
                 End If
             End If
@@ -471,64 +468,64 @@ Module C_Player
 
     End Sub
 
-    Function GetPlayerDir(index as integer) As Integer
+    Function GetPlayerDir(index As Integer) As Integer
 
-        If Index > MAX_PLAYERS Then Exit Function
-        GetPlayerDir = Player(Index).Dir
+        If index > MAX_PLAYERS Then Exit Function
+        GetPlayerDir = Player(index).Dir
     End Function
 
-    Function GetPlayerGatherSkillLvl(index as integer, skillSlot As Integer) As Integer
+    Function GetPlayerGatherSkillLvl(index As Integer, skillSlot As Integer) As Integer
 
         GetPlayerGatherSkillLvl = 0
 
-        If Index > MAX_PLAYERS Then Exit Function
+        If index > MAX_PLAYERS Then Exit Function
 
-        GetPlayerGatherSkillLvl = Player(Index).GatherSkills(SkillSlot).SkillLevel
+        GetPlayerGatherSkillLvl = Player(index).GatherSkills(skillSlot).SkillLevel
     End Function
 
-    Function GetPlayerGatherSkillExp(index as integer, skillSlot As Integer) As Integer
+    Function GetPlayerGatherSkillExp(index As Integer, skillSlot As Integer) As Integer
 
         GetPlayerGatherSkillExp = 0
 
-        If Index > MAX_PLAYERS Then Exit Function
+        If index > MAX_PLAYERS Then Exit Function
 
-        GetPlayerGatherSkillExp = Player(Index).GatherSkills(SkillSlot).SkillCurExp
+        GetPlayerGatherSkillExp = Player(index).GatherSkills(skillSlot).SkillCurExp
     End Function
 
-    Function GetPlayerGatherSkillMaxExp(index as integer, skillSlot As Integer) As Integer
+    Function GetPlayerGatherSkillMaxExp(index As Integer, skillSlot As Integer) As Integer
 
         GetPlayerGatherSkillMaxExp = 0
 
-        If Index > MAX_PLAYERS Then Exit Function
+        If index > MAX_PLAYERS Then Exit Function
 
-        GetPlayerGatherSkillMaxExp = Player(Index).GatherSkills(SkillSlot).SkillNextLvlExp
+        GetPlayerGatherSkillMaxExp = Player(index).GatherSkills(skillSlot).SkillNextLvlExp
     End Function
 
     Friend Sub PlayerCastSkill(skillslot As Integer)
-        dim buffer as New ByteStream(4)
+        Dim buffer As New ByteStream(4)
 
         ' Check for subscript out of range
         If skillslot < 1 OrElse skillslot > MAX_PLAYER_SKILLS Then Exit Sub
 
-        If SkillCD(skillslot) > 0 Then
+        If SkillCd(skillslot) > 0 Then
             AddText("Skill has not cooled down yet!", QColorType.AlertColor)
             Exit Sub
         End If
 
         ' Check if player has enough MP
-        If GetPlayerVital(MyIndex, VitalType.MP) < Skill(PlayerSkills(skillslot)).MpCost Then
+        If GetPlayerVital(Myindex, VitalType.MP) < Skill(PlayerSkills(skillslot)).MpCost Then
             AddText("Not enough MP to cast " & Trim$(Skill(PlayerSkills(skillslot)).Name) & ".", QColorType.AlertColor)
             Exit Sub
         End If
 
         If PlayerSkills(skillslot) > 0 Then
-            If GetTickCount() > Player(MyIndex).AttackTimer + 1000 Then
-                If Player(MyIndex).Moving = 0 Then
-                    Buffer.WriteInt32(ClientPackets.CCast)
-                    Buffer.WriteInt32(skillslot)
+            If GetTickCount() > Player(Myindex).AttackTimer + 1000 Then
+                If Player(Myindex).Moving = 0 Then
+                    buffer.WriteInt32(ClientPackets.CCast)
+                    buffer.WriteInt32(skillslot)
 
-                    Socket.SendData(Buffer.Data, Buffer.Head)
-                    Buffer.Dispose()
+                    Socket.SendData(buffer.Data, buffer.Head)
+                    buffer.Dispose()
 
                     SkillBuffer = skillslot
                     SkillBufferTimer = GetTickCount()
@@ -542,292 +539,293 @@ Module C_Player
 
     End Sub
 
-    Sub SetPlayerMap(index as integer, mapNum as Integer)
-        If Index > MAX_PLAYERS Then Exit Sub
-        Player(Index).Map = MapNum
+    Sub SetPlayerMap(index As Integer, mapNum As Integer)
+        If index > MAX_PLAYERS Then Exit Sub
+        Player(index).Map = mapNum
     End Sub
 
-    Function GetPlayerInvItemNum(index as integer, invslot As Integer) As Integer
+    Function GetPlayerInvItemNum(index As Integer, invslot As Integer) As Integer
         GetPlayerInvItemNum = 0
-        If Index > MAX_PLAYERS Then Exit Function
+        If index > MAX_PLAYERS Then Exit Function
         If invslot = 0 Then Exit Function
         GetPlayerInvItemNum = PlayerInv(invslot).Num
     End Function
 
-    Sub SetPlayerName(index as integer, name As String)
-        If Index > MAX_PLAYERS Then Exit Sub
-        Player(Index).Name = Name
+    Sub SetPlayerName(index As Integer, name As String)
+        If index > MAX_PLAYERS Then Exit Sub
+        Player(index).Name = name
     End Sub
 
-    Sub SetPlayerClass(index as integer, classnum As Integer)
-        If Index > MAX_PLAYERS Then Exit Sub
-        Player(Index).Classes = Classnum
+    Sub SetPlayerClass(index As Integer, classnum As Integer)
+        If index > MAX_PLAYERS Then Exit Sub
+        Player(index).Classes = classnum
     End Sub
 
-    Sub SetPlayerPoints(index as integer, points As Integer)
-        If Index > MAX_PLAYERS Then Exit Sub
-        Player(Index).POINTS = POINTS
+    Sub SetPlayerPoints(index As Integer, points As Integer)
+        If index > MAX_PLAYERS Then Exit Sub
+        Player(index).Points = points
     End Sub
 
-    Sub SetPlayerStat(index as integer, stat As StatType, value As Integer)
-        If Index > MAX_PLAYERS Then Exit Sub
-        If Value <= 0 Then Value = 1
-        If Value > Byte.MaxValue Then Value = Byte.MaxValue
-        Player(Index).Stat(Stat) = Value
+    Sub SetPlayerStat(index As Integer, stat As StatType, value As Integer)
+        If index > MAX_PLAYERS Then Exit Sub
+        If value <= 0 Then value = 1
+        If value > Byte.MaxValue Then value = Byte.MaxValue
+        Player(index).Stat(stat) = value
     End Sub
 
-    Sub SetPlayerInvItemNum(index as integer, invslot As Integer, itemnum As Integer)
-        If Index > MAX_PLAYERS Then Exit Sub
+    Sub SetPlayerInvItemNum(index As Integer, invslot As Integer, itemnum As Integer)
+        If index > MAX_PLAYERS Then Exit Sub
         PlayerInv(invslot).Num = itemnum
     End Sub
 
-    Function GetPlayerInvItemValue(index as integer, invslot As Integer) As Integer
+    Function GetPlayerInvItemValue(index As Integer, invslot As Integer) As Integer
         GetPlayerInvItemValue = 0
-        If Index > MAX_PLAYERS Then Exit Function
+        If index > MAX_PLAYERS Then Exit Function
         GetPlayerInvItemValue = PlayerInv(invslot).Value
     End Function
 
-    Sub SetPlayerInvItemValue(index as integer, invslot As Integer, itemValue As Integer)
-        If Index > MAX_PLAYERS Then Exit Sub
-        PlayerInv(invslot).Value = ItemValue
+    Sub SetPlayerInvItemValue(index As Integer, invslot As Integer, itemValue As Integer)
+        If index > MAX_PLAYERS Then Exit Sub
+        PlayerInv(invslot).Value = itemValue
     End Sub
 
-    Function GetPlayerPoints(index as integer) As Integer
-        GetPlayerPOINTS = 0
-        If Index > MAX_PLAYERS Then Exit Function
-        GetPlayerPOINTS = Player(Index).POINTS
+    Function GetPlayerPoints(index As Integer) As Integer
+        GetPlayerPoints = 0
+        If index > MAX_PLAYERS Then Exit Function
+        GetPlayerPoints = Player(index).Points
     End Function
 
-    Sub SetPlayerAccess(index as integer, access As Integer)
-        If Index > MAX_PLAYERS Then Exit Sub
-        Player(Index).Access = Access
+    Sub SetPlayerAccess(index As Integer, access As Integer)
+        If index > MAX_PLAYERS Then Exit Sub
+        Player(index).Access = access
     End Sub
 
-    Sub SetPlayerPk(index as integer, pk As Integer)
-        If Index > MAX_PLAYERS Then Exit Sub
-        Player(Index).PK = PK
+    Sub SetPlayerPk(index As Integer, pk As Integer)
+        If index > MAX_PLAYERS Then Exit Sub
+        Player(index).Pk = pk
     End Sub
 
-    Sub SetPlayerVital(index as integer, vital As VitalType, value As Integer)
-        If Index > MAX_PLAYERS Then Exit Sub
-        Player(Index).Vital(Vital) = Value
+    Sub SetPlayerVital(index As Integer, vital As VitalType, value As Integer)
+        If index > MAX_PLAYERS Then Exit Sub
+        Player(index).Vital(vital) = value
 
-        If GetPlayerVital(Index, Vital) > GetPlayerMaxVital(Index, Vital) Then
-            Player(Index).Vital(Vital) = GetPlayerMaxVital(Index, Vital)
+        If GetPlayerVital(index, vital) > GetPlayerMaxVital(index, vital) Then
+            Player(index).Vital(vital) = GetPlayerMaxVital(index, vital)
         End If
     End Sub
 
-    Function GetPlayerMaxVital(index as integer, vital As VitalType) As Integer
+    Function GetPlayerMaxVital(index As Integer, vital As VitalType) As Integer
         GetPlayerMaxVital = 0
-        If Index > MAX_PLAYERS Then Exit Function
+        If index > MAX_PLAYERS Then Exit Function
 
-        Select Case Vital
+        Select Case vital
             Case VitalType.HP
-                GetPlayerMaxVital = Player(Index).MaxHP
+                GetPlayerMaxVital = Player(index).MaxHp
             Case VitalType.MP
-                GetPlayerMaxVital = Player(Index).MaxMP
+                GetPlayerMaxVital = Player(index).MaxMp
             Case VitalType.SP
-                GetPlayerMaxVital = Player(Index).MaxSP
+                GetPlayerMaxVital = Player(index).MaxSp
         End Select
 
     End Function
 
-    Sub SetPlayerX(index as integer, x As Integer)
-        If Index > MAX_PLAYERS Then Exit Sub
-        Player(Index).X = X
+    Sub SetPlayerX(index As Integer, x As Integer)
+        If index > MAX_PLAYERS Then Exit Sub
+        Player(index).X = x
     End Sub
 
-    Sub SetPlayerY(index as integer, y As Integer)
-        If Index > MAX_PLAYERS Then Exit Sub
-        Player(Index).Y = Y
+    Sub SetPlayerY(index As Integer, y As Integer)
+        If index > MAX_PLAYERS Then Exit Sub
+        Player(index).Y = y
     End Sub
 
-    Sub SetPlayerSprite(index as integer, sprite As Integer)
-        If Index > MAX_PLAYERS Then Exit Sub
-        Player(Index).Sprite = Sprite
+    Sub SetPlayerSprite(index As Integer, sprite As Integer)
+        If index > MAX_PLAYERS Then Exit Sub
+        Player(index).Sprite = sprite
     End Sub
 
-    Sub SetPlayerExp(index as integer, exp As Integer)
-        If Index > MAX_PLAYERS Then Exit Sub
-        Player(Index).EXP = EXP
+    Sub SetPlayerExp(index As Integer, exp As Integer)
+        If index > MAX_PLAYERS Then Exit Sub
+        Player(index).Exp = exp
     End Sub
 
-    Sub SetPlayerLevel(index as integer, level As Integer)
-        If Index > MAX_PLAYERS Then Exit Sub
-        Player(Index).Level = Level
+    Sub SetPlayerLevel(index As Integer, level As Integer)
+        If index > MAX_PLAYERS Then Exit Sub
+        Player(index).Level = level
     End Sub
 
-    Sub SetPlayerDir(index as integer, dir As Integer)
-        If Index > MAX_PLAYERS Then Exit Sub
-        Player(Index).Dir = Dir
+    Sub SetPlayerDir(index As Integer, dir As Integer)
+        If index > MAX_PLAYERS Then Exit Sub
+        Player(index).Dir = dir
     End Sub
 
-    Function GetPlayerVital(index as integer, vital As VitalType) As Integer
+    Function GetPlayerVital(index As Integer, vital As VitalType) As Integer
         GetPlayerVital = 0
-        If Index > MAX_PLAYERS Then Exit Function
-        GetPlayerVital = Player(Index).Vital(Vital)
+        If index > MAX_PLAYERS Then Exit Function
+        GetPlayerVital = Player(index).Vital(vital)
     End Function
 
-    Function GetPlayerSprite(index as integer) As Integer
+    Function GetPlayerSprite(index As Integer) As Integer
         GetPlayerSprite = 0
-        If Index > MAX_PLAYERS Then Exit Function
-        GetPlayerSprite = Player(Index).Sprite
+        If index > MAX_PLAYERS Then Exit Function
+        GetPlayerSprite = Player(index).Sprite
     End Function
 
-    Function GetPlayerClass(index as integer) As Integer
+    Function GetPlayerClass(index As Integer) As Integer
         GetPlayerClass = 0
-        If Index > MAX_PLAYERS Then Exit Function
-        GetPlayerClass = Player(Index).Classes
+        If index > MAX_PLAYERS Then Exit Function
+        GetPlayerClass = Player(index).Classes
     End Function
 
-    Function GetPlayerMap(index as integer) As Integer
+    Function GetPlayerMap(index As Integer) As Integer
         GetPlayerMap = 0
-        If Index > MAX_PLAYERS Then Exit Function
-        GetPlayerMap = Player(Index).Map
+        If index > MAX_PLAYERS Then Exit Function
+        GetPlayerMap = Player(index).Map
     End Function
 
-    Function GetPlayerLevel(index as integer) As Integer
+    Function GetPlayerLevel(index As Integer) As Integer
         GetPlayerLevel = 0
-        If Index > MAX_PLAYERS Then Exit Function
-        GetPlayerLevel = Player(Index).Level
+        If index > MAX_PLAYERS Then Exit Function
+        GetPlayerLevel = Player(index).Level
     End Function
 
-    Function GetPlayerEquipment(index as integer, equipmentSlot As EquipmentType) As Byte
+    Function GetPlayerEquipment(index As Integer, equipmentSlot As EquipmentType) As Byte
         GetPlayerEquipment = 0
-        If Index > MAX_PLAYERS Then Exit Function
-        GetPlayerEquipment = Player(Index).Equipment(EquipmentSlot)
+        If index > MAX_PLAYERS Then Exit Function
+        GetPlayerEquipment = Player(index).Equipment(equipmentSlot)
     End Function
 
-    Function GetPlayerStat(index as integer, stat As StatType) As Integer
+    Function GetPlayerStat(index As Integer, stat As StatType) As Integer
         GetPlayerStat = 0
-        If Index > MAX_PLAYERS Then Exit Function
-        GetPlayerStat = Player(Index).Stat(Stat)
+        If index > MAX_PLAYERS Then Exit Function
+        GetPlayerStat = Player(index).Stat(stat)
     End Function
 
-    Function GetPlayerExp(index as integer) As Integer
-        If Index > MAX_PLAYERS Then Exit Function
-        GetPlayerExp = Player(Index).EXP
+    Function GetPlayerExp(index As Integer) As Integer
+        If index > MAX_PLAYERS Then Exit Function
+        GetPlayerExp = Player(index).Exp
     End Function
 
-    Function GetPlayerX(index as integer) As Integer
+    Function GetPlayerX(index As Integer) As Integer
         GetPlayerX = 0
-        If Index > MAX_PLAYERS Then Exit Function
-        GetPlayerX = Player(Index).X
+        If index > MAX_PLAYERS Then Exit Function
+        GetPlayerX = Player(index).X
     End Function
 
-    Function GetPlayerY(index as integer) As Integer
+    Function GetPlayerY(index As Integer) As Integer
         GetPlayerY = 0
-        If Index > MAX_PLAYERS Then Exit Function
-        GetPlayerY = Player(Index).Y
+        If index > MAX_PLAYERS Then Exit Function
+        GetPlayerY = Player(index).Y
     End Function
 
-    Function GetPlayerAccess(index as integer) As Integer
+    Function GetPlayerAccess(index As Integer) As Integer
         GetPlayerAccess = 0
-        If Index > MAX_PLAYERS Then Exit Function
-        GetPlayerAccess = Player(Index).Access
+        If index > MAX_PLAYERS Then Exit Function
+        GetPlayerAccess = Player(index).Access
     End Function
 
-    Function GetPlayerPk(index as integer) As Integer
-        GetPlayerPK = 0
-        If Index > MAX_PLAYERS Then Exit Function
-        GetPlayerPK = Player(Index).PK
+    Function GetPlayerPk(index As Integer) As Integer
+        GetPlayerPk = 0
+        If index > MAX_PLAYERS Then Exit Function
+        GetPlayerPk = Player(index).Pk
     End Function
 
-    Sub SetPlayerEquipment(index as integer, invNum As Integer, equipmentSlot As EquipmentType)
-        If Index < 1 OrElse Index > MAX_PLAYERS Then Exit Sub
-        Player(Index).Equipment(EquipmentSlot) = InvNum
+    Sub SetPlayerEquipment(index As Integer, invNum As Integer, equipmentSlot As EquipmentType)
+        If index < 1 OrElse index > MAX_PLAYERS Then Exit Sub
+        Player(index).Equipment(equipmentSlot) = invNum
     End Sub
 
-    Sub ClearPlayer(index as integer)
-        Player(Index).Name = ""
-        Player(Index).Access = 0
-        Player(Index).Attacking = 0
-        Player(Index).AttackTimer = 0
-        Player(Index).Classes = 0
-        Player(Index).Dir = 0
+    Sub ClearPlayer(index As Integer)
+        Player(index).Name = ""
+        Player(index).Access = 0
+        Player(index).Attacking = 0
+        Player(index).AttackTimer = 0
+        Player(index).Classes = 0
+        Player(index).Dir = 0
 
-        ReDim Player(Index).Equipment(EquipmentType.Count - 1)
+        ReDim Player(index).Equipment(EquipmentType.Count - 1)
         For y = 1 To EquipmentType.Count - 1
-            Player(Index).Equipment(y) = 0
+            Player(index).Equipment(y) = 0
         Next
 
-        Player(Index).EXP = 0
-        Player(Index).Level = 0
-        Player(Index).Map = 0
-        Player(Index).MapGetTimer = 0
-        Player(Index).MaxHP = 0
-        Player(Index).MaxMP = 0
-        Player(Index).MaxSP = 0
-        Player(Index).Moving = 0
-        Player(Index).PK = 0
-        Player(Index).POINTS = 0
-        Player(Index).Sprite = 0
+        Player(index).Exp = 0
+        Player(index).Level = 0
+        Player(index).Map = 0
+        Player(index).MapGetTimer = 0
+        Player(index).MaxHp = 0
+        Player(index).MaxMp = 0
+        Player(index).MaxSp = 0
+        Player(index).Moving = 0
+        Player(index).Pk = 0
+        Player(index).Points = 0
+        Player(index).Sprite = 0
 
-        ReDim Player(Index).Stat(StatType.Count - 1)
+        ReDim Player(index).Stat(StatType.Count - 1)
         For x = 1 To StatType.Count - 1
-            Player(Index).Stat(x) = 0
+            Player(index).Stat(x) = 0
         Next
 
-        Player(Index).Steps = 0
+        Player(index).Steps = 0
 
-        ReDim Player(Index).Vital(VitalType.Count - 1)
+        ReDim Player(index).Vital(VitalType.Count - 1)
         For i = 1 To VitalType.Count - 1
-            Player(Index).Vital(i) = 0
+            Player(index).Vital(i) = 0
         Next
 
-        Player(Index).X = 0
-        Player(Index).XOffset = 0
-        Player(Index).Y = 0
-        Player(Index).YOffset = 0
+        Player(index).X = 0
+        Player(index).XOffset = 0
+        Player(index).Y = 0
+        Player(index).YOffset = 0
 
-        ReDim Player(Index).RandEquip(EquipmentType.Count - 1)
+        ReDim Player(index).RandEquip(EquipmentType.Count - 1)
         For y = 1 To EquipmentType.Count - 1
-            ReDim Player(Index).RandEquip(y).Stat(StatType.Count - 1)
+            ReDim Player(index).RandEquip(y).Stat(StatType.Count - 1)
             For x = 1 To StatType.Count - 1
-                Player(Index).RandEquip(y).Stat(x) = 0
+                Player(index).RandEquip(y).Stat(x) = 0
             Next
         Next
 
-        ReDim Player(Index).RandInv(MAX_INV)
+        ReDim Player(index).RandInv(MAX_INV)
         For y = 1 To MAX_INV
-            ReDim Player(Index).RandInv(y).Stat(StatType.Count - 1)
+            ReDim Player(index).RandInv(y).Stat(StatType.Count - 1)
             For x = 1 To StatType.Count - 1
-                Player(Index).RandInv(y).Stat(x) = 0
+                Player(index).RandInv(y).Stat(x) = 0
             Next
         Next
 
-        ReDim Player(Index).PlayerQuest(MaxQuests)
+        ReDim Player(index).PlayerQuest(MaxQuests)
 
-        ReDim Player(Index).Hotbar(MaxHotbar)
+        ReDim Player(index).Hotbar(MaxHotbar)
 
-        ReDim Player(Index).GatherSkills(ResourceSkills.Count - 1)
+        ReDim Player(index).GatherSkills(ResourceSkills.Count - 1)
 
-        ReDim Player(Index).RecipeLearned(MAX_RECIPE)
+        ReDim Player(index).RecipeLearned(MAX_RECIPE)
 
         'pets
-        Player(Index).Pet.Num = 0
-        Player(Index).Pet.Health = 0
-        Player(Index).Pet.Mana = 0
-        Player(Index).Pet.Level = 0
+        Player(index).Pet.Num = 0
+        Player(index).Pet.Health = 0
+        Player(index).Pet.Mana = 0
+        Player(index).Pet.Level = 0
 
-        ReDim Player(Index).Pet.Stat(StatType.Count - 1)
+        ReDim Player(index).Pet.Stat(StatType.Count - 1)
         For i = 1 To StatType.Count - 1
-            Player(Index).Pet.Stat(i) = 0
+            Player(index).Pet.Stat(i) = 0
         Next
 
-        ReDim Player(Index).Pet.Skill(4)
+        ReDim Player(index).Pet.Skill(4)
         For i = 1 To 4
-            Player(Index).Pet.Skill(i) = 0
+            Player(index).Pet.Skill(i) = 0
         Next
 
-        Player(Index).Pet.X = 0
-        Player(Index).Pet.Y = 0
-        Player(Index).Pet.Dir = 0
-        Player(Index).Pet.MaxHp = 0
-        Player(Index).Pet.MaxMP = 0
-        Player(Index).Pet.Alive = 0
-        Player(Index).Pet.AttackBehaviour = 0
-        Player(Index).Pet.Exp = 0
-        Player(Index).Pet.TNL = 0
+        Player(index).Pet.X = 0
+        Player(index).Pet.Y = 0
+        Player(index).Pet.Dir = 0
+        Player(index).Pet.MaxHp = 0
+        Player(index).Pet.MaxMp = 0
+        Player(index).Pet.Alive = 0
+        Player(index).Pet.AttackBehaviour = 0
+        Player(index).Pet.Exp = 0
+        Player(index).Pet.Tnl = 0
     End Sub
+
 End Module

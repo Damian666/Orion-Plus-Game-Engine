@@ -90,4 +90,5 @@
     Private Sub TxtMessage2_TextChanged(sender As Object, e As EventArgs) Handles txtMessage2.TextChanged
         Resource(Editorindex).EmptyMessage = Trim$(txtMessage2.Text)
     End Sub
+
 End Class

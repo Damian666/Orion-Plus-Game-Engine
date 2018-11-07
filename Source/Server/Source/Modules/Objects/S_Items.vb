@@ -3,11 +3,11 @@ Imports ASFW
 Imports ASFW.IO.FileIO
 
 Friend Module S_Items
-#Region "Globals and Types"
 
-#End Region
+
 
 #Region "Database"
+
     Sub SaveItems()
         Dim i As Integer
 
@@ -258,9 +258,11 @@ Friend Module S_Items
         buffer.WriteInt32(Item(itemNum).Ammo)
         Return buffer.ToArray
     End Function
+
 #End Region
 
 #Region "Map Items"
+
     Sub SendMapItemsTo(index As Integer, mapNum As Integer)
         Dim i As Integer
         Dim buffer As ByteStream
@@ -403,9 +405,11 @@ Friend Module S_Items
         Next
 
     End Sub
+
 #End Region
 
 #Region "Incoming Packets"
+
     Sub Packet_RequestItems(index As Integer, ByRef data() As Byte)
         AddDebug("Recieved CMSG: CRequestItems")
 
@@ -532,9 +536,11 @@ Friend Module S_Items
         ' everything worked out fine
         PlayerMapDropItem(index, InvNum, Amount)
     End Sub
+
 #End Region
 
 #Region "Outgoing Packets"
+
     Sub SendItems(index As Integer)
         Dim i As Integer
 
@@ -571,7 +577,6 @@ Friend Module S_Items
         SendDataToAll(buffer.Data, buffer.Head)
         buffer.Dispose()
     End Sub
-
 
 #End Region
 

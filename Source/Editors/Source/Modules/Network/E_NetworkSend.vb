@@ -2,6 +2,7 @@
 Imports ASFW.IO
 
 Module E_NetworkSend
+
     Friend Sub SendEditorLogin(Name As String, Password As String)
         Dim buffer As New ByteStream(4)
 
@@ -185,8 +186,6 @@ Module E_NetworkSend
         Socket.SendData(buffer.Data, buffer.Head)
         buffer.Dispose()
     End Sub
-
-
 
     Friend Sub SendRequestEditResource()
         Dim buffer As New ByteStream(4)
@@ -522,6 +521,5 @@ Module E_NetworkSend
         Socket.SendData(buffer.Data, buffer.Head)
         buffer.Dispose()
     End Sub
-
 
 End Module

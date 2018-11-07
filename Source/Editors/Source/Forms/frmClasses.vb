@@ -14,7 +14,7 @@ Friend Class frmClasses
     Private Sub LstIndex_SelectedIndexChanged(sender As Object, e As EventArgs) Handles lstIndex.SelectedIndexChanged
         If lstIndex.SelectedIndex < 0 Then Exit Sub
 
-        EditorIndex = lstIndex.SelectedIndex + 1
+        Editorindex = lstIndex.SelectedIndex + 1
 
         LoadClassInfo = True
     End Sub
@@ -51,14 +51,14 @@ Friend Class frmClasses
         Dim i As Integer
 
         'If its The Last class, its simple, just remove and redim
-        If EditorIndex = Max_Classes Then
+        If Editorindex = Max_Classes Then
             Max_Classes = Max_Classes - 1
             ReDim Preserve Classes(Max_Classes)
         Else
             'but if its somewhere in the middle, or beginning, it gets harder xD
             For i = 1 To Max_Classes
                 'we shift everything thats beneath the selected class, up 1 slot
-                Classes(EditorIndex) = Classes(EditorIndex + 1)
+                Classes(Editorindex) = Classes(Editorindex + 1)
             Next
 
             'and then we remove it, and redim
@@ -78,66 +78,68 @@ Friend Class frmClasses
     End Sub
 
     Private Sub TxtDescription_TextChanged(sender As Object, e As EventArgs) Handles txtDescription.TextChanged
-        Classes(EditorIndex).Desc = txtDescription.Text
+        Classes(Editorindex).Desc = txtDescription.Text
     End Sub
 
     Private Sub TxtName_TextChanged(sender As Object, e As EventArgs) Handles txtName.TextChanged
-        Dim tmpindex as integer
-        If EditorIndex = 0 OrElse EditorIndex > Max_Classes Then Exit Sub
+        Dim tmpindex As Integer
+        If Editorindex = 0 OrElse Editorindex > Max_Classes Then Exit Sub
 
-        tmpIndex = lstIndex.SelectedIndex
-        Classes(EditorIndex).Name = Trim$(txtName.Text)
-        lstIndex.Items.RemoveAt(EditorIndex - 1)
-        lstIndex.Items.Insert(EditorIndex - 1, Trim(Classes(EditorIndex).Name))
-        lstIndex.SelectedIndex = tmpIndex
+        tmpindex = lstIndex.SelectedIndex
+        Classes(Editorindex).Name = Trim$(txtName.Text)
+        lstIndex.Items.RemoveAt(Editorindex - 1)
+        lstIndex.Items.Insert(Editorindex - 1, Trim(Classes(Editorindex).Name))
+        lstIndex.SelectedIndex = tmpindex
     End Sub
+
 #End Region
 
 #Region "Sprites"
+
     Private Sub BtnAddMaleSprite_Click(sender As Object, e As EventArgs) Handles btnAddMaleSprite.Click
         Dim tmpamount As Byte
-        If EditorIndex = 0 OrElse EditorIndex > Max_Classes Then Exit Sub
+        If Editorindex = 0 OrElse Editorindex > Max_Classes Then Exit Sub
 
-        tmpamount = UBound(Classes(EditorIndex).MaleSprite)
+        tmpamount = UBound(Classes(Editorindex).MaleSprite)
 
-        ReDim Preserve Classes(EditorIndex).MaleSprite(tmpamount + 1)
+        ReDim Preserve Classes(Editorindex).MaleSprite(tmpamount + 1)
 
-        Classes(EditorIndex).MaleSprite(tmpamount + 1) = 1
+        Classes(Editorindex).MaleSprite(tmpamount + 1) = 1
 
         LoadClassInfo = True
     End Sub
 
     Private Sub BtnDeleteMaleSprite_Click(sender As Object, e As EventArgs) Handles btnDeleteMaleSprite.Click
         Dim tmpamount As Byte
-        If EditorIndex = 0 OrElse EditorIndex > Max_Classes Then Exit Sub
+        If Editorindex = 0 OrElse Editorindex > Max_Classes Then Exit Sub
 
-        tmpamount = UBound(Classes(EditorIndex).MaleSprite)
+        tmpamount = UBound(Classes(Editorindex).MaleSprite)
 
-        ReDim Preserve Classes(EditorIndex).MaleSprite(tmpamount - 1)
+        ReDim Preserve Classes(Editorindex).MaleSprite(tmpamount - 1)
 
         LoadClassInfo = True
     End Sub
 
     Private Sub BtnAddFemaleSprite_Click(sender As Object, e As EventArgs) Handles btnAddFemaleSprite.Click
         Dim tmpamount As Byte
-        If EditorIndex = 0 OrElse EditorIndex > Max_Classes Then Exit Sub
+        If Editorindex = 0 OrElse Editorindex > Max_Classes Then Exit Sub
 
-        tmpamount = UBound(Classes(EditorIndex).FemaleSprite)
+        tmpamount = UBound(Classes(Editorindex).FemaleSprite)
 
-        ReDim Preserve Classes(EditorIndex).FemaleSprite(tmpamount + 1)
+        ReDim Preserve Classes(Editorindex).FemaleSprite(tmpamount + 1)
 
-        Classes(EditorIndex).FemaleSprite(tmpamount + 1) = 1
+        Classes(Editorindex).FemaleSprite(tmpamount + 1) = 1
 
         LoadClassInfo = True
     End Sub
 
     Private Sub BtnDeleteFemaleSprite_Click(sender As Object, e As EventArgs) Handles btnDeleteFemaleSprite.Click
         Dim tmpamount As Byte
-        If EditorIndex = 0 OrElse EditorIndex > Max_Classes Then Exit Sub
+        If Editorindex = 0 OrElse Editorindex > Max_Classes Then Exit Sub
 
-        tmpamount = UBound(Classes(EditorIndex).FemaleSprite)
+        tmpamount = UBound(Classes(Editorindex).FemaleSprite)
 
-        ReDim Preserve Classes(EditorIndex).FemaleSprite(tmpamount - 1)
+        ReDim Preserve Classes(Editorindex).FemaleSprite(tmpamount - 1)
 
         LoadClassInfo = True
     End Sub
@@ -145,7 +147,7 @@ Friend Class frmClasses
     Private Sub NudMaleSprite_ValueChanged(sender As Object, e As EventArgs) Handles nudMaleSprite.Click
         If cmbMaleSprite.SelectedIndex < 0 Then Exit Sub
 
-        Classes(EditorIndex).MaleSprite(cmbMaleSprite.SelectedIndex) = nudMaleSprite.Value
+        Classes(Editorindex).MaleSprite(cmbMaleSprite.SelectedIndex) = nudMaleSprite.Value
 
         DrawPreview()
     End Sub
@@ -153,18 +155,18 @@ Friend Class frmClasses
     Private Sub NudFemaleSprite_ValueChanged(sender As Object, e As EventArgs) Handles nudFemaleSprite.Click
         If cmbFemaleSprite.SelectedIndex < 0 Then Exit Sub
 
-        Classes(EditorIndex).FemaleSprite(cmbFemaleSprite.SelectedIndex) = nudFemaleSprite.Value
+        Classes(Editorindex).FemaleSprite(cmbFemaleSprite.SelectedIndex) = nudFemaleSprite.Value
 
         DrawPreview()
     End Sub
 
     Private Sub CmbMaleSprite_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbMaleSprite.SelectedIndexChanged
-        nudMaleSprite.Value = Classes(EditorIndex).MaleSprite(cmbMaleSprite.SelectedIndex)
+        nudMaleSprite.Value = Classes(Editorindex).MaleSprite(cmbMaleSprite.SelectedIndex)
         DrawPreview()
     End Sub
 
     Private Sub CmbFemaleSprite_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbFemaleSprite.SelectedIndexChanged
-        nudFemaleSprite.Value = Classes(EditorIndex).FemaleSprite(cmbFemaleSprite.SelectedIndex)
+        nudFemaleSprite.Value = Classes(Editorindex).FemaleSprite(cmbFemaleSprite.SelectedIndex)
         DrawPreview()
     End Sub
 
@@ -191,59 +193,62 @@ Friend Class frmClasses
     Private Sub PicFemale_Paint(sender As Object, e As EventArgs) Handles picFemale.Paint
         'nope
     End Sub
+
 #End Region
 
 #Region "Stats"
-    Private Sub NumStrength_ValueChanged(sender As Object, e As EventArgs) Handles nudStrength.Click
-        If EditorIndex <= 0 OrElse EditorIndex > Max_Classes Then Exit Sub
 
-        Classes(EditorIndex).Stat(StatType.Strength) = nudStrength.Value
+    Private Sub NumStrength_ValueChanged(sender As Object, e As EventArgs) Handles nudStrength.Click
+        If Editorindex <= 0 OrElse Editorindex > Max_Classes Then Exit Sub
+
+        Classes(Editorindex).Stat(StatType.Strength) = nudStrength.Value
     End Sub
 
     Private Sub NumLuck_ValueChanged(sender As Object, e As EventArgs) Handles nudLuck.Click
-        If EditorIndex <= 0 OrElse EditorIndex > Max_Classes Then Exit Sub
+        If Editorindex <= 0 OrElse Editorindex > Max_Classes Then Exit Sub
 
-        Classes(EditorIndex).Stat(StatType.Luck) = nudLuck.Value
+        Classes(Editorindex).Stat(StatType.Luck) = nudLuck.Value
     End Sub
 
     Private Sub NumEndurance_ValueChanged(sender As Object, e As EventArgs) Handles nudEndurance.Click
-        If EditorIndex <= 0 OrElse EditorIndex > Max_Classes Then Exit Sub
+        If Editorindex <= 0 OrElse Editorindex > Max_Classes Then Exit Sub
 
-        Classes(EditorIndex).Stat(StatType.Endurance) = nudEndurance.Value
+        Classes(Editorindex).Stat(StatType.Endurance) = nudEndurance.Value
     End Sub
 
     Private Sub NumIntelligence_ValueChanged(sender As Object, e As EventArgs) Handles nudIntelligence.Click
-        If EditorIndex <= 0 OrElse EditorIndex > Max_Classes Then Exit Sub
+        If Editorindex <= 0 OrElse Editorindex > Max_Classes Then Exit Sub
 
-        Classes(EditorIndex).Stat(StatType.Intelligence) = nudIntelligence.Value
+        Classes(Editorindex).Stat(StatType.Intelligence) = nudIntelligence.Value
     End Sub
 
     Private Sub NumVitality_ValueChanged(sender As Object, e As EventArgs) Handles nudVitality.Click
-        If EditorIndex <= 0 OrElse EditorIndex > Max_Classes Then Exit Sub
+        If Editorindex <= 0 OrElse Editorindex > Max_Classes Then Exit Sub
 
-        Classes(EditorIndex).Stat(StatType.Vitality) = nudVitality.Value
+        Classes(Editorindex).Stat(StatType.Vitality) = nudVitality.Value
     End Sub
 
     Private Sub NumSpirit_ValueChanged(sender As Object, e As EventArgs) Handles nudSpirit.Click
-        If EditorIndex <= 0 OrElse EditorIndex > Max_Classes Then Exit Sub
+        If Editorindex <= 0 OrElse Editorindex > Max_Classes Then Exit Sub
 
-        Classes(EditorIndex).Stat(StatType.Spirit) = nudSpirit.Value
+        Classes(Editorindex).Stat(StatType.Spirit) = nudSpirit.Value
     End Sub
 
     Private Sub NumBaseExp_ValueChanged(sender As Object, e As EventArgs) Handles nudBaseExp.Click
-        If EditorIndex <= 0 OrElse EditorIndex > Max_Classes Then Exit Sub
+        If Editorindex <= 0 OrElse Editorindex > Max_Classes Then Exit Sub
 
-        Classes(EditorIndex).BaseExp = nudBaseExp.Value
+        Classes(Editorindex).BaseExp = nudBaseExp.Value
     End Sub
 
 #End Region
 
 #Region "Start Items"
+
     Private Sub BtnItemAdd_Click(sender As Object, e As EventArgs) Handles btnItemAdd.Click
         If lstStartItems.SelectedIndex < 0 OrElse cmbItems.SelectedIndex < 0 Then Exit Sub
 
-        Classes(EditorIndex).StartItem(lstStartItems.SelectedIndex + 1) = cmbItems.SelectedIndex
-        Classes(EditorIndex).StartValue(lstStartItems.SelectedIndex + 1) = nudItemAmount.Value
+        Classes(Editorindex).StartItem(lstStartItems.SelectedIndex + 1) = cmbItems.SelectedIndex
+        Classes(Editorindex).StartValue(lstStartItems.SelectedIndex + 1) = nudItemAmount.Value
 
         LoadClassInfo = True
     End Sub
@@ -251,22 +256,23 @@ Friend Class frmClasses
 #End Region
 
 #Region "Starting Point"
-    Private Sub NumStartMap_ValueChanged(sender As Object, e As EventArgs) Handles nudStartMap.Click
-        If EditorIndex <= 0 OrElse EditorIndex > Max_Classes Then Exit Sub
 
-        Classes(EditorIndex).StartMap = nudStartMap.Value
+    Private Sub NumStartMap_ValueChanged(sender As Object, e As EventArgs) Handles nudStartMap.Click
+        If Editorindex <= 0 OrElse Editorindex > Max_Classes Then Exit Sub
+
+        Classes(Editorindex).StartMap = nudStartMap.Value
     End Sub
 
     Private Sub NumStartX_ValueChanged(sender As Object, e As EventArgs) Handles nudStartX.Click
-        If EditorIndex <= 0 OrElse EditorIndex > Max_Classes Then Exit Sub
+        If Editorindex <= 0 OrElse Editorindex > Max_Classes Then Exit Sub
 
-        Classes(EditorIndex).StartX = nudStartX.Value
+        Classes(Editorindex).StartX = nudStartX.Value
     End Sub
 
     Private Sub NumStartY_ValueChanged(sender As Object, e As EventArgs) Handles nudStartY.Click
-        If EditorIndex <= 0 OrElse EditorIndex > Max_Classes Then Exit Sub
+        If Editorindex <= 0 OrElse Editorindex > Max_Classes Then Exit Sub
 
-        Classes(EditorIndex).StartY = nudStartY.Value
+        Classes(Editorindex).StartY = nudStartY.Value
     End Sub
 
 #End Region

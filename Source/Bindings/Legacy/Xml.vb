@@ -1,6 +1,6 @@
-﻿Imports System.Xml
-Imports System.IO
+﻿Imports System.IO
 Imports System.Text
+Imports System.Xml
 
 Friend Class XmlClass
     Private xmlDoc As New XmlDocument()
@@ -43,19 +43,19 @@ Friend Class XmlClass
         End If
 
         'Check for element node
-        Dim xmlNode As XmlNode = xmlDoc.SelectSingleNode(Root & "/" & Selection & "/Element[@Name='" & Name & "']")
+        Dim xmlNode As XmlNode = xmlDoc.SelectSingleNode(Root & "/" & Selection & "/Element[@Name='" & name & "']")
 
         If xmlNode Is Nothing Then
             Dim element As XmlElement = xmlDoc.CreateElement("Element")
             'Write new element values.
-            element.SetAttribute("Name", Name)
-            element.SetAttribute("Value", Value)
+            element.SetAttribute("Name", name)
+            element.SetAttribute("Value", value)
             'Add new node.
             xmlDoc.DocumentElement(Selection).AppendChild(DirectCast(element, XmlNode))
         Else
             'Update node values.
-            xmlNode.Attributes("Name").Value = Name
-            xmlNode.Attributes("Value").Value = Value
+            xmlNode.Attributes("Name").Value = name
+            xmlNode.Attributes("Value").Value = value
         End If
         'Save xml data.
 
@@ -68,16 +68,16 @@ Friend Class XmlClass
         'Dim xmlDoc As New XmlDocument()
 
         If Not File.Exists(Filename) Then
-            Return DefaultValue
+            Return defaultValue
         Else
             'Load xml document.
             'xmlDoc.Load(Filename)
             'Read node value.
-            Dim XmlNode = xmlDoc.SelectSingleNode(Root & "/" & Selection & "/Element[@Name='" & Name & "']")
+            Dim XmlNode = xmlDoc.SelectSingleNode(Root & "/" & Selection & "/Element[@Name='" & name & "']")
 
             'Check if node is here.
             If XmlNode Is Nothing Then
-                Return DefaultValue
+                Return defaultValue
             Else
                 'Return xml node value
                 Return (XmlNode.Attributes("Value").Value)
@@ -96,7 +96,7 @@ Friend Class XmlClass
             'Load xml document.
             ' xmlDoc.Load(Filename)
             'Read node value.
-            Dim XmlNode = xmlDoc.SelectSingleNode(Root & "/" & Selection & "/Element[@Name='" & Name & "']")
+            Dim XmlNode = xmlDoc.SelectSingleNode(Root & "/" & Selection & "/Element[@Name='" & name & "']")
             'Check if node is here.
             If Not XmlNode Is Nothing Then
                 xmlDoc.SelectSingleNode(Root & "/" & Selection).RemoveChild(XmlNode)
@@ -120,5 +120,3 @@ Friend Class XmlClass
         xmlDoc = Nothing
     End Sub
 End Class
-
-

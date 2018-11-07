@@ -3,7 +3,9 @@ Imports ASFW
 Imports ASFW.IO.FileIO
 
 Friend Module S_Resources
+
 #Region "Globals & Types"
+
     Friend SkillExpTable(100) As Integer
     Friend ResourceCache(MAX_CACHED_MAPS) As ResourceCacheRec
 
@@ -19,9 +21,11 @@ Friend Module S_Resources
         Dim ResourceCount As Integer
         Dim ResourceData() As MapResourceRec
     End Structure
+
 #End Region
 
 #Region "DataBase"
+
     Sub SaveResources()
         Dim i As Integer
 
@@ -185,9 +189,11 @@ Friend Module S_Resources
 
         myXml.CloseXml(False)
     End Sub
+
 #End Region
 
 #Region "Gather Skills"
+
     Function GetPlayerGatherSkillLvl(index As Integer, SkillSlot As Integer) As Integer
 
         GetPlayerGatherSkillLvl = 0
@@ -284,9 +290,11 @@ Friend Module S_Resources
 
         GetSkillNextLevel = SkillExpTable(GetPlayerGatherSkillLvl(index, SkillSlot) + 1)
     End Function
+
 #End Region
 
 #Region "Incoming Packets"
+
     Sub Packet_EditResource(index As Integer, ByRef data() As Byte)
         Dim Buffer As New ByteStream(4)
 
@@ -347,10 +355,10 @@ Friend Module S_Resources
         SendResources(index)
     End Sub
 
-
 #End Region
 
 #Region "Outgoing Packets"
+
     Sub SendResourceCacheTo(index As Integer, Resource_num As Integer)
         Dim i As Integer, mapnum As Integer
         Dim buffer As New ByteStream(4)
@@ -437,9 +445,11 @@ Friend Module S_Resources
         SendDataToAll(buffer.Data, buffer.Head)
         buffer.Dispose()
     End Sub
+
 #End Region
 
 #Region "Functions"
+
     Sub CheckResource(index As Integer, x As Integer, y As Integer)
         Dim Resource_num As Integer, ResourceType As Byte
         Dim Resource_index As Integer
@@ -529,6 +539,7 @@ Friend Module S_Resources
             End If
         End If
     End Sub
+
 #End Region
 
 End Module

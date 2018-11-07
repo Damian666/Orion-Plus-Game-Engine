@@ -1,17 +1,22 @@
-﻿Imports ASFW
-Imports System.Drawing
+﻿Imports System.Drawing
 Imports System.IO
 Imports System.Windows.Forms
+Imports ASFW
 
 Module C_Resources
+
 #Region "Globals & Types"
+
     ' Cache the Resources in an array
     Friend MapResource() As MapResourceRec
+
     Friend ResourceIndex As Integer
     Friend ResourcesInit As Boolean
+
 #End Region
 
 #Region "DataBase"
+
     Friend Sub CheckResources()
         Dim i As Integer
         i = 1
@@ -39,9 +44,11 @@ Module C_Resources
         Next
 
     End Sub
+
 #End Region
 
 #Region "Incoming Packets"
+
     Sub Packet_ResourceCache(ByRef data() As Byte)
         Dim i As Integer
         Dim buffer As New ByteStream(data)
@@ -91,9 +98,11 @@ Module C_Resources
 
         buffer.Dispose()
     End Sub
+
 #End Region
 
 #Region "Outgoing Packets"
+
     Sub SendRequestResources()
         Dim buffer As New ByteStream(4)
 
@@ -102,9 +111,11 @@ Module C_Resources
         Socket.SendData(buffer.Data, buffer.Head)
         buffer.Dispose()
     End Sub
+
 #End Region
 
 #Region "Drawing"
+
     Friend Sub DrawResource(resource As Integer, dx As Integer, dy As Integer, rec As Rectangle)
         If resource < 1 OrElse resource > NumResources Then Exit Sub
         Dim x As Integer
@@ -175,5 +186,7 @@ Module C_Resources
 
         DrawResource(resourceSprite, x, y, rec)
     End Sub
+
 #End Region
+
 End Module

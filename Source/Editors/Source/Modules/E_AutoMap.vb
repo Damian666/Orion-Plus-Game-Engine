@@ -5,6 +5,7 @@
     ' Map analysis and tips: Richard Johnson, Luan Meireles (Alenzinho)
 
 #Region "Globals And Types"
+
     Friend MapStart As Integer = 1
     Friend MapSize As Integer = 4
     Friend MapX As Integer = 50
@@ -85,9 +86,11 @@
         Dim TileEndY As Integer
         Dim Tile(,) As TilePrefab
     End Structure
+
 #End Region
 
 #Region "Loading Functions"
+
     Sub OpenAutomapper()
         LoadTilePrefab()
         FrmAutoMapper.Visible = True
@@ -160,9 +163,11 @@
         LoadDetail(TilePrefab.Sand, 10, 0, 13, TileType.None, 7, 14)
         LoadDetail(TilePrefab.Sand, 11, 0, 0, TileType.None, 1, 1)
     End Sub
+
 #End Region
 
 #Region "Incoming Packets"
+
     Sub Packet_AutoMapper(ByRef data() As Byte)
         Dim Layer As Integer
         Dim buffer As New ASFW.ByteStream(data)
@@ -202,9 +207,11 @@
         InitAutoMapper = True
 
     End Sub
+
 #End Region
 
 #Region "Outgoing Packets"
+
     Friend Sub SendRequestAutoMapper()
         Dim buffer As New ASFW.ByteStream(4)
 
@@ -253,5 +260,7 @@
         Socket.SendData(buffer.Data, buffer.Head)
         buffer.Dispose()
     End Sub
+
 #End Region
+
 End Module

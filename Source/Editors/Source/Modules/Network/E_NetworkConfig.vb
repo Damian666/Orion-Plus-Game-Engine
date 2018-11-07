@@ -20,6 +20,7 @@ Friend Module E_NetworkConfig
     End Sub
 
 #Region " Events "
+
     Private Sub Socket_ConnectionSuccess() Handles Socket.ConnectionSuccess
 
     End Sub
@@ -39,6 +40,7 @@ Friend Module E_NetworkConfig
         DestroyNetwork()
         CloseEditor()
     End Sub
+
 #End Region
 
 End Module

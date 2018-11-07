@@ -3,6 +3,7 @@ Imports ASFW
 Imports ASFW.IO
 
 Module S_NetworkReceive
+
     Friend Sub PacketRouter()
         Socket.PacketId(ClientPackets.CCheckPing) = AddressOf Packet_Ping
         Socket.PacketId(ClientPackets.CNewAccount) = AddressOf Packet_NewAccount
@@ -173,11 +174,11 @@ Module S_NetworkReceive
 
     End Sub
 
-    Private Sub Packet_Ping(index as integer, ByRef data() As Byte)
+    Private Sub Packet_Ping(index As Integer, ByRef data() As Byte)
         TempPlayer(index).DataPackets = TempPlayer(index).DataPackets + 1
     End Sub
 
-    Private Sub Packet_NewAccount(index as integer, ByRef data() As Byte)
+    Private Sub Packet_NewAccount(index As Integer, ByRef data() As Byte)
         Dim username As String, password As String
         Dim i As Integer, n As Integer, IP As String
         Dim buffer As New ByteStream(data)
@@ -186,8 +187,8 @@ Module S_NetworkReceive
 
         If Not IsPlaying(index) AndAlso Not IsLoggedIn(index) Then
             'Get the Data
-            username = EKeyPair.DecryptString(Buffer.ReadString)
-            password = EKeyPair.DecryptString(Buffer.ReadString)
+            username = EKeyPair.DecryptString(buffer.ReadString)
+            password = EKeyPair.DecryptString(buffer.ReadString)
             ' Prevent hacking
             If Len(username.Trim) < 3 OrElse Len(password.Trim) < 3 Then
                 AlertMsg(index, "Your username and password must be at least three characters in length")
@@ -250,18 +251,18 @@ Module S_NetworkReceive
                 AlertMsg(index, "Sorry, that account username is already taken!")
             End If
 
-            Buffer.Dispose()
+            buffer.Dispose()
         End If
     End Sub
 
-    Private Sub Packet_DeleteAccount(index as integer, ByRef data() As Byte)
+    Private Sub Packet_DeleteAccount(index As Integer, ByRef data() As Byte)
         Dim Name As String
         Dim buffer As New ByteStream(data)
 
         AddDebug("Recieved CMSG: CDelChar")
 
         ' Get the data
-        Name = Buffer.ReadString
+        Name = buffer.ReadString
 
         If GetPlayerLogin(index) = Trim$(Name) Then
             PlayerMsg(index, "You cannot delete your own account while online!", ColorType.BrightRed)
@@ -278,7 +279,7 @@ Module S_NetworkReceive
         Next
     End Sub
 
-    Private Sub Packet_Login(index as integer, ByRef data() As Byte)
+    Private Sub Packet_Login(index As Integer, ByRef data() As Byte)
         Dim Name As String, IP As String
         Dim Password As String, i As Integer
         Dim buffer As New ByteStream(data)
@@ -522,14 +523,14 @@ Module S_NetworkReceive
 
                     Next
 
-                    Socket.SendDataTo(index, Buffer.Data, Buffer.Head)
+                    Socket.SendDataTo(index, buffer.Data, buffer.Head)
                 End If
             End If
         End If
 
     End Sub
 
-    Private Sub Packet_SayMessage(index as integer, ByRef data() As Byte)
+    Private Sub Packet_SayMessage(index As Integer, ByRef data() As Byte)
         Dim msg As String
         Dim buffer As New ByteStream(data)
 
@@ -543,10 +544,10 @@ Module S_NetworkReceive
         SayMsg_Map(GetPlayerMap(index), index, msg, ColorType.White)
         SendChatBubble(GetPlayerMap(index), index, TargetType.Player, msg, ColorType.White)
 
-        Buffer.Dispose()
+        buffer.Dispose()
     End Sub
 
-    Private Sub Packet_BroadCastMsg(index as integer, ByRef data() As Byte)
+    Private Sub Packet_BroadCastMsg(index As Integer, ByRef data() As Byte)
         Dim msg As String
         Dim s As String
         Dim buffer As New ByteStream(data)
@@ -561,26 +562,26 @@ Module S_NetworkReceive
         Addlog(s, PLAYER_LOG)
         Console.WriteLine(s)
 
-        Buffer.Dispose()
+        buffer.Dispose()
     End Sub
 
-    Friend Sub Packet_PlayerMsg(index as integer, ByRef data() As Byte)
-        Dim OtherPlayer As String, Msg As String, OtherPlayerindex as Integer
+    Friend Sub Packet_PlayerMsg(index As Integer, ByRef data() As Byte)
+        Dim OtherPlayer As String, Msg As String, OtherPlayerindex As Integer
         Dim buffer As New ByteStream(data)
 
         AddDebug("Recieved CMSG: CPlayerMsg")
 
-        OtherPlayer = Buffer.ReadString
+        OtherPlayer = buffer.ReadString
         'Msg = buffer.ReadString
         Msg = buffer.ReadString
         buffer.Dispose()
 
-        OtherPlayerIndex = FindPlayer(OtherPlayer)
-        If OtherPlayerIndex <> index Then
-            If OtherPlayerIndex > 0 Then
+        OtherPlayerindex = FindPlayer(OtherPlayer)
+        If OtherPlayerindex <> index Then
+            If OtherPlayerindex > 0 Then
                 Addlog(GetPlayerName(index) & " tells " & GetPlayerName(index) & ", '" & Msg & "'", PLAYER_LOG)
-                PlayerMsg(OtherPlayerIndex, GetPlayerName(index) & " tells you, '" & Msg & "'", ColorType.Pink)
-                PlayerMsg(index, "You tell " & GetPlayerName(OtherPlayerIndex) & ", '" & Msg & "'", ColorType.Pink)
+                PlayerMsg(OtherPlayerindex, GetPlayerName(index) & " tells you, '" & Msg & "'", ColorType.Pink)
+                PlayerMsg(index, "You tell " & GetPlayerName(OtherPlayerindex) & ", '" & Msg & "'", ColorType.Pink)
             Else
                 PlayerMsg(index, "Player is not online.", ColorType.BrightRed)
             End If
@@ -589,7 +590,7 @@ Module S_NetworkReceive
         End If
     End Sub
 
-    Private Sub Packet_PlayerMove(index as integer, ByRef data() As Byte)
+    Private Sub Packet_PlayerMove(index As Integer, ByRef data() As Byte)
         Dim Dir As Integer
         Dim movement As Integer
         Dim tmpX As Integer, tmpY As Integer
@@ -599,11 +600,11 @@ Module S_NetworkReceive
 
         If TempPlayer(index).GettingMap = True Then Exit Sub
 
-        Dir = Buffer.ReadInt32
-        movement = Buffer.ReadInt32
-        tmpX = Buffer.ReadInt32
-        tmpY = Buffer.ReadInt32
-        Buffer.Dispose()
+        Dir = buffer.ReadInt32
+        movement = buffer.ReadInt32
+        tmpX = buffer.ReadInt32
+        tmpY = buffer.ReadInt32
+        buffer.Dispose()
 
         ' Prevent hacking
         If Dir < DirectionType.Up OrElse Dir > DirectionType.Right Then Exit Sub
@@ -652,27 +653,27 @@ Module S_NetworkReceive
         buffer.Dispose()
     End Sub
 
-    Sub Packet_PlayerDirection(index as integer, ByRef data() As Byte)
+    Sub Packet_PlayerDirection(index As Integer, ByRef data() As Byte)
         Dim dir As Integer
         Dim buffer As New ByteStream(data)
 
         AddDebug("Recieved CMSG: CPlayerDir")
 
-        If TempPlayer(Index).GettingMap = True Then Exit Sub
+        If TempPlayer(index).GettingMap = True Then Exit Sub
 
-        dir = Buffer.ReadInt32
-        Buffer.Dispose()
+        dir = buffer.ReadInt32
+        buffer.Dispose()
 
         ' Prevent hacking
         If dir < DirectionType.Up OrElse dir > DirectionType.Right Then Exit Sub
 
-        SetPlayerDir(Index, dir)
+        SetPlayerDir(index, dir)
 
-        Buffer = New ByteStream(4)
-        Buffer.WriteInt32(ServerPackets.SPlayerDir)
-        Buffer.WriteInt32(Index)
-        Buffer.WriteInt32(GetPlayerDir(Index))
-        SendDataToMapBut(Index, GetPlayerMap(Index), Buffer.Data, Buffer.Head)
+        buffer = New ByteStream(4)
+        buffer.WriteInt32(ServerPackets.SPlayerDir)
+        buffer.WriteInt32(index)
+        buffer.WriteInt32(GetPlayerDir(index))
+        SendDataToMapBut(index, GetPlayerMap(index), buffer.Data, buffer.Head)
 
         AddDebug("Sent SMSG: SPlayerDir")
 
@@ -680,53 +681,53 @@ Module S_NetworkReceive
 
     End Sub
 
-    Sub Packet_UseItem(index as integer, ByRef data() As Byte)
+    Sub Packet_UseItem(index As Integer, ByRef data() As Byte)
         Dim invnum As Integer
         Dim buffer As New ByteStream(data)
 
         AddDebug("Recieved CMSG: CUseItem")
 
-        invnum = Buffer.ReadInt32
-        Buffer.Dispose()
+        invnum = buffer.ReadInt32
+        buffer.Dispose()
 
-        UseItem(Index, invnum)
+        UseItem(index, invnum)
     End Sub
 
-    Sub Packet_Attack(index as integer, ByRef data() As Byte)
+    Sub Packet_Attack(index As Integer, ByRef data() As Byte)
         Dim i As Integer
-        Dim Tempindex as integer
+        Dim Tempindex As Integer
         Dim x As Integer, y As Integer
         Dim buffer As New ByteStream(data)
 
         AddDebug("Recieved CMSG: CAttack")
 
         ' can't attack whilst casting
-        If TempPlayer(Index).SkillBuffer > 0 Then Exit Sub
+        If TempPlayer(index).SkillBuffer > 0 Then Exit Sub
 
         ' can't attack whilst stunned
-        If TempPlayer(Index).StunDuration > 0 Then Exit Sub
+        If TempPlayer(index).StunDuration > 0 Then Exit Sub
 
         ' Send this packet so they can see the person attacking
-        Buffer = New ByteStream(4)
-        Buffer.WriteInt32(ServerPackets.SAttack)
-        Buffer.WriteInt32(Index)
-        SendDataToMap(GetPlayerMap(Index), Buffer.Data, Buffer.Head)
-        Buffer.Dispose()
+        buffer = New ByteStream(4)
+        buffer.WriteInt32(ServerPackets.SAttack)
+        buffer.WriteInt32(index)
+        SendDataToMap(GetPlayerMap(index), buffer.Data, buffer.Head)
+        buffer.Dispose()
 
         ' Projectile check
-        If GetPlayerEquipment(Index, EquipmentType.Weapon) > 0 Then
-            If Item(GetPlayerEquipment(Index, EquipmentType.Weapon)).Projectile > 0 Then 'Item has a projectile
-                If Item(GetPlayerEquipment(Index, EquipmentType.Weapon)).Ammo > 0 Then
-                    If HasItem(Index, Item(GetPlayerEquipment(Index, EquipmentType.Weapon)).Ammo) Then
-                        TakeInvItem(Index, Item(GetPlayerEquipment(Index, EquipmentType.Weapon)).Ammo, 1)
-                        PlayerFireProjectile(Index)
+        If GetPlayerEquipment(index, EquipmentType.Weapon) > 0 Then
+            If Item(GetPlayerEquipment(index, EquipmentType.Weapon)).Projectile > 0 Then 'Item has a projectile
+                If Item(GetPlayerEquipment(index, EquipmentType.Weapon)).Ammo > 0 Then
+                    If HasItem(index, Item(GetPlayerEquipment(index, EquipmentType.Weapon)).Ammo) Then
+                        TakeInvItem(index, Item(GetPlayerEquipment(index, EquipmentType.Weapon)).Ammo, 1)
+                        PlayerFireProjectile(index)
                         Exit Sub
                     Else
-                        PlayerMsg(Index, "No More " & Item(Item(GetPlayerEquipment(Index, EquipmentType.Weapon)).Ammo).Name & " !", ColorType.BrightRed)
+                        PlayerMsg(index, "No More " & Item(Item(GetPlayerEquipment(index, EquipmentType.Weapon)).Ammo).Name & " !", ColorType.BrightRed)
                         Exit Sub
                     End If
                 Else
-                    PlayerFireProjectile(Index)
+                    PlayerFireProjectile(index)
                     Exit Sub
                 End If
             End If
@@ -734,408 +735,405 @@ Module S_NetworkReceive
 
         ' Try to attack a player
         For i = 1 To GetPlayersOnline()
-            TempIndex = i
+            Tempindex = i
 
             ' Make sure we dont try to attack ourselves
-            If TempIndex <> Index Then
-                If IsPlaying(TempIndex) Then
-                    TryPlayerAttackPlayer(Index, i)
+            If Tempindex <> index Then
+                If IsPlaying(Tempindex) Then
+                    TryPlayerAttackPlayer(index, i)
                 End If
             End If
         Next
 
         ' Try to attack a npc
         For i = 1 To MAX_MAP_NPCS
-            TryPlayerAttackNpc(Index, i)
+            TryPlayerAttackNpc(index, i)
         Next
 
         ' Check tradeskills
-        Select Case GetPlayerDir(Index)
+        Select Case GetPlayerDir(index)
             Case DirectionType.Up
 
-                If GetPlayerY(Index) = 0 Then Exit Sub
-                x = GetPlayerX(Index)
-                y = GetPlayerY(Index) - 1
+                If GetPlayerY(index) = 0 Then Exit Sub
+                x = GetPlayerX(index)
+                y = GetPlayerY(index) - 1
             Case DirectionType.Down
 
-                If GetPlayerY(Index) = Map(GetPlayerMap(Index)).MaxY Then Exit Sub
-                x = GetPlayerX(Index)
-                y = GetPlayerY(Index) + 1
+                If GetPlayerY(index) = Map(GetPlayerMap(index)).MaxY Then Exit Sub
+                x = GetPlayerX(index)
+                y = GetPlayerY(index) + 1
             Case DirectionType.Left
 
-                If GetPlayerX(Index) = 0 Then Exit Sub
-                x = GetPlayerX(Index) - 1
-                y = GetPlayerY(Index)
+                If GetPlayerX(index) = 0 Then Exit Sub
+                x = GetPlayerX(index) - 1
+                y = GetPlayerY(index)
             Case DirectionType.Right
 
-                If GetPlayerX(Index) = Map(GetPlayerMap(Index)).MaxX Then Exit Sub
-                x = GetPlayerX(Index) + 1
-                y = GetPlayerY(Index)
+                If GetPlayerX(index) = Map(GetPlayerMap(index)).MaxX Then Exit Sub
+                x = GetPlayerX(index) + 1
+                y = GetPlayerY(index)
         End Select
 
-        CheckResource(Index, x, y)
+        CheckResource(index, x, y)
 
-        Buffer.Dispose()
+        buffer.Dispose()
     End Sub
 
-    Sub Packet_PlayerInfo(index as integer, ByRef data() As Byte)
+    Sub Packet_PlayerInfo(index As Integer, ByRef data() As Byte)
         Dim i As Integer, n As Integer
         Dim name As String
         Dim buffer As New ByteStream(data)
 
         AddDebug("Recieved CMSG: CPlayerInfoRequest")
 
-        name = Buffer.ReadString
+        name = buffer.ReadString
         i = FindPlayer(name)
 
         If i > 0 Then
-            PlayerMsg(Index, "Account:  " & Trim$(Player(i).Login) & ", Name: " & GetPlayerName(i), ColorType.Yellow)
+            PlayerMsg(index, "Account:  " & Trim$(Player(i).Login) & ", Name: " & GetPlayerName(i), ColorType.Yellow)
 
-            If GetPlayerAccess(Index) > AdminType.Monitor Then
-                PlayerMsg(Index, "-=- Stats for " & GetPlayerName(i) & " -=-", ColorType.Yellow)
-                PlayerMsg(Index, "Level: " & GetPlayerLevel(i) & "  Exp: " & GetPlayerExp(i) & "/" & GetPlayerNextLevel(i), ColorType.Yellow)
-                PlayerMsg(Index, "HP: " & GetPlayerVital(i, VitalType.HP) & "/" & GetPlayerMaxVital(i, VitalType.HP) & "  MP: " & GetPlayerVital(i, VitalType.MP) & "/" & GetPlayerMaxVital(i, VitalType.MP) & "  SP: " & GetPlayerVital(i, VitalType.SP) & "/" & GetPlayerMaxVital(i, VitalType.SP), ColorType.Yellow)
-                PlayerMsg(Index, "Strength: " & GetPlayerStat(i, StatType.Strength) & "  Defense: " & GetPlayerStat(i, StatType.Endurance) & "  Magic: " & GetPlayerStat(i, StatType.Intelligence) & "  Speed: " & GetPlayerStat(i, StatType.Spirit), ColorType.Yellow)
+            If GetPlayerAccess(index) > AdminType.Monitor Then
+                PlayerMsg(index, "-=- Stats for " & GetPlayerName(i) & " -=-", ColorType.Yellow)
+                PlayerMsg(index, "Level: " & GetPlayerLevel(i) & "  Exp: " & GetPlayerExp(i) & "/" & GetPlayerNextLevel(i), ColorType.Yellow)
+                PlayerMsg(index, "HP: " & GetPlayerVital(i, VitalType.HP) & "/" & GetPlayerMaxVital(i, VitalType.HP) & "  MP: " & GetPlayerVital(i, VitalType.MP) & "/" & GetPlayerMaxVital(i, VitalType.MP) & "  SP: " & GetPlayerVital(i, VitalType.SP) & "/" & GetPlayerMaxVital(i, VitalType.SP), ColorType.Yellow)
+                PlayerMsg(index, "Strength: " & GetPlayerStat(i, StatType.Strength) & "  Defense: " & GetPlayerStat(i, StatType.Endurance) & "  Magic: " & GetPlayerStat(i, StatType.Intelligence) & "  Speed: " & GetPlayerStat(i, StatType.Spirit), ColorType.Yellow)
                 n = (GetPlayerStat(i, StatType.Strength) \ 2) + (GetPlayerLevel(i) \ 2)
                 i = (GetPlayerStat(i, StatType.Endurance) \ 2) + (GetPlayerLevel(i) \ 2)
 
                 If n > 100 Then n = 100
                 If i > 100 Then i = 100
-                PlayerMsg(Index, "Critical Hit Chance: " & n & "%, Block Chance: " & i & "%", ColorType.Yellow)
+                PlayerMsg(index, "Critical Hit Chance: " & n & "%, Block Chance: " & i & "%", ColorType.Yellow)
             End If
-
         Else
-            PlayerMsg(Index, "Player is not online.", ColorType.BrightRed)
+            PlayerMsg(index, "Player is not online.", ColorType.BrightRed)
         End If
 
-        Buffer.Dispose()
+        buffer.Dispose()
     End Sub
 
-    Sub Packet_WarpMeTo(index as integer, ByRef data() As Byte)
+    Sub Packet_WarpMeTo(index As Integer, ByRef data() As Byte)
         Dim n As Integer
         Dim buffer As New ByteStream(data)
 
         AddDebug("Recieved CMSG: CWarpMeTo")
 
         ' Prevent hacking
-        If GetPlayerAccess(Index) < AdminType.Mapper Then Exit Sub
+        If GetPlayerAccess(index) < AdminType.Mapper Then Exit Sub
 
         ' The player
-        n = FindPlayer(Buffer.ReadString)
-        Buffer.Dispose()
+        n = FindPlayer(buffer.ReadString)
+        buffer.Dispose()
 
-        If n <> Index Then
+        If n <> index Then
             If n > 0 Then
-                PlayerWarp(Index, GetPlayerMap(n), GetPlayerX(n), GetPlayerY(n))
-                PlayerMsg(n, GetPlayerName(Index) & " has warped to you.", ColorType.Yellow)
-                PlayerMsg(Index, "You have been warped to " & GetPlayerName(n) & ".", ColorType.Yellow)
-                Addlog(GetPlayerName(Index) & " has warped to " & GetPlayerName(n) & ", map #" & GetPlayerMap(n) & ".", ADMIN_LOG)
+                PlayerWarp(index, GetPlayerMap(n), GetPlayerX(n), GetPlayerY(n))
+                PlayerMsg(n, GetPlayerName(index) & " has warped to you.", ColorType.Yellow)
+                PlayerMsg(index, "You have been warped to " & GetPlayerName(n) & ".", ColorType.Yellow)
+                Addlog(GetPlayerName(index) & " has warped to " & GetPlayerName(n) & ", map #" & GetPlayerMap(n) & ".", ADMIN_LOG)
             Else
-                PlayerMsg(Index, "Player is not online.", ColorType.BrightRed)
+                PlayerMsg(index, "Player is not online.", ColorType.BrightRed)
             End If
-
         Else
-            PlayerMsg(Index, "You cannot warp to yourself, dumbass!", ColorType.BrightRed)
+            PlayerMsg(index, "You cannot warp to yourself, dumbass!", ColorType.BrightRed)
         End If
 
     End Sub
 
-    Sub Packet_WarpToMe(index as integer, ByRef data() As Byte)
+    Sub Packet_WarpToMe(index As Integer, ByRef data() As Byte)
         Dim n As Integer
         Dim buffer As New ByteStream(data)
 
         AddDebug("Recieved CMSG: CWarpToMe")
 
         ' Prevent hacking
-        If GetPlayerAccess(Index) < AdminType.Mapper Then Exit Sub
+        If GetPlayerAccess(index) < AdminType.Mapper Then Exit Sub
 
         ' The player
-        n = FindPlayer(Buffer.ReadString)
-        Buffer.Dispose()
+        n = FindPlayer(buffer.ReadString)
+        buffer.Dispose()
 
-        If n <> Index Then
+        If n <> index Then
             If n > 0 Then
-                PlayerWarp(n, GetPlayerMap(Index), GetPlayerX(Index), GetPlayerY(Index))
-                PlayerMsg(n, "You have been summoned by " & GetPlayerName(Index) & ".", ColorType.Yellow)
-                PlayerMsg(Index, GetPlayerName(n) & " has been summoned.", ColorType.Yellow)
-                Addlog(GetPlayerName(Index) & " has warped " & GetPlayerName(n) & " to self, map #" & GetPlayerMap(Index) & ".", ADMIN_LOG)
+                PlayerWarp(n, GetPlayerMap(index), GetPlayerX(index), GetPlayerY(index))
+                PlayerMsg(n, "You have been summoned by " & GetPlayerName(index) & ".", ColorType.Yellow)
+                PlayerMsg(index, GetPlayerName(n) & " has been summoned.", ColorType.Yellow)
+                Addlog(GetPlayerName(index) & " has warped " & GetPlayerName(n) & " to self, map #" & GetPlayerMap(index) & ".", ADMIN_LOG)
             Else
-                PlayerMsg(Index, "Player is not online.", ColorType.BrightRed)
+                PlayerMsg(index, "Player is not online.", ColorType.BrightRed)
             End If
-
         Else
-            PlayerMsg(Index, "You cannot warp yourself to yourself, dumbass!", ColorType.BrightRed)
+            PlayerMsg(index, "You cannot warp yourself to yourself, dumbass!", ColorType.BrightRed)
         End If
 
     End Sub
 
-    Sub Packet_WarpTo(index as integer, ByRef data() As Byte)
+    Sub Packet_WarpTo(index As Integer, ByRef data() As Byte)
         Dim n As Integer
         Dim buffer As New ByteStream(data)
 
         AddDebug("Recieved CMSG: CWarpTo")
 
         ' Prevent hacking
-        If GetPlayerAccess(Index) < AdminType.Mapper Then Exit Sub
+        If GetPlayerAccess(index) < AdminType.Mapper Then Exit Sub
 
         ' The map
-        n = Buffer.ReadInt32
-        Buffer.Dispose()
+        n = buffer.ReadInt32
+        buffer.Dispose()
 
         ' Prevent hacking
         If n < 0 OrElse n > MAX_CACHED_MAPS Then Exit Sub
 
-        PlayerWarp(Index, n, GetPlayerX(Index), GetPlayerY(Index))
-        PlayerMsg(Index, "You have been warped to map #" & n, ColorType.Yellow)
-        Addlog(GetPlayerName(Index) & " warped to map #" & n & ".", ADMIN_LOG)
+        PlayerWarp(index, n, GetPlayerX(index), GetPlayerY(index))
+        PlayerMsg(index, "You have been warped to map #" & n, ColorType.Yellow)
+        Addlog(GetPlayerName(index) & " warped to map #" & n & ".", ADMIN_LOG)
 
     End Sub
 
-    Sub Packet_SetSprite(index as integer, ByRef data() As Byte)
+    Sub Packet_SetSprite(index As Integer, ByRef data() As Byte)
         Dim n As Integer
         Dim buffer As New ByteStream(data)
 
         AddDebug("Recieved CMSG: CSetSprite")
 
         ' Prevent hacking
-        If GetPlayerAccess(Index) < AdminType.Mapper Then Exit Sub
+        If GetPlayerAccess(index) < AdminType.Mapper Then Exit Sub
 
         ' The sprite
-        n = Buffer.ReadInt32
-        Buffer.Dispose()
+        n = buffer.ReadInt32
+        buffer.Dispose()
 
-        SetPlayerSprite(Index, n)
-        SendPlayerData(Index)
+        SetPlayerSprite(index, n)
+        SendPlayerData(index)
 
     End Sub
 
-    Sub Packet_GetStats(index as integer, ByRef data() As Byte)
+    Sub Packet_GetStats(index As Integer, ByRef data() As Byte)
         Dim i As Integer
         Dim n As Integer
         Dim buffer As New ByteStream(data)
 
         AddDebug("Recieved CMSG: CGetStats")
 
-        PlayerMsg(Index, "-=- Stats for " & GetPlayerName(Index) & " -=-", ColorType.Yellow)
-        PlayerMsg(Index, "Level: " & GetPlayerLevel(Index) & "  Exp: " & GetPlayerExp(Index) & "/" & GetPlayerNextLevel(Index), ColorType.Yellow)
-        PlayerMsg(Index, "HP: " & GetPlayerVital(Index, VitalType.HP) & "/" & GetPlayerMaxVital(Index, VitalType.HP) & "  MP: " & GetPlayerVital(Index, VitalType.MP) & "/" & GetPlayerMaxVital(Index, VitalType.MP) & "  SP: " & GetPlayerVital(Index, VitalType.SP) & "/" & GetPlayerMaxVital(Index, VitalType.SP), ColorType.Yellow)
-        PlayerMsg(Index, "STR: " & GetPlayerStat(Index, StatType.Strength) & "  DEF: " & GetPlayerStat(Index, StatType.Endurance) & "  MAGI: " & GetPlayerStat(Index, StatType.Intelligence) & "  Speed: " & GetPlayerStat(Index, StatType.Spirit), ColorType.Yellow)
-        n = (GetPlayerStat(Index, StatType.Strength) \ 2) + (GetPlayerLevel(Index) \ 2)
-        i = (GetPlayerStat(Index, StatType.Endurance) \ 2) + (GetPlayerLevel(Index) \ 2)
+        PlayerMsg(index, "-=- Stats for " & GetPlayerName(index) & " -=-", ColorType.Yellow)
+        PlayerMsg(index, "Level: " & GetPlayerLevel(index) & "  Exp: " & GetPlayerExp(index) & "/" & GetPlayerNextLevel(index), ColorType.Yellow)
+        PlayerMsg(index, "HP: " & GetPlayerVital(index, VitalType.HP) & "/" & GetPlayerMaxVital(index, VitalType.HP) & "  MP: " & GetPlayerVital(index, VitalType.MP) & "/" & GetPlayerMaxVital(index, VitalType.MP) & "  SP: " & GetPlayerVital(index, VitalType.SP) & "/" & GetPlayerMaxVital(index, VitalType.SP), ColorType.Yellow)
+        PlayerMsg(index, "STR: " & GetPlayerStat(index, StatType.Strength) & "  DEF: " & GetPlayerStat(index, StatType.Endurance) & "  MAGI: " & GetPlayerStat(index, StatType.Intelligence) & "  Speed: " & GetPlayerStat(index, StatType.Spirit), ColorType.Yellow)
+        n = (GetPlayerStat(index, StatType.Strength) \ 2) + (GetPlayerLevel(index) \ 2)
+        i = (GetPlayerStat(index, StatType.Endurance) \ 2) + (GetPlayerLevel(index) \ 2)
 
         If n > 100 Then n = 100
         If i > 100 Then i = 100
-        PlayerMsg(Index, "Critical Hit Chance: " & n & "%, Block Chance: " & i & "%", ColorType.Yellow)
-        Buffer.Dispose()
+        PlayerMsg(index, "Critical Hit Chance: " & n & "%, Block Chance: " & i & "%", ColorType.Yellow)
+        buffer.Dispose()
     End Sub
 
-    Sub Packet_RequestNewMap(index as integer, ByRef data() As Byte)
+    Sub Packet_RequestNewMap(index As Integer, ByRef data() As Byte)
         Dim dir As Integer
         Dim buffer As New ByteStream(data)
 
         AddDebug("Recieved CMSG: CRequestNewMap")
 
-        dir = Buffer.ReadInt32
-        Buffer.Dispose()
+        dir = buffer.ReadInt32
+        buffer.Dispose()
 
         ' Prevent hacking
         If dir < DirectionType.Up OrElse dir > DirectionType.Right Then Exit Sub
 
-        PlayerMove(Index, dir, 1, True)
+        PlayerMove(index, dir, 1, True)
     End Sub
 
-    Sub Packet_MapData(index as integer, ByRef data() As Byte)
+    Sub Packet_MapData(index As Integer, ByRef data() As Byte)
         Dim i As Integer
-        Dim mapNum as Integer
+        Dim mapNum As Integer
         Dim x As Integer
         Dim y As Integer
 
         AddDebug("Recieved CMSG: CSaveMap")
 
-        Dim buffer as New ByteStream(Compression.DecompressBytes(data))
+        Dim buffer As New ByteStream(Compression.DecompressBytes(data))
 
         ' Prevent hacking
-        If GetPlayerAccess(Index) < AdminType.Mapper Then Exit Sub
+        If GetPlayerAccess(index) < AdminType.Mapper Then Exit Sub
 
         Gettingmap = True
 
-        MapNum = GetPlayerMap(Index)
+        mapNum = GetPlayerMap(index)
 
-        i = Map(MapNum).Revision + 1
-        ClearMap(MapNum)
+        i = Map(mapNum).Revision + 1
+        ClearMap(mapNum)
 
-        Map(MapNum).Name = Buffer.ReadString
-        Map(MapNum).Music = Buffer.ReadString
-        Map(MapNum).Revision = i
-        Map(MapNum).Moral = Buffer.ReadInt32
-        Map(MapNum).Tileset = Buffer.ReadInt32
-        Map(MapNum).Up = Buffer.ReadInt32
-        Map(MapNum).Down = Buffer.ReadInt32
-        Map(MapNum).Left = Buffer.ReadInt32
-        Map(MapNum).Right = Buffer.ReadInt32
-        Map(MapNum).BootMap = Buffer.ReadInt32
-        Map(MapNum).BootX = Buffer.ReadInt32
-        Map(MapNum).BootY = Buffer.ReadInt32
-        Map(MapNum).MaxX = Buffer.ReadInt32
-        Map(MapNum).MaxY = Buffer.ReadInt32
-        Map(MapNum).WeatherType = Buffer.ReadInt32
-        Map(MapNum).FogIndex = Buffer.ReadInt32
-        Map(MapNum).WeatherIntensity = Buffer.ReadInt32
-        Map(MapNum).FogAlpha = Buffer.ReadInt32
-        Map(MapNum).FogSpeed = Buffer.ReadInt32
-        Map(MapNum).HasMapTint = Buffer.ReadInt32
-        Map(MapNum).MapTintR = Buffer.ReadInt32
-        Map(MapNum).MapTintG = Buffer.ReadInt32
-        Map(MapNum).MapTintB = Buffer.ReadInt32
-        Map(MapNum).MapTintA = Buffer.ReadInt32
+        Map(mapNum).Name = buffer.ReadString
+        Map(mapNum).Music = buffer.ReadString
+        Map(mapNum).Revision = i
+        Map(mapNum).Moral = buffer.ReadInt32
+        Map(mapNum).Tileset = buffer.ReadInt32
+        Map(mapNum).Up = buffer.ReadInt32
+        Map(mapNum).Down = buffer.ReadInt32
+        Map(mapNum).Left = buffer.ReadInt32
+        Map(mapNum).Right = buffer.ReadInt32
+        Map(mapNum).BootMap = buffer.ReadInt32
+        Map(mapNum).BootX = buffer.ReadInt32
+        Map(mapNum).BootY = buffer.ReadInt32
+        Map(mapNum).MaxX = buffer.ReadInt32
+        Map(mapNum).MaxY = buffer.ReadInt32
+        Map(mapNum).WeatherType = buffer.ReadInt32
+        Map(mapNum).Fogindex = buffer.ReadInt32
+        Map(mapNum).WeatherIntensity = buffer.ReadInt32
+        Map(mapNum).FogAlpha = buffer.ReadInt32
+        Map(mapNum).FogSpeed = buffer.ReadInt32
+        Map(mapNum).HasMapTint = buffer.ReadInt32
+        Map(mapNum).MapTintR = buffer.ReadInt32
+        Map(mapNum).MapTintG = buffer.ReadInt32
+        Map(mapNum).MapTintB = buffer.ReadInt32
+        Map(mapNum).MapTintA = buffer.ReadInt32
 
-        Map(MapNum).Instanced = Buffer.ReadInt32
-        Map(MapNum).Panorama = Buffer.ReadInt32
-        Map(MapNum).Parallax = Buffer.ReadInt32
+        Map(mapNum).Instanced = buffer.ReadInt32
+        Map(mapNum).Panorama = buffer.ReadInt32
+        Map(mapNum).Parallax = buffer.ReadInt32
 
-        ReDim Map(MapNum).Tile(Map(MapNum).MaxX,Map(MapNum).MaxY)
+        ReDim Map(mapNum).Tile(Map(mapNum).MaxX, Map(mapNum).MaxY)
 
         For x = 1 To MAX_MAP_NPCS
-            ClearMapNpc(x, MapNum)
-            Map(MapNum).Npc(x) = Buffer.ReadInt32
+            ClearMapNpc(x, mapNum)
+            Map(mapNum).Npc(x) = buffer.ReadInt32
         Next
 
-        With Map(MapNum)
+        With Map(mapNum)
             For x = 0 To .MaxX
                 For y = 0 To .MaxY
-                    .Tile(x, y).Data1 = Buffer.ReadInt32
-                    .Tile(x, y).Data2 = Buffer.ReadInt32
-                    .Tile(x, y).Data3 = Buffer.ReadInt32
-                    .Tile(x, y).DirBlock = Buffer.ReadInt32
+                    .Tile(x, y).Data1 = buffer.ReadInt32
+                    .Tile(x, y).Data2 = buffer.ReadInt32
+                    .Tile(x, y).Data3 = buffer.ReadInt32
+                    .Tile(x, y).DirBlock = buffer.ReadInt32
                     ReDim .Tile(x, y).Layer(LayerType.Count - 1)
                     For i = 0 To LayerType.Count - 1
-                        .Tile(x, y).Layer(i).Tileset = Buffer.ReadInt32
-                        .Tile(x, y).Layer(i).X = Buffer.ReadInt32
-                        .Tile(x, y).Layer(i).Y = Buffer.ReadInt32
-                        .Tile(x, y).Layer(i).AutoTile = Buffer.ReadInt32
+                        .Tile(x, y).Layer(i).Tileset = buffer.ReadInt32
+                        .Tile(x, y).Layer(i).X = buffer.ReadInt32
+                        .Tile(x, y).Layer(i).Y = buffer.ReadInt32
+                        .Tile(x, y).Layer(i).AutoTile = buffer.ReadInt32
                     Next
-                    .Tile(x, y).Type = Buffer.ReadInt32
+                    .Tile(x, y).Type = buffer.ReadInt32
                 Next
             Next
 
         End With
 
         'Event Data!
-        Map(MapNum).EventCount = Buffer.ReadInt32
+        Map(mapNum).EventCount = buffer.ReadInt32
 
-        If Map(MapNum).EventCount > 0 Then
-            ReDim Map(MapNum).Events(Map(MapNum).EventCount)
-            For i = 1 To Map(MapNum).EventCount
-                With Map(MapNum).Events(i)
-                    .Name = Buffer.ReadString
-                    .Globals = Buffer.ReadInt32
-                    .X = Buffer.ReadInt32
-                    .Y = Buffer.ReadInt32
-                    .PageCount = Buffer.ReadInt32
+        If Map(mapNum).EventCount > 0 Then
+            ReDim Map(mapNum).Events(Map(mapNum).EventCount)
+            For i = 1 To Map(mapNum).EventCount
+                With Map(mapNum).Events(i)
+                    .Name = buffer.ReadString
+                    .Globals = buffer.ReadInt32
+                    .X = buffer.ReadInt32
+                    .Y = buffer.ReadInt32
+                    .PageCount = buffer.ReadInt32
                 End With
-                If Map(MapNum).Events(i).PageCount > 0 Then
-                    ReDim Map(MapNum).Events(i).Pages(Map(MapNum).Events(i).PageCount)
-                    ReDim TempPlayer(i).EventMap.EventPages(Map(MapNum).Events(i).PageCount)
-                    For x = 1 To Map(MapNum).Events(i).PageCount
-                        With Map(MapNum).Events(i).Pages(x)
-                            .chkVariable = Buffer.ReadInt32
-                            .VariableIndex = Buffer.ReadInt32
-                            .VariableCondition = Buffer.ReadInt32
-                            .VariableCompare = Buffer.ReadInt32
+                If Map(mapNum).Events(i).PageCount > 0 Then
+                    ReDim Map(mapNum).Events(i).Pages(Map(mapNum).Events(i).PageCount)
+                    ReDim TempPlayer(i).EventMap.EventPages(Map(mapNum).Events(i).PageCount)
+                    For x = 1 To Map(mapNum).Events(i).PageCount
+                        With Map(mapNum).Events(i).Pages(x)
+                            .ChkVariable = buffer.ReadInt32
+                            .Variableindex = buffer.ReadInt32
+                            .VariableCondition = buffer.ReadInt32
+                            .VariableCompare = buffer.ReadInt32
 
-                            Map(MapNum).Events(i).Pages(x).chkSwitch = Buffer.ReadInt32
-                            Map(MapNum).Events(i).Pages(x).SwitchIndex = Buffer.ReadInt32
-                            .SwitchCompare = Buffer.ReadInt32
+                            Map(mapNum).Events(i).Pages(x).ChkSwitch = buffer.ReadInt32
+                            Map(mapNum).Events(i).Pages(x).Switchindex = buffer.ReadInt32
+                            .SwitchCompare = buffer.ReadInt32
 
-                            .chkHasItem = Buffer.ReadInt32
-                            .HasItemIndex = Buffer.ReadInt32
-                            .HasItemAmount = Buffer.ReadInt32
+                            .ChkHasItem = buffer.ReadInt32
+                            .HasItemindex = buffer.ReadInt32
+                            .HasItemAmount = buffer.ReadInt32
 
-                            .chkSelfSwitch = Buffer.ReadInt32
-                            .SelfSwitchIndex = Buffer.ReadInt32
-                            .SelfSwitchCompare = Buffer.ReadInt32
+                            .ChkSelfSwitch = buffer.ReadInt32
+                            .SelfSwitchindex = buffer.ReadInt32
+                            .SelfSwitchCompare = buffer.ReadInt32
 
-                            .GraphicType = Buffer.ReadInt32
-                            .Graphic = Buffer.ReadInt32
-                            .GraphicX = Buffer.ReadInt32
-                            .GraphicY = Buffer.ReadInt32
-                            .GraphicX2 = Buffer.ReadInt32
-                            .GraphicY2 = Buffer.ReadInt32
+                            .GraphicType = buffer.ReadInt32
+                            .Graphic = buffer.ReadInt32
+                            .GraphicX = buffer.ReadInt32
+                            .GraphicY = buffer.ReadInt32
+                            .GraphicX2 = buffer.ReadInt32
+                            .GraphicY2 = buffer.ReadInt32
 
-                            .MoveType = Buffer.ReadInt32
-                            .MoveSpeed = Buffer.ReadInt32
-                            .MoveFreq = Buffer.ReadInt32
+                            .MoveType = buffer.ReadInt32
+                            .MoveSpeed = buffer.ReadInt32
+                            .MoveFreq = buffer.ReadInt32
 
-                            .MoveRouteCount = Buffer.ReadInt32
+                            .MoveRouteCount = buffer.ReadInt32
 
-                            .IgnoreMoveRoute = Buffer.ReadInt32
-                            .RepeatMoveRoute = Buffer.ReadInt32
+                            .IgnoreMoveRoute = buffer.ReadInt32
+                            .RepeatMoveRoute = buffer.ReadInt32
 
                             If .MoveRouteCount > 0 Then
-                                ReDim Map(MapNum).Events(i).Pages(x).MoveRoute(.MoveRouteCount)
+                                ReDim Map(mapNum).Events(i).Pages(x).MoveRoute(.MoveRouteCount)
                                 For y = 1 To .MoveRouteCount
-                                    .MoveRoute(y).Index = Buffer.ReadInt32
-                                    .MoveRoute(y).Data1 = Buffer.ReadInt32
-                                    .MoveRoute(y).Data2 = Buffer.ReadInt32
-                                    .MoveRoute(y).Data3 = Buffer.ReadInt32
-                                    .MoveRoute(y).Data4 = Buffer.ReadInt32
-                                    .MoveRoute(y).Data5 = Buffer.ReadInt32
-                                    .MoveRoute(y).Data6 = Buffer.ReadInt32
+                                    .MoveRoute(y).Index = buffer.ReadInt32
+                                    .MoveRoute(y).Data1 = buffer.ReadInt32
+                                    .MoveRoute(y).Data2 = buffer.ReadInt32
+                                    .MoveRoute(y).Data3 = buffer.ReadInt32
+                                    .MoveRoute(y).Data4 = buffer.ReadInt32
+                                    .MoveRoute(y).Data5 = buffer.ReadInt32
+                                    .MoveRoute(y).Data6 = buffer.ReadInt32
                                 Next
                             End If
 
-                            .WalkAnim = Buffer.ReadInt32
-                            .DirFix = Buffer.ReadInt32
-                            .WalkThrough = Buffer.ReadInt32
-                            .ShowName = Buffer.ReadInt32
-                            .Trigger = Buffer.ReadInt32
-                            .CommandListCount = Buffer.ReadInt32
+                            .WalkAnim = buffer.ReadInt32
+                            .DirFix = buffer.ReadInt32
+                            .WalkThrough = buffer.ReadInt32
+                            .ShowName = buffer.ReadInt32
+                            .Trigger = buffer.ReadInt32
+                            .CommandListCount = buffer.ReadInt32
 
-                            .Position = Buffer.ReadInt32
-                            .QuestNum = Buffer.ReadInt32
+                            .Position = buffer.ReadInt32
+                            .QuestNum = buffer.ReadInt32
 
-                            .chkPlayerGender = Buffer.ReadInt32
+                            .ChkPlayerGender = buffer.ReadInt32
                         End With
 
-                        If Map(MapNum).Events(i).Pages(x).CommandListCount > 0 Then
-                            ReDim Map(MapNum).Events(i).Pages(x).CommandList(Map(MapNum).Events(i).Pages(x).CommandListCount)
-                            For y = 1 To Map(MapNum).Events(i).Pages(x).CommandListCount
-                                Map(MapNum).Events(i).Pages(x).CommandList(y).CommandCount = Buffer.ReadInt32
-                                Map(MapNum).Events(i).Pages(x).CommandList(y).ParentList = Buffer.ReadInt32
-                                If Map(MapNum).Events(i).Pages(x).CommandList(y).CommandCount > 0 Then
-                                    ReDim Map(MapNum).Events(i).Pages(x).CommandList(y).Commands(Map(MapNum).Events(i).Pages(x).CommandList(y).CommandCount)
-                                    For z = 1 To Map(MapNum).Events(i).Pages(x).CommandList(y).CommandCount
-                                        With Map(MapNum).Events(i).Pages(x).CommandList(y).Commands(z)
-                                            .Index = Buffer.ReadInt32
-                                            .Text1 = Buffer.ReadString
-                                            .Text2 = Buffer.ReadString
-                                            .Text3 = Buffer.ReadString
-                                            .Text4 = Buffer.ReadString
-                                            .Text5 = Buffer.ReadString
-                                            .Data1 = Buffer.ReadInt32
-                                            .Data2 = Buffer.ReadInt32
-                                            .Data3 = Buffer.ReadInt32
-                                            .Data4 = Buffer.ReadInt32
-                                            .Data5 = Buffer.ReadInt32
-                                            .Data6 = Buffer.ReadInt32
-                                            .ConditionalBranch.CommandList = Buffer.ReadInt32
-                                            .ConditionalBranch.Condition = Buffer.ReadInt32
-                                            .ConditionalBranch.Data1 = Buffer.ReadInt32
-                                            .ConditionalBranch.Data2 = Buffer.ReadInt32
-                                            .ConditionalBranch.Data3 = Buffer.ReadInt32
-                                            .ConditionalBranch.ElseCommandList = Buffer.ReadInt32
-                                            .MoveRouteCount = Buffer.ReadInt32
+                        If Map(mapNum).Events(i).Pages(x).CommandListCount > 0 Then
+                            ReDim Map(mapNum).Events(i).Pages(x).CommandList(Map(mapNum).Events(i).Pages(x).CommandListCount)
+                            For y = 1 To Map(mapNum).Events(i).Pages(x).CommandListCount
+                                Map(mapNum).Events(i).Pages(x).CommandList(y).CommandCount = buffer.ReadInt32
+                                Map(mapNum).Events(i).Pages(x).CommandList(y).ParentList = buffer.ReadInt32
+                                If Map(mapNum).Events(i).Pages(x).CommandList(y).CommandCount > 0 Then
+                                    ReDim Map(mapNum).Events(i).Pages(x).CommandList(y).Commands(Map(mapNum).Events(i).Pages(x).CommandList(y).CommandCount)
+                                    For z = 1 To Map(mapNum).Events(i).Pages(x).CommandList(y).CommandCount
+                                        With Map(mapNum).Events(i).Pages(x).CommandList(y).Commands(z)
+                                            .Index = buffer.ReadInt32
+                                            .Text1 = buffer.ReadString
+                                            .Text2 = buffer.ReadString
+                                            .Text3 = buffer.ReadString
+                                            .Text4 = buffer.ReadString
+                                            .Text5 = buffer.ReadString
+                                            .Data1 = buffer.ReadInt32
+                                            .Data2 = buffer.ReadInt32
+                                            .Data3 = buffer.ReadInt32
+                                            .Data4 = buffer.ReadInt32
+                                            .Data5 = buffer.ReadInt32
+                                            .Data6 = buffer.ReadInt32
+                                            .ConditionalBranch.CommandList = buffer.ReadInt32
+                                            .ConditionalBranch.Condition = buffer.ReadInt32
+                                            .ConditionalBranch.Data1 = buffer.ReadInt32
+                                            .ConditionalBranch.Data2 = buffer.ReadInt32
+                                            .ConditionalBranch.Data3 = buffer.ReadInt32
+                                            .ConditionalBranch.ElseCommandList = buffer.ReadInt32
+                                            .MoveRouteCount = buffer.ReadInt32
                                             Dim tmpcount As Integer = .MoveRouteCount
                                             If tmpcount > 0 Then
                                                 ReDim Preserve .MoveRoute(tmpcount)
                                                 For w = 1 To tmpcount
-                                                    .MoveRoute(w).Index = Buffer.ReadInt32
-                                                    .MoveRoute(w).Data1 = Buffer.ReadInt32
-                                                    .MoveRoute(w).Data2 = Buffer.ReadInt32
-                                                    .MoveRoute(w).Data3 = Buffer.ReadInt32
-                                                    .MoveRoute(w).Data4 = Buffer.ReadInt32
-                                                    .MoveRoute(w).Data5 = Buffer.ReadInt32
-                                                    .MoveRoute(w).Data6 = Buffer.ReadInt32
+                                                    .MoveRoute(w).Index = buffer.ReadInt32
+                                                    .MoveRoute(w).Data1 = buffer.ReadInt32
+                                                    .MoveRoute(w).Data2 = buffer.ReadInt32
+                                                    .MoveRoute(w).Data3 = buffer.ReadInt32
+                                                    .MoveRoute(w).Data4 = buffer.ReadInt32
+                                                    .MoveRoute(w).Data5 = buffer.ReadInt32
+                                                    .MoveRoute(w).Data6 = buffer.ReadInt32
                                                 Next
                                             End If
                                         End With
@@ -1150,107 +1148,107 @@ Module S_NetworkReceive
         'End Event Data
 
         ' Save the map
-        SaveMap(MapNum)
-        SaveMapEvent(MapNum)
+        SaveMap(mapNum)
+        SaveMapEvent(mapNum)
 
         Gettingmap = False
 
-        SendMapNpcsToMap(MapNum)
-        SpawnMapNpcs(MapNum)
-        SpawnGlobalEvents(MapNum)
+        SendMapNpcsToMap(mapNum)
+        SpawnMapNpcs(mapNum)
+        SpawnGlobalEvents(mapNum)
 
         For i = 1 To GetPlayersOnline()
             If IsPlaying(i) Then
-                If Player(i).Character(TempPlayer(i).CurChar).Map = MapNum Then
-                    SpawnMapEventsFor(i, MapNum)
+                If Player(i).Character(TempPlayer(i).CurChar).Map = mapNum Then
+                    SpawnMapEventsFor(i, mapNum)
                 End If
             End If
         Next
 
-        ' Clear it all out 
+        ' Clear it all out
         For i = 1 To MAX_MAP_ITEMS
-            SpawnItemSlot(i, 0, 0, GetPlayerMap(Index), MapItem(GetPlayerMap(Index), i).X, MapItem(GetPlayerMap(Index), i).Y)
-            ClearMapItem(i, GetPlayerMap(Index))
+            SpawnItemSlot(i, 0, 0, GetPlayerMap(index), MapItem(GetPlayerMap(index), i).X, MapItem(GetPlayerMap(index), i).Y)
+            ClearMapItem(i, GetPlayerMap(index))
         Next
 
         ' Respawn
-        SpawnMapItems(GetPlayerMap(Index))
+        SpawnMapItems(GetPlayerMap(index))
 
-        ClearTempTile(MapNum)
-        CacheResources(MapNum)
+        ClearTempTile(mapNum)
+        CacheResources(mapNum)
 
         ' Refresh map for everyone online
         For i = 1 To GetPlayersOnline()
-            If IsPlaying(i) AndAlso GetPlayerMap(i) = MapNum Then
-                PlayerWarp(i, MapNum, GetPlayerX(i), GetPlayerY(i))
+            If IsPlaying(i) AndAlso GetPlayerMap(i) = mapNum Then
+                PlayerWarp(i, mapNum, GetPlayerX(i), GetPlayerY(i))
                 ' Send map
-                SendMapData(i, MapNum, True)
+                SendMapData(i, mapNum, True)
             End If
         Next
 
-        Buffer.Dispose()
+        buffer.Dispose()
     End Sub
 
-    Private Sub Packet_NeedMap(index as integer, ByRef data() As Byte)
+    Private Sub Packet_NeedMap(index As Integer, ByRef data() As Byte)
         Dim s As String
         Dim buffer As New ByteStream(data)
 
         AddDebug("Recieved CMSG: CNeedMap")
 
         ' Get yes/no value
-        s = Buffer.ReadInt32
-        Buffer.Dispose()
+        s = buffer.ReadInt32
+        buffer.Dispose()
 
         ' Check if map data is needed to be sent
         If s = 1 Then
-            SendMapData(Index, GetPlayerMap(Index), True)
+            SendMapData(index, GetPlayerMap(index), True)
         Else
-            SendMapData(Index, GetPlayerMap(Index), False)
+            SendMapData(index, GetPlayerMap(index), False)
         End If
 
-        SpawnMapEventsFor(Index, GetPlayerMap(Index))
-        SendJoinMap(Index)
-        TempPlayer(Index).GettingMap = False
+        SpawnMapEventsFor(index, GetPlayerMap(index))
+        SendJoinMap(index)
+        TempPlayer(index).GettingMap = False
     End Sub
 
-    Sub Packet_RespawnMap(index as integer, ByRef data() As Byte)
+    Sub Packet_RespawnMap(index As Integer, ByRef data() As Byte)
         Dim i As Integer
         Dim buffer As New ByteStream(data)
 
         AddDebug("Recieved CMSG: CMapRespawn")
 
         ' Prevent hacking
-        If GetPlayerAccess(Index) < AdminType.Mapper Then Exit Sub
+        If GetPlayerAccess(index) < AdminType.Mapper Then Exit Sub
 
         ' Clear out it all
         For i = 1 To MAX_MAP_ITEMS
-            SpawnItemSlot(i, 0, 0, GetPlayerMap(Index), MapItem(GetPlayerMap(Index), i).X, MapItem(GetPlayerMap(Index), i).Y)
-            ClearMapItem(i, GetPlayerMap(Index))
+            SpawnItemSlot(i, 0, 0, GetPlayerMap(index), MapItem(GetPlayerMap(index), i).X, MapItem(GetPlayerMap(index), i).Y)
+            ClearMapItem(i, GetPlayerMap(index))
         Next
 
         ' Respawn
-        SpawnMapItems(GetPlayerMap(Index))
+        SpawnMapItems(GetPlayerMap(index))
 
         ' Respawn NPCS
         For i = 1 To MAX_MAP_NPCS
-            SpawnNpc(i, GetPlayerMap(Index))
+            SpawnNpc(i, GetPlayerMap(index))
         Next
 
-        CacheResources(GetPlayerMap(Index))
-        PlayerMsg(Index, "Map respawned.", ColorType.BrightGreen)
-        Addlog(GetPlayerName(Index) & " has respawned map #" & GetPlayerMap(Index), ADMIN_LOG)
+        CacheResources(GetPlayerMap(index))
+        PlayerMsg(index, "Map respawned.", ColorType.BrightGreen)
+        Addlog(GetPlayerName(index) & " has respawned map #" & GetPlayerMap(index), ADMIN_LOG)
 
-        Buffer.Dispose()
+        buffer.Dispose()
     End Sub
 
-    Sub Packet_KickPlayer(index as integer, ByRef data() As Byte)
+    Sub Packet_KickPlayer(index As Integer, ByRef data() As Byte)
         Dim n As Integer
         Dim buffer As New ByteStream(data)
 
         AddDebug("Recieved CMSG: CKickPlayer")
 
         ' Prevent hacking
-        If GetPlayerAccess(Index) <= 0 Then
+        If GetPlayerAccess(index) <= 0 Then
             Exit Sub
         End If
 
@@ -1258,37 +1256,35 @@ Module S_NetworkReceive
         n = FindPlayer(buffer.ReadString)
         buffer.Dispose()
 
-        If n <> Index Then
+        If n <> index Then
             If n > 0 Then
-                If GetPlayerAccess(n) < GetPlayerAccess(Index) Then
-                    GlobalMsg(GetPlayerName(n) & " has been kicked from " & Options.GameName & " by " & GetPlayerName(Index) & "!")
-                    Addlog(GetPlayerName(Index) & " has kicked " & GetPlayerName(n) & ".", ADMIN_LOG)
-                    AlertMsg(n, "You have been kicked by " & GetPlayerName(Index) & "!")
+                If GetPlayerAccess(n) < GetPlayerAccess(index) Then
+                    GlobalMsg(GetPlayerName(n) & " has been kicked from " & Options.GameName & " by " & GetPlayerName(index) & "!")
+                    Addlog(GetPlayerName(index) & " has kicked " & GetPlayerName(n) & ".", ADMIN_LOG)
+                    AlertMsg(n, "You have been kicked by " & GetPlayerName(index) & "!")
                 Else
-                    PlayerMsg(Index, "That is a higher or same access admin then you!", ColorType.BrightRed)
+                    PlayerMsg(index, "That is a higher or same access admin then you!", ColorType.BrightRed)
                 End If
-
             Else
-                PlayerMsg(Index, "Player is not online.", ColorType.BrightRed)
+                PlayerMsg(index, "Player is not online.", ColorType.BrightRed)
             End If
-
         Else
-            PlayerMsg(Index, "You cannot kick yourself!", ColorType.BrightRed)
+            PlayerMsg(index, "You cannot kick yourself!", ColorType.BrightRed)
         End If
     End Sub
 
-    Sub Packet_Banlist(index as integer, ByRef data() As Byte)
+    Sub Packet_Banlist(index As Integer, ByRef data() As Byte)
         AddDebug("Recieved CMSG: CBanList")
 
         ' Prevent hacking
-        If GetPlayerAccess(Index) < AdminType.Mapper Then
+        If GetPlayerAccess(index) < AdminType.Mapper Then
             Exit Sub
         End If
 
-        PlayerMsg(Index, "Command /banlist is not available in Orion+... yet ;)", ColorType.Yellow)
+        PlayerMsg(index, "Command /banlist is not available in Orion+... yet ;)", ColorType.Yellow)
     End Sub
 
-    Sub Packet_DestroyBans(index as integer, ByRef data() As Byte)
+    Sub Packet_DestroyBans(index As Integer, ByRef data() As Byte)
         Dim filename As String
 
         AddDebug("Recieved CMSG: CBanDestory")
@@ -1300,10 +1296,10 @@ Module S_NetworkReceive
 
         If File.Exists(filename) Then Kill(filename)
 
-        PlayerMsg(Index, "Ban list destroyed.", ColorType.BrightGreen)
+        PlayerMsg(index, "Ban list destroyed.", ColorType.BrightGreen)
     End Sub
 
-    Sub Packet_BanPlayer(index as integer, ByRef data() As Byte)
+    Sub Packet_BanPlayer(index As Integer, ByRef data() As Byte)
         Dim n As Integer
         Dim buffer As New ByteStream(data)
 
@@ -1313,51 +1309,45 @@ Module S_NetworkReceive
         If GetPlayerAccess(index) < AdminType.Mapper Then Exit Sub
 
         ' The player index
-        n = FindPlayer(Buffer.ReadString)
-        Buffer.Dispose()
+        n = FindPlayer(buffer.ReadString)
+        buffer.Dispose()
 
-        If n <> Index Then
+        If n <> index Then
             If n > 0 Then
-                If GetPlayerAccess(n) < GetPlayerAccess(Index) Then
-                    BanIndex(n, Index)
+                If GetPlayerAccess(n) < GetPlayerAccess(index) Then
+                    BanIndex(n, index)
                 Else
-                    PlayerMsg(Index, "That is a higher or same access admin then you!", ColorType.BrightRed)
+                    PlayerMsg(index, "That is a higher or same access admin then you!", ColorType.BrightRed)
                 End If
-
             Else
-                PlayerMsg(Index, "Player is not online.", ColorType.BrightRed)
+                PlayerMsg(index, "Player is not online.", ColorType.BrightRed)
             End If
-
         Else
-            PlayerMsg(Index, "You cannot ban yourself, dumbass!", ColorType.BrightRed)
+            PlayerMsg(index, "You cannot ban yourself, dumbass!", ColorType.BrightRed)
         End If
 
     End Sub
 
-    Private Sub Packet_EditMapRequest(index as integer, ByRef data() As Byte)
+    Private Sub Packet_EditMapRequest(index As Integer, ByRef data() As Byte)
         AddDebug("Recieved CMSG: CRequestEditMap")
 
         ' Prevent hacking
-        If GetPlayerAccess(Index) < AdminType.Mapper Then Exit Sub
+        If GetPlayerAccess(index) < AdminType.Mapper Then Exit Sub
 
-        If GetPlayerMap(Index) > MAX_MAPS Then
-            PlayerMsg(Index, "Cant edit instanced maps!", ColorType.BrightRed)
+        If GetPlayerMap(index) > MAX_MAPS Then
+            PlayerMsg(index, "Cant edit instanced maps!", ColorType.BrightRed)
             Exit Sub
         End If
 
-        SendMapEventData(Index)
+        SendMapEventData(index)
 
         Dim Buffer As New ByteStream(4)
         Buffer.WriteInt32(ServerPackets.SEditMap)
-        Socket.SendDataTo(Index, Buffer.Data, Buffer.Head)
+        Socket.SendDataTo(index, Buffer.Data, Buffer.Head)
         Buffer.Dispose()
     End Sub
 
-
-
-
-
-    Sub Packet_EditShop(index as integer, ByRef data() As Byte)
+    Sub Packet_EditShop(index As Integer, ByRef data() As Byte)
         AddDebug("Recieved EMSG: RequestEditShop")
 
         ' Prevent hacking
@@ -1365,14 +1355,14 @@ Module S_NetworkReceive
 
         Dim Buffer = New ByteStream(4)
         Buffer.WriteInt32(ServerPackets.SShopEditor)
-        Socket.SendDataTo(Index, Buffer.Data, Buffer.Head)
+        Socket.SendDataTo(index, Buffer.Data, Buffer.Head)
 
         AddDebug("Sent SMSG: SShopEditor")
 
         Buffer.Dispose()
     End Sub
 
-    Sub Packet_SaveShop(index as integer, ByRef data() As Byte)
+    Sub Packet_SaveShop(index As Integer, ByRef data() As Byte)
         Dim ShopNum As Integer
         Dim buffer As New ByteStream(data)
 
@@ -1381,20 +1371,20 @@ Module S_NetworkReceive
         ' Prevent hacking
         If GetPlayerAccess(index) < AdminType.Developer Then Exit Sub
 
-        ShopNum = Buffer.ReadInt32
+        ShopNum = buffer.ReadInt32
 
         ' Prevent hacking
         If ShopNum < 0 OrElse ShopNum > MAX_SHOPS Then Exit Sub
 
-        Shop(ShopNum).BuyRate = Buffer.ReadInt32()
-        Shop(ShopNum).Name = Buffer.ReadString()
-        Shop(ShopNum).Face = Buffer.ReadInt32()
+        Shop(ShopNum).BuyRate = buffer.ReadInt32()
+        Shop(ShopNum).Name = buffer.ReadString()
+        Shop(ShopNum).Face = buffer.ReadInt32()
 
         For i = 0 To MAX_TRADES
-            Shop(ShopNum).TradeItem(i).CostItem = Buffer.ReadInt32()
-            Shop(ShopNum).TradeItem(i).CostValue = Buffer.ReadInt32()
-            Shop(ShopNum).TradeItem(i).Item = Buffer.ReadInt32()
-            Shop(ShopNum).TradeItem(i).ItemValue = Buffer.ReadInt32()
+            Shop(ShopNum).TradeItem(i).CostItem = buffer.ReadInt32()
+            Shop(ShopNum).TradeItem(i).CostValue = buffer.ReadInt32()
+            Shop(ShopNum).TradeItem(i).Item = buffer.ReadInt32()
+            Shop(ShopNum).TradeItem(i).ItemValue = buffer.ReadInt32()
         Next
 
         If Shop(ShopNum).Name Is Nothing Then Shop(ShopNum).Name = ""
@@ -1407,7 +1397,7 @@ Module S_NetworkReceive
         Addlog(GetPlayerLogin(index) & " saving shop #" & ShopNum & ".", ADMIN_LOG)
     End Sub
 
-    Sub Packet_EditSkill(index as integer, ByRef data() As Byte)
+    Sub Packet_EditSkill(index As Integer, ByRef data() As Byte)
         AddDebug("Recieved EMSG: RequestEditSkill")
 
         ' Prevent hacking
@@ -1415,63 +1405,63 @@ Module S_NetworkReceive
 
         Dim Buffer = New ByteStream(4)
         Buffer.WriteInt32(ServerPackets.SSkillEditor)
-        Socket.SendDataTo(Index, Buffer.Data, Buffer.Head)
+        Socket.SendDataTo(index, Buffer.Data, Buffer.Head)
 
         AddDebug("Sent SMSG: SSkillEditor")
 
         Buffer.Dispose()
     End Sub
 
-    Sub Packet_SaveSkill(index as integer, ByRef data() As Byte)
+    Sub Packet_SaveSkill(index As Integer, ByRef data() As Byte)
         Dim skillnum As Integer
         Dim buffer As New ByteStream(data)
 
         AddDebug("Recieved EMSG: SaveSkill")
 
-        skillnum = Buffer.ReadInt32
+        skillnum = buffer.ReadInt32
 
         ' Prevent hacking
         If skillnum < 0 OrElse skillnum > MAX_SKILLS Then Exit Sub
 
-        Skill(skillnum).AccessReq = Buffer.ReadInt32()
-        Skill(skillnum).AoE = Buffer.ReadInt32()
-        Skill(skillnum).CastAnim = Buffer.ReadInt32()
-        Skill(skillnum).CastTime = Buffer.ReadInt32()
-        Skill(skillnum).CdTime = Buffer.ReadInt32()
-        Skill(skillnum).ClassReq = Buffer.ReadInt32()
-        Skill(skillnum).Dir = Buffer.ReadInt32()
-        Skill(skillnum).Duration = Buffer.ReadInt32()
-        Skill(skillnum).Icon = Buffer.ReadInt32()
-        Skill(skillnum).Interval = Buffer.ReadInt32()
-        Skill(skillnum).IsAoE = Buffer.ReadInt32()
-        Skill(skillnum).LevelReq = Buffer.ReadInt32()
-        Skill(skillnum).Map = Buffer.ReadInt32()
-        Skill(skillnum).MpCost = Buffer.ReadInt32()
-        Skill(skillnum).Name = Buffer.ReadString()
-        Skill(skillnum).Range = Buffer.ReadInt32()
-        Skill(skillnum).SkillAnim = Buffer.ReadInt32()
-        Skill(skillnum).StunDuration = Buffer.ReadInt32()
-        Skill(skillnum).Type = Buffer.ReadInt32()
-        Skill(skillnum).Vital = Buffer.ReadInt32()
-        Skill(skillnum).X = Buffer.ReadInt32()
-        Skill(skillnum).Y = Buffer.ReadInt32()
+        Skill(skillnum).AccessReq = buffer.ReadInt32()
+        Skill(skillnum).AoE = buffer.ReadInt32()
+        Skill(skillnum).CastAnim = buffer.ReadInt32()
+        Skill(skillnum).CastTime = buffer.ReadInt32()
+        Skill(skillnum).CdTime = buffer.ReadInt32()
+        Skill(skillnum).ClassReq = buffer.ReadInt32()
+        Skill(skillnum).Dir = buffer.ReadInt32()
+        Skill(skillnum).Duration = buffer.ReadInt32()
+        Skill(skillnum).Icon = buffer.ReadInt32()
+        Skill(skillnum).Interval = buffer.ReadInt32()
+        Skill(skillnum).IsAoE = buffer.ReadInt32()
+        Skill(skillnum).LevelReq = buffer.ReadInt32()
+        Skill(skillnum).Map = buffer.ReadInt32()
+        Skill(skillnum).MpCost = buffer.ReadInt32()
+        Skill(skillnum).Name = buffer.ReadString()
+        Skill(skillnum).Range = buffer.ReadInt32()
+        Skill(skillnum).SkillAnim = buffer.ReadInt32()
+        Skill(skillnum).StunDuration = buffer.ReadInt32()
+        Skill(skillnum).Type = buffer.ReadInt32()
+        Skill(skillnum).Vital = buffer.ReadInt32()
+        Skill(skillnum).X = buffer.ReadInt32()
+        Skill(skillnum).Y = buffer.ReadInt32()
 
         'projectiles
-        Skill(skillnum).IsProjectile = Buffer.ReadInt32()
-        Skill(skillnum).Projectile = Buffer.ReadInt32()
+        Skill(skillnum).IsProjectile = buffer.ReadInt32()
+        Skill(skillnum).Projectile = buffer.ReadInt32()
 
-        Skill(skillnum).KnockBack = Buffer.ReadInt32()
-        Skill(skillnum).KnockBackTiles = Buffer.ReadInt32()
+        Skill(skillnum).KnockBack = buffer.ReadInt32()
+        Skill(skillnum).KnockBackTiles = buffer.ReadInt32()
 
         ' Save it
         SendUpdateSkillToAll(skillnum)
         SaveSkill(skillnum)
-        Addlog(GetPlayerLogin(Index) & " saved Skill #" & skillnum & ".", ADMIN_LOG)
+        Addlog(GetPlayerLogin(index) & " saved Skill #" & skillnum & ".", ADMIN_LOG)
 
-        Buffer.Dispose()
+        buffer.Dispose()
     End Sub
 
-    Sub Packet_SetAccess(index as integer, ByRef data() As Byte)
+    Sub Packet_SetAccess(index As Integer, ByRef data() As Byte)
         Dim buffer As New ByteStream(data)
         Dim n As Integer
         Dim i As Integer
@@ -1479,12 +1469,12 @@ Module S_NetworkReceive
         AddDebug("Recieved CMSG: CSetAccess")
 
         ' Prevent hacking
-        If GetPlayerAccess(Index) < AdminType.Creator Then Exit Sub
+        If GetPlayerAccess(index) < AdminType.Creator Then Exit Sub
 
         ' The index
-        n = FindPlayer(Buffer.ReadString)
+        n = FindPlayer(buffer.ReadString)
         ' The access
-        i = Buffer.ReadInt32
+        i = buffer.ReadInt32
 
         ' Check for invalid access level
         If i >= 0 OrElse i <= 3 Then
@@ -1493,8 +1483,8 @@ Module S_NetworkReceive
             If n > 0 Then
 
                 'check to see if same level access is trying to change another access of the very same level and boot them if they are.
-                If GetPlayerAccess(n) = GetPlayerAccess(Index) Then
-                    PlayerMsg(Index, "Invalid access level.", ColorType.BrightRed)
+                If GetPlayerAccess(n) = GetPlayerAccess(index) Then
+                    PlayerMsg(index, "Invalid access level.", ColorType.BrightRed)
                     Exit Sub
                 End If
 
@@ -1504,25 +1494,24 @@ Module S_NetworkReceive
 
                 SetPlayerAccess(n, i)
                 SendPlayerData(n)
-                Addlog(GetPlayerName(Index) & " has modified " & GetPlayerName(n) & "'s access.", ADMIN_LOG)
+                Addlog(GetPlayerName(index) & " has modified " & GetPlayerName(n) & "'s access.", ADMIN_LOG)
             Else
-                PlayerMsg(Index, "Player is not online.", ColorType.BrightRed)
+                PlayerMsg(index, "Player is not online.", ColorType.BrightRed)
             End If
-
         Else
-            PlayerMsg(Index, "Invalid access level.", ColorType.BrightRed)
+            PlayerMsg(index, "Invalid access level.", ColorType.BrightRed)
         End If
 
-        Buffer.Dispose()
+        buffer.Dispose()
     End Sub
 
-    Sub Packet_WhosOnline(index as integer, ByRef data() As Byte)
+    Sub Packet_WhosOnline(index As Integer, ByRef data() As Byte)
         AddDebug("Recieved CMSG: CWhosOnline")
 
-        SendWhosOnline(Index)
+        SendWhosOnline(index)
     End Sub
 
-    Sub Packet_SetMotd(index as integer, ByRef data() As Byte)
+    Sub Packet_SetMotd(index As Integer, ByRef data() As Byte)
         Dim buffer As New ByteStream(data)
 
         AddDebug("Recieved CMSG: CSetMotd")
@@ -1530,57 +1519,57 @@ Module S_NetworkReceive
         ' Prevent hacking
         If GetPlayerAccess(index) < AdminType.Mapper Then Exit Sub
 
-        Options.Motd = Trim$(Buffer.ReadString)
+        Options.Motd = Trim$(buffer.ReadString)
         SaveOptions()
 
         GlobalMsg("MOTD changed to: " & Options.Motd)
-        Addlog(GetPlayerName(Index) & " changed MOTD to: " & Options.Motd, ADMIN_LOG)
+        Addlog(GetPlayerName(index) & " changed MOTD to: " & Options.Motd, ADMIN_LOG)
 
-        Buffer.Dispose()
+        buffer.Dispose()
     End Sub
 
-    Sub Packet_PlayerSearch(index as integer, ByRef data() As Byte)
+    Sub Packet_PlayerSearch(index As Integer, ByRef data() As Byte)
         Dim TargetFound As Byte, rclick As Byte
         Dim x As Integer, y As Integer, i As Integer
         Dim buffer As New ByteStream(data)
 
         AddDebug("Recieved CMSG: CSearch")
 
-        x = Buffer.ReadInt32
-        y = Buffer.ReadInt32
-        rclick = Buffer.ReadInt32
+        x = buffer.ReadInt32
+        y = buffer.ReadInt32
+        rclick = buffer.ReadInt32
 
         ' Prevent subscript out of range
-        If x < 0 OrElse x > Map(GetPlayerMap(Index)).MaxX OrElse y < 0 OrElse y > Map(GetPlayerMap(Index)).MaxY Then Exit Sub
+        If x < 0 OrElse x > Map(GetPlayerMap(index)).MaxX OrElse y < 0 OrElse y > Map(GetPlayerMap(index)).MaxY Then Exit Sub
 
         ' Check for a player
         For i = 1 To GetPlayersOnline()
 
             If IsPlaying(i) Then
-                If GetPlayerMap(Index) = GetPlayerMap(i) Then
+                If GetPlayerMap(index) = GetPlayerMap(i) Then
                     If GetPlayerX(i) = x Then
                         If GetPlayerY(i) = y Then
 
                             ' Consider the player
-                            If i <> Index Then
-                                If GetPlayerLevel(i) >= GetPlayerLevel(Index) + 5 Then
-                                    PlayerMsg(Index, "You wouldn't stand a chance.", ColorType.BrightRed)
+                            If i <> index Then
+                                If GetPlayerLevel(i) >= GetPlayerLevel(index) + 5 Then
+                                    PlayerMsg(index, "You wouldn't stand a chance.", ColorType.BrightRed)
                                 Else
 
-                                    If GetPlayerLevel(i) > GetPlayerLevel(Index) Then
-                                        PlayerMsg(Index, "This one seems to have an advantage over you.", ColorType.Yellow)
+                                    If GetPlayerLevel(i) > GetPlayerLevel(index) Then
+                                        PlayerMsg(index, "This one seems to have an advantage over you.", ColorType.Yellow)
                                     Else
 
-                                        If GetPlayerLevel(i) = GetPlayerLevel(Index) Then
-                                            PlayerMsg(Index, "This would be an even fight.", ColorType.White)
+                                        If GetPlayerLevel(i) = GetPlayerLevel(index) Then
+                                            PlayerMsg(index, "This would be an even fight.", ColorType.White)
                                         Else
 
-                                            If GetPlayerLevel(Index) >= GetPlayerLevel(i) + 5 Then
-                                                PlayerMsg(Index, "You could slaughter that player.", ColorType.BrightBlue)
+                                            If GetPlayerLevel(index) >= GetPlayerLevel(i) + 5 Then
+                                                PlayerMsg(index, "You could slaughter that player.", ColorType.BrightBlue)
                                             Else
 
-                                                If GetPlayerLevel(Index) > GetPlayerLevel(i) Then
-                                                    PlayerMsg(Index, "You would have an advantage over that player.", ColorType.BrightCyan)
+                                                If GetPlayerLevel(index) > GetPlayerLevel(i) Then
+                                                    PlayerMsg(index, "You would have an advantage over that player.", ColorType.BrightCyan)
                                                 End If
                                             End If
                                         End If
@@ -1589,12 +1578,12 @@ Module S_NetworkReceive
                             End If
 
                             ' Change target
-                            TempPlayer(Index).Target = i
-                            TempPlayer(Index).TargetType = TargetType.Player
-                            PlayerMsg(Index, "Your target is now " & GetPlayerName(i) & ".", ColorType.Yellow)
-                            SendTarget(Index, TempPlayer(Index).Target, TempPlayer(Index).TargetType)
+                            TempPlayer(index).Target = i
+                            TempPlayer(index).TargetType = TargetType.Player
+                            PlayerMsg(index, "Your target is now " & GetPlayerName(i) & ".", ColorType.Yellow)
+                            SendTarget(index, TempPlayer(index).Target, TempPlayer(index).TargetType)
                             TargetFound = 1
-                            If rclick = 1 Then SendRightClick(Index)
+                            If rclick = 1 Then SendRightClick(index)
                             Exit Sub
                         End If
                     End If
@@ -1606,10 +1595,10 @@ Module S_NetworkReceive
         ' Check for an item
         For i = 1 To MAX_MAP_ITEMS
 
-            If MapItem(GetPlayerMap(Index), i).Num > 0 Then
-                If MapItem(GetPlayerMap(Index), i).X = x Then
-                    If MapItem(GetPlayerMap(Index), i).Y = y Then
-                        PlayerMsg(Index, "You see " & CheckGrammar(Trim$(Item(MapItem(GetPlayerMap(Index), i).Num).Name)) & ".", ColorType.White)
+            If MapItem(GetPlayerMap(index), i).Num > 0 Then
+                If MapItem(GetPlayerMap(index), i).X = x Then
+                    If MapItem(GetPlayerMap(index), i).Y = y Then
+                        PlayerMsg(index, "You see " & CheckGrammar(Trim$(Item(MapItem(GetPlayerMap(index), i).Num).Name)) & ".", ColorType.White)
                         Exit Sub
                     End If
                 End If
@@ -1620,14 +1609,14 @@ Module S_NetworkReceive
         ' Check for an npc
         For i = 1 To MAX_MAP_NPCS
 
-            If MapNpc(GetPlayerMap(Index)).Npc(i).Num > 0 Then
-                If MapNpc(GetPlayerMap(Index)).Npc(i).X = x Then
-                    If MapNpc(GetPlayerMap(Index)).Npc(i).Y = y Then
+            If MapNpc(GetPlayerMap(index)).Npc(i).Num > 0 Then
+                If MapNpc(GetPlayerMap(index)).Npc(i).X = x Then
+                    If MapNpc(GetPlayerMap(index)).Npc(i).Y = y Then
                         ' Change target
-                        TempPlayer(Index).Target = i
-                        TempPlayer(Index).TargetType = TargetType.Npc
-                        PlayerMsg(Index, "Your target is now " & CheckGrammar(Trim$(Npc(MapNpc(GetPlayerMap(Index)).Npc(i).Num).Name)) & ".", ColorType.Yellow)
-                        SendTarget(Index, TempPlayer(Index).Target, TempPlayer(Index).TargetType)
+                        TempPlayer(index).Target = i
+                        TempPlayer(index).TargetType = TargetType.Npc
+                        PlayerMsg(index, "Your target is now " & CheckGrammar(Trim$(Npc(MapNpc(GetPlayerMap(index)).Npc(i).Num).Name)) & ".", ColorType.Yellow)
+                        SendTarget(index, TempPlayer(index).Target, TempPlayer(index).TargetType)
                         TargetFound = 1
                         Exit Sub
                     End If
@@ -1637,26 +1626,26 @@ Module S_NetworkReceive
         Next
 
         'Housing
-        If Player(Index).Character(TempPlayer(Index).CurChar).InHouse > 0 Then
-            If Player(Index).Character(TempPlayer(Index).CurChar).InHouse = Index Then
-                If Player(Index).Character(TempPlayer(Index).CurChar).House.HouseIndex > 0 Then
-                    If Player(Index).Character(TempPlayer(Index).CurChar).House.FurnitureCount > 0 Then
-                        For i = 1 To Player(Index).Character(TempPlayer(Index).CurChar).House.FurnitureCount
-                            If x >= Player(Index).Character(TempPlayer(Index).CurChar).House.Furniture(i).X AndAlso x <= Player(Index).Character(TempPlayer(Index).CurChar).House.Furniture(i).X + Item(Player(Index).Character(TempPlayer(Index).CurChar).House.Furniture(i).ItemNum).FurnitureWidth - 1 Then
-                                If y <= Player(Index).Character(TempPlayer(Index).CurChar).House.Furniture(i).Y AndAlso y >= Player(Index).Character(TempPlayer(Index).CurChar).House.Furniture(i).Y - Item(Player(Index).Character(TempPlayer(Index).CurChar).House.Furniture(i).ItemNum).FurnitureHeight + 1 Then
+        If Player(index).Character(TempPlayer(index).CurChar).InHouse > 0 Then
+            If Player(index).Character(TempPlayer(index).CurChar).InHouse = index Then
+                If Player(index).Character(TempPlayer(index).CurChar).House.Houseindex > 0 Then
+                    If Player(index).Character(TempPlayer(index).CurChar).House.FurnitureCount > 0 Then
+                        For i = 1 To Player(index).Character(TempPlayer(index).CurChar).House.FurnitureCount
+                            If x >= Player(index).Character(TempPlayer(index).CurChar).House.Furniture(i).X AndAlso x <= Player(index).Character(TempPlayer(index).CurChar).House.Furniture(i).X + Item(Player(index).Character(TempPlayer(index).CurChar).House.Furniture(i).ItemNum).FurnitureWidth - 1 Then
+                                If y <= Player(index).Character(TempPlayer(index).CurChar).House.Furniture(i).Y AndAlso y >= Player(index).Character(TempPlayer(index).CurChar).House.Furniture(i).Y - Item(Player(index).Character(TempPlayer(index).CurChar).House.Furniture(i).ItemNum).FurnitureHeight + 1 Then
                                     'Found an Item, get the index and lets pick it up!
-                                    x = FindOpenInvSlot(Index, Player(Index).Character(TempPlayer(Index).CurChar).House.Furniture(i).ItemNum)
+                                    x = FindOpenInvSlot(index, Player(index).Character(TempPlayer(index).CurChar).House.Furniture(i).ItemNum)
                                     If x > 0 Then
-                                        GiveInvItem(Index, Player(Index).Character(TempPlayer(Index).CurChar).House.Furniture(i).ItemNum, 0, True)
-                                        Player(Index).Character(TempPlayer(Index).CurChar).House.FurnitureCount = Player(Index).Character(TempPlayer(Index).CurChar).House.FurnitureCount - 1
-                                        For x = i + 1 To Player(Index).Character(TempPlayer(Index).CurChar).House.FurnitureCount + 1
-                                            Player(Index).Character(TempPlayer(Index).CurChar).House.Furniture(x - 1) = Player(Index).Character(TempPlayer(Index).CurChar).House.Furniture(x)
+                                        GiveInvItem(index, Player(index).Character(TempPlayer(index).CurChar).House.Furniture(i).ItemNum, 0, True)
+                                        Player(index).Character(TempPlayer(index).CurChar).House.FurnitureCount = Player(index).Character(TempPlayer(index).CurChar).House.FurnitureCount - 1
+                                        For x = i + 1 To Player(index).Character(TempPlayer(index).CurChar).House.FurnitureCount + 1
+                                            Player(index).Character(TempPlayer(index).CurChar).House.Furniture(x - 1) = Player(index).Character(TempPlayer(index).CurChar).House.Furniture(x)
                                         Next
-                                        ReDim Preserve Player(Index).Character(TempPlayer(Index).CurChar).House.Furniture(Player(Index).Character(TempPlayer(Index).CurChar).House.FurnitureCount)
-                                        SendFurnitureToHouse(Index)
+                                        ReDim Preserve Player(index).Character(TempPlayer(index).CurChar).House.Furniture(Player(index).Character(TempPlayer(index).CurChar).House.FurnitureCount)
+                                        SendFurnitureToHouse(index)
                                         Exit Sub
                                     Else
-                                        PlayerMsg(Index, "No inventory space available!", ColorType.BrightRed)
+                                        PlayerMsg(index, "No inventory space available!", ColorType.BrightRed)
                                     End If
                                     Exit Sub
                                 End If
@@ -1668,92 +1657,90 @@ Module S_NetworkReceive
         End If
 
         If TargetFound = 0 Then
-            SendTarget(Index, 0, 0)
+            SendTarget(index, 0, 0)
         End If
 
-        Buffer.Dispose()
+        buffer.Dispose()
     End Sub
 
-    Sub Packet_Skills(index as integer, ByRef data() As Byte)
+    Sub Packet_Skills(index As Integer, ByRef data() As Byte)
         AddDebug("Recieved CMSG: CSkills")
 
-        SendPlayerSkills(Index)
+        SendPlayerSkills(index)
     End Sub
 
-    Sub Packet_Cast(index as integer, ByRef data() As Byte)
+    Sub Packet_Cast(index As Integer, ByRef data() As Byte)
         Dim n As Integer
         Dim buffer As New ByteStream(data)
 
         AddDebug("Recieved CMSG: CCast")
 
         ' Skill slot
-        n = Buffer.ReadInt32
-        Buffer.Dispose()
+        n = buffer.ReadInt32
+        buffer.Dispose()
 
         ' set the skill buffer before castin
-        BufferSkill(Index, n)
+        BufferSkill(index, n)
 
-        Buffer.Dispose()
+        buffer.Dispose()
     End Sub
 
-    Sub Packet_QuitGame(index as integer, ByRef data() As Byte)
+    Sub Packet_QuitGame(index As Integer, ByRef data() As Byte)
         AddDebug("Recieved CMSG: CQuit")
 
-        SendLeftGame(Index)
+        SendLeftGame(index)
         LeftGame(index)
     End Sub
 
-    Sub Packet_SwapInvSlots(index as integer, ByRef data() As Byte)
+    Sub Packet_SwapInvSlots(index As Integer, ByRef data() As Byte)
         Dim oldSlot As Integer, newSlot As Integer
         Dim buffer As New ByteStream(data)
 
         AddDebug("Recieved CMSG: CSwapInvSlots")
 
-        If TempPlayer(Index).InTrade > 0 OrElse TempPlayer(Index).InBank OrElse TempPlayer(Index).InShop Then Exit Sub
+        If TempPlayer(index).InTrade > 0 OrElse TempPlayer(index).InBank OrElse TempPlayer(index).InShop Then Exit Sub
 
         ' Old Slot
-        oldSlot = Buffer.ReadInt32
-        newSlot = Buffer.ReadInt32
-        Buffer.Dispose()
+        oldSlot = buffer.ReadInt32
+        newSlot = buffer.ReadInt32
+        buffer.Dispose()
 
-        PlayerSwitchInvSlots(Index, oldSlot, newSlot)
+        PlayerSwitchInvSlots(index, oldSlot, newSlot)
 
-        Buffer.Dispose()
+        buffer.Dispose()
     End Sub
 
-    Sub Packet_CheckPing(index as integer, ByRef data() As Byte)
-        dim buffer as ByteStream
-        Buffer = New ByteStream(4)
-        Buffer.WriteInt32(ServerPackets.SSendPing)
-        Socket.SendDataTo(Index, Buffer.Data, Buffer.Head)
+    Sub Packet_CheckPing(index As Integer, ByRef data() As Byte)
+        Dim buffer As ByteStream
+        buffer = New ByteStream(4)
+        buffer.WriteInt32(ServerPackets.SSendPing)
+        Socket.SendDataTo(index, buffer.Data, buffer.Head)
 
         AddDebug("Sent SMSG: SSendPing")
 
         buffer.Dispose()
     End Sub
 
-    Sub Packet_Unequip(index as integer, ByRef data() As Byte)
+    Sub Packet_Unequip(index As Integer, ByRef data() As Byte)
         Dim buffer As New ByteStream(data)
 
         AddDebug("Recieved CMSG: CUnequip")
 
-        PlayerUnequipItem(Index, Buffer.ReadInt32)
+        PlayerUnequipItem(index, buffer.ReadInt32)
 
-        Buffer.Dispose()
+        buffer.Dispose()
     End Sub
 
-    Sub Packet_RequestPlayerData(index as integer, ByRef data() As Byte)
+    Sub Packet_RequestPlayerData(index As Integer, ByRef data() As Byte)
         AddDebug("Recieved CMSG: CRequestPlayerData")
 
-        SendPlayerData(Index)
+        SendPlayerData(index)
     End Sub
 
-
-
-    Sub Packet_RequestNpcs(index as integer, ByRef data() As Byte)
+    Sub Packet_RequestNpcs(index As Integer, ByRef data() As Byte)
         AddDebug("Recieved CMSG: CRequestNPCS")
 
-        SendNpcs(Index)
+        SendNpcs(index)
     End Sub
 
     Sub Packet_SpawnItem(index As Integer, ByRef data() As Byte)
@@ -1773,98 +1760,96 @@ Module S_NetworkReceive
         buffer.Dispose()
     End Sub
 
-    Sub Packet_TrainStat(index as integer, ByRef data() As Byte)
+    Sub Packet_TrainStat(index As Integer, ByRef data() As Byte)
         Dim tmpstat As Integer
         Dim buffer As New ByteStream(data)
 
         AddDebug("Recieved CMSG: CTrainStat")
 
         ' check points
-        If GetPlayerPOINTS(Index) = 0 Then Exit Sub
+        If GetPlayerPOINTS(index) = 0 Then Exit Sub
 
         ' stat
-        tmpstat = Buffer.ReadInt32
+        tmpstat = buffer.ReadInt32
 
         ' increment stat
-        SetPlayerStat(Index, tmpstat, GetPlayerRawStat(Index, tmpstat) + 1)
+        SetPlayerStat(index, tmpstat, GetPlayerRawStat(index, tmpstat) + 1)
 
         ' decrement points
-        SetPlayerPOINTS(Index, GetPlayerPOINTS(Index) - 1)
+        SetPlayerPOINTS(index, GetPlayerPOINTS(index) - 1)
 
         ' send player new data
-        SendPlayerData(Index)
-        Buffer.Dispose()
+        SendPlayerData(index)
+        buffer.Dispose()
     End Sub
 
-
-
-    Sub Packet_RequestSkills(index as integer, ByRef data() As Byte)
+    Sub Packet_RequestSkills(index As Integer, ByRef data() As Byte)
         AddDebug("Recieved CMSG: CRequestSkills")
 
-        SendSkills(Index)
+        SendSkills(index)
     End Sub
 
-    Sub Packet_RequestShops(index as integer, ByRef data() As Byte)
+    Sub Packet_RequestShops(index As Integer, ByRef data() As Byte)
         AddDebug("Recieved CMSG: CRequestShops")
 
-        SendShops(Index)
+        SendShops(index)
     End Sub
 
-    Sub Packet_RequestLevelUp(index as integer, ByRef data() As Byte)
+    Sub Packet_RequestLevelUp(index As Integer, ByRef data() As Byte)
         AddDebug("Recieved CMSG: CRequestLevelUp")
 
         ' Prevent hacking
         If GetPlayerAccess(index) < AdminType.Creator Then Exit Sub
 
-        SetPlayerExp(Index, GetPlayerNextLevel(Index))
-        CheckPlayerLevelUp(Index)
+        SetPlayerExp(index, GetPlayerNextLevel(index))
+        CheckPlayerLevelUp(index)
     End Sub
 
-    Sub Packet_ForgetSkill(index as integer, ByRef data() As Byte)
+    Sub Packet_ForgetSkill(index As Integer, ByRef data() As Byte)
         Dim skillslot As Integer
         Dim buffer As New ByteStream(data)
 
         AddDebug("Recieved CMSG: CForgetSkill")
 
-        skillslot = Buffer.ReadInt32
+        skillslot = buffer.ReadInt32
 
         ' Check for subscript out of range
         If skillslot < 1 OrElse skillslot > MAX_PLAYER_SKILLS Then Exit Sub
 
         ' dont let them forget a skill which is in CD
-        If TempPlayer(Index).SkillCD(skillslot) > 0 Then
-            PlayerMsg(Index, "Cannot forget a skill which is cooling down!", ColorType.BrightRed)
+        If TempPlayer(index).SkillCd(skillslot) > 0 Then
+            PlayerMsg(index, "Cannot forget a skill which is cooling down!", ColorType.BrightRed)
             Exit Sub
         End If
 
         ' dont let them forget a skill which is buffered
-        If TempPlayer(Index).SkillBuffer = skillslot Then
-            PlayerMsg(Index, "Cannot forget a skill which you are casting!", ColorType.BrightRed)
+        If TempPlayer(index).SkillBuffer = skillslot Then
+            PlayerMsg(index, "Cannot forget a skill which you are casting!", ColorType.BrightRed)
             Exit Sub
         End If
 
-        Player(Index).Character(TempPlayer(Index).CurChar).Skill(skillslot) = 0
-        SendPlayerSkills(Index)
+        Player(index).Character(TempPlayer(index).CurChar).Skill(skillslot) = 0
+        SendPlayerSkills(index)
 
-        Buffer.Dispose()
+        buffer.Dispose()
     End Sub
 
-    Sub Packet_CloseShop(index as integer, ByRef data() As Byte)
+    Sub Packet_CloseShop(index As Integer, ByRef data() As Byte)
         AddDebug("Recieved CMSG: CCloseShop")
 
-        TempPlayer(Index).InShop = 0
+        TempPlayer(index).InShop = 0
     End Sub
 
-    Sub Packet_BuyItem(index as integer, ByRef data() As Byte)
+    Sub Packet_BuyItem(index As Integer, ByRef data() As Byte)
         Dim shopslot As Integer, shopnum As Integer, itemamount As Integer
         Dim buffer As New ByteStream(data)
 
         AddDebug("Recieved CMSG: CBuyItem")
 
-        shopslot = Buffer.ReadInt32
+        shopslot = buffer.ReadInt32
 
         ' not in shop, exit out
-        shopnum = TempPlayer(Index).InShop
+        shopnum = TempPlayer(index).InShop
         If shopnum < 1 OrElse shopnum > MAX_SHOPS Then Exit Sub
 
         With Shop(shopnum).TradeItem(shopslot)
@@ -1872,148 +1857,148 @@ Module S_NetworkReceive
             If .Item < 1 Then Exit Sub
 
             ' check has the cost item
-            itemamount = HasItem(Index, .CostItem)
+            itemamount = HasItem(index, .CostItem)
             If itemamount = 0 OrElse itemamount < .CostValue Then
-                PlayerMsg(Index, "You do not have enough to buy this item.", ColorType.BrightRed)
-                ResetShopAction(Index)
+                PlayerMsg(index, "You do not have enough to buy this item.", ColorType.BrightRed)
+                ResetShopAction(index)
                 Exit Sub
             End If
 
             ' it's fine, let's go ahead
-            TakeInvItem(Index, .CostItem, .CostValue)
-            GiveInvItem(Index, .Item, .ItemValue)
+            TakeInvItem(index, .CostItem, .CostValue)
+            GiveInvItem(index, .Item, .ItemValue)
         End With
 
         ' send confirmation message & reset their shop action
-        PlayerMsg(Index, "Trade successful.", ColorType.BrightGreen)
-        ResetShopAction(Index)
+        PlayerMsg(index, "Trade successful.", ColorType.BrightGreen)
+        ResetShopAction(index)
 
-        Buffer.Dispose()
+        buffer.Dispose()
     End Sub
 
-    Sub Packet_SellItem(index as integer, ByRef data() As Byte)
+    Sub Packet_SellItem(index As Integer, ByRef data() As Byte)
         Dim invSlot As Integer
         Dim itemNum As Integer
         Dim price As Integer
         Dim multiplier As Double
-        dim buffer as New ByteStream(data)
+        Dim buffer As New ByteStream(data)
 
         AddDebug("Recieved CMSG: CSellItem")
 
-        invSlot = Buffer.ReadInt32
+        invSlot = buffer.ReadInt32
 
         ' if invalid, exit out
         If invSlot < 1 OrElse invSlot > MAX_INV Then Exit Sub
 
         ' has item?
-        If GetPlayerInvItemNum(Index, invSlot) < 1 OrElse GetPlayerInvItemNum(Index, invSlot) > MAX_ITEMS Then Exit Sub
+        If GetPlayerInvItemNum(index, invSlot) < 1 OrElse GetPlayerInvItemNum(index, invSlot) > MAX_ITEMS Then Exit Sub
 
         ' seems to be valid
-        itemNum = GetPlayerInvItemNum(Index, invSlot)
+        itemNum = GetPlayerInvItemNum(index, invSlot)
 
         ' work out price
-        multiplier = Shop(TempPlayer(Index).InShop).BuyRate / 100
+        multiplier = Shop(TempPlayer(index).InShop).BuyRate / 100
         price = Item(itemNum).Price * multiplier
 
         ' item has cost?
         If price <= 0 Then
-            PlayerMsg(Index, "The shop doesn't want that item.", ColorType.Yellow)
-            ResetShopAction(Index)
+            PlayerMsg(index, "The shop doesn't want that item.", ColorType.Yellow)
+            ResetShopAction(index)
             Exit Sub
         End If
 
         ' take item and give gold
-        TakeInvItem(Index, itemNum, 1)
-        GiveInvItem(Index, 1, price)
+        TakeInvItem(index, itemNum, 1)
+        GiveInvItem(index, 1, price)
 
         ' send confirmation message & reset their shop action
-        PlayerMsg(Index, "Sold the " & Trim(Item(GetPlayerInvItemNum(Index, invSlot)).Name) & " !", ColorType.BrightGreen)
-        ResetShopAction(Index)
+        PlayerMsg(index, "Sold the " & Trim(Item(GetPlayerInvItemNum(index, invSlot)).Name) & " !", ColorType.BrightGreen)
+        ResetShopAction(index)
 
-        Buffer.Dispose()
+        buffer.Dispose()
     End Sub
 
-    Sub Packet_ChangeBankSlots(index as integer, ByRef data() As Byte)
+    Sub Packet_ChangeBankSlots(index As Integer, ByRef data() As Byte)
         Dim oldslot As Integer, newslot As Integer
         Dim buffer As New ByteStream(data)
 
         AddDebug("Recieved CMSG: CChangeBankSlots")
 
-        oldslot = Buffer.ReadInt32
-        newslot = Buffer.ReadInt32
+        oldslot = buffer.ReadInt32
+        newslot = buffer.ReadInt32
 
-        PlayerSwitchBankSlots(Index, oldslot, newslot)
+        PlayerSwitchBankSlots(index, oldslot, newslot)
 
-        Buffer.Dispose()
+        buffer.Dispose()
     End Sub
 
-    Sub Packet_DepositItem(index as integer, ByRef data() As Byte)
+    Sub Packet_DepositItem(index As Integer, ByRef data() As Byte)
         Dim invslot As Integer, amount As Integer
         Dim buffer As New ByteStream(data)
 
         AddDebug("Recieved CMSG: CDepositItem")
 
-        invslot = Buffer.ReadInt32
-        amount = Buffer.ReadInt32
+        invslot = buffer.ReadInt32
+        amount = buffer.ReadInt32
 
-        GiveBankItem(Index, invslot, amount)
+        GiveBankItem(index, invslot, amount)
 
-        Buffer.Dispose()
+        buffer.Dispose()
     End Sub
 
-    Sub Packet_WithdrawItem(index as integer, ByRef data() As Byte)
+    Sub Packet_WithdrawItem(index As Integer, ByRef data() As Byte)
         Dim bankslot As Integer, amount As Integer
         Dim buffer As New ByteStream(data)
 
         AddDebug("Recieved CMSG: CWithdrawItem")
 
-        bankslot = Buffer.ReadInt32
-        amount = Buffer.ReadInt32
+        bankslot = buffer.ReadInt32
+        amount = buffer.ReadInt32
 
-        TakeBankItem(Index, bankslot, amount)
+        TakeBankItem(index, bankslot, amount)
 
-        Buffer.Dispose()
+        buffer.Dispose()
     End Sub
 
-    Sub Packet_CloseBank(index as integer, ByRef data() As Byte)
+    Sub Packet_CloseBank(index As Integer, ByRef data() As Byte)
         AddDebug("Recieved CMSG: CCloseBank")
 
-        SaveBank(Index)
-        SavePlayer(Index)
+        SaveBank(index)
+        SavePlayer(index)
 
-        TempPlayer(Index).InBank = False
+        TempPlayer(index).InBank = False
     End Sub
 
-    Sub Packet_AdminWarp(index as integer, ByRef data() As Byte)
+    Sub Packet_AdminWarp(index As Integer, ByRef data() As Byte)
         Dim x As Integer, y As Integer
         Dim buffer As New ByteStream(data)
 
         AddDebug("Recieved CMSG: CAdminWarp")
 
-        x = Buffer.ReadInt32
-        y = Buffer.ReadInt32
+        x = buffer.ReadInt32
+        y = buffer.ReadInt32
 
-        If GetPlayerAccess(Index) >= AdminType.Mapper Then
+        If GetPlayerAccess(index) >= AdminType.Mapper Then
             'Set the  Information
-            SetPlayerX(Index, x)
-            SetPlayerY(Index, y)
+            SetPlayerX(index, x)
+            SetPlayerY(index, y)
 
             'send the stuff
-            SendPlayerXY(Index)
+            SendPlayerXY(index)
         End If
 
-        Buffer.Dispose()
+        buffer.Dispose()
     End Sub
 
-    Sub Packet_TradeInvite(index as integer, ByRef data() As Byte)
+    Sub Packet_TradeInvite(index As Integer, ByRef data() As Byte)
         Dim Name As String, tradetarget As Integer
         Dim buffer As New ByteStream(data)
 
         AddDebug("Recieved CMSG: CTradeInvite")
 
-        Name = Buffer.ReadString
+        Name = buffer.ReadString
 
-        Buffer.Dispose()
+        buffer.Dispose()
 
         ' Check for a player
 
@@ -2023,75 +2008,75 @@ Module S_NetworkReceive
         If tradetarget <= 0 OrElse tradetarget > MAX_PLAYERS Then Exit Sub
 
         ' can't trade with yourself..
-        If tradetarget = Index Then
-            PlayerMsg(Index, "You can't trade with yourself.", ColorType.BrightRed)
+        If tradetarget = index Then
+            PlayerMsg(index, "You can't trade with yourself.", ColorType.BrightRed)
             Exit Sub
         End If
 
         ' send the trade request
-        TempPlayer(Index).TradeRequest = tradetarget
-        TempPlayer(tradetarget).TradeRequest = Index
+        TempPlayer(index).TradeRequest = tradetarget
+        TempPlayer(tradetarget).TradeRequest = index
 
-        PlayerMsg(tradetarget, Trim$(GetPlayerName(Index)) & " has invited you to trade.", ColorType.Yellow)
-        PlayerMsg(Index, "You have invited " & Trim$(GetPlayerName(tradetarget)) & " to trade.", ColorType.BrightGreen)
-        SendClearTradeTimer(Index)
+        PlayerMsg(tradetarget, Trim$(GetPlayerName(index)) & " has invited you to trade.", ColorType.Yellow)
+        PlayerMsg(index, "You have invited " & Trim$(GetPlayerName(tradetarget)) & " to trade.", ColorType.BrightGreen)
+        SendClearTradeTimer(index)
 
-        SendTradeInvite(tradetarget, Index)
+        SendTradeInvite(tradetarget, index)
     End Sub
 
-    Sub Packet_TradeInviteAccept(index as integer, ByRef data() As Byte)
+    Sub Packet_TradeInviteAccept(index As Integer, ByRef data() As Byte)
         Dim tradetarget As Integer, status As Byte
         Dim buffer As New ByteStream(data)
 
         AddDebug("Recieved CMSG: CTradeInviteAccept")
 
-        status = Buffer.ReadInt32
+        status = buffer.ReadInt32
 
-        Buffer.Dispose()
+        buffer.Dispose()
 
         If status = 0 Then Exit Sub
 
-        tradetarget = TempPlayer(Index).TradeRequest
+        tradetarget = TempPlayer(index).TradeRequest
 
         ' Let them trade!
-        If TempPlayer(tradetarget).TradeRequest = Index Then
+        If TempPlayer(tradetarget).TradeRequest = index Then
             ' let them know they're trading
-            PlayerMsg(Index, "You have accepted " & Trim$(GetPlayerName(tradetarget)) & "'s trade request.", ColorType.Yellow)
-            PlayerMsg(tradetarget, Trim$(GetPlayerName(Index)) & " has accepted your trade request.", ColorType.BrightGreen)
+            PlayerMsg(index, "You have accepted " & Trim$(GetPlayerName(tradetarget)) & "'s trade request.", ColorType.Yellow)
+            PlayerMsg(tradetarget, Trim$(GetPlayerName(index)) & " has accepted your trade request.", ColorType.BrightGreen)
             ' clear the trade timeout clientside
-            SendClearTradeTimer(Index)
+            SendClearTradeTimer(index)
 
             ' clear the tradeRequest server-side
-            TempPlayer(Index).TradeRequest = 0
+            TempPlayer(index).TradeRequest = 0
             TempPlayer(tradetarget).TradeRequest = 0
 
             ' set that they're trading with each other
-            TempPlayer(Index).InTrade = tradetarget
-            TempPlayer(tradetarget).InTrade = Index
+            TempPlayer(index).InTrade = tradetarget
+            TempPlayer(tradetarget).InTrade = index
 
             ' clear out their trade offers
-            ReDim TempPlayer(Index).TradeOffer(MAX_INV)
+            ReDim TempPlayer(index).TradeOffer(MAX_INV)
             ReDim TempPlayer(tradetarget).TradeOffer(MAX_INV)
             For i = 1 To MAX_INV
-                TempPlayer(Index).TradeOffer(i).Num = 0
-                TempPlayer(Index).TradeOffer(i).Value = 0
+                TempPlayer(index).TradeOffer(i).Num = 0
+                TempPlayer(index).TradeOffer(i).Value = 0
                 TempPlayer(tradetarget).TradeOffer(i).Num = 0
                 TempPlayer(tradetarget).TradeOffer(i).Value = 0
             Next
             ' Used to init the trade window clientside
-            SendTrade(Index, tradetarget)
-            SendTrade(tradetarget, Index)
+            SendTrade(index, tradetarget)
+            SendTrade(tradetarget, index)
 
             ' Send the offer data - Used to clear their client
-            SendTradeUpdate(Index, 0)
-            SendTradeUpdate(Index, 1)
+            SendTradeUpdate(index, 0)
+            SendTradeUpdate(index, 1)
             SendTradeUpdate(tradetarget, 0)
             SendTradeUpdate(tradetarget, 1)
             Exit Sub
         End If
     End Sub
 
-    Sub Packet_AcceptTrade(index as integer, ByRef data() As Byte)
+    Sub Packet_AcceptTrade(index As Integer, ByRef data() As Byte)
         Dim itemNum As Integer
         Dim tradeTarget As Integer, i As Integer
         Dim tmpTradeItem(MAX_INV) As PlayerInvRec
@@ -2099,13 +2084,13 @@ Module S_NetworkReceive
 
         AddDebug("Recieved CMSG: CAcceptTrade")
 
-        TempPlayer(Index).AcceptTrade = True
+        TempPlayer(index).AcceptTrade = True
 
-        tradeTarget = TempPlayer(Index).InTrade
+        tradeTarget = TempPlayer(index).InTrade
 
         ' if not both of them accept, then exit
         If Not TempPlayer(tradeTarget).AcceptTrade Then
-            SendTradeStatus(Index, 2)
+            SendTradeStatus(index, 2)
             SendTradeStatus(tradeTarget, 1)
             Exit Sub
         End If
@@ -2113,14 +2098,14 @@ Module S_NetworkReceive
         ' take their items
         For i = 1 To MAX_INV
             ' player
-            If TempPlayer(Index).TradeOffer(i).Num > 0 Then
-                itemNum = Player(Index).Character(TempPlayer(Index).CurChar).Inv(TempPlayer(Index).TradeOffer(i).Num).Num
+            If TempPlayer(index).TradeOffer(i).Num > 0 Then
+                itemNum = Player(index).Character(TempPlayer(index).CurChar).Inv(TempPlayer(index).TradeOffer(i).Num).Num
                 If itemNum > 0 Then
                     ' store temp
                     tmpTradeItem(i).Num = itemNum
-                    tmpTradeItem(i).Value = TempPlayer(Index).TradeOffer(i).Value
+                    tmpTradeItem(i).Value = TempPlayer(index).TradeOffer(i).Value
                     ' take item
-                    TakeInvSlot(Index, TempPlayer(Index).TradeOffer(i).Num, tmpTradeItem(i).Value)
+                    TakeInvSlot(index, TempPlayer(index).TradeOffer(i).Num, tmpTradeItem(i).Value)
                 End If
             End If
             ' target
@@ -2141,7 +2126,7 @@ Module S_NetworkReceive
             ' player
             If tmpTradeItem2(i).Num > 0 Then
                 ' give away!
-                GiveInvItem(Index, tmpTradeItem2(i).Num, tmpTradeItem2(i).Value, False)
+                GiveInvItem(index, tmpTradeItem2(i).Num, tmpTradeItem2(i).Value, False)
             End If
             ' target
             If tmpTradeItem(i).Num > 0 Then
@@ -2150,95 +2135,95 @@ Module S_NetworkReceive
             End If
         Next
 
-        SendInventory(Index)
+        SendInventory(index)
         SendInventory(tradeTarget)
 
         ' they now have all the items. Clear out values + let them out of the trade.
         For i = 1 To MAX_INV
-            TempPlayer(Index).TradeOffer(i).Num = 0
-            TempPlayer(Index).TradeOffer(i).Value = 0
+            TempPlayer(index).TradeOffer(i).Num = 0
+            TempPlayer(index).TradeOffer(i).Value = 0
             TempPlayer(tradeTarget).TradeOffer(i).Num = 0
             TempPlayer(tradeTarget).TradeOffer(i).Value = 0
         Next
 
-        TempPlayer(Index).InTrade = 0
+        TempPlayer(index).InTrade = 0
         TempPlayer(tradeTarget).InTrade = 0
 
-        PlayerMsg(Index, "Trade completed.", ColorType.BrightGreen)
+        PlayerMsg(index, "Trade completed.", ColorType.BrightGreen)
         PlayerMsg(tradeTarget, "Trade completed.", ColorType.BrightGreen)
 
-        SendCloseTrade(Index)
+        SendCloseTrade(index)
         SendCloseTrade(tradeTarget)
     End Sub
 
-    Sub Packet_DeclineTrade(index as integer, ByRef data() As Byte)
+    Sub Packet_DeclineTrade(index As Integer, ByRef data() As Byte)
         Dim tradeTarget As Integer
 
         AddDebug("Recieved CMSG: CDeclineTrade")
 
-        tradeTarget = TempPlayer(Index).InTrade
+        tradeTarget = TempPlayer(index).InTrade
 
         For i = 1 To MAX_INV
-            TempPlayer(Index).TradeOffer(i).Num = 0
-            TempPlayer(Index).TradeOffer(i).Value = 0
+            TempPlayer(index).TradeOffer(i).Num = 0
+            TempPlayer(index).TradeOffer(i).Value = 0
             TempPlayer(tradeTarget).TradeOffer(i).Num = 0
             TempPlayer(tradeTarget).TradeOffer(i).Value = 0
         Next
 
-        TempPlayer(Index).InTrade = 0
+        TempPlayer(index).InTrade = 0
         TempPlayer(tradeTarget).InTrade = 0
 
-        PlayerMsg(Index, "You declined the trade.", ColorType.Yellow)
-        PlayerMsg(tradeTarget, GetPlayerName(Index) & " has declined the trade.", ColorType.BrightRed)
+        PlayerMsg(index, "You declined the trade.", ColorType.Yellow)
+        PlayerMsg(tradeTarget, GetPlayerName(index) & " has declined the trade.", ColorType.BrightRed)
 
-        SendCloseTrade(Index)
+        SendCloseTrade(index)
         SendCloseTrade(tradeTarget)
     End Sub
 
-    Sub Packet_TradeItem(index as integer, ByRef data() As Byte)
+    Sub Packet_TradeItem(index As Integer, ByRef data() As Byte)
         Dim itemnum As Integer
         Dim invslot As Integer, amount As Integer, emptyslot As Integer, i As Integer
         Dim buffer As New ByteStream(data)
 
         AddDebug("Recieved CMSG: CTradeItem")
 
-        invslot = Buffer.ReadInt32
-        amount = Buffer.ReadInt32
+        invslot = buffer.ReadInt32
+        amount = buffer.ReadInt32
 
-        Buffer.Dispose()
+        buffer.Dispose()
 
         If invslot <= 0 OrElse invslot > MAX_INV Then Exit Sub
 
-        itemnum = GetPlayerInvItemNum(Index, invslot)
+        itemnum = GetPlayerInvItemNum(index, invslot)
 
         If itemnum <= 0 OrElse itemnum > MAX_ITEMS Then Exit Sub
 
         ' make sure they have the amount they offer
-        If amount < 0 OrElse amount > GetPlayerInvItemValue(Index, invslot) Then Exit Sub
+        If amount < 0 OrElse amount > GetPlayerInvItemValue(index, invslot) Then Exit Sub
 
         If Item(itemnum).Type = ItemType.Currency OrElse Item(itemnum).Stackable = 1 Then
 
             ' check if already offering same currency item
             For i = 1 To MAX_INV
 
-                If TempPlayer(Index).TradeOffer(i).Num = invslot Then
+                If TempPlayer(index).TradeOffer(i).Num = invslot Then
                     ' add amount
-                    TempPlayer(Index).TradeOffer(i).Value = TempPlayer(Index).TradeOffer(i).Value + amount
+                    TempPlayer(index).TradeOffer(i).Value = TempPlayer(index).TradeOffer(i).Value + amount
 
                     ' clamp to limits
-                    If TempPlayer(Index).TradeOffer(i).Value > GetPlayerInvItemValue(Index, invslot) Then
-                        TempPlayer(Index).TradeOffer(i).Value = GetPlayerInvItemValue(Index, invslot)
+                    If TempPlayer(index).TradeOffer(i).Value > GetPlayerInvItemValue(index, invslot) Then
+                        TempPlayer(index).TradeOffer(i).Value = GetPlayerInvItemValue(index, invslot)
                     End If
 
                     ' cancel any trade agreement
-                    TempPlayer(Index).AcceptTrade = False
-                    TempPlayer(TempPlayer(Index).InTrade).AcceptTrade = False
+                    TempPlayer(index).AcceptTrade = False
+                    TempPlayer(TempPlayer(index).InTrade).AcceptTrade = False
 
-                    SendTradeStatus(Index, 0)
-                    SendTradeStatus(TempPlayer(Index).InTrade, 0)
+                    SendTradeStatus(index, 0)
+                    SendTradeStatus(TempPlayer(index).InTrade, 0)
 
-                    SendTradeUpdate(Index, 0)
-                    SendTradeUpdate(TempPlayer(Index).InTrade, 1)
+                    SendTradeUpdate(index, 0)
+                    SendTradeUpdate(TempPlayer(index).InTrade, 1)
                     ' exit early
                     Exit Sub
                 End If
@@ -2246,8 +2231,8 @@ Module S_NetworkReceive
         Else
             ' make sure they're not already offering it
             For i = 1 To MAX_INV
-                If TempPlayer(Index).TradeOffer(i).Num = invslot Then
-                    PlayerMsg(Index, "You've already offered this item.", ColorType.BrightRed)
+                If TempPlayer(index).TradeOffer(i).Num = invslot Then
+                    PlayerMsg(index, "You've already offered this item.", ColorType.BrightRed)
                     Exit Sub
                 End If
             Next
@@ -2255,163 +2240,163 @@ Module S_NetworkReceive
 
         ' not already offering - find earliest empty slot
         For i = 1 To MAX_INV
-            If TempPlayer(Index).TradeOffer(i).Num = 0 Then
+            If TempPlayer(index).TradeOffer(i).Num = 0 Then
                 emptyslot = i
                 Exit For
             End If
         Next
-        TempPlayer(Index).TradeOffer(emptyslot).Num = invslot
-        TempPlayer(Index).TradeOffer(emptyslot).Value = amount
+        TempPlayer(index).TradeOffer(emptyslot).Num = invslot
+        TempPlayer(index).TradeOffer(emptyslot).Value = amount
 
         ' cancel any trade agreement and send new data
-        TempPlayer(Index).AcceptTrade = False
-        TempPlayer(TempPlayer(Index).InTrade).AcceptTrade = False
+        TempPlayer(index).AcceptTrade = False
+        TempPlayer(TempPlayer(index).InTrade).AcceptTrade = False
 
-        SendTradeStatus(Index, 0)
-        SendTradeStatus(TempPlayer(Index).InTrade, 0)
+        SendTradeStatus(index, 0)
+        SendTradeStatus(TempPlayer(index).InTrade, 0)
 
-        SendTradeUpdate(Index, 0)
-        SendTradeUpdate(TempPlayer(Index).InTrade, 1)
+        SendTradeUpdate(index, 0)
+        SendTradeUpdate(TempPlayer(index).InTrade, 1)
     End Sub
 
-    Sub Packet_UntradeItem(index as integer, ByRef data() As Byte)
+    Sub Packet_UntradeItem(index As Integer, ByRef data() As Byte)
         Dim tradeslot As Integer
         Dim buffer As New ByteStream(data)
 
         AddDebug("Recieved CMSG: CUntradeItem")
 
-        tradeslot = Buffer.ReadInt32
+        tradeslot = buffer.ReadInt32
 
-        Buffer.Dispose()
+        buffer.Dispose()
 
         If tradeslot <= 0 OrElse tradeslot > MAX_INV Then Exit Sub
-        If TempPlayer(Index).TradeOffer(tradeslot).Num <= 0 Then Exit Sub
+        If TempPlayer(index).TradeOffer(tradeslot).Num <= 0 Then Exit Sub
 
-        TempPlayer(Index).TradeOffer(tradeslot).Num = 0
-        TempPlayer(Index).TradeOffer(tradeslot).Value = 0
+        TempPlayer(index).TradeOffer(tradeslot).Num = 0
+        TempPlayer(index).TradeOffer(tradeslot).Value = 0
 
-        If TempPlayer(Index).AcceptTrade Then TempPlayer(Index).AcceptTrade = False
-        If TempPlayer(TempPlayer(Index).InTrade).AcceptTrade Then TempPlayer(TempPlayer(Index).InTrade).AcceptTrade = False
+        If TempPlayer(index).AcceptTrade Then TempPlayer(index).AcceptTrade = False
+        If TempPlayer(TempPlayer(index).InTrade).AcceptTrade Then TempPlayer(TempPlayer(index).InTrade).AcceptTrade = False
 
-        SendTradeStatus(Index, 0)
-        SendTradeStatus(TempPlayer(Index).InTrade, 0)
+        SendTradeStatus(index, 0)
+        SendTradeStatus(TempPlayer(index).InTrade, 0)
 
-        SendTradeUpdate(Index, 0)
-        SendTradeUpdate(TempPlayer(Index).InTrade, 1)
+        SendTradeUpdate(index, 0)
+        SendTradeUpdate(TempPlayer(index).InTrade, 1)
     End Sub
 
-    Sub HackingAttempt(index as integer, Reason As String)
+    Sub HackingAttempt(index As Integer, Reason As String)
 
-        If Index > 0 AndAlso IsPlaying(Index) Then
-            GlobalMsg(GetPlayerLogin(Index) & "/" & GetPlayerName(Index) & " has been booted for (" & Reason & ")")
+        If index > 0 AndAlso IsPlaying(index) Then
+            GlobalMsg(GetPlayerLogin(index) & "/" & GetPlayerName(index) & " has been booted for (" & Reason & ")")
 
-            AlertMsg(Index, "You have lost your connection with " & Options.GameName & ".")
+            AlertMsg(index, "You have lost your connection with " & Options.GameName & ".")
         End If
 
     End Sub
 
     'Mapreport
-    Sub Packet_MapReport(index as integer, ByRef data() As Byte)
+    Sub Packet_MapReport(index As Integer, ByRef data() As Byte)
         AddDebug("Recieved CMSG: CMapReport")
 
         ' Prevent hacking
-        If GetPlayerAccess(Index) < AdminType.Mapper Then Exit Sub
+        If GetPlayerAccess(index) < AdminType.Mapper Then Exit Sub
 
-        SendMapReport(Index)
+        SendMapReport(index)
     End Sub
 
-    Sub Packet_Admin(index as integer, ByRef data() As Byte)
+    Sub Packet_Admin(index As Integer, ByRef data() As Byte)
         AddDebug("Recieved CMSG: CAdmin")
 
         ' Prevent hacking
-        If GetPlayerAccess(Index) < AdminType.Mapper Then Exit Sub
+        If GetPlayerAccess(index) < AdminType.Mapper Then Exit Sub
 
-        SendAdminPanel(Index)
+        SendAdminPanel(index)
     End Sub
 
-    Sub Packet_SetHotBarSlot(index as integer, ByRef data() As Byte)
+    Sub Packet_SetHotBarSlot(index As Integer, ByRef data() As Byte)
         Dim slot As Integer, skill As Integer, type As Byte
         Dim buffer As New ByteStream(data)
 
         AddDebug("Recieved CMSG: CSetHotbarSlot")
 
-        slot = Buffer.ReadInt32
-        skill = Buffer.ReadInt32
-        type = Buffer.ReadInt32
+        slot = buffer.ReadInt32
+        skill = buffer.ReadInt32
+        type = buffer.ReadInt32
 
-        Player(Index).Character(TempPlayer(Index).CurChar).Hotbar(slot).Slot = skill
-        Player(Index).Character(TempPlayer(Index).CurChar).Hotbar(slot).SlotType = type
+        Player(index).Character(TempPlayer(index).CurChar).Hotbar(slot).Slot = skill
+        Player(index).Character(TempPlayer(index).CurChar).Hotbar(slot).SlotType = type
 
-        SendHotbar(Index)
+        SendHotbar(index)
 
-        Buffer.Dispose()
+        buffer.Dispose()
     End Sub
 
-    Sub Packet_DeleteHotBarSlot(index as integer, ByRef data() As Byte)
+    Sub Packet_DeleteHotBarSlot(index As Integer, ByRef data() As Byte)
         Dim slot As Integer
         Dim buffer As New ByteStream(data)
 
         AddDebug("Recieved CMSG: CDeleteHotbarSlot")
 
-        slot = Buffer.ReadInt32
+        slot = buffer.ReadInt32
 
-        Player(Index).Character(TempPlayer(Index).CurChar).Hotbar(slot).Slot = 0
-        Player(Index).Character(TempPlayer(Index).CurChar).Hotbar(slot).SlotType = 0
+        Player(index).Character(TempPlayer(index).CurChar).Hotbar(slot).Slot = 0
+        Player(index).Character(TempPlayer(index).CurChar).Hotbar(slot).SlotType = 0
 
-        SendHotbar(Index)
+        SendHotbar(index)
 
-        Buffer.Dispose()
+        buffer.Dispose()
     End Sub
 
-    Sub Packet_UseHotBarSlot(index as integer, ByRef data() As Byte)
+    Sub Packet_UseHotBarSlot(index As Integer, ByRef data() As Byte)
         Dim slot As Integer
         Dim buffer As New ByteStream(data)
 
         AddDebug("Recieved CMSG: CUseHotbarSlot")
 
-        slot = Buffer.ReadInt32
-        Buffer.Dispose()
+        slot = buffer.ReadInt32
+        buffer.Dispose()
 
-        If Player(Index).Character(TempPlayer(Index).CurChar).Hotbar(slot).Slot > 0 Then
-            If Player(Index).Character(TempPlayer(Index).CurChar).Hotbar(slot).SlotType = 1 Then 'skill
-                BufferSkill(Index, Player(Index).Character(TempPlayer(Index).CurChar).Hotbar(slot).Slot)
-            ElseIf Player(Index).Character(TempPlayer(Index).CurChar).Hotbar(slot).SlotType = 2 Then 'item
-                UseItem(Index, Player(Index).Character(TempPlayer(Index).CurChar).Hotbar(slot).Slot)
+        If Player(index).Character(TempPlayer(index).CurChar).Hotbar(slot).Slot > 0 Then
+            If Player(index).Character(TempPlayer(index).CurChar).Hotbar(slot).SlotType = 1 Then 'skill
+                BufferSkill(index, Player(index).Character(TempPlayer(index).CurChar).Hotbar(slot).Slot)
+            ElseIf Player(index).Character(TempPlayer(index).CurChar).Hotbar(slot).SlotType = 2 Then 'item
+                UseItem(index, Player(index).Character(TempPlayer(index).CurChar).Hotbar(slot).Slot)
             End If
         End If
 
-        SendHotbar(Index)
+        SendHotbar(index)
 
     End Sub
 
-    Sub Packet_RequestClasses(index as integer, ByRef data() As Byte)
+    Sub Packet_RequestClasses(index As Integer, ByRef data() As Byte)
         AddDebug("Recieved CMSG: CRequestClasses")
 
-        SendClasses(Index)
+        SendClasses(index)
     End Sub
 
-    Sub Packet_RequestEditClasses(index as integer, ByRef data() As Byte)
+    Sub Packet_RequestEditClasses(index As Integer, ByRef data() As Byte)
         AddDebug("Recieved EMSG: RequestEditClasses")
 
         ' Prevent hacking
-        If GetPlayerAccess(Index) < AdminType.Developer Then Exit Sub
+        If GetPlayerAccess(index) < AdminType.Developer Then Exit Sub
 
-        SendClasses(Index)
+        SendClasses(index)
 
-        SendClassEditor(Index)
+        SendClassEditor(index)
     End Sub
 
-    Sub Packet_SaveClasses(index as integer, ByRef data() As Byte)
+    Sub Packet_SaveClasses(index As Integer, ByRef data() As Byte)
         Dim i As Integer, z As Integer, x As Integer
         Dim buffer As New ByteStream(data)
 
         AddDebug("Recieved EMSG: SaveClasses")
 
         ' Prevent hacking
-        If GetPlayerAccess(Index) < AdminType.Developer Then Exit Sub
+        If GetPlayerAccess(index) < AdminType.Developer Then Exit Sub
 
         ' Max classes
-        Max_Classes = Buffer.ReadInt32
+        Max_Classes = buffer.ReadInt32
         ReDim Classes(Max_Classes)
 
         For i = 0 To Max_Classes
@@ -2425,48 +2410,48 @@ Module S_NetworkReceive
                 .Desc = buffer.ReadString
 
                 ' get array size
-                z = Buffer.ReadInt32
+                z = buffer.ReadInt32
 
                 ' redim array
                 ReDim .MaleSprite(z)
                 ' loop-receive data
                 For x = 0 To z
-                    .MaleSprite(x) = Buffer.ReadInt32
+                    .MaleSprite(x) = buffer.ReadInt32
                 Next
 
                 ' get array size
-                z = Buffer.ReadInt32
+                z = buffer.ReadInt32
                 ' redim array
                 ReDim .FemaleSprite(z)
                 ' loop-receive data
                 For x = 0 To z
-                    .FemaleSprite(x) = Buffer.ReadInt32
+                    .FemaleSprite(x) = buffer.ReadInt32
                 Next
 
-                .Stat(StatType.Strength) = Buffer.ReadInt32
-                .Stat(StatType.Endurance) = Buffer.ReadInt32
-                .Stat(StatType.Vitality) = Buffer.ReadInt32
-                .Stat(StatType.Intelligence) = Buffer.ReadInt32
-                .Stat(StatType.Luck) = Buffer.ReadInt32
-                .Stat(StatType.Spirit) = Buffer.ReadInt32
+                .Stat(StatType.Strength) = buffer.ReadInt32
+                .Stat(StatType.Endurance) = buffer.ReadInt32
+                .Stat(StatType.Vitality) = buffer.ReadInt32
+                .Stat(StatType.Intelligence) = buffer.ReadInt32
+                .Stat(StatType.Luck) = buffer.ReadInt32
+                .Stat(StatType.Spirit) = buffer.ReadInt32
 
                 ReDim .StartItem(5)
                 ReDim .StartValue(5)
                 For q = 1 To 5
-                    .StartItem(q) = Buffer.ReadInt32
-                    .StartValue(q) = Buffer.ReadInt32
+                    .StartItem(q) = buffer.ReadInt32
+                    .StartValue(q) = buffer.ReadInt32
                 Next
 
-                .StartMap = Buffer.ReadInt32
-                .StartX = Buffer.ReadInt32
-                .StartY = Buffer.ReadInt32
+                .StartMap = buffer.ReadInt32
+                .StartX = buffer.ReadInt32
+                .StartY = buffer.ReadInt32
 
-                .BaseExp = Buffer.ReadInt32
+                .BaseExp = buffer.ReadInt32
             End With
 
         Next
 
-        Buffer.Dispose()
+        buffer.Dispose()
 
         SaveClasses()
 
@@ -2475,50 +2460,50 @@ Module S_NetworkReceive
         SendClassesToAll()
     End Sub
 
-    Private Sub Packet_EditorLogin(index as integer, ByRef data() As Byte)
+    Private Sub Packet_EditorLogin(index As Integer, ByRef data() As Byte)
         Dim Name As String, Password As String, Version As String
         Dim buffer As New ByteStream(data)
 
         AddDebug("Recieved EMSG: EditorLogin")
 
-        If Not IsLoggedIn(Index) Then
+        If Not IsLoggedIn(index) Then
 
             ' Get the data
-            Name = EKeyPair.DecryptString(Buffer.ReadString)
-            Password = EKeyPair.DecryptString(Buffer.ReadString)
-            Version = EKeyPair.DecryptString(Buffer.ReadString)
+            Name = EKeyPair.DecryptString(buffer.ReadString)
+            Password = EKeyPair.DecryptString(buffer.ReadString)
+            Version = EKeyPair.DecryptString(buffer.ReadString)
 
             ' Check versions
             If Version <> Application.ProductVersion Then
-                AlertMsg(Index, "Version outdated, please visit " & Options.Website)
+                AlertMsg(index, "Version outdated, please visit " & Options.Website)
                 Exit Sub
             End If
 
             If Len(Trim$(Name)) < 3 OrElse Len(Trim$(Password)) < 3 Then
-                AlertMsg(Index, "Your name and password must be at least three characters in length")
+                AlertMsg(index, "Your name and password must be at least three characters in length")
                 Exit Sub
             End If
 
             If Not AccountExist(Name) Then
-                AlertMsg(Index, "That account name does not exist.")
+                AlertMsg(index, "That account name does not exist.")
                 Exit Sub
             End If
 
             If Not PasswordOK(Name, Password) Then
-                AlertMsg(Index, "Incorrect password.")
+                AlertMsg(index, "Incorrect password.")
                 Exit Sub
             End If
 
             If IsMultiAccounts(Name) Then
-                AlertMsg(Index, "Multiple account logins is not authorized.")
+                AlertMsg(index, "Multiple account logins is not authorized.")
                 Exit Sub
             End If
 
             ' Load the player
-            LoadPlayer(Index, Name)
+            LoadPlayer(index, Name)
 
-            If GetPlayerAccess(Index) > AdminType.Player Then
-                SendEditorLoadOk(Index)
+            If GetPlayerAccess(index) > AdminType.Player Then
+                SendEditorLoadOk(index)
                 'SendMapData(index, 1, True)
                 SendGameData(index)
                 SendMapNames(index)
@@ -2528,239 +2513,239 @@ Module S_NetworkReceive
                 SendHouseConfigs(index)
                 SendPets(index)
             Else
-                AlertMsg(Index, "not authorized.")
+                AlertMsg(index, "not authorized.")
                 Exit Sub
             End If
 
             ' Show the player up on the socket status
-            Addlog(GetPlayerLogin(Index) & " has logged in from " & Socket.ClientIp(Index) & ".", PLAYER_LOG)
+            Addlog(GetPlayerLogin(index) & " has logged in from " & Socket.ClientIp(index) & ".", PLAYER_LOG)
 
-            Console.WriteLine(GetPlayerLogin(Index) & " has logged in from " & Socket.ClientIp(Index) & ".")
+            Console.WriteLine(GetPlayerLogin(index) & " has logged in from " & Socket.ClientIp(index) & ".")
 
         End If
 
-        Buffer.Dispose()
+        buffer.Dispose()
     End Sub
 
-    Private Sub Packet_EditorRequestMap(index as integer, ByRef data() As Byte)
-        Dim mapNum as Integer
+    Private Sub Packet_EditorRequestMap(index As Integer, ByRef data() As Byte)
+        Dim mapNum As Integer
         Dim buffer As New ByteStream(data)
 
         AddDebug("Recieved EMSG: EditorRequestMap")
 
-        mapNum = Buffer.ReadInt32
+        mapNum = buffer.ReadInt32
 
-        Buffer.Dispose()
+        buffer.Dispose()
 
-        If GetPlayerAccess(Index) > AdminType.Player Then
-            SendMapData(Index, MapNum, True)
-            SendMapNames(Index)
+        If GetPlayerAccess(index) > AdminType.Player Then
+            SendMapData(index, mapNum, True)
+            SendMapNames(index)
 
-            Buffer = New ByteStream(4)
-            Buffer.WriteInt32(ServerPackets.SEditMap)
-            Socket.SendDataTo(Index, Buffer.Data, Buffer.Head)
+            buffer = New ByteStream(4)
+            buffer.WriteInt32(ServerPackets.SEditMap)
+            Socket.SendDataTo(index, buffer.Data, buffer.Head)
 
             AddDebug("Sent SMSG: SEditMap")
 
             buffer.Dispose()
         Else
-            AlertMsg(Index, "Not Allowed!")
+            AlertMsg(index, "Not Allowed!")
         End If
 
     End Sub
 
-    Sub Packet_EditorMapData(index as integer, ByRef data() As Byte)
+    Sub Packet_EditorMapData(index As Integer, ByRef data() As Byte)
         Dim i As Integer
-        Dim mapNum as Integer
+        Dim mapNum As Integer
         Dim x As Integer
         Dim y As Integer
 
         AddDebug("Recieved EMSG: EditorSaveMap")
 
         ' Prevent hacking
-        If GetPlayerAccess(Index) < AdminType.Mapper Then Exit Sub
+        If GetPlayerAccess(index) < AdminType.Mapper Then Exit Sub
 
-        dim buffer as New ByteStream(Compression.DecompressBytes(data))
+        Dim buffer As New ByteStream(Compression.DecompressBytes(data))
 
         Gettingmap = True
 
-        MapNum = Buffer.ReadInt32
+        mapNum = buffer.ReadInt32
 
-        i = Map(MapNum).Revision + 1
-        ClearMap(MapNum)
+        i = Map(mapNum).Revision + 1
+        ClearMap(mapNum)
 
-        Map(MapNum).Name = Buffer.ReadString
-        Map(MapNum).Music = Buffer.ReadString
-        Map(MapNum).Revision = i
-        Map(MapNum).Moral = Buffer.ReadInt32
-        Map(MapNum).Tileset = Buffer.ReadInt32
-        Map(MapNum).Up = Buffer.ReadInt32
-        Map(MapNum).Down = Buffer.ReadInt32
-        Map(MapNum).Left = Buffer.ReadInt32
-        Map(MapNum).Right = Buffer.ReadInt32
-        Map(MapNum).BootMap = Buffer.ReadInt32
-        Map(MapNum).BootX = Buffer.ReadInt32
-        Map(MapNum).BootY = Buffer.ReadInt32
-        Map(MapNum).MaxX = Buffer.ReadInt32
-        Map(MapNum).MaxY = Buffer.ReadInt32
-        Map(MapNum).WeatherType = Buffer.ReadInt32
-        Map(MapNum).FogIndex = Buffer.ReadInt32
-        Map(MapNum).WeatherIntensity = Buffer.ReadInt32
-        Map(MapNum).FogAlpha = Buffer.ReadInt32
-        Map(MapNum).FogSpeed = Buffer.ReadInt32
-        Map(MapNum).HasMapTint = Buffer.ReadInt32
-        Map(MapNum).MapTintR = Buffer.ReadInt32
-        Map(MapNum).MapTintG = Buffer.ReadInt32
-        Map(MapNum).MapTintB = Buffer.ReadInt32
-        Map(MapNum).MapTintA = Buffer.ReadInt32
+        Map(mapNum).Name = buffer.ReadString
+        Map(mapNum).Music = buffer.ReadString
+        Map(mapNum).Revision = i
+        Map(mapNum).Moral = buffer.ReadInt32
+        Map(mapNum).Tileset = buffer.ReadInt32
+        Map(mapNum).Up = buffer.ReadInt32
+        Map(mapNum).Down = buffer.ReadInt32
+        Map(mapNum).Left = buffer.ReadInt32
+        Map(mapNum).Right = buffer.ReadInt32
+        Map(mapNum).BootMap = buffer.ReadInt32
+        Map(mapNum).BootX = buffer.ReadInt32
+        Map(mapNum).BootY = buffer.ReadInt32
+        Map(mapNum).MaxX = buffer.ReadInt32
+        Map(mapNum).MaxY = buffer.ReadInt32
+        Map(mapNum).WeatherType = buffer.ReadInt32
+        Map(mapNum).Fogindex = buffer.ReadInt32
+        Map(mapNum).WeatherIntensity = buffer.ReadInt32
+        Map(mapNum).FogAlpha = buffer.ReadInt32
+        Map(mapNum).FogSpeed = buffer.ReadInt32
+        Map(mapNum).HasMapTint = buffer.ReadInt32
+        Map(mapNum).MapTintR = buffer.ReadInt32
+        Map(mapNum).MapTintG = buffer.ReadInt32
+        Map(mapNum).MapTintB = buffer.ReadInt32
+        Map(mapNum).MapTintA = buffer.ReadInt32
 
-        Map(MapNum).Instanced = Buffer.ReadInt32
-        Map(MapNum).Panorama = Buffer.ReadInt32
-        Map(MapNum).Parallax = Buffer.ReadInt32
+        Map(mapNum).Instanced = buffer.ReadInt32
+        Map(mapNum).Panorama = buffer.ReadInt32
+        Map(mapNum).Parallax = buffer.ReadInt32
 
-        ReDim Map(MapNum).Tile(Map(MapNum).MaxX,Map(MapNum).MaxY)
+        ReDim Map(mapNum).Tile(Map(mapNum).MaxX, Map(mapNum).MaxY)
 
         For x = 1 To MAX_MAP_NPCS
-            ClearMapNpc(x, MapNum)
-            Map(MapNum).Npc(x) = Buffer.ReadInt32
+            ClearMapNpc(x, mapNum)
+            Map(mapNum).Npc(x) = buffer.ReadInt32
         Next
 
-        With Map(MapNum)
+        With Map(mapNum)
             For x = 0 To .MaxX
                 For y = 0 To .MaxY
-                    .Tile(x, y).Data1 = Buffer.ReadInt32
-                    .Tile(x, y).Data2 = Buffer.ReadInt32
-                    .Tile(x, y).Data3 = Buffer.ReadInt32
-                    .Tile(x, y).DirBlock = Buffer.ReadInt32
+                    .Tile(x, y).Data1 = buffer.ReadInt32
+                    .Tile(x, y).Data2 = buffer.ReadInt32
+                    .Tile(x, y).Data3 = buffer.ReadInt32
+                    .Tile(x, y).DirBlock = buffer.ReadInt32
                     ReDim .Tile(x, y).Layer(LayerType.Count - 1)
                     For i = 0 To LayerType.Count - 1
-                        .Tile(x, y).Layer(i).Tileset = Buffer.ReadInt32
-                        .Tile(x, y).Layer(i).X = Buffer.ReadInt32
-                        .Tile(x, y).Layer(i).Y = Buffer.ReadInt32
-                        .Tile(x, y).Layer(i).AutoTile = Buffer.ReadInt32
+                        .Tile(x, y).Layer(i).Tileset = buffer.ReadInt32
+                        .Tile(x, y).Layer(i).X = buffer.ReadInt32
+                        .Tile(x, y).Layer(i).Y = buffer.ReadInt32
+                        .Tile(x, y).Layer(i).AutoTile = buffer.ReadInt32
                     Next
-                    .Tile(x, y).Type = Buffer.ReadInt32
+                    .Tile(x, y).Type = buffer.ReadInt32
                 Next
             Next
 
         End With
 
         'Event Data!
-        Map(MapNum).EventCount = Buffer.ReadInt32
+        Map(mapNum).EventCount = buffer.ReadInt32
 
-        If Map(MapNum).EventCount > 0 Then
-            ReDim Map(MapNum).Events(Map(MapNum).EventCount)
-            For i = 1 To Map(MapNum).EventCount
-                With Map(MapNum).Events(i)
-                    .Name = Buffer.ReadString
-                    .Globals = Buffer.ReadInt32
-                    .X = Buffer.ReadInt32
-                    .Y = Buffer.ReadInt32
-                    .PageCount = Buffer.ReadInt32
+        If Map(mapNum).EventCount > 0 Then
+            ReDim Map(mapNum).Events(Map(mapNum).EventCount)
+            For i = 1 To Map(mapNum).EventCount
+                With Map(mapNum).Events(i)
+                    .Name = buffer.ReadString
+                    .Globals = buffer.ReadInt32
+                    .X = buffer.ReadInt32
+                    .Y = buffer.ReadInt32
+                    .PageCount = buffer.ReadInt32
                 End With
-                If Map(MapNum).Events(i).PageCount > 0 Then
-                    ReDim Map(MapNum).Events(i).Pages(Map(MapNum).Events(i).PageCount)
-                    ReDim TempPlayer(i).EventMap.EventPages(Map(MapNum).Events(i).PageCount)
-                    For x = 1 To Map(MapNum).Events(i).PageCount
-                        With Map(MapNum).Events(i).Pages(x)
-                            .chkVariable = Buffer.ReadInt32
-                            .VariableIndex = Buffer.ReadInt32
-                            .VariableCondition = Buffer.ReadInt32
-                            .VariableCompare = Buffer.ReadInt32
+                If Map(mapNum).Events(i).PageCount > 0 Then
+                    ReDim Map(mapNum).Events(i).Pages(Map(mapNum).Events(i).PageCount)
+                    ReDim TempPlayer(i).EventMap.EventPages(Map(mapNum).Events(i).PageCount)
+                    For x = 1 To Map(mapNum).Events(i).PageCount
+                        With Map(mapNum).Events(i).Pages(x)
+                            .ChkVariable = buffer.ReadInt32
+                            .Variableindex = buffer.ReadInt32
+                            .VariableCondition = buffer.ReadInt32
+                            .VariableCompare = buffer.ReadInt32
 
-                            Map(MapNum).Events(i).Pages(x).chkSwitch = Buffer.ReadInt32
-                            Map(MapNum).Events(i).Pages(x).SwitchIndex = Buffer.ReadInt32
-                            .SwitchCompare = Buffer.ReadInt32
+                            Map(mapNum).Events(i).Pages(x).ChkSwitch = buffer.ReadInt32
+                            Map(mapNum).Events(i).Pages(x).Switchindex = buffer.ReadInt32
+                            .SwitchCompare = buffer.ReadInt32
 
-                            .chkHasItem = Buffer.ReadInt32
-                            .HasItemIndex = Buffer.ReadInt32
-                            .HasItemAmount = Buffer.ReadInt32
+                            .ChkHasItem = buffer.ReadInt32
+                            .HasItemindex = buffer.ReadInt32
+                            .HasItemAmount = buffer.ReadInt32
 
-                            .chkSelfSwitch = Buffer.ReadInt32
-                            .SelfSwitchIndex = Buffer.ReadInt32
-                            .SelfSwitchCompare = Buffer.ReadInt32
+                            .ChkSelfSwitch = buffer.ReadInt32
+                            .SelfSwitchindex = buffer.ReadInt32
+                            .SelfSwitchCompare = buffer.ReadInt32
 
-                            .GraphicType = Buffer.ReadInt32
-                            .Graphic = Buffer.ReadInt32
-                            .GraphicX = Buffer.ReadInt32
-                            .GraphicY = Buffer.ReadInt32
-                            .GraphicX2 = Buffer.ReadInt32
-                            .GraphicY2 = Buffer.ReadInt32
+                            .GraphicType = buffer.ReadInt32
+                            .Graphic = buffer.ReadInt32
+                            .GraphicX = buffer.ReadInt32
+                            .GraphicY = buffer.ReadInt32
+                            .GraphicX2 = buffer.ReadInt32
+                            .GraphicY2 = buffer.ReadInt32
 
-                            .MoveType = Buffer.ReadInt32
-                            .MoveSpeed = Buffer.ReadInt32
-                            .MoveFreq = Buffer.ReadInt32
+                            .MoveType = buffer.ReadInt32
+                            .MoveSpeed = buffer.ReadInt32
+                            .MoveFreq = buffer.ReadInt32
 
-                            .MoveRouteCount = Buffer.ReadInt32
+                            .MoveRouteCount = buffer.ReadInt32
 
-                            .IgnoreMoveRoute = Buffer.ReadInt32
-                            .RepeatMoveRoute = Buffer.ReadInt32
+                            .IgnoreMoveRoute = buffer.ReadInt32
+                            .RepeatMoveRoute = buffer.ReadInt32
 
                             If .MoveRouteCount > 0 Then
-                                ReDim Map(MapNum).Events(i).Pages(x).MoveRoute(.MoveRouteCount)
+                                ReDim Map(mapNum).Events(i).Pages(x).MoveRoute(.MoveRouteCount)
                                 For y = 1 To .MoveRouteCount
-                                    .MoveRoute(y).Index = Buffer.ReadInt32
-                                    .MoveRoute(y).Data1 = Buffer.ReadInt32
-                                    .MoveRoute(y).Data2 = Buffer.ReadInt32
-                                    .MoveRoute(y).Data3 = Buffer.ReadInt32
-                                    .MoveRoute(y).Data4 = Buffer.ReadInt32
-                                    .MoveRoute(y).Data5 = Buffer.ReadInt32
-                                    .MoveRoute(y).Data6 = Buffer.ReadInt32
+                                    .MoveRoute(y).Index = buffer.ReadInt32
+                                    .MoveRoute(y).Data1 = buffer.ReadInt32
+                                    .MoveRoute(y).Data2 = buffer.ReadInt32
+                                    .MoveRoute(y).Data3 = buffer.ReadInt32
+                                    .MoveRoute(y).Data4 = buffer.ReadInt32
+                                    .MoveRoute(y).Data5 = buffer.ReadInt32
+                                    .MoveRoute(y).Data6 = buffer.ReadInt32
                                 Next
                             End If
 
-                            .WalkAnim = Buffer.ReadInt32
-                            .DirFix = Buffer.ReadInt32
-                            .WalkThrough = Buffer.ReadInt32
-                            .ShowName = Buffer.ReadInt32
-                            .Trigger = Buffer.ReadInt32
-                            .CommandListCount = Buffer.ReadInt32
+                            .WalkAnim = buffer.ReadInt32
+                            .DirFix = buffer.ReadInt32
+                            .WalkThrough = buffer.ReadInt32
+                            .ShowName = buffer.ReadInt32
+                            .Trigger = buffer.ReadInt32
+                            .CommandListCount = buffer.ReadInt32
 
-                            .Position = Buffer.ReadInt32
-                            .QuestNum = Buffer.ReadInt32
+                            .Position = buffer.ReadInt32
+                            .QuestNum = buffer.ReadInt32
 
-                            .chkPlayerGender = Buffer.ReadInt32
+                            .ChkPlayerGender = buffer.ReadInt32
                         End With
 
-                        If Map(MapNum).Events(i).Pages(x).CommandListCount > 0 Then
-                            ReDim Map(MapNum).Events(i).Pages(x).CommandList(Map(MapNum).Events(i).Pages(x).CommandListCount)
-                            For y = 1 To Map(MapNum).Events(i).Pages(x).CommandListCount
-                                Map(MapNum).Events(i).Pages(x).CommandList(y).CommandCount = Buffer.ReadInt32
-                                Map(MapNum).Events(i).Pages(x).CommandList(y).ParentList = Buffer.ReadInt32
-                                If Map(MapNum).Events(i).Pages(x).CommandList(y).CommandCount > 0 Then
-                                    ReDim Map(MapNum).Events(i).Pages(x).CommandList(y).Commands(Map(MapNum).Events(i).Pages(x).CommandList(y).CommandCount)
-                                    For z = 1 To Map(MapNum).Events(i).Pages(x).CommandList(y).CommandCount
-                                        With Map(MapNum).Events(i).Pages(x).CommandList(y).Commands(z)
-                                            .Index = Buffer.ReadInt32
-                                            .Text1 = Buffer.ReadString
-                                            .Text2 = Buffer.ReadString
-                                            .Text3 = Buffer.ReadString
-                                            .Text4 = Buffer.ReadString
-                                            .Text5 = Buffer.ReadString
-                                            .Data1 = Buffer.ReadInt32
-                                            .Data2 = Buffer.ReadInt32
-                                            .Data3 = Buffer.ReadInt32
-                                            .Data4 = Buffer.ReadInt32
-                                            .Data5 = Buffer.ReadInt32
-                                            .Data6 = Buffer.ReadInt32
-                                            .ConditionalBranch.CommandList = Buffer.ReadInt32
-                                            .ConditionalBranch.Condition = Buffer.ReadInt32
-                                            .ConditionalBranch.Data1 = Buffer.ReadInt32
-                                            .ConditionalBranch.Data2 = Buffer.ReadInt32
-                                            .ConditionalBranch.Data3 = Buffer.ReadInt32
-                                            .ConditionalBranch.ElseCommandList = Buffer.ReadInt32
-                                            .MoveRouteCount = Buffer.ReadInt32
+                        If Map(mapNum).Events(i).Pages(x).CommandListCount > 0 Then
+                            ReDim Map(mapNum).Events(i).Pages(x).CommandList(Map(mapNum).Events(i).Pages(x).CommandListCount)
+                            For y = 1 To Map(mapNum).Events(i).Pages(x).CommandListCount
+                                Map(mapNum).Events(i).Pages(x).CommandList(y).CommandCount = buffer.ReadInt32
+                                Map(mapNum).Events(i).Pages(x).CommandList(y).ParentList = buffer.ReadInt32
+                                If Map(mapNum).Events(i).Pages(x).CommandList(y).CommandCount > 0 Then
+                                    ReDim Map(mapNum).Events(i).Pages(x).CommandList(y).Commands(Map(mapNum).Events(i).Pages(x).CommandList(y).CommandCount)
+                                    For z = 1 To Map(mapNum).Events(i).Pages(x).CommandList(y).CommandCount
+                                        With Map(mapNum).Events(i).Pages(x).CommandList(y).Commands(z)
+                                            .Index = buffer.ReadInt32
+                                            .Text1 = buffer.ReadString
+                                            .Text2 = buffer.ReadString
+                                            .Text3 = buffer.ReadString
+                                            .Text4 = buffer.ReadString
+                                            .Text5 = buffer.ReadString
+                                            .Data1 = buffer.ReadInt32
+                                            .Data2 = buffer.ReadInt32
+                                            .Data3 = buffer.ReadInt32
+                                            .Data4 = buffer.ReadInt32
+                                            .Data5 = buffer.ReadInt32
+                                            .Data6 = buffer.ReadInt32
+                                            .ConditionalBranch.CommandList = buffer.ReadInt32
+                                            .ConditionalBranch.Condition = buffer.ReadInt32
+                                            .ConditionalBranch.Data1 = buffer.ReadInt32
+                                            .ConditionalBranch.Data2 = buffer.ReadInt32
+                                            .ConditionalBranch.Data3 = buffer.ReadInt32
+                                            .ConditionalBranch.ElseCommandList = buffer.ReadInt32
+                                            .MoveRouteCount = buffer.ReadInt32
                                             Dim tmpcount As Integer = .MoveRouteCount
                                             If tmpcount > 0 Then
                                                 ReDim Preserve .MoveRoute(tmpcount)
                                                 For w = 1 To tmpcount
-                                                    .MoveRoute(w).Index = Buffer.ReadInt32
-                                                    .MoveRoute(w).Data1 = Buffer.ReadInt32
-                                                    .MoveRoute(w).Data2 = Buffer.ReadInt32
-                                                    .MoveRoute(w).Data3 = Buffer.ReadInt32
-                                                    .MoveRoute(w).Data4 = Buffer.ReadInt32
-                                                    .MoveRoute(w).Data5 = Buffer.ReadInt32
-                                                    .MoveRoute(w).Data6 = Buffer.ReadInt32
+                                                    .MoveRoute(w).Index = buffer.ReadInt32
+                                                    .MoveRoute(w).Data1 = buffer.ReadInt32
+                                                    .MoveRoute(w).Data2 = buffer.ReadInt32
+                                                    .MoveRoute(w).Data3 = buffer.ReadInt32
+                                                    .MoveRoute(w).Data4 = buffer.ReadInt32
+                                                    .MoveRoute(w).Data5 = buffer.ReadInt32
+                                                    .MoveRoute(w).Data6 = buffer.ReadInt32
                                                 Next
                                             End If
                                         End With
@@ -2781,54 +2766,53 @@ Module S_NetworkReceive
 
         Gettingmap = False
 
-        SendMapNpcsToMap(MapNum)
-        SpawnMapNpcs(MapNum)
-        SpawnGlobalEvents(MapNum)
+        SendMapNpcsToMap(mapNum)
+        SpawnMapNpcs(mapNum)
+        SpawnGlobalEvents(mapNum)
 
         For i = 1 To GetPlayersOnline()
             If IsPlaying(i) Then
-                If Player(i).Character(TempPlayer(i).CurChar).Map = MapNum Then
-                    SpawnMapEventsFor(i, MapNum)
+                If Player(i).Character(TempPlayer(i).CurChar).Map = mapNum Then
+                    SpawnMapEventsFor(i, mapNum)
                 End If
             End If
         Next
 
         ' Clear out it all
         For i = 1 To MAX_MAP_ITEMS
-            SpawnItemSlot(i, 0, 0, GetPlayerMap(Index), MapItem(GetPlayerMap(Index), i).X, MapItem(GetPlayerMap(Index), i).Y)
-            ClearMapItem(i, GetPlayerMap(Index))
+            SpawnItemSlot(i, 0, 0, GetPlayerMap(index), MapItem(GetPlayerMap(index), i).X, MapItem(GetPlayerMap(index), i).Y)
+            ClearMapItem(i, GetPlayerMap(index))
         Next
 
         ' Respawn
-        SpawnMapItems(MapNum)
+        SpawnMapItems(mapNum)
 
-        ClearTempTile(MapNum)
-        CacheResources(MapNum)
+        ClearTempTile(mapNum)
+        CacheResources(mapNum)
 
         ' Refresh map for everyone online
         For i = 1 To GetPlayersOnline()
-            If IsPlaying(i) AndAlso GetPlayerMap(i) = MapNum Then
-                PlayerWarp(i, MapNum, GetPlayerX(i), GetPlayerY(i))
+            If IsPlaying(i) AndAlso GetPlayerMap(i) = mapNum Then
+                PlayerWarp(i, mapNum, GetPlayerX(i), GetPlayerY(i))
                 ' Send map
-                SendMapData(i, MapNum, True)
+                SendMapData(i, mapNum, True)
             End If
         Next
 
-        Buffer.Dispose()
+        buffer.Dispose()
     End Sub
 
-
-
-    Private Sub Packet_Emote(index as integer, ByRef data() As Byte)
+    Private Sub Packet_Emote(index As Integer, ByRef data() As Byte)
         Dim Emote As Integer
         Dim buffer As New ByteStream(data)
 
         AddDebug("Recieved CMSG: CEmote")
 
-        Emote = Buffer.ReadInt32
+        Emote = buffer.ReadInt32
 
-        SendEmote(Index, Emote)
+        SendEmote(index, Emote)
 
-        Buffer.Dispose()
+        buffer.Dispose()
     End Sub
+
 End Module

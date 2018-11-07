@@ -1,7 +1,7 @@
-﻿
-Imports ASFW
+﻿Imports ASFW
 
 Friend Module E_Crafting
+
 #Region "Globals"
 
     Friend Recipe_Changed(MAX_RECIPE) As Boolean
@@ -53,6 +53,7 @@ Friend Module E_Crafting
 #End Region
 
 #Region "Database"
+
     Sub ClearRecipes()
         Dim i As Integer
 
@@ -78,9 +79,11 @@ Friend Module E_Crafting
 
         ReDim Recipe_Changed(MAX_RECIPE)
     End Sub
+
 #End Region
 
 #Region "Editor"
+
     Friend Sub RecipeEditorPreInit()
         Dim i As Integer
 
@@ -176,9 +179,11 @@ Friend Module E_Crafting
 
         FrmRecipe.lstIngredients.SelectedIndex = 0
     End Sub
+
 #End Region
 
 #Region "Incoming Packets"
+
     Sub Packet_UpdateRecipe(ByRef data() As Byte)
         Dim n As Integer, i As Integer
         Dim buffer As New ByteStream(data)
@@ -209,6 +214,7 @@ Friend Module E_Crafting
 #End Region
 
 #Region "OutGoing Packets"
+
     Sub SendRequestRecipes()
         Dim buffer As New ByteStream(4)
 
@@ -269,6 +275,7 @@ Friend Module E_Crafting
         Next
 
     End Function
+
 #End Region
 
 End Module

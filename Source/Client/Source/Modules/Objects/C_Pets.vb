@@ -2,7 +2,9 @@
 Imports ASFW
 
 Module C_Pets
+
 #Region "Globals etc"
+
     Friend Pet() As PetRec
 
     Friend Const PetbarTop As Byte = 2
@@ -20,6 +22,7 @@ Module C_Pets
 
     'Pet Constants
     Friend Const PetBehaviourFollow As Byte = 0 'The pet will attack all npcs around
+
     Friend Const PetBehaviourGoto As Byte = 1 'If attacked, the pet will fight back
     Friend Const PetAttackBehaviourAttackonsight As Byte = 2 'The pet will attack all npcs around
     Friend Const PetAttackBehaviourGuard As Byte = 3 'If attacked, the pet will fight back
@@ -70,6 +73,7 @@ Module C_Pets
 
         'Client Use Only
         Dim XOffset As Integer
+
         Dim YOffset As Integer
         Dim Moving As Byte
         Dim Attacking As Byte
@@ -77,9 +81,11 @@ Module C_Pets
         Dim Steps As Byte
         Dim Damage As Integer
     End Structure
+
 #End Region
 
 #Region "Database"
+
     Sub ClearPet(index As Integer)
 
         Pet(index).Name = ""
@@ -99,9 +105,11 @@ Module C_Pets
         Next
 
     End Sub
+
 #End Region
 
 #Region "Outgoing Packets"
+
     Friend Sub SendPetBehaviour(index As Integer)
         Dim buffer As New ByteStream(4)
 
@@ -168,9 +176,11 @@ Module C_Pets
         buffer.Dispose()
 
     End Sub
+
 #End Region
 
 #Region "Incoming Packets"
+
     Friend Sub Packet_UpdatePlayerPet(ByRef data() As Byte)
         Dim n As Integer, i As Integer
         Dim buffer As New ByteStream(data)
@@ -223,6 +233,7 @@ Module C_Pets
             .LevelPnts = buffer.ReadInt32
             .StatType = buffer.ReadInt32
             .LevelingType = buffer.ReadInt32
+
             For i = 1 To StatType.Count - 1
                 .Stat(i) = buffer.ReadInt32
             Next
@@ -335,9 +346,11 @@ Module C_Pets
 
         buffer.Dispose()
     End Sub
+
 #End Region
 
 #Region "Movement"
+
     Sub ProcessPetMovement(index As Integer)
 
         ' Check if pet is walking, and if so process moving them over
@@ -405,6 +418,7 @@ Module C_Pets
 #End Region
 
 #Region "Drawing"
+
     Friend Sub DrawPet(index As Integer)
         Dim anim As Byte, x As Integer, y As Integer
         Dim sprite As Integer, spriteleft As Integer
@@ -510,7 +524,6 @@ Module C_Pets
                     color = SFML.Graphics.Color.Yellow
                     backcolor = SFML.Graphics.Color.Black
             End Select
-
         Else
             color = SFML.Graphics.Color.Red
         End If
@@ -623,6 +636,7 @@ Module C_Pets
 #End Region
 
 #Region "Misc"
+
     Friend Function PetAlive(index As Integer) As Boolean
         PetAlive = False
 
@@ -664,6 +678,7 @@ Module C_Pets
         Next
 
     End Function
+
 #End Region
 
 End Module

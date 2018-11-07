@@ -6,7 +6,9 @@ Imports SFML.Graphics
 Imports SFML.Window
 
 Public Class FrmEditor_MapEditor
+
 #Region "Frm"
+
     Private Sub FrmEditor_Map_Load(ByVal sender As Object, ByVal e As EventArgs) Handles MyBase.Load
         cmbTileSets.SelectedIndex = 0
         EditorMap_DrawTileset()
@@ -20,9 +22,11 @@ Public Class FrmEditor_MapEditor
 
         scrlFog.Maximum = NumFogs
     End Sub
+
 #End Region
 
 #Region "Toolbar"
+
     Private Sub TsbSave_Click(sender As Object, e As EventArgs) Handles tsbSave.Click
         MapEditorSend()
         GettingMap = True
@@ -43,9 +47,11 @@ Public Class FrmEditor_MapEditor
     Private Sub TsbMapGrid_Click(sender As Object, e As EventArgs) Handles tsbMapGrid.Click
         MapGrid = Not MapGrid
     End Sub
+
 #End Region
 
 #Region "Tiles"
+
     Private Sub PicBackSelect_MouseDown(ByVal sender As Object, ByVal e As MouseEventArgs) Handles picBackSelect.MouseDown
         MapEditorChooseTile(e.Button, e.X, e.Y)
     End Sub
@@ -93,9 +99,11 @@ Public Class FrmEditor_MapEditor
             EditorTileHeight = 1
         End If
     End Sub
+
 #End Region
 
 #Region "Attributes"
+
     Private Sub ScrlMapWarpMap_Scroll(ByVal sender As Object, ByVal e As EventArgs) Handles scrlMapWarpMap.ValueChanged
         lblMapWarpMap.Text = "Map: " & scrlMapWarpMap.Value
     End Sub
@@ -387,6 +395,7 @@ Public Class FrmEditor_MapEditor
 #End Region
 
 #Region "Npc's"
+
     Private Sub LstMapNpc_SelectedIndexChanged(sender As Object, e As EventArgs) Handles lstMapNpc.SelectedIndexChanged
         cmbNpcList.SelectedItem = lstMapNpc.SelectedItem
     End Sub
@@ -403,9 +412,11 @@ Public Class FrmEditor_MapEditor
 
         End If
     End Sub
+
 #End Region
 
 #Region "Settings"
+
     Private Sub BtnSaveSettings_Click(sender As Object, e As EventArgs) Handles btnSaveSettings.Click
         Dim X As Integer, x2 As Integer
         Dim Y As Integer, y2 As Integer
@@ -479,9 +490,11 @@ Public Class FrmEditor_MapEditor
             PlayMusic(Map.Music)
         End If
     End Sub
+
 #End Region
 
 #Region "Events"
+
     Private Sub BtnCopyEvent_Click(sender As Object, e As EventArgs) Handles btnCopyEvent.Click
         If EventCopy = False Then
             EventCopy = True
@@ -505,9 +518,11 @@ Public Class FrmEditor_MapEditor
             lblPasteMode.Text = "PasteMode Off"
         End If
     End Sub
+
 #End Region
 
 #Region "Map Effects"
+
     Private Sub CmbWeather_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbWeather.SelectedIndexChanged
         Map.WeatherType = cmbWeather.SelectedIndex
     End Sub
@@ -567,6 +582,7 @@ Public Class FrmEditor_MapEditor
     Private Sub CmbParallax_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbParallax.SelectedIndexChanged
         Map.Parallax = cmbParallax.SelectedIndex
     End Sub
+
 #End Region
 
 #Region "Map Editor"
@@ -1131,11 +1147,10 @@ Public Class FrmEditor_MapEditor
 
     End Sub
 
-
-
 #End Region
 
 #Region "Drawing"
+
     Public Sub EditorMap_DrawTileset()
         Dim height As Integer
         Dim width As Integer
@@ -1289,6 +1304,7 @@ Public Class FrmEditor_MapEditor
         rec2.Position = New Vector2f(ConvertMapX(CurX * PicX), ConvertMapY(CurY * PicY))
         GameWindow.Draw(rec2)
     End Sub
+
 #End Region
 
 End Class

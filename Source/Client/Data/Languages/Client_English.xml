@@ -91,7 +91,7 @@
     <string id="party">Usage: /party (name)</string>
     <string id="wrongcmd">"Not a valid command!"</string>
   </chatcommand>
-  
+
   <adminchatcommand>
     <string id="accesswarning">You need to be a high enough staff member to do this!</string>
     <string id="questreset">Usage: /questreset (quest #)</string>
@@ -103,14 +103,14 @@
     <string id="kick">Usage: /kick (name)</string>
     <string id="warpmeto">Usage: /warpmeto (name)</string>
     <string id="warptome">Usage: /warptome (name)</string>
-    <string id="warpto">Usage: /warpto (map #)</string>  
-    <string id="wrongmapnr">Invalid map number.</string> 
+    <string id="warpto">Usage: /warpto (map #)</string>
+    <string id="wrongmapnr">Invalid map number.</string>
     <string id="setsprite">Usage: /setsprite (sprite #)</string>
     <string id="motd">Usage: /motd (new motd)</string>
     <string id="ban">Usage: /ban (name)</string>
     <string id="setaccess">Usage: /setaccess (name) (access)</string>
   </adminchatcommand>
-  
+
   <itemdescription>
     <string id="notavail">Not Available</string>
     <string id="damage">Damage: </string>
@@ -131,7 +131,7 @@
     <string id="secs"> Secs</string>
     <string id="amount">Amount: </string>
   </itemdescription>
-  
+
   <skilldescription>
     <string id="no">No</string>
     <string id="damage">Damage: </string>
@@ -150,7 +150,7 @@
     <string id="notenough">Not Enough Materials!</string>
   <string id="noneselected">None Selected</string>
   </crafting>
-  
+
   <trade>
     <string id="tradetimeout">You took too long to decide. Please try again.</string>
     <string id="tradeinvite">{0} invites you to a trade!</string>

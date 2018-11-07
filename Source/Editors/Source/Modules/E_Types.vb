@@ -1,9 +1,11 @@
 ﻿Module E_Types
+
     ' options
     Friend Options As New E_Options()
 
     ' Friend data structures
     Friend Map As MapRec
+
     Friend TempTile(,) As TempTileRec
     Friend MapLock As New Object()
     Friend MapItem(MAX_MAP_ITEMS) As MapItemRec
@@ -13,7 +15,7 @@
     Friend MapNames(MAX_MAPS) As String
 
     Friend Structure MapRec
-        Dim mapNum as Integer
+        Dim mapNum As Integer
         Dim Name As String
         Dim Music As String
 
@@ -39,7 +41,7 @@
         Dim Events() As EventRec
 
         Dim WeatherType As Byte
-        Dim Fogindex as integer
+        Dim Fogindex As Integer
         Dim WeatherIntensity As Integer
         Dim FogAlpha As Byte
         Dim FogSpeed As Byte
@@ -57,6 +59,7 @@
 
         'Client Side Only -- Temporary
         Dim CurrentEvents As Integer
+
         Dim MapEvents() As MapEventRec
     End Structure
 
@@ -72,12 +75,14 @@
         Dim StartX As Byte
         Dim StartY As Byte
         Dim BaseExp As Integer
+
         ' For client use
         Dim Vital() As Integer
+
     End Structure
 
     Friend Structure MapItemRec
-        Dim Num As integer
+        Dim Num As Integer
         Dim Value As Integer
         Dim Frame As Byte
         Dim X As Byte
@@ -86,15 +91,17 @@
 
     Friend Structure MapNpcRec
         Dim Num As Byte
-        Dim Target As integer
+        Dim Target As Integer
         Dim TargetType As Byte
         Dim Vital() As Integer
         Dim Map As Integer
         Dim X As Byte
         Dim Y As Byte
         Dim Dir As Byte
+
         ' Client use only
         Dim XOffset As Integer
+
         Dim YOffset As Integer
         Dim Moving As Byte
         Dim Attacking As Byte

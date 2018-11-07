@@ -2,7 +2,9 @@
 Imports ASFW
 
 Module C_Trade
+
 #Region "Globals & Types"
+
     Friend TradeTimer As Integer
     Friend TradeRequest As Boolean
     Friend InTrade As Boolean
@@ -12,9 +14,11 @@ Module C_Trade
     Friend TradeY As Integer
     Friend TheirWorth As String
     Friend YourWorth As String
+
 #End Region
 
 #Region "Incoming Packets"
+
     Sub Packet_ClearTradeTimer(ByRef data() As Byte)
         Dim buffer As New ByteStream(data)
         TradeRequest = False
@@ -91,9 +95,11 @@ Module C_Trade
 
         buffer.Dispose()
     End Sub
+
 #End Region
 
 #Region "Outgoing Packets"
+
     Friend Sub AcceptTrade()
         Dim buffer As New ByteStream(4)
 
@@ -156,9 +162,11 @@ Module C_Trade
         Socket.SendData(buffer.Data, buffer.Head)
         buffer.Dispose()
     End Sub
+
 #End Region
 
 #Region "Drawing"
+
     Sub DrawTrade()
         Dim i As Integer, x As Integer, y As Integer, itemnum As Integer, itempic As Integer
         Dim amount As String
@@ -297,6 +305,7 @@ Module C_Trade
         'render decline button
         DrawButton("Decline Trade", TradeWindowX + TradeButtonDeclineX, TradeWindowY + TradeButtonDeclineY, 0)
     End Sub
+
 #End Region
 
 End Module

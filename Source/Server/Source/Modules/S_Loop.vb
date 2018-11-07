@@ -2,6 +2,7 @@
 Imports System.Threading
 
 Module modLoop
+
     Sub ServerLoop()
         Dim tick As Integer
         Dim tmr25 As Integer, tmr300 As Integer
@@ -100,8 +101,8 @@ Module modLoop
             End If
 
             If GetTimeMs() > tmr300 Then
-                UpdateNpcAI()
-                UpdatePetAI()
+                UpdateNpcAi()
+                UpdatePetAi()
                 tmr300 = GetTimeMs() + 300
             End If
 
@@ -174,7 +175,6 @@ Module modLoop
                 SendMapItemsToAll(y)
             End If
 
-            Application.DoEvents()
         Next
 
     End Sub
@@ -218,6 +218,31 @@ Module modLoop
         For mapNum = 1 To MAX_CACHED_MAPS
 
             If ServerDestroyed Then Exit Sub
+
+            ' items appearing to everyone
+            For i = 1 To MAX_MAP_ITEMS
+                If MapItem(mapNum, i).Num > 0 Then
+                    If MapItem(mapNum, i).PlayerName <> vbNullString Then
+                        ' make item public?
+                        If MapItem(mapNum, i).PlayerTimer < GetTimeMs() Then
+                            ' make it public
+                            MapItem(mapNum, i).PlayerName = vbNullString
+                            MapItem(mapNum, i).PlayerTimer = 0
+                            ' send updates to everyone
+                            SendMapItemsToAll(mapNum)
+                        End If
+                        ' despawn item?
+                        If MapItem(mapNum, i).CanDespawn Then
+                            If MapItem(mapNum, i).DespawnTimer < GetTimeMs() Then
+                                ' despawn it
+                                ClearMapItem(i, mapNum)
+                                ' send updates to everyone
+                                SendMapItemsToAll(mapNum)
+                            End If
+                        End If
+                    End If
+                End If
+            Next
 
             '  Close the doors
             If tickCount > TempTile(mapNum).DoorTimer + 5000 Then
@@ -269,7 +294,6 @@ Module modLoop
                             MapNpc(mapNum).Npc(x).SkillBuffer = 0
                             MapNpc(mapNum).Npc(x).SkillBufferTimer = 0
                         End If
-
                     Else
                         ' /////////////////////////////////////////
                         ' // This is used for ATTACKING ON SIGHT //
@@ -471,7 +495,7 @@ Module modLoop
                                 If IsPlaying(target) AndAlso GetPlayerMap(target) = mapNum Then
                                     If IsPlaying(target) AndAlso GetPlayerMap(target) = mapNum Then
                                         If Random(1, 3) = 1 Then
-                                            Dim skillnum As integer = RandomNpcAttack(mapNum, x)
+                                            Dim skillnum As Integer = RandomNpcAttack(mapNum, x)
                                             If skillnum > 0 Then
                                                 BufferNpcSkill(mapNum, x, skillnum)
                                             Else
@@ -578,19 +602,19 @@ Module modLoop
         Dim i As Integer
 
         'Prevent subscript out of range
-        If NpcNum <= 0 OrElse NpcNum > MAX_NPCS Then
+        If npcNum <= 0 OrElse npcNum > MAX_NPCS Then
             GetNpcVitalRegen = 0
             Exit Function
         End If
 
-        Select Case Vital
+        Select Case vital
             Case VitalType.HP
-                i = Npc(NpcNum).Stat(StatType.Vitality) \ 3
+                i = Npc(npcNum).Stat(StatType.Vitality) \ 3
 
                 If i < 1 Then i = 1
                 GetNpcVitalRegen = i
             Case VitalType.MP
-                i = Npc(NpcNum).Stat(StatType.Intelligence) \ 3
+                i = Npc(npcNum).Stat(StatType.Intelligence) \ 3
 
                 If i < 1 Then i = 1
                 GetNpcVitalRegen = i
@@ -655,10 +679,10 @@ Module modLoop
 
     Friend Sub CastSkill(index As Integer, skillSlot As Integer)
         ' Set up some basic variables we'll be using.
-        Dim skillId = GetPlayerSkill(index, SkillSlot)
+        Dim skillId = GetPlayerSkill(index, skillSlot)
 
         ' Preventative checks
-        If Not IsPlaying(index) OrElse SkillSlot <= 0 OrElse SkillSlot > MAX_PLAYER_SKILLS OrElse Not HasSkill(index, skillId) Then Exit Sub
+        If Not IsPlaying(index) OrElse skillSlot <= 0 OrElse skillSlot > MAX_PLAYER_SKILLS OrElse Not HasSkill(index, skillId) Then Exit Sub
 
         ' Check if the player is able to cast the spell.
         If GetPlayerVital(index, VitalType.MP) < Skill(skillId).MpCost Then
@@ -702,9 +726,9 @@ Module modLoop
         Dim centerY = GetPlayerY(index)
 
         ' Determine what kind of spell we're dealing with and process it.
-        Select Case Skill(SkillId).Type
+        Select Case Skill(skillId).Type
             Case SkillType.DamageHp, SkillType.DamageMp, SkillType.HealHp, SkillType.HealMp
-                HandleAoE(index, SkillId, centerX, centerY)
+                HandleAoE(index, skillId, centerX, centerY)
 
             Case Else
                 Throw New NotImplementedException()
@@ -732,9 +756,9 @@ Module modLoop
         End Select
 
         ' Determine what kind of spell we're dealing with and process it.
-        Select Case Skill(SkillId).Type
+        Select Case Skill(skillId).Type
             Case SkillType.HealMp, SkillType.DamageHp, SkillType.DamageMp, SkillType.HealHp
-                HandleAoE(index, SkillId, centerX, centerY)
+                HandleAoE(index, skillId, centerX, centerY)
 
             Case Else
                 Throw New NotImplementedException()
@@ -743,31 +767,31 @@ Module modLoop
 
     Private Sub HandleSelfCastSkill(index As Integer, skillId As Integer)
         ' Determine what kind of spell we're dealing with and process it.
-        Select Case Skill(SkillId).Type
+        Select Case Skill(skillId).Type
             Case SkillType.HealHp
-                SkillPlayer_Effect(VitalType.HP, True, index, Skill(SkillId).Vital, SkillId)
+                SkillPlayer_Effect(VitalType.HP, True, index, Skill(skillId).Vital, skillId)
             Case SkillType.HealMp
-                SkillPlayer_Effect(VitalType.MP, True, index, Skill(SkillId).Vital, SkillId)
+                SkillPlayer_Effect(VitalType.MP, True, index, Skill(skillId).Vital, skillId)
             Case SkillType.Warp
-                SendAnimation(GetPlayerMap(index), Skill(SkillId).SkillAnim, 0, 0, TargetType.Player, index)
-                PlayerWarp(index, Skill(SkillId).Map, Skill(SkillId).X, Skill(SkillId).Y)
+                SendAnimation(GetPlayerMap(index), Skill(skillId).SkillAnim, 0, 0, TargetType.Player, index)
+                PlayerWarp(index, Skill(skillId).Map, Skill(skillId).X, Skill(skillId).Y)
             Case Else
                 Throw New NotImplementedException()
         End Select
 
         ' Play our animation.
-        SendAnimation(GetPlayerMap(index), Skill(SkillId).SkillAnim, 0, 0, TargetType.Player, index)
+        SendAnimation(GetPlayerMap(index), Skill(skillId).SkillAnim, 0, 0, TargetType.Player, index)
     End Sub
 
     Private Sub HandleTargetedSkill(index As Integer, skillId As Integer)
         ' Set up some variables we'll definitely be using.
         Dim vital As VitalType
         Dim dealsDamage As Boolean
-        Dim amount = Skill(SkillId).Vital
+        Dim amount = Skill(skillId).Vital
         Dim target = TempPlayer(index).Target
 
         ' Determine what vital we need to adjust and how.
-        Select Case Skill(SkillId).Type
+        Select Case Skill(skillId).Type
             Case SkillType.DamageHp
                 vital = VitalType.HP
                 dealsDamage = True
@@ -791,10 +815,10 @@ Module modLoop
         Select Case TempPlayer(index).TargetType
             Case TargetType.Npc
                 ' Deal with damaging abilities.
-                If dealsDamage AndAlso CanPlayerAttackNpc(index, target, True) Then SkillNpc_Effect(vital, False, target, amount, SkillId, GetPlayerMap(index))
+                If dealsDamage AndAlso CanPlayerAttackNpc(index, target, True) Then SkillNpc_Effect(vital, False, target, amount, skillId, GetPlayerMap(index))
 
                 ' Deal with healing abilities
-                If Not dealsDamage Then SkillNpc_Effect(vital, True, target, amount, SkillId, GetPlayerMap(index))
+                If Not dealsDamage Then SkillNpc_Effect(vital, True, target, amount, skillId, GetPlayerMap(index))
 
                 ' Handle our NPC death if it kills them
                 If IsNpcDead(GetPlayerMap(index), TempPlayer(index).Target) Then
@@ -804,10 +828,10 @@ Module modLoop
             Case TargetType.Player
 
                 ' Deal with damaging abilities.
-                If dealsDamage AndAlso CanPlayerAttackPlayer(index, target, True) Then SkillPlayer_Effect(vital, False, target, amount, SkillId)
+                If dealsDamage AndAlso CanPlayerAttackPlayer(index, target, True) Then SkillPlayer_Effect(vital, False, target, amount, skillId)
 
                 ' Deal with healing abilities
-                If Not dealsDamage Then SkillPlayer_Effect(vital, True, target, amount, SkillId)
+                If Not dealsDamage Then SkillPlayer_Effect(vital, True, target, amount, skillId)
 
                 If IsPlayerDead(target) Then
                     ' Actually kill the player.
@@ -825,19 +849,19 @@ Module modLoop
         End Select
 
         ' Play our animation.
-        SendAnimation(GetPlayerMap(index), Skill(SkillId).SkillAnim, 0, 0, TempPlayer(index).TargetType, target)
+        SendAnimation(GetPlayerMap(index), Skill(skillId).SkillAnim, 0, 0, TempPlayer(index).TargetType, target)
     End Sub
 
     Private Sub HandleAoE(index As Integer, skillId As Integer, x As Integer, y As Integer)
         ' Get some basic things set up.
         Dim map = GetPlayerMap(index)
-        Dim range = Skill(SkillId).Range
-        Dim amount = Skill(SkillId).Vital
+        Dim range = Skill(skillId).Range
+        Dim amount = Skill(skillId).Vital
         Dim vital As VitalType
         Dim dealsDamage As Boolean
 
         ' Determine what vital we need to adjust and how.
-        Select Case Skill(SkillId).Type
+        Select Case Skill(skillId).Type
             Case SkillType.DamageHp
                 vital = VitalType.HP
                 dealsDamage = True
@@ -860,16 +884,16 @@ Module modLoop
 
         ' Loop through all online players on the current map.
         For Each id In TempPlayer.Where(Function(p) p.InGame).Select(Function(p, i) i + 1).Where(Function(i) GetPlayerMap(i) = map AndAlso i <> index).ToArray()
-            If IsInRange(range, X, Y, GetPlayerX(id), GetPlayerY(id)) Then
+            If IsInRange(range, x, y, GetPlayerX(id), GetPlayerY(id)) Then
 
                 ' Deal with damaging abilities.
-                If dealsDamage AndAlso CanPlayerAttackPlayer(index, id, True) Then SkillPlayer_Effect(vital, False, id, amount, SkillId)
+                If dealsDamage AndAlso CanPlayerAttackPlayer(index, id, True) Then SkillPlayer_Effect(vital, False, id, amount, skillId)
 
                 ' Deal with healing abilities
-                If Not dealsDamage Then SkillPlayer_Effect(vital, True, id, amount, SkillId)
+                If Not dealsDamage Then SkillPlayer_Effect(vital, True, id, amount, skillId)
 
                 ' Send our animation to the map.
-                SendAnimation(map, Skill(SkillId).SkillAnim, 0, 0, TargetType.Player, id)
+                SendAnimation(map, Skill(skillId).SkillAnim, 0, 0, TargetType.Player, id)
 
                 If IsPlayerDead(id) Then
                     ' Actually kill the player.
@@ -886,16 +910,16 @@ Module modLoop
 
         ' Loop through all the NPCs on this map
         For Each id In MapNpc(map).Npc.Where(Function(n) n.Num > 0 AndAlso n.Vital(VitalType.HP) > 0).Select(Function(n, i) i + 1).ToArray()
-            If IsInRange(range, X, Y, MapNpc(map).Npc(id).X, MapNpc(map).Npc(id).Y) Then
+            If IsInRange(range, x, y, MapNpc(map).Npc(id).X, MapNpc(map).Npc(id).Y) Then
 
                 ' Deal with damaging abilities.
-                If dealsDamage AndAlso CanPlayerAttackNpc(index, id, True) Then SkillNpc_Effect(vital, False, id, amount, SkillId, map)
+                If dealsDamage AndAlso CanPlayerAttackNpc(index, id, True) Then SkillNpc_Effect(vital, False, id, amount, skillId, map)
 
                 ' Deal with healing abilities
-                If Not dealsDamage Then SkillNpc_Effect(vital, True, id, amount, SkillId, map)
+                If Not dealsDamage Then SkillNpc_Effect(vital, True, id, amount, skillId, map)
 
                 ' Send our animation to the map.
-                SendAnimation(map, Skill(SkillId).SkillAnim, 0, 0, TargetType.Npc, id)
+                SendAnimation(map, Skill(skillId).SkillAnim, 0, 0, TargetType.Npc, id)
 
                 ' Handle our NPC death if it kills them
                 If IsNpcDead(map, id) Then
@@ -906,10 +930,10 @@ Module modLoop
     End Sub
 
     Private Sub FinalizeCast(index As Integer, skillSlot As Integer, skillCost As Integer)
-        SetPlayerVital(index, VitalType.MP, GetPlayerVital(index, VitalType.MP) - SkillCost)
+        SetPlayerVital(index, VitalType.MP, GetPlayerVital(index, VitalType.MP) - skillCost)
         SendVital(index, VitalType.MP)
-        TempPlayer(index).SkillCd(SkillSlot) = GetTimeMs() + (Skill(SkillSlot).CdTime * 1000)
-        SendCooldown(index, SkillSlot)
+        TempPlayer(index).SkillCd(skillSlot) = GetTimeMs() + (Skill(skillSlot).CdTime * 1000)
+        SendCooldown(index, skillSlot)
     End Sub
 
     Private Function IsTargetOnMap(index As Integer) As Boolean
@@ -921,7 +945,7 @@ Module modLoop
     End Function
 
     Private Function IsInSkillRange(index As Integer, SkillId As Integer) As Boolean
-        Dim targetX As Integer,targetY As Integer
+        Dim targetX As Integer, targetY As Integer
 
         If TempPlayer(index).TargetType = TargetType.Player Then
             targetX = GetPlayerX(TempPlayer(index).Target)
@@ -1213,4 +1237,5 @@ Module modLoop
             SendMapNpcVitals(mapNum, index)
         End If
     End Sub
+
 End Module

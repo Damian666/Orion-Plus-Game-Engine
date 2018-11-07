@@ -326,9 +326,9 @@ Module C_GameLogic
         Dim y As Integer
         ReDim TempTile(Map.MaxX, Map.MaxY)
 
-        For X = 0 To Map.MaxX
-            For Y = 0 To Map.MaxY
-                TempTile(X, Y).DoorOpen = 0
+        For x = 0 To Map.MaxX
+            For y = 0 To Map.MaxY
+                TempTile(x, y).DoorOpen = 0
             Next
         Next
 
@@ -337,45 +337,45 @@ Module C_GameLogic
     Sub ProcessNpcMovement(mapNpcNum As Integer)
 
         ' Check if NPC is walking, and if so process moving them over
-        If MapNpc(MapNpcNum).Moving = MovementType.Walking Then
+        If MapNpc(mapNpcNum).Moving = MovementType.Walking Then
 
-            Select Case MapNpc(MapNpcNum).Dir
+            Select Case MapNpc(mapNpcNum).Dir
                 Case DirectionType.Up
-                    MapNpc(MapNpcNum).YOffset = MapNpc(MapNpcNum).YOffset - ((ElapsedTime / 1000) * (WalkSpeed * SizeX))
-                    If MapNpc(MapNpcNum).YOffset < 0 Then MapNpc(MapNpcNum).YOffset = 0
+                    MapNpc(mapNpcNum).YOffset = MapNpc(mapNpcNum).YOffset - ((ElapsedTime / 1000) * (WalkSpeed * SizeX))
+                    If MapNpc(mapNpcNum).YOffset < 0 Then MapNpc(mapNpcNum).YOffset = 0
 
                 Case DirectionType.Down
-                    MapNpc(MapNpcNum).YOffset = MapNpc(MapNpcNum).YOffset + ((ElapsedTime / 1000) * (WalkSpeed * SizeX))
-                    If MapNpc(MapNpcNum).YOffset > 0 Then MapNpc(MapNpcNum).YOffset = 0
+                    MapNpc(mapNpcNum).YOffset = MapNpc(mapNpcNum).YOffset + ((ElapsedTime / 1000) * (WalkSpeed * SizeX))
+                    If MapNpc(mapNpcNum).YOffset > 0 Then MapNpc(mapNpcNum).YOffset = 0
 
                 Case DirectionType.Left
-                    MapNpc(MapNpcNum).XOffset = MapNpc(MapNpcNum).XOffset - ((ElapsedTime / 1000) * (WalkSpeed * SizeX))
-                    If MapNpc(MapNpcNum).XOffset < 0 Then MapNpc(MapNpcNum).XOffset = 0
+                    MapNpc(mapNpcNum).XOffset = MapNpc(mapNpcNum).XOffset - ((ElapsedTime / 1000) * (WalkSpeed * SizeX))
+                    If MapNpc(mapNpcNum).XOffset < 0 Then MapNpc(mapNpcNum).XOffset = 0
 
                 Case DirectionType.Right
-                    MapNpc(MapNpcNum).XOffset = MapNpc(MapNpcNum).XOffset + ((ElapsedTime / 1000) * (WalkSpeed * SizeX))
-                    If MapNpc(MapNpcNum).XOffset > 0 Then MapNpc(MapNpcNum).XOffset = 0
+                    MapNpc(mapNpcNum).XOffset = MapNpc(mapNpcNum).XOffset + ((ElapsedTime / 1000) * (WalkSpeed * SizeX))
+                    If MapNpc(mapNpcNum).XOffset > 0 Then MapNpc(mapNpcNum).XOffset = 0
 
             End Select
 
             ' Check if completed walking over to the next tile
-            If MapNpc(MapNpcNum).Moving > 0 Then
-                If MapNpc(MapNpcNum).Dir = DirectionType.Right OrElse MapNpc(MapNpcNum).Dir = DirectionType.Down Then
-                    If (MapNpc(MapNpcNum).XOffset >= 0) AndAlso (MapNpc(MapNpcNum).YOffset >= 0) Then
-                        MapNpc(MapNpcNum).Moving = 0
-                        If MapNpc(MapNpcNum).Steps = 1 Then
-                            MapNpc(MapNpcNum).Steps = 3
+            If MapNpc(mapNpcNum).Moving > 0 Then
+                If MapNpc(mapNpcNum).Dir = DirectionType.Right OrElse MapNpc(mapNpcNum).Dir = DirectionType.Down Then
+                    If (MapNpc(mapNpcNum).XOffset >= 0) AndAlso (MapNpc(mapNpcNum).YOffset >= 0) Then
+                        MapNpc(mapNpcNum).Moving = 0
+                        If MapNpc(mapNpcNum).Steps = 1 Then
+                            MapNpc(mapNpcNum).Steps = 3
                         Else
-                            MapNpc(MapNpcNum).Steps = 1
+                            MapNpc(mapNpcNum).Steps = 1
                         End If
                     End If
                 Else
-                    If (MapNpc(MapNpcNum).XOffset <= 0) AndAlso (MapNpc(MapNpcNum).YOffset <= 0) Then
-                        MapNpc(MapNpcNum).Moving = 0
-                        If MapNpc(MapNpcNum).Steps = 1 Then
-                            MapNpc(MapNpcNum).Steps = 3
+                    If (MapNpc(mapNpcNum).XOffset <= 0) AndAlso (MapNpc(mapNpcNum).YOffset <= 0) Then
+                        MapNpc(mapNpcNum).Moving = 0
+                        If MapNpc(mapNpcNum).Steps = 1 Then
+                            MapNpc(mapNpcNum).Steps = 3
                         Else
-                            MapNpc(MapNpcNum).Steps = 1
+                            MapNpc(mapNpcNum).Steps = 1
                         End If
                     End If
                 End If
@@ -413,7 +413,7 @@ Module C_GameLogic
         If MapData = False Then Exit Function
         If PlayerData = False Then Exit Function
         GameStarted = True
-        pnlloadvisible = False
+        Pnlloadvisible = False
     End Function
 
     Friend Sub CreateActionMsg(message As String, color As Integer, msgType As Byte, x As Integer, y As Integer)
@@ -422,13 +422,13 @@ Module C_GameLogic
         If ActionMsgIndex >= Byte.MaxValue Then ActionMsgIndex = 1
 
         With ActionMsg(ActionMsgIndex)
-            .message = message
-            .color = color
-            .Type = MsgType
+            .Message = message
+            .Color = color
+            .Type = msgType
             .Created = GetTickCount()
             .Scroll = 1
-            .X = X
-            .Y = Y
+            .X = x
+            .Y = y
         End With
 
         If ActionMsg(ActionMsgIndex).Type = ActionMsgType.Scroll Then
@@ -439,38 +439,38 @@ Module C_GameLogic
     End Sub
 
     Friend Function Rand(maxNumber As Integer, Optional minNumber As Integer = 0) As Integer
-        If MinNumber > MaxNumber Then
-            Dim t As Integer = MinNumber
-            MinNumber = MaxNumber
-            MaxNumber = t
+        If minNumber > maxNumber Then
+            Dim t As Integer = minNumber
+            minNumber = maxNumber
+            maxNumber = t
         End If
 
-        Return GameRand.Next(MinNumber, MaxNumber)
+        Return GameRand.Next(minNumber, maxNumber)
     End Function
 
     ' BitWise Operators for directional blocking
     Friend Sub SetDirBlock(ByRef blockvar As Byte, ByRef dir As Byte, block As Boolean)
         If block Then
-            blockvar = blockvar Or (2 ^ Dir)
+            blockvar = blockvar Or (2 ^ dir)
         Else
-            blockvar = blockvar And Not (2 ^ Dir)
+            blockvar = blockvar And Not (2 ^ dir)
         End If
     End Sub
 
     Friend Function IsDirBlocked(ByRef blockvar As Byte, ByRef dir As Byte) As Boolean
-        Return Not (Not blockvar AndAlso (2 ^ Dir))
+        Return Not (Not blockvar AndAlso (2 ^ dir))
     End Function
 
     Friend Function ConvertCurrency(amount As Integer) As String
 
-        If Int(Amount) < 10000 Then
-            ConvertCurrency = Amount
-        ElseIf Int(Amount) < 999999 Then
-            ConvertCurrency = Int(Amount / 1000) & "k"
-        ElseIf Int(Amount) < 999999999 Then
-            ConvertCurrency = Int(Amount / 1000000) & "m"
+        If Int(amount) < 10000 Then
+            ConvertCurrency = amount
+        ElseIf Int(amount) < 999999 Then
+            ConvertCurrency = Int(amount / 1000) & "k"
+        ElseIf Int(amount) < 999999999 Then
+            ConvertCurrency = Int(amount / 1000000) & "m"
         Else
-            ConvertCurrency = Int(Amount / 1000000000) & "b"
+            ConvertCurrency = Int(amount / 1000000000) & "b"
         End If
 
     End Function
@@ -481,22 +481,22 @@ Module C_GameLogic
         Dim i As Integer
         Dim n As Integer
         Dim command() As String
-        dim buffer as ByteStream
-        ChatText = Trim$(ChatInput.CurrentMessage)
-        Name = ""
+        Dim buffer As ByteStream
+        chatText = Trim$(ChatInput.CurrentMessage)
+        name = ""
 
-        If Len(ChatText) = 0 Then Exit Sub
-        ChatInput.CurrentMessage = LCase$(ChatText)
+        If Len(chatText) = 0 Then Exit Sub
+        ChatInput.CurrentMessage = LCase$(chatText)
 
         If EventChat = True Then
             If EventChatType = 0 Then
-                Buffer = New ByteStream(4)
-                Buffer.WriteInt32(ClientPackets.CEventChatReply)
-                Buffer.WriteInt32(EventReplyID)
-                Buffer.WriteInt32(EventReplyPage)
-                Buffer.WriteInt32(0)
-                Socket.SendData(Buffer.Data, Buffer.Head)
-                Buffer.Dispose()
+                buffer = New ByteStream(4)
+                buffer.WriteInt32(ClientPackets.CEventChatReply)
+                buffer.WriteInt32(EventReplyId)
+                buffer.WriteInt32(EventReplyPage)
+                buffer.WriteInt32(0)
+                Socket.SendData(buffer.Data, buffer.Head)
+                buffer.Dispose()
                 ClearEventChat()
                 InEvent = False
                 Exit Sub
@@ -504,11 +504,11 @@ Module C_GameLogic
         End If
 
         ' Broadcast message
-        If Left$(ChatText, 1) = "'" Then
-            ChatText = Mid$(ChatText, 2, Len(ChatText) - 1)
+        If Left$(chatText, 1) = "'" Then
+            chatText = Mid$(chatText, 2, Len(chatText) - 1)
 
-            If Len(ChatText) > 0 Then
-                BroadcastMsg(ChatText) '("Привет, русский чат")
+            If Len(chatText) > 0 Then
+                BroadcastMsg(chatText) '("Привет, русский чат")
             End If
 
             ChatInput.CurrentMessage = ""
@@ -516,10 +516,10 @@ Module C_GameLogic
         End If
 
         ' party message
-        If Left$(ChatText, 1) = "-" Then
-            ChatInput.CurrentMessage = Mid$(ChatText, 2, Len(ChatText) - 1)
+        If Left$(chatText, 1) = "-" Then
+            ChatInput.CurrentMessage = Mid$(chatText, 2, Len(chatText) - 1)
 
-            If Len(ChatText) > 0 Then
+            If Len(chatText) > 0 Then
                 SendPartyChatMsg(ChatInput.CurrentMessage)
             End If
 
@@ -528,27 +528,27 @@ Module C_GameLogic
         End If
 
         ' Player message
-        If Left$(ChatText, 1) = "!" Then
-            ChatText = Mid$(ChatText, 2, Len(ChatText) - 1)
-            Name = ""
+        If Left$(chatText, 1) = "!" Then
+            chatText = Mid$(chatText, 2, Len(chatText) - 1)
+            name = ""
 
             ' Get the desired player from the user text
-            For i = 1 To Len(ChatText)
+            For i = 1 To Len(chatText)
 
-                If Mid$(ChatText, i, 1) <> Space(1) Then
-                    Name = Name & Mid$(ChatText, i, 1)
+                If Mid$(chatText, i, 1) <> Space(1) Then
+                    name = name & Mid$(chatText, i, 1)
                 Else
                     Exit For
                 End If
 
             Next
 
-            ChatInput.CurrentMessage = Trim$(Mid$(ChatText, i, Len(ChatText) - 1))
+            ChatInput.CurrentMessage = Trim$(Mid$(chatText, i, Len(chatText) - 1))
 
             ' Make sure they are actually sending something
             If Len(ChatInput.CurrentMessage) > 0 Then
                 ' Send the message to the player
-                PlayerMsg(ChatInput.CurrentMessage, Name)
+                PlayerMsg(ChatInput.CurrentMessage, name)
             Else
                 AddText(Strings.Get("chatcommand", "playermsg"), ColorType.Yellow)
             End If
@@ -558,22 +558,22 @@ Module C_GameLogic
         End If
 
         If Left$(ChatInput.CurrentMessage, 1) = "/" Then
-            Command = Split(ChatInput.CurrentMessage, Space(1))
+            command = Split(ChatInput.CurrentMessage, Space(1))
 
-            Select Case Command(0)
+            Select Case command(0)
                 Case "/emote"
                     ' Checks to make sure we have more than one string in the array
-                    If UBound(Command) < 1 Then
+                    If UBound(command) < 1 Then
                         AddText(Strings.Get("chatcommand", "emote"), ColorType.Yellow)
                         GoTo Continue1
                     End If
 
-                    If Not IsNumeric(Command(1)) Then
+                    If Not IsNumeric(command(1)) Then
                         AddText(Strings.Get("chatcommand", "emote"), ColorType.Yellow)
                         GoTo Continue1
                     End If
 
-                    SendUseEmote(Command(1))
+                    SendUseEmote(command(1))
 
                 Case "/help"
                     AddText(Strings.Get("chatcommand", "help1"), ColorType.Yellow)
@@ -585,68 +585,68 @@ Module C_GameLogic
                 Case "/houseinvite"
 
                     ' Checks to make sure we have more than one string in the array
-                    If UBound(Command) < 1 Then
+                    If UBound(command) < 1 Then
                         AddText(Strings.Get("chatcommand", "houseinvite"), ColorType.Yellow)
                         GoTo Continue1
                     End If
 
-                    If IsNumeric(Command(1)) Then
+                    If IsNumeric(command(1)) Then
                         AddText(Strings.Get("chatcommand", "houseinvite"), ColorType.Yellow)
                         GoTo Continue1
                     End If
 
-                    SendInvite(Command(1))
+                    SendInvite(command(1))
 
                 Case "/sellhouse"
-                    Buffer = New ByteStream(4)
-                    Buffer.WriteInt32(ClientPackets.CSellHouse)
-                    Socket.SendData(Buffer.Data, Buffer.Head)
-                    Buffer.Dispose()
+                    buffer = New ByteStream(4)
+                    buffer.WriteInt32(ClientPackets.CSellHouse)
+                    Socket.SendData(buffer.Data, buffer.Head)
+                    buffer.Dispose()
                 Case "/info"
 
                     ' Checks to make sure we have more than one string in the array
-                    If UBound(Command) < 1 Then
+                    If UBound(command) < 1 Then
                         AddText(Strings.Get("chatcommand", "info"), ColorType.Yellow)
                         GoTo Continue1
                     End If
 
-                    If IsNumeric(Command(1)) Then
+                    If IsNumeric(command(1)) Then
                         AddText(Strings.Get("chatcommand", "info"), ColorType.Yellow)
                         GoTo Continue1
                     End If
 
-                    Buffer = New ByteStream(4)
-                    Buffer.WriteInt32(ClientPackets.CPlayerInfoRequest)
+                    buffer = New ByteStream(4)
+                    buffer.WriteInt32(ClientPackets.CPlayerInfoRequest)
                     buffer.WriteString((command(1)))
-                    Socket.SendData(Buffer.Data, Buffer.Head)
-                    Buffer.Dispose()
+                    Socket.SendData(buffer.Data, buffer.Head)
+                    buffer.Dispose()
                 ' Whos Online
                 Case "/who"
                     SendWhosOnline()
                 ' Checking fps
                 Case "/fps"
-                    BFPS = Not BFPS
+                    Bfps = Not Bfps
                 Case "/lps"
-                    BLPS = Not BLPS
+                    Blps = Not Blps
                 ' Request stats
                 Case "/stats"
-                    Buffer = New ByteStream(4)
-                    Buffer.WriteInt32(ClientPackets.CGetStats)
-                    Socket.SendData(Buffer.Data, Buffer.Head)
-                    Buffer.Dispose()
+                    buffer = New ByteStream(4)
+                    buffer.WriteInt32(ClientPackets.CGetStats)
+                    Socket.SendData(buffer.Data, buffer.Head)
+                    buffer.Dispose()
                 Case "/party"
                     ' Make sure they are actually sending something
-                    If UBound(Command) < 1 Then
+                    If UBound(command) < 1 Then
                         AddText(Strings.Get("chatcommand", "party"), ColorType.Yellow)
                         GoTo Continue1
                     End If
 
-                    If IsNumeric(Command(1)) Then
+                    If IsNumeric(command(1)) Then
                         AddText(Strings.Get("chatcommand", "party"), ColorType.Yellow)
                         GoTo Continue1
                     End If
 
-                    SendPartyRequest(Command(1))
+                    SendPartyRequest(command(1))
 
                 ' Join party
                 Case "/join"
@@ -662,22 +662,22 @@ Module C_GameLogic
                 ' // Monitor Admin Commands //
 
                 Case "/questreset"
-                    If GetPlayerAccess(MyIndex) < AdminType.Mapper Then
+                    If GetPlayerAccess(Myindex) < AdminType.Mapper Then
                         AddText(Strings.Get("adminchatcommand", "accesswarning"), QColorType.AlertColor)
                         GoTo Continue1
                     End If
 
-                    If UBound(Command) < 1 Then
+                    If UBound(command) < 1 Then
                         AddText(Strings.Get("adminchatcommand", "questreset"), ColorType.Yellow)
                         GoTo Continue1
                     End If
 
-                    If Not IsNumeric(Command(1)) Then
+                    If Not IsNumeric(command(1)) Then
                         AddText(Strings.Get("adminchatcommand", "questreset"), ColorType.Yellow)
                         GoTo Continue1
                     End If
 
-                    n = Command(1)
+                    n = command(1)
 
                     ' Check to make sure its a valid map #
                     If n > 0 AndAlso n <= MaxQuests Then
@@ -689,7 +689,7 @@ Module C_GameLogic
                 ' Admin Help
                 Case "/admin"
 
-                    If GetPlayerAccess(MyIndex) < AdminType.Monitor Then
+                    If GetPlayerAccess(Myindex) < AdminType.Monitor Then
                         AddText(Strings.Get("adminchatcommand", "accesswarning"), QColorType.AlertColor)
                         GoTo Continue1
                     End If
@@ -701,27 +701,27 @@ Module C_GameLogic
                 ' Kicking a player
                 Case "/kick"
 
-                    If GetPlayerAccess(MyIndex) < AdminType.Monitor Then
+                    If GetPlayerAccess(Myindex) < AdminType.Monitor Then
                         AddText(Strings.Get("adminchatcommand", "accesswarning"), QColorType.AlertColor)
                         GoTo Continue1
                     End If
 
-                    If UBound(Command) < 1 Then
+                    If UBound(command) < 1 Then
                         AddText(Strings.Get("adminchatcommand", "kick"), ColorType.Yellow)
                         GoTo Continue1
                     End If
 
-                    If IsNumeric(Command(1)) Then
+                    If IsNumeric(command(1)) Then
                         AddText(Strings.Get("adminchatcommand", "kick"), ColorType.Yellow)
                         GoTo Continue1
                     End If
 
-                    SendKick(Command(1))
+                    SendKick(command(1))
                 ' // Mapper Admin Commands //
                 ' Location
                 Case "/loc"
 
-                    If GetPlayerAccess(MyIndex) < AdminType.Mapper Then
+                    If GetPlayerAccess(Myindex) < AdminType.Mapper Then
                         AddText(Strings.Get("adminchatcommand", "accesswarning"), QColorType.AlertColor)
                         GoTo Continue1
                     End If
@@ -730,7 +730,7 @@ Module C_GameLogic
                 ' Map Editor
                 Case "/mapeditor"
 
-                    If GetPlayerAccess(MyIndex) < AdminType.Mapper Then
+                    If GetPlayerAccess(Myindex) < AdminType.Mapper Then
                         AddText(Strings.Get("adminchatcommand", "accesswarning"), QColorType.AlertColor)
                         GoTo Continue1
                     End If
@@ -739,60 +739,60 @@ Module C_GameLogic
                 ' Warping to a player
                 Case "/warpmeto"
 
-                    If GetPlayerAccess(MyIndex) < AdminType.Mapper Then
+                    If GetPlayerAccess(Myindex) < AdminType.Mapper Then
                         AddText(Strings.Get("adminchatcommand", "accesswarning"), QColorType.AlertColor)
                         GoTo Continue1
                     End If
 
-                    If UBound(Command) < 1 Then
+                    If UBound(command) < 1 Then
                         AddText(Strings.Get("adminchatcommand", "warpmeto"), ColorType.Yellow)
                         GoTo Continue1
                     End If
 
-                    If IsNumeric(Command(1)) Then
+                    If IsNumeric(command(1)) Then
                         AddText(Strings.Get("adminchatcommand", "warpmeto"), ColorType.Yellow)
                         GoTo Continue1
                     End If
 
-                    WarpMeTo(Command(1))
+                    WarpMeTo(command(1))
                 ' Warping a player to you
                 Case "/warptome"
 
-                    If GetPlayerAccess(MyIndex) < AdminType.Mapper Then
+                    If GetPlayerAccess(Myindex) < AdminType.Mapper Then
                         AddText(Strings.Get("adminchatcommand", "accesswarning"), QColorType.AlertColor)
                         GoTo Continue1
                     End If
 
-                    If UBound(Command) < 1 Then
+                    If UBound(command) < 1 Then
                         AddText(Strings.Get("adminchatcommand", "warptome"), ColorType.Yellow)
                         GoTo Continue1
                     End If
 
-                    If IsNumeric(Command(1)) Then
+                    If IsNumeric(command(1)) Then
                         AddText(Strings.Get("adminchatcommand", "warptome"), ColorType.Yellow)
                         GoTo Continue1
                     End If
 
-                    WarpToMe(Command(1))
+                    WarpToMe(command(1))
                 ' Warping to a map
                 Case "/warpto"
 
-                    If GetPlayerAccess(MyIndex) < AdminType.Mapper Then
+                    If GetPlayerAccess(Myindex) < AdminType.Mapper Then
                         AddText(Strings.Get("adminchatcommand", "accesswarning"), QColorType.AlertColor)
                         GoTo Continue1
                     End If
 
-                    If UBound(Command) < 1 Then
+                    If UBound(command) < 1 Then
                         AddText(Strings.Get("adminchatcommand", "warpto"), ColorType.Yellow)
                         GoTo Continue1
                     End If
 
-                    If Not IsNumeric(Command(1)) Then
+                    If Not IsNumeric(command(1)) Then
                         AddText(Strings.Get("adminchatcommand", "warpto"), ColorType.Yellow)
                         GoTo Continue1
                     End If
 
-                    n = Command(1)
+                    n = command(1)
 
                     ' Check to make sure its a valid map #
                     If n > 0 AndAlso n <= MAX_MAPS Then
@@ -804,26 +804,26 @@ Module C_GameLogic
                 ' Setting sprite
                 Case "/setsprite"
 
-                    If GetPlayerAccess(MyIndex) < AdminType.Mapper Then
+                    If GetPlayerAccess(Myindex) < AdminType.Mapper Then
                         AddText(Strings.Get("adminchatcommand", "accesswarning"), QColorType.AlertColor)
                         GoTo Continue1
                     End If
 
-                    If UBound(Command) < 1 Then
+                    If UBound(command) < 1 Then
                         AddText(Strings.Get("adminchatcommand", "setsprite"), ColorType.Yellow)
                         GoTo Continue1
                     End If
 
-                    If Not IsNumeric(Command(1)) Then
+                    If Not IsNumeric(command(1)) Then
                         AddText(Strings.Get("adminchatcommand", "setsprite"), ColorType.Yellow)
                         GoTo Continue1
                     End If
 
-                    SendSetSprite(Command(1))
+                    SendSetSprite(command(1))
                 ' Map report
                 Case "/mapreport"
 
-                    If GetPlayerAccess(MyIndex) < AdminType.Mapper Then
+                    If GetPlayerAccess(Myindex) < AdminType.Mapper Then
                         AddText(Strings.Get("adminchatcommand", "accesswarning"), QColorType.AlertColor)
                         GoTo Continue1
                     End If
@@ -832,7 +832,7 @@ Module C_GameLogic
                 ' Respawn request
                 Case "/respawn"
 
-                    If GetPlayerAccess(MyIndex) < AdminType.Mapper Then
+                    If GetPlayerAccess(Myindex) < AdminType.Mapper Then
                         AddText(Strings.Get("adminchatcommand", "accesswarning"), QColorType.AlertColor)
                         GoTo Continue1
                     End If
@@ -841,21 +841,21 @@ Module C_GameLogic
                 ' MOTD change
                 Case "/motd"
 
-                    If GetPlayerAccess(MyIndex) < AdminType.Mapper Then
+                    If GetPlayerAccess(Myindex) < AdminType.Mapper Then
                         AddText(Strings.Get("adminchatcommand", "accesswarning"), QColorType.AlertColor)
                         GoTo Continue1
                     End If
 
-                    If UBound(Command) < 1 Then
+                    If UBound(command) < 1 Then
                         AddText(Strings.Get("adminchatcommand", "motd"), ColorType.Yellow)
                         GoTo Continue1
                     End If
 
-                    SendMOTDChange(Right$(ChatText, Len(ChatText) - 5))
+                    SendMotdChange(Right$(chatText, Len(chatText) - 5))
                 ' Check the ban list
                 Case "/banlist"
 
-                    If GetPlayerAccess(MyIndex) < AdminType.Mapper Then
+                    If GetPlayerAccess(Myindex) < AdminType.Mapper Then
                         AddText(Strings.Get("adminchatcommand", "accesswarning"), QColorType.AlertColor)
                         GoTo Continue1
                     End If
@@ -864,39 +864,39 @@ Module C_GameLogic
                 ' Banning a player
                 Case "/ban"
 
-                    If GetPlayerAccess(MyIndex) < AdminType.Mapper Then
+                    If GetPlayerAccess(Myindex) < AdminType.Mapper Then
                         AddText(Strings.Get("adminchatcommand", "accesswarning"), QColorType.AlertColor)
                         GoTo Continue1
                     End If
 
-                    If UBound(Command) < 1 Then
+                    If UBound(command) < 1 Then
                         AddText(Strings.Get("adminchatcommand", "ban"), ColorType.Yellow)
                         GoTo Continue1
                     End If
 
-                    SendBan(Command(1))
+                    SendBan(command(1))
                 ' // Developer Admin Commands //
 
                 ' // Creator Admin Commands //
                 ' Giving another player access
                 Case "/setaccess"
 
-                    If GetPlayerAccess(MyIndex) < AdminType.Creator Then
+                    If GetPlayerAccess(Myindex) < AdminType.Creator Then
                         AddText(Strings.Get("adminchatcommand", "accesswarning"), QColorType.AlertColor)
                         GoTo Continue1
                     End If
 
-                    If UBound(Command) < 2 Then
+                    If UBound(command) < 2 Then
                         AddText(Strings.Get("adminchatcommand", "setaccess"), ColorType.Yellow)
                         GoTo Continue1
                     End If
 
-                    If IsNumeric(Command(1)) OrElse Not IsNumeric(Command(2)) Then
+                    If IsNumeric(command(1)) OrElse Not IsNumeric(command(2)) Then
                         AddText(Strings.Get("adminchatcommand", "setaccess"), ColorType.Yellow)
                         GoTo Continue1
                     End If
 
-                    SendSetAccess(Command(1), CLng(Command(2)))
+                    SendSetAccess(command(1), CLng(command(2)))
                 Case Else
                     AddText(Strings.Get("chatcommand", "wrongcmd"), QColorType.AlertColor)
             End Select
@@ -908,47 +908,47 @@ Continue1:
         End If
 
         ' Say message
-        If Len(ChatText) > 0 Then
-            SayMsg(ChatText)
+        If Len(chatText) > 0 Then
+            SayMsg(chatText)
         End If
 
         ChatInput.CurrentMessage = ""
     End Sub
 
     Sub CheckMapGetItem()
-        dim buffer as New ByteStream(4)
-        Buffer = New ByteStream(4)
+        Dim buffer As New ByteStream(4)
+        buffer = New ByteStream(4)
 
-        If GetTickCount() > Player(MyIndex).MapGetTimer + 250 Then
+        If GetTickCount() > Player(Myindex).MapGetTimer + 250 Then
             If Trim$(ChatInput.CurrentMessage) = "" Then
-                Player(MyIndex).MapGetTimer = GetTickCount()
-                Buffer.WriteInt32(ClientPackets.CMapGetItem)
-                Socket.SendData(Buffer.Data, Buffer.Head)
+                Player(Myindex).MapGetTimer = GetTickCount()
+                buffer.WriteInt32(ClientPackets.CMapGetItem)
+                Socket.SendData(buffer.Data, buffer.Head)
             End If
         End If
 
-        Buffer.Dispose()
+        buffer.Dispose()
     End Sub
 
     Friend Sub UpdateDescWindow(itemnum As Integer, amount As Integer, invNum As Integer, windowType As Byte)
         Dim theName As String = "", tmpRarity As Integer
 
-        If Item(itemnum).Randomize <> 0 AndAlso InvNum <> 0 Then
-            If WindowType = 0 Then ' inventory
-                theName = Trim(Player(MyIndex).RandInv(InvNum).Prefix) & " " & Trim(Item(itemnum).Name) & " " & Trim(Player(MyIndex).RandInv(InvNum).Suffix)
-                tmpRarity = Player(MyIndex).RandInv(InvNum).Rarity
-            ElseIf WindowType = 1 Then ' equip
-                theName = Trim(Player(MyIndex).RandEquip(InvNum).Prefix) & " " & Trim(Item(itemnum).Name) & " " & Trim(Player(MyIndex).RandEquip(InvNum).Suffix)
-                tmpRarity = Player(MyIndex).RandEquip(InvNum).Rarity
-            ElseIf WindowType = 2 Then ' bank
-                theName = Trim(Bank.ItemRand(InvNum).Prefix) & " " & Trim(Item(itemnum).Name) & " " & Trim(Bank.ItemRand(InvNum).Suffix)
-                tmpRarity = Bank.ItemRand(InvNum).Rarity
-            ElseIf WindowType = 3 Then ' shop
-                theName = Trim(Player(MyIndex).RandEquip(InvNum).Prefix) & " " & Trim(Item(itemnum).Name) & " " & Trim(Player(MyIndex).RandEquip(InvNum).Suffix)
-                tmpRarity = Player(MyIndex).RandEquip(InvNum).Rarity
-            ElseIf WindowType = 4 Then ' trade
-                theName = Trim(Player(MyIndex).RandEquip(InvNum).Prefix) & " " & Trim(Item(itemnum).Name) & " " & Trim(Player(MyIndex).RandEquip(InvNum).Suffix)
-                tmpRarity = Player(MyIndex).RandEquip(InvNum).Rarity
+        If Item(itemnum).Randomize <> 0 AndAlso invNum <> 0 Then
+            If windowType = 0 Then ' inventory
+                theName = Trim(Player(Myindex).RandInv(invNum).Prefix) & " " & Trim(Item(itemnum).Name) & " " & Trim(Player(Myindex).RandInv(invNum).Suffix)
+                tmpRarity = Player(Myindex).RandInv(invNum).Rarity
+            ElseIf windowType = 1 Then ' equip
+                theName = Trim(Player(Myindex).RandEquip(invNum).Prefix) & " " & Trim(Item(itemnum).Name) & " " & Trim(Player(Myindex).RandEquip(invNum).Suffix)
+                tmpRarity = Player(Myindex).RandEquip(invNum).Rarity
+            ElseIf windowType = 2 Then ' bank
+                theName = Trim(Bank.ItemRand(invNum).Prefix) & " " & Trim(Item(itemnum).Name) & " " & Trim(Bank.ItemRand(invNum).Suffix)
+                tmpRarity = Bank.ItemRand(invNum).Rarity
+            ElseIf windowType = 3 Then ' shop
+                theName = Trim(Player(Myindex).RandEquip(invNum).Prefix) & " " & Trim(Item(itemnum).Name) & " " & Trim(Player(Myindex).RandEquip(invNum).Suffix)
+                tmpRarity = Player(Myindex).RandEquip(invNum).Rarity
+            ElseIf windowType = 4 Then ' trade
+                theName = Trim(Player(Myindex).RandEquip(invNum).Prefix) & " " & Trim(Item(itemnum).Name) & " " & Trim(Player(Myindex).RandEquip(invNum).Suffix)
+                tmpRarity = Player(Myindex).RandEquip(invNum).Rarity
             End If
         Else
             theName = Trim$(Item(itemnum).Name)
@@ -996,10 +996,10 @@ Continue1:
 
                     Case EquipmentType.Weapon
                         If Item(itemnum).Randomize <> 0 Then
-                            If WindowType = 0 Then
-                                ItemDescInfo = "Damage: " & Player(MyIndex).RandInv(InvNum).Damage
+                            If windowType = 0 Then
+                                ItemDescInfo = "Damage: " & Player(Myindex).RandInv(invNum).Damage
                             Else
-                                ItemDescInfo = "Damage: " & Player(MyIndex).RandEquip(InvNum).Damage
+                                ItemDescInfo = "Damage: " & Player(Myindex).RandEquip(invNum).Damage
                             End If
                         Else
                             ItemDescInfo = "Damage: " & Item(itemnum).Data2
@@ -1088,20 +1088,19 @@ Continue1:
 
         ' Equipment specific
         If Item(itemnum).Randomize <> 0 Then
-            If WindowType = 0 Then
-                If Player(MyIndex).RandInv(InvNum).Stat(StatType.Strength) > 0 Then
-                    ItemDescStr = "+" & Player(MyIndex).RandInv(InvNum).Stat(StatType.Strength)
+            If windowType = 0 Then
+                If Player(Myindex).RandInv(invNum).Stat(StatType.Strength) > 0 Then
+                    ItemDescStr = "+" & Player(Myindex).RandInv(invNum).Stat(StatType.Strength)
                 Else
                     ItemDescStr = Strings.Get("itemdescription", "none")
                 End If
             Else
-                If Player(MyIndex).RandEquip(InvNum).Stat(StatType.Strength) > 0 Then
-                    ItemDescStr = "+" & Player(MyIndex).RandEquip(InvNum).Stat(StatType.Strength)
+                If Player(Myindex).RandEquip(invNum).Stat(StatType.Strength) > 0 Then
+                    ItemDescStr = "+" & Player(Myindex).RandEquip(invNum).Stat(StatType.Strength)
                 Else
                     ItemDescStr = Strings.Get("itemdescription", "none")
                 End If
             End If
-
         Else
             If Item(itemnum).Add_Stat(StatType.Strength) > 0 Then
                 ItemDescStr = "+" & Item(itemnum).Add_Stat(StatType.Strength)
@@ -1111,15 +1110,15 @@ Continue1:
         End If
 
         If Item(itemnum).Randomize <> 0 Then
-            If WindowType = 0 Then
-                If Player(MyIndex).RandInv(InvNum).Stat(StatType.Vitality) > 0 Then
-                    ItemDescVit = "+" & Player(MyIndex).RandInv(InvNum).Stat(StatType.Vitality)
+            If windowType = 0 Then
+                If Player(Myindex).RandInv(invNum).Stat(StatType.Vitality) > 0 Then
+                    ItemDescVit = "+" & Player(Myindex).RandInv(invNum).Stat(StatType.Vitality)
                 Else
                     ItemDescVit = Strings.Get("itemdescription", "none")
                 End If
             Else
-                If Player(MyIndex).RandEquip(InvNum).Stat(StatType.Vitality) > 0 Then
-                    ItemDescVit = "+" & Player(MyIndex).RandEquip(InvNum).Stat(StatType.Vitality)
+                If Player(Myindex).RandEquip(invNum).Stat(StatType.Vitality) > 0 Then
+                    ItemDescVit = "+" & Player(Myindex).RandEquip(invNum).Stat(StatType.Vitality)
                 Else
                     ItemDescVit = Strings.Get("itemdescription", "none")
                 End If
@@ -1133,15 +1132,15 @@ Continue1:
         End If
 
         If Item(itemnum).Randomize <> 0 Then
-            If WindowType = 0 Then
-                If Player(MyIndex).RandInv(InvNum).Stat(StatType.Intelligence) > 0 Then
-                    ItemDescInt = "+" & Player(MyIndex).RandInv(InvNum).Stat(StatType.Intelligence)
+            If windowType = 0 Then
+                If Player(Myindex).RandInv(invNum).Stat(StatType.Intelligence) > 0 Then
+                    ItemDescInt = "+" & Player(Myindex).RandInv(invNum).Stat(StatType.Intelligence)
                 Else
                     ItemDescInt = Strings.Get("itemdescription", "none")
                 End If
             Else
-                If Player(MyIndex).RandEquip(InvNum).Stat(StatType.Intelligence) > 0 Then
-                    ItemDescInt = "+" & Player(MyIndex).RandEquip(InvNum).Stat(StatType.Intelligence)
+                If Player(Myindex).RandEquip(invNum).Stat(StatType.Intelligence) > 0 Then
+                    ItemDescInt = "+" & Player(Myindex).RandEquip(invNum).Stat(StatType.Intelligence)
                 Else
                     ItemDescInt = Strings.Get("itemdescription", "none")
                 End If
@@ -1155,20 +1154,19 @@ Continue1:
         End If
 
         If Item(itemnum).Randomize <> 0 Then
-            If WindowType = 0 Then
-                If Player(MyIndex).RandInv(InvNum).Stat(StatType.Endurance) > 0 Then
-                    ItemDescEnd = "+" & Player(MyIndex).RandInv(InvNum).Stat(StatType.Endurance)
+            If windowType = 0 Then
+                If Player(Myindex).RandInv(invNum).Stat(StatType.Endurance) > 0 Then
+                    ItemDescEnd = "+" & Player(Myindex).RandInv(invNum).Stat(StatType.Endurance)
                 Else
                     ItemDescEnd = Strings.Get("itemdescription", "none")
                 End If
             Else
-                If Player(MyIndex).RandEquip(InvNum).Stat(StatType.Endurance) > 0 Then
-                    ItemDescEnd = "+" & Player(MyIndex).RandEquip(InvNum).Stat(StatType.Endurance)
+                If Player(Myindex).RandEquip(invNum).Stat(StatType.Endurance) > 0 Then
+                    ItemDescEnd = "+" & Player(Myindex).RandEquip(invNum).Stat(StatType.Endurance)
                 Else
                     ItemDescEnd = Strings.Get("itemdescription", "none")
                 End If
             End If
-
         Else
             If Item(itemnum).Add_Stat(StatType.Endurance) > 0 Then
                 ItemDescEnd = "+" & Item(itemnum).Add_Stat(StatType.Endurance)
@@ -1178,20 +1176,19 @@ Continue1:
         End If
 
         If Item(itemnum).Randomize <> 0 Then
-            If WindowType = 0 Then
-                If Player(MyIndex).RandInv(InvNum).Stat(StatType.Luck) > 0 Then
-                    ItemDescLuck = "+" & Player(MyIndex).RandInv(InvNum).Stat(StatType.Luck)
+            If windowType = 0 Then
+                If Player(Myindex).RandInv(invNum).Stat(StatType.Luck) > 0 Then
+                    ItemDescLuck = "+" & Player(Myindex).RandInv(invNum).Stat(StatType.Luck)
                 Else
                     ItemDescLuck = Strings.Get("itemdescription", "none")
                 End If
             Else
-                If Player(MyIndex).RandEquip(InvNum).Stat(StatType.Luck) > 0 Then
-                    ItemDescLuck = "+" & Player(MyIndex).RandEquip(InvNum).Stat(StatType.Luck)
+                If Player(Myindex).RandEquip(invNum).Stat(StatType.Luck) > 0 Then
+                    ItemDescLuck = "+" & Player(Myindex).RandEquip(invNum).Stat(StatType.Luck)
                 Else
                     ItemDescLuck = Strings.Get("itemdescription", "none")
                 End If
             End If
-
         Else
             If Item(itemnum).Add_Stat(StatType.Luck) > 0 Then
                 ItemDescLuck = "+" & Item(itemnum).Add_Stat(StatType.Luck)
@@ -1201,20 +1198,19 @@ Continue1:
         End If
 
         If Item(itemnum).Randomize <> 0 Then
-            If WindowType = 0 Then
-                If Player(MyIndex).RandInv(InvNum).Stat(StatType.Spirit) > 0 Then
-                    ItemDescSpr = "+" & Player(MyIndex).RandInv(InvNum).Stat(StatType.Spirit)
+            If windowType = 0 Then
+                If Player(Myindex).RandInv(invNum).Stat(StatType.Spirit) > 0 Then
+                    ItemDescSpr = "+" & Player(Myindex).RandInv(invNum).Stat(StatType.Spirit)
                 Else
                     ItemDescSpr = Strings.Get("itemdescription", "none")
                 End If
             Else
-                If Player(MyIndex).RandEquip(InvNum).Stat(StatType.Spirit) > 0 Then
-                    ItemDescSpr = "+" & Player(MyIndex).RandEquip(InvNum).Stat(StatType.Spirit)
+                If Player(Myindex).RandEquip(invNum).Stat(StatType.Spirit) > 0 Then
+                    ItemDescSpr = "+" & Player(Myindex).RandEquip(invNum).Stat(StatType.Spirit)
                 Else
                     ItemDescSpr = Strings.Get("itemdescription", "none")
                 End If
             End If
-
         Else
             If Item(itemnum).Add_Stat(StatType.Spirit) > 0 Then
                 ItemDescSpr = "+" & Item(itemnum).Add_Stat(StatType.Spirit)
@@ -1224,20 +1220,19 @@ Continue1:
         End If
 
         If Item(itemnum).Randomize <> 0 Then
-            If WindowType = 0 Then
+            If windowType = 0 Then
                 If Item(itemnum).SubType = EquipmentType.Weapon Then
-                    ItemDescSpeed = Player(MyIndex).RandInv(InvNum).Speed / 1000 & Strings.Get("itemdescription", "secs")
+                    ItemDescSpeed = Player(Myindex).RandInv(invNum).Speed / 1000 & Strings.Get("itemdescription", "secs")
                 Else
                     ItemDescSpeed = Strings.Get("itemdescription", "notavail")
                 End If
             Else
                 If Item(itemnum).SubType = EquipmentType.Weapon Then
-                    ItemDescSpeed = Player(MyIndex).RandEquip(InvNum).Speed / 1000 & Strings.Get("itemdescription", "secs")
+                    ItemDescSpeed = Player(Myindex).RandEquip(invNum).Speed / 1000 & Strings.Get("itemdescription", "secs")
                 Else
                     ItemDescSpeed = Strings.Get("itemdescription", "notavail")
                 End If
             End If
-
         Else
             If Item(itemnum).SubType = EquipmentType.Weapon Then
                 ItemDescSpeed = Item(itemnum).Speed / 1000 & Strings.Get("itemdescription", "secs")
@@ -1270,25 +1265,25 @@ Continue1:
     End Function
 
     Friend Sub SetBankItemNum(bankslot As Byte, itemnum As Integer)
-        Bank.Item(Bankslot).Num = itemnum
+        Bank.Item(bankslot).Num = itemnum
     End Sub
 
     Friend Function GetBankItemValue(bankslot As Byte) As Integer
-        GetBankItemValue = Bank.Item(Bankslot).Value
+        GetBankItemValue = Bank.Item(bankslot).Value
     End Function
 
     Friend Sub SetBankItemValue(bankslot As Byte, itemValue As Integer)
-        Bank.Item(Bankslot).Value = ItemValue
+        Bank.Item(bankslot).Value = itemValue
     End Sub
 
     Friend Sub ClearActionMsg(index As Byte)
-        ActionMsg(Index).message = ""
-        ActionMsg(Index).Created = 0
-        ActionMsg(Index).Type = 0
-        ActionMsg(Index).color = 0
-        ActionMsg(Index).Scroll = 0
-        ActionMsg(Index).X = 0
-        ActionMsg(Index).Y = 0
+        ActionMsg(index).Message = ""
+        ActionMsg(index).Created = 0
+        ActionMsg(index).Type = 0
+        ActionMsg(index).Color = 0
+        ActionMsg(index).Scroll = 0
+        ActionMsg(index).X = 0
+        ActionMsg(index).Y = 0
     End Sub
 
     Friend Sub UpdateSkillWindow(skillnum As Integer)
@@ -1329,9 +1324,9 @@ Continue1:
         SkillDescDamage = Skill(skillnum).Vital
 
         If Skill(skillnum).IsAoE Then
-            SkillDescAOE = Skill(skillnum).AoE & Strings.Get("skilldescription", "tiles")
+            SkillDescAoe = Skill(skillnum).AoE & Strings.Get("skilldescription", "tiles")
         Else
-            SkillDescAOE = Strings.Get("skilldescription", "no")
+            SkillDescAoe = Strings.Get("skilldescription", "no")
         End If
 
         If Skill(skillnum).Range > 0 Then
@@ -1342,50 +1337,49 @@ Continue1:
 
     End Sub
 
-    Friend Sub CheckAnimInstance(index as integer)
+    Friend Sub CheckAnimInstance(index As Integer)
         Dim looptime As Integer
         Dim layer As Integer, sound As String
         Dim frameCount As Integer
 
         ' if doesn't exist then exit sub
-        If AnimInstance(Index).Animation <= 0 Then Exit Sub
-        If AnimInstance(Index).Animation >= MAX_ANIMATIONS Then Exit Sub
+        If AnimInstance(index).Animation <= 0 Then Exit Sub
+        If AnimInstance(index).Animation >= MAX_ANIMATIONS Then Exit Sub
 
-        Sound = Animation(AnimInstance(Index).Animation).Sound
+        sound = Animation(AnimInstance(index).Animation).Sound
 
-        For Layer = 0 To 1
-            If AnimInstance(Index).Used(Layer) Then
-                looptime = Animation(AnimInstance(Index).Animation).LoopTime(Layer)
-                FrameCount = Animation(AnimInstance(Index).Animation).Frames(Layer)
-
+        For layer = 0 To 1
+            If AnimInstance(index).Used(layer) Then
+                looptime = Animation(AnimInstance(index).Animation).LoopTime(layer)
+                frameCount = Animation(AnimInstance(index).Animation).Frames(layer)
 
                 ' if zero'd then set so we don't have extra loop and/or frame
-                If AnimInstance(Index).FrameIndex(Layer) = 0 Then AnimInstance(Index).FrameIndex(Layer) = 1
-                If AnimInstance(Index).LoopIndex(Layer) = 0 Then AnimInstance(Index).LoopIndex(Layer) = 1
+                If AnimInstance(index).FrameIndex(layer) = 0 Then AnimInstance(index).FrameIndex(layer) = 1
+                If AnimInstance(index).LoopIndex(layer) = 0 Then AnimInstance(index).LoopIndex(layer) = 1
 
                 ' check if frame timer is set, and needs to have a frame change
-                If AnimInstance(Index).Timer(Layer) + looptime <= GetTickCount() Then
+                If AnimInstance(index).Timer(layer) + looptime <= GetTickCount() Then
                     ' check if out of range
-                    If AnimInstance(Index).FrameIndex(Layer) >= FrameCount Then
-                        AnimInstance(Index).LoopIndex(Layer) = AnimInstance(Index).LoopIndex(Layer) + 1
-                        If AnimInstance(Index).LoopIndex(Layer) > Animation(AnimInstance(Index).Animation).LoopCount(Layer) Then
-                            AnimInstance(Index).Used(Layer) = False
+                    If AnimInstance(index).FrameIndex(layer) >= frameCount Then
+                        AnimInstance(index).LoopIndex(layer) = AnimInstance(index).LoopIndex(layer) + 1
+                        If AnimInstance(index).LoopIndex(layer) > Animation(AnimInstance(index).Animation).LoopCount(layer) Then
+                            AnimInstance(index).Used(layer) = False
                         Else
-                            AnimInstance(Index).FrameIndex(Layer) = 1
+                            AnimInstance(index).FrameIndex(layer) = 1
                         End If
                     Else
-                        AnimInstance(Index).FrameIndex(Layer) = AnimInstance(Index).FrameIndex(Layer) + 1
+                        AnimInstance(index).FrameIndex(layer) = AnimInstance(index).FrameIndex(layer) + 1
                     End If
-                    AnimInstance(Index).Timer(Layer) = GetTickCount()
+                    AnimInstance(index).Timer(layer) = GetTickCount()
                 End If
             End If
         Next
 
         ' if neither layer is used, clear
-        If AnimInstance(Index).Used(0) = False AndAlso AnimInstance(Index).Used(1) = False Then
-            ClearAnimInstance(Index)
+        If AnimInstance(index).Used(0) = False AndAlso AnimInstance(index).Used(1) = False Then
+            ClearAnimInstance(index)
         Else
-            If Sound <> "" Then PlaySound(Sound)
+            If sound <> "" Then PlaySound(sound)
         End If
     End Sub
 
@@ -1408,34 +1402,34 @@ Continue1:
     End Sub
 
     Friend Sub AddChatBubble(target As Integer, targetType As Byte, msg As String, colour As Integer)
-        Dim i As Integer, index as integer
+        Dim i As Integer, index As Integer
 
         ' set the global index
 
-        chatBubbleIndex = chatBubbleIndex + 1
-        If chatBubbleIndex < 1 OrElse chatBubbleIndex > Byte.MaxValue Then chatBubbleIndex = 1
+        ChatBubbleindex = ChatBubbleindex + 1
+        If ChatBubbleindex < 1 OrElse ChatBubbleindex > Byte.MaxValue Then ChatBubbleindex = 1
         ' default to new bubble
-        Index = chatBubbleIndex
+        index = ChatBubbleindex
         ' loop through and see if that player/npc already has a chat bubble
         For i = 1 To Byte.MaxValue
-            If chatBubble(i).targetType = targetType Then
-                If chatBubble(i).target = target Then
+            If ChatBubble(i).TargetType = targetType Then
+                If ChatBubble(i).Target = target Then
                     ' reset master index
-                    If chatBubbleIndex > 1 Then chatBubbleIndex = chatBubbleIndex - 1
+                    If ChatBubbleindex > 1 Then ChatBubbleindex = ChatBubbleindex - 1
                     ' we use this one now, yes?
-                    Index = i
+                    index = i
                     Exit For
                 End If
             End If
         Next
         ' set the bubble up
-        With chatBubble(Index)
-            .target = target
-            .targetType = targetType
-            .Msg = Msg
-            .colour = colour
+        With ChatBubble(index)
+            .Target = target
+            .TargetType = targetType
+            .Msg = msg
+            .Colour = colour
             .Timer = GetTickCount()
-            .active = True
+            .Active = True
         End With
 
     End Sub

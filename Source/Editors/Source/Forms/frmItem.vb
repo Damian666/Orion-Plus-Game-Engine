@@ -59,9 +59,11 @@
         fraBasics.Visible = False
         fraRequirements.Visible = True
     End Sub
+
 #End Region
 
 #Region "Basics"
+
     Private Sub NudPic_ValueChanged(sender As Object, e As EventArgs) Handles nudPic.Click
         If Editorindex = 0 OrElse Editorindex > MAX_ITEMS Then Exit Sub
 
@@ -222,9 +224,11 @@
 
         Item(Editorindex).Data1 = cmbPet.SelectedIndex
     End Sub
+
 #End Region
 
 #Region "Requirements"
+
     Private Sub CmbClassReq_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbClassReq.SelectedIndexChanged
         If Editorindex = 0 OrElse Editorindex > MAX_ITEMS Then Exit Sub
 
@@ -278,9 +282,11 @@
 
         Item(Editorindex).Stat_Req(StatType.Spirit) = nudSprReq.Value
     End Sub
+
 #End Region
 
 #Region "Equipment"
+
     Private Sub CmbTool_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbTool.SelectedIndexChanged
         If Editorindex = 0 OrElse Editorindex > MAX_ITEMS Then Exit Sub
         Item(Editorindex).Data3 = cmbTool.SelectedIndex
@@ -378,9 +384,11 @@
 
         Item(Editorindex).Ammo = cmbAmmo.SelectedIndex
     End Sub
+
 #End Region
 
 #Region "Furniture"
+
     Private Sub CmbFurnitureType_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbFurnitureType.SelectedIndexChanged
         If Editorindex = 0 OrElse Editorindex > MAX_ITEMS Then Exit Sub
         Item(Editorindex).Data1 = cmbFurnitureType.SelectedIndex

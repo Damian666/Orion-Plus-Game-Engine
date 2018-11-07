@@ -5,7 +5,9 @@ Imports SFML.Graphics
 Imports SFML.Window
 
 Friend Module C_Weather
+
 #Region "Types and Globals"
+
     Friend Const MaxWeatherParticles As Integer = 100
 
     Friend WeatherParticle(MaxWeatherParticles) As WeatherParticleRec
@@ -33,9 +35,11 @@ Friend Module C_Weather
     Friend CurrentTintB As Integer
     Friend CurrentTintA As Integer
     Friend DrawThunder As Integer
+
 #End Region
 
 #Region "Drawing"
+
     Friend Sub DrawThunderEffect()
 
         If DrawThunder > 0 Then
@@ -97,9 +101,11 @@ Friend Module C_Weather
         GameWindow.Draw(FogSprite(fogNum))
 
     End Sub
+
 #End Region
 
 #Region "Functions"
+
     Sub ProcessWeather()
         Dim i As Integer, x As Integer
 
@@ -152,9 +158,11 @@ Friend Module C_Weather
         Next
 
     End Sub
+
 #End Region
 
 #Region "Sound"
+
     Sub PlayWeatherSound(fileName As String, Optional looped As Boolean = False)
         If Not Options.Sound = 1 OrElse Not File.Exists(Application.StartupPath & SoundPath & fileName) Then Exit Sub
         If CurWeatherMusic = fileName Then Exit Sub
@@ -186,6 +194,7 @@ Friend Module C_Weather
 
         CurWeatherMusic = ""
     End Sub
+
 #End Region
 
 End Module

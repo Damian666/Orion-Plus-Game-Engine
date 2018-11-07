@@ -2,7 +2,8 @@
 Imports ASFW.IO
 
 Module S_NetworkSend
-    Sub AlertMsg(index as integer, Msg As String)
+
+    Sub AlertMsg(index As Integer, Msg As String)
         Dim buffer As New ByteStream(4)
         buffer.WriteInt32(ServerPackets.SAlertMsg)
         buffer.WriteString((Msg))
@@ -37,8 +38,6 @@ Module S_NetworkSend
         Socket.SendDataTo(index, buffer.Data, buffer.Head)
         buffer.Dispose()
     End Sub
-
-
 
     Sub SendNewCharClasses(index As Integer)
         Dim i As Integer, n As Integer, q As Integer
@@ -161,8 +160,6 @@ Module S_NetworkSend
         AddDebug("Sent SMSG: SClassesData")
 
         buffer.WriteBlock(ClassData)
-
-
 
         'For i = 1 To Max_Classes
         '    buffer.WriteString((GetClassName(i).Trim))
@@ -948,7 +945,7 @@ Module S_NetworkSend
         buffer.Dispose()
     End Sub
 
-    Sub SendMapKey(index As Integer, X As Integer, Y As Integer, Value As integer)
+    Sub SendMapKey(index As Integer, X As Integer, Y As Integer, Value As Integer)
         Dim buffer As New ByteStream(4)
 
         buffer.WriteInt32(ServerPackets.SMapKey)
@@ -1019,7 +1016,6 @@ Module S_NetworkSend
         Dim data = PlayerData(index)
         SendDataToMap(GetPlayerMap(index), data, data.Length)
     End Sub
-
 
     Sub SendMapKeyToMap(mapNum As Integer, X As Integer, Y As Integer, Value As Integer)
         Dim buffer As New ByteStream(4)
@@ -1557,26 +1553,25 @@ Module S_NetworkSend
         buffer.WriteInt32(TargetType)
         buffer.WriteString(Message.Trim)
         buffer.WriteInt32(Colour)
-        SendDataToMap(MapNum, Buffer.Data, Buffer.Head)
+        SendDataToMap(mapNum, buffer.Data, buffer.Head)
 
-        Buffer.Dispose()
+        buffer.Dispose()
 
     End Sub
 
-    Sub SendPlayerAttack(index as integer)
+    Sub SendPlayerAttack(index As Integer)
         Dim Buffer As New ByteStream(4)
 
         Buffer.WriteInt32(ServerPackets.SAttack)
 
         AddDebug("Sent SMSG: SPlayerAttack")
 
-        Buffer.WriteInt32(Index)
-        SendDataToMapBut(Index, GetPlayerMap(Index), Buffer.Data, Buffer.Head)
+        Buffer.WriteInt32(index)
+        SendDataToMapBut(index, GetPlayerMap(index), Buffer.Data, Buffer.Head)
         Buffer.Dispose()
     End Sub
 
-
-    Sub SendTotalOnlineTo(index as integer)
+    Sub SendTotalOnlineTo(index As Integer)
         Dim Buffer As New ByteStream(4)
 
         Buffer.WriteInt32(ServerPackets.STotalOnline)
@@ -1584,7 +1579,7 @@ Module S_NetworkSend
         AddDebug("Sent SMSG: STotalOnline")
 
         Buffer.WriteInt32(GetPlayersOnline)
-        Socket.SendDataTo(Index, Buffer.Data, Buffer.Head)
+        Socket.SendDataTo(index, Buffer.Data, Buffer.Head)
 
         Buffer.Dispose()
     End Sub
@@ -1601,4 +1596,5 @@ Module S_NetworkSend
 
         Buffer.Dispose()
     End Sub
+
 End Module

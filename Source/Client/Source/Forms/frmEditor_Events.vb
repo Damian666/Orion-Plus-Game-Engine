@@ -3,6 +3,7 @@ Imports System.IO
 Imports System.Windows.Forms
 
 Public Class FrmEditor_Events
+
 #Region "Frm Code"
 
     Sub ClearConditionFrame()
@@ -180,7 +181,6 @@ Public Class FrmEditor_Events
             cmbCompleteQuest.Items.Add(i & ". " & Trim$(Quest(i).Name))
             cmbEndQuest.Items.Add(i & ". " & Trim$(Quest(i).Name))
         Next
-
 
         cmbSpawnNpc.SelectedIndex = 0
         nudFogData0.Maximum = NumFogs
@@ -657,9 +657,11 @@ Public Class FrmEditor_Events
     Private Sub BtnCancelCommand_Click(sender As Object, e As EventArgs) Handles btnCancelCommand.Click
         fraCommands.Visible = False
     End Sub
+
 #End Region
 
 #Region "Page Buttons"
+
     Private Sub TabPages_Click(sender As Object, e As EventArgs) Handles tabPages.Click
         CurPageNum = tabPages.SelectedIndex + 1
         EventEditorLoadPage(CurPageNum)
@@ -672,7 +674,6 @@ Public Class FrmEditor_Events
             MsgBox("You cannot have multiple pages on global events!")
             Exit Sub
         End If
-
 
         pageCount = TmpEvent.PageCount + 1
 
@@ -735,9 +736,11 @@ Public Class FrmEditor_Events
     Private Sub TxtName_TextChanged(sender As Object, e As EventArgs) Handles txtName.TextChanged
         TmpEvent.Name = Trim$(txtName.Text)
     End Sub
+
 #End Region
 
 #Region "Conditions"
+
     Private Sub ChkPlayerVar_CheckedChanged(sender As Object, e As EventArgs) Handles chkPlayerVar.CheckedChanged
         If chkPlayerVar.Checked = True Then
             cmbPlayerVar.Enabled = False
@@ -827,10 +830,10 @@ Public Class FrmEditor_Events
         TmpEvent.Pages(CurPageNum).SelfSwitchCompare = cmbSelfSwitchCompare.SelectedIndex
     End Sub
 
-
 #End Region
 
 #Region "Graphic"
+
     Private Sub PicGraphic_Click(sender As Object, e As EventArgs) Handles picGraphic.Click
         fraGraphic.Top = 0
         fraGraphic.Left = 0
@@ -934,9 +937,11 @@ Public Class FrmEditor_Events
     Private Sub BtnGraphicCancel_Click(sender As Object, e As EventArgs) Handles btnGraphicCancel.Click
         fraGraphic.Visible = False
     End Sub
+
 #End Region
 
 #Region "Movement"
+
     Private Sub CmbMoveType_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbMoveType.SelectedIndexChanged
         If cmbMoveType.SelectedIndex = -1 Then Exit Sub
         TmpEvent.Pages(CurPageNum).MoveType = cmbMoveType.SelectedIndex
@@ -1066,24 +1071,28 @@ Public Class FrmEditor_Events
         TmpEvent.Pages(CurPageNum).MoveFreq = cmbMoveFreq.SelectedIndex
     End Sub
 
-
 #End Region
 
 #Region "Positioning"
+
     Private Sub CmbPositioning_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbPositioning.SelectedIndexChanged
         If cmbPositioning.SelectedIndex = -1 Then Exit Sub
         TmpEvent.Pages(CurPageNum).Position = cmbPositioning.SelectedIndex
     End Sub
+
 #End Region
 
 #Region "Trigger"
+
     Private Sub CmbTrigger_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbTrigger.SelectedIndexChanged
         If cmbTrigger.SelectedIndex = -1 Then Exit Sub
         TmpEvent.Pages(CurPageNum).Trigger = cmbTrigger.SelectedIndex
     End Sub
+
 #End Region
 
 #Region "Global"
+
     Private Sub ChkGlobal_CheckedChanged(sender As Object, e As EventArgs) Handles chkGlobal.CheckedChanged
         If TmpEvent.PageCount > 1 Then
             If MsgBox("If you set the event to global you will lose all pages except for your first one. Do you want to continue?", vbYesNo) = vbNo Then
@@ -1105,15 +1114,19 @@ Public Class FrmEditor_Events
         Next
         EventEditorLoadPage(CurPageNum)
     End Sub
+
 #End Region
 
 #Region "Quest"
+
     Private Sub CmbEventQuest_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbEventQuest.SelectedIndexChanged
         TmpEvent.Pages(CurPageNum).Questnum = cmbEventQuest.SelectedIndex
     End Sub
+
 #End Region
 
 #Region "Options"
+
     Private Sub ChkWalkAnim_CheckedChanged(sender As Object, e As EventArgs) Handles chkWalkAnim.CheckedChanged
         If chkWalkAnim.Checked = True Then
             TmpEvent.Pages(CurPageNum).WalkAnim = 1
@@ -1149,9 +1162,11 @@ Public Class FrmEditor_Events
         End If
 
     End Sub
+
 #End Region
 
 #Region "Commands"
+
     Private Sub LstCommands_SelectedIndexChanged(sender As Object, e As EventArgs) Handles lstCommands.SelectedIndexChanged
         CurCommand = lstCommands.SelectedIndex + 1
     End Sub
@@ -1182,9 +1197,11 @@ Public Class FrmEditor_Events
             ClearEventCommands()
         End If
     End Sub
+
 #End Region
 
 #Region "Variables/Switches"
+
     '    'Renaming Variables/Switches
     Private Sub BtnLabeling_Click(sender As Object, e As EventArgs) Handles btnLabeling.Click
         pnlVariableSwitches.Visible = True
@@ -1549,7 +1566,9 @@ Public Class FrmEditor_Events
 #End Region
 
 #Region "CommandFrames"
+
 #Region "Show Text"
+
     Private Sub NudShowTextFace_ValueChanged(sender As Object, e As EventArgs) Handles nudShowTextFace.ValueChanged
         If nudShowTextFace.Value > 0 Then
             If File.Exists(Application.StartupPath & GfxPath & "Faces\" & nudShowTextFace.Value & GfxExt) Then
@@ -1578,9 +1597,11 @@ Public Class FrmEditor_Events
         fraDialogue.Visible = False
         fraShowText.Visible = False
     End Sub
+
 #End Region
 
 #Region "Add Text"
+
     Private Sub BtnAddTextOk_Click(sender As Object, e As EventArgs) Handles btnAddTextOk.Click
         If Not IsEdit Then
             AddCommand(EventType.EvAddText)
@@ -1598,9 +1619,11 @@ Public Class FrmEditor_Events
         fraDialogue.Visible = False
         fraAddText.Visible = False
     End Sub
+
 #End Region
 
 #Region "Show Choices"
+
     Private Sub NudShowChoicesFace_ValueChanged(sender As Object, e As EventArgs) Handles nudShowChoicesFace.ValueChanged
         If nudShowChoicesFace.Value > 0 Then
             If File.Exists(Application.StartupPath & GfxPath & "Faces\" & nudShowChoicesFace.Value & GfxExt) Then
@@ -1629,9 +1652,11 @@ Public Class FrmEditor_Events
         fraDialogue.Visible = False
         fraShowChoices.Visible = False
     End Sub
+
 #End Region
 
 #Region "Show Chatbubble"
+
     Private Sub CmbChatBubbleTargetType_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbChatBubbleTargetType.SelectedIndexChanged
         If cmbChatBubbleTargetType.SelectedIndex = 0 Then
             cmbChatBubbleTarget.Visible = False
@@ -1676,6 +1701,7 @@ Public Class FrmEditor_Events
         fraDialogue.Visible = False
         fraShowChatBubble.Visible = False
     End Sub
+
 #End Region
 
 #Region "Set Player Variable"
@@ -1757,6 +1783,7 @@ Public Class FrmEditor_Events
         fraDialogue.Visible = False
         fraPlayerVariable.Visible = False
     End Sub
+
 #End Region
 
 #Region "Set Player Switch"
@@ -1800,9 +1827,11 @@ Public Class FrmEditor_Events
         fraDialogue.Visible = False
         fraSetSelfSwitch.Visible = False
     End Sub
+
 #End Region
 
 #Region "Conditional Branch"
+
     Private Sub OptCondition_Index0_CheckedChanged(sender As Object, e As EventArgs) Handles optCondition0.CheckedChanged
         If Not optCondition0.Checked Then Exit Sub
 
@@ -1979,6 +2008,7 @@ Public Class FrmEditor_Events
 #End Region
 
 #Region "Change Level"
+
     Private Sub BtnChangeLevelOK_Click(sender As Object, e As EventArgs) Handles btnChangeLevelOk.Click
         If IsEdit = False Then
             AddCommand(EventType.EvChangeLevel)
@@ -2040,7 +2070,6 @@ Public Class FrmEditor_Events
         fraDialogue.Visible = False
         fraChangeClass.Visible = False
     End Sub
-
 
 #End Region
 
@@ -2557,4 +2586,5 @@ Public Class FrmEditor_Events
 #End Region
 
 #End Region
+
 End Class

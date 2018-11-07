@@ -1,6 +1,7 @@
 ﻿Imports System.IO
 
 Friend Class frmEvents
+
 #Region "Frm Code"
 
     Sub ClearConditionFrame()
@@ -179,7 +180,6 @@ Friend Class frmEvents
             cmbEndQuest.Items.Add(i & ". " & Trim$(Quest(i).Name))
         Next
 
-
         cmbSpawnNpc.SelectedIndex = 0
         nudFogData0.Maximum = NumFogs
         cmbEventQuest.Items.Clear()
@@ -220,7 +220,7 @@ Friend Class frmEvents
     End Sub
 
     Private Sub BtnOK_Click(sender As Object, e As EventArgs) Handles btnOk.Click
-        EventEditorOK()
+        EventEditorOk()
     End Sub
 
     Private Sub BtnCancel_Click(sender As Object, e As EventArgs) Handles btnCancel.Click
@@ -315,7 +315,7 @@ Friend Class frmEvents
                 fraCommands.Visible = False
             'Exit Event Process
             Case "Stop Event Processing"
-                AddCommand(EventType.evExitProcess)
+                AddCommand(EventType.EvExitProcess)
                 fraCommands.Visible = False
                 fraDialogue.Visible = False
             'Label
@@ -342,17 +342,17 @@ Friend Class frmEvents
                 fraCommands.Visible = False
             'Restore Hp
             Case "Restore HP"
-                AddCommand(EventType.evRestoreHP)
+                AddCommand(EventType.EvRestoreHp)
                 fraCommands.Visible = False
                 fraDialogue.Visible = False
             'Restore Mp
             Case "Restore Mp"
-                AddCommand(EventType.evRestoreMP)
+                AddCommand(EventType.EvRestoreMp)
                 fraCommands.Visible = False
                 fraDialogue.Visible = False
             'Level Up
             Case "Level Up"
-                AddCommand(EventType.evLevelUp)
+                AddCommand(EventType.EvLevelUp)
                 fraCommands.Visible = False
                 fraDialogue.Visible = False
             'Change Level
@@ -473,12 +473,12 @@ Friend Class frmEvents
                 fraCommands.Visible = False
             'Hold Player
             Case "Hold Player"
-                AddCommand(EventType.evHoldPlayer)
+                AddCommand(EventType.EvHoldPlayer)
                 fraCommands.Visible = False
                 fraDialogue.Visible = False
             'Release Player
             Case "Release Player"
-                AddCommand(EventType.evReleasePlayer)
+                AddCommand(EventType.EvReleasePlayer)
                 fraCommands.Visible = False
                 fraDialogue.Visible = False
         'Animation
@@ -562,7 +562,7 @@ Friend Class frmEvents
                 fraCommands.Visible = False
             'Stop BGM
             Case "Stop BGM"
-                AddCommand(EventType.evFadeoutBGM)
+                AddCommand(EventType.EvFadeoutBgm)
                 fraCommands.Visible = False
                 fraDialogue.Visible = False
             'Play Sound
@@ -573,7 +573,7 @@ Friend Class frmEvents
                 fraCommands.Visible = False
             'Stop Sounds
             Case "Stop Sounds"
-                AddCommand(EventType.evStopSound)
+                AddCommand(EventType.EvStopSound)
                 fraCommands.Visible = False
                 fraDialogue.Visible = False
         'Etc...
@@ -601,7 +601,7 @@ Friend Class frmEvents
 
             'Open bank
             Case "Open Bank"
-                AddCommand(EventType.evOpenBank)
+                AddCommand(EventType.EvOpenBank)
                 fraCommands.Visible = False
                 fraDialogue.Visible = False
             'Open shop
@@ -612,24 +612,24 @@ Friend Class frmEvents
                 fraCommands.Visible = False
             'Open Mail
             Case 45
-                AddCommand(EventType.evOpenMail)
+                AddCommand(EventType.EvOpenMail)
                 fraCommands.Visible = False
                 fraDialogue.Visible = False
         'cutscene options
 
             'Fade in
             Case "Fade In"
-                AddCommand(EventType.evFadeIn)
+                AddCommand(EventType.EvFadeIn)
                 fraCommands.Visible = False
                 fraDialogue.Visible = False
             'Fade out
             Case "Fade Out"
-                AddCommand(EventType.evFadeOut)
+                AddCommand(EventType.EvFadeOut)
                 fraCommands.Visible = False
                 fraDialogue.Visible = False
             'Flash white
             Case 48
-                AddCommand(EventType.evFlashWhite)
+                AddCommand(EventType.EvFlashWhite)
                 fraCommands.Visible = False
                 fraDialogue.Visible = False
             'Show pic
@@ -655,12 +655,14 @@ Friend Class frmEvents
     Private Sub BtnCancelCommand_Click(sender As Object, e As EventArgs) Handles btnCancelCommand.Click
         fraCommands.Visible = False
     End Sub
+
 #End Region
 
 #Region "Page Buttons"
+
     Private Sub TabPages_Click(sender As Object, e As EventArgs) Handles tabPages.Click
-        curPageNum = tabPages.SelectedIndex + 1
-        EventEditorLoadPage(curPageNum)
+        CurPageNum = tabPages.SelectedIndex + 1
+        EventEditorLoadPage(CurPageNum)
     End Sub
 
     Private Sub BtnNewPage_Click(sender As Object, e As EventArgs) Handles btnNewPage.Click
@@ -671,127 +673,128 @@ Friend Class frmEvents
             Exit Sub
         End If
 
-
-        pageCount = tmpEvent.PageCount + 1
+        pageCount = TmpEvent.PageCount + 1
 
         ' redim the array
-        ReDim Preserve tmpEvent.Pages(pageCount)
+        ReDim Preserve TmpEvent.Pages(pageCount)
 
-        tmpEvent.PageCount = pageCount
+        TmpEvent.PageCount = pageCount
 
         ' set the tabs
         tabPages.TabPages.Clear()
 
-        For i = 1 To tmpEvent.PageCount
+        For i = 1 To TmpEvent.PageCount
             tabPages.TabPages.Add(Str(i))
         Next
         btnDeletePage.Enabled = True
     End Sub
 
     Private Sub BtnCopyPage_Click(sender As Object, e As EventArgs) Handles btnCopyPage.Click
-        CopyEventPage = tmpEvent.Pages(curPageNum)
+        CopyEventPage = TmpEvent.Pages(CurPageNum)
         btnPastePage.Enabled = True
     End Sub
 
     Private Sub BtnPastePage_Click(sender As Object, e As EventArgs) Handles btnPastePage.Click
-        tmpEvent.Pages(curPageNum) = CopyEventPage
-        EventEditorLoadPage(curPageNum)
+        TmpEvent.Pages(CurPageNum) = CopyEventPage
+        EventEditorLoadPage(CurPageNum)
     End Sub
 
     Private Sub BtnDeletePage_Click(sender As Object, e As EventArgs) Handles btnDeletePage.Click
-        tmpEvent.Pages(curPageNum) = Nothing
+        TmpEvent.Pages(CurPageNum) = Nothing
         ' move everything else down a notch
-        If curPageNum < tmpEvent.PageCount Then
-            For i = curPageNum To tmpEvent.PageCount - 1
-                tmpEvent.Pages(i + 1) = tmpEvent.Pages(i)
+        If CurPageNum < TmpEvent.PageCount Then
+            For i = CurPageNum To TmpEvent.PageCount - 1
+                TmpEvent.Pages(i + 1) = TmpEvent.Pages(i)
             Next
         End If
-        tmpEvent.PageCount = tmpEvent.PageCount - 1
+        TmpEvent.PageCount = TmpEvent.PageCount - 1
         ' set the tabs
         tabPages.TabPages.Clear()
 
-        For i = 1 To tmpEvent.PageCount
+        For i = 1 To TmpEvent.PageCount
             tabPages.TabPages.Add("0", Str(i), "")
         Next
         ' set the tab back
-        If curPageNum <= tmpEvent.PageCount Then
-            tabPages.SelectedIndex = tabPages.TabPages.IndexOfKey(curPageNum)
+        If CurPageNum <= TmpEvent.PageCount Then
+            tabPages.SelectedIndex = tabPages.TabPages.IndexOfKey(CurPageNum)
         Else
-            tabPages.SelectedIndex = tabPages.TabPages.IndexOfKey(tmpEvent.PageCount)
+            tabPages.SelectedIndex = tabPages.TabPages.IndexOfKey(TmpEvent.PageCount)
         End If
         ' make sure we disable
-        If tmpEvent.PageCount <= 1 Then
+        If TmpEvent.PageCount <= 1 Then
             btnDeletePage.Enabled = False
         End If
 
     End Sub
 
     Private Sub BtnClearPage_Click(sender As Object, e As EventArgs) Handles btnClearPage.Click
-        tmpEvent.Pages(curPageNum) = Nothing
+        TmpEvent.Pages(CurPageNum) = Nothing
     End Sub
 
     Private Sub TxtName_TextChanged(sender As Object, e As EventArgs) Handles txtName.TextChanged
-        tmpEvent.Name = Trim$(txtName.Text)
+        TmpEvent.Name = Trim$(txtName.Text)
     End Sub
+
 #End Region
 
 #Region "Conditions"
+
     Private Sub ChkPlayerVar_CheckedChanged(sender As Object, e As EventArgs) Handles chkPlayerVar.CheckedChanged
         If chkPlayerVar.Checked = True Then
             cmbPlayerVar.Enabled = False
             nudPlayerVariable.Enabled = False
             cmbPlayervarCompare.Enabled = False
-            tmpEvent.Pages(curPageNum).chkVariable = 0
+            TmpEvent.Pages(CurPageNum).ChkVariable = 0
         Else
             cmbPlayerVar.Enabled = True
             nudPlayerVariable.Enabled = True
             cmbPlayervarCompare.Enabled = True
-            tmpEvent.Pages(curPageNum).chkVariable = 1
+            TmpEvent.Pages(CurPageNum).ChkVariable = 1
         End If
     End Sub
 
     Private Sub CmbPlayerVar_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbPlayerVar.SelectedIndexChanged
         If cmbPlayerVar.SelectedIndex = -1 Then Exit Sub
-        tmpEvent.Pages(curPageNum).VariableIndex = cmbPlayerVar.SelectedIndex
+        TmpEvent.Pages(CurPageNum).Variableindex = cmbPlayerVar.SelectedIndex
     End Sub
 
     Private Sub CmbPlayervarCompare_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbPlayervarCompare.SelectedIndexChanged
         If cmbPlayervarCompare.SelectedIndex = -1 Then Exit Sub
-        tmpEvent.Pages(curPageNum).VariableCompare = cmbPlayervarCompare.SelectedIndex
+        TmpEvent.Pages(CurPageNum).VariableCompare = cmbPlayervarCompare.SelectedIndex
     End Sub
 
     Private Sub NudPlayerVariable_ValueChanged(sender As Object, e As EventArgs) Handles nudPlayerVariable.ValueChanged
-        tmpEvent.Pages(curPageNum).VariableCondition = nudPlayerVariable.Value
+        TmpEvent.Pages(CurPageNum).VariableCondition = nudPlayerVariable.Value
     End Sub
 
     Private Sub ChkPlayerSwitch_CheckedChanged(sender As Object, e As EventArgs) Handles chkPlayerSwitch.CheckedChanged
         If chkPlayerSwitch.Checked = True Then
             cmbPlayerSwitch.Enabled = True
             cmbPlayerSwitchCompare.Enabled = True
-            tmpEvent.Pages(curPageNum).chkSwitch = 1
+            TmpEvent.Pages(CurPageNum).ChkSwitch = 1
         Else
             cmbPlayerSwitch.Enabled = False
             cmbPlayerSwitchCompare.Enabled = False
-            tmpEvent.Pages(curPageNum).chkSwitch = 0
+            TmpEvent.Pages(CurPageNum).ChkSwitch = 0
         End If
     End Sub
 
     Private Sub CmbPlayerSwitch_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbPlayerSwitch.SelectedIndexChanged
         If cmbPlayerSwitch.SelectedIndex = -1 Then Exit Sub
-        tmpEvent.Pages(curPageNum).SwitchIndex = cmbPlayerSwitch.SelectedIndex
+        TmpEvent.Pages(CurPageNum).Switchindex = cmbPlayerSwitch.SelectedIndex
     End Sub
 
     Private Sub CmbPlayerSwitchCompare_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbPlayerSwitchCompare.SelectedIndexChanged
         If cmbPlayerSwitchCompare.SelectedIndex = -1 Then Exit Sub
-        tmpEvent.Pages(curPageNum).SwitchCompare = cmbPlayerSwitchCompare.SelectedIndex
+        TmpEvent.Pages(CurPageNum).SwitchCompare = cmbPlayerSwitchCompare.SelectedIndex
     End Sub
 
     Private Sub ChkHasItem_CheckedChanged(sender As Object, e As EventArgs) Handles chkHasItem.CheckedChanged
         If chkHasItem.Checked = True Then
-            tmpEvent.Pages(curPageNum).chkHasItem = 1
+            TmpEvent.Pages(CurPageNum).ChkHasItem = 1
             cmbHasItem.Enabled = True
         Else
-            tmpEvent.Pages(curPageNum).chkHasItem = 0
+            TmpEvent.Pages(CurPageNum).ChkHasItem = 0
             cmbHasItem.Enabled = False
         End If
 
@@ -799,36 +802,36 @@ Friend Class frmEvents
 
     Private Sub CmbHasItem_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbHasItem.SelectedIndexChanged
         If cmbHasItem.SelectedIndex = -1 Then Exit Sub
-        tmpEvent.Pages(curPageNum).HasItemIndex = cmbHasItem.SelectedIndex
-        tmpEvent.Pages(curPageNum).HasItemAmount = nudCondition_HasItem.Value
+        TmpEvent.Pages(CurPageNum).HasItemindex = cmbHasItem.SelectedIndex
+        TmpEvent.Pages(CurPageNum).HasItemAmount = nudCondition_HasItem.Value
     End Sub
 
     Private Sub ChkSelfSwitch_CheckedChanged(sender As Object, e As EventArgs) Handles chkSelfSwitch.CheckedChanged
         If chkSelfSwitch.Checked = True Then
             cmbSelfSwitch.Enabled = True
             cmbSelfSwitchCompare.Enabled = True
-            tmpEvent.Pages(curPageNum).chkSelfSwitch = 1
+            TmpEvent.Pages(CurPageNum).ChkSelfSwitch = 1
         Else
             cmbSelfSwitch.Enabled = False
             cmbSelfSwitchCompare.Enabled = False
-            tmpEvent.Pages(curPageNum).chkSelfSwitch = 0
+            TmpEvent.Pages(CurPageNum).ChkSelfSwitch = 0
         End If
     End Sub
 
     Private Sub CmbSelfSwitch_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbSelfSwitch.SelectedIndexChanged
         If cmbSelfSwitch.SelectedIndex = -1 Then Exit Sub
-        tmpEvent.Pages(curPageNum).SelfSwitchIndex = cmbSelfSwitch.SelectedIndex
+        TmpEvent.Pages(CurPageNum).SelfSwitchindex = cmbSelfSwitch.SelectedIndex
     End Sub
 
     Private Sub CmbSelfSwitchCompare_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbSelfSwitchCompare.SelectedIndexChanged
         If cmbSelfSwitchCompare.SelectedIndex = -1 Then Exit Sub
-        tmpEvent.Pages(curPageNum).SelfSwitchCompare = cmbSelfSwitchCompare.SelectedIndex
+        TmpEvent.Pages(CurPageNum).SelfSwitchCompare = cmbSelfSwitchCompare.SelectedIndex
     End Sub
-
 
 #End Region
 
 #Region "Graphic"
+
     Private Sub PicGraphic_Click(sender As Object, e As EventArgs) Handles picGraphic.Click
         fraGraphic.Top = 0
         fraGraphic.Left = 0
@@ -841,7 +844,7 @@ Friend Class frmEvents
 
     Private Sub CmbGraphic_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbGraphic.SelectedIndexChanged
         If cmbGraphic.SelectedIndex = -1 Then Exit Sub
-        tmpEvent.Pages(curPageNum).GraphicType = cmbGraphic.SelectedIndex
+        TmpEvent.Pages(CurPageNum).GraphicType = cmbGraphic.SelectedIndex
         ' set the max on the scrollbar
         Select Case cmbGraphic.SelectedIndex
             Case 0 ' None
@@ -855,10 +858,10 @@ Friend Class frmEvents
                 nudGraphic.Enabled = True
         End Select
 
-        If tmpEvent.Pages(curPageNum).GraphicType = 1 Then
+        If TmpEvent.Pages(CurPageNum).GraphicType = 1 Then
             If Me.nudGraphic.Value <= 0 OrElse Me.nudGraphic.Value > NumCharacters Then Exit Sub
 
-        ElseIf tmpEvent.Pages(curPageNum).GraphicType = 2 Then
+        ElseIf TmpEvent.Pages(CurPageNum).GraphicType = 2 Then
             If Me.nudGraphic.Value <= 0 OrElse Me.nudGraphic.Value > NumTileSets Then Exit Sub
 
         End If
@@ -916,12 +919,12 @@ Friend Class frmEvents
 
     Private Sub BtnGraphicOk_Click(sender As Object, e As EventArgs) Handles btnGraphicOk.Click
         If GraphicSelType = 0 Then
-            tmpEvent.Pages(curPageNum).GraphicType = cmbGraphic.SelectedIndex
-            tmpEvent.Pages(curPageNum).Graphic = nudGraphic.Value
-            tmpEvent.Pages(curPageNum).GraphicX = GraphicSelX
-            tmpEvent.Pages(curPageNum).GraphicY = GraphicSelY
-            tmpEvent.Pages(curPageNum).GraphicX2 = GraphicSelX2
-            tmpEvent.Pages(curPageNum).GraphicY2 = GraphicSelY2
+            TmpEvent.Pages(CurPageNum).GraphicType = cmbGraphic.SelectedIndex
+            TmpEvent.Pages(CurPageNum).Graphic = nudGraphic.Value
+            TmpEvent.Pages(CurPageNum).GraphicX = GraphicSelX
+            TmpEvent.Pages(CurPageNum).GraphicY = GraphicSelY
+            TmpEvent.Pages(CurPageNum).GraphicX2 = GraphicSelX2
+            TmpEvent.Pages(CurPageNum).GraphicY2 = GraphicSelY2
         Else
             AddMoveRouteCommand(42)
             GraphicSelType = 0
@@ -932,12 +935,14 @@ Friend Class frmEvents
     Private Sub BtnGraphicCancel_Click(sender As Object, e As EventArgs) Handles btnGraphicCancel.Click
         fraGraphic.Visible = False
     End Sub
+
 #End Region
 
 #Region "Movement"
+
     Private Sub CmbMoveType_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbMoveType.SelectedIndexChanged
         If cmbMoveType.SelectedIndex = -1 Then Exit Sub
-        tmpEvent.Pages(curPageNum).MoveType = cmbMoveType.SelectedIndex
+        TmpEvent.Pages(CurPageNum).MoveType = cmbMoveType.SelectedIndex
         If cmbMoveType.SelectedIndex = 2 Then
             btnMoveRoute.Enabled = True
         Else
@@ -953,12 +958,12 @@ Friend Class frmEvents
         cmbEvent.SelectedIndex = 0
         cmbEvent.Enabled = False
         IsMoveRouteCommand = False
-        chkIgnoreMove.Checked = tmpEvent.Pages(curPageNum).IgnoreMoveRoute
-        chkRepeatRoute.Checked = tmpEvent.Pages(curPageNum).RepeatMoveRoute
-        TempMoveRouteCount = tmpEvent.Pages(curPageNum).MoveRouteCount
+        chkIgnoreMove.Checked = TmpEvent.Pages(CurPageNum).IgnoreMoveRoute
+        chkRepeatRoute.Checked = TmpEvent.Pages(CurPageNum).RepeatMoveRoute
+        TempMoveRouteCount = TmpEvent.Pages(CurPageNum).MoveRouteCount
 
         'Will it let me do this?
-        TempMoveRoute = tmpEvent.Pages(curPageNum).MoveRoute
+        TempMoveRoute = TmpEvent.Pages(CurPageNum).MoveRoute
         For i = 1 To TempMoveRouteCount
             Select Case TempMoveRoute(i).Index
                 Case 1
@@ -1056,107 +1061,117 @@ Friend Class frmEvents
 
     Private Sub CmbMoveSpeed_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbMoveSpeed.SelectedIndexChanged
         If cmbMoveSpeed.SelectedIndex = -1 Then Exit Sub
-        tmpEvent.Pages(curPageNum).MoveSpeed = cmbMoveSpeed.SelectedIndex
+        TmpEvent.Pages(CurPageNum).MoveSpeed = cmbMoveSpeed.SelectedIndex
     End Sub
 
     Private Sub CmbMoveFreq_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbMoveFreq.SelectedIndexChanged
         If cmbMoveFreq.SelectedIndex = -1 Then Exit Sub
-        tmpEvent.Pages(curPageNum).MoveFreq = cmbMoveFreq.SelectedIndex
+        TmpEvent.Pages(CurPageNum).MoveFreq = cmbMoveFreq.SelectedIndex
     End Sub
-
 
 #End Region
 
 #Region "Positioning"
+
     Private Sub CmbPositioning_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbPositioning.SelectedIndexChanged
         If cmbPositioning.SelectedIndex = -1 Then Exit Sub
-        tmpEvent.Pages(curPageNum).Position = cmbPositioning.SelectedIndex
+        TmpEvent.Pages(CurPageNum).Position = cmbPositioning.SelectedIndex
     End Sub
+
 #End Region
 
 #Region "Trigger"
+
     Private Sub CmbTrigger_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbTrigger.SelectedIndexChanged
         If cmbTrigger.SelectedIndex = -1 Then Exit Sub
-        tmpEvent.Pages(curPageNum).Trigger = cmbTrigger.SelectedIndex
+        TmpEvent.Pages(CurPageNum).Trigger = cmbTrigger.SelectedIndex
     End Sub
+
 #End Region
 
 #Region "Global"
+
     Private Sub ChkGlobal_CheckedChanged(sender As Object, e As EventArgs) Handles chkGlobal.CheckedChanged
-        If tmpEvent.PageCount > 1 Then
+        If TmpEvent.PageCount > 1 Then
             If MsgBox("If you set the event to global you will lose all pages except for your first one. Do you want to continue?", vbYesNo) = vbNo Then
                 Exit Sub
             End If
         End If
         If chkGlobal.Checked = True Then
-            tmpEvent.Globals = 1
+            TmpEvent.Globals = 1
         Else
-            tmpEvent.Globals = 0
+            TmpEvent.Globals = 0
         End If
 
-        tmpEvent.PageCount = 1
-        curPageNum = 1
+        TmpEvent.PageCount = 1
+        CurPageNum = 1
         Me.tabPages.TabPages.Clear()
 
-        For i = 1 To tmpEvent.PageCount
+        For i = 1 To TmpEvent.PageCount
             Me.tabPages.TabPages.Add("0", Str(i), "0")
         Next
-        EventEditorLoadPage(curPageNum)
+        EventEditorLoadPage(CurPageNum)
     End Sub
+
 #End Region
 
 #Region "QuestIcon"
+
     Private Sub CmbEventQuest_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbEventQuest.SelectedIndexChanged
-        tmpEvent.Pages(curPageNum).Questnum = cmbEventQuest.SelectedIndex
+        TmpEvent.Pages(CurPageNum).Questnum = cmbEventQuest.SelectedIndex
     End Sub
+
 #End Region
 
 #Region "Options"
+
     Private Sub ChkWalkAnim_CheckedChanged(sender As Object, e As EventArgs) Handles chkWalkAnim.CheckedChanged
         If chkWalkAnim.Checked = True Then
-            tmpEvent.Pages(curPageNum).WalkAnim = 1
+            TmpEvent.Pages(CurPageNum).WalkAnim = 1
         Else
-            tmpEvent.Pages(curPageNum).WalkAnim = 0
+            TmpEvent.Pages(CurPageNum).WalkAnim = 0
         End If
 
     End Sub
 
     Private Sub ChkDirFix_CheckedChanged(sender As Object, e As EventArgs) Handles chkDirFix.CheckedChanged
         If chkDirFix.Checked = True Then
-            tmpEvent.Pages(curPageNum).DirFix = 1
+            TmpEvent.Pages(CurPageNum).DirFix = 1
         Else
-            tmpEvent.Pages(curPageNum).DirFix = 0
+            TmpEvent.Pages(CurPageNum).DirFix = 0
         End If
 
     End Sub
 
     Private Sub ChkWalkThrough_CheckedChanged(sender As Object, e As EventArgs) Handles chkWalkThrough.CheckedChanged
         If chkWalkThrough.Checked = True Then
-            tmpEvent.Pages(curPageNum).WalkThrough = 1
+            TmpEvent.Pages(CurPageNum).WalkThrough = 1
         Else
-            tmpEvent.Pages(curPageNum).WalkThrough = 0
+            TmpEvent.Pages(CurPageNum).WalkThrough = 0
         End If
 
     End Sub
 
     Private Sub ChkShowName_CheckedChanged(sender As Object, e As EventArgs) Handles chkShowName.CheckedChanged
         If chkShowName.Checked = True Then
-            tmpEvent.Pages(curPageNum).ShowName = 1
+            TmpEvent.Pages(CurPageNum).ShowName = 1
         Else
-            tmpEvent.Pages(curPageNum).ShowName = 0
+            TmpEvent.Pages(CurPageNum).ShowName = 0
         End If
 
     End Sub
+
 #End Region
 
 #Region "Commands"
+
     Private Sub LstCommands_SelectedIndexChanged(sender As Object, e As EventArgs) Handles lstCommands.SelectedIndexChanged
-        curCommand = lstCommands.SelectedIndex + 1
+        CurCommand = lstCommands.SelectedIndex + 1
     End Sub
 
     Private Sub BtnAddCommand_Click(sender As Object, e As EventArgs) Handles btnAddCommand.Click
         If lstCommands.SelectedIndex > -1 Then
-            isEdit = False
+            IsEdit = False
             'tabPages.SelectedTab = TabPage
             fraCommands.Visible = True
         End If
@@ -1180,9 +1195,11 @@ Friend Class frmEvents
             ClearEventCommands()
         End If
     End Sub
+
 #End Region
 
 #Region "Variables/Switches"
+
     '    'Renaming Variables/Switches
     Private Sub BtnLabeling_Click(sender As Object, e As EventArgs) Handles btnLabeling.Click
         pnlVariableSwitches.Visible = True
@@ -1210,21 +1227,21 @@ Friend Class frmEvents
         Select Case RenameType
             Case 1
                 'Variable
-                If RenameIndex > 0 AndAlso RenameIndex <= MaxVariables + 1 Then
-                    Variables(RenameIndex) = txtRename.Text
+                If Renameindex > 0 AndAlso Renameindex <= MaxVariables + 1 Then
+                    Variables(Renameindex) = txtRename.Text
                     FraRenaming.Visible = False
                     fraLabeling.Visible = True
                     RenameType = 0
-                    RenameIndex = 0
+                    Renameindex = 0
                 End If
             Case 2
                 'Switch
-                If RenameIndex > 0 AndAlso RenameIndex <= MaxSwitches + 1 Then
-                    Switches(RenameIndex) = txtRename.Text
+                If Renameindex > 0 AndAlso Renameindex <= MaxSwitches + 1 Then
+                    Switches(Renameindex) = txtRename.Text
                     FraRenaming.Visible = False
                     fraLabeling.Visible = True
                     RenameType = 0
-                    RenameIndex = 0
+                    Renameindex = 0
                 End If
         End Select
         lstSwitches.Items.Clear()
@@ -1244,7 +1261,7 @@ Friend Class frmEvents
     Private Sub BtnRename_Cancel_Click(sender As Object, e As EventArgs) Handles btnRename_Cancel.Click
         FraRenaming.Visible = False
         RenameType = 0
-        RenameIndex = 0
+        Renameindex = 0
         lstSwitches.Items.Clear()
 
         For i = 1 To MaxSwitches
@@ -1260,7 +1277,7 @@ Friend Class frmEvents
     End Sub
 
     Private Sub TxtRename_TextChanged(sender As Object, e As EventArgs) Handles txtRename.TextChanged
-        tmpEvent.Name = Trim$(txtName.Text)
+        TmpEvent.Name = Trim$(txtName.Text)
     End Sub
 
     Private Sub LstVariables_DoubleClick(sender As Object, e As EventArgs) Handles lstVariables.DoubleClick
@@ -1270,7 +1287,7 @@ Friend Class frmEvents
             lblEditing.Text = "Editing Variable #" & CStr(lstVariables.SelectedIndex + 1)
             txtRename.Text = Variables(lstVariables.SelectedIndex + 1)
             RenameType = 1
-            RenameIndex = lstVariables.SelectedIndex + 1
+            Renameindex = lstVariables.SelectedIndex + 1
         End If
     End Sub
 
@@ -1281,7 +1298,7 @@ Friend Class frmEvents
             lblEditing.Text = "Editing Switch #" & CStr(lstSwitches.SelectedIndex + 1)
             txtRename.Text = Switches(lstSwitches.SelectedIndex + 1)
             RenameType = 2
-            RenameIndex = lstSwitches.SelectedIndex + 1
+            Renameindex = lstSwitches.SelectedIndex + 1
         End If
     End Sub
 
@@ -1292,7 +1309,7 @@ Friend Class frmEvents
             lblEditing.Text = "Editing Variable #" & CStr(lstVariables.SelectedIndex + 1)
             txtRename.Text = Variables(lstVariables.SelectedIndex + 1)
             RenameType = 1
-            RenameIndex = lstVariables.SelectedIndex + 1
+            Renameindex = lstVariables.SelectedIndex + 1
         End If
     End Sub
 
@@ -1302,7 +1319,7 @@ Friend Class frmEvents
             lblEditing.Text = "Editing Switch #" & CStr(lstSwitches.SelectedIndex + 1)
             txtRename.Text = Switches(lstSwitches.SelectedIndex + 1)
             RenameType = 2
-            RenameIndex = lstSwitches.SelectedIndex + 1
+            Renameindex = lstSwitches.SelectedIndex + 1
         End If
     End Sub
 
@@ -1346,10 +1363,10 @@ Friend Class frmEvents
         End If
     End Sub
 
-    Sub AddMoveRouteCommand(index as integer)
+    Sub AddMoveRouteCommand(index As Integer)
         Dim i As Integer, X As Integer
 
-        Index = Index + 1
+        index = index + 1
         If lstMoveRoute.SelectedIndex > -1 Then
             i = lstMoveRoute.SelectedIndex + 1
             TempMoveRouteCount = TempMoveRouteCount + 1
@@ -1357,9 +1374,9 @@ Friend Class frmEvents
             For X = TempMoveRouteCount - 1 To i Step -1
                 TempMoveRoute(X + 1) = TempMoveRoute(X)
             Next
-            TempMoveRoute(i).Index = Index
+            TempMoveRoute(i).Index = index
             'if set graphic then...
-            If Index = 43 Then
+            If index = 43 Then
                 TempMoveRoute(i).Data1 = cmbGraphic.SelectedIndex
                 TempMoveRoute(i).Data2 = nudGraphic.Value
                 TempMoveRoute(i).Data3 = GraphicSelX
@@ -1371,10 +1388,10 @@ Friend Class frmEvents
         Else
             TempMoveRouteCount = TempMoveRouteCount + 1
             ReDim Preserve TempMoveRoute(TempMoveRouteCount)
-            TempMoveRoute(TempMoveRouteCount).Index = Index
+            TempMoveRoute(TempMoveRouteCount).Index = index
             PopulateMoveRouteList()
             'if set graphic then....
-            If Index = 43 Then
+            If index = 43 Then
                 TempMoveRoute(TempMoveRouteCount).Data1 = cmbGraphic.SelectedIndex
                 TempMoveRoute(TempMoveRouteCount).Data2 = nudGraphic.Value
                 TempMoveRoute(TempMoveRouteCount).Data3 = GraphicSelX
@@ -1386,12 +1403,12 @@ Friend Class frmEvents
 
     End Sub
 
-    Sub RemoveMoveRouteCommand(index as integer)
+    Sub RemoveMoveRouteCommand(index As Integer)
         Dim i As Integer
 
-        Index = Index + 1
-        If Index > 0 AndAlso Index <= TempMoveRouteCount Then
-            For i = Index + 1 To TempMoveRouteCount
+        index = index + 1
+        If index > 0 AndAlso index <= TempMoveRouteCount Then
+            For i = index + 1 To TempMoveRouteCount
                 TempMoveRoute(i - 1) = TempMoveRoute(i)
             Next
             TempMoveRouteCount = TempMoveRouteCount - 1
@@ -1505,24 +1522,24 @@ Friend Class frmEvents
 
     Private Sub ChkIgnoreMove_CheckedChanged(sender As Object, e As EventArgs) Handles chkIgnoreMove.CheckedChanged
         If chkIgnoreMove.Checked = True Then
-            tmpEvent.Pages(curPageNum).IgnoreMoveRoute = 1
+            TmpEvent.Pages(CurPageNum).IgnoreMoveRoute = 1
         Else
-            tmpEvent.Pages(curPageNum).IgnoreMoveRoute = 0
+            TmpEvent.Pages(CurPageNum).IgnoreMoveRoute = 0
         End If
     End Sub
 
     Private Sub ChkRepeatRoute_CheckedChanged(sender As Object, e As EventArgs) Handles chkRepeatRoute.CheckedChanged
         If chkRepeatRoute.Checked = True Then
-            tmpEvent.Pages(curPageNum).RepeatMoveRoute = 1
+            TmpEvent.Pages(CurPageNum).RepeatMoveRoute = 1
         Else
-            tmpEvent.Pages(curPageNum).RepeatMoveRoute = 0
+            TmpEvent.Pages(CurPageNum).RepeatMoveRoute = 0
         End If
     End Sub
 
     Private Sub BtnMoveRouteOk_Click(sender As Object, e As EventArgs) Handles btnMoveRouteOk.Click
         If IsMoveRouteCommand = True Then
-            If Not isEdit Then
-                AddCommand(EventType.evSetMoveRoute)
+            If Not IsEdit Then
+                AddCommand(EventType.EvSetMoveRoute)
             Else
                 EditCommand()
             End If
@@ -1530,8 +1547,8 @@ Friend Class frmEvents
             ReDim TempMoveRoute(0)
             fraMoveRoute.Visible = False
         Else
-            tmpEvent.Pages(curPageNum).MoveRouteCount = TempMoveRouteCount
-            tmpEvent.Pages(curPageNum).MoveRoute = TempMoveRoute
+            TmpEvent.Pages(CurPageNum).MoveRouteCount = TempMoveRouteCount
+            TmpEvent.Pages(CurPageNum).MoveRoute = TempMoveRoute
             TempMoveRouteCount = 0
             ReDim TempMoveRoute(0)
             fraMoveRoute.Visible = False
@@ -1547,7 +1564,9 @@ Friend Class frmEvents
 #End Region
 
 #Region "CommandFrames"
+
 #Region "Show Text"
+
     Private Sub NudShowTextFace_ValueChanged(sender As Object, e As EventArgs) Handles nudShowTextFace.ValueChanged
         If nudShowTextFace.Value > 0 Then
             If File.Exists(Application.StartupPath & GFX_PATH & "Faces\" & nudShowTextFace.Value & GFX_EXT) Then
@@ -1559,8 +1578,8 @@ Friend Class frmEvents
     End Sub
 
     Private Sub BtnShowTextOk_Click(sender As Object, e As EventArgs) Handles btnShowTextOk.Click
-        If Not isEdit Then
-            AddCommand(EventType.evShowText)
+        If Not IsEdit Then
+            AddCommand(EventType.EvShowText)
         Else
             EditCommand()
         End If
@@ -1572,16 +1591,18 @@ Friend Class frmEvents
     End Sub
 
     Private Sub BtnShowTextCancel_Click(sender As Object, e As EventArgs) Handles btnShowTextCancel.Click
-        If Not isEdit Then fraCommands.Visible = True Else fraCommands.Visible = False
+        If Not IsEdit Then fraCommands.Visible = True Else fraCommands.Visible = False
         fraDialogue.Visible = False
         fraShowText.Visible = False
     End Sub
+
 #End Region
 
 #Region "Add Text"
+
     Private Sub BtnAddTextOk_Click(sender As Object, e As EventArgs) Handles btnAddTextOk.Click
-        If Not isEdit Then
-            AddCommand(EventType.evAddText)
+        If Not IsEdit Then
+            AddCommand(EventType.EvAddText)
         Else
             EditCommand()
         End If
@@ -1592,13 +1613,15 @@ Friend Class frmEvents
     End Sub
 
     Private Sub BtnAddTextCancel_Click(sender As Object, e As EventArgs) Handles btnAddTextCancel.Click
-        If Not isEdit Then fraCommands.Visible = True Else fraCommands.Visible = False
+        If Not IsEdit Then fraCommands.Visible = True Else fraCommands.Visible = False
         fraDialogue.Visible = False
         fraAddText.Visible = False
     End Sub
+
 #End Region
 
 #Region "Show Choices"
+
     Private Sub NudShowChoicesFace_ValueChanged(sender As Object, e As EventArgs) Handles nudShowChoicesFace.ValueChanged
         If nudShowChoicesFace.Value > 0 Then
             If File.Exists(Application.StartupPath & GFX_PATH & "Faces\" & nudShowChoicesFace.Value & GFX_EXT) Then
@@ -1611,8 +1634,8 @@ Friend Class frmEvents
     End Sub
 
     Private Sub BtnShowChoicesOk_Click(sender As Object, e As EventArgs) Handles btnShowChoicesOk.Click
-        If Not isEdit Then
-            AddCommand(EventType.evShowChoices)
+        If Not IsEdit Then
+            AddCommand(EventType.EvShowChoices)
         Else
             EditCommand()
         End If
@@ -1623,13 +1646,15 @@ Friend Class frmEvents
     End Sub
 
     Private Sub BtnShowChoicesCancel_Click(sender As Object, e As EventArgs) Handles btnShowChoicesCancel.Click
-        If Not isEdit Then fraCommands.Visible = True Else fraCommands.Visible = False
+        If Not IsEdit Then fraCommands.Visible = True Else fraCommands.Visible = False
         fraDialogue.Visible = False
         fraShowChoices.Visible = False
     End Sub
+
 #End Region
 
 #Region "Show Chatbubble"
+
     Private Sub CmbChatBubbleTargetType_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbChatBubbleTargetType.SelectedIndexChanged
         If cmbChatBubbleTargetType.SelectedIndex = 0 Then
             cmbChatBubbleTarget.Visible = False
@@ -1658,8 +1683,8 @@ Friend Class frmEvents
     End Sub
 
     Private Sub BtnShowChatBubbleOK_Click(sender As Object, e As EventArgs) Handles btnShowChatBubbleOk.Click
-        If Not isEdit Then
-            AddCommand(EventType.evShowChatBubble)
+        If Not IsEdit Then
+            AddCommand(EventType.EvShowChatBubble)
         Else
             EditCommand()
         End If
@@ -1670,10 +1695,11 @@ Friend Class frmEvents
     End Sub
 
     Private Sub BtnShowChatBubbleCancel_Click(sender As Object, e As EventArgs) Handles btnShowChatBubbleCancel.Click
-        If Not isEdit Then fraCommands.Visible = True Else fraCommands.Visible = False
+        If Not IsEdit Then fraCommands.Visible = True Else fraCommands.Visible = False
         fraDialogue.Visible = False
         fraShowChatBubble.Visible = False
     End Sub
+
 #End Region
 
 #Region "Set Player Variable"
@@ -1739,8 +1765,8 @@ Friend Class frmEvents
     End Sub
 
     Private Sub BtnPlayerVarOk_Click(sender As Object, e As EventArgs) Handles btnPlayerVarOk.Click
-        If Not isEdit Then
-            AddCommand(EventType.evPlayerVar)
+        If Not IsEdit Then
+            AddCommand(EventType.EvPlayerVar)
         Else
             EditCommand()
         End If
@@ -1751,17 +1777,18 @@ Friend Class frmEvents
     End Sub
 
     Private Sub BtnPlayerVarCancel_Click(sender As Object, e As EventArgs) Handles btnPlayerVarCancel.Click
-        If Not isEdit Then fraCommands.Visible = True Else fraCommands.Visible = False
+        If Not IsEdit Then fraCommands.Visible = True Else fraCommands.Visible = False
         fraDialogue.Visible = False
         fraPlayerVariable.Visible = False
     End Sub
+
 #End Region
 
 #Region "Set Player Switch"
 
     Private Sub BtnSetPlayerSwitchOk_Click(sender As Object, e As EventArgs) Handles btnSetPlayerSwitchOk.Click
-        If Not isEdit Then
-            AddCommand(EventType.evPlayerSwitch)
+        If Not IsEdit Then
+            AddCommand(EventType.EvPlayerSwitch)
         Else
             EditCommand()
         End If
@@ -1772,7 +1799,7 @@ Friend Class frmEvents
     End Sub
 
     Private Sub BtnSetPlayerswitchCancel_Click(sender As Object, e As EventArgs) Handles btnSetPlayerswitchCancel.Click
-        If Not isEdit Then fraCommands.Visible = True Else fraCommands.Visible = False
+        If Not IsEdit Then fraCommands.Visible = True Else fraCommands.Visible = False
         fraDialogue.Visible = False
         fraPlayerSwitch.Visible = False
     End Sub
@@ -1782,8 +1809,8 @@ Friend Class frmEvents
 #Region "Set Self Switch"
 
     Private Sub BtnSelfswitchOk_Click(sender As Object, e As EventArgs) Handles btnSelfswitchOk.Click
-        If Not isEdit Then
-            AddCommand(EventType.evSelfSwitch)
+        If Not IsEdit Then
+            AddCommand(EventType.EvSelfSwitch)
         Else
             EditCommand()
         End If
@@ -1794,13 +1821,15 @@ Friend Class frmEvents
     End Sub
 
     Private Sub BtnSelfswitchCancel_Click(sender As Object, e As EventArgs) Handles btnSelfswitchCancel.Click
-        If Not isEdit Then fraCommands.Visible = True Else fraCommands.Visible = False
+        If Not IsEdit Then fraCommands.Visible = True Else fraCommands.Visible = False
         fraDialogue.Visible = False
         fraSetSelfSwitch.Visible = False
     End Sub
+
 #End Region
 
 #Region "Conditional Branch"
+
     Private Sub OptCondition_Index0_CheckedChanged(sender As Object, e As EventArgs) Handles optCondition0.CheckedChanged
         If Not optCondition0.Checked Then Exit Sub
 
@@ -1887,8 +1916,8 @@ Friend Class frmEvents
     End Sub
 
     Private Sub BtnConditionalBranchOk_Click(sender As Object, e As EventArgs) Handles btnConditionalBranchOk.Click
-        If isEdit = False Then
-            AddCommand(EventType.evCondition)
+        If IsEdit = False Then
+            AddCommand(EventType.EvCondition)
         Else
             EditCommand()
         End If
@@ -1899,7 +1928,7 @@ Friend Class frmEvents
     End Sub
 
     Private Sub BtnConditionalBranchCancel_Click(sender As Object, e As EventArgs) Handles btnConditionalBranchCancel.Click
-        If Not isEdit Then fraCommands.Visible = True Else fraCommands.Visible = False
+        If Not IsEdit Then fraCommands.Visible = True Else fraCommands.Visible = False
         fraDialogue.Visible = False
         fraConditionalBranch.Visible = False
     End Sub
@@ -1909,8 +1938,8 @@ Friend Class frmEvents
 #Region "Create Label"
 
     Private Sub BtnCreatelabelOk_Click(sender As Object, e As EventArgs) Handles btnCreatelabelOk.Click
-        If isEdit = False Then
-            AddCommand(EventType.evLabel)
+        If IsEdit = False Then
+            AddCommand(EventType.EvLabel)
         Else
             EditCommand()
         End If
@@ -1921,7 +1950,7 @@ Friend Class frmEvents
     End Sub
 
     Private Sub BtnCreateLabelCancel_Click(sender As Object, e As EventArgs) Handles btnCreatelabelCancel.Click
-        If Not isEdit Then fraCommands.Visible = True Else fraCommands.Visible = False
+        If Not IsEdit Then fraCommands.Visible = True Else fraCommands.Visible = False
         fraDialogue.Visible = False
         fraCreateLabel.Visible = False
     End Sub
@@ -1931,8 +1960,8 @@ Friend Class frmEvents
 #Region "GoTo Label"
 
     Private Sub BtnGoToLabelOk_Click(sender As Object, e As EventArgs) Handles btnGoToLabelOk.Click
-        If isEdit = False Then
-            AddCommand(EventType.evGotoLabel)
+        If IsEdit = False Then
+            AddCommand(EventType.EvGotoLabel)
         Else
             EditCommand()
         End If
@@ -1943,7 +1972,7 @@ Friend Class frmEvents
     End Sub
 
     Private Sub BtnGoToLabelCancel_Click(sender As Object, e As EventArgs) Handles btnGoToLabelCancel.Click
-        If Not isEdit Then fraCommands.Visible = True Else fraCommands.Visible = False
+        If Not IsEdit Then fraCommands.Visible = True Else fraCommands.Visible = False
         fraDialogue.Visible = False
         fraGoToLabel.Visible = False
     End Sub
@@ -1953,8 +1982,8 @@ Friend Class frmEvents
 #Region "Change Items"
 
     Private Sub BtnChangeItemsOk_Click(sender As Object, e As EventArgs) Handles btnChangeItemsOk.Click
-        If isEdit = False Then
-            AddCommand(EventType.evChangeItems)
+        If IsEdit = False Then
+            AddCommand(EventType.EvChangeItems)
         Else
             EditCommand()
         End If
@@ -1965,21 +1994,22 @@ Friend Class frmEvents
     End Sub
 
     Private Sub BtnChangeItemsCancel_Click(sender As Object, e As EventArgs) Handles btnChangeItemsCancel.Click
-        If Not isEdit Then fraCommands.Visible = True Else fraCommands.Visible = False
+        If Not IsEdit Then fraCommands.Visible = True Else fraCommands.Visible = False
         fraDialogue.Visible = False
         fraChangeItems.Visible = False
     End Sub
 
     Private Sub CmbChangeItemIndex_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbChangeItemIndex.SelectedIndexChanged
-        tmpEvent.Pages(curPageNum).Questnum = cmbEventQuest.SelectedIndex
+        TmpEvent.Pages(CurPageNum).Questnum = cmbEventQuest.SelectedIndex
     End Sub
 
 #End Region
 
 #Region "Change Level"
+
     Private Sub BtnChangeLevelOK_Click(sender As Object, e As EventArgs) Handles btnChangeLevelOk.Click
-        If isEdit = False Then
-            AddCommand(EventType.evChangeLevel)
+        If IsEdit = False Then
+            AddCommand(EventType.EvChangeLevel)
         Else
             EditCommand()
         End If
@@ -1990,7 +2020,7 @@ Friend Class frmEvents
     End Sub
 
     Private Sub BtnChangeLevelCancel_Click(sender As Object, e As EventArgs) Handles btnChangeLevelCancel.Click
-        If Not isEdit Then fraCommands.Visible = True Else fraCommands.Visible = False
+        If Not IsEdit Then fraCommands.Visible = True Else fraCommands.Visible = False
         fraDialogue.Visible = False
         fraChangeLevel.Visible = False
     End Sub
@@ -2000,8 +2030,8 @@ Friend Class frmEvents
 #Region "Change Skills"
 
     Private Sub BtnChangeSkillsOK_Click(sender As Object, e As EventArgs) Handles btnChangeSkillsOk.Click
-        If isEdit = False Then
-            AddCommand(EventType.evChangeSkills)
+        If IsEdit = False Then
+            AddCommand(EventType.EvChangeSkills)
         Else
             EditCommand()
         End If
@@ -2012,7 +2042,7 @@ Friend Class frmEvents
     End Sub
 
     Private Sub BtnChangeSkillsCancel_Click(sender As Object, e As EventArgs) Handles btnChangeSkillsCancel.Click
-        If Not isEdit Then fraCommands.Visible = True Else fraCommands.Visible = False
+        If Not IsEdit Then fraCommands.Visible = True Else fraCommands.Visible = False
         fraDialogue.Visible = False
         fraChangeSkills.Visible = False
     End Sub
@@ -2022,8 +2052,8 @@ Friend Class frmEvents
 #Region "Change Class"
 
     Private Sub BtnChangeClassOK_Click(sender As Object, e As EventArgs) Handles btnChangeClassOk.Click
-        If isEdit = False Then
-            AddCommand(EventType.evChangeClass)
+        If IsEdit = False Then
+            AddCommand(EventType.EvChangeClass)
         Else
             EditCommand()
         End If
@@ -2034,19 +2064,18 @@ Friend Class frmEvents
     End Sub
 
     Private Sub BtnChangeClassCancel_Click(sender As Object, e As EventArgs) Handles btnChangeClassCancel.Click
-        If Not isEdit Then fraCommands.Visible = True Else fraCommands.Visible = False
+        If Not IsEdit Then fraCommands.Visible = True Else fraCommands.Visible = False
         fraDialogue.Visible = False
         fraChangeClass.Visible = False
     End Sub
-
 
 #End Region
 
 #Region "Change Sprite"
 
     Private Sub BtnChangeSpriteOK_Click(sender As Object, e As EventArgs) Handles btnChangeSpriteOk.Click
-        If isEdit = False Then
-            AddCommand(EventType.evChangeSprite)
+        If IsEdit = False Then
+            AddCommand(EventType.EvChangeSprite)
         Else
             EditCommand()
         End If
@@ -2057,7 +2086,7 @@ Friend Class frmEvents
     End Sub
 
     Private Sub BtnChangeSpriteCancel_Click(sender As Object, e As EventArgs) Handles btnChangeSpriteCancel.Click
-        If Not isEdit Then fraCommands.Visible = True Else fraCommands.Visible = False
+        If Not IsEdit Then fraCommands.Visible = True Else fraCommands.Visible = False
         fraDialogue.Visible = False
         fraChangeSprite.Visible = False
     End Sub
@@ -2067,8 +2096,8 @@ Friend Class frmEvents
 #Region "Change Gender"
 
     Private Sub BtnChangeGenderOK_Click(sender As Object, e As EventArgs) Handles btnChangeGenderOk.Click
-        If isEdit = False Then
-            AddCommand(EventType.evChangeSex)
+        If IsEdit = False Then
+            AddCommand(EventType.EvChangeSex)
         Else
             EditCommand()
         End If
@@ -2079,7 +2108,7 @@ Friend Class frmEvents
     End Sub
 
     Private Sub BtnChangeGenderCancel_Click(sender As Object, e As EventArgs) Handles btnChangeGenderCancel.Click
-        If Not isEdit Then fraCommands.Visible = True Else fraCommands.Visible = False
+        If Not IsEdit Then fraCommands.Visible = True Else fraCommands.Visible = False
         fraDialogue.Visible = False
         fraChangeGender.Visible = False
     End Sub
@@ -2089,8 +2118,8 @@ Friend Class frmEvents
 #Region "Change PK"
 
     Private Sub BtnChangePkOK_Click(sender As Object, e As EventArgs) Handles btnChangePkOk.Click
-        If isEdit = False Then
-            AddCommand(EventType.evChangePK)
+        If IsEdit = False Then
+            AddCommand(EventType.EvChangePk)
         Else
             EditCommand()
         End If
@@ -2101,7 +2130,7 @@ Friend Class frmEvents
     End Sub
 
     Private Sub BtnChangePkCancel_Click(sender As Object, e As EventArgs) Handles btnChangePkCancel.Click
-        If Not isEdit Then fraCommands.Visible = True Else fraCommands.Visible = False
+        If Not IsEdit Then fraCommands.Visible = True Else fraCommands.Visible = False
         fraDialogue.Visible = False
         fraChangePK.Visible = False
     End Sub
@@ -2111,8 +2140,8 @@ Friend Class frmEvents
 #Region "Give Exp"
 
     Private Sub BtnGiveExpOK_Click(sender As Object, e As EventArgs) Handles btnGiveExpOk.Click
-        If isEdit = False Then
-            AddCommand(EventType.evGiveExp)
+        If IsEdit = False Then
+            AddCommand(EventType.EvGiveExp)
         Else
             EditCommand()
         End If
@@ -2123,7 +2152,7 @@ Friend Class frmEvents
     End Sub
 
     Private Sub BtnGiveExpCancel_Click(sender As Object, e As EventArgs) Handles btnGiveExpCancel.Click
-        If Not isEdit Then fraCommands.Visible = True Else fraCommands.Visible = False
+        If Not IsEdit Then fraCommands.Visible = True Else fraCommands.Visible = False
         fraDialogue.Visible = False
         fraGiveExp.Visible = False
     End Sub
@@ -2133,8 +2162,8 @@ Friend Class frmEvents
 #Region "Player Warp"
 
     Private Sub BtnPlayerWarpOK_Click(sender As Object, e As EventArgs) Handles btnPlayerWarpOk.Click
-        If Not isEdit Then
-            AddCommand(EventType.evWarpPlayer)
+        If Not IsEdit Then
+            AddCommand(EventType.EvWarpPlayer)
         Else
             EditCommand()
         End If
@@ -2145,7 +2174,7 @@ Friend Class frmEvents
     End Sub
 
     Private Sub BtnPlayerWarpCancel_Click(sender As Object, e As EventArgs) Handles btnPlayerWarpCancel.Click
-        If Not isEdit Then fraCommands.Visible = True Else fraCommands.Visible = False
+        If Not IsEdit Then fraCommands.Visible = True Else fraCommands.Visible = False
         fraDialogue.Visible = False
         fraPlayerWarp.Visible = False
     End Sub
@@ -2155,8 +2184,8 @@ Friend Class frmEvents
 #Region "Route Completion"
 
     Private Sub BtnMoveWaitOK_Click(sender As Object, e As EventArgs) Handles btnMoveWaitOk.Click
-        If Not isEdit Then
-            AddCommand(EventType.evWaitMovement)
+        If Not IsEdit Then
+            AddCommand(EventType.EvWaitMovement)
         Else
             EditCommand()
         End If
@@ -2167,7 +2196,7 @@ Friend Class frmEvents
     End Sub
 
     Private Sub BtnMoveWaitCancel_Click(sender As Object, e As EventArgs) Handles btnMoveWaitCancel.Click
-        If Not isEdit Then fraCommands.Visible = True Else fraCommands.Visible = False
+        If Not IsEdit Then fraCommands.Visible = True Else fraCommands.Visible = False
         fraDialogue.Visible = False
         fraMoveRouteWait.Visible = False
     End Sub
@@ -2177,8 +2206,8 @@ Friend Class frmEvents
 #Region "Spawn Npc"
 
     Private Sub BtnSpawnNpcOK_Click(sender As Object, e As EventArgs) Handles btnSpawnNpcOk.Click
-        If isEdit = False Then
-            AddCommand(EventType.evSpawnNpc)
+        If IsEdit = False Then
+            AddCommand(EventType.EvSpawnNpc)
         Else
             EditCommand()
         End If
@@ -2189,7 +2218,7 @@ Friend Class frmEvents
     End Sub
 
     Private Sub BtnSpawnNpcCancel_Click(sender As Object, e As EventArgs) Handles btnSpawnNpcCancel.Click
-        If Not isEdit Then fraCommands.Visible = True Else fraCommands.Visible = False
+        If Not IsEdit Then fraCommands.Visible = True Else fraCommands.Visible = False
         fraDialogue.Visible = False
         fraSpawnNpc.Visible = False
     End Sub
@@ -2223,8 +2252,8 @@ Friend Class frmEvents
     End Sub
 
     Private Sub BtnPlayAnimationOK_Click(sender As Object, e As EventArgs) Handles btnPlayAnimationOk.Click
-        If Not isEdit Then
-            AddCommand(EventType.evPlayAnimation)
+        If Not IsEdit Then
+            AddCommand(EventType.EvPlayAnimation)
         Else
             EditCommand()
         End If
@@ -2235,7 +2264,7 @@ Friend Class frmEvents
     End Sub
 
     Private Sub BtnPlayAnimationCancel_Click(sender As Object, e As EventArgs) Handles btnPlayAnimationCancel.Click
-        If Not isEdit Then fraCommands.Visible = True Else fraCommands.Visible = False
+        If Not IsEdit Then fraCommands.Visible = True Else fraCommands.Visible = False
         fraDialogue.Visible = False
         fraPlayAnimation.Visible = False
     End Sub
@@ -2245,8 +2274,8 @@ Friend Class frmEvents
 #Region "Begin Quest"
 
     Private Sub BtnBeginQuestOK_Click(sender As Object, e As EventArgs) Handles btnBeginQuestOk.Click
-        If Not isEdit Then
-            AddCommand(EventType.evBeginQuest)
+        If Not IsEdit Then
+            AddCommand(EventType.EvBeginQuest)
         Else
             EditCommand()
         End If
@@ -2257,7 +2286,7 @@ Friend Class frmEvents
     End Sub
 
     Private Sub BtnBeginQuestCancel_Click(sender As Object, e As EventArgs) Handles btnBeginQuestCancel.Click
-        If Not isEdit Then fraCommands.Visible = True Else fraCommands.Visible = False
+        If Not IsEdit Then fraCommands.Visible = True Else fraCommands.Visible = False
         fraDialogue.Visible = False
         fraBeginQuest.Visible = False
     End Sub
@@ -2267,8 +2296,8 @@ Friend Class frmEvents
 #Region "Complete QuestTask"
 
     Private Sub BtnCompleteQuestTaskOK_Click(sender As Object, e As EventArgs) Handles btnCompleteQuestTaskOk.Click
-        If Not isEdit Then
-            AddCommand(EventType.evQuestTask)
+        If Not IsEdit Then
+            AddCommand(EventType.EvQuestTask)
         Else
             EditCommand()
         End If
@@ -2279,7 +2308,7 @@ Friend Class frmEvents
     End Sub
 
     Private Sub BtnCompleteQuestTaskCancel_Click(sender As Object, e As EventArgs) Handles btnCompleteQuestTaskCancel.Click
-        If Not isEdit Then fraCommands.Visible = True Else fraCommands.Visible = False
+        If Not IsEdit Then fraCommands.Visible = True Else fraCommands.Visible = False
         fraDialogue.Visible = False
         fraCompleteTask.Visible = False
     End Sub
@@ -2289,8 +2318,8 @@ Friend Class frmEvents
 #Region "End Quest"
 
     Private Sub BtnEndQuestOK_Click(sender As Object, e As EventArgs) Handles btnEndQuestOk.Click
-        If Not isEdit Then
-            AddCommand(EventType.evEndQuest)
+        If Not IsEdit Then
+            AddCommand(EventType.EvEndQuest)
         Else
             EditCommand()
         End If
@@ -2301,7 +2330,7 @@ Friend Class frmEvents
     End Sub
 
     Private Sub BtnEndQuestCancel_Click(sender As Object, e As EventArgs) Handles btnEndQuestCancel.Click
-        If Not isEdit Then fraCommands.Visible = True Else fraCommands.Visible = False
+        If Not IsEdit Then fraCommands.Visible = True Else fraCommands.Visible = False
         fraDialogue.Visible = False
         fraEndQuest.Visible = False
     End Sub
@@ -2311,8 +2340,8 @@ Friend Class frmEvents
 #Region "Set Fog"
 
     Private Sub BtnSetFogOK_Click(sender As Object, e As EventArgs) Handles btnSetFogOk.Click
-        If Not isEdit Then
-            AddCommand(EventType.evSetFog)
+        If Not IsEdit Then
+            AddCommand(EventType.EvSetFog)
         Else
             EditCommand()
         End If
@@ -2323,7 +2352,7 @@ Friend Class frmEvents
     End Sub
 
     Private Sub BtnSetFogCancel_Click(sender As Object, e As EventArgs) Handles btnSetFogCancel.Click
-        If Not isEdit Then fraCommands.Visible = True Else fraCommands.Visible = False
+        If Not IsEdit Then fraCommands.Visible = True Else fraCommands.Visible = False
         fraDialogue.Visible = False
         fraSetFog.Visible = False
     End Sub
@@ -2333,8 +2362,8 @@ Friend Class frmEvents
 #Region "Set Weather"
 
     Private Sub BtnSetWeatherOK_Click(sender As Object, e As EventArgs) Handles btnSetWeatherOk.Click
-        If Not isEdit Then
-            AddCommand(EventType.evSetWeather)
+        If Not IsEdit Then
+            AddCommand(EventType.EvSetWeather)
         Else
             EditCommand()
         End If
@@ -2345,7 +2374,7 @@ Friend Class frmEvents
     End Sub
 
     Private Sub BtnSetWeatherCancel_Click(sender As Object, e As EventArgs) Handles btnSetWeatherCancel.Click
-        If Not isEdit Then fraCommands.Visible = True Else fraCommands.Visible = False
+        If Not IsEdit Then fraCommands.Visible = True Else fraCommands.Visible = False
         fraDialogue.Visible = False
         fraSetWeather.Visible = False
     End Sub
@@ -2355,8 +2384,8 @@ Friend Class frmEvents
 #Region "Set Map Tint"
 
     Private Sub BtnMapTintOK_Click(sender As Object, e As EventArgs) Handles btnMapTintOk.Click
-        If Not isEdit Then
-            AddCommand(EventType.evSetTint)
+        If Not IsEdit Then
+            AddCommand(EventType.EvSetTint)
         Else
             EditCommand()
         End If
@@ -2367,7 +2396,7 @@ Friend Class frmEvents
     End Sub
 
     Private Sub BtnMapTintCancel_Click(sender As Object, e As EventArgs) Handles btnMapTintCancel.Click
-        If Not isEdit Then fraCommands.Visible = True Else fraCommands.Visible = False
+        If Not IsEdit Then fraCommands.Visible = True Else fraCommands.Visible = False
         fraDialogue.Visible = False
         fraMapTint.Visible = False
     End Sub
@@ -2377,8 +2406,8 @@ Friend Class frmEvents
 #Region "Play BGM"
 
     Private Sub BtnPlayBgmOK_Click(sender As Object, e As EventArgs) Handles btnPlayBgmOk.Click
-        If Not isEdit Then
-            AddCommand(EventType.evPlayBGM)
+        If Not IsEdit Then
+            AddCommand(EventType.EvPlayBgm)
         Else
             EditCommand()
         End If
@@ -2389,7 +2418,7 @@ Friend Class frmEvents
     End Sub
 
     Private Sub BtnPlayBgmCancel_Click(sender As Object, e As EventArgs) Handles btnPlayBgmCancel.Click
-        If Not isEdit Then fraCommands.Visible = True Else fraCommands.Visible = False
+        If Not IsEdit Then fraCommands.Visible = True Else fraCommands.Visible = False
         fraDialogue.Visible = False
         fraPlayBGM.Visible = False
     End Sub
@@ -2399,8 +2428,8 @@ Friend Class frmEvents
 #Region "Play Sound"
 
     Private Sub BtnPlaySoundOK_Click(sender As Object, e As EventArgs) Handles btnPlaySoundOk.Click
-        If Not isEdit Then
-            AddCommand(EventType.evPlaySound)
+        If Not IsEdit Then
+            AddCommand(EventType.EvPlaySound)
         Else
             EditCommand()
         End If
@@ -2411,7 +2440,7 @@ Friend Class frmEvents
     End Sub
 
     Private Sub BtnPlaySoundCancel_Click(sender As Object, e As EventArgs) Handles btnPlaySoundCancel.Click
-        If Not isEdit Then fraCommands.Visible = True Else fraCommands.Visible = False
+        If Not IsEdit Then fraCommands.Visible = True Else fraCommands.Visible = False
         fraDialogue.Visible = False
         fraPlaySound.Visible = False
     End Sub
@@ -2421,8 +2450,8 @@ Friend Class frmEvents
 #Region "Wait"
 
     Private Sub BtnSetWaitOK_Click(sender As Object, e As EventArgs) Handles btnSetWaitOk.Click
-        If Not isEdit Then
-            AddCommand(EventType.evWait)
+        If Not IsEdit Then
+            AddCommand(EventType.EvWait)
         Else
             EditCommand()
         End If
@@ -2433,7 +2462,7 @@ Friend Class frmEvents
     End Sub
 
     Private Sub BtnSetWaitCancel_Click(sender As Object, e As EventArgs) Handles btnSetWaitCancel.Click
-        If Not isEdit Then fraCommands.Visible = True Else fraCommands.Visible = False
+        If Not IsEdit Then fraCommands.Visible = True Else fraCommands.Visible = False
         fraDialogue.Visible = False
         fraSetWait.Visible = False
     End Sub
@@ -2443,8 +2472,8 @@ Friend Class frmEvents
 #Region "Set Access"
 
     Private Sub BtnSetAccessOK_Click(sender As Object, e As EventArgs) Handles btnSetAccessOk.Click
-        If Not isEdit Then
-            AddCommand(EventType.evSetAccess)
+        If Not IsEdit Then
+            AddCommand(EventType.EvSetAccess)
         Else
             EditCommand()
         End If
@@ -2455,7 +2484,7 @@ Friend Class frmEvents
     End Sub
 
     Private Sub BtnSetAccessCancel_Click(sender As Object, e As EventArgs) Handles btnSetAccessCancel.Click
-        If Not isEdit Then fraCommands.Visible = True Else fraCommands.Visible = False
+        If Not IsEdit Then fraCommands.Visible = True Else fraCommands.Visible = False
         fraDialogue.Visible = False
         fraSetAccess.Visible = False
     End Sub
@@ -2465,8 +2494,8 @@ Friend Class frmEvents
 #Region "Custom Script"
 
     Private Sub BtnCustomScriptOK_Click(sender As Object, e As EventArgs) Handles btnCustomScriptOk.Click
-        If Not isEdit Then
-            AddCommand(EventType.evCustomScript)
+        If Not IsEdit Then
+            AddCommand(EventType.EvCustomScript)
         Else
             EditCommand()
         End If
@@ -2477,7 +2506,7 @@ Friend Class frmEvents
     End Sub
 
     Private Sub BtnCustomScriptCancel_Click(sender As Object, e As EventArgs) Handles btnCustomScriptCancel.Click
-        If Not isEdit Then fraCommands.Visible = True Else fraCommands.Visible = False
+        If Not IsEdit Then fraCommands.Visible = True Else fraCommands.Visible = False
         fraDialogue.Visible = False
         fraCustomScript.Visible = False
     End Sub
@@ -2487,8 +2516,8 @@ Friend Class frmEvents
 #Region "Show Pic"
 
     Private Sub BtnShowPicOK_Click(sender As Object, e As EventArgs) Handles btnShowPicOk.Click
-        If Not isEdit Then
-            AddCommand(EventType.evShowPicture)
+        If Not IsEdit Then
+            AddCommand(EventType.EvShowPicture)
         Else
             EditCommand()
         End If
@@ -2499,7 +2528,7 @@ Friend Class frmEvents
     End Sub
 
     Private Sub BtnShowPicCancel_Click(sender As Object, e As EventArgs) Handles btnShowPicCancel.Click
-        If Not isEdit Then fraCommands.Visible = True Else fraCommands.Visible = False
+        If Not IsEdit Then fraCommands.Visible = True Else fraCommands.Visible = False
         fraDialogue.Visible = False
         fraShowPic.Visible = False
     End Sub
@@ -2509,8 +2538,8 @@ Friend Class frmEvents
 #Region "Hide Pic"
 
     Private Sub BtnHidePicOK_Click(sender As Object, e As EventArgs) Handles btnHidePicOk.Click
-        If Not isEdit Then
-            AddCommand(EventType.evHidePicture)
+        If Not IsEdit Then
+            AddCommand(EventType.EvHidePicture)
         Else
             EditCommand()
         End If
@@ -2521,7 +2550,7 @@ Friend Class frmEvents
     End Sub
 
     Private Sub BtnHidePicCancel_Click(sender As Object, e As EventArgs) Handles btnHidePicCancel.Click
-        If Not isEdit Then fraCommands.Visible = True Else fraCommands.Visible = False
+        If Not IsEdit Then fraCommands.Visible = True Else fraCommands.Visible = False
         fraDialogue.Visible = False
         fraHidePic.Visible = False
     End Sub
@@ -2531,8 +2560,8 @@ Friend Class frmEvents
 #Region "Open Shop"
 
     Private Sub BtnOpenShopOK_Click(sender As Object, e As EventArgs) Handles btnOpenShopOk.Click
-        If Not isEdit Then
-            AddCommand(EventType.evOpenShop)
+        If Not IsEdit Then
+            AddCommand(EventType.EvOpenShop)
         Else
             EditCommand()
         End If
@@ -2543,7 +2572,7 @@ Friend Class frmEvents
     End Sub
 
     Private Sub BtnOpenShopCancel_Click(sender As Object, e As EventArgs) Handles btnOpenShopCancel.Click
-        If Not isEdit Then fraCommands.Visible = True Else fraCommands.Visible = False
+        If Not IsEdit Then fraCommands.Visible = True Else fraCommands.Visible = False
         fraDialogue.Visible = False
         fraOpenShop.Visible = False
     End Sub
@@ -2555,4 +2584,5 @@ Friend Class frmEvents
 #End Region
 
 #End Region
+
 End Class

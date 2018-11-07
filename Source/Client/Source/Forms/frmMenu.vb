@@ -5,7 +5,9 @@ Imports ASFW
 
 Friend Class FrmMenu
     Inherits Form
+
 #Region "Form Functions"
+
     ''' <summary>
     ''' clean up and close the game.
     ''' </summary>
@@ -43,7 +45,7 @@ Friend Class FrmMenu
         pnlCharSelect.Top = pnlMainMenu.Top
         pnlCharSelect.Left = pnlMainMenu.Left
 
-        If started = False Then Call Startup()
+        If Started = False Then Call Startup()
 
         Connect()
 
@@ -60,19 +62,21 @@ Friend Class FrmMenu
     ''' Shows the IP config.
     ''' </summary>
     Private Sub LblServerStatus_Click(sender As Object, e As EventArgs) Handles lblServerStatus.Click
-        pnlCreditsVisible = False
-        pnlLoginVisible = False
-        pnlRegisterVisible = False
-        pnlCharCreateVisible = False
+        PnlCreditsVisible = False
+        PnlLoginVisible = False
+        PnlRegisterVisible = False
+        PnlCharCreateVisible = False
 
-        txtIP.Text = Options.IP
+        txtIP.Text = Options.Ip
         txtPort.Text = Options.Port
 
         pnlIPConfig.Visible = True
     End Sub
+
 #End Region
 
 #Region "Draw Functions"
+
     ''' <summary>
     ''' Preload the images in the menu.
     ''' </summary>
@@ -174,13 +178,13 @@ Friend Class FrmMenu
             Dim charwidth As Integer
             Dim charheight As Integer
 
-            If newCharClass = 0 Then newCharClass = 1
-            If newCharSprite = 0 Then newCharSprite = 1
+            If NewCharClass = 0 Then NewCharClass = 1
+            If NewCharSprite = 0 Then NewCharSprite = 1
 
             If rdoMale.Checked = True Then
-                filename = Application.StartupPath & GfxPath & "characters\" & Classes(newCharClass).MaleSprite(newCharSprite) & GfxExt
+                filename = Application.StartupPath & GfxPath & "characters\" & Classes(NewCharClass).MaleSprite(NewCharSprite) & GfxExt
             Else
-                filename = Application.StartupPath & GfxPath & "characters\" & Classes(newCharClass).FemaleSprite(newCharSprite) & GfxExt
+                filename = Application.StartupPath & GfxPath & "characters\" & Classes(NewCharClass).FemaleSprite(NewCharSprite) & GfxExt
             End If
 
             Dim charsprite As Bitmap = New Bitmap(filename)
@@ -194,9 +198,9 @@ Friend Class FrmMenu
             charsprite.MakeTransparent(charsprite.GetPixel(0, 0))
 
             If charwidth > 32 Then
-                lblnextcharleft = (100 - (64 - charwidth))
+                Lblnextcharleft = (100 - (64 - charwidth))
             Else
-                lblnextcharleft = 100
+                Lblnextcharleft = 100
             End If
             pnlNewChar.Refresh()
             g.DrawImage(charsprite, destRect, srcRect, GraphicsUnit.Pixel)
@@ -312,9 +316,11 @@ Friend Class FrmMenu
     Private Sub PnlNewChar_Paint(sender As Object, e As PaintEventArgs) Handles pnlNewChar.Paint
         'nada here
     End Sub
+
 #End Region
 
 #Region "Credits"
+
     ''' <summary>
     ''' This timer handles the scrolling credits.
     ''' </summary>
@@ -323,11 +329,11 @@ Friend Class FrmMenu
         Dim filepath As String
         filepath = Application.StartupPath & "\Data\credits.txt"
         lblScrollingCredits.Top = 177
-        If pnlCreditsVisible = True Then
+        If PnlCreditsVisible = True Then
             tmrCredits.Enabled = False
             credits = GetFileContents(filepath)
             lblScrollingCredits.Text = "" & vbNewLine & credits
-            Do Until pnlCreditsVisible = False
+            Do Until PnlCreditsVisible = False
                 lblScrollingCredits.Top = lblScrollingCredits.Top - 1
                 If lblScrollingCredits.Bottom <= lblCreditsTop.Bottom Then
                     lblScrollingCredits.Top = 177
@@ -337,9 +343,11 @@ Friend Class FrmMenu
             Loop
         End If
     End Sub
+
 #End Region
 
 #Region "Login"
+
     ''' <summary>
     ''' Handles press enter on login name txtbox.
     ''' </summary>
@@ -348,6 +356,7 @@ Friend Class FrmMenu
             BtnLogin_Click(Me, Nothing)
         End If
     End Sub
+
     ''' <summary>
     ''' Handles press enter on login password txtbox.
     ''' </summary>
@@ -361,17 +370,19 @@ Friend Class FrmMenu
     ''' Handle the SavePas checkbox.
     ''' </summary>
     Private Sub ChkSavePass_CheckedChanged(sender As Object, e As EventArgs) Handles chkSavePass.CheckedChanged
-        chkSavePassChecked = chkSavePass.Checked
+        ChkSavePassChecked = chkSavePass.Checked
     End Sub
+
 #End Region
 
 #Region "Char Creation"
+
     ''' <summary>
     ''' Changes selected class.
     ''' </summary>
     Private Sub CmbClass_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbClass.SelectedIndexChanged
-        newCharClass = cmbClass.SelectedIndex + 1
-        txtDescription.Text = Classes(newCharClass).Desc
+        NewCharClass = cmbClass.SelectedIndex + 1
+        txtDescription.Text = Classes(NewCharClass).Desc
         DrawCharacter()
     End Sub
 
@@ -393,11 +404,11 @@ Friend Class FrmMenu
     ''' Switches sprite for selected class to next one, if any.
     ''' </summary>
     Private Sub LblNextChar_Click(sender As Object, e As EventArgs) Handles lblNextChar.Click
-        newCharSprite = newCharSprite + 1
+        NewCharSprite = NewCharSprite + 1
         If rdoMale.Checked = True Then
-            If newCharSprite > Classes(newCharClass).MaleSprite.Length - 1 Then newCharSprite = 1
+            If NewCharSprite > Classes(NewCharClass).MaleSprite.Length - 1 Then NewCharSprite = 1
         ElseIf rdoFemale.Checked = True Then
-            If newCharSprite > Classes(newCharClass).FemaleSprite.Length - 1 Then newCharSprite = 1
+            If NewCharSprite > Classes(NewCharClass).FemaleSprite.Length - 1 Then NewCharSprite = 1
         End If
         DrawCharacter()
     End Sub
@@ -406,11 +417,11 @@ Friend Class FrmMenu
     ''' Switches sprite for selected class to previous one, if any.
     ''' </summary>
     Private Sub LblPrevChar_Click(sender As Object, e As EventArgs) Handles lblPrevChar.Click
-        newCharSprite = newCharSprite - 1
+        NewCharSprite = NewCharSprite - 1
         If rdoMale.Checked = True Then
-            If newCharSprite = 0 Then newCharSprite = Classes(newCharClass).MaleSprite.Length - 1
+            If NewCharSprite = 0 Then NewCharSprite = Classes(NewCharClass).MaleSprite.Length - 1
         ElseIf rdoFemale.Checked = True Then
-            If newCharSprite = 0 Then newCharSprite = Classes(newCharClass).FemaleSprite.Length - 1
+            If NewCharSprite = 0 Then NewCharSprite = Classes(NewCharClass).FemaleSprite.Length - 1
         End If
         DrawCharacter()
     End Sub
@@ -421,19 +432,21 @@ Friend Class FrmMenu
     Private Sub PnlNewChar_VisibleChanged(sender As Object, e As EventArgs) Handles pnlNewChar.VisibleChanged
         DrawCharacter()
     End Sub
+
 #End Region
 
 #Region "Buttons"
+
     ''' <summary>
     ''' Handle Play button press.
     ''' </summary>
     Private Sub BtnPlay_Click(sender As Object, e As EventArgs) Handles btnPlay.Click
         If Socket.IsConnected() = True Then
             PlaySound("Click.ogg")
-            pnlRegisterVisible = False
-            pnlLoginVisible = True
-            pnlCharCreateVisible = False
-            pnlCreditsVisible = False
+            PnlRegisterVisible = False
+            PnlLoginVisible = True
+            PnlCharCreateVisible = False
+            PnlCreditsVisible = False
             pnlIPConfig.Visible = False
             txtLogin.Focus()
             If Options.SavePass = True Then
@@ -464,10 +477,10 @@ Friend Class FrmMenu
     Private Sub BtnRegister_Click(sender As Object, e As EventArgs) Handles btnRegister.Click
         If Socket.IsConnected() = True Then
             PlaySound("Click.ogg")
-            pnlRegisterVisible = True
-            pnlLoginVisible = False
-            pnlCharCreateVisible = False
-            pnlCreditsVisible = False
+            PnlRegisterVisible = True
+            PnlLoginVisible = False
+            PnlCharCreateVisible = False
+            PnlCreditsVisible = False
             pnlIPConfig.Visible = False
         End If
     End Sub
@@ -491,13 +504,13 @@ Friend Class FrmMenu
     ''' </summary>
     Private Sub BtnCredits_Click(sender As Object, e As EventArgs) Handles btnCredits.Click
         PlaySound("Click.ogg")
-        If pnlCreditsVisible = False Then
+        If PnlCreditsVisible = False Then
             tmrCredits.Enabled = True
         End If
-        pnlCreditsVisible = True
-        pnlLoginVisible = False
-        pnlRegisterVisible = False
-        pnlCharCreateVisible = False
+        PnlCreditsVisible = True
+        PnlLoginVisible = False
+        PnlRegisterVisible = False
+        PnlCharCreateVisible = False
         pnlIPConfig.Visible = False
     End Sub
 
@@ -567,17 +580,17 @@ Friend Class FrmMenu
         Dim name As String
         Dim password As String
         Dim passwordAgain As String
-        Name = Trim$(txtRuser.Text)
-        Password = Trim$(txtRPass.Text)
-        PasswordAgain = Trim$(txtRPass2.Text)
+        name = Trim$(txtRuser.Text)
+        password = Trim$(txtRPass.Text)
+        passwordAgain = Trim$(txtRPass2.Text)
 
-        If IsLoginLegal(Name, Password) Then
-            If Password <> PasswordAgain Then
+        If IsLoginLegal(name, password) Then
+            If password <> passwordAgain Then
                 MsgBox("Passwords don't match.")
                 Exit Sub
             End If
 
-            If Not IsStringLegal(Name) Then Exit Sub
+            If Not IsStringLegal(name) Then Exit Sub
 
             MenuState(MenuStateNewaccount)
         End If
@@ -622,7 +635,7 @@ Friend Class FrmMenu
     ''' Handles SaveIP button press.
     ''' </summary>
     Private Sub BtnSaveIP_Click(sender As Object, e As EventArgs) Handles btnSaveIP.Click
-        Options.IP = txtIP.Text
+        Options.Ip = txtIP.Text
         Options.Port = txtPort.Text
 
         pnlIPConfig.Visible = False
@@ -659,21 +672,21 @@ Friend Class FrmMenu
     Private Sub BtnNewChar_Click(sender As Object, e As EventArgs) Handles btnNewChar.Click
         Dim i As Integer, newSelectedChar As Byte
 
-        NewSelectedChar = 0
+        newSelectedChar = 0
 
         For i = 1 To MaxChars
             If CharSelection(i).Name = "" Then
-                NewSelectedChar = i
+                newSelectedChar = i
                 Exit For
             End If
         Next
 
-        If NewSelectedChar > 0 Then
-            SelectedChar = NewSelectedChar
+        If newSelectedChar > 0 Then
+            SelectedChar = newSelectedChar
         End If
 
-        pnlCharCreateVisible = True
-        pnlCharSelectVisible = False
+        PnlCharCreateVisible = True
+        PnlCharSelectVisible = False
         DrawChar = True
     End Sub
 
@@ -681,16 +694,16 @@ Friend Class FrmMenu
     ''' Handles UseChar button press.
     ''' </summary>
     Private Sub BtnUseChar_Click(sender As Object, e As EventArgs) Handles btnUseChar.Click
-        pnlloadvisible = True
-        frmmenuvisible = False
+        Pnlloadvisible = True
+        Frmmenuvisible = False
 
-        dim buffer as ByteStream
-        Buffer = New ByteStream(8)
-        Buffer.WriteInt32(ClientPackets.CUseChar)
-        Buffer.WriteInt32(SelectedChar)
-        Socket.SendData(Buffer.Data, Buffer.Head)
+        Dim buffer As ByteStream
+        buffer = New ByteStream(8)
+        buffer.WriteInt32(ClientPackets.CUseChar)
+        buffer.WriteInt32(SelectedChar)
+        Socket.SendData(buffer.Data, buffer.Head)
 
-        Buffer.Dispose()
+        buffer.Dispose()
     End Sub
 
     ''' <summary>
@@ -699,11 +712,11 @@ Friend Class FrmMenu
     Private Sub BtnDelChar_Click(sender As Object, e As EventArgs) Handles btnDelChar.Click
         Dim result1 As DialogResult = MessageBox.Show("Sure you want to delete character " & SelectedChar & "?", "You sure?", MessageBoxButtons.YesNo)
         If result1 = DialogResult.Yes Then
-            dim buffer as New ByteStream(4)
-            Buffer.WriteInt32(ClientPackets.CDelChar)
-            Buffer.WriteInt32(SelectedChar)
-            Socket.SendData(Buffer.Data, Buffer.Head)
-            Buffer.Dispose()
+            Dim buffer As New ByteStream(4)
+            buffer.WriteInt32(ClientPackets.CDelChar)
+            buffer.WriteInt32(SelectedChar)
+            Socket.SendData(buffer.Data, buffer.Head)
+            buffer.Dispose()
         End If
     End Sub
 

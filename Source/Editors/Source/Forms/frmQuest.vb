@@ -172,6 +172,7 @@
 #End Region
 
 #Region "Tasks"
+
     Private Sub LstTasks_DoubleClick(sender As Object, e As EventArgs) Handles lstTasks.DoubleClick
         If lstTasks.SelectedIndex < 0 Then Exit Sub
 
@@ -368,9 +369,11 @@
             cmbNpc.Enabled = False
         End If
     End Sub
+
 #End Region
 
 #Region "Requirements"
+
     Private Sub BtnAddRequirement_Click(sender As Object, e As EventArgs) Handles btnAddRequirement.Click
         Quest(Editorindex).ReqCount = Quest(Editorindex).ReqCount + 1
 
@@ -493,4 +496,5 @@
     End Sub
 
 #End Region
+
 End Class

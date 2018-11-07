@@ -1,6 +1,7 @@
 ﻿Imports System.IO
 
 Friend Class FrmVisualWarp
+
     Private Sub LstMaps_SelectedIndexChanged(sender As Object, e As EventArgs) Handles lstMaps.SelectedIndexChanged
         DrawMap()
         EditorWarpMap = lstMaps.SelectedIndex + 1
@@ -67,4 +68,5 @@ Friend Class FrmVisualWarp
     Private Sub FrmVisualWarp_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
     End Sub
+
 End Class

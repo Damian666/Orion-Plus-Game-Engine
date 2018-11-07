@@ -1,9 +1,12 @@
 ﻿Imports ASFW
 
 Friend Module C_Quest
+
 #Region "Global Info"
+
     'Constants
     Friend Const MaxQuests As Integer = 250
+
     'Friend Const MAX_TASKS As Byte = 10
     'Friend Const MAX_REQUIREMENTS As Byte = 10
     Friend Const EditorTasks As Byte = 7
@@ -50,6 +53,7 @@ Friend Module C_Quest
 
     'here we store temp info because off UpdateUI >.<
     Friend UpdateQuestWindow As Boolean
+
     Friend UpdateQuestChat As Boolean
     Friend QuestNum As Integer
     Friend QuestNumForStart As Integer
@@ -104,9 +108,11 @@ Friend Module C_Quest
         Dim Task() As TaskRec
 
     End Structure
+
 #End Region
 
 #Region "DataBase"
+
     Sub ClearQuest(questNum As Integer)
         Dim I As Integer
 
@@ -169,9 +175,11 @@ Friend Module C_Quest
             ClearQuest(I)
         Next
     End Sub
+
 #End Region
 
 #Region "Incoming Packets"
+
     Friend Sub Packet_QuestEditor(ByRef data() As Byte)
         QuestEditorShow = True
     End Sub
@@ -271,6 +279,7 @@ Friend Module C_Quest
 
         buffer.Dispose()
     End Sub
+
 #End Region
 
 #Region "Outgoing Packets"
@@ -316,9 +325,11 @@ Friend Module C_Quest
         buffer.Dispose()
 
     End Sub
+
 #End Region
 
 #Region "Support Functions"
+
     'Tells if the quest is in progress or not
     Friend Function QuestInProgress(questNum As Integer) As Boolean
         QuestInProgress = False
@@ -349,9 +360,11 @@ Friend Module C_Quest
             End If
         Next
     End Function
+
 #End Region
 
 #Region "Misc Functions"
+
     Friend Function CanStartQuest(questNum As Integer) As Boolean
         Dim i As Integer
 
@@ -620,6 +633,7 @@ Friend Module C_Quest
 
         SelectedQuest = 0
     End Sub
+
 #End Region
 
 End Module

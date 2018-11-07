@@ -4,11 +4,10 @@ Imports ASFW.IO.FileIO
 
 Friend Module S_Animations
 
-#Region "Globals and Types"
 
-#End Region
 
 #Region "Database"
+
     Sub SaveAnimations()
         Dim i As Integer
 
@@ -153,9 +152,11 @@ Friend Module S_Animations
 
         Return buffer.ToArray
     End Function
+
 #End Region
 
 #Region "Incoming Packets"
+
     Sub Packet_EditAnimation(index As Integer, ByRef data() As Byte)
         AddDebug("Recieved EMSG: RequestEditAnimation")
 
@@ -213,9 +214,11 @@ Friend Module S_Animations
 
         SendAnimations(index)
     End Sub
+
 #End Region
 
 #Region "Outgoing Packets"
+
     Sub SendAnimation(mapNum As Integer, Anim As Integer, X As Integer, Y As Integer, Optional LockType As Byte = 0, Optional Lockindex As Integer = 0)
         Dim buffer As New ByteStream(4)
         buffer.WriteInt32(ServerPackets.SAnimation)
@@ -312,5 +315,7 @@ Friend Module S_Animations
         SendDataToAll(buffer.Data, buffer.Head)
         buffer.Dispose()
     End Sub
+
 #End Region
+
 End Module

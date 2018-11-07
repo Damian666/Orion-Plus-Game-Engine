@@ -1,5 +1,4 @@
-﻿Imports System.Text
-Imports SFML.Graphics
+﻿Imports SFML.Graphics
 Imports SFML.Window
 
 Module C_Text
@@ -10,44 +9,44 @@ Module C_Text
     Friend Const AllChatLineWidth As Integer = 40
     Friend Const ChatboxPadding As Integer = 10 + 16 + 2 ' 10 = left and right border padding +2 each (3+2+3+2), 16 = scrollbar width, +2 for padding between scrollbar and text
     Friend Const ChatEntryPadding As Integer = 10 ' 5 on left and right
-    Friend FirstLineindex as integer = 0
-    Friend LastLineindex as integer = 0
+    Friend FirstLineindex As Integer = 0
+    Friend LastLineindex As Integer = 0
     Friend ScrollMod As Integer = 0
 
     Friend Sub DrawText(x As Integer, y As Integer, text As String, color As Color, backColor As Color, ByRef target As RenderWindow, Optional textSize As Byte = FontSize)
-        Dim backString As Text = New Text(text, SFMLGameFont)
-        Dim frontString As Text = New Text(text, SFMLGameFont)
-        BackString.CharacterSize = TextSize
-        FrontString.CharacterSize = TextSize
+        Dim backString As Text = New Text(text, SfmlGameFont)
+        Dim frontString As Text = New Text(text, SfmlGameFont)
+        backString.CharacterSize = textSize
+        frontString.CharacterSize = textSize
 
-        BackString.Color = BackColor
-        BackString.Position = New Vector2f(X - 1, Y - 1)
-        target.Draw(BackString)
+        backString.Color = backColor
+        backString.Position = New Vector2f(x - 1, y - 1)
+        target.Draw(backString)
 
-        BackString.Position = New Vector2f(X - 1, Y + 1)
-        target.Draw(BackString)
+        backString.Position = New Vector2f(x - 1, y + 1)
+        target.Draw(backString)
 
-        BackString.Position = New Vector2f(X + 1, Y + 1)
-        target.Draw(BackString)
+        backString.Position = New Vector2f(x + 1, y + 1)
+        target.Draw(backString)
 
-        BackString.Position = New Vector2f(X + 1, Y - 1)
-        target.Draw(BackString)
+        backString.Position = New Vector2f(x + 1, y - 1)
+        target.Draw(backString)
 
-        FrontString.Color = color
-        FrontString.Position = New Vector2f(X, Y)
-        target.Draw(FrontString)
+        frontString.Color = color
+        frontString.Position = New Vector2f(x, y)
+        target.Draw(frontString)
     End Sub
 
-    Friend Sub DrawPlayerName(index as integer)
+    Friend Sub DrawPlayerName(index As Integer)
         Dim textX As Integer
         Dim textY As Integer
         Dim color As Color, backcolor As Color
         Dim name As String
 
         ' Check access level
-        If GetPlayerPK(Index) = False Then
+        If GetPlayerPk(index) = False Then
 
-            Select Case GetPlayerAccess(Index)
+            Select Case GetPlayerAccess(index)
                 Case AdminType.Player
                     color = Color.Red
                     backcolor = Color.Black
@@ -64,24 +63,23 @@ Module C_Text
                     color = Color.Yellow
                     backcolor = Color.Black
             End Select
-
         Else
             color = Color.Red
         End If
 
-        Name = Trim$(Player(Index).Name)
+        name = Trim$(Player(index).Name)
         ' calc pos
-        TextX = ConvertMapX(GetPlayerX(Index) * PicX) + Player(Index).XOffset + (PicX \ 2)
-        TextX = TextX - (GetTextWidth((Trim$(Name))) / 2)
-        If GetPlayerSprite(Index) < 1 OrElse GetPlayerSprite(Index) > NumCharacters Then
-            TextY = ConvertMapY(GetPlayerY(Index) * PicY) + Player(Index).YOffset - 16
+        textX = ConvertMapX(GetPlayerX(index) * PicX) + Player(index).XOffset + (PicX \ 2)
+        textX = textX - (GetTextWidth((Trim$(name))) / 2)
+        If GetPlayerSprite(index) < 1 OrElse GetPlayerSprite(index) > NumCharacters Then
+            textY = ConvertMapY(GetPlayerY(index) * PicY) + Player(index).YOffset - 16
         Else
             ' Determine location for text
-            TextY = ConvertMapY(GetPlayerY(Index) * PicY) + Player(Index).YOffset - (CharacterGFXInfo(GetPlayerSprite(Index)).Height / 4) + 16
+            textY = ConvertMapY(GetPlayerY(index) * PicY) + Player(index).YOffset - (CharacterGfxInfo(GetPlayerSprite(index)).Height / 4) + 16
         End If
 
         ' Draw name
-        DrawText(TextX, TextY, Trim$(Name), color, backcolor, GameWindow)
+        DrawText(textX, textY, Trim$(name), color, backcolor, GameWindow)
     End Sub
 
     Friend Sub DrawNpcName(mapNpcNum As Integer)
@@ -90,7 +88,7 @@ Module C_Text
         Dim color As Color, backcolor As Color
         Dim npcNum As Integer
 
-        npcNum = MapNpc(MapNpcNum).Num
+        npcNum = MapNpc(mapNpcNum).Num
 
         Select Case Npc(npcNum).Behaviour
             Case 0 ' attack on sight
@@ -104,15 +102,15 @@ Module C_Text
                 backcolor = Color.Black
         End Select
 
-        TextX = ConvertMapX(MapNpc(MapNpcNum).X * PicX) + MapNpc(MapNpcNum).XOffset + (PicX \ 2) - GetTextWidth((Trim$(Npc(npcNum).Name))) / 2
+        textX = ConvertMapX(MapNpc(mapNpcNum).X * PicX) + MapNpc(mapNpcNum).XOffset + (PicX \ 2) - GetTextWidth((Trim$(Npc(npcNum).Name))) / 2
         If Npc(npcNum).Sprite < 1 OrElse Npc(npcNum).Sprite > NumCharacters Then
-            TextY = ConvertMapY(MapNpc(MapNpcNum).Y * PicY) + MapNpc(MapNpcNum).YOffset - 16
+            textY = ConvertMapY(MapNpc(mapNpcNum).Y * PicY) + MapNpc(mapNpcNum).YOffset - 16
         Else
-            TextY = ConvertMapY(MapNpc(MapNpcNum).Y * PicY) + MapNpc(MapNpcNum).YOffset - (CharacterGFXInfo(Npc(npcNum).Sprite).Height / 4) + 16
+            textY = ConvertMapY(MapNpc(mapNpcNum).Y * PicY) + MapNpc(mapNpcNum).YOffset - (CharacterGfxInfo(Npc(npcNum).Sprite).Height / 4) + 16
         End If
 
         ' Draw name
-        DrawText(TextX, TextY, Trim$(Npc(npcNum).Name), color, backcolor, GameWindow)
+        DrawText(textX, textY, Trim$(Npc(npcNum).Name), color, backcolor, GameWindow)
     End Sub
 
     Friend Sub DrawEventName(index As Integer)
@@ -124,30 +122,30 @@ Module C_Text
         color = Color.Yellow
         backcolor = Color.Black
 
-        Name = Trim$(Map.MapEvents(Index).Name)
+        name = Trim$(Map.MapEvents(index).Name)
 
         ' calc pos
-        TextX = ConvertMapX(Map.MapEvents(Index).X * PicX) + Map.MapEvents(Index).XOffset + (PicX \ 2) - GetTextWidth(Trim$(Name)) \ 2
-        If Map.MapEvents(Index).GraphicType = 0 Then
-            TextY = ConvertMapY(Map.MapEvents(Index).Y * PicY) + Map.MapEvents(Index).YOffset - 16
-        ElseIf Map.MapEvents(Index).GraphicType = 1 Then
-            If Map.MapEvents(Index).GraphicNum < 1 OrElse Map.MapEvents(Index).GraphicNum > NumCharacters Then
-                TextY = ConvertMapY(Map.MapEvents(Index).Y * PicY) + Map.MapEvents(Index).YOffset - 16
+        textX = ConvertMapX(Map.MapEvents(index).X * PicX) + Map.MapEvents(index).XOffset + (PicX \ 2) - GetTextWidth(Trim$(name)) \ 2
+        If Map.MapEvents(index).GraphicType = 0 Then
+            textY = ConvertMapY(Map.MapEvents(index).Y * PicY) + Map.MapEvents(index).YOffset - 16
+        ElseIf Map.MapEvents(index).GraphicType = 1 Then
+            If Map.MapEvents(index).GraphicNum < 1 OrElse Map.MapEvents(index).GraphicNum > NumCharacters Then
+                textY = ConvertMapY(Map.MapEvents(index).Y * PicY) + Map.MapEvents(index).YOffset - 16
             Else
                 ' Determine location for text
-                TextY = ConvertMapY(Map.MapEvents(Index).Y * PicY) + Map.MapEvents(Index).YOffset - (CharacterGFXInfo(Map.MapEvents(Index).GraphicNum).Height \ 4) + 16
+                textY = ConvertMapY(Map.MapEvents(index).Y * PicY) + Map.MapEvents(index).YOffset - (CharacterGfxInfo(Map.MapEvents(index).GraphicNum).Height \ 4) + 16
             End If
-        ElseIf Map.MapEvents(Index).GraphicType = 2 Then
-            If Map.MapEvents(Index).GraphicY2 > 0 Then
-                TextX = TextX + (Map.MapEvents(Index).GraphicY2 * PicY) \ 2 - 16
-                TextY = ConvertMapY(Map.MapEvents(Index).Y * PicY) + Map.MapEvents(Index).YOffset - (Map.MapEvents(Index).GraphicY2 * PicY) + 16
+        ElseIf Map.MapEvents(index).GraphicType = 2 Then
+            If Map.MapEvents(index).GraphicY2 > 0 Then
+                textX = textX + (Map.MapEvents(index).GraphicY2 * PicY) \ 2 - 16
+                textY = ConvertMapY(Map.MapEvents(index).Y * PicY) + Map.MapEvents(index).YOffset - (Map.MapEvents(index).GraphicY2 * PicY) + 16
             Else
-                TextY = ConvertMapY(Map.MapEvents(Index).Y * PicY) + Map.MapEvents(Index).YOffset - 32 + 16
+                textY = ConvertMapY(Map.MapEvents(index).Y * PicY) + Map.MapEvents(index).YOffset - 32 + 16
             End If
         End If
 
         ' Draw name
-        DrawText(TextX, TextY, Trim$(Name), color, backcolor, GameWindow)
+        DrawText(textX, textY, Trim$(name), color, backcolor, GameWindow)
 
         'For i = 1 To MaxQuests
         '    'check if the npc is the starter to any quest: [!] symbol
@@ -233,78 +231,79 @@ Module C_Text
 
     End Sub
 
-    Sub DrawActionMsg(index as integer)
+    Sub DrawActionMsg(index As Integer)
         Dim x As Integer, y As Integer, i As Integer, time As Integer
 
         ' how long we want each message to appear
-        Select Case ActionMsg(Index).Type
+        Select Case ActionMsg(index).Type
             Case ActionMsgType.Static
-                Time = 1500
+                time = 1500
 
-                If ActionMsg(Index).Y > 0 Then
-                    X = ActionMsg(Index).X + Int(PicX \ 2) - ((Len(Trim$(ActionMsg(Index).message)) \ 2) * 8)
-                    y = ActionMsg(Index).Y - Int(PicY \ 2) - 2
+                If ActionMsg(index).Y > 0 Then
+                    x = ActionMsg(index).X + Int(PicX \ 2) - ((Len(Trim$(ActionMsg(index).Message)) \ 2) * 8)
+                    y = ActionMsg(index).Y - Int(PicY \ 2) - 2
                 Else
-                    X = ActionMsg(Index).X + Int(PicX \ 2) - ((Len(Trim$(ActionMsg(Index).message)) \ 2) * 8)
-                    y = ActionMsg(Index).Y - Int(PicY \ 2) + 18
+                    x = ActionMsg(index).X + Int(PicX \ 2) - ((Len(Trim$(ActionMsg(index).Message)) \ 2) * 8)
+                    y = ActionMsg(index).Y - Int(PicY \ 2) + 18
                 End If
 
             Case ActionMsgType.Scroll
-                Time = 1500
+                time = 1500
 
-                If ActionMsg(Index).Y > 0 Then
-                    X = ActionMsg(Index).X + Int(PicX \ 2) - ((Len(Trim$(ActionMsg(Index).message)) \ 2) * 8)
-                    y = ActionMsg(Index).Y - Int(PicY \ 2) - 2 - (ActionMsg(Index).Scroll * 0.6)
-                    ActionMsg(Index).Scroll = ActionMsg(Index).Scroll + 1
+                If ActionMsg(index).Y > 0 Then
+                    x = ActionMsg(index).X + Int(PicX \ 2) - ((Len(Trim$(ActionMsg(index).Message)) \ 2) * 8)
+                    y = ActionMsg(index).Y - Int(PicY \ 2) - 2 - (ActionMsg(index).Scroll * 0.6)
+                    ActionMsg(index).Scroll = ActionMsg(index).Scroll + 1
                 Else
-                    X = ActionMsg(Index).X + Int(PicX \ 2) - ((Len(Trim$(ActionMsg(Index).message)) \ 2) * 8)
-                    y = ActionMsg(Index).Y - Int(PicY \ 2) + 18 + (ActionMsg(Index).Scroll * 0.6)
-                    ActionMsg(Index).Scroll = ActionMsg(Index).Scroll + 1
+                    x = ActionMsg(index).X + Int(PicX \ 2) - ((Len(Trim$(ActionMsg(index).Message)) \ 2) * 8)
+                    y = ActionMsg(index).Y - Int(PicY \ 2) + 18 + (ActionMsg(index).Scroll * 0.6)
+                    ActionMsg(index).Scroll = ActionMsg(index).Scroll + 1
                 End If
 
             Case ActionMsgType.Screen
-                Time = 3000
+                time = 3000
 
                 ' This will kill any action screen messages that there in the system
                 For i = Byte.MaxValue To 1 Step -1
                     If ActionMsg(i).Type = ActionMsgType.Screen Then
-                        If i <> Index Then
-                            ClearActionMsg(Index)
-                            Index = i
+                        If i <> index Then
+                            ClearActionMsg(index)
+                            index = i
                         End If
                     End If
                 Next
-                X = (frmGame.picscreen.Width \ 2) - ((Len(Trim$(ActionMsg(Index).message)) \ 2) * 8)
+                x = (FrmGame.picscreen.Width \ 2) - ((Len(Trim$(ActionMsg(index).Message)) \ 2) * 8)
                 y = 425
 
         End Select
 
-        X = ConvertMapX(X)
+        x = ConvertMapX(x)
         y = ConvertMapY(y)
 
-        If GetTickCount() < ActionMsg(Index).Created + Time Then
-            DrawText(X, y, ActionMsg(Index).message, GetSFMLColor(ActionMsg(Index).color), (Color.Black), GameWindow)
+        If GetTickCount() < ActionMsg(index).Created + time Then
+            DrawText(x, y, ActionMsg(index).Message, GetSfmlColor(ActionMsg(index).Color), (Color.Black), GameWindow)
         Else
-            ClearActionMsg(Index)
+            ClearActionMsg(index)
         End If
 
     End Sub
 
-    Private ReadOnly WidthTester As Text = New Text("", SFMLGameFont)
+    Private ReadOnly WidthTester As Text = New Text("", SfmlGameFont)
+
     Friend Function GetTextWidth(text As String, Optional textSize As Byte = FontSize) As Integer
-        widthTester.DisplayedString = Text
-        widthTester.CharacterSize = TextSize
-        Return widthTester.GetLocalBounds().Width
+        WidthTester.DisplayedString = text
+        WidthTester.CharacterSize = textSize
+        Return WidthTester.GetLocalBounds().Width
     End Function
 
     Friend Sub AddText(msg As String, color As Integer)
-        If txtChatAdd = "" Then
-            txtChatAdd = txtChatAdd & Msg
-            AddChatRec(Msg, Color)
+        If TxtChatAdd = "" Then
+            TxtChatAdd = TxtChatAdd & msg
+            AddChatRec(msg, color)
         Else
-            For Each str As String In WordWrap(Msg, MyChatWindowGFXInfo.Width - ChatboxPadding, WrapMode.Font)
-                txtChatAdd = txtChatAdd & vbNewLine & str
-                AddChatRec(str, Color)
+            For Each str As String In WordWrap(msg, MyChatWindowGfxInfo.Width - ChatboxPadding, WrapMode.Font)
+                TxtChatAdd = TxtChatAdd & vbNewLine & str
+                AddChatRec(str, color)
             Next
 
         End If
@@ -312,13 +311,13 @@ Module C_Text
 
     Friend Sub AddChatRec(msg As String, color As Integer)
         Dim struct As ChatRec
-        struct.Text = Msg
-        struct.Color = Color
+        struct.Text = msg
+        struct.Color = color
         Chat.Add(struct)
     End Sub
 
     Friend Function GetSfmlColor(color As Byte) As Color
-        Select Case Color
+        Select Case color
             Case ColorType.Black
                 Return SFML.Graphics.Color.Black
             Case ColorType.Blue
@@ -458,7 +457,6 @@ Module C_Text
             Next
         End If
 
-
         If (line.Length > 0) Then
             lines.Add(line)
         End If
@@ -475,14 +473,14 @@ Module C_Text
         If str = Nothing Then Exit Function
 
         While True
-            Dim index As Integer = str.IndexOfAny(splitChars, startIndex)
+            Dim index As Integer = str.IndexOfAny(splitChars, startindex)
 
             If index = -1 Then
-                parts.Add(str.Substring(startIndex))
+                parts.Add(str.Substring(startindex))
                 Return parts.ToArray()
             End If
 
-            Dim word As String = str.Substring(startIndex, index - startIndex)
+            Dim word As String = str.Substring(startindex, index - startindex)
             Dim nextChar As Char = str.Substring(index, 1)(0)
             ' Dashes and the likes should stick to the word occuring before it. Whitespace doesn't have to.
             If Char.IsWhiteSpace(nextChar) Then
@@ -492,71 +490,71 @@ Module C_Text
                 parts.Add(word + nextChar)
             End If
 
-            startIndex = index + 1
+            startindex = index + 1
         End While
 
     End Function
 
-    Friend Sub DrawChatBubble(index as integer)
+    Friend Sub DrawChatBubble(index As Integer)
         Dim theArray As List(Of String), x As Integer, y As Integer, i As Integer, maxWidth As Integer, x2 As Integer, y2 As Integer
 
-        With chatBubble(Index)
-            If .targetType = TargetType.Player Then
+        With ChatBubble(index)
+            If .TargetType = TargetType.Player Then
                 ' it's a player
-                If GetPlayerMap(.target) = GetPlayerMap(MyIndex) Then
+                If GetPlayerMap(.Target) = GetPlayerMap(Myindex) Then
                     ' it's on our map - get co-ords
-                    X = ConvertMapX((Player(.target).X * 32) + Player(.target).XOffset) + 16
-                    Y = ConvertMapY((Player(.target).Y * 32) + Player(.target).YOffset) - 40
+                    x = ConvertMapX((Player(.Target).X * 32) + Player(.Target).XOffset) + 16
+                    y = ConvertMapY((Player(.Target).Y * 32) + Player(.Target).YOffset) - 40
                 End If
-            ElseIf .targetType = TargetType.Npc Then
+            ElseIf .TargetType = TargetType.Npc Then
                 ' it's on our map - get co-ords
-                X = ConvertMapX((MapNpc(.target).X * 32) + MapNpc(.target).XOffset) + 16
-                Y = ConvertMapY((MapNpc(.target).Y * 32) + MapNpc(.target).YOffset) - 40
-            ElseIf .targetType = TargetType.Event Then
-                X = ConvertMapX((Map.MapEvents(.target).X * 32) + Map.MapEvents(.target).XOffset) + 16
-                Y = ConvertMapY((Map.MapEvents(.target).Y * 32) + Map.MapEvents(.target).YOffset) - 40
+                x = ConvertMapX((MapNpc(.Target).X * 32) + MapNpc(.Target).XOffset) + 16
+                y = ConvertMapY((MapNpc(.Target).Y * 32) + MapNpc(.Target).YOffset) - 40
+            ElseIf .TargetType = TargetType.Event Then
+                x = ConvertMapX((Map.MapEvents(.Target).X * 32) + Map.MapEvents(.Target).XOffset) + 16
+                y = ConvertMapY((Map.MapEvents(.Target).Y * 32) + Map.MapEvents(.Target).YOffset) - 40
             End If
             ' word wrap the text
             theArray = WordWrap(.Msg, ChatBubbleWidth, WrapMode.Font)
             ' find max width
             For i = 0 To theArray.Count - 1
-                If GetTextWidth(theArray(i)) > MaxWidth Then MaxWidth = GetTextWidth(theArray(i))
+                If GetTextWidth(theArray(i)) > maxWidth Then maxWidth = GetTextWidth(theArray(i))
             Next
             ' calculate the new position
-            X2 = X - (MaxWidth \ 2)
-            Y2 = Y - (theArray.Count * 12)
+            x2 = x - (maxWidth \ 2)
+            y2 = y - (theArray.Count * 12)
 
             ' render bubble - top left
-            RenderTextures(ChatBubbleGFX, GameWindow, X2 - 9, Y2 - 5, 0, 0, 9, 5, 9, 5)
+            RenderTextures(ChatBubbleGfx, GameWindow, x2 - 9, y2 - 5, 0, 0, 9, 5, 9, 5)
             ' top right
-            RenderTextures(ChatBubbleGFX, GameWindow, X2 + MaxWidth, Y2 - 5, 119, 0, 9, 5, 9, 5)
+            RenderTextures(ChatBubbleGfx, GameWindow, x2 + maxWidth, y2 - 5, 119, 0, 9, 5, 9, 5)
             ' top
-            RenderTextures(ChatBubbleGFX, GameWindow, X2, Y2 - 5, 10, 0, MaxWidth, 5, 5, 5)
+            RenderTextures(ChatBubbleGfx, GameWindow, x2, y2 - 5, 10, 0, maxWidth, 5, 5, 5)
             ' bottom left
-            RenderTextures(ChatBubbleGFX, GameWindow, X2 - 9, Y, 0, 19, 9, 6, 9, 6)
+            RenderTextures(ChatBubbleGfx, GameWindow, x2 - 9, y, 0, 19, 9, 6, 9, 6)
             ' bottom right
-            RenderTextures(ChatBubbleGFX, GameWindow, X2 + MaxWidth, Y, 119, 19, 9, 6, 9, 6)
+            RenderTextures(ChatBubbleGfx, GameWindow, x2 + maxWidth, y, 119, 19, 9, 6, 9, 6)
             ' bottom - left half
-            RenderTextures(ChatBubbleGFX, GameWindow, X2, Y, 10, 19, (MaxWidth \ 2) - 5, 6, 9, 6)
+            RenderTextures(ChatBubbleGfx, GameWindow, x2, y, 10, 19, (maxWidth \ 2) - 5, 6, 9, 6)
             ' bottom - right half
-            RenderTextures(ChatBubbleGFX, GameWindow, X2 + (MaxWidth \ 2) + 6, Y, 10, 19, (MaxWidth \ 2) - 5, 6, 9, 6)
+            RenderTextures(ChatBubbleGfx, GameWindow, x2 + (maxWidth \ 2) + 6, y, 10, 19, (maxWidth \ 2) - 5, 6, 9, 6)
             ' left
-            RenderTextures(ChatBubbleGFX, GameWindow, X2 - 9, Y2, 0, 6, 9, (theArray.Count * 12), 9, 1)
+            RenderTextures(ChatBubbleGfx, GameWindow, x2 - 9, y2, 0, 6, 9, (theArray.Count * 12), 9, 1)
             ' right
-            RenderTextures(ChatBubbleGFX, GameWindow, X2 + MaxWidth, Y2, 119, 6, 9, (theArray.Count * 12), 9, 1)
+            RenderTextures(ChatBubbleGfx, GameWindow, x2 + maxWidth, y2, 119, 6, 9, (theArray.Count * 12), 9, 1)
             ' center
-            RenderTextures(ChatBubbleGFX, GameWindow, X2, Y2, 9, 5, MaxWidth, (theArray.Count * 12), 1, 1)
+            RenderTextures(ChatBubbleGfx, GameWindow, x2, y2, 9, 5, maxWidth, (theArray.Count * 12), 1, 1)
             ' little pointy bit
-            RenderTextures(ChatBubbleGFX, GameWindow, X - 5, Y, 58, 19, 11, 11, 11, 11)
+            RenderTextures(ChatBubbleGfx, GameWindow, x - 5, y, 58, 19, 11, 11, 11, 11)
 
             ' render each line centralised
             For i = 0 To theArray.Count - 1
-                DrawText(X - (GetTextWidth(theArray(i)) / 2), Y2, theArray(i), ToSFMLColor(Drawing.ColorTranslator.FromOle(QBColor(.colour))), Color.Black, GameWindow)
-                Y2 = Y2 + 12
+                DrawText(x - (GetTextWidth(theArray(i)) / 2), y2, theArray(i), ToSfmlColor(Drawing.ColorTranslator.FromOle(QBColor(.Colour))), Color.Black, GameWindow)
+                y2 = y2 + 12
             Next
             ' check if it's timed out - close it if so
             If .Timer + 5000 < GetTickCount() Then
-                .active = False
+                .Active = False
             End If
         End With
 

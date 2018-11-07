@@ -6,7 +6,7 @@ Module ClientDataBase
     Sub ClearTempTile()
         Dim X As Integer
         Dim Y As Integer
-        ReDim TempTile(Map.MaxX,Map.MaxY)
+        ReDim TempTile(Map.MaxX, Map.MaxY)
 
         For X = 0 To Map.MaxX
             For Y = 0 To Map.MaxY
@@ -99,8 +99,6 @@ Module ClientDataBase
 
         If NumAnimations = 0 Then Exit Sub
     End Sub
-
-
 
     Friend Sub CheckResources()
         Dim i As Integer
@@ -196,7 +194,7 @@ Module ClientDataBase
 
     Sub ClearMap()
         SyncLock MapLock
-            Map.MapNum = 0
+            Map.mapNum = 0
             Map.Name = ""
             Map.tileset = 1
             Map.MaxX = SCREEN_MAPX
@@ -213,7 +211,7 @@ Module ClientDataBase
             Map.Up = 0
 
             ReDim Map.Npc(MAX_MAP_NPCS)
-            ReDim Map.Tile(Map.MaxX,Map.MaxY)
+            ReDim Map.Tile(Map.MaxX, Map.MaxY)
 
             For x = 0 To SCREEN_MAPX
                 For y = 0 To SCREEN_MAPY
@@ -241,31 +239,31 @@ Module ClientDataBase
 
     End Sub
 
-    Sub ClearMapItem(index as integer)
-        MapItem(Index).Frame = 0
-        MapItem(Index).Num = 0
-        MapItem(Index).Value = 0
-        MapItem(Index).X = 0
-        MapItem(Index).Y = 0
+    Sub ClearMapItem(index As Integer)
+        MapItem(index).Frame = 0
+        MapItem(index).Num = 0
+        MapItem(index).Value = 0
+        MapItem(index).X = 0
+        MapItem(index).Y = 0
     End Sub
 
-    Sub ClearMapNpc(index as integer)
-        MapNpc(Index).Attacking = 0
-        MapNpc(Index).AttackTimer = 0
-        MapNpc(Index).Dir = 0
-        MapNpc(Index).Map = 0
-        MapNpc(Index).Moving = 0
-        MapNpc(Index).Num = 0
-        MapNpc(Index).Steps = 0
-        MapNpc(Index).Target = 0
-        MapNpc(Index).TargetType = 0
-        MapNpc(Index).Vital(VitalType.HP) = 0
-        MapNpc(Index).Vital(VitalType.MP) = 0
-        MapNpc(Index).Vital(VitalType.SP) = 0
-        MapNpc(Index).X = 0
-        MapNpc(Index).XOffset = 0
-        MapNpc(Index).Y = 0
-        MapNpc(Index).YOffset = 0
+    Sub ClearMapNpc(index As Integer)
+        MapNpc(index).Attacking = 0
+        MapNpc(index).AttackTimer = 0
+        MapNpc(index).Dir = 0
+        MapNpc(index).Map = 0
+        MapNpc(index).Moving = 0
+        MapNpc(index).Num = 0
+        MapNpc(index).Steps = 0
+        MapNpc(index).Target = 0
+        MapNpc(index).TargetType = 0
+        MapNpc(index).Vital(VitalType.HP) = 0
+        MapNpc(index).Vital(VitalType.MP) = 0
+        MapNpc(index).Vital(VitalType.SP) = 0
+        MapNpc(index).X = 0
+        MapNpc(index).XOffset = 0
+        MapNpc(index).Y = 0
+        MapNpc(index).YOffset = 0
     End Sub
 
     Sub ClearMapNpcs()
@@ -277,8 +275,6 @@ Module ClientDataBase
 
     End Sub
 
-
-
     Friend Sub ClearChanged_Resource()
         For i = 1 To MAX_RESOURCES
             Resource_Changed(i) = Nothing
@@ -286,9 +282,9 @@ Module ClientDataBase
         ReDim Resource_Changed(MAX_RESOURCES)
     End Sub
 
-    Sub ClearResource(index as integer)
-        Resource(Index) = Nothing
-        Resource(Index) = New ResourceRec With {
+    Sub ClearResource(index As Integer)
+        Resource(index) = Nothing
+        Resource(index) = New ResourceRec With {
             .Name = ""
         }
     End Sub
@@ -311,34 +307,34 @@ Module ClientDataBase
 
     End Sub
 
-    Sub ClearNpc(index as integer)
-        Npc(Index) = Nothing
-        Npc(Index).Name = ""
-        Npc(Index).AttackSay = ""
-        ReDim Npc(Index).Stat(StatType.Count - 1)
-        ReDim Npc(Index).Skill(MAX_NPC_SKILLS)
+    Sub ClearNpc(index As Integer)
+        Npc(index) = Nothing
+        Npc(index).Name = ""
+        Npc(index).AttackSay = ""
+        ReDim Npc(index).Stat(StatType.Count - 1)
+        ReDim Npc(index).Skill(MAX_NPC_SKILLS)
 
-        ReDim Npc(Index).DropItem(5)
-        ReDim Npc(Index).DropItemValue(5)
-        ReDim Npc(Index).DropChance(5)
+        ReDim Npc(index).DropItem(5)
+        ReDim Npc(index).DropItemValue(5)
+        ReDim Npc(index).DropChance(5)
     End Sub
 
-    Sub ClearAnimation(index as integer)
-        Animation(Index) = Nothing
-        Animation(Index) = New AnimationRec
+    Sub ClearAnimation(index As Integer)
+        Animation(index) = Nothing
+        Animation(index) = New AnimationRec
         For x = 0 To 1
-            ReDim Animation(Index).Sprite(x)
+            ReDim Animation(index).Sprite(x)
         Next
         For x = 0 To 1
-            ReDim Animation(Index).Frames(x)
+            ReDim Animation(index).Frames(x)
         Next
         For x = 0 To 1
-            ReDim Animation(Index).LoopCount(x)
+            ReDim Animation(index).LoopCount(x)
         Next
         For x = 0 To 1
-            ReDim Animation(Index).looptime(x)
+            ReDim Animation(index).LoopTime(x)
         Next
-        Animation(Index).Name = ""
+        Animation(index).Name = ""
     End Sub
 
     Sub ClearAnimations()
@@ -359,19 +355,19 @@ Module ClientDataBase
 
     End Sub
 
-    Sub ClearSkill(index as integer)
-        Skill(Index) = Nothing
-        Skill(Index) = New SkillRec With {
+    Sub ClearSkill(index As Integer)
+        Skill(index) = Nothing
+        Skill(index) = New SkillRec With {
             .Name = ""
         }
     End Sub
 
-    Sub ClearShop(index as integer)
-        Shop(Index) = Nothing
-        Shop(Index) = New ShopRec With {
+    Sub ClearShop(index As Integer)
+        Shop(index) = Nothing
+        Shop(index) = New ShopRec With {
             .Name = ""
         }
-        ReDim Shop(Index).TradeItem(MAX_TRADES)
+        ReDim Shop(index).TradeItem(MAX_TRADES)
     End Sub
 
     Sub ClearShops()

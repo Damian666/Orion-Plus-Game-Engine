@@ -1,104 +1,104 @@
 ﻿Friend Class frmSkill
 
     Private Sub TxtName_TextChanged(sender As Object, e As EventArgs) Handles txtName.TextChanged
-        Dim tmpindex as integer
+        Dim tmpindex As Integer
 
-        If EditorIndex = 0 Then Exit Sub
-        tmpIndex = lstIndex.SelectedIndex
-        Skill(EditorIndex).Name = Trim$(txtName.Text)
-        lstIndex.Items.RemoveAt(EditorIndex - 1)
-        lstIndex.Items.Insert(EditorIndex - 1, EditorIndex & ": " & Skill(EditorIndex).Name)
-        lstIndex.SelectedIndex = tmpIndex
+        If Editorindex = 0 Then Exit Sub
+        tmpindex = lstIndex.SelectedIndex
+        Skill(Editorindex).Name = Trim$(txtName.Text)
+        lstIndex.Items.RemoveAt(Editorindex - 1)
+        lstIndex.Items.Insert(Editorindex - 1, Editorindex & ": " & Skill(Editorindex).Name)
+        lstIndex.SelectedIndex = tmpindex
     End Sub
 
     Private Sub CmbType_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbType.SelectedIndexChanged
-        Skill(EditorIndex).Type = cmbType.SelectedIndex
+        Skill(Editorindex).Type = cmbType.SelectedIndex
     End Sub
 
     Private Sub NudMp_ValueChanged(sender As Object, e As EventArgs) Handles nudMp.ValueChanged
-        Skill(EditorIndex).MpCost = nudMp.Value
+        Skill(Editorindex).MpCost = nudMp.Value
     End Sub
 
     Private Sub NudLevel_ValueChanged(sender As Object, e As EventArgs) Handles nudLevel.ValueChanged
-        Skill(EditorIndex).LevelReq = nudLevel.Value
+        Skill(Editorindex).LevelReq = nudLevel.Value
     End Sub
 
     Private Sub CmbAccessReq_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbAccessReq.SelectedIndexChanged
-        Skill(EditorIndex).AccessReq = cmbAccessReq.SelectedIndex
+        Skill(Editorindex).AccessReq = cmbAccessReq.SelectedIndex
     End Sub
 
     Private Sub CmbClass_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbClass.SelectedIndexChanged
-        Skill(EditorIndex).ClassReq = cmbClass.SelectedIndex
+        Skill(Editorindex).ClassReq = cmbClass.SelectedIndex
     End Sub
 
     Private Sub NudCast_Scroll(sender As Object, e As EventArgs) Handles nudCast.ValueChanged
-        Skill(EditorIndex).CastTime = nudCast.Value
+        Skill(Editorindex).CastTime = nudCast.Value
     End Sub
 
     Private Sub NudCool_Scroll(sender As Object, e As EventArgs) Handles nudCool.ValueChanged
-        Skill(EditorIndex).CdTime = nudCool.Value
+        Skill(Editorindex).CdTime = nudCool.Value
     End Sub
 
     Private Sub NudIcon_Scroll(sender As Object, e As EventArgs) Handles nudIcon.ValueChanged
 
-        Skill(EditorIndex).Icon = nudIcon.Value
+        Skill(Editorindex).Icon = nudIcon.Value
         EditorSkill_BltIcon()
     End Sub
 
     Private Sub NudMap_Scroll(sender As Object, e As EventArgs) Handles nudMap.ValueChanged
-        Skill(EditorIndex).Map = nudMap.Value
+        Skill(Editorindex).Map = nudMap.Value
     End Sub
 
     Private Sub CmbDir_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbDir.SelectedIndexChanged
-        Skill(EditorIndex).Dir = cmbDir.SelectedIndex
+        Skill(Editorindex).Dir = cmbDir.SelectedIndex
     End Sub
 
     Private Sub NudX_Scroll(sender As Object, e As EventArgs) Handles nudX.ValueChanged
-        Skill(EditorIndex).X = nudX.Value
+        Skill(Editorindex).X = nudX.Value
     End Sub
 
     Private Sub NudY_Scroll(sender As Object, e As EventArgs) Handles nudY.ValueChanged
-        Skill(EditorIndex).Y = nudY.Value
+        Skill(Editorindex).Y = nudY.Value
     End Sub
 
     Private Sub NudVital_Scroll(sender As Object, e As EventArgs) Handles nudVital.ValueChanged
-        Skill(EditorIndex).Vital = nudVital.Value
+        Skill(Editorindex).Vital = nudVital.Value
     End Sub
 
     Private Sub NudDuration_Scroll(sender As Object, e As EventArgs) Handles nudDuration.ValueChanged
-        Skill(EditorIndex).Duration = nudDuration.Value
+        Skill(Editorindex).Duration = nudDuration.Value
     End Sub
 
     Private Sub NudInterval_Scroll(sender As Object, e As EventArgs) Handles nudInterval.ValueChanged
-        Skill(EditorIndex).Interval = nudInterval.Value
+        Skill(Editorindex).Interval = nudInterval.Value
     End Sub
 
     Private Sub NudRange_Scroll(sender As Object, e As EventArgs) Handles nudRange.ValueChanged
-        Skill(EditorIndex).Range = nudRange.Value
+        Skill(Editorindex).Range = nudRange.Value
     End Sub
 
     Private Sub ChkAOE_CheckedChanged(sender As Object, e As EventArgs) Handles chkAoE.CheckedChanged
         If chkAoE.Checked = False Then
-            Skill(EditorIndex).IsAoE = False
+            Skill(Editorindex).IsAoE = False
         Else
-            Skill(EditorIndex).IsAoE = True
+            Skill(Editorindex).IsAoE = True
         End If
     End Sub
 
     Private Sub NudAoE_Scroll(sender As Object, e As EventArgs) Handles nudAoE.ValueChanged
-        Skill(EditorIndex).AoE = nudAoE.Value
+        Skill(Editorindex).AoE = nudAoE.Value
     End Sub
 
     Private Sub CmbAnimCast_Scroll(sender As Object, e As EventArgs) Handles cmbAnimCast.SelectedIndexChanged
-        Skill(EditorIndex).CastAnim = cmbAnimCast.SelectedIndex
+        Skill(Editorindex).CastAnim = cmbAnimCast.SelectedIndex
     End Sub
 
     Private Sub CmbAnim_Scroll(sender As Object, e As EventArgs) Handles cmbAnim.SelectedIndexChanged
-        Skill(EditorIndex).SkillAnim = cmbAnim.SelectedIndex
+        Skill(Editorindex).SkillAnim = cmbAnim.SelectedIndex
     End Sub
 
     Private Sub NudStun_Scroll(sender As Object, e As EventArgs) Handles nudStun.ValueChanged
-        Skill(EditorIndex).StunDuration = nudStun.Value
+        Skill(Editorindex).StunDuration = nudStun.Value
     End Sub
 
     Private Sub LstIndex_Click(sender As Object, e As EventArgs) Handles lstIndex.Click
@@ -110,14 +110,14 @@
     End Sub
 
     Private Sub BtnDelete_Click(sender As Object, e As EventArgs) Handles btnDelete.Click
-        Dim tmpindex as integer
+        Dim tmpindex As Integer
 
-        ClearSkill(EditorIndex)
+        ClearSkill(Editorindex)
 
-        tmpIndex = lstIndex.SelectedIndex
-        lstIndex.Items.RemoveAt(EditorIndex - 1)
-        lstIndex.Items.Insert(EditorIndex - 1, EditorIndex & ": " & Skill(EditorIndex).Name)
-        lstIndex.SelectedIndex = tmpIndex
+        tmpindex = lstIndex.SelectedIndex
+        lstIndex.Items.RemoveAt(Editorindex - 1)
+        lstIndex.Items.Insert(Editorindex - 1, Editorindex & ": " & Skill(Editorindex).Name)
+        lstIndex.SelectedIndex = tmpindex
 
         SkillEditorInit()
     End Sub
@@ -133,29 +133,30 @@
 
     Private Sub ChkProjectile_CheckedChanged(sender As Object, e As EventArgs) Handles chkProjectile.CheckedChanged
         If chkProjectile.Checked = False Then
-            Skill(EditorIndex).IsProjectile = 0
+            Skill(Editorindex).IsProjectile = 0
         Else
-            Skill(EditorIndex).IsProjectile = 1
+            Skill(Editorindex).IsProjectile = 1
         End If
     End Sub
 
     Private Sub ScrlProjectile_Scroll(sender As System.Object, e As System.EventArgs) Handles cmbProjectile.SelectedIndexChanged
-        Skill(EditorIndex).Projectile = cmbProjectile.SelectedIndex
+        Skill(Editorindex).Projectile = cmbProjectile.SelectedIndex
     End Sub
 
     Private Sub ChkKnockBack_CheckedChanged(sender As Object, e As EventArgs) Handles chkKnockBack.CheckedChanged
-        If EditorIndex = 0 OrElse EditorIndex > MAX_SKILLS Then Exit Sub
+        If Editorindex = 0 OrElse Editorindex > MAX_SKILLS Then Exit Sub
 
         If chkKnockBack.Checked = True Then
-            Skill(EditorIndex).KnockBack = 1
+            Skill(Editorindex).KnockBack = 1
         Else
-            Skill(EditorIndex).KnockBack = 0
+            Skill(Editorindex).KnockBack = 0
         End If
     End Sub
 
     Private Sub CmbKnockBackTiles_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbKnockBackTiles.SelectedIndexChanged
-        If EditorIndex = 0 OrElse EditorIndex > MAX_SKILLS Then Exit Sub
+        If Editorindex = 0 OrElse Editorindex > MAX_SKILLS Then Exit Sub
 
-        Skill(EditorIndex).KnockBackTiles = cmbKnockBackTiles.SelectedIndex
+        Skill(Editorindex).KnockBackTiles = cmbKnockBackTiles.SelectedIndex
     End Sub
+
 End Class

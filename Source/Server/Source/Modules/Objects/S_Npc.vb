@@ -1,7 +1,9 @@
 ﻿Imports ASFW
 
 Module S_Npc
+
 #Region "Spawning"
+
     Sub SpawnAllMapNpcs()
         Dim i As Integer
 
@@ -117,7 +119,6 @@ Module S_Npc
 
         buffer.Dispose()
     End Sub
-
 
 #End Region
 
@@ -396,9 +397,11 @@ Module S_Npc
 
         buffer.Dispose()
     End Sub
+
 #End Region
 
 #Region "Npcombat"
+
     Friend Sub TryNpcAttackPlayer(mapnpcnum As Integer, index As Integer)
 
         Dim mapNum As Integer, npcnum As Integer, Damage As Integer, i As Integer, armor As Integer
@@ -1015,10 +1018,10 @@ Module S_Npc
         End If
     End Sub
 
-
 #End Region
 
 #Region "Outgoing Packets"
+
     Sub SendMapNpcsToMap(mapNum As Integer)
         Dim i As Integer
         Dim buffer As New ByteStream(4)
@@ -1040,9 +1043,11 @@ Module S_Npc
 
         buffer.Dispose()
     End Sub
+
 #End Region
 
 #Region "Incoming Packets"
+
     Sub Packet_EditNpc(index As Integer, ByRef data() As Byte)
         AddDebug("Recieved EMSG: RequestEditNpc")
 
@@ -1295,6 +1300,7 @@ Module S_Npc
         SendDataToMap(mapNum, Buffer.Data, Buffer.Head)
         Buffer.Dispose()
     End Sub
+
 #End Region
 
 End Module

@@ -2,13 +2,16 @@
 Imports ASFW
 
 Module C_Shops
+
 #Region "Globals & Types"
+
     Friend InShop As Integer ' is the player in a shop?
     Friend ShopAction As Byte ' stores the current shop action
 
 #End Region
 
 #Region "DataBase"
+
     Sub ClearShop(index As Integer)
         Shop(index) = Nothing
         Shop(index) = New ShopRec With {
@@ -30,9 +33,11 @@ Module C_Shops
         Next
 
     End Sub
+
 #End Region
 
 #Region "Incoming Packets"
+
     Friend Sub Packet_OpenShop(ByRef data() As Byte)
         Dim shopnum As Integer
         Dim buffer As New ByteStream(data)
@@ -68,9 +73,11 @@ Module C_Shops
 
         buffer.Dispose()
     End Sub
+
 #End Region
 
 #Region "Outgoing Packets"
+
     Friend Sub SendRequestShops()
         Dim buffer As New ByteStream(4)
 
@@ -99,9 +106,11 @@ Module C_Shops
         Socket.SendData(buffer.Data, buffer.Head)
         buffer.Dispose()
     End Sub
+
 #End Region
 
 #Region "Drawing"
+
     Sub DrawShop()
         Dim i As Integer, x As Integer, y As Integer, itemnum As Integer, itempic As Integer
         Dim amount As String
@@ -209,5 +218,7 @@ Module C_Shops
         Next
 
     End Sub
+
 #End Region
+
 End Module

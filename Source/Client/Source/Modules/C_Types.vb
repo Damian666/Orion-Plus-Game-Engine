@@ -1,4 +1,5 @@
 ﻿Module C_Types
+
     ' options
     Friend Options As New C_Options()
 
@@ -7,6 +8,7 @@
 
     ' client-side stuff
     Friend ActionMsg(Byte.MaxValue) As ActionMsgRec
+
     Friend Blood(Byte.MaxValue) As BloodRec
     Friend AnimInstance(Byte.MaxValue) As AnimInstanceRec
     Friend Chat As New List(Of ChatRec)
@@ -15,6 +17,7 @@
     Friend MapNames(MAX_MAPS) As String
 
     Friend CharSelection() As CharSelRec
+
     Friend Structure CharSelRec
         Dim Name As String
         Dim Sprite As Integer
@@ -36,29 +39,38 @@
     End Structure
 
     Friend Structure PlayerRec
+
         ' General
         Dim Name As String
+
         Dim Classes As Byte
         Dim Sprite As Integer
         Dim Level As Byte
         Dim Exp As Integer
         Dim Access As Byte
         Dim Pk As Byte
+
         ' Vitals
         Dim Vital() As Integer
+
         ' Stats
         Dim Stat() As Byte
+
         Dim Points As Byte
+
         ' Worn equipment
         Dim Equipment() As Integer
+
         ' Position
         Dim Map As Integer
+
         Dim X As Byte
         Dim Y As Byte
         Dim Dir As Byte
 
         ' Client use only
         Dim MaxHp As Integer
+
         Dim MaxMp As Integer
         Dim MaxSp As Integer
         Dim XOffset As Integer
@@ -93,6 +105,7 @@
 
         ' Random Items
         Dim RandInv() As RandInvRec
+
         Dim RandEquip() As RandInvRec
 
         Dim Pet As PlayerPetRec
@@ -124,7 +137,7 @@
         Dim Events() As EventRec
 
         Dim WeatherType As Byte
-        Dim Fogindex as integer
+        Dim Fogindex As Integer
         Dim WeatherIntensity As Integer
         Dim FogAlpha As Byte
         Dim FogSpeed As Byte
@@ -142,6 +155,7 @@
 
         'Client Side Only -- Temporary
         Dim CurrentEvents As Integer
+
         Dim MapEvents() As MapEventRec
     End Structure
 
@@ -157,8 +171,10 @@
         Dim StartX As Byte
         Dim StartY As Byte
         Dim BaseExp As Integer
+
         ' For client use
         Dim Vital() As Integer
+
     End Structure
 
     Friend Structure MapItemRec
@@ -180,8 +196,10 @@
         Dim X As Byte
         Dim Y As Byte
         Dim Dir As Byte
+
         ' Client use only
         Dim XOffset As Integer
+
         Dim YOffset As Integer
         Dim Moving As Byte
         Dim Attacking As Byte

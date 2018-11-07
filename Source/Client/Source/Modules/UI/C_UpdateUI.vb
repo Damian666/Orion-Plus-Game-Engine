@@ -1,6 +1,7 @@
 ﻿Module C_UpdateUI
 
 #Region "Defines"
+
     Friend GameDestroyed As Boolean
     Friend ReloadFrmMain As Boolean
     Friend PnlRegisterVisible As Boolean
@@ -26,6 +27,7 @@
 
     'GUI drawing
     Friend HudVisible As Boolean
+
     Friend PnlCharacterVisible As Boolean
     Friend PnlInventoryVisible As Boolean
     Friend PnlSkillsVisible As Boolean
@@ -70,11 +72,14 @@
 
     'UI Panels Coordinates
     Friend HudWindowX As Integer = 0
+
     Friend HudWindowY As Integer = 0
     Friend HudFaceX As Integer = 4
     Friend HudFaceY As Integer = 4
+
     'bars
     Friend HudhpBarX As Integer = 110
+
     Friend HudhpBarY As Integer = 10
     Friend HudmpBarX As Integer = 110
     Friend HudmpBarY As Integer = 30
@@ -84,7 +89,7 @@
     'Set the Chat Position
 
     Friend MyChatX As Integer = 1
-    Friend MyChatY As Integer = frmGame.Height - 55
+    Friend MyChatY As Integer = FrmGame.Height - 55
 
     Friend ChatWindowX As Integer = 1
     Friend ChatWindowY As Integer = 705
@@ -110,6 +115,7 @@
 
     'Action Panel Coordinates
     Friend ActionPanelX As Integer = 942
+
     Friend ActionPanelY As Integer = 755
 
     Friend InvBtnX As Integer = 16
@@ -128,6 +134,7 @@
 
     'Character window Coordinates
     Friend CharWindowX As Integer = 943
+
     Friend CharWindowY As Integer = 475
     Friend Const EqTop As Byte = 85
     Friend Const EqLeft As Byte = 8
@@ -150,16 +157,19 @@
 
     'Hotbar Coordinates
     Friend HotbarX As Integer = 489
+
     Friend HotbarY As Integer = 825
 
     'pet bar
     Friend PetbarX As Integer = 489
+
     Friend PetbarY As Integer = 800
     Friend PetStatX As Integer = 943
     Friend PetStatY As Integer = 575
 
     'Inventory window Coordinates
     Friend InvWindowX As Integer = 943
+
     Friend InvWindowY As Integer = 475
     Friend Const InvTop As Byte = 9
     Friend Const InvLeft As Byte = 10
@@ -169,9 +179,12 @@
 
     'Skill window Coordinates
     Friend SkillWindowX As Integer = 943
+
     Friend SkillWindowY As Integer = 475
+
     ' skills constants
     Friend Const SkillTop As Byte = 9
+
     Friend Const SkillLeft As Byte = 10
     Friend Const SkillOffsetY As Byte = 5
     Friend Const SkillOffsetX As Byte = 6
@@ -196,6 +209,7 @@
 
     'dialog panel
     Friend DialogPanelVisible As Boolean
+
     Friend DialogPanelX As Integer = 250
     Friend DialogPanelY As Integer = 400
     Friend OkButtonX As Integer = 50
@@ -205,10 +219,12 @@
 
     'bank window Coordinates
     Friend BankWindowX As Integer = 319
+
     Friend BankWindowY As Integer = 105
 
     ' Bank constants
     Friend Const BankTop As Byte = 30
+
     Friend Const BankLeft As Byte = 16
     Friend Const BankOffsetY As Byte = 5
     Friend Const BankOffsetX As Byte = 6
@@ -216,6 +232,7 @@
 
     ' shop coordinates
     Friend ShopWindowX As Integer = 250
+
     Friend ShopWindowY As Integer = 125
     Friend ShopFaceX As Integer = 60
     Friend ShopFaceY As Integer = 60
@@ -231,6 +248,7 @@
 
     ' shop constants
     Friend Const ShopTop As Byte = 46
+
     Friend Const ShopLeft As Integer = 271
     Friend Const ShopOffsetY As Byte = 5
     Friend Const ShopOffsetX As Byte = 5
@@ -238,6 +256,7 @@
 
     'trade constants
     Friend Const TradeWindowX As Integer = 200
+
     Friend Const TradeWindowY As Byte = 100
     Friend Const OurTradeX As Integer = 2
     Friend Const OurTradeY As Byte = 17
@@ -250,16 +269,16 @@
     Friend TradeButtonDeclineX As Integer = 250
     Friend TradeButtonDeclineY As Integer = 320
 
-
-
     'event chat constants
     Friend Const EventChatX As Integer = 250
+
     Friend Const EventChatY As Byte = 210
     Friend EventChatTextX As Integer = 113
     Friend EventChatTextY As Integer = 14
 
     'right click menu
     Friend RClickname As String
+
     Friend RClickX As Integer
     Friend RClickY As Integer
 
@@ -268,6 +287,7 @@
     Friend CraftPanelX As Integer = 25
     Friend CraftPanelY As Integer = 25
     Friend LoadClassInfo As Boolean
+
 #End Region
 
     Sub UpdateUi()
@@ -279,12 +299,12 @@
         If UpdateNews = True Then
             FrmMenu.lblNews.Text = News
             FrmMenu.Text = GameName
-            frmGame.Text = GameName
+            FrmGame.Text = GameName
             UpdateNews = False
         End If
 
-        If pnlRegisterVisible <> FrmMenu.pnlRegister.Visible Then
-            FrmMenu.pnlRegister.Visible = pnlRegisterVisible
+        If PnlRegisterVisible <> FrmMenu.pnlRegister.Visible Then
+            FrmMenu.pnlRegister.Visible = PnlRegisterVisible
             FrmMenu.pnlRegister.BringToFront()
         End If
 
@@ -293,21 +313,21 @@
             DrawChar = False
         End If
 
-        If pnlCharCreateVisible <> FrmMenu.pnlNewChar.Visible Then
-            FrmMenu.pnlNewChar.Visible = pnlCharCreateVisible
+        If PnlCharCreateVisible <> FrmMenu.pnlNewChar.Visible Then
+            FrmMenu.pnlNewChar.Visible = PnlCharCreateVisible
             FrmMenu.pnlNewChar.BringToFront()
             DrawChar = True
         End If
 
-        If lblnextcharleft <> FrmMenu.lblNextChar.Left Then
-            FrmMenu.lblNextChar.Left = lblnextcharleft
+        If Lblnextcharleft <> FrmMenu.lblNextChar.Left Then
+            FrmMenu.lblNextChar.Left = Lblnextcharleft
         End If
 
-        If Not cmbclass Is Nothing Then
+        If Not Cmbclass Is Nothing Then
             FrmMenu.cmbClass.Items.Clear()
 
-            For i = 1 To UBound(cmbclass)
-                FrmMenu.cmbClass.Items.Add(cmbclass(i))
+            For i = 1 To UBound(Cmbclass)
+                FrmMenu.cmbClass.Items.Add(Cmbclass(i))
             Next
 
             FrmMenu.cmbClass.SelectedIndex = 0
@@ -316,22 +336,22 @@
 
             FrmMenu.txtCharName.Focus()
 
-            cmbclass = Nothing
+            Cmbclass = Nothing
         End If
 
-        If pnlLoginVisible <> FrmMenu.pnlLogin.Visible Then
-            FrmMenu.pnlLogin.Visible = pnlLoginVisible
-            If pnlLoginVisible Then
+        If PnlLoginVisible <> FrmMenu.pnlLogin.Visible Then
+            FrmMenu.pnlLogin.Visible = PnlLoginVisible
+            If PnlLoginVisible Then
                 FrmMenu.txtLogin.Focus()
             End If
         End If
 
-        If pnlCreditsVisible <> FrmMenu.pnlCredits.Visible Then
-            FrmMenu.pnlCredits.Visible = pnlCreditsVisible
+        If PnlCreditsVisible <> FrmMenu.pnlCredits.Visible Then
+            FrmMenu.pnlCredits.Visible = PnlCreditsVisible
         End If
 
-        If frmmenuvisible <> FrmMenu.Visible Then
-            FrmMenu.Visible = frmmenuvisible
+        If Frmmenuvisible <> FrmMenu.Visible Then
+            FrmMenu.Visible = Frmmenuvisible
         End If
 
         If DrawCharSelect Then
@@ -339,15 +359,15 @@
             DrawCharSelect = False
         End If
 
-        If pnlCharSelectVisible <> FrmMenu.pnlCharSelect.Visible Then
-            FrmMenu.pnlCharSelect.Visible = pnlCharSelectVisible
-            If pnlCharSelectVisible Then
+        If PnlCharSelectVisible <> FrmMenu.pnlCharSelect.Visible Then
+            FrmMenu.pnlCharSelect.Visible = PnlCharSelectVisible
+            If PnlCharSelectVisible Then
                 DrawCharSelect = True
             End If
         End If
 
-        If frmmaingamevisible <> frmGame.Visible Then
-            frmGame.Visible = frmmaingamevisible
+        If Frmmaingamevisible <> FrmGame.Visible Then
+            FrmGame.Visible = Frmmaingamevisible
         End If
 
         If InitCrafting = True Then
@@ -359,26 +379,26 @@
             OpenShop(NeedToOpenShopNum)
             NeedToOpenShop = False
             NeedToOpenShopNum = 0
-            pnlShopVisible = True
+            PnlShopVisible = True
         End If
 
         If NeedToOpenBank = True Then
             InBank = True
-            pnlBankVisible = True
+            PnlBankVisible = True
             DrawBank()
             NeedToOpenBank = False
         End If
 
         If NeedToOpenTrade = True Then
             InTrade = True
-            pnlTradeVisible = True
+            PnlTradeVisible = True
 
             NeedToOpenTrade = False
         End If
 
         If NeedtoCloseTrade = True Then
             InTrade = False
-            pnlTradeVisible = False
+            PnlTradeVisible = False
 
             NeedtoCloseTrade = False
         End If
@@ -392,25 +412,25 @@
             UpdateCharacterPanel = False
         End If
 
-        If pnlloadvisible <> FrmMenu.pnlLoad.Visible Then
-            FrmMenu.pnlLoad.Visible = pnlloadvisible
+        If Pnlloadvisible <> FrmMenu.pnlLoad.Visible Then
+            FrmMenu.pnlLoad.Visible = Pnlloadvisible
         End If
 
         If UpdateMapnames = True Then
             Dim x As Integer
 
-            frmAdmin.lstMaps.Items.Clear()
+            FrmAdmin.lstMaps.Items.Clear()
 
             For x = 1 To MAX_MAPS
-                frmAdmin.lstMaps.Items.Add(x)
-                frmAdmin.lstMaps.Items(x - 1).SubItems.Add(MapNames(x))
+                FrmAdmin.lstMaps.Items.Add(x)
+                FrmAdmin.lstMaps.Items(x - 1).SubItems.Add(MapNames(x))
             Next
 
             UpdateMapnames = False
         End If
 
         If Adminvisible = True Then
-            frmAdmin.Visible = Not frmAdmin.Visible
+            FrmAdmin.Visible = Not FrmAdmin.Visible
             Adminvisible = False
         End If
 
@@ -456,15 +476,15 @@
         End If
 
         If EventChat = True Then
-            pnlEventChatVisible = True
+            PnlEventChatVisible = True
             EventChat = False
         End If
 
         If ShowRClick = True Then
-            RClickname = Player(myTarget).Name
+            RClickname = Player(MyTarget).Name
             RClickX = ConvertMapX(CurX * PicX)
             RClickY = ConvertMapY(CurY * PicY)
-            pnlRClickVisible = True
+            PnlRClickVisible = True
 
             ShowRClick = False
         End If
@@ -534,35 +554,35 @@
 
             ' show in GUI
             If Options.Music = 1 Then
-                frmOptions.optMOn.Checked = True
+                FrmOptions.optMOn.Checked = True
             Else
-                frmOptions.optMOff.Checked = True
+                FrmOptions.optMOff.Checked = True
             End If
 
             If Options.Music = 1 Then
-                frmOptions.optSOn.Checked = True
+                FrmOptions.optSOn.Checked = True
             Else
-                frmOptions.optSOff.Checked = True
+                FrmOptions.optSOff.Checked = True
             End If
 
-            frmOptions.lblVolume.Text = "Volume: " & Options.Volume
-            frmOptions.scrlVolume.Value = Options.Volume
+            FrmOptions.lblVolume.Text = "Volume: " & Options.Volume
+            FrmOptions.scrlVolume.Value = Options.Volume
 
-            frmOptions.cmbScreenSize.SelectedIndex = Options.ScreenSize
+            FrmOptions.cmbScreenSize.SelectedIndex = Options.ScreenSize
 
             If Options.HighEnd = 1 Then
-                frmOptions.chkHighEnd.Checked = True
+                FrmOptions.chkHighEnd.Checked = True
             Else
-                frmOptions.chkHighEnd.Checked = False
+                FrmOptions.chkHighEnd.Checked = False
             End If
 
             If Options.ShowNpcBar = 1 Then
-                frmOptions.chkNpcBars.Checked = True
+                FrmOptions.chkNpcBars.Checked = True
             Else
-                frmOptions.chkNpcBars.Checked = False
+                FrmOptions.chkNpcBars.Checked = False
             End If
 
-            frmOptions.Visible = True
+            FrmOptions.Visible = True
             OptionsVisible = False
         End If
     End Sub

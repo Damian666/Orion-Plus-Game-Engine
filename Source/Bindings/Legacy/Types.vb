@@ -175,7 +175,7 @@
         Dim X As Integer
         Dim Y As Integer
         ' used for locking to players/npcs
-        Dim lockindex as integer
+        Dim lockindex As Integer
         Dim LockType As Byte
         ' timing
         Dim Timer() As Integer

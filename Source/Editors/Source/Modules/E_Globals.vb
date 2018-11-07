@@ -17,23 +17,28 @@
 
     ' Gfx Path and variables
     Friend Const GFX_PATH As String = "\Data\graphics\"
+
     Friend Const GFX_GUI_PATH As String = "\Data\graphics\gui\"
     Friend Const GFX_EXT As String = ".png"
 
     ' path constants
     Friend Const SOUND_PATH As String = "\Data\sound\"
+
     Friend Const MUSIC_PATH As String = "\Data\music\"
 
     Friend Max_Classes As Byte
 
     Friend MapData As Boolean
+
     ' Cache the Resources in an array
     Friend MapResource() As MapResourceRec
-    Friend Resource_index as integer
+
+    Friend Resource_index As Integer
     Friend Resources_Init As Boolean
 
     ' fog
     Friend fogOffsetX As Integer
+
     Friend fogOffsetY As Integer
 
     Friend CurrentWeather As Integer
@@ -49,6 +54,7 @@
 
     ' Editor edited items array
     Friend Item_Changed(MAX_ITEMS) As Boolean
+
     Friend NPC_Changed(MAX_NPCS) As Boolean
     Friend Resource_Changed(MAX_NPCS) As Boolean
     Friend Animation_Changed(MAX_ANIMATIONS) As Boolean
@@ -57,6 +63,7 @@
 
     'Editors
     Friend InitEditor As Boolean
+
     Friend InitMapEditor As Boolean
     Friend InitItemEditor As Boolean
     Friend InitResourceEditor As Boolean
@@ -71,6 +78,7 @@
 
     ' Game editor constants
     Friend Const EDITOR_ITEM As Byte = 1
+
     Friend Const EDITOR_NPC As Byte = 2
     Friend Const EDITOR_SKILL As Byte = 3
     Friend Const EDITOR_SHOP As Byte = 4
@@ -86,12 +94,14 @@
 
     ' Game editors
     Friend Editor As Byte
-    Friend Editorindex as integer
+
+    Friend Editorindex As Integer
     Friend AnimEditorFrame(1) As Integer
     Friend AnimEditorTimer(1) As Integer
 
     ' Used to check if in editor or not and variables for use in editor
     Friend InMapEditor As Boolean
+
     Friend EditorTileX As Integer
     Friend EditorViewX As Integer
     Friend EditorViewY As Integer
@@ -101,7 +111,7 @@
     Friend EditorWarpMap As Integer
     Friend EditorWarpX As Integer
     Friend EditorWarpY As Integer
-    Friend SpawnNpcNum As integer
+    Friend SpawnNpcNum As Integer
     Friend SpawnNpcDir As Byte
     Friend EditorShop As Integer
     Friend EditorTileSelStart As Point
@@ -109,14 +119,17 @@
 
     ' Used for map item editor
     Friend ItemEditorNum As Integer
+
     Friend ItemEditorValue As Integer
 
     ' Used for map key editor
     Friend KeyEditorNum As Integer
+
     Friend KeyEditorTake As Integer
 
     ' Used for map key open editor
     Friend KeyOpenEditorX As Integer
+
     Friend KeyOpenEditorY As Integer
 
     ' Map Resources
@@ -124,11 +137,13 @@
 
     ' Used for map editor heal & trap & slide tiles
     Friend MapEditorHealType As Integer
+
     Friend MapEditorHealAmount As Integer
     Friend MapEditorSlideDir As Integer
 
     ' Map constants
     Friend SCREEN_MAPX As Byte = 35
+
     Friend SCREEN_MAPY As Byte = 26
 
     ' Used to freeze controls when getting a new map
@@ -136,14 +151,17 @@
 
     ' Font variables
     Friend Const FONT_NAME As String = "Arial.ttf"
+
     Friend Const FONT_SIZE As Byte = 13
 
     ' Tile size constants
     Friend Const PIC_X As Integer = 32
+
     Friend Const PIC_Y As Integer = 32
 
     ' Sprite, item, skill size constants
     Friend Const SIZE_X As Integer = 32
+
     Friend Const SIZE_Y As Integer = 32
 
     'Graphics
@@ -154,6 +172,7 @@
 
     ' for directional blocking
     Friend DirArrowX(4) As Byte
+
     Friend DirArrowY(4) As Byte
 
     Friend HalfX As Integer = ((SCREEN_MAPX + 1) \ 2) * PIC_X
@@ -168,17 +187,18 @@
 
     ' Mouse cursor tile location
     Friend CurX As Integer
+
     Friend CurY As Integer
     Friend CurMouseX As Integer
     Friend CurMouseY As Integer
 
     ' Draw map name location
     Friend DrawMapNameX As Single
+
     Friend DrawMapNameY As Single
     Friend DrawMapNameColor As SFML.Graphics.Color
 
     Friend LoadClassInfo As Boolean
-
 
     Friend EKeyPair As New ASFW.IO.Encryption.KeyPair()
 End Module

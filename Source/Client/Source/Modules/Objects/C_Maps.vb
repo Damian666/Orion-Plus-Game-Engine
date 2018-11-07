@@ -1,19 +1,23 @@
-﻿Imports System.Windows.Forms
+﻿Imports System.Drawing
 Imports System.IO
+Imports System.Windows.Forms
 Imports ASFW
 Imports ASFW.IO
-Imports System.Drawing
 
 Module C_Maps
+
 #Region "Globals & Types"
+
     Friend Map As MapRec
     Friend MapLock As New Object()
     Friend MapItem(MAX_MAP_ITEMS) As MapItemRec
     Friend MapNpc(MAX_MAP_NPCS) As MapNpcRec
     Friend TempTile(,) As TempTileRec
+
 #End Region
 
 #Region "DataBase"
+
     Friend Sub CheckTilesets()
         Dim i As Integer
         i = 1
@@ -108,9 +112,11 @@ Module C_Maps
         Next
 
     End Sub
+
 #End Region
 
 #Region "Incoming Packets"
+
     Friend Sub Packet_EditMap(ByRef data() As Byte)
         Dim buffer As New ByteStream(data)
         InitMapEditor = True
@@ -480,9 +486,11 @@ Module C_Maps
         CanMoveNow = True
 
     End Sub
+
 #End Region
 
 #Region "Outgoing Packets"
+
     Friend Sub SendPlayerRequestNewMap()
         If GettingMap Then Exit Sub
 
@@ -686,10 +694,10 @@ Module C_Maps
         buffer.Dispose()
     End Sub
 
-
 #End Region
 
 #Region "Drawing"
+
     Friend Sub DrawMapTile(x As Integer, y As Integer)
         Dim i As Integer
         Dim srcrect As New Rectangle(0, 0, 0, 0)
@@ -775,6 +783,7 @@ Module C_Maps
         Next
 
     End Sub
+
 #End Region
 
 End Module

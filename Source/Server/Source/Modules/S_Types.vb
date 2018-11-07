@@ -1,7 +1,9 @@
 ﻿Module modTypes
     Friend Options As New S_Options()
+
     ' Friend data structures
     Friend Map(MAX_CACHED_MAPS) As MapRec
+
     Friend TempTile(MAX_CACHED_MAPS) As TempTileRec
     Friend PlayersOnMap(MAX_CACHED_MAPS) As Integer
     Friend MapItem(MAX_CACHED_MAPS, MAX_MAP_ITEMS) As MapItemRec
@@ -11,8 +13,10 @@
     Friend Player(MAX_PLAYERS) As PlayerRec
 
     Friend Structure PlayerRec
+
         ' Account
         Dim Login As String
+
         Dim Password As String
         Dim Access As Byte
 
@@ -22,8 +26,10 @@
     End Structure
 
     Friend Structure CharacterRec
+
         ' General
         Dim Name As String
+
         Dim Sex As Byte
         Dim Classes As Byte
         Dim Sprite As Integer
@@ -37,6 +43,7 @@
 
         ' Stats
         Dim Stat() As Byte
+
         Dim Points As Byte
 
         ' Worn equipment
@@ -44,10 +51,12 @@
 
         ' Inventory
         Dim Inv() As PlayerInvRec
-        Dim Skill() As integer
+
+        Dim Skill() As Integer
 
         ' Position
         Dim Map As Integer
+
         Dim X As Byte
         Dim Y As Byte
         Dim Dir As Byte
@@ -67,6 +76,7 @@
 
         'Event
         Dim Switches() As Byte
+
         Dim Variables() As Integer
 
         'gather skills
@@ -76,14 +86,17 @@
 
         ' Random Items
         Dim RandInv() As RandInvRec
+
         Dim RandEquip() As RandInvRec
 
         Dim Pet As PlayerPetRec
     End Structure
 
     Friend Structure TempPlayerRec
+
         ' Non saved local vars
         Dim InGame As Boolean
+
         Dim AttackTimer As Integer
         Dim DataTimer As Integer
         Dim DataBytes As Integer
@@ -91,7 +104,7 @@
         Dim PartyInvite As Integer
         Dim InParty As Byte
         Dim TargetType As Byte
-        Dim Target As integer
+        Dim Target As Integer
         Dim PartyStarter As Byte
         Dim GettingMap As Byte
         Dim SkillBuffer As Integer
@@ -101,16 +114,18 @@
         Dim StunTimer As Integer
         Dim StunDuration As Integer
         Dim InBank As Boolean
+
         ' trade
         Dim TradeRequest As Integer
+
         Dim InTrade As Integer
         Dim TradeOffer() As PlayerInvRec
         Dim AcceptTrade As Boolean
 
         'Housing
-        Dim BuyHouseindex as integer
+        Dim BuyHouseindex As Integer
 
-        Dim Invitationindex as integer
+        Dim Invitationindex As Integer
         Dim InvitationTimer As Integer
 
         Dim EventMap As EventMapStruct
@@ -122,6 +137,7 @@
 
         'craft shit
         Dim IsCrafting As Boolean
+
         Dim CraftIt As Byte
         Dim CraftTimer As Integer
         Dim CraftTimeNeeded As Integer
@@ -134,6 +150,7 @@
 
         'instance stuff
         Dim InInstance As Byte
+
         Dim TmpInstanceNum As Integer
         Dim TmpMap As Integer
         Dim TmpX As Integer
@@ -141,6 +158,7 @@
 
         'pets
         Dim PetTarget As Integer
+
         Dim PetTargetType As Integer
         Dim PetBehavior As Integer
 
@@ -156,8 +174,10 @@
 
         Dim PetDoT() As DoTRec
         Dim PetHoT() As DoTRec
+
         ' regen
         Dim PetstopRegen As Boolean
+
         Dim PetstopRegenTimer As Integer
 
     End Structure
@@ -190,7 +210,7 @@
         Dim Events() As EventStruct
 
         Dim WeatherType As Byte
-        Dim Fogindex as integer
+        Dim Fogindex As Integer
         Dim WeatherIntensity As Integer
         Dim FogAlpha As Byte
         Dim FogSpeed As Byte
@@ -222,12 +242,19 @@
     End Structure
 
     Friend Structure MapItemRec
-        Dim Num As integer
+        Dim Num As Integer
         Dim Value As Integer
         Dim X As Byte
         Dim Y As Byte
 
         Dim RandData As RandInvRec
+
+        ' ownership + despawn
+        Dim PlayerName As String
+
+        Dim PlayerTimer As Long
+        Dim CanDespawn As Boolean
+        Dim DespawnTimer As Long
     End Structure
 
     Friend Structure MapNpcRec
@@ -238,8 +265,10 @@
         Dim X As Byte
         Dim Y As Byte
         Dim Dir As Integer
+
         ' For server use only
         Dim SpawnWait As Integer
+
         Dim AttackTimer As Integer
         Dim StunDuration As Integer
         Dim StunTimer As Integer
@@ -277,8 +306,10 @@
         Dim Timer As Integer
         Dim Caster As Integer
         Dim StartTime As Integer
+
         'PET
         Dim AttackerType As Integer 'For Pets
 
     End Structure
+
 End Module

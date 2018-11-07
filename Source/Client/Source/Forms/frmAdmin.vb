@@ -1,4 +1,5 @@
 ﻿Friend Class FrmAdmin
+
     Private Sub FrmAdmin_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         ' set values for admin panel
         cmbSpawnItem.Items.Clear()
@@ -10,6 +11,7 @@
     End Sub
 
 #Region "Moderation"
+
     Private Sub BtnAdminWarpTo_Click(sender As Object, e As EventArgs) Handles btnAdminWarpTo.Click
 
         If GetPlayerAccess(Myindex) < AdminType.Mapper Then
@@ -104,9 +106,11 @@
 
         SendSetSprite(nudAdminSprite.Value)
     End Sub
+
 #End Region
 
 #Region "Editors"
+
     Private Sub BtnMapEditor_Click(sender As Object, e As EventArgs) Handles btnMapEditor.Click
         If GetPlayerAccess(Myindex) < AdminType.Mapper Then
             AddText("You need to be a high enough staff member to do this!", QColorType.AlertColor)
@@ -115,9 +119,11 @@
 
         SendRequestEditMap()
     End Sub
+
 #End Region
 
 #Region "Map Report"
+
     Private Sub BtnMapReport_Click(sender As Object, e As EventArgs) Handles btnMapReport.Click
         If GetPlayerAccess(Myindex) < AdminType.Mapper Then
             AddText("You need to be a high enough staff member to do this!", QColorType.AlertColor)
@@ -139,9 +145,11 @@
             AddText("Invalid map number: " & lstMaps.FocusedItem.Index + 1, QColorType.AlertColor)
         End If
     End Sub
+
 #End Region
 
 #Region "Misc"
+
     Private Sub CmbSpawnItem_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbSpawnItem.SelectedIndexChanged
         If Item(cmbSpawnItem.SelectedIndex + 1).Type = ItemType.Currency OrElse Item(cmbSpawnItem.SelectedIndex + 1).Stackable = 1 Then
             nudSpawnItemAmount.Enabled = True

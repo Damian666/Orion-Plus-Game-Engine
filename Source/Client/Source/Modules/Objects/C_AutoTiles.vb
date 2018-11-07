@@ -1,7 +1,10 @@
 ﻿Friend Module C_AutoTiles
+
 #Region "Globals and Types"
+
     ' Autotiles
     Friend Const AutoInner As Byte = 1
+
     Friend Const AutoOuter As Byte = 2
     Friend Const AutoHorizontal As Byte = 3
     Friend Const AutoVertical As Byte = 4
@@ -9,6 +12,7 @@
 
     ' Autotile types
     Friend Const AutotileNone As Byte = 0
+
     Friend Const AutotileNormal As Byte = 1
     Friend Const AutotileFake As Byte = 2
     Friend Const AutotileAnim As Byte = 3
@@ -17,11 +21,13 @@
 
     ' Rendering
     Friend Const RenderStateNone As Integer = 0
+
     Friend Const RenderStateNormal As Integer = 1
     Friend Const RenderStateAutotile As Integer = 2
 
     ' autotiling
     Friend AutoIn(4) As PointRec
+
     Friend AutoNw(4) As PointRec
     Friend AutoNe(4) As PointRec
     Friend AutoSw(4) As PointRec
@@ -29,6 +35,7 @@
 
     ' Map animations
     Friend WaterfallFrame As Integer
+
     Friend AutoTileFrame As Integer
 
     Friend Autotile(,) As AutotileRec
@@ -49,6 +56,7 @@
         Dim Layer() As QuarterTileRec '1 To MapLayer.Count - 1
         Dim ExLayer() As QuarterTileRec '1 To ExMapLayer.Count - 1
     End Structure
+
 #End Region
 
     Sub ClearAutotiles()
@@ -60,8 +68,8 @@
             For y = 0 To Map.MaxY
                 ReDim Autotile(x, y).Layer(LayerType.Count - 1)
                 For i = 0 To LayerType.Count - 1
-                    ReDim Autotile(x, y).Layer(i).srcX(4)
-                    ReDim Autotile(x, y).Layer(i).srcY(4)
+                    ReDim Autotile(x, y).Layer(i).SrcX(4)
+                    ReDim Autotile(x, y).Layer(i).SrcY(4)
                     ReDim Autotile(x, y).Layer(i).QuarterTile(4)
                 Next
             Next
@@ -75,7 +83,7 @@
 
         If layerNum > LayerType.Count - 1 Then
             layerNum = layerNum - (LayerType.Count - 1)
-            With Autotile(X, Y).ExLayer(layerNum).QuarterTile(tileQuarter)
+            With Autotile(x, y).ExLayer(layerNum).QuarterTile(tileQuarter)
                 Select Case autoTileLetter
                     Case "a"
                         .X = AutoIn(1).X
@@ -140,7 +148,7 @@
                 End Select
             End With
         Else
-            With Autotile(X, Y).Layer(layerNum).QuarterTile(tileQuarter)
+            With Autotile(x, y).Layer(layerNum).QuarterTile(tileQuarter)
                 Select Case autoTileLetter
                     Case "a"
                         .X = AutoIn(1).X
@@ -218,13 +226,13 @@
         ' We also give letters to each subtile for easy rendering tweaks. ;]
         ' First, we need to re-size the array
 
-        ReDim Autotile(Map.MaxX,Map.MaxY)
+        ReDim Autotile(Map.MaxX, Map.MaxY)
         For x = 0 To Map.MaxX
             For y = 0 To Map.MaxY
                 ReDim Autotile(x, y).Layer(LayerType.Count - 1)
                 For i = 0 To LayerType.Count - 1
-                    ReDim Autotile(x, y).Layer(i).srcX(4)
-                    ReDim Autotile(x, y).Layer(i).srcY(4)
+                    ReDim Autotile(x, y).Layer(i).SrcX(4)
+                    ReDim Autotile(x, y).Layer(i).SrcY(4)
                     ReDim Autotile(x, y).Layer(i).QuarterTile(4)
                 Next
             Next
@@ -314,22 +322,22 @@
 
         ' exit out early
 
-        If X < 0 OrElse X > Map.MaxX OrElse Y < 0 OrElse Y > Map.MaxY Then Exit Sub
+        If x < 0 OrElse x > Map.MaxX OrElse y < 0 OrElse y > Map.MaxY Then Exit Sub
 
-        With Map.Tile(X, Y)
+        With Map.Tile(x, y)
             ' check if the tile can be rendered
             If .Layer(layerNum).Tileset <= 0 OrElse .Layer(layerNum).Tileset > NumTileSets Then
-                Autotile(X, Y).Layer(layerNum).renderState = RenderStateNone
+                Autotile(x, y).Layer(layerNum).RenderState = RenderStateNone
                 Exit Sub
             End If
             ' check if it's a key - hide mask if key is closed
             If layerNum = LayerType.Mask Then
                 If .Type = TileType.Key Then
-                    If TempTile(X, Y).DoorOpen = False Then
-                        Autotile(X, Y).Layer(layerNum).renderState = RenderStateNone
+                    If TempTile(x, y).DoorOpen = False Then
+                        Autotile(x, y).Layer(layerNum).RenderState = RenderStateNone
                         Exit Sub
                     Else
-                        Autotile(X, Y).Layer(layerNum).renderState = RenderStateNormal
+                        Autotile(x, y).Layer(layerNum).RenderState = RenderStateNormal
                         Exit Sub
                     End If
                 End If
@@ -338,13 +346,13 @@
             If .Layer(layerNum).AutoTile = AutotileNone OrElse .Layer(layerNum).AutoTile = AutotileFake Then
                 'ReDim Autotile(X, Y).Layer(MapLayer.Count - 1)
                 ' default to... default
-                Autotile(X, Y).Layer(layerNum).renderState = RenderStateNormal
+                Autotile(x, y).Layer(layerNum).RenderState = RenderStateNormal
             Else
-                Autotile(X, Y).Layer(layerNum).renderState = RenderStateAutotile
+                Autotile(x, y).Layer(layerNum).RenderState = RenderStateAutotile
                 ' cache tileset positioning
                 For quarterNum = 1 To 4
-                    Autotile(X, Y).Layer(layerNum).srcX(quarterNum) = (Map.Tile(X, Y).Layer(layerNum).X * 32) + Autotile(X, Y).Layer(layerNum).QuarterTile(quarterNum).X
-                    Autotile(X, Y).Layer(layerNum).srcY(quarterNum) = (Map.Tile(X, Y).Layer(layerNum).Y * 32) + Autotile(X, Y).Layer(layerNum).QuarterTile(quarterNum).Y
+                    Autotile(x, y).Layer(layerNum).SrcX(quarterNum) = (Map.Tile(x, y).Layer(layerNum).X * 32) + Autotile(x, y).Layer(layerNum).QuarterTile(quarterNum).X
+                    Autotile(x, y).Layer(layerNum).SrcY(quarterNum) = (Map.Tile(x, y).Layer(layerNum).Y * 32) + Autotile(x, y).Layer(layerNum).QuarterTile(quarterNum).Y
                 Next
             End If
         End With
@@ -362,39 +370,39 @@
         ' The situations are "inner", "outer", "horizontal", "vertical" and "fill".
         ' Exit out if we don't have an autotile
 
-        If Map.Tile(X, Y).Layer(layerNum).AutoTile = 0 Then Exit Sub
+        If Map.Tile(x, y).Layer(layerNum).AutoTile = 0 Then Exit Sub
         ' Okay, we have autotiling but which one?
-        Select Case Map.Tile(X, Y).Layer(layerNum).AutoTile
+        Select Case Map.Tile(x, y).Layer(layerNum).AutoTile
                 ' Normal or animated - same difference
             Case AutotileNormal, AutotileAnim
                 ' North West Quarter
-                CalculateNW_Normal(layerNum, X, Y)
+                CalculateNW_Normal(layerNum, x, y)
                 ' North East Quarter
-                CalculateNE_Normal(layerNum, X, Y)
+                CalculateNE_Normal(layerNum, x, y)
                 ' South West Quarter
-                CalculateSW_Normal(layerNum, X, Y)
+                CalculateSW_Normal(layerNum, x, y)
                 ' South East Quarter
-                CalculateSE_Normal(layerNum, X, Y)
+                CalculateSE_Normal(layerNum, x, y)
                 ' Cliff
             Case AutotileCliff
                 ' North West Quarter
-                CalculateNW_Cliff(layerNum, X, Y)
+                CalculateNW_Cliff(layerNum, x, y)
                 ' North East Quarter
-                CalculateNE_Cliff(layerNum, X, Y)
+                CalculateNE_Cliff(layerNum, x, y)
                 ' South West Quarter
-                CalculateSW_Cliff(layerNum, X, Y)
+                CalculateSW_Cliff(layerNum, x, y)
                 ' South East Quarter
-                CalculateSE_Cliff(layerNum, X, Y)
+                CalculateSE_Cliff(layerNum, x, y)
                 ' Waterfalls
             Case AutotileWaterfall
                 ' North West Quarter
-                CalculateNW_Waterfall(layerNum, X, Y)
+                CalculateNW_Waterfall(layerNum, x, y)
                 ' North East Quarter
-                CalculateNE_Waterfall(layerNum, X, Y)
+                CalculateNE_Waterfall(layerNum, x, y)
                 ' South West Quarter
-                CalculateSW_Waterfall(layerNum, X, Y)
+                CalculateSW_Waterfall(layerNum, x, y)
                 ' South East Quarter
-                CalculateSE_Waterfall(layerNum, X, Y)
+                CalculateSE_Waterfall(layerNum, x, y)
                 ' Anything else
         End Select
         ' End If
@@ -408,11 +416,11 @@
 
         ' North West
 
-        If CheckTileMatch(layerNum, X, Y, X - 1, Y - 1) Then tmpTile(1) = True
+        If CheckTileMatch(layerNum, x, y, x - 1, y - 1) Then tmpTile(1) = True
         ' North
-        If CheckTileMatch(layerNum, X, Y, X, Y - 1) Then tmpTile(2) = True
+        If CheckTileMatch(layerNum, x, y, x, y - 1) Then tmpTile(2) = True
         ' West
-        If CheckTileMatch(layerNum, X, Y, X - 1, Y) Then tmpTile(3) = True
+        If CheckTileMatch(layerNum, x, y, x - 1, y) Then tmpTile(3) = True
         ' Calculate Situation - Inner
         If Not tmpTile(2) AndAlso Not tmpTile(3) Then situation = AutoInner
         ' Horizontal
@@ -426,15 +434,15 @@
         ' Actually place the subtile
         Select Case situation
             Case AutoInner
-                PlaceAutotile(layerNum, X, Y, 1, "e")
+                PlaceAutotile(layerNum, x, y, 1, "e")
             Case AutoOuter
-                PlaceAutotile(layerNum, X, Y, 1, "a")
+                PlaceAutotile(layerNum, x, y, 1, "a")
             Case AutoHorizontal
-                PlaceAutotile(layerNum, X, Y, 1, "i")
+                PlaceAutotile(layerNum, x, y, 1, "i")
             Case AutoVertical
-                PlaceAutotile(layerNum, X, Y, 1, "m")
+                PlaceAutotile(layerNum, x, y, 1, "m")
             Case AutoFill
-                PlaceAutotile(layerNum, X, Y, 1, "q")
+                PlaceAutotile(layerNum, x, y, 1, "q")
         End Select
 
     End Sub
@@ -445,11 +453,11 @@
 
         ' North
 
-        If CheckTileMatch(layerNum, X, Y, X, Y - 1) Then tmpTile(1) = True
+        If CheckTileMatch(layerNum, x, y, x, y - 1) Then tmpTile(1) = True
         ' North East
-        If CheckTileMatch(layerNum, X, Y, X + 1, Y - 1) Then tmpTile(2) = True
+        If CheckTileMatch(layerNum, x, y, x + 1, y - 1) Then tmpTile(2) = True
         ' East
-        If CheckTileMatch(layerNum, X, Y, X + 1, Y) Then tmpTile(3) = True
+        If CheckTileMatch(layerNum, x, y, x + 1, y) Then tmpTile(3) = True
         ' Calculate Situation - Inner
         If Not tmpTile(1) AndAlso Not tmpTile(3) Then situation = AutoInner
         ' Horizontal
@@ -463,15 +471,15 @@
         ' Actually place the subtile
         Select Case situation
             Case AutoInner
-                PlaceAutotile(layerNum, X, Y, 2, "j")
+                PlaceAutotile(layerNum, x, y, 2, "j")
             Case AutoOuter
-                PlaceAutotile(layerNum, X, Y, 2, "b")
+                PlaceAutotile(layerNum, x, y, 2, "b")
             Case AutoHorizontal
-                PlaceAutotile(layerNum, X, Y, 2, "f")
+                PlaceAutotile(layerNum, x, y, 2, "f")
             Case AutoVertical
-                PlaceAutotile(layerNum, X, Y, 2, "r")
+                PlaceAutotile(layerNum, x, y, 2, "r")
             Case AutoFill
-                PlaceAutotile(layerNum, X, Y, 2, "n")
+                PlaceAutotile(layerNum, x, y, 2, "n")
         End Select
 
     End Sub
@@ -482,11 +490,11 @@
 
         ' West
 
-        If CheckTileMatch(layerNum, X, Y, X - 1, Y) Then tmpTile(1) = True
+        If CheckTileMatch(layerNum, x, y, x - 1, y) Then tmpTile(1) = True
         ' South West
-        If CheckTileMatch(layerNum, X, Y, X - 1, Y + 1) Then tmpTile(2) = True
+        If CheckTileMatch(layerNum, x, y, x - 1, y + 1) Then tmpTile(2) = True
         ' South
-        If CheckTileMatch(layerNum, X, Y, X, Y + 1) Then tmpTile(3) = True
+        If CheckTileMatch(layerNum, x, y, x, y + 1) Then tmpTile(3) = True
         ' Calculate Situation - Inner
         If Not tmpTile(1) AndAlso Not tmpTile(3) Then situation = AutoInner
         ' Horizontal
@@ -500,15 +508,15 @@
         ' Actually place the subtile
         Select Case situation
             Case AutoInner
-                PlaceAutotile(layerNum, X, Y, 3, "o")
+                PlaceAutotile(layerNum, x, y, 3, "o")
             Case AutoOuter
-                PlaceAutotile(layerNum, X, Y, 3, "c")
+                PlaceAutotile(layerNum, x, y, 3, "c")
             Case AutoHorizontal
-                PlaceAutotile(layerNum, X, Y, 3, "s")
+                PlaceAutotile(layerNum, x, y, 3, "s")
             Case AutoVertical
-                PlaceAutotile(layerNum, X, Y, 3, "g")
+                PlaceAutotile(layerNum, x, y, 3, "g")
             Case AutoFill
-                PlaceAutotile(layerNum, X, Y, 3, "k")
+                PlaceAutotile(layerNum, x, y, 3, "k")
         End Select
 
     End Sub
@@ -519,11 +527,11 @@
 
         ' South
 
-        If CheckTileMatch(layerNum, X, Y, X, Y + 1) Then tmpTile(1) = True
+        If CheckTileMatch(layerNum, x, y, x, y + 1) Then tmpTile(1) = True
         ' South East
-        If CheckTileMatch(layerNum, X, Y, X + 1, Y + 1) Then tmpTile(2) = True
+        If CheckTileMatch(layerNum, x, y, x + 1, y + 1) Then tmpTile(2) = True
         ' East
-        If CheckTileMatch(layerNum, X, Y, X + 1, Y) Then tmpTile(3) = True
+        If CheckTileMatch(layerNum, x, y, x + 1, y) Then tmpTile(3) = True
         ' Calculate Situation - Inner
         If Not tmpTile(1) AndAlso Not tmpTile(3) Then situation = AutoInner
         ' Horizontal
@@ -537,15 +545,15 @@
         ' Actually place the subtile
         Select Case situation
             Case AutoInner
-                PlaceAutotile(layerNum, X, Y, 4, "t")
+                PlaceAutotile(layerNum, x, y, 4, "t")
             Case AutoOuter
-                PlaceAutotile(layerNum, X, Y, 4, "d")
+                PlaceAutotile(layerNum, x, y, 4, "d")
             Case AutoHorizontal
-                PlaceAutotile(layerNum, X, Y, 4, "p")
+                PlaceAutotile(layerNum, x, y, 4, "p")
             Case AutoVertical
-                PlaceAutotile(layerNum, X, Y, 4, "l")
+                PlaceAutotile(layerNum, x, y, 4, "l")
             Case AutoFill
-                PlaceAutotile(layerNum, X, Y, 4, "h")
+                PlaceAutotile(layerNum, x, y, 4, "h")
         End Select
 
     End Sub
@@ -555,14 +563,14 @@
         Dim tmpTile As Boolean
         ' West
 
-        If CheckTileMatch(layerNum, X, Y, X - 1, Y) Then tmpTile = True
+        If CheckTileMatch(layerNum, x, y, x - 1, y) Then tmpTile = True
         ' Actually place the subtile
         If tmpTile Then
             ' Extended
-            PlaceAutotile(layerNum, X, Y, 1, "i")
+            PlaceAutotile(layerNum, x, y, 1, "i")
         Else
             ' Edge
-            PlaceAutotile(layerNum, X, Y, 1, "e")
+            PlaceAutotile(layerNum, x, y, 1, "e")
         End If
 
     End Sub
@@ -571,14 +579,14 @@
         Dim tmpTile As Boolean
         ' East
 
-        If CheckTileMatch(layerNum, X, Y, X + 1, Y) Then tmpTile = True
+        If CheckTileMatch(layerNum, x, y, x + 1, y) Then tmpTile = True
         ' Actually place the subtile
         If tmpTile Then
             ' Extended
-            PlaceAutotile(layerNum, X, Y, 2, "f")
+            PlaceAutotile(layerNum, x, y, 2, "f")
         Else
             ' Edge
-            PlaceAutotile(layerNum, X, Y, 2, "j")
+            PlaceAutotile(layerNum, x, y, 2, "j")
         End If
 
     End Sub
@@ -587,14 +595,14 @@
         Dim tmpTile As Boolean
         ' West
 
-        If CheckTileMatch(layerNum, X, Y, X - 1, Y) Then tmpTile = True
+        If CheckTileMatch(layerNum, x, y, x - 1, y) Then tmpTile = True
         ' Actually place the subtile
         If tmpTile Then
             ' Extended
-            PlaceAutotile(layerNum, X, Y, 3, "k")
+            PlaceAutotile(layerNum, x, y, 3, "k")
         Else
             ' Edge
-            PlaceAutotile(layerNum, X, Y, 3, "g")
+            PlaceAutotile(layerNum, x, y, 3, "g")
         End If
 
     End Sub
@@ -603,14 +611,14 @@
         Dim tmpTile As Boolean
         ' East
 
-        If CheckTileMatch(layerNum, X, Y, X + 1, Y) Then tmpTile = True
+        If CheckTileMatch(layerNum, x, y, x + 1, y) Then tmpTile = True
         ' Actually place the subtile
         If tmpTile Then
             ' Extended
-            PlaceAutotile(layerNum, X, Y, 4, "h")
+            PlaceAutotile(layerNum, x, y, 4, "h")
         Else
             ' Edge
-            PlaceAutotile(layerNum, X, Y, 4, "l")
+            PlaceAutotile(layerNum, x, y, 4, "l")
         End If
 
     End Sub
@@ -622,11 +630,11 @@
 
         ' North West
 
-        If CheckTileMatch(layerNum, X, Y, X - 1, Y - 1) Then tmpTile(1) = True
+        If CheckTileMatch(layerNum, x, y, x - 1, y - 1) Then tmpTile(1) = True
         ' North
-        If CheckTileMatch(layerNum, X, Y, X, Y - 1) Then tmpTile(2) = True
+        If CheckTileMatch(layerNum, x, y, x, y - 1) Then tmpTile(2) = True
         ' West
-        If CheckTileMatch(layerNum, X, Y, X - 1, Y) Then tmpTile(3) = True
+        If CheckTileMatch(layerNum, x, y, x - 1, y) Then tmpTile(3) = True
         situation = AutoFill
         ' Calculate Situation - Horizontal
         If Not tmpTile(2) AndAlso tmpTile(3) Then situation = AutoHorizontal
@@ -639,13 +647,13 @@
         ' Actually place the subtile
         Select Case situation
             Case AutoInner
-                PlaceAutotile(layerNum, X, Y, 1, "e")
+                PlaceAutotile(layerNum, x, y, 1, "e")
             Case AutoHorizontal
-                PlaceAutotile(layerNum, X, Y, 1, "i")
+                PlaceAutotile(layerNum, x, y, 1, "i")
             Case AutoVertical
-                PlaceAutotile(layerNum, X, Y, 1, "m")
+                PlaceAutotile(layerNum, x, y, 1, "m")
             Case AutoFill
-                PlaceAutotile(layerNum, X, Y, 1, "q")
+                PlaceAutotile(layerNum, x, y, 1, "q")
         End Select
 
     End Sub
@@ -656,11 +664,11 @@
 
         ' North
 
-        If CheckTileMatch(layerNum, X, Y, X, Y - 1) Then tmpTile(1) = True
+        If CheckTileMatch(layerNum, x, y, x, y - 1) Then tmpTile(1) = True
         ' North East
-        If CheckTileMatch(layerNum, X, Y, X + 1, Y - 1) Then tmpTile(2) = True
+        If CheckTileMatch(layerNum, x, y, x + 1, y - 1) Then tmpTile(2) = True
         ' East
-        If CheckTileMatch(layerNum, X, Y, X + 1, Y) Then tmpTile(3) = True
+        If CheckTileMatch(layerNum, x, y, x + 1, y) Then tmpTile(3) = True
         situation = AutoFill
         ' Calculate Situation - Horizontal
         If Not tmpTile(1) AndAlso tmpTile(3) Then situation = AutoHorizontal
@@ -673,13 +681,13 @@
         ' Actually place the subtile
         Select Case situation
             Case AutoInner
-                PlaceAutotile(layerNum, X, Y, 2, "j")
+                PlaceAutotile(layerNum, x, y, 2, "j")
             Case AutoHorizontal
-                PlaceAutotile(layerNum, X, Y, 2, "f")
+                PlaceAutotile(layerNum, x, y, 2, "f")
             Case AutoVertical
-                PlaceAutotile(layerNum, X, Y, 2, "r")
+                PlaceAutotile(layerNum, x, y, 2, "r")
             Case AutoFill
-                PlaceAutotile(layerNum, X, Y, 2, "n")
+                PlaceAutotile(layerNum, x, y, 2, "n")
         End Select
 
     End Sub
@@ -690,11 +698,11 @@
 
         ' West
 
-        If CheckTileMatch(layerNum, X, Y, X - 1, Y) Then tmpTile(1) = True
+        If CheckTileMatch(layerNum, x, y, x - 1, y) Then tmpTile(1) = True
         ' South West
-        If CheckTileMatch(layerNum, X, Y, X - 1, Y + 1) Then tmpTile(2) = True
+        If CheckTileMatch(layerNum, x, y, x - 1, y + 1) Then tmpTile(2) = True
         ' South
-        If CheckTileMatch(layerNum, X, Y, X, Y + 1) Then tmpTile(3) = True
+        If CheckTileMatch(layerNum, x, y, x, y + 1) Then tmpTile(3) = True
         situation = AutoFill
         ' Calculate Situation - Horizontal
         If tmpTile(1) AndAlso Not tmpTile(3) Then situation = AutoHorizontal
@@ -707,13 +715,13 @@
         ' Actually place the subtile
         Select Case situation
             Case AutoInner
-                PlaceAutotile(layerNum, X, Y, 3, "o")
+                PlaceAutotile(layerNum, x, y, 3, "o")
             Case AutoHorizontal
-                PlaceAutotile(layerNum, X, Y, 3, "s")
+                PlaceAutotile(layerNum, x, y, 3, "s")
             Case AutoVertical
-                PlaceAutotile(layerNum, X, Y, 3, "g")
+                PlaceAutotile(layerNum, x, y, 3, "g")
             Case AutoFill
-                PlaceAutotile(layerNum, X, Y, 3, "k")
+                PlaceAutotile(layerNum, x, y, 3, "k")
         End Select
 
     End Sub
@@ -724,11 +732,11 @@
 
         ' South
 
-        If CheckTileMatch(layerNum, X, Y, X, Y + 1) Then tmpTile(1) = True
+        If CheckTileMatch(layerNum, x, y, x, y + 1) Then tmpTile(1) = True
         ' South East
-        If CheckTileMatch(layerNum, X, Y, X + 1, Y + 1) Then tmpTile(2) = True
+        If CheckTileMatch(layerNum, x, y, x + 1, y + 1) Then tmpTile(2) = True
         ' East
-        If CheckTileMatch(layerNum, X, Y, X + 1, Y) Then tmpTile(3) = True
+        If CheckTileMatch(layerNum, x, y, x + 1, y) Then tmpTile(3) = True
         situation = AutoFill
         ' Calculate Situation -  Horizontal
         If Not tmpTile(1) AndAlso tmpTile(3) Then situation = AutoHorizontal
@@ -741,13 +749,13 @@
         ' Actually place the subtile
         Select Case situation
             Case AutoInner
-                PlaceAutotile(layerNum, X, Y, 4, "t")
+                PlaceAutotile(layerNum, x, y, 4, "t")
             Case AutoHorizontal
-                PlaceAutotile(layerNum, X, Y, 4, "p")
+                PlaceAutotile(layerNum, x, y, 4, "p")
             Case AutoVertical
-                PlaceAutotile(layerNum, X, Y, 4, "l")
+                PlaceAutotile(layerNum, x, y, 4, "l")
             Case AutoFill
-                PlaceAutotile(layerNum, X, Y, 4, "h")
+                PlaceAutotile(layerNum, x, y, 4, "h")
         End Select
 
     End Sub
@@ -759,37 +767,37 @@
         'If layerNum > MapLayer.Count - 1 Then exTile = True : layerNum = layerNum - (MapLayer.Count - 1)
         CheckTileMatch = True
         ' if it's off the map then set it as autotile and exit out early
-        If X2 < 0 OrElse X2 > Map.MaxX OrElse Y2 < 0 OrElse Y2 > Map.MaxY Then
+        If x2 < 0 OrElse x2 > Map.MaxX OrElse y2 < 0 OrElse y2 > Map.MaxY Then
             CheckTileMatch = True
             Exit Function
         End If
 
         ' fakes ALWAYS return true
-        If Map.Tile(X2, Y2).Layer(layerNum).AutoTile = AutotileFake Then
+        If Map.Tile(x2, y2).Layer(layerNum).AutoTile = AutotileFake Then
             CheckTileMatch = True
             Exit Function
         End If
         ' End If
 
         ' check neighbour is an autotile
-        If Map.Tile(X2, Y2).Layer(layerNum).AutoTile = 0 Then
+        If Map.Tile(x2, y2).Layer(layerNum).AutoTile = 0 Then
             CheckTileMatch = False
             Exit Function
         End If
         ' End If
 
         ' check we're a matching
-        If Map.Tile(X1, Y1).Layer(layerNum).Tileset <> Map.Tile(X2, Y2).Layer(layerNum).Tileset Then
+        If Map.Tile(x1, y1).Layer(layerNum).Tileset <> Map.Tile(x2, y2).Layer(layerNum).Tileset Then
             CheckTileMatch = False
             Exit Function
         End If
 
         ' check tiles match
-        If Map.Tile(X1, Y1).Layer(layerNum).X <> Map.Tile(X2, Y2).Layer(layerNum).X Then
+        If Map.Tile(x1, y1).Layer(layerNum).X <> Map.Tile(x2, y2).Layer(layerNum).X Then
             CheckTileMatch = False
             Exit Function
         Else
-            If Map.Tile(X1, Y1).Layer(layerNum).Y <> Map.Tile(X2, Y2).Layer(layerNum).Y Then
+            If Map.Tile(x1, y1).Layer(layerNum).Y <> Map.Tile(x2, y2).Layer(layerNum).Y Then
                 CheckTileMatch = False
                 Exit Function
             End If
@@ -823,7 +831,7 @@
             End Select
         End If
 
-        Select Case Map.Tile(X, Y).Layer(layerNum).AutoTile
+        Select Case Map.Tile(x, y).Layer(layerNum).AutoTile
             Case AutotileWaterfall
                 yOffset = (WaterfallFrame - 1) * 32
             Case AutotileAnim
@@ -837,7 +845,8 @@
         'TileSetSprite(Map.Tile(X, Y).Layer(layerNum).Tileset).Position = New SFML.Window.Vector2f(destX, destY)
 
         'GameWindow.Draw(TileSetSprite(Map.Tile(X, Y).Layer(layerNum).Tileset))
-        If Map.Tile(X, Y).Layer Is Nothing Then Exit Sub
-        RenderSprite(TileSetSprite(Map.Tile(X, Y).Layer(layerNum).Tileset), GameWindow, destX, destY, Autotile(X, Y).Layer(layerNum).srcX(quarterNum) + xOffset, Autotile(X, Y).Layer(layerNum).srcY(quarterNum) + yOffset, 16, 16)
+        If Map.Tile(x, y).Layer Is Nothing Then Exit Sub
+        RenderSprite(TileSetSprite(Map.Tile(x, y).Layer(layerNum).Tileset), GameWindow, destX, destY, Autotile(x, y).Layer(layerNum).SrcX(quarterNum) + xOffset, Autotile(x, y).Layer(layerNum).SrcY(quarterNum) + yOffset, 16, 16)
     End Sub
+
 End Module
