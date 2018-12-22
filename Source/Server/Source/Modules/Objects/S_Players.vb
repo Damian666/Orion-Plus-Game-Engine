@@ -1042,7 +1042,11 @@ Module S_Players
     End Sub
 
     Sub SetPlayerPOINTS(index As Integer, Points As Integer)
-        Player(index).Character(TempPlayer(index).CurChar).Points = Points
+        If Player(index).Character(TempPlayer(index).CurChar).Points + Points > 255 Then
+            Player(index).Character(TempPlayer(index).CurChar).Points = 255
+        Else
+            Player(index).Character(TempPlayer(index).CurChar).Points = Points
+        End If
     End Sub
 
     Sub CheckPlayerLevelUp(index As Integer)
