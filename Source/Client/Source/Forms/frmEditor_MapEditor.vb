@@ -1151,7 +1151,7 @@ Public Class FrmEditor_MapEditor
 
 #Region "Drawing"
 
-    Public Sub EditorMap_DrawTileset()
+    Public Sub EditorMap_DrawTileset2()
         Dim height As Integer
         Dim width As Integer
         Dim tileset As Byte
@@ -1221,6 +1221,61 @@ Public Class FrmEditor_MapEditor
         TilesetWindow.Display()
 
         LastTileset = tileset
+    End Sub
+
+    Public Sub EditorMap_DrawTileset()
+        Dim height As Integer
+        Dim width As Integer
+        Dim tileset As Byte
+
+        ' find tileset number
+        tileset = Me.cmbTileSets.SelectedIndex + 1
+
+        ' exit out if doesn't exist
+        If tileset < 0 Or tileset > NumTileSets Then Exit Sub
+
+        'Draw the tileset into memory.)
+        TileSetImgsGFX(tileset) = New Bitmap(Application.StartupPath & GfxPath & "tilesets\" & tileset & GfxExt)
+
+        height = TileSetImgsGFX(tileset).Height
+        width = TileSetImgsGFX(tileset).Width
+        MapEditorBackBuffer = New Bitmap(width, height)
+        Dim g As Graphics = Graphics.FromImage(MapEditorBackBuffer)
+        g.FillRectangle(Brushes.Black, New Rectangle(0, 0, MapEditorBackBuffer.Width, MapEditorBackBuffer.Height))
+        Me.picBackSelect.Height = height
+        Me.picBackSelect.Width = width
+
+        ' change selected shape for autotiles
+        If Me.cmbAutoTile.SelectedIndex > 0 Then
+            Select Case Me.cmbAutoTile.SelectedIndex
+                Case 1 ' autotile
+                    EditorTileWidth = 2
+                    EditorTileHeight = 3
+                Case 2 ' fake autotile
+                    EditorTileWidth = 1
+                    EditorTileHeight = 1
+                Case 3 ' animated
+                    EditorTileWidth = 6
+                    EditorTileHeight = 3
+                Case 4 ' cliff
+                    EditorTileWidth = 2
+                    EditorTileHeight = 2
+                Case 5 ' waterfall
+                    EditorTileWidth = 2
+                    EditorTileHeight = 3
+                Case Else
+                    EditorTileWidth = 1
+                    EditorTileHeight = 1
+            End Select
+        End If
+
+        g.DrawImage(TileSetImgsGFX(tileset), New Rectangle(0, 0, TileSetImgsGFX(tileset).Width, TileSetImgsGFX(tileset).Height))
+        g.DrawRectangle(Pens.Red, New Rectangle(EditorTileSelStart.X * PicX, EditorTileSelStart.Y * PicY, (EditorTileSelEnd.X - EditorTileSelStart.X) * PicX, (EditorTileSelEnd.Y - EditorTileSelStart.Y) * PicX))
+        g.Dispose()
+
+        g = Me.picBackSelect.CreateGraphics
+        g.DrawImage(MapEditorBackBuffer, New Rectangle(0, 0, width, height))
+        g.Dispose()
     End Sub
 
     Public Sub EditorMap_DrawMapItem()

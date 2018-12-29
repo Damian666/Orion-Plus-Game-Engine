@@ -19,6 +19,7 @@ Module C_Graphics
 
     'TileSets
     Friend TileSetTexture() As Texture
+    Friend TileSetImgsGFX() As Bitmap
 
     Friend TileSetSprite() As Sprite
     Friend TileSetTextureInfo() As GraphicInfo
@@ -281,6 +282,8 @@ Module C_Graphics
     Friend ShadowSprite As Sprite
     Friend ShadowGfxInfo As GraphicInfo
 
+    Friend MapEditorBackBuffer As Bitmap
+
 #End Region
 
 #Region "Types"
@@ -308,7 +311,7 @@ Module C_Graphics
         SfmlGameFont = New SFML.Graphics.Font(Environment.GetFolderPath(Environment.SpecialFolder.Fonts) + "\" + FontName)
 
         'this stuff only loads when needed :)
-
+        ReDim TileSetImgsGFX(0 To NumTileSets)
         ReDim TileSetTexture(NumTileSets)
         ReDim TileSetSprite(NumTileSets)
         ReDim TileSetTextureInfo(NumTileSets)
