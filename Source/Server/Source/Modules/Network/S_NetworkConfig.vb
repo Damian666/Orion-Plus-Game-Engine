@@ -7,7 +7,8 @@ Friend Module S_NetworkConfig
     Friend Sub InitNetwork()
         If Not Socket Is Nothing Then Return
         ' Establish some Rulez
-        Socket = New Server(EditorPackets.Count, MAX_PLAYERS) With {
+        Socket = New Server(EditorPackets.Count, 4096, MAX_PLAYERS) With {
+            .MinimumIndex = 1,
             .BufferLimit = 2048000, ' <- this is 2mb max data storage
             .PacketAcceptLimit = 100, ' Dunno what is a reasonable cap right now so why not? :P
             .PacketDisconnectCount = 150 ' If the other thing was even remotely reasonable, this is DEFINITELY spam count!

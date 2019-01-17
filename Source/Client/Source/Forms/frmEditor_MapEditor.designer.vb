@@ -22,7 +22,7 @@ Partial Class FrmEditor_MapEditor
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
-        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmEditor_MapEditor))
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(FrmEditor_MapEditor))
         Me.scrlPictureX = New System.Windows.Forms.HScrollBar()
         Me.scrlPictureY = New System.Windows.Forms.VScrollBar()
         Me.optHouse = New System.Windows.Forms.RadioButton()
@@ -161,6 +161,12 @@ Partial Class FrmEditor_MapEditor
         Me.Label15 = New System.Windows.Forms.Label()
         Me.Label13 = New System.Windows.Forms.Label()
         Me.TabPage1 = New System.Windows.Forms.TabPage()
+        Me.GroupBox5 = New System.Windows.Forms.GroupBox()
+        Me.Label20 = New System.Windows.Forms.Label()
+        Me.cmbParallax = New System.Windows.Forms.ComboBox()
+        Me.GroupBox4 = New System.Windows.Forms.GroupBox()
+        Me.Label19 = New System.Windows.Forms.Label()
+        Me.cmbPanorama = New System.Windows.Forms.ComboBox()
         Me.GroupBox3 = New System.Windows.Forms.GroupBox()
         Me.chkUseTint = New System.Windows.Forms.CheckBox()
         Me.lblMapAlpha = New System.Windows.Forms.Label()
@@ -182,12 +188,6 @@ Partial Class FrmEditor_MapEditor
         Me.lblFogIndex = New System.Windows.Forms.Label()
         Me.Label14 = New System.Windows.Forms.Label()
         Me.cmbWeather = New System.Windows.Forms.ComboBox()
-        Me.GroupBox4 = New System.Windows.Forms.GroupBox()
-        Me.cmbPanorama = New System.Windows.Forms.ComboBox()
-        Me.Label19 = New System.Windows.Forms.Label()
-        Me.GroupBox5 = New System.Windows.Forms.GroupBox()
-        Me.Label20 = New System.Windows.Forms.Label()
-        Me.cmbParallax = New System.Windows.Forms.ComboBox()
         Me.pnlBack.SuspendLayout()
         CType(Me.picBackSelect, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.pnlAttributes.SuspendLayout()
@@ -218,10 +218,10 @@ Partial Class FrmEditor_MapEditor
         Me.tpDirBlock.SuspendLayout()
         Me.tpEvents.SuspendLayout()
         Me.TabPage1.SuspendLayout()
+        Me.GroupBox5.SuspendLayout()
+        Me.GroupBox4.SuspendLayout()
         Me.GroupBox3.SuspendLayout()
         Me.GroupBox1.SuspendLayout()
-        Me.GroupBox4.SuspendLayout()
-        Me.GroupBox5.SuspendLayout()
         Me.SuspendLayout()
         '
         'scrlPictureX
@@ -1594,6 +1594,62 @@ Partial Class FrmEditor_MapEditor
         Me.TabPage1.Text = "Map Effects"
         Me.TabPage1.UseVisualStyleBackColor = True
         '
+        'GroupBox5
+        '
+        Me.GroupBox5.Controls.Add(Me.Label20)
+        Me.GroupBox5.Controls.Add(Me.cmbParallax)
+        Me.GroupBox5.Location = New System.Drawing.Point(253, 166)
+        Me.GroupBox5.Name = "GroupBox5"
+        Me.GroupBox5.Size = New System.Drawing.Size(236, 53)
+        Me.GroupBox5.TabIndex = 21
+        Me.GroupBox5.TabStop = False
+        Me.GroupBox5.Text = "Map Parallax"
+        '
+        'Label20
+        '
+        Me.Label20.AutoSize = True
+        Me.Label20.Location = New System.Drawing.Point(6, 22)
+        Me.Label20.Name = "Label20"
+        Me.Label20.Size = New System.Drawing.Size(47, 13)
+        Me.Label20.TabIndex = 1
+        Me.Label20.Text = "Parallax:"
+        '
+        'cmbParallax
+        '
+        Me.cmbParallax.FormattingEnabled = True
+        Me.cmbParallax.Location = New System.Drawing.Point(70, 19)
+        Me.cmbParallax.Name = "cmbParallax"
+        Me.cmbParallax.Size = New System.Drawing.Size(160, 21)
+        Me.cmbParallax.TabIndex = 0
+        '
+        'GroupBox4
+        '
+        Me.GroupBox4.Controls.Add(Me.Label19)
+        Me.GroupBox4.Controls.Add(Me.cmbPanorama)
+        Me.GroupBox4.Location = New System.Drawing.Point(6, 166)
+        Me.GroupBox4.Name = "GroupBox4"
+        Me.GroupBox4.Size = New System.Drawing.Size(241, 53)
+        Me.GroupBox4.TabIndex = 20
+        Me.GroupBox4.TabStop = False
+        Me.GroupBox4.Text = "Map Panorama"
+        '
+        'Label19
+        '
+        Me.Label19.AutoSize = True
+        Me.Label19.Location = New System.Drawing.Point(6, 22)
+        Me.Label19.Name = "Label19"
+        Me.Label19.Size = New System.Drawing.Size(58, 13)
+        Me.Label19.TabIndex = 1
+        Me.Label19.Text = "Panorama:"
+        '
+        'cmbPanorama
+        '
+        Me.cmbPanorama.FormattingEnabled = True
+        Me.cmbPanorama.Location = New System.Drawing.Point(70, 19)
+        Me.cmbPanorama.Name = "cmbPanorama"
+        Me.cmbPanorama.Size = New System.Drawing.Size(165, 21)
+        Me.cmbPanorama.TabIndex = 0
+        '
         'GroupBox3
         '
         Me.GroupBox3.Controls.Add(Me.chkUseTint)
@@ -1800,63 +1856,7 @@ Partial Class FrmEditor_MapEditor
         Me.cmbWeather.Size = New System.Drawing.Size(145, 21)
         Me.cmbWeather.TabIndex = 0
         '
-        'GroupBox4
-        '
-        Me.GroupBox4.Controls.Add(Me.Label19)
-        Me.GroupBox4.Controls.Add(Me.cmbPanorama)
-        Me.GroupBox4.Location = New System.Drawing.Point(6, 166)
-        Me.GroupBox4.Name = "GroupBox4"
-        Me.GroupBox4.Size = New System.Drawing.Size(241, 53)
-        Me.GroupBox4.TabIndex = 20
-        Me.GroupBox4.TabStop = False
-        Me.GroupBox4.Text = "Map Panorama"
-        '
-        'cmbPanorama
-        '
-        Me.cmbPanorama.FormattingEnabled = True
-        Me.cmbPanorama.Location = New System.Drawing.Point(70, 19)
-        Me.cmbPanorama.Name = "cmbPanorama"
-        Me.cmbPanorama.Size = New System.Drawing.Size(165, 21)
-        Me.cmbPanorama.TabIndex = 0
-        '
-        'Label19
-        '
-        Me.Label19.AutoSize = True
-        Me.Label19.Location = New System.Drawing.Point(6, 22)
-        Me.Label19.Name = "Label19"
-        Me.Label19.Size = New System.Drawing.Size(58, 13)
-        Me.Label19.TabIndex = 1
-        Me.Label19.Text = "Panorama:"
-        '
-        'GroupBox5
-        '
-        Me.GroupBox5.Controls.Add(Me.Label20)
-        Me.GroupBox5.Controls.Add(Me.cmbParallax)
-        Me.GroupBox5.Location = New System.Drawing.Point(253, 166)
-        Me.GroupBox5.Name = "GroupBox5"
-        Me.GroupBox5.Size = New System.Drawing.Size(236, 53)
-        Me.GroupBox5.TabIndex = 21
-        Me.GroupBox5.TabStop = False
-        Me.GroupBox5.Text = "Map Parallax"
-        '
-        'Label20
-        '
-        Me.Label20.AutoSize = True
-        Me.Label20.Location = New System.Drawing.Point(6, 22)
-        Me.Label20.Name = "Label20"
-        Me.Label20.Size = New System.Drawing.Size(47, 13)
-        Me.Label20.TabIndex = 1
-        Me.Label20.Text = "Parallax:"
-        '
-        'cmbParallax
-        '
-        Me.cmbParallax.FormattingEnabled = True
-        Me.cmbParallax.Location = New System.Drawing.Point(70, 19)
-        Me.cmbParallax.Name = "cmbParallax"
-        Me.cmbParallax.Size = New System.Drawing.Size(160, 21)
-        Me.cmbParallax.TabIndex = 0
-        '
-        'frmEditor_MapEditor
+        'FrmEditor_MapEditor
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
@@ -1867,7 +1867,7 @@ Partial Class FrmEditor_MapEditor
         Me.Controls.Add(Me.pnlAttributes)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.MaximizeBox = False
-        Me.Name = "frmEditor_MapEditor"
+        Me.Name = "FrmEditor_MapEditor"
         Me.Text = "Map Editor"
         Me.pnlBack.ResumeLayout(False)
         CType(Me.picBackSelect, System.ComponentModel.ISupportInitialize).EndInit()
@@ -1919,14 +1919,14 @@ Partial Class FrmEditor_MapEditor
         Me.tpEvents.ResumeLayout(False)
         Me.tpEvents.PerformLayout()
         Me.TabPage1.ResumeLayout(False)
+        Me.GroupBox5.ResumeLayout(False)
+        Me.GroupBox5.PerformLayout()
+        Me.GroupBox4.ResumeLayout(False)
+        Me.GroupBox4.PerformLayout()
         Me.GroupBox3.ResumeLayout(False)
         Me.GroupBox3.PerformLayout()
         Me.GroupBox1.ResumeLayout(False)
         Me.GroupBox1.PerformLayout()
-        Me.GroupBox4.ResumeLayout(False)
-        Me.GroupBox4.PerformLayout()
-        Me.GroupBox5.ResumeLayout(False)
-        Me.GroupBox5.PerformLayout()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 

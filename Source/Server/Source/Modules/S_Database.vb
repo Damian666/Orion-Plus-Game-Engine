@@ -108,7 +108,7 @@ Module modDatabase
             Classes(i).Stat(StatType.Vitality) = Val(myXml.ReadString("CLASS" & i, "Vit"))
             Classes(i).Stat(StatType.Luck) = Val(myXml.ReadString("CLASS" & i, "Luck"))
             Classes(i).Stat(StatType.Intelligence) = Val(myXml.ReadString("CLASS" & i, "Int"))
-            Classes(i).Stat(StatType.Spirit) = Val(myXml.ReadString("CLASS" & i, "Speed"))
+            Classes(i).Stat(StatType.Spirit) = Val(myXml.ReadString("CLASS" & i, "Spir"))
 
             Classes(i).BaseExp = Val(myXml.ReadString("CLASS" & i, "BaseExp"))
 
@@ -1877,7 +1877,7 @@ Module modDatabase
         Options.Motd = myXml.ReadString("Settings", "MoTd", "Welcome to the Orion+ Engine")
         Options.Website = myXml.ReadString("Settings", "Website", "http://ascensiongamedev.com/index.php")
         Options.StartMap = myXml.ReadString("Settings", "StartMap", "1")
-        Options.StartX = myXml.ReadString("Settings", "StartX", "13+")
+        Options.StartX = myXml.ReadString("Settings", "StartX", "13")
         Options.StartY = myXml.ReadString("Settings", "StartY", "7")
         myXml.CloseXml(False)
     End Sub

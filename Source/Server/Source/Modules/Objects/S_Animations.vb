@@ -4,8 +4,6 @@ Imports ASFW.IO.FileIO
 
 Friend Module S_Animations
 
-
-
 #Region "Database"
 
     Sub SaveAnimations()

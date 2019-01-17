@@ -23,7 +23,6 @@ Module C_Variables
 
     ' targetting
     Friend MyTarget As Integer
-
     Friend MyTargetType As Integer
 
     ' chat bubble

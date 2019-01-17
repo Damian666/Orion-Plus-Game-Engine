@@ -1055,10 +1055,11 @@ Module C_Graphics
     End Sub
 
     Friend Sub RenderTextures(txture As Texture, target As RenderWindow, dX As Single, dY As Single, sx As Single, sy As Single, dWidth As Single, dHeight As Single, sWidth As Single, sHeight As Single)
-        Dim tmpImage As Sprite = New Sprite(txture)
-        tmpImage.TextureRect = New IntRect(sx, sy, sWidth, sHeight)
-        tmpImage.Scale = New Vector2f(dWidth / sWidth, dHeight / sHeight)
-        tmpImage.Position = New Vector2f(dX, dY)
+        Dim tmpImage As Sprite = New Sprite(txture) With {
+            .TextureRect = New IntRect(sx, sy, sWidth, sHeight),
+            .Scale = New Vector2f(dWidth / sWidth, dHeight / sHeight),
+            .Position = New Vector2f(dX, dY)
+        }
         target.Draw(tmpImage)
     End Sub
 

@@ -6,7 +6,7 @@ Imports SFML.Graphics
 Imports SFML.Window
 
 Public Class FrmEditor_MapEditor
-
+    Dim picbacktop As Integer, picbackleft As Integer
 #Region "Frm"
 
     Private Sub FrmEditor_Map_Load(ByVal sender As Object, ByVal e As EventArgs) Handles MyBase.Load
@@ -86,8 +86,8 @@ Public Class FrmEditor_MapEditor
         EditorTileSelStart = New Point(0, 0)
         EditorTileSelEnd = New Point(1, 1)
 
-        picBackSelect.Height = TileSetTextureInfo(cmbTileSets.SelectedIndex + 1).Height
-        picBackSelect.Width = TileSetTextureInfo(cmbTileSets.SelectedIndex + 1).Width
+        'picBackSelect.Height = TileSetTextureInfo(cmbTileSets.SelectedIndex + 1).Height
+        'picBackSelect.Width = TileSetTextureInfo(cmbTileSets.SelectedIndex + 1).Width
 
         scrlPictureY.Maximum = (picBackSelect.Height \ PicY)
         scrlPictureX.Maximum = (picBackSelect.Width \ PicX)
@@ -689,9 +689,22 @@ Public Class FrmEditor_MapEditor
         EditorTileSelStart = New Point(0, 0)
         EditorTileSelEnd = New Point(1, 1)
 
+        LastTileset = 1
+
+        If TileSetTextureInfo(LastTileset).IsLoaded = False Then
+            LoadTexture(LastTileset, 1)
+        End If
+        ' we use it, lets update timer
+        With TileSetTextureInfo(LastTileset)
+            .TextureTimer = GetTickCount() + 100000
+        End With
+
         ' set the scrollbars
-        scrlPictureY.Maximum = (picBackSelect.Height \ PicY) \ 2 ' \2 is new, lets test
-        scrlPictureX.Maximum = (picBackSelect.Width \ PicX) \ 2
+
+        scrlPictureY.Maximum = (TileSetTextureInfo(LastTileset).Height \ PicY) \ 2
+        scrlPictureX.Maximum = (TileSetTextureInfo(LastTileset).Width \ PicX) \ 2
+        'height = TileSetTextureInfo(tileset).Height
+        'width = TileSetTextureInfo(tileset).Width
 
         ' set shops for the shop attribute
         cmbShop.Items.Add("None")
@@ -718,8 +731,8 @@ Public Class FrmEditor_MapEditor
     End Sub
 
     Public Sub MapEditorTileScroll()
-        picBackSelect.Top = (scrlPictureY.Value * PicY) * -1
-        picBackSelect.Left = (scrlPictureX.Value * PicX) * -1
+        picbacktop = (scrlPictureY.Value * PicY) ' * -1
+        picbackleft = (scrlPictureX.Value * PicX) ' * -1
     End Sub
 
     Public Sub MapEditorChooseTile(ByVal Button As Integer, ByVal X As Single, ByVal Y As Single)
@@ -749,8 +762,8 @@ Public Class FrmEditor_MapEditor
                 End Select
             End If
 
-            EditorTileX = X \ PicX
-            EditorTileY = Y \ PicY
+            EditorTileX = (picbackleft \ PicX) + (X \ PicX)
+            EditorTileY = (picbacktop \ PicY) + (Y \ PicY)
 
             EditorTileSelStart = New Point(EditorTileX, EditorTileY)
             EditorTileSelEnd = New Point(EditorTileX + EditorTileWidth, EditorTileY + EditorTileHeight)
@@ -1151,9 +1164,9 @@ Public Class FrmEditor_MapEditor
 
 #Region "Drawing"
 
-    Public Sub EditorMap_DrawTileset2()
-        Dim height As Integer
-        Dim width As Integer
+    Public Sub EditorMap_DrawTileset()
+        'Dim height As Integer
+        'Dim width As Integer
         Dim tileset As Byte
 
         TilesetWindow.DispatchEvents()
@@ -1179,12 +1192,12 @@ Public Class FrmEditor_MapEditor
             .TextureTimer = GetTickCount() + 100000
         End With
 
-        height = TileSetTextureInfo(tileset).Height
-        width = TileSetTextureInfo(tileset).Width
-        Me.picBackSelect.Height = height
-        Me.picBackSelect.Width = width
+        'height = TileSetTextureInfo(tileset).Height
+        'width = TileSetTextureInfo(tileset).Width
+        'Me.picBackSelect.Height = height
+        'Me.picBackSelect.Width = width
 
-        TilesetWindow.SetView(New SFML.Graphics.View(New FloatRect(0, 0, width, height)))
+        'TilesetWindow.SetView(New SFML.Graphics.View(New FloatRect(0, 0, picbackleft + Me.picBackSelect.Width, picbacktop + Me.picBackSelect.Height)))
 
         ' change selected shape for autotiles
         If Me.cmbAutoTile.SelectedIndex > 0 Then
@@ -1210,72 +1223,22 @@ Public Class FrmEditor_MapEditor
             End Select
         End If
 
-        RenderSprite(TileSetSprite(tileset), TilesetWindow, 0, 0, 0, 0, width, height)
+        If TileSetTextureInfo(tileset).Width - picbackleft < picBackSelect.Width Or TileSetTextureInfo(tileset).Height - picbacktop < picBackSelect.Height Then
+            RenderSprite(TileSetSprite(tileset), TilesetWindow, 0, 0, picbackleft, picbacktop, TileSetTextureInfo(tileset).Width - picbackleft, TileSetTextureInfo(tileset).Height - picbacktop)
+        Else
+            RenderSprite(TileSetSprite(tileset), TilesetWindow, 0, 0, picbackleft, picbacktop, picbackleft + picBackSelect.Width, picbacktop + picBackSelect.Height)
+        End If
+
 
         rec2.Size = New Vector2f(EditorTileWidth * PicX, EditorTileHeight * PicY)
 
-        rec2.Position = New Vector2f(EditorTileSelStart.X * PicX, EditorTileSelStart.Y * PicY)
+        rec2.Position = New Vector2f((EditorTileSelStart.X * PicX - picbackleft), (EditorTileSelStart.Y * PicY - picbacktop))
         TilesetWindow.Draw(rec2)
 
         'and finally show everything on screen
         TilesetWindow.Display()
 
         LastTileset = tileset
-    End Sub
-
-    Public Sub EditorMap_DrawTileset()
-        Dim height As Integer
-        Dim width As Integer
-        Dim tileset As Byte
-
-        ' find tileset number
-        tileset = Me.cmbTileSets.SelectedIndex + 1
-
-        ' exit out if doesn't exist
-        If tileset < 0 Or tileset > NumTileSets Then Exit Sub
-
-        'Draw the tileset into memory.)
-        TileSetImgsGFX(tileset) = New Bitmap(Application.StartupPath & GfxPath & "tilesets\" & tileset & GfxExt)
-
-        height = TileSetImgsGFX(tileset).Height
-        width = TileSetImgsGFX(tileset).Width
-        MapEditorBackBuffer = New Bitmap(width, height)
-        Dim g As Graphics = Graphics.FromImage(MapEditorBackBuffer)
-        g.FillRectangle(Brushes.Black, New Rectangle(0, 0, MapEditorBackBuffer.Width, MapEditorBackBuffer.Height))
-        Me.picBackSelect.Height = height
-        Me.picBackSelect.Width = width
-
-        ' change selected shape for autotiles
-        If Me.cmbAutoTile.SelectedIndex > 0 Then
-            Select Case Me.cmbAutoTile.SelectedIndex
-                Case 1 ' autotile
-                    EditorTileWidth = 2
-                    EditorTileHeight = 3
-                Case 2 ' fake autotile
-                    EditorTileWidth = 1
-                    EditorTileHeight = 1
-                Case 3 ' animated
-                    EditorTileWidth = 6
-                    EditorTileHeight = 3
-                Case 4 ' cliff
-                    EditorTileWidth = 2
-                    EditorTileHeight = 2
-                Case 5 ' waterfall
-                    EditorTileWidth = 2
-                    EditorTileHeight = 3
-                Case Else
-                    EditorTileWidth = 1
-                    EditorTileHeight = 1
-            End Select
-        End If
-
-        g.DrawImage(TileSetImgsGFX(tileset), New Rectangle(0, 0, TileSetImgsGFX(tileset).Width, TileSetImgsGFX(tileset).Height))
-        g.DrawRectangle(Pens.Red, New Rectangle(EditorTileSelStart.X * PicX, EditorTileSelStart.Y * PicY, (EditorTileSelEnd.X - EditorTileSelStart.X) * PicX, (EditorTileSelEnd.Y - EditorTileSelStart.Y) * PicX))
-        g.Dispose()
-
-        g = Me.picBackSelect.CreateGraphics
-        g.DrawImage(MapEditorBackBuffer, New Rectangle(0, 0, width, height))
-        g.Dispose()
     End Sub
 
     Public Sub EditorMap_DrawMapItem()
@@ -1359,6 +1322,7 @@ Public Class FrmEditor_MapEditor
         rec2.Position = New Vector2f(ConvertMapX(CurX * PicX), ConvertMapY(CurY * PicY))
         GameWindow.Draw(rec2)
     End Sub
+
 
 #End Region
 

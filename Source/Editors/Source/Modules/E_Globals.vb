@@ -56,7 +56,7 @@
     Friend Item_Changed(MAX_ITEMS) As Boolean
 
     Friend NPC_Changed(MAX_NPCS) As Boolean
-    Friend Resource_Changed(MAX_NPCS) As Boolean
+    Friend Resource_Changed(MAX_RESOURCES) As Boolean
     Friend Animation_Changed(MAX_ANIMATIONS) As Boolean
     Friend Skill_Changed(MAX_SKILLS) As Boolean
     Friend Shop_Changed(MAX_SHOPS) As Boolean

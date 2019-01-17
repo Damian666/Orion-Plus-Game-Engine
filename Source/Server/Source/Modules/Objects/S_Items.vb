@@ -4,8 +4,6 @@ Imports ASFW.IO.FileIO
 
 Friend Module S_Items
 
-
-
 #Region "Database"
 
     Sub SaveItems()

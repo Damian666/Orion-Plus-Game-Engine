@@ -1,7 +1,7 @@
 ﻿Imports System.IO
 
 Module S_General
-    Friend Declare Function GetQueueStatus Lib "user32" (fuFlags As Integer) As Integer
+    'Friend Declare Function GetQueueStatus Lib "user32" (fuFlags As Integer) As Integer
     Friend ServerDestroyed As Boolean
     Friend MyIPAddress As String
     Friend myStopWatch As New Stopwatch()
@@ -240,7 +240,7 @@ Module S_General
         isShuttingDown = False
 
         ' Start listener now that everything is loaded
-        Socket.StartListening(Options.Port, 5, 1)
+        Socket.StartListening(Options.Port, 5)
 
         ' Starts the server loop
         ServerLoop()
