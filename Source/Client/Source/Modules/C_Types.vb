@@ -3,8 +3,7 @@
     ' options
     Friend Options As New C_Options()
 
-    ' Friend data structures
-    Friend Player(MAX_PLAYERS) As PlayerRec
+
 
     ' client-side stuff
     Friend ActionMsg(Byte.MaxValue) As ActionMsgRec
@@ -16,15 +15,9 @@
     'Mapreport
     Friend MapNames(MAX_MAPS) As String
 
-    Friend CharSelection() As CharSelRec
 
-    Friend Structure CharSelRec
-        Dim Name As String
-        Dim Sprite As Integer
-        Dim Gender As Integer
-        Dim ClassName As String
-        Dim Level As Integer
-    End Structure
+
+
 
     Friend Structure ChatRec
         Dim Text As String
@@ -36,79 +29,6 @@
         Dim Skillnum As Integer
         Dim Timer As Integer
         Dim FramePointer As Integer
-    End Structure
-
-    Friend Structure PlayerRec
-
-        ' General
-        Dim Name As String
-
-        Dim Classes As Byte
-        Dim Sprite As Integer
-        Dim Level As Byte
-        Dim Exp As Integer
-        Dim Access As Byte
-        Dim Pk As Byte
-
-        ' Vitals
-        Dim Vital() As Integer
-
-        ' Stats
-        Dim Stat() As Byte
-
-        Dim Points As Byte
-
-        ' Worn equipment
-        Dim Equipment() As Integer
-
-        ' Position
-        Dim Map As Integer
-
-        Dim X As Byte
-        Dim Y As Byte
-        Dim Dir As Byte
-
-        ' Client use only
-        Dim MaxHp As Integer
-
-        Dim MaxMp As Integer
-        Dim MaxSp As Integer
-        Dim XOffset As Integer
-        Dim YOffset As Integer
-        Dim Moving As Byte
-        Dim Attacking As Byte
-        Dim AttackTimer As Integer
-        Dim MapGetTimer As Integer
-        Dim Steps As Byte
-
-        Dim Emote As Integer
-        Dim EmoteTimer As Integer
-
-        Dim PlayerQuest() As PlayerQuestRec
-
-        'Housing
-        Dim House As PlayerHouseRec
-
-        Dim InHouse As Integer
-        Dim LastMap As Integer
-        Dim LastX As Integer
-        Dim LastY As Integer
-
-        Dim Hotbar() As HotbarRec
-
-        Dim EventTimer As Integer
-
-        'gather skills
-        Dim GatherSkills() As ResourceSkillsRec
-
-        Dim RecipeLearned() As Byte
-
-        ' Random Items
-        Dim RandInv() As RandInvRec
-
-        Dim RandEquip() As RandInvRec
-
-        Dim Pet As PlayerPetRec
     End Structure
 
     Friend Structure MapRec

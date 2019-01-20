@@ -503,138 +503,7 @@ Module C_NetworkReceive
         buffer.Dispose()
     End Sub
 
-    Private Sub Packet_PlayerHP(ByRef data() As Byte)
-        Dim buffer As New ByteStream(data)
-        Player(Myindex).MaxHp = buffer.ReadInt32
 
-        SetPlayerVital(Myindex, VitalType.HP, buffer.ReadInt32)
-
-        If GetPlayerMaxVital(Myindex, VitalType.HP) > 0 Then
-            LblHpText = GetPlayerVital(Myindex, VitalType.HP) & "/" & GetPlayerMaxVital(Myindex, VitalType.HP)
-            ' hp bar
-            PicHpWidth = Int(((GetPlayerVital(Myindex, VitalType.HP) / 169) / (GetPlayerMaxVital(Myindex, VitalType.HP) / 169)) * 169)
-        End If
-
-        buffer.Dispose()
-    End Sub
-
-    Private Sub Packet_PlayerMP(ByRef data() As Byte)
-        Dim buffer As New ByteStream(data)
-        Player(Myindex).MaxMp = buffer.ReadInt32
-        SetPlayerVital(Myindex, VitalType.MP, buffer.ReadInt32)
-
-        If GetPlayerMaxVital(Myindex, VitalType.MP) > 0 Then
-            LblManaText = GetPlayerVital(Myindex, VitalType.MP) & "/" & GetPlayerMaxVital(Myindex, VitalType.MP)
-            ' mp bar
-            PicManaWidth = Int(((GetPlayerVital(Myindex, VitalType.MP) / 169) / (GetPlayerMaxVital(Myindex, VitalType.MP) / 169)) * 169)
-        End If
-
-        buffer.Dispose()
-    End Sub
-
-    Private Sub Packet_PlayerSP(ByRef data() As Byte)
-        Dim buffer As New ByteStream(data)
-        Player(Myindex).MaxSp = buffer.ReadInt32
-        SetPlayerVital(Myindex, VitalType.SP, buffer.ReadInt32)
-
-        buffer.Dispose()
-    End Sub
-
-    Private Sub Packet_PlayerStats(ByRef data() As Byte)
-        Dim i As Integer, index As Integer
-        Dim buffer As New ByteStream(data)
-        index = buffer.ReadInt32
-        For i = 1 To StatType.Count - 1
-            SetPlayerStat(index, i, buffer.ReadInt32)
-        Next
-        UpdateCharacterPanel = True
-
-        buffer.Dispose()
-    End Sub
-
-    Private Sub Packet_PlayerData(ByRef data() As Byte)
-        Dim i As Integer, x As Integer
-        Dim buffer As New ByteStream(data)
-        i = buffer.ReadInt32
-        SetPlayerName(i, buffer.ReadString)
-        SetPlayerClass(i, buffer.ReadInt32)
-        SetPlayerLevel(i, buffer.ReadInt32)
-        SetPlayerPoints(i, buffer.ReadInt32)
-        SetPlayerSprite(i, buffer.ReadInt32)
-        SetPlayerMap(i, buffer.ReadInt32)
-        SetPlayerX(i, buffer.ReadInt32)
-        SetPlayerY(i, buffer.ReadInt32)
-        SetPlayerDir(i, buffer.ReadInt32)
-        SetPlayerAccess(i, buffer.ReadInt32)
-        SetPlayerPk(i, buffer.ReadInt32)
-
-        For x = 1 To StatType.Count - 1
-            SetPlayerStat(i, x, buffer.ReadInt32)
-        Next
-
-        Player(i).InHouse = buffer.ReadInt32
-
-        For x = 0 To ResourceSkills.Count - 1
-            Player(i).GatherSkills(x).SkillLevel = buffer.ReadInt32
-            Player(i).GatherSkills(x).SkillCurExp = buffer.ReadInt32
-            Player(i).GatherSkills(x).SkillNextLvlExp = buffer.ReadInt32
-        Next
-
-        For x = 1 To MAX_RECIPE
-            Player(i).RecipeLearned(x) = buffer.ReadInt32
-        Next
-
-        ' Check if the player is the client player
-        If i = Myindex Then
-            ' Reset directions
-            DirUp = False
-            DirDown = False
-            DirLeft = False
-            DirRight = False
-
-            UpdateCharacterPanel = True
-        End If
-
-        ' Make sure they aren't walking
-        Player(i).Moving = 0
-        Player(i).XOffset = 0
-        Player(i).YOffset = 0
-
-        If i = Myindex Then PlayerData = True
-
-        buffer.Dispose()
-    End Sub
-
-    Private Sub Packet_PlayerMove(ByRef data() As Byte)
-        Dim i As Integer, x As Integer, y As Integer
-        Dim dir As Integer, n As Byte
-        Dim buffer As New ByteStream(data)
-        i = buffer.ReadInt32
-        x = buffer.ReadInt32
-        y = buffer.ReadInt32
-        dir = buffer.ReadInt32
-        n = buffer.ReadInt32
-
-        SetPlayerX(i, x)
-        SetPlayerY(i, y)
-        SetPlayerDir(i, dir)
-        Player(i).XOffset = 0
-        Player(i).YOffset = 0
-        Player(i).Moving = n
-
-        Select Case GetPlayerDir(i)
-            Case DirectionType.Up
-                Player(i).YOffset = PicY
-            Case DirectionType.Down
-                Player(i).YOffset = PicY * -1
-            Case DirectionType.Left
-                Player(i).XOffset = PicX
-            Case DirectionType.Right
-                Player(i).XOffset = PicX * -1
-        End Select
-
-        buffer.Dispose()
-    End Sub
 
     Private Sub Packet_NpcMove(ByRef data() As Byte)
         Dim mapNpcNum As Integer, movement As Integer
@@ -669,22 +538,7 @@ Module C_NetworkReceive
         buffer.Dispose()
     End Sub
 
-    Private Sub Packet_PlayerDir(ByRef data() As Byte)
-        Dim dir As Integer, i As Integer
-        Dim buffer As New ByteStream(data)
-        i = buffer.ReadInt32
-        dir = buffer.ReadInt32
 
-        SetPlayerDir(i, dir)
-
-        With Player(i)
-            .XOffset = 0
-            .YOffset = 0
-            .Moving = 0
-        End With
-
-        buffer.Dispose()
-    End Sub
 
     Private Sub Packet_NpcDir(ByRef data() As Byte)
         Dim dir As Integer, i As Integer
@@ -702,24 +556,7 @@ Module C_NetworkReceive
         buffer.Dispose()
     End Sub
 
-    Private Sub Packet_PlayerXY(ByRef data() As Byte)
-        Dim x As Integer, y As Integer, dir As Integer
-        Dim buffer As New ByteStream(data)
-        x = buffer.ReadInt32
-        y = buffer.ReadInt32
-        dir = buffer.ReadInt32
 
-        SetPlayerX(Myindex, x)
-        SetPlayerY(Myindex, y)
-        SetPlayerDir(Myindex, dir)
-
-        ' Make sure they aren't walking
-        Player(Myindex).Moving = 0
-        Player(Myindex).XOffset = 0
-        Player(Myindex).YOffset = 0
-
-        buffer.Dispose()
-    End Sub
 
     Private Sub Packet_Attack(ByRef data() As Byte)
         Dim i As Integer
@@ -976,18 +813,7 @@ Module C_NetworkReceive
         CreateActionMsg(message, color, tmpType, x, y)
     End Sub
 
-    Private Sub Packet_PlayerExp(ByRef data() As Byte)
-        Dim index As Integer, tnl As Integer
-        Dim buffer As New ByteStream(data)
-        index = buffer.ReadInt32
-        SetPlayerExp(index, buffer.ReadInt32)
-        tnl = buffer.ReadInt32
 
-        If tnl = 0 Then tnl = 1
-        NextlevelExp = tnl
-
-        buffer.Dispose()
-    End Sub
 
     Private Sub Packet_Blood(ByRef data() As Byte)
         Dim x As Integer, y As Integer, sprite As Integer

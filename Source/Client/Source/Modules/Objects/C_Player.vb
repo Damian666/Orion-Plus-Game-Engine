@@ -1,83 +1,204 @@
-﻿Imports ASFW
+﻿Imports System.Drawing
+Imports ASFW
+Imports SFML.Graphics
+Imports SFML.Window
 
 Module C_Player
+#Region "Globals"
+    Friend CharSelection() As CharSelRec
+    Friend Player(MAX_PLAYERS) As PlayerRec
+    Friend PlayerInv(MAX_INV) As PlayerInvRec   ' Inventory
+#End Region
 
-    Function IsPlaying(index As Integer) As Boolean
+#Region "Structs"
+    Friend Structure CharSelRec
+        Dim Name As String
+        Dim Sprite As Integer
+        Dim Gender As Integer
+        Dim ClassName As String
+        Dim Level As Integer
+    End Structure
 
-        ' if the player doesn't exist, the name will equal 0
-        If Len(GetPlayerName(index)) > 0 Then
-            IsPlaying = True
-        End If
+    Friend Structure PlayerRec
 
-    End Function
+        ' General
+        Dim Name As String
 
-    Function GetPlayerName(index As Integer) As String
-        GetPlayerName = ""
-        If index > MAX_PLAYERS Then Exit Function
-        GetPlayerName = Trim$(Player(index).Name)
-    End Function
+        Dim Classes As Byte
+        Dim Sprite As Integer
+        Dim Level As Byte
+        Dim Exp As Integer
+        Dim Access As Byte
+        Dim Pk As Byte
 
-    Sub CheckAttack()
-        Dim attackspeed As Integer, x As Integer, y As Integer
-        Dim buffer As New ByteStream(4)
+        ' Vitals
+        Dim Vital() As Integer
 
-        If VbKeyControl Then
-            If InEvent = True Then Exit Sub
-            If SkillBuffer > 0 Then Exit Sub ' currently casting a skill, can't attack
-            If StunDuration > 0 Then Exit Sub ' stunned, can't attack
+        ' Stats
+        Dim Stat() As Byte
 
-            ' speed from weapon
-            If GetPlayerEquipment(Myindex, EquipmentType.Weapon) > 0 Then
-                attackspeed = Item(GetPlayerEquipment(Myindex, EquipmentType.Weapon)).Speed * 1000
-            Else
-                attackspeed = 1000
-            End If
+        Dim Points As Byte
 
-            If Player(Myindex).AttackTimer + attackspeed < GetTickCount() Then
-                If Player(Myindex).Attacking = 0 Then
+        ' Worn equipment
+        Dim Equipment() As Integer
 
-                    With Player(Myindex)
-                        .Attacking = 1
-                        .AttackTimer = GetTickCount()
-                    End With
+        ' Position
+        Dim Map As Integer
 
-                    SendAttack()
-                End If
-            End If
+        Dim X As Byte
+        Dim Y As Byte
+        Dim Dir As Byte
 
-            Select Case Player(Myindex).Dir
-                Case DirectionType.Up
-                    x = GetPlayerX(Myindex)
-                    y = GetPlayerY(Myindex) - 1
-                Case DirectionType.Down
-                    x = GetPlayerX(Myindex)
-                    y = GetPlayerY(Myindex) + 1
-                Case DirectionType.Left
-                    x = GetPlayerX(Myindex) - 1
-                    y = GetPlayerY(Myindex)
-                Case DirectionType.Right
-                    x = GetPlayerX(Myindex) + 1
-                    y = GetPlayerY(Myindex)
-            End Select
+        ' Client use only
+        Dim MaxHp As Integer
 
-            If GetTickCount() > Player(Myindex).EventTimer Then
-                For i = 1 To Map.CurrentEvents
-                    If Map.MapEvents(i).Visible = 1 Then
-                        If Map.MapEvents(i).X = x AndAlso Map.MapEvents(i).Y = y Then
-                            buffer = New ByteStream(4)
-                            buffer.WriteInt32(ClientPackets.CEvent)
-                            buffer.WriteInt32(i)
-                            Socket.SendData(buffer.Data, buffer.Head)
-                            buffer.Dispose()
-                            Player(Myindex).EventTimer = GetTickCount() + 200
-                        End If
-                    End If
-                Next
-            End If
-        End If
+        Dim MaxMp As Integer
+        Dim MaxSp As Integer
+        Dim XOffset As Integer
+        Dim YOffset As Integer
+        Dim Moving As Byte
+        Dim Attacking As Byte
+        Dim AttackTimer As Integer
+        Dim MapGetTimer As Integer
+        Dim Steps As Byte
 
+        Dim Emote As Integer
+        Dim EmoteTimer As Integer
+
+        Dim PlayerQuest() As PlayerQuestRec
+
+        'Housing
+        Dim House As PlayerHouseRec
+
+        Dim InHouse As Integer
+        Dim LastMap As Integer
+        Dim LastX As Integer
+        Dim LastY As Integer
+
+        Dim Hotbar() As HotbarRec
+
+        Dim EventTimer As Integer
+
+        'gather skills
+        Dim GatherSkills() As ResourceSkillsRec
+
+        Dim RecipeLearned() As Byte
+
+        ' Random Items
+        Dim RandInv() As RandInvRec
+
+        Dim RandEquip() As RandInvRec
+
+        Dim Pet As PlayerPetRec
+    End Structure
+#End Region
+
+#Region "Database"
+    Sub ClearPlayers()
+        Dim i As Integer
+
+        ReDim Player(MAX_PLAYERS)
+
+        For i = 1 To MAX_PLAYERS
+            ClearPlayer(i)
+        Next
     End Sub
 
+    Sub ClearPlayer(index As Integer)
+        Player(index).Name = ""
+        Player(index).Access = 0
+        Player(index).Attacking = 0
+        Player(index).AttackTimer = 0
+        Player(index).Classes = 0
+        Player(index).Dir = 0
+
+        ReDim Player(index).Equipment(EquipmentType.Count - 1)
+        For y = 1 To EquipmentType.Count - 1
+            Player(index).Equipment(y) = 0
+        Next
+
+        Player(index).Exp = 0
+        Player(index).Level = 0
+        Player(index).Map = 0
+        Player(index).MapGetTimer = 0
+        Player(index).MaxHp = 0
+        Player(index).MaxMp = 0
+        Player(index).MaxSp = 0
+        Player(index).Moving = 0
+        Player(index).Pk = 0
+        Player(index).Points = 0
+        Player(index).Sprite = 0
+
+        ReDim Player(index).Stat(StatType.Count - 1)
+        For x = 1 To StatType.Count - 1
+            Player(index).Stat(x) = 0
+        Next
+
+        Player(index).Steps = 0
+
+        ReDim Player(index).Vital(VitalType.Count - 1)
+        For i = 1 To VitalType.Count - 1
+            Player(index).Vital(i) = 0
+        Next
+
+        Player(index).X = 0
+        Player(index).XOffset = 0
+        Player(index).Y = 0
+        Player(index).YOffset = 0
+
+        ReDim Player(index).RandEquip(EquipmentType.Count - 1)
+        For y = 1 To EquipmentType.Count - 1
+            ReDim Player(index).RandEquip(y).Stat(StatType.Count - 1)
+            For x = 1 To StatType.Count - 1
+                Player(index).RandEquip(y).Stat(x) = 0
+            Next
+        Next
+
+        ReDim Player(index).RandInv(MAX_INV)
+        For y = 1 To MAX_INV
+            ReDim Player(index).RandInv(y).Stat(StatType.Count - 1)
+            For x = 1 To StatType.Count - 1
+                Player(index).RandInv(y).Stat(x) = 0
+            Next
+        Next
+
+        ReDim Player(index).PlayerQuest(MaxQuests)
+
+        ReDim Player(index).Hotbar(MaxHotbar)
+
+        ReDim Player(index).GatherSkills(ResourceSkills.Count - 1)
+
+        ReDim Player(index).RecipeLearned(MAX_RECIPE)
+
+        'pets
+        Player(index).Pet.Num = 0
+        Player(index).Pet.Health = 0
+        Player(index).Pet.Mana = 0
+        Player(index).Pet.Level = 0
+
+        ReDim Player(index).Pet.Stat(StatType.Count - 1)
+        For i = 1 To StatType.Count - 1
+            Player(index).Pet.Stat(i) = 0
+        Next
+
+        ReDim Player(index).Pet.Skill(4)
+        For i = 1 To 4
+            Player(index).Pet.Skill(i) = 0
+        Next
+
+        Player(index).Pet.X = 0
+        Player(index).Pet.Y = 0
+        Player(index).Pet.Dir = 0
+        Player(index).Pet.MaxHp = 0
+        Player(index).Pet.MaxMp = 0
+        Player(index).Pet.Alive = 0
+        Player(index).Pet.AttackBehaviour = 0
+        Player(index).Pet.Exp = 0
+        Player(index).Pet.Tnl = 0
+    End Sub
+#End Region
+
+#Region "Movement"
     Sub CheckMovement()
 
         If IsTryingToMove() AndAlso CanMove() Then
@@ -473,33 +594,69 @@ Module C_Player
         If index > MAX_PLAYERS Then Exit Function
         GetPlayerDir = Player(index).Dir
     End Function
+#End Region
 
-    Function GetPlayerGatherSkillLvl(index As Integer, skillSlot As Integer) As Integer
+#Region "Attacking"
+    Sub CheckAttack()
+        Dim attackspeed As Integer, x As Integer, y As Integer
+        Dim buffer As New ByteStream(4)
 
-        GetPlayerGatherSkillLvl = 0
+        If VbKeyControl Then
+            If InEvent = True Then Exit Sub
+            If SkillBuffer > 0 Then Exit Sub ' currently casting a skill, can't attack
+            If StunDuration > 0 Then Exit Sub ' stunned, can't attack
 
-        If index > MAX_PLAYERS Then Exit Function
+            ' speed from weapon
+            If GetPlayerEquipment(Myindex, EquipmentType.Weapon) > 0 Then
+                attackspeed = Item(GetPlayerEquipment(Myindex, EquipmentType.Weapon)).Speed * 1000
+            Else
+                attackspeed = 1000
+            End If
 
-        GetPlayerGatherSkillLvl = Player(index).GatherSkills(skillSlot).SkillLevel
-    End Function
+            If Player(Myindex).AttackTimer + attackspeed < GetTickCount() Then
+                If Player(Myindex).Attacking = 0 Then
 
-    Function GetPlayerGatherSkillExp(index As Integer, skillSlot As Integer) As Integer
+                    With Player(Myindex)
+                        .Attacking = 1
+                        .AttackTimer = GetTickCount()
+                    End With
 
-        GetPlayerGatherSkillExp = 0
+                    SendAttack()
+                End If
+            End If
 
-        If index > MAX_PLAYERS Then Exit Function
+            Select Case Player(Myindex).Dir
+                Case DirectionType.Up
+                    x = GetPlayerX(Myindex)
+                    y = GetPlayerY(Myindex) - 1
+                Case DirectionType.Down
+                    x = GetPlayerX(Myindex)
+                    y = GetPlayerY(Myindex) + 1
+                Case DirectionType.Left
+                    x = GetPlayerX(Myindex) - 1
+                    y = GetPlayerY(Myindex)
+                Case DirectionType.Right
+                    x = GetPlayerX(Myindex) + 1
+                    y = GetPlayerY(Myindex)
+            End Select
 
-        GetPlayerGatherSkillExp = Player(index).GatherSkills(skillSlot).SkillCurExp
-    End Function
+            If GetTickCount() > Player(Myindex).EventTimer Then
+                For i = 1 To Map.CurrentEvents
+                    If Map.MapEvents(i).Visible = 1 Then
+                        If Map.MapEvents(i).X = x AndAlso Map.MapEvents(i).Y = y Then
+                            buffer = New ByteStream(4)
+                            buffer.WriteInt32(ClientPackets.CEvent)
+                            buffer.WriteInt32(i)
+                            Socket.SendData(buffer.Data, buffer.Head)
+                            buffer.Dispose()
+                            Player(Myindex).EventTimer = GetTickCount() + 200
+                        End If
+                    End If
+                Next
+            End If
+        End If
 
-    Function GetPlayerGatherSkillMaxExp(index As Integer, skillSlot As Integer) As Integer
-
-        GetPlayerGatherSkillMaxExp = 0
-
-        If index > MAX_PLAYERS Then Exit Function
-
-        GetPlayerGatherSkillMaxExp = Player(index).GatherSkills(skillSlot).SkillNextLvlExp
-    End Function
+    End Sub
 
     Friend Sub PlayerCastSkill(skillslot As Integer)
         Dim buffer As New ByteStream(4)
@@ -538,6 +695,50 @@ Module C_Player
         End If
 
     End Sub
+#End Region
+
+#Region "Data Set & Retrieval"
+    Function IsPlaying(index As Integer) As Boolean
+
+        ' if the player doesn't exist, the name will equal 0
+        If Len(GetPlayerName(index)) > 0 Then
+            IsPlaying = True
+        End If
+
+    End Function
+
+    Function GetPlayerName(index As Integer) As String
+        GetPlayerName = ""
+        If index > MAX_PLAYERS Then Exit Function
+        GetPlayerName = Trim$(Player(index).Name)
+    End Function
+
+    Function GetPlayerGatherSkillLvl(index As Integer, skillSlot As Integer) As Integer
+
+        GetPlayerGatherSkillLvl = 0
+
+        If index > MAX_PLAYERS Then Exit Function
+
+        GetPlayerGatherSkillLvl = Player(index).GatherSkills(skillSlot).SkillLevel
+    End Function
+
+    Function GetPlayerGatherSkillExp(index As Integer, skillSlot As Integer) As Integer
+
+        GetPlayerGatherSkillExp = 0
+
+        If index > MAX_PLAYERS Then Exit Function
+
+        GetPlayerGatherSkillExp = Player(index).GatherSkills(skillSlot).SkillCurExp
+    End Function
+
+    Function GetPlayerGatherSkillMaxExp(index As Integer, skillSlot As Integer) As Integer
+
+        GetPlayerGatherSkillMaxExp = 0
+
+        If index > MAX_PLAYERS Then Exit Function
+
+        GetPlayerGatherSkillMaxExp = Player(index).GatherSkills(skillSlot).SkillNextLvlExp
+    End Function
 
     Sub SetPlayerMap(index As Integer, mapNum As Integer)
         If index > MAX_PLAYERS Then Exit Sub
@@ -734,98 +935,506 @@ Module C_Player
         If index < 1 OrElse index > MAX_PLAYERS Then Exit Sub
         Player(index).Equipment(equipmentSlot) = invNum
     End Sub
+#End Region
 
-    Sub ClearPlayer(index As Integer)
-        Player(index).Name = ""
-        Player(index).Access = 0
-        Player(index).Attacking = 0
-        Player(index).AttackTimer = 0
-        Player(index).Classes = 0
-        Player(index).Dir = 0
+#Region "Drawing"
+    Friend Sub DrawPlayer(index As Integer)
+        Dim anim As Byte, x As Integer, y As Integer
+        Dim spritenum As Integer, spriteleft As Integer
+        Dim attackspeed As Integer, attackSprite As Byte
+        Dim srcrec As Rectangle
 
-        ReDim Player(index).Equipment(EquipmentType.Count - 1)
-        For y = 1 To EquipmentType.Count - 1
-            Player(index).Equipment(y) = 0
+        spritenum = GetPlayerSprite(index)
+
+        attackSprite = 0
+
+        If spritenum < 1 OrElse spritenum > NumCharacters Then Exit Sub
+
+        ' speed from weapon
+        If GetPlayerEquipment(index, EquipmentType.Weapon) > 0 Then
+            attackspeed = Item(GetPlayerEquipment(index, EquipmentType.Weapon)).Speed
+        Else
+            attackspeed = 1000
+        End If
+
+        ' Reset frame
+        anim = 0
+
+        ' Check for attacking animation
+        If Player(index).AttackTimer + (attackspeed / 2) > GetTickCount() Then
+            If Player(index).Attacking = 1 Then
+                If attackSprite = 1 Then
+                    anim = 4
+                Else
+                    anim = 3
+                End If
+            End If
+        Else
+            ' If not attacking, walk normally
+            Select Case GetPlayerDir(index)
+                Case DirectionType.Up
+
+                    If (Player(index).YOffset > 8) Then anim = Player(index).Steps
+                Case DirectionType.Down
+
+                    If (Player(index).YOffset < -8) Then anim = Player(index).Steps
+                Case DirectionType.Left
+
+                    If (Player(index).XOffset > 8) Then anim = Player(index).Steps
+                Case DirectionType.Right
+
+                    If (Player(index).XOffset < -8) Then anim = Player(index).Steps
+            End Select
+
+        End If
+
+        ' Check to see if we want to stop making him attack
+        With Player(index)
+            If .AttackTimer + attackspeed < GetTickCount() Then
+                .Attacking = 0
+                .AttackTimer = 0
+            End If
+
+        End With
+
+        ' Set the left
+        Select Case GetPlayerDir(index)
+            Case DirectionType.Up
+                spriteleft = 3
+            Case DirectionType.Right
+                spriteleft = 2
+            Case DirectionType.Down
+                spriteleft = 0
+            Case DirectionType.Left
+                spriteleft = 1
+        End Select
+
+        If attackSprite = 1 Then
+            srcrec = New Rectangle((anim) * (CharacterGfxInfo(spritenum).Width / 5), spriteleft * (CharacterGfxInfo(spritenum).Height / 4), (CharacterGfxInfo(spritenum).Width / 5), (CharacterGfxInfo(spritenum).Height / 4))
+        Else
+            srcrec = New Rectangle((anim) * (CharacterGfxInfo(spritenum).Width / 4), spriteleft * (CharacterGfxInfo(spritenum).Height / 4), (CharacterGfxInfo(spritenum).Width / 4), (CharacterGfxInfo(spritenum).Height / 4))
+        End If
+
+        ' Calculate the X
+        If attackSprite = 1 Then
+            x = GetPlayerX(index) * PicX + Player(index).XOffset - ((CharacterGfxInfo(spritenum).Width / 5 - 32) / 2)
+        Else
+            x = GetPlayerX(index) * PicX + Player(index).XOffset - ((CharacterGfxInfo(spritenum).Width / 4 - 32) / 2)
+        End If
+
+        ' Is the player's height more than 32..?
+        If (CharacterGfxInfo(spritenum).Height) > 32 Then
+            ' Create a 32 pixel offset for larger sprites
+            y = GetPlayerY(index) * PicY + Player(index).YOffset - ((CharacterGfxInfo(spritenum).Height / 4) - 32)
+        Else
+            ' Proceed as normal
+            y = GetPlayerY(index) * PicY + Player(index).YOffset
+        End If
+
+        ' render the actual sprite
+        DrawCharacter(spritenum, x, y, srcrec)
+
+        'check for paperdolling
+        For i = 1 To EquipmentType.Count - 1
+            If GetPlayerEquipment(index, i) > 0 Then
+                If Item(GetPlayerEquipment(index, i)).Paperdoll > 0 Then
+                    DrawPaperdoll(x, y, Item(GetPlayerEquipment(index, i)).Paperdoll, anim, spriteleft)
+                End If
+            End If
         Next
 
-        Player(index).Exp = 0
-        Player(index).Level = 0
-        Player(index).Map = 0
-        Player(index).MapGetTimer = 0
-        Player(index).MaxHp = 0
-        Player(index).MaxMp = 0
-        Player(index).MaxSp = 0
-        Player(index).Moving = 0
-        Player(index).Pk = 0
-        Player(index).Points = 0
-        Player(index).Sprite = 0
+        ' Check to see if we want to stop showing emote
+        With Player(index)
+            If .EmoteTimer < GetTickCount() Then
+                .Emote = 0
+                .EmoteTimer = 0
+            End If
+        End With
 
-        ReDim Player(index).Stat(StatType.Count - 1)
-        For x = 1 To StatType.Count - 1
-            Player(index).Stat(x) = 0
-        Next
-
-        Player(index).Steps = 0
-
-        ReDim Player(index).Vital(VitalType.Count - 1)
-        For i = 1 To VitalType.Count - 1
-            Player(index).Vital(i) = 0
-        Next
-
-        Player(index).X = 0
-        Player(index).XOffset = 0
-        Player(index).Y = 0
-        Player(index).YOffset = 0
-
-        ReDim Player(index).RandEquip(EquipmentType.Count - 1)
-        For y = 1 To EquipmentType.Count - 1
-            ReDim Player(index).RandEquip(y).Stat(StatType.Count - 1)
-            For x = 1 To StatType.Count - 1
-                Player(index).RandEquip(y).Stat(x) = 0
-            Next
-        Next
-
-        ReDim Player(index).RandInv(MAX_INV)
-        For y = 1 To MAX_INV
-            ReDim Player(index).RandInv(y).Stat(StatType.Count - 1)
-            For x = 1 To StatType.Count - 1
-                Player(index).RandInv(y).Stat(x) = 0
-            Next
-        Next
-
-        ReDim Player(index).PlayerQuest(MaxQuests)
-
-        ReDim Player(index).Hotbar(MaxHotbar)
-
-        ReDim Player(index).GatherSkills(ResourceSkills.Count - 1)
-
-        ReDim Player(index).RecipeLearned(MAX_RECIPE)
-
-        'pets
-        Player(index).Pet.Num = 0
-        Player(index).Pet.Health = 0
-        Player(index).Pet.Mana = 0
-        Player(index).Pet.Level = 0
-
-        ReDim Player(index).Pet.Stat(StatType.Count - 1)
-        For i = 1 To StatType.Count - 1
-            Player(index).Pet.Stat(i) = 0
-        Next
-
-        ReDim Player(index).Pet.Skill(4)
-        For i = 1 To 4
-            Player(index).Pet.Skill(i) = 0
-        Next
-
-        Player(index).Pet.X = 0
-        Player(index).Pet.Y = 0
-        Player(index).Pet.Dir = 0
-        Player(index).Pet.MaxHp = 0
-        Player(index).Pet.MaxMp = 0
-        Player(index).Pet.Alive = 0
-        Player(index).Pet.AttackBehaviour = 0
-        Player(index).Pet.Exp = 0
-        Player(index).Pet.Tnl = 0
+        'check for emotes
+        'Player(Index).Emote = 4
+        If Player(index).Emote > 0 Then
+            DrawEmotes(x, y, Player(index).Emote)
+        End If
     End Sub
+
+    Friend Sub DrawPlayerName(index As Integer)
+        Dim textX As Integer
+        Dim textY As Integer
+        Dim color As SFML.Graphics.Color, backcolor As SFML.Graphics.Color
+        Dim name As String
+
+        ' Check access level
+        If GetPlayerPk(index) = False Then
+
+            Select Case GetPlayerAccess(index)
+                Case AdminType.Player
+                    color = SFML.Graphics.Color.Red
+                    backcolor = SFML.Graphics.Color.Black
+                Case AdminType.Monitor
+                    color = SFML.Graphics.Color.Black
+                    backcolor = SFML.Graphics.Color.White
+                Case AdminType.Mapper
+                    color = SFML.Graphics.Color.Cyan
+                    backcolor = SFML.Graphics.Color.Black
+                Case AdminType.Developer
+                    color = SFML.Graphics.Color.Green
+                    backcolor = SFML.Graphics.Color.Black
+                Case AdminType.Creator
+                    color = SFML.Graphics.Color.Yellow
+                    backcolor = SFML.Graphics.Color.Black
+            End Select
+        Else
+            color = SFML.Graphics.Color.Red
+        End If
+
+        name = Trim$(Player(index).Name)
+        ' calc pos
+        textX = ConvertMapX(GetPlayerX(index) * PicX) + Player(index).XOffset + (PicX \ 2)
+        textX = textX - (GetTextWidth((Trim$(name))) / 2)
+        If GetPlayerSprite(index) < 1 OrElse GetPlayerSprite(index) > NumCharacters Then
+            textY = ConvertMapY(GetPlayerY(index) * PicY) + Player(index).YOffset - 16
+        Else
+            ' Determine location for text
+            textY = ConvertMapY(GetPlayerY(index) * PicY) + Player(index).YOffset - (CharacterGfxInfo(GetPlayerSprite(index)).Height / 4) + 16
+        End If
+
+        ' Draw name
+        DrawText(textX, textY, Trim$(name), color, backcolor, GameWindow)
+    End Sub
+
+    Sub DrawEquipment()
+        Dim i As Integer, itemnum As Integer, itempic As Integer, tmprarity As Byte
+        Dim rec As Rectangle, recPos As Rectangle, playersprite As Integer
+        Dim tmpSprite2 As Sprite = New Sprite(CharPanelGfx)
+        Dim tempRarityColor As SFML.Graphics.Color
+
+        If NumItems = 0 Then Exit Sub
+
+        'first render panel
+        RenderSprite(CharPanelSprite, GameWindow, CharWindowX, CharWindowY, 0, 0, CharPanelGfxInfo.Width, CharPanelGfxInfo.Height)
+
+        'lets get player sprite to render
+        playersprite = GetPlayerSprite(Myindex)
+
+        With rec
+            .Y = 0
+            .Height = CharacterGfxInfo(playersprite).Height / 4
+            .X = 0
+            .Width = CharacterGfxInfo(playersprite).Width / 4
+        End With
+
+        RenderSprite(CharacterSprite(playersprite), GameWindow, CharWindowX + CharPanelGfxInfo.Width / 4 - rec.Width / 2, CharWindowY + CharPanelGfxInfo.Height / 2 - rec.Height / 2, rec.X, rec.Y, rec.Width, rec.Height)
+
+        For i = 1 To EquipmentType.Count - 1
+            itemnum = GetPlayerEquipment(Myindex, i)
+
+            If itemnum > 0 Then
+
+                itempic = Item(itemnum).Pic
+
+                If ItemsGfxInfo(itempic).IsLoaded = False Then
+                    LoadTexture(itempic, 4)
+                End If
+
+                'seeying we still use it, lets update timer
+                With ItemsGfxInfo(itempic)
+                    .TextureTimer = GetTickCount() + 100000
+                End With
+
+                With rec
+                    .Y = 0
+                    .Height = 32
+                    .X = 0
+                    .Width = 32
+                End With
+
+                With recPos
+                    .Y = CharWindowY + EqTop + ((EqOffsetY + 32) * ((i - 1) \ EqColumns))
+                    .Height = PicY
+                    .X = CharWindowX + EqLeft + 1 + ((EqOffsetX + 32 - 2) * (((i - 1) Mod EqColumns)))
+                    .Width = PicX
+                End With
+
+                ItemsSprite(itempic).TextureRect = New IntRect(rec.X, rec.Y, rec.Width, rec.Height)
+                ItemsSprite(itempic).Position = New Vector2f(recPos.X, recPos.Y)
+                GameWindow.Draw(ItemsSprite(itempic))
+
+                ' set the name
+                If Item(itemnum).Randomize <> 0 Then
+                    tmprarity = Player(Myindex).RandEquip(i).Rarity
+                Else
+                    tmprarity = Item(itemnum).Rarity
+                End If
+
+                Select Case tmprarity
+                    Case 0 ' White
+                        tempRarityColor = ItemRarityColor0
+                    Case 1 ' green
+                        tempRarityColor = ItemRarityColor1
+                    Case 2 ' blue
+                        tempRarityColor = ItemRarityColor2
+                    Case 3 ' maroon
+                        tempRarityColor = ItemRarityColor3
+                    Case 4 ' purple
+                        tempRarityColor = ItemRarityColor4
+                    Case 5 'gold
+                        tempRarityColor = ItemRarityColor5
+                End Select
+
+                Dim rec2 As New RectangleShape With {
+                    .OutlineColor = New SFML.Graphics.Color(tempRarityColor),
+                    .OutlineThickness = 2,
+                    .FillColor = New SFML.Graphics.Color(SFML.Graphics.Color.Transparent),
+                    .Size = New Vector2f(30, 30),
+                    .Position = New Vector2f(recPos.X, recPos.Y)
+                }
+                GameWindow.Draw(rec2)
+            End If
+
+        Next
+
+        ' Set the character windows
+        'name
+        DrawText(CharWindowX + 10, CharWindowY + 14, Strings.Get("charwindow", "charname") & GetPlayerName(Myindex), SFML.Graphics.Color.White, SFML.Graphics.Color.Black, GameWindow)
+        'class
+        DrawText(CharWindowX + 10, CharWindowY + 33, Strings.Get("charwindow", "charclass") & Trim(Classes(GetPlayerClass(Myindex)).Name), SFML.Graphics.Color.White, SFML.Graphics.Color.Black, GameWindow)
+        'level
+        DrawText(CharWindowX + 150, CharWindowY + 14, Strings.Get("charwindow", "charlvl") & GetPlayerLevel(Myindex), SFML.Graphics.Color.White, SFML.Graphics.Color.Black, GameWindow)
+        'points
+        DrawText(CharWindowX + 6, CharWindowY + 200, Strings.Get("charwindow", "charpoints") & GetPlayerPoints(Myindex), SFML.Graphics.Color.White, SFML.Graphics.Color.Black, GameWindow)
+
+        'Header
+        DrawText(CharWindowX + 250, CharWindowY + 14, Strings.Get("charwindow", "charstatslbl"), SFML.Graphics.Color.White, SFML.Graphics.Color.Black, GameWindow)
+
+        'strength stat
+        DrawText(CharWindowX + 210, CharWindowY + 30, Strings.Get("charwindow", "charstrength") & GetPlayerStat(Myindex, StatType.Strength), SFML.Graphics.Color.White, SFML.Graphics.Color.Black, GameWindow, 11)
+        'endurance stat
+        DrawText(CharWindowX + 210, CharWindowY + 50, Strings.Get("charwindow", "charendurance") & GetPlayerStat(Myindex, StatType.Endurance), SFML.Graphics.Color.White, SFML.Graphics.Color.Black, GameWindow, 11)
+        'vitality stat
+        DrawText(CharWindowX + 210, CharWindowY + 70, Strings.Get("charwindow", "charvitality") & GetPlayerStat(Myindex, StatType.Vitality), SFML.Graphics.Color.White, SFML.Graphics.Color.Black, GameWindow, 11)
+        'intelligence stat
+        DrawText(CharWindowX + 210, CharWindowY + 90, Strings.Get("charwindow", "charintelligence") & GetPlayerStat(Myindex, StatType.Intelligence), SFML.Graphics.Color.White, SFML.Graphics.Color.Black, GameWindow, 11)
+        'luck stat
+        DrawText(CharWindowX + 210, CharWindowY + 110, Strings.Get("charwindow", "charluck") & GetPlayerStat(Myindex, StatType.Luck), SFML.Graphics.Color.White, SFML.Graphics.Color.Black, GameWindow, 11)
+        'spirit stat
+        DrawText(CharWindowX + 210, CharWindowY + 130, Strings.Get("charwindow", "charspirit") & GetPlayerStat(Myindex, StatType.Spirit), SFML.Graphics.Color.White, SFML.Graphics.Color.Black, GameWindow, 11)
+
+        If GetPlayerPoints(Myindex) > 0 Then
+            'strength upgrade
+            RenderSprite(CharPanelPlusSprite, GameWindow, CharWindowX + StrengthUpgradeX, CharWindowY + StrengthUpgradeY + 4, 0, 0, CharPanelPlusGfxInfo.Width, CharPanelPlusGfxInfo.Height)
+            'endurance upgrade
+            RenderSprite(CharPanelPlusSprite, GameWindow, CharWindowX + EnduranceUpgradeX, CharWindowY + EnduranceUpgradeY + 4, 0, 0, CharPanelPlusGfxInfo.Width, CharPanelPlusGfxInfo.Height)
+            'vitality upgrade
+            RenderSprite(CharPanelPlusSprite, GameWindow, CharWindowX + VitalityUpgradeX, CharWindowY + VitalityUpgradeY + 4, 0, 0, CharPanelPlusGfxInfo.Width, CharPanelPlusGfxInfo.Height)
+            'intelligence upgrade
+            RenderSprite(CharPanelPlusSprite, GameWindow, CharWindowX + IntellectUpgradeX, CharWindowY + IntellectUpgradeY + 4, 0, 0, CharPanelPlusGfxInfo.Width, CharPanelPlusGfxInfo.Height)
+            'willpower upgrade
+            RenderSprite(CharPanelPlusSprite, GameWindow, CharWindowX + LuckUpgradeX, CharWindowY + LuckUpgradeY + 4, 0, 0, CharPanelPlusGfxInfo.Width, CharPanelPlusGfxInfo.Height)
+            'spirit upgrade
+            RenderSprite(CharPanelPlusSprite, GameWindow, CharWindowX + SpiritUpgradeX, CharWindowY + SpiritUpgradeY + 4, 0, 0, CharPanelPlusGfxInfo.Width, CharPanelPlusGfxInfo.Height)
+        End If
+
+        'gather skills
+        'Header
+        DrawText(CharWindowX + 250, CharWindowY + 145, Strings.Get("charwindow", "chargather"), SFML.Graphics.Color.White, SFML.Graphics.Color.Black, GameWindow)
+        'herbalist skill
+        DrawText(CharWindowX + 210, CharWindowY + 164, Strings.Get("charwindow", "charherb") & GetPlayerGatherSkillLvl(Myindex, ResourceSkills.Herbalist) & Strings.Get("charwindow", "charexp") & GetPlayerGatherSkillExp(Myindex, ResourceSkills.Herbalist) & "/" & GetPlayerGatherSkillMaxExp(Myindex, ResourceSkills.Herbalist), SFML.Graphics.Color.White, SFML.Graphics.Color.Black, GameWindow, 11)
+        'woodcutter
+        DrawText(CharWindowX + 210, CharWindowY + 184, Strings.Get("charwindow", "charwood") & GetPlayerGatherSkillLvl(Myindex, ResourceSkills.WoodCutter) & Strings.Get("charwindow", "charexp") & GetPlayerGatherSkillExp(Myindex, ResourceSkills.WoodCutter) & "/" & GetPlayerGatherSkillMaxExp(Myindex, ResourceSkills.WoodCutter), SFML.Graphics.Color.White, SFML.Graphics.Color.Black, GameWindow, 11)
+        'miner
+        DrawText(CharWindowX + 210, CharWindowY + 204, Strings.Get("charwindow", "charmine") & GetPlayerGatherSkillLvl(Myindex, ResourceSkills.Miner) & Strings.Get("charwindow", "charexp") & GetPlayerGatherSkillExp(Myindex, ResourceSkills.Miner) & "/" & GetPlayerGatherSkillMaxExp(Myindex, ResourceSkills.Miner), SFML.Graphics.Color.White, SFML.Graphics.Color.Black, GameWindow, 11)
+        'fisherman
+        DrawText(CharWindowX + 210, CharWindowY + 224, Strings.Get("charwindow", "charfish") & GetPlayerGatherSkillLvl(Myindex, ResourceSkills.Fisherman) & Strings.Get("charwindow", "charexp") & GetPlayerGatherSkillExp(Myindex, ResourceSkills.Fisherman) & "/" & GetPlayerGatherSkillMaxExp(Myindex, ResourceSkills.Fisherman), SFML.Graphics.Color.White, SFML.Graphics.Color.Black, GameWindow, 11)
+    End Sub
+#End Region
+
+#Region "Outgoing Traffic"
+
+#End Region
+
+#Region "Incoming Traffic"
+    Sub Packet_PlayerHP(ByRef data() As Byte)
+        Dim buffer As New ByteStream(data)
+        Player(Myindex).MaxHp = buffer.ReadInt32
+
+        SetPlayerVital(Myindex, VitalType.HP, buffer.ReadInt32)
+
+        If GetPlayerMaxVital(Myindex, VitalType.HP) > 0 Then
+            LblHpText = GetPlayerVital(Myindex, VitalType.HP) & "/" & GetPlayerMaxVital(Myindex, VitalType.HP)
+            ' hp bar
+            PicHpWidth = Int(((GetPlayerVital(Myindex, VitalType.HP) / 169) / (GetPlayerMaxVital(Myindex, VitalType.HP) / 169)) * 169)
+        End If
+
+        buffer.Dispose()
+    End Sub
+
+    Sub Packet_PlayerMP(ByRef data() As Byte)
+        Dim buffer As New ByteStream(data)
+        Player(Myindex).MaxMp = buffer.ReadInt32
+        SetPlayerVital(Myindex, VitalType.MP, buffer.ReadInt32)
+
+        If GetPlayerMaxVital(Myindex, VitalType.MP) > 0 Then
+            LblManaText = GetPlayerVital(Myindex, VitalType.MP) & "/" & GetPlayerMaxVital(Myindex, VitalType.MP)
+            ' mp bar
+            PicManaWidth = Int(((GetPlayerVital(Myindex, VitalType.MP) / 169) / (GetPlayerMaxVital(Myindex, VitalType.MP) / 169)) * 169)
+        End If
+
+        buffer.Dispose()
+    End Sub
+
+    Sub Packet_PlayerSP(ByRef data() As Byte)
+        Dim buffer As New ByteStream(data)
+        Player(Myindex).MaxSp = buffer.ReadInt32
+        SetPlayerVital(Myindex, VitalType.SP, buffer.ReadInt32)
+
+        buffer.Dispose()
+    End Sub
+
+    Sub Packet_PlayerStats(ByRef data() As Byte)
+        Dim i As Integer, index As Integer
+        Dim buffer As New ByteStream(data)
+        index = buffer.ReadInt32
+        For i = 1 To StatType.Count - 1
+            SetPlayerStat(index, i, buffer.ReadInt32)
+        Next
+        UpdateCharacterPanel = True
+
+        buffer.Dispose()
+    End Sub
+
+    Sub Packet_PlayerData(ByRef data() As Byte)
+        Dim i As Integer, x As Integer
+        Dim buffer As New ByteStream(data)
+        i = buffer.ReadInt32
+        SetPlayerName(i, buffer.ReadString)
+        SetPlayerClass(i, buffer.ReadInt32)
+        SetPlayerLevel(i, buffer.ReadInt32)
+        SetPlayerPoints(i, buffer.ReadInt32)
+        SetPlayerSprite(i, buffer.ReadInt32)
+        SetPlayerMap(i, buffer.ReadInt32)
+        SetPlayerX(i, buffer.ReadInt32)
+        SetPlayerY(i, buffer.ReadInt32)
+        SetPlayerDir(i, buffer.ReadInt32)
+        SetPlayerAccess(i, buffer.ReadInt32)
+        SetPlayerPk(i, buffer.ReadInt32)
+
+        For x = 1 To StatType.Count - 1
+            SetPlayerStat(i, x, buffer.ReadInt32)
+        Next
+
+        Player(i).InHouse = buffer.ReadInt32
+
+        For x = 0 To ResourceSkills.Count - 1
+            Player(i).GatherSkills(x).SkillLevel = buffer.ReadInt32
+            Player(i).GatherSkills(x).SkillCurExp = buffer.ReadInt32
+            Player(i).GatherSkills(x).SkillNextLvlExp = buffer.ReadInt32
+        Next
+
+        For x = 1 To MAX_RECIPE
+            Player(i).RecipeLearned(x) = buffer.ReadInt32
+        Next
+
+        ' Check if the player is the client player
+        If i = Myindex Then
+            ' Reset directions
+            DirUp = False
+            DirDown = False
+            DirLeft = False
+            DirRight = False
+
+            UpdateCharacterPanel = True
+        End If
+
+        ' Make sure they aren't walking
+        Player(i).Moving = 0
+        Player(i).XOffset = 0
+        Player(i).YOffset = 0
+
+        If i = Myindex Then PlayerData = True
+
+        buffer.Dispose()
+    End Sub
+
+    Sub Packet_PlayerMove(ByRef data() As Byte)
+        Dim i As Integer, x As Integer, y As Integer
+        Dim dir As Integer, n As Byte
+        Dim buffer As New ByteStream(data)
+        i = buffer.ReadInt32
+        x = buffer.ReadInt32
+        y = buffer.ReadInt32
+        dir = buffer.ReadInt32
+        n = buffer.ReadInt32
+
+        SetPlayerX(i, x)
+        SetPlayerY(i, y)
+        SetPlayerDir(i, dir)
+        Player(i).XOffset = 0
+        Player(i).YOffset = 0
+        Player(i).Moving = n
+
+        Select Case GetPlayerDir(i)
+            Case DirectionType.Up
+                Player(i).YOffset = PicY
+            Case DirectionType.Down
+                Player(i).YOffset = PicY * -1
+            Case DirectionType.Left
+                Player(i).XOffset = PicX
+            Case DirectionType.Right
+                Player(i).XOffset = PicX * -1
+        End Select
+
+        buffer.Dispose()
+    End Sub
+
+    Sub Packet_PlayerDir(ByRef data() As Byte)
+        Dim dir As Integer, i As Integer
+        Dim buffer As New ByteStream(data)
+        i = buffer.ReadInt32
+        dir = buffer.ReadInt32
+
+        SetPlayerDir(i, dir)
+
+        With Player(i)
+            .XOffset = 0
+            .YOffset = 0
+            .Moving = 0
+        End With
+
+        buffer.Dispose()
+    End Sub
+
+    Sub Packet_PlayerExp(ByRef data() As Byte)
+        Dim index As Integer, tnl As Integer
+        Dim buffer As New ByteStream(data)
+        index = buffer.ReadInt32
+        SetPlayerExp(index, buffer.ReadInt32)
+        tnl = buffer.ReadInt32
+
+        If tnl = 0 Then tnl = 1
+        NextlevelExp = tnl
+
+        buffer.Dispose()
+    End Sub
+
+    Sub Packet_PlayerXY(ByRef data() As Byte)
+        Dim x As Integer, y As Integer, dir As Integer
+        Dim buffer As New ByteStream(data)
+        x = buffer.ReadInt32
+        y = buffer.ReadInt32
+        dir = buffer.ReadInt32
+
+        SetPlayerX(Myindex, x)
+        SetPlayerY(Myindex, y)
+        SetPlayerDir(Myindex, dir)
+
+        ' Make sure they aren't walking
+        Player(Myindex).Moving = 0
+        Player(Myindex).XOffset = 0
+        Player(Myindex).YOffset = 0
+
+        buffer.Dispose()
+    End Sub
+#End Region
 
 End Module

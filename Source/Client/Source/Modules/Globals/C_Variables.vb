@@ -55,7 +55,7 @@ Module C_Variables
     ' Player variables
     Friend Myindex As Integer ' Index of actual player
 
-    Friend PlayerInv(MAX_INV) As PlayerInvRec   ' Inventory
+
     Friend PlayerSkills(MAX_PLAYER_SKILLS) As Byte
     Friend InventoryItemSelected As Integer
     Friend SkillBuffer As Integer

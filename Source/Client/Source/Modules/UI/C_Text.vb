@@ -37,50 +37,7 @@ Module C_Text
         target.Draw(frontString)
     End Sub
 
-    Friend Sub DrawPlayerName(index As Integer)
-        Dim textX As Integer
-        Dim textY As Integer
-        Dim color As Color, backcolor As Color
-        Dim name As String
 
-        ' Check access level
-        If GetPlayerPk(index) = False Then
-
-            Select Case GetPlayerAccess(index)
-                Case AdminType.Player
-                    color = Color.Red
-                    backcolor = Color.Black
-                Case AdminType.Monitor
-                    color = Color.Black
-                    backcolor = Color.White
-                Case AdminType.Mapper
-                    color = Color.Cyan
-                    backcolor = Color.Black
-                Case AdminType.Developer
-                    color = Color.Green
-                    backcolor = Color.Black
-                Case AdminType.Creator
-                    color = Color.Yellow
-                    backcolor = Color.Black
-            End Select
-        Else
-            color = Color.Red
-        End If
-
-        name = Trim$(Player(index).Name)
-        ' calc pos
-        textX = ConvertMapX(GetPlayerX(index) * PicX) + Player(index).XOffset + (PicX \ 2)
-        textX = textX - (GetTextWidth((Trim$(name))) / 2)
-        If GetPlayerSprite(index) < 1 OrElse GetPlayerSprite(index) > NumCharacters Then
-            textY = ConvertMapY(GetPlayerY(index) * PicY) + Player(index).YOffset - 16
-        Else
-            ' Determine location for text
-            textY = ConvertMapY(GetPlayerY(index) * PicY) + Player(index).YOffset - (CharacterGfxInfo(GetPlayerSprite(index)).Height / 4) + 16
-        End If
-
-        ' Draw name
-        DrawText(textX, textY, Trim$(name), color, backcolor, GameWindow)
-    End Sub
 
     Friend Sub DrawNpcName(mapNpcNum As Integer)
         Dim textX As Integer
