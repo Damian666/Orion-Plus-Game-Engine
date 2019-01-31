@@ -240,7 +240,7 @@ Module S_General
         isShuttingDown = False
 
         ' Start listener now that everything is loaded
-        Socket.StartListening(Options.Port, 5, 1)
+        Socket.StartListening(Options.Port, 5)
 
         ' Starts the server loop
         ServerLoop()
