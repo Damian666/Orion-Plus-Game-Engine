@@ -219,12 +219,10 @@
 
     'bank window Coordinates
     Friend BankWindowX As Integer = 319
-
     Friend BankWindowY As Integer = 105
 
     ' Bank constants
     Friend Const BankTop As Byte = 30
-
     Friend Const BankLeft As Byte = 16
     Friend Const BankOffsetY As Byte = 5
     Friend Const BankOffsetX As Byte = 6

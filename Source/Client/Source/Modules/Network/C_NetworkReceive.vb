@@ -1327,16 +1327,7 @@ Module C_NetworkReceive
         buffer.Dispose()
     End Sub
 
-    Private Sub Packet_Hotbar(ByRef data() As Byte)
-        Dim i As Integer
-        Dim buffer As New ByteStream(data)
-        For i = 1 To MaxHotbar
-            Player(Myindex).Hotbar(i).Slot = buffer.ReadInt32
-            Player(Myindex).Hotbar(i).SType = buffer.ReadInt32
-        Next
 
-        buffer.Dispose()
-    End Sub
 
     Private Sub Packet_Critical(ByRef data() As Byte)
         ShakeTimerEnabled = True

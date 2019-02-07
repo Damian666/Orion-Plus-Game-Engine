@@ -42,6 +42,17 @@ Friend Module C_HotBar
 
     End Function
 
+    Friend Sub Packet_Hotbar(ByRef data() As Byte)
+        Dim i As Integer
+        Dim buffer As New ByteStream(data)
+        For i = 1 To MaxHotbar
+            Player(Myindex).Hotbar(i).Slot = buffer.ReadInt32
+            Player(Myindex).Hotbar(i).SType = buffer.ReadInt32
+        Next
+
+        buffer.Dispose()
+    End Sub
+
     Friend Sub SendSetHotbarSlot(slot As Integer, num As Integer, type As Integer)
         Dim buffer As New ByteStream(4)
 

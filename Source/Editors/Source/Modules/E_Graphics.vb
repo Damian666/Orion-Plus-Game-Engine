@@ -963,8 +963,8 @@ Module E_Graphics
         'let program do other things
         Application.DoEvents()
 
-        frmMapEditor.picScreen.Width = (Map.MaxX * PIC_X) + PIC_X
-        frmMapEditor.picScreen.Height = (Map.MaxY * PIC_Y) + PIC_Y
+        'frmMapEditor.picScreen.Width = (Map.MaxX * PIC_X) + PIC_X
+        'frmMapEditor.picScreen.Height = (Map.MaxY * PIC_Y) + PIC_Y
 
         'Clear each of our render targets
         GameWindow.DispatchEvents()
@@ -1287,13 +1287,13 @@ Module E_Graphics
 
     End Sub
 
-    Friend Sub EditorMap_DrawTileset()
-        Dim height As Integer
-        Dim width As Integer
+    Public Sub EditorMap_DrawTileset()
+        'Dim height As Integer
+        'Dim width As Integer
         Dim tileset As Byte
 
         TilesetWindow.DispatchEvents()
-        TilesetWindow.Clear(Color.Black)
+        TilesetWindow.Clear(SFML.Graphics.Color.Black)
 
         ' find tileset number
         tileset = frmMapEditor.cmbTileSets.SelectedIndex + 1
@@ -1302,9 +1302,9 @@ Module E_Graphics
         If tileset <= 0 OrElse tileset > NumTileSets Then Exit Sub
 
         Dim rec2 As New RectangleShape With {
-            .OutlineColor = New Color(Color.Red),
+            .OutlineColor = New SFML.Graphics.Color(SFML.Graphics.Color.Red),
             .OutlineThickness = 0.6,
-            .FillColor = New Color(Color.Transparent)
+            .FillColor = New SFML.Graphics.Color(SFML.Graphics.Color.Transparent)
         }
 
         If TileSetTextureInfo(tileset).IsLoaded = False Then
@@ -1315,12 +1315,12 @@ Module E_Graphics
             .TextureTimer = GetTickCount() + 100000
         End With
 
-        height = TileSetTextureInfo(tileset).height
-        width = TileSetTextureInfo(tileset).width
-        frmMapEditor.picBackSelect.Height = height
-        frmMapEditor.picBackSelect.Width = width
+        'height = TileSetTextureInfo(tileset).Height
+        'width = TileSetTextureInfo(tileset).Width
+        'Me.picBackSelect.Height = height
+        'Me.picBackSelect.Width = width
 
-        TilesetWindow.SetView(New SFML.Graphics.View(New SFML.Graphics.FloatRect(0, 0, width, height)))
+        'TilesetWindow.SetView(New SFML.Graphics.View(New FloatRect(0, 0, picbackleft + Me.picBackSelect.Width, picbacktop + Me.picBackSelect.Height)))
 
         ' change selected shape for autotiles
         If frmMapEditor.cmbAutoTile.SelectedIndex > 0 Then
@@ -1340,14 +1340,22 @@ Module E_Graphics
                 Case 5 ' waterfall
                     EditorTileWidth = 2
                     EditorTileHeight = 3
+                Case Else
+                    EditorTileWidth = 1
+                    EditorTileHeight = 1
             End Select
         End If
 
-        RenderSprite(TileSetSprite(tileset), TilesetWindow, 0, 0, 0, 0, width, height)
+        If TileSetTextureInfo(tileset).width - picbackleft < frmMapEditor.picScreen.Width Or TileSetTextureInfo(tileset).height - picbacktop < frmMapEditor.picScreen.Height Then
+            RenderSprite(TileSetSprite(tileset), TilesetWindow, 0, 0, picbackleft, picbacktop, TileSetTextureInfo(tileset).width - picbackleft, TileSetTextureInfo(tileset).height - picbacktop)
+        Else
+            RenderSprite(TileSetSprite(tileset), TilesetWindow, 0, 0, picbackleft, picbacktop, picbackleft + frmMapEditor.picScreen.Width, picbacktop + frmMapEditor.picScreen.Height)
+        End If
+
 
         rec2.Size = New Vector2f(EditorTileWidth * PIC_X, EditorTileHeight * PIC_Y)
 
-        rec2.Position = New Vector2f(EditorTileSelStart.X * PIC_X, EditorTileSelStart.Y * PIC_Y)
+        rec2.Position = New Vector2f((EditorTileSelStart.X * PIC_X - picbackleft), (EditorTileSelStart.Y * PIC_Y - picbacktop))
         TilesetWindow.Draw(rec2)
 
         'and finally show everything on screen

@@ -14,6 +14,8 @@
 
     Friend TilesetsClr() As Color
     Friend LastTileset As Byte
+    Friend picbacktop As Integer
+    Friend picbackleft As Integer
 
     ' Gfx Path and variables
     Friend Const GFX_PATH As String = "\Data\graphics\"

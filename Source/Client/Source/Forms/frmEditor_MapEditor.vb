@@ -21,6 +21,8 @@ Public Class FrmEditor_MapEditor
         tabpages.SelectedIndex = 0
 
         scrlFog.Maximum = NumFogs
+
+        Me.TopMost = True
     End Sub
 
 #End Region

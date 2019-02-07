@@ -1,6 +1,6 @@
 ﻿Imports System.IO
 
-Friend Class frmShop
+Friend Class FrmShop
 
     Private Sub TxtName_TextChanged(sender As Object, e As EventArgs) Handles txtName.TextChanged
         Dim tmpindex As Integer

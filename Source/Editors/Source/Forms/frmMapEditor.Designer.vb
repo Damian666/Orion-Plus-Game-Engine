@@ -2136,9 +2136,10 @@ Partial Class frmMapEditor
         '
         Me.picScreen.BackColor = System.Drawing.Color.Black
         Me.picScreen.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center
+        Me.picScreen.Dock = System.Windows.Forms.DockStyle.Fill
         Me.picScreen.Location = New System.Drawing.Point(1, 25)
         Me.picScreen.Name = "picScreen"
-        Me.picScreen.Size = New System.Drawing.Size(598, 413)
+        Me.picScreen.Size = New System.Drawing.Size(756, 547)
         Me.picScreen.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage
         Me.picScreen.TabIndex = 2
         Me.picScreen.TabStop = False

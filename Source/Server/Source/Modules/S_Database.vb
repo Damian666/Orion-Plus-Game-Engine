@@ -982,7 +982,6 @@ Module modDatabase
 
             If Not File.Exists(Path.Combine(Application.StartupPath, "data", "shops", String.Format("shop{0}.dat", i))) Then
                 SaveShop(i)
-                Application.DoEvents()
             End If
 
         Next

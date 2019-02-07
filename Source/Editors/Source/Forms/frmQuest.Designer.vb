@@ -1196,7 +1196,7 @@ Partial Class FrmQuest
         Me.rdbNoneReq.TabStop = True
         Me.rdbNoneReq.Text = "None"
         '
-        'frmQuest
+        'FrmQuest
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
@@ -1208,11 +1208,11 @@ Partial Class FrmQuest
         Me.Controls.Add(Me.DarkLabel8)
         Me.Controls.Add(Me.DarkGroupBox2)
         Me.Controls.Add(Me.fraQuestList)
-        Me.Controls.Add(Me.fraTasks)
         Me.Controls.Add(Me.fraRequirements)
+        Me.Controls.Add(Me.fraTasks)
         Me.ForeColor = System.Drawing.Color.Gainsboro
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
-        Me.Name = "frmQuest"
+        Me.Name = "FrmQuest"
         Me.Text = "Quest Editor"
         Me.fraQuestList.ResumeLayout(False)
         Me.DarkGroupBox2.ResumeLayout(False)

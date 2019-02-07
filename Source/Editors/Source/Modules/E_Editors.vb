@@ -232,8 +232,9 @@ Module E_Editors
     End Sub
 
     Friend Sub MapEditorTileScroll()
-        frmMapEditor.picBackSelect.Top = (frmMapEditor.scrlPictureY.Value * PIC_Y) * -1
-        frmMapEditor.picBackSelect.Left = (frmMapEditor.scrlPictureX.Value * PIC_X) * -1
+        picbacktop = (frmMapEditor.scrlPictureY.Value * PIC_Y)
+        picbackleft = (frmMapEditor.scrlPictureX.Value * PIC_X)
+
     End Sub
 
     Friend Sub MapEditorChooseTile(Button As Integer, X As Single, Y As Single)
@@ -981,33 +982,33 @@ Module E_Editors
     Friend Sub ShopEditorInit()
         Dim i As Integer
 
-        If frmShop.Visible = False Then Exit Sub
-        Editorindex = frmShop.lstIndex.SelectedIndex + 1
+        If FrmShop.Visible = False Then Exit Sub
+        Editorindex = FrmShop.lstIndex.SelectedIndex + 1
 
-        frmShop.txtName.Text = Trim$(Shop(Editorindex).Name)
+        FrmShop.txtName.Text = Trim$(Shop(Editorindex).Name)
         If Shop(Editorindex).BuyRate > 0 Then
-            frmShop.nudBuy.Value = Shop(Editorindex).BuyRate
+            FrmShop.nudBuy.Value = Shop(Editorindex).BuyRate
         Else
-            frmShop.nudBuy.Value = 100
+            FrmShop.nudBuy.Value = 100
         End If
 
-        frmShop.nudFace.Value = Shop(Editorindex).Face
+        FrmShop.nudFace.Value = Shop(Editorindex).Face
         If File.Exists(Application.StartupPath & GFX_PATH & "Faces\" & Shop(Editorindex).Face & GFX_EXT) Then
-            frmShop.picFace.BackgroundImage = Image.FromFile(Application.StartupPath & GFX_PATH & "Faces\" & Shop(Editorindex).Face & GFX_EXT)
+            FrmShop.picFace.BackgroundImage = Image.FromFile(Application.StartupPath & GFX_PATH & "Faces\" & Shop(Editorindex).Face & GFX_EXT)
         End If
 
-        frmShop.cmbItem.Items.Clear()
-        frmShop.cmbItem.Items.Add("None")
-        frmShop.cmbCostItem.Items.Clear()
-        frmShop.cmbCostItem.Items.Add("None")
+        FrmShop.cmbItem.Items.Clear()
+        FrmShop.cmbItem.Items.Add("None")
+        FrmShop.cmbCostItem.Items.Clear()
+        FrmShop.cmbCostItem.Items.Add("None")
 
         For i = 1 To MAX_ITEMS
-            frmShop.cmbItem.Items.Add(i & ": " & Trim$(Item(i).Name))
-            frmShop.cmbCostItem.Items.Add(i & ": " & Trim$(Item(i).Name))
+            FrmShop.cmbItem.Items.Add(i & ": " & Trim$(Item(i).Name))
+            FrmShop.cmbCostItem.Items.Add(i & ": " & Trim$(Item(i).Name))
         Next
 
-        frmShop.cmbItem.SelectedIndex = 0
-        frmShop.cmbCostItem.SelectedIndex = 0
+        FrmShop.cmbItem.SelectedIndex = 0
+        FrmShop.cmbCostItem.SelectedIndex = 0
 
         UpdateShopTrade()
 
@@ -1016,20 +1017,20 @@ Module E_Editors
 
     Friend Sub UpdateShopTrade()
         Dim i As Integer
-        frmShop.lstTradeItem.Items.Clear()
+        FrmShop.lstTradeItem.Items.Clear()
 
         For i = 1 To MAX_TRADES
             With Shop(Editorindex).TradeItem(i)
                 ' if none, show as none
                 If .Item = 0 AndAlso .CostItem = 0 Then
-                    frmShop.lstTradeItem.Items.Add("Empty Trade Slot")
+                    FrmShop.lstTradeItem.Items.Add("Empty Trade Slot")
                 Else
-                    frmShop.lstTradeItem.Items.Add(i & ": " & .ItemValue & "x " & Trim$(Item(.Item).Name) & " for " & .CostValue & "x " & Trim$(Item(.CostItem).Name))
+                    FrmShop.lstTradeItem.Items.Add(i & ": " & .ItemValue & "x " & Trim$(Item(.Item).Name) & " for " & .CostValue & "x " & Trim$(Item(.CostItem).Name))
                 End If
             End With
         Next
 
-        frmShop.lstTradeItem.SelectedIndex = 0
+        FrmShop.lstTradeItem.SelectedIndex = 0
     End Sub
 
     Friend Sub ShopEditorOk()
@@ -1041,14 +1042,14 @@ Module E_Editors
             End If
         Next
 
-        frmShop.Visible = False
+        FrmShop.Visible = False
         Editor = 0
         ClearChanged_Shop()
     End Sub
 
     Friend Sub ShopEditorCancel()
         Editor = 0
-        frmShop.Visible = False
+        FrmShop.Visible = False
         ClearChanged_Shop()
         ClearShops()
         SendRequestShops()

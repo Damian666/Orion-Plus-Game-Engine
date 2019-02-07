@@ -27,7 +27,6 @@ Module C_Variables
 
     ' chat bubble
     Friend ChatBubble(Byte.MaxValue) As ChatBubbleRec
-
     Friend ChatBubbleindex As Integer
 
     ' skill drag + drop

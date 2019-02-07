@@ -15,14 +15,12 @@ Friend Class frmMapEditor
 
         nudFog.Maximum = NumFogs
 
-        picScreen.Width = (Map.MaxX * PIC_X) + PIC_X
-        picScreen.Height = (Map.MaxY * PIC_Y) + PIC_Y
 
         scrlMapViewH.Maximum = (Map.MaxX \ PIC_X) + PIC_X
         scrlMapViewV.Maximum = (Map.MaxY \ PIC_Y) + PIC_Y
 
         GameWindow.SetView(New SFML.Graphics.View(New SFML.Graphics.FloatRect(0, 0, picScreen.Width, picScreen.Height)))
-        TilesetWindow.SetView(New SFML.Graphics.View(New SFML.Graphics.FloatRect(0, 0, picBackSelect.Width, picBackSelect.Height)))
+        'TilesetWindow.SetView(New SFML.Graphics.View(New SFML.Graphics.FloatRect(0, 0, picBackSelect.Width, picBackSelect.Height)))
 
         picScreen.Focus()
 
@@ -31,8 +29,8 @@ Friend Class frmMapEditor
     Private Sub FrmEditor_MapEditor_Resize(sender As Object, e As EventArgs) Handles MyBase.Resize
         If GameWindow Is Nothing Then Exit Sub
 
-        picScreen.Width = (Map.MaxX * PIC_X) + PIC_X
-        picScreen.Height = (Map.MaxY * PIC_Y) + PIC_Y
+        'picScreen.Width = (Map.MaxX * PIC_X) + PIC_X
+        'picScreen.Height = (Map.MaxY * PIC_Y) + PIC_Y
 
         ' set the scrollbars
         scrlMapViewH.Maximum = (Map.MaxX \ PIC_X) + PIC_X
@@ -88,15 +86,11 @@ Friend Class frmMapEditor
         EditorTileSelStart = New Point(0, 0)
         EditorTileSelEnd = New Point(1, 1)
 
-        'EditorMap_DrawTileset2()
+        'picBackSelect.Height = TileSetTextureInfo(cmbTileSets.SelectedIndex + 1).Height
+        'picBackSelect.Width = TileSetTextureInfo(cmbTileSets.SelectedIndex + 1).Width
 
-        'pnlBack.Refresh()
-
-        picBackSelect.Height = TileSetTextureInfo(cmbTileSets.SelectedIndex + 1).height
-        picBackSelect.Width = TileSetTextureInfo(cmbTileSets.SelectedIndex + 1).width
-
-        scrlPictureY.Maximum = (picBackSelect.Height \ PIC_Y) + PIC_Y
-        scrlPictureX.Maximum = (picBackSelect.Width \ PIC_X) + PIC_X
+        scrlPictureY.Maximum = (picBackSelect.Height \ PIC_Y)
+        scrlPictureX.Maximum = (picBackSelect.Width \ PIC_X)
     End Sub
 
     Private Sub CmbAutoTile_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbAutoTile.SelectedIndexChanged

@@ -504,7 +504,7 @@ Module E_Loop
         End If
 
         If InitShopEditor = True Then
-            With frmShop
+            With FrmShop
                 Editor = EDITOR_SHOP
                 .lstIndex.Items.Clear()
 
