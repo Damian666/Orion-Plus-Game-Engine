@@ -31,7 +31,7 @@ Module C_Resources
 
     Sub ClearResource(index As Integer)
         Resource(index) = Nothing
-        Resource(index) = New ResourceRec With {
+        Resource(index) = New ResourceStruct With {
             .Name = ""
         }
     End Sub

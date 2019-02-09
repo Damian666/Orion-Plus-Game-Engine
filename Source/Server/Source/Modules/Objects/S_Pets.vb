@@ -10,11 +10,12 @@ Module S_Pets
 
     ' PET constants
     Friend Const PetBehaviourFollow As Byte = 0 'The pet will attack all npcs around
-
     Friend Const PetBehaviourGoto As Byte = 1 'If attacked, the pet will fight back
     Friend Const PetAttackBehaviourAttackonsight As Byte = 2 'The pet will attack all npcs around
     Friend Const PetAttackBehaviourGuard As Byte = 3 'If attacked, the pet will fight back
     Friend Const PetAttackBehaviourDonothing As Byte = 4 'The pet will not attack even if attacked
+
+    Friend givePetHpTimer As Integer
 
     Friend Structure PetRec
 
@@ -654,7 +655,7 @@ Module S_Pets
 #Region "Pet Functions"
 
     Friend Sub UpdatePetAi()
-        Dim didWalk As Boolean, givePetHpTimer As Integer, playerindex As Integer
+        Dim didWalk As Boolean, playerindex As Integer
         Dim mapNum As Integer, tickCount As Integer, i As Integer, n As Integer
         Dim distanceX As Integer, distanceY As Integer, tmpdir As Integer
         Dim target As Integer, targetTypes As Byte, targetX As Integer, targetY As Integer, targetVerify As Boolean
@@ -688,8 +689,8 @@ Module S_Pets
                                             distanceY = GetPetY(playerindex) - GetPetY(i)
 
                                             ' Make sure we get a positive value
-                                            If distanceX < 0 Then distanceX = distanceX * -1
-                                            If distanceY < 0 Then distanceY = distanceY * -1
+                                            If distanceX < 0 Then distanceX *= -1
+                                            If distanceY < 0 Then distanceY *= -1
 
                                             ' Are they in range?  if so GET'M!
                                             If distanceX <= n AndAlso distanceY <= n Then
@@ -704,8 +705,8 @@ Module S_Pets
                                             distanceY = GetPetY(playerindex) - GetPlayerY(i)
 
                                             ' Make sure we get a positive value
-                                            If distanceX < 0 Then distanceX = distanceX * -1
-                                            If distanceY < 0 Then distanceY = distanceY * -1
+                                            If distanceX < 0 Then distanceX *= -1
+                                            If distanceY < 0 Then distanceY *= -1
 
                                             ' Are they in range?  if so GET'M!
                                             If distanceX <= n AndAlso distanceY <= n Then
@@ -729,8 +730,8 @@ Module S_Pets
                                         distanceY = GetPetY(playerindex) - MapNpc(GetPlayerMap(playerindex)).Npc(i).Y
 
                                         ' Make sure we get a positive value
-                                        If distanceX < 0 Then distanceX = distanceX * -1
-                                        If distanceY < 0 Then distanceY = distanceY * -1
+                                        If distanceX < 0 Then distanceX *= -1
+                                        If distanceY < 0 Then distanceY *= -1
 
                                         ' Are they in range?  if so GET'M!
                                         If distanceX <= n AndAlso distanceY <= n Then
@@ -1663,7 +1664,7 @@ Module S_Pets
                 For j = 0 To Map(mapNum).MaxY
                     For i = 0 To Map(mapNum).MaxX
                         'we add up ALL the squares
-                        sum = sum + pos(i, j)
+                        sum += pos(i, j)
                     Next i
                 Next j
 
@@ -1678,7 +1679,7 @@ Module S_Pets
             End If
 
             'we increase the pointer to point to the next squares to be expanded
-            tim = tim + 1
+            tim += 1
         Loop
 
         'We work backwards to find the way...
@@ -1696,7 +1697,7 @@ Module S_Pets
             'has that value. So lets say the tim would be 5, because it takes 5 steps to get to the target.
             'Now everytime we decrease that, so we make it 4, and we look for any adjacent square that has
             'that value. When we find it, we just color it yellow as for the solution
-            tim = tim - 1
+            tim -= 1
             'reset did to false
             did = False
 
@@ -1706,7 +1707,7 @@ Module S_Pets
                 'check the square on the right of the solution. Is it a tim-1 one? or just a blank one
                 If pos(lastX + 1, lastY) = 100 + tim Then
                     'if it, then make it yellow, and change did to true
-                    lastX = lastX + 1
+                    lastX += 1
                     did = True
                 End If
             End If
@@ -1716,7 +1717,7 @@ Module S_Pets
             If did = False Then
                 If lastX > 0 Then
                     If pos(lastX - 1, lastY) = 100 + tim Then
-                        lastX = lastX - 1
+                        lastX -= 1
                         did = True
                     End If
                 End If
@@ -1726,7 +1727,7 @@ Module S_Pets
             If did = False Then
                 If lastY < Map(mapNum).MaxY Then
                     If pos(lastX, lastY + 1) = 100 + tim Then
-                        lastY = lastY + 1
+                        lastY += 1
                         did = True
                     End If
                 End If
@@ -1737,7 +1738,7 @@ Module S_Pets
             If did = False Then
                 If lastY > 0 Then
                     If pos(lastX, lastY - 1) = 100 + tim Then
-                        lastY = lastY - 1
+                        lastY -= 1
                     End If
                 End If
             End If
@@ -1848,7 +1849,7 @@ Module S_Pets
 
             SetPetPoints(index, GetPetPoints(index) + Pet(Player(index).Character(TempPlayer(index).CurChar).Pet.Num).LevelPnts)
             SetPetExp(index, expRollover)
-            levelCount = levelCount + 1
+            levelCount += 1
         Loop
 
         If levelCount > 0 Then
@@ -1913,7 +1914,6 @@ Module S_Pets
         Dim mapNum As Integer
         Dim damage As Integer
 
-        damage = 0
 
         ' Can we attack the npc?
         If CanPetAttackNpc(index, mapNpcNum) Then
@@ -1937,16 +1937,16 @@ Module S_Pets
 
             ' if the npc blocks, take away the block amount
             blockAmount = CanNpcBlock(mapNpcNum)
-            damage = damage - blockAmount
+            damage -= blockAmount
 
             ' take away armour
-            damage = damage - Random(1, (Npc(npcnum).Stat(StatType.Luck) * 2))
+            damage -= Random(1, (Npc(npcnum).Stat(StatType.Luck) * 2))
             ' randomise from 1 to max hit
             damage = Random(1, damage)
 
             ' * 1.5 if it's a crit!
             If CanPetCrit(index) Then
-                damage = damage * 1.5
+                damage *= 1.5
                 SendActionMsg(mapNum, "Critical!", ColorType.BrightCyan, 1, (GetPlayerX(index) * 32), (GetPlayerY(index) * 32))
             End If
 
@@ -2030,10 +2030,9 @@ Module S_Pets
 
     End Function
 
-    Friend Sub PetAttackNpc(attacker As Integer, mapnpcnum As Integer, damage As Integer, Optional skillnum As Integer = 0, Optional overTime As Boolean = False)
+    Friend Sub PetAttackNpc(attacker As Integer, mapnpcnum As Integer, damage As Integer, Optional skillnum As Integer = 0) ', Optional overTime As Boolean = False)
         Dim name As String, exp As Integer
-        Dim n As Integer, i As Integer
-        Dim mapNum As Integer, npcnum As Integer
+        Dim i As Integer, mapNum As Integer, npcnum As Integer
 
         ' Check for subscript out of range
         If IsPlaying(attacker) = False OrElse mapnpcnum <= 0 OrElse mapnpcnum > MAX_MAP_NPCS OrElse damage < 0 OrElse Not PetAlive(attacker) Then
@@ -2048,9 +2047,6 @@ Module S_Pets
             ' Send this packet so they can see the pet attacking
             SendPetAttack(attacker, mapNum)
         End If
-
-        ' Check for weapon
-        n = 0 'no weapon, pet :P
 
         ' set the regen timer
         TempPlayer(attacker).PetstopRegen = True
@@ -2210,11 +2206,11 @@ Module S_Pets
             damage = GetNpcDamage(npcnum)
 
             ' take away armour
-            damage = damage - ((GetPetStat(index, StatType.Endurance) * 2) + (GetPetLevel(index) * 2))
+            damage -= ((GetPetStat(index, StatType.Endurance) * 2) + (GetPetLevel(index) * 2))
 
             ' * 1.5 if crit hit
             If CanNpcCrit(npcnum) Then
-                damage = damage * 1.5
+                damage *= 1.5
                 SendActionMsg(mapNum, "Critical!", ColorType.BrightCyan, ActionMsgType.Scroll, (MapNpc(mapNum).Npc(mapNpcNum).X * 32), (MapNpc(mapNum).Npc(mapNpcNum).Y * 32))
             End If
         End If
@@ -2411,16 +2407,13 @@ Module S_Pets
     End Function
 
     Sub PetAttackPlayer(attacker As Integer, victim As Integer, damage As Integer, Optional skillNum As Integer = 0)
-        Dim exp As Integer, n As Integer, i As Integer
+        Dim exp As Integer, i As Integer
 
         ' Check for subscript out of range
 
         If IsPlaying(attacker) = False OrElse IsPlaying(victim) = False OrElse damage < 0 OrElse PetAlive(attacker) = False Then
             Exit Sub
         End If
-
-        ' Check for weapon
-        n = 0 'No Weapon, PET!
 
         If skillNum = 0 Then
             ' Send this packet so they can see the pet attacking
@@ -2563,17 +2556,17 @@ Module S_Pets
 
             ' if the player blocks, take away the block amount
             blockAmount = CanPlayerBlockHit(victim)
-            damage = damage - blockAmount
+            damage -= blockAmount
 
             ' take away armour
-            damage = damage - Random(1, (GetPetStat(index, StatType.Luck)) * 2)
+            damage -= Random(1, (GetPetStat(index, StatType.Luck)) * 2)
 
             ' randomise for up to 10% lower than max hit
             damage = Random(1, damage)
 
             ' * 1.5 if crit hit
             If CanPetCrit(index) Then
-                damage = damage * 1.5
+                damage *= 1.5
                 SendActionMsg(mapNum, "Critical!", ColorType.BrightCyan, 1, (GetPetX(index) * 32), (GetPetY(index) * 32))
             End If
 
@@ -2674,16 +2667,13 @@ Module S_Pets
     End Function
 
     Sub PetAttackPet(attacker As Integer, victim As Integer, damage As Integer, Optional skillnum As Integer = 0)
-        Dim exp As Integer, n As Integer, i As Integer
+        Dim exp As Integer, i As Integer
 
         ' Check for subscript out of range
 
         If IsPlaying(attacker) = False OrElse IsPlaying(victim) = False OrElse damage < 0 OrElse PetAlive(attacker) = False OrElse PetAlive(victim) = False Then
             Exit Sub
         End If
-
-        ' Check for weapon
-        n = 0 'No Weapon, PET!
 
         If skillnum = 0 Then
             ' Send this packet so they can see the pet attacking
@@ -2827,17 +2817,17 @@ Module S_Pets
             damage = GetPetDamage(index)
 
             ' if the player blocks, take away the block amount
-            damage = damage - blockAmount
+            damage -= blockAmount
 
             ' take away armour
-            damage = damage - Random(1, (Player(index).Character(TempPlayer(index).CurChar).Pet.Stat(StatType.Luck) * 2))
+            damage -= Random(1, (Player(index).Character(TempPlayer(index).CurChar).Pet.Stat(StatType.Luck) * 2))
 
             ' randomise for up to 10% lower than max hit
             damage = Random(1, damage)
 
             ' * 1.5 if crit hit
             If CanPetCrit(index) Then
-                damage = damage * 1.5
+                damage *= 1.5
                 SendActionMsg(mapNum, "Critical!", ColorType.BrightCyan, 1, (GetPetX(index) * 32), (GetPetY(index) * 32))
             End If
 
@@ -3611,8 +3601,6 @@ Module S_Pets
         ' Check for subscript out of range
 
         If IsPlaying(attacker) = False OrElse IsPlaying(victim) = False OrElse damage < 0 OrElse Not PetAlive(victim) Then Exit Sub
-        ' Check for weapon
-        n = 0
 
         If GetPlayerEquipment(attacker, EquipmentType.Weapon) > 0 Then
             n = GetPlayerEquipment(attacker, EquipmentType.Weapon)
@@ -3663,7 +3651,7 @@ Module S_Pets
                 End If
             Next
 
-            PlayerMsg(victim, ("Your " & Trim$(GetPetName(victim)) & " was killed by  " & Trim$(GetPlayerName(attacker)) & "."), ColorType.BrightRed)
+            PlayerMsg(victim, ("Your " & GetPetName(victim).Trim & " was killed by  " & GetPlayerName(attacker).Trim & "."), ColorType.BrightRed)
             ReCallPet(victim)
         Else
             ' Pet not dead, just do the damage
@@ -3704,10 +3692,6 @@ Module S_Pets
 
     Friend Sub TryPlayerAttackPet(attacker As Integer, victim As Integer)
         Dim blockAmount As Integer, mapNum As Integer
-        Dim damage As Integer
-
-        damage = 0
-
         If Not PetAlive(victim) Then Exit Sub
 
         ' Can we attack the npc?
@@ -3730,21 +3714,21 @@ Module S_Pets
             End If
 
             ' Get the damage we can do
-            damage = GetPlayerDamage(attacker)
+            Dim damage As Integer = GetPlayerDamage(attacker)
 
             ' if the npc blocks, take away the block amount
             blockAmount = 0
-            damage = damage - blockAmount
+            damage -= blockAmount
 
             ' take away armour
-            damage = damage - Random(1, (GetPlayerStat(victim, StatType.Luck) * 2))
+            damage -= Random(1, (GetPlayerStat(victim, StatType.Luck) * 2))
 
             ' randomise for up to 10% lower than max hit
             damage = Random(1, damage)
 
             ' * 1.5 if can crit
             If CanPlayerCriticalHit(attacker) Then
-                damage = damage * 1.5
+                damage *= 1.5
                 SendActionMsg(mapNum, "Critical!", ColorType.BrightCyan, 1, (GetPlayerX(attacker) * 32), (GetPlayerY(attacker) * 32))
             End If
 
@@ -3774,14 +3758,12 @@ Module S_Pets
         GetPetName = ""
 
         If PetAlive(index) Then
-            GetPetName = Pet(Player(index).Character(TempPlayer(index).CurChar).Pet.Num).Name
+            GetPetName = Pet(Player(index).Character(TempPlayer(index).CurChar).Pet.Num).Name.Trim
         End If
 
     End Function
 
     Friend Function GetPetNum(index As Integer) As Integer
-        GetPetNum = 0
-
         GetPetNum = Player(index).Character(TempPlayer(index).CurChar).Pet.Num
 
     End Function

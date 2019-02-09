@@ -1337,51 +1337,7 @@ Continue1:
 
     End Sub
 
-    Friend Sub CheckAnimInstance(index As Integer)
-        Dim looptime As Integer
-        Dim layer As Integer, sound As String
-        Dim frameCount As Integer
 
-        ' if doesn't exist then exit sub
-        If AnimInstance(index).Animation <= 0 Then Exit Sub
-        If AnimInstance(index).Animation >= MAX_ANIMATIONS Then Exit Sub
-
-        sound = Animation(AnimInstance(index).Animation).Sound
-
-        For layer = 0 To 1
-            If AnimInstance(index).Used(layer) Then
-                looptime = Animation(AnimInstance(index).Animation).LoopTime(layer)
-                frameCount = Animation(AnimInstance(index).Animation).Frames(layer)
-
-                ' if zero'd then set so we don't have extra loop and/or frame
-                If AnimInstance(index).FrameIndex(layer) = 0 Then AnimInstance(index).FrameIndex(layer) = 1
-                If AnimInstance(index).LoopIndex(layer) = 0 Then AnimInstance(index).LoopIndex(layer) = 1
-
-                ' check if frame timer is set, and needs to have a frame change
-                If AnimInstance(index).Timer(layer) + looptime <= GetTickCount() Then
-                    ' check if out of range
-                    If AnimInstance(index).FrameIndex(layer) >= frameCount Then
-                        AnimInstance(index).LoopIndex(layer) = AnimInstance(index).LoopIndex(layer) + 1
-                        If AnimInstance(index).LoopIndex(layer) > Animation(AnimInstance(index).Animation).LoopCount(layer) Then
-                            AnimInstance(index).Used(layer) = False
-                        Else
-                            AnimInstance(index).FrameIndex(layer) = 1
-                        End If
-                    Else
-                        AnimInstance(index).FrameIndex(layer) = AnimInstance(index).FrameIndex(layer) + 1
-                    End If
-                    AnimInstance(index).Timer(layer) = GetTickCount()
-                End If
-            End If
-        Next
-
-        ' if neither layer is used, clear
-        If AnimInstance(index).Used(0) = False AndAlso AnimInstance(index).Used(1) = False Then
-            ClearAnimInstance(index)
-        Else
-            If sound <> "" Then PlaySound(sound)
-        End If
-    End Sub
 
     Friend Sub UpdateDrawMapName()
         Dim g As Graphics = Graphics.FromImage(New Bitmap(1, 1))

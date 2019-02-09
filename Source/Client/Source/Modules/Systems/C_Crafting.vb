@@ -6,7 +6,7 @@ Friend Module C_Crafting
 #Region "Globals & Types"
 
     Friend RecipeChanged(MAX_RECIPE) As Boolean
-    Friend Recipe(MAX_RECIPE) As RecipeRec
+    Friend Recipe(MAX_RECIPE) As RecipeStruct
     Friend InitRecipeEditor As Boolean
     Friend InitCrafting As Boolean
     Friend InCraft As Boolean
@@ -40,16 +40,16 @@ Friend Module C_Crafting
     Friend CraftTimerEnabled As Boolean
     Friend CraftTimer As Integer
 
-    Friend Structure RecipeRec
+    Friend Structure RecipeStruct
         Dim Name As String
         Dim RecipeType As Byte
         Dim MakeItemNum As Integer
         Dim MakeItemAmount As Integer
-        Dim Ingredients() As IngredientsRec
+        Dim Ingredients() As IngredientsStruct
         Dim CreateTime As Byte
     End Structure
 
-    Friend Structure IngredientsRec
+    Friend Structure IngredientsStruct
         Dim ItemNum As Integer
         Dim Value As Integer
     End Structure

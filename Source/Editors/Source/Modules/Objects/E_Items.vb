@@ -9,7 +9,7 @@ Friend Module E_Items
     Friend Sub ClearItem(index As Integer)
         index = index - 1
         Item(index) = Nothing
-        Item(index) = New ItemRec
+        Item(index) = New ItemStruct
         For x = 0 To StatType.Count - 1
             ReDim Item(index).Add_Stat(x)
         Next

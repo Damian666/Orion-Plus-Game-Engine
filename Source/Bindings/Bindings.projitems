@@ -10,12 +10,12 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="$(MSBuildThisFileDirectory)Common\Time.vb" />
-    <Compile Include="$(MSBuildThisFileDirectory)Legacy\Constants.vb" />
-    <Compile Include="$(MSBuildThisFileDirectory)Legacy\Enums.vb" />
-    <Compile Include="$(MSBuildThisFileDirectory)Legacy\Language.vb" />
-    <Compile Include="$(MSBuildThisFileDirectory)Legacy\Packets.vb" />
-    <Compile Include="$(MSBuildThisFileDirectory)Legacy\Strings.vb" />
-    <Compile Include="$(MSBuildThisFileDirectory)Legacy\Types.vb" />
-    <Compile Include="$(MSBuildThisFileDirectory)Legacy\Xml.vb" />
+    <Compile Include="$(MSBuildThisFileDirectory)Common\Constants.vb" />
+    <Compile Include="$(MSBuildThisFileDirectory)Common\Enums.vb" />
+    <Compile Include="$(MSBuildThisFileDirectory)Common\Language.vb" />
+    <Compile Include="$(MSBuildThisFileDirectory)Common\Packets.vb" />
+    <Compile Include="$(MSBuildThisFileDirectory)Common\Strings.vb" />
+    <Compile Include="$(MSBuildThisFileDirectory)Common\Types.vb" />
+    <Compile Include="$(MSBuildThisFileDirectory)Common\Xml.vb" />
   </ItemGroup>
 </Project>

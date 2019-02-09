@@ -9,7 +9,7 @@ Friend Module C_EventSystem
 #Region "Globals"
 
     ' Temp event storage
-    Friend TmpEvent As EventRec
+    Friend TmpEvent As EventStruct
 
     Friend IsEdit As Boolean
 
@@ -54,7 +54,7 @@ Friend Module C_EventSystem
     Friend Const MaxSwitches As Integer = 500
     Friend Const MaxVariables As Integer = 500
 
-    Friend CpEvent As EventRec
+    Friend CpEvent As EventStruct
     Friend EventCopy As Boolean
     Friend EventPaste As Boolean
     Friend EventList() As EventListRec
@@ -172,7 +172,7 @@ Friend Module C_EventSystem
         Dim Y As Integer
     End Structure
 
-    Friend Structure EventRec
+    Friend Structure EventStruct
         Dim Name As String
         Dim Globals As Integer
         Dim PageCount As Integer
@@ -181,7 +181,7 @@ Friend Module C_EventSystem
         Dim Y As Integer
     End Structure
 
-    Friend Structure MapEventRec
+    Friend Structure MapEventStruct
         Dim Name As String
         Dim Dir As Integer
         Dim X As Integer
@@ -207,7 +207,7 @@ Friend Module C_EventSystem
         Dim Questnum As Integer
     End Structure
 
-    Friend CopyEvent As EventRec
+    Friend CopyEvent As EventStruct
     Friend CopyEventPage As EventPageRec
 
     Friend Structure EventListRec

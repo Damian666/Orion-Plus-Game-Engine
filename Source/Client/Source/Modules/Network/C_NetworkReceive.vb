@@ -256,164 +256,7 @@ Module C_NetworkReceive
 
     End Sub
 
-    Private Sub Packet_NewCharClasses(ByRef data() As Byte)
-        Dim i As Integer, z As Integer, x As Integer
-        Dim buffer As New ByteStream(data)
-        ' Max classes
-        MaxClasses = buffer.ReadInt32
-        ReDim Classes(MaxClasses)
 
-        SelectedChar = 1
-
-        For i = 1 To MaxClasses
-
-            With Classes(i)
-                .Name = Trim(buffer.ReadString)
-                .Desc = Trim(buffer.ReadString)
-
-                ReDim .Vital(VitalType.Count - 1)
-
-                .Vital(VitalType.HP) = buffer.ReadInt32
-                .Vital(VitalType.MP) = buffer.ReadInt32
-                .Vital(VitalType.SP) = buffer.ReadInt32
-
-                ' get array size
-                z = buffer.ReadInt32
-                ' redim array
-                ReDim .MaleSprite(z + 1)
-                ' loop-receive data
-                For x = 1 To z + 1
-                    .MaleSprite(x) = buffer.ReadInt32
-                Next
-
-                ' get array size
-                z = buffer.ReadInt32
-                ' redim array
-                ReDim .FemaleSprite(z + 1)
-                ' loop-receive data
-                For x = 1 To z + 1
-                    .FemaleSprite(x) = buffer.ReadInt32
-                Next
-
-                ReDim .Stat(StatType.Count - 1)
-
-                .Stat(StatType.Strength) = buffer.ReadInt32
-                .Stat(StatType.Endurance) = buffer.ReadInt32
-                .Stat(StatType.Vitality) = buffer.ReadInt32
-                .Stat(StatType.Intelligence) = buffer.ReadInt32
-                .Stat(StatType.Luck) = buffer.ReadInt32
-                .Stat(StatType.Spirit) = buffer.ReadInt32
-
-                ReDim .StartItem(5)
-                ReDim .StartValue(5)
-                For q = 1 To 5
-                    .StartItem(q) = buffer.ReadInt32
-                    .StartValue(q) = buffer.ReadInt32
-                Next
-
-                .StartMap = buffer.ReadInt32
-                .StartX = buffer.ReadInt32
-                .StartY = buffer.ReadInt32
-
-                .BaseExp = buffer.ReadInt32
-            End With
-
-        Next
-
-        buffer.Dispose()
-
-        ' Used for if the player is creating a new character
-        Frmmenuvisible = True
-        Pnlloadvisible = False
-        PnlCreditsVisible = False
-        PnlRegisterVisible = False
-        PnlCharCreateVisible = True
-        PnlLoginVisible = False
-
-        ReDim Cmbclass(MaxClasses)
-
-        For i = 1 To MaxClasses
-            Cmbclass(i) = Classes(i).Name
-        Next
-
-        FrmMenu.DrawCharacter()
-
-        NewCharSprite = 1
-    End Sub
-
-    Private Sub Packet_ClassesData(ByRef data() As Byte)
-        Dim i As Integer, z As Integer, x As Integer
-        Dim buffer As New ByteStream(data)
-        ' Max classes
-        MaxClasses = buffer.ReadInt32
-        ReDim Classes(MaxClasses)
-
-        SelectedChar = 1
-
-        For i = 1 To MaxClasses
-
-            With Classes(i)
-                .Name = Trim(buffer.ReadString)
-                .Desc = Trim(buffer.ReadString)
-
-                ReDim .Vital(VitalType.Count - 1)
-
-                .Vital(VitalType.HP) = buffer.ReadInt32
-                .Vital(VitalType.MP) = buffer.ReadInt32
-                .Vital(VitalType.SP) = buffer.ReadInt32
-
-                ' get array size
-                z = buffer.ReadInt32
-                ' redim array
-                ReDim .MaleSprite(z + 1)
-                ' loop-receive data
-                For x = 1 To z + 1
-                    .MaleSprite(x) = buffer.ReadInt32
-                Next
-
-                ' get array size
-                z = buffer.ReadInt32
-                ' redim array
-                ReDim .FemaleSprite(z + 1)
-                ' loop-receive data
-                For x = 1 To z + 1
-                    .FemaleSprite(x) = buffer.ReadInt32
-                Next
-
-                ReDim .Stat(StatType.Count - 1)
-
-                .Stat(StatType.Strength) = buffer.ReadInt32
-                .Stat(StatType.Endurance) = buffer.ReadInt32
-                .Stat(StatType.Vitality) = buffer.ReadInt32
-                .Stat(StatType.Intelligence) = buffer.ReadInt32
-                .Stat(StatType.Luck) = buffer.ReadInt32
-                .Stat(StatType.Spirit) = buffer.ReadInt32
-
-                ReDim .StartItem(5)
-                ReDim .StartValue(5)
-                For q = 1 To 5
-                    .StartItem(q) = buffer.ReadInt32
-                    .StartValue(q) = buffer.ReadInt32
-                Next
-
-                .StartMap = buffer.ReadInt32
-                .StartX = buffer.ReadInt32
-                .StartY = buffer.ReadInt32
-
-                .BaseExp = buffer.ReadInt32
-            End With
-
-        Next
-
-        ReDim Cmbclass(MaxClasses)
-        For i = 1 To MaxClasses
-            Cmbclass(i) = Classes(i).Name
-        Next
-        FrmMenu.DrawCharacter()
-        NewCharSprite = 1
-
-        buffer.Dispose()
-    End Sub
 
     Private Sub Packet_InGame(ByRef data() As Byte)
         InGame = True
@@ -503,8 +346,6 @@ Module C_NetworkReceive
         buffer.Dispose()
     End Sub
 
-
-
     Private Sub Packet_NpcMove(ByRef data() As Byte)
         Dim mapNpcNum As Integer, movement As Integer
         Dim x As Integer, y As Integer, dir As Integer
@@ -538,8 +379,6 @@ Module C_NetworkReceive
         buffer.Dispose()
     End Sub
 
-
-
     Private Sub Packet_NpcDir(ByRef data() As Byte)
         Dim dir As Integer, i As Integer
         Dim buffer As New ByteStream(data)
@@ -555,8 +394,6 @@ Module C_NetworkReceive
 
         buffer.Dispose()
     End Sub
-
-
 
     Private Sub Packet_Attack(ByRef data() As Byte)
         Dim i As Integer
@@ -813,8 +650,6 @@ Module C_NetworkReceive
         CreateActionMsg(message, color, tmpType, x, y)
     End Sub
 
-
-
     Private Sub Packet_Blood(ByRef data() As Byte)
         Dim x As Integer, y As Integer, sprite As Integer
         Dim buffer As New ByteStream(data)
@@ -837,52 +672,7 @@ Module C_NetworkReceive
         buffer.Dispose()
     End Sub
 
-    Private Sub Packet_UpdateAnimation(ByRef data() As Byte)
-        Dim n As Integer, i As Integer
-        Dim buffer As New ByteStream(data)
-        n = buffer.ReadInt32
-        ' Update the Animation
-        For i = 0 To UBound(Animation(n).Frames)
-            Animation(n).Frames(i) = buffer.ReadInt32()
-        Next
 
-        For i = 0 To UBound(Animation(n).LoopCount)
-            Animation(n).LoopCount(i) = buffer.ReadInt32()
-        Next
-
-        For i = 0 To UBound(Animation(n).LoopTime)
-            Animation(n).LoopTime(i) = buffer.ReadInt32()
-        Next
-
-        Animation(n).Name = Trim$(buffer.ReadString)
-        Animation(n).Sound = Trim$(buffer.ReadString)
-
-        If Animation(n).Name Is Nothing Then Animation(n).Name = ""
-        If Animation(n).Sound Is Nothing Then Animation(n).Sound = ""
-
-        For i = 0 To UBound(Animation(n).Sprite)
-            Animation(n).Sprite(i) = buffer.ReadInt32()
-        Next
-        buffer.Dispose()
-    End Sub
-
-    Private Sub Packet_Animation(ByRef data() As Byte)
-        Dim buffer As New ByteStream(data)
-        AnimationIndex = AnimationIndex + 1
-        If AnimationIndex >= Byte.MaxValue Then AnimationIndex = 1
-
-        With AnimInstance(AnimationIndex)
-            .Animation = buffer.ReadInt32
-            .X = buffer.ReadInt32
-            .Y = buffer.ReadInt32
-            .LockType = buffer.ReadInt32
-            .lockindex = buffer.ReadInt32
-            .Used(0) = True
-            .Used(1) = True
-        End With
-
-        buffer.Dispose()
-    End Sub
 
     Private Sub Packet_NPCVitals(ByRef data() As Byte)
         Dim mapNpcNum As Integer

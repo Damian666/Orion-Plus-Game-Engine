@@ -313,8 +313,7 @@ Module E_Editors
 
         If Not IsInBounds() Then Exit Sub
         If Button = MouseButtons.Left Then
-            If SelectedTab = 1 Then
-                ' (EditorTileSelEnd.X - EditorTileSelStart.X) = 1 AndAlso (EditorTileSelEnd.Y - EditorTileSelStart.Y) = 1 Then 'single tile
+            If SelectedTab = 1 Then 'single tile
                 If EditorTileWidth = 1 AndAlso EditorTileHeight = 1 Then
 
                     MapEditorSetTile(CurX, CurY, CurLayer, False, frmMapEditor.cmbAutoTile.SelectedIndex)
@@ -498,8 +497,8 @@ Module E_Editors
 
     Friend Sub MapEditorSend()
         SendEditorMap()
-        InMapEditor = False
-        frmMapEditor.Visible = False
+        'InMapEditor = False
+        'frmMapEditor.Visible = False
         GettingMap = True
 
     End Sub

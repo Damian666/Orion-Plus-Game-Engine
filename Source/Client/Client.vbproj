@@ -94,7 +94,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ApplicationEvents.vb" />
-    <Compile Include="GlobalSuppressions.vb" />
     <Compile Include="My Project\Resources.Designer.vb">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -113,6 +112,8 @@
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Source\Modules\C_Options.vb" />
+    <Compile Include="Source\Modules\Objects\C_Animations.vb" />
+    <Compile Include="Source\Modules\Objects\C_Classes.vb" />
     <Compile Include="Source\Modules\Objects\C_Items.vb" />
     <Compile Include="Source\Modules\Objects\C_Maps.vb" />
     <Compile Include="Source\Modules\Objects\C_Resources.vb" />

@@ -316,14 +316,14 @@ Module modLoop
                                                     distanceY = MapNpc(mapNum).Npc(x).Y - Player(i).Character(TempPlayer(i).CurChar).Pet.Y
 
                                                     ' Make sure we get a positive value
-                                                    If distanceX < 0 Then distanceX = distanceX * -1
-                                                    If distanceY < 0 Then distanceY = distanceY * -1
+                                                    If distanceX < 0 Then distanceX *= -1
+                                                    If distanceY < 0 Then distanceY *= -1
 
                                                     ' Are they in range?  if so GET'M!
                                                     If distanceX <= n AndAlso distanceY <= n Then
                                                         If Npc(npcNum).Behaviour = NpcBehavior.AttackOnSight OrElse GetPlayerPK(i) = i Then
                                                             If Len(Trim$(Npc(npcNum).AttackSay)) > 0 Then
-                                                                PlayerMsg(i, Trim$(Npc(npcNum).Name) & " says: " & Trim$(Npc(npcNum).AttackSay), QColorType.SayColor)
+                                                                PlayerMsg(i, Trim$(Npc(npcNum).Name) & " says: " & Npc(npcNum).AttackSay.Trim, QColorType.SayColor)
                                                             End If
                                                             MapNpc(mapNum).Npc(x).TargetType = TargetType.Pet
                                                             MapNpc(mapNum).Npc(x).Target = i
@@ -335,8 +335,8 @@ Module modLoop
                                                     distanceY = MapNpc(mapNum).Npc(x).Y - GetPlayerY(i)
 
                                                     ' Make sure we get a positive value
-                                                    If distanceX < 0 Then distanceX = distanceX * -1
-                                                    If distanceY < 0 Then distanceY = distanceY * -1
+                                                    If distanceX < 0 Then distanceX *= -1
+                                                    If distanceY < 0 Then distanceY *= -1
 
                                                     ' Are they in range?  if so GET'M!
                                                     If distanceX <= n AndAlso distanceY <= n Then
@@ -366,8 +366,8 @@ Module modLoop
                                                     distanceY = MapNpc(mapNum).Npc(x).Y - CLng(MapNpc(mapNum).Npc(i).Y)
 
                                                     ' Make sure we get a positive value
-                                                    If distanceX < 0 Then distanceX = distanceX * -1
-                                                    If distanceY < 0 Then distanceY = distanceY * -1
+                                                    If distanceX < 0 Then distanceX *= -1
+                                                    If distanceY < 0 Then distanceY *= -1
 
                                                     ' Are they in range?  if so GET'M!
                                                     If distanceX <= n AndAlso distanceY <= n AndAlso Npc(npcNum).Behaviour = NpcBehavior.AttackOnSight Then
@@ -1190,7 +1190,7 @@ Module modLoop
 
         If damage > 0 Then
             ' Calculate for Magic Resistance.
-            damage = damage - ((GetPlayerStat(index, StatType.Spirit) * 2) + (GetPlayerLevel(index) * 3))
+            damage -= ((GetPlayerStat(index, StatType.Spirit) * 2) + (GetPlayerLevel(index) * 3))
 
             If increment Then
                 sSymbol = "+"

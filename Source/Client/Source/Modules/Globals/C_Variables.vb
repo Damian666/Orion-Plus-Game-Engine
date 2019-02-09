@@ -170,7 +170,7 @@ Module C_Variables
     Friend ActionMsgIndex As Byte
 
     Friend BloodIndex As Byte
-    Friend AnimationIndex As Byte
+
 
     ' New char
     Friend NewCharSprite As Integer

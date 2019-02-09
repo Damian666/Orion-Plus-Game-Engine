@@ -32,3 +32,5 @@ $tf*/
 Build/
 Source/Editors/Source/Forms/Forms.rar
 Source/Server/My Project/app.manifest
+/.vs/Orion+ Game Engine/v16/Server/sqlite3/db.lock
+/.vs/Orion+ Game Engine/v16/Server/sqlite3/storage.ide

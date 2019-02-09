@@ -8,8 +8,8 @@ Module C_Trade
     Friend TradeTimer As Integer
     Friend TradeRequest As Boolean
     Friend InTrade As Boolean
-    Friend TradeYourOffer(MAX_INV) As PlayerInvRec
-    Friend TradeTheirOffer(MAX_INV) As PlayerInvRec
+    Friend TradeYourOffer(MAX_INV) As PlayerInvStruct
+    Friend TradeTheirOffer(MAX_INV) As PlayerInvStruct
     Friend TradeX As Integer
     Friend TradeY As Integer
     Friend TheirWorth As String

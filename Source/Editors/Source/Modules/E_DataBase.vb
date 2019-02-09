@@ -284,7 +284,7 @@ Module ClientDataBase
 
     Sub ClearResource(index As Integer)
         Resource(index) = Nothing
-        Resource(index) = New ResourceRec With {
+        Resource(index) = New ResourceStruct With {
             .Name = ""
         }
     End Sub
@@ -321,7 +321,7 @@ Module ClientDataBase
 
     Sub ClearAnimation(index As Integer)
         Animation(index) = Nothing
-        Animation(index) = New AnimationRec
+        Animation(index) = New AnimationStruct
         For x = 0 To 1
             ReDim Animation(index).Sprite(x)
         Next
@@ -357,14 +357,14 @@ Module ClientDataBase
 
     Sub ClearSkill(index As Integer)
         Skill(index) = Nothing
-        Skill(index) = New SkillRec With {
+        Skill(index) = New SkillStruct With {
             .Name = ""
         }
     End Sub
 
     Sub ClearShop(index As Integer)
         Shop(index) = Nothing
-        Shop(index) = New ShopRec With {
+        Shop(index) = New ShopStruct With {
             .Name = ""
         }
         ReDim Shop(index).TradeItem(MAX_TRADES)

@@ -6,14 +6,101 @@ Imports ASFW.IO
 
 Module C_Maps
 
-#Region "Globals & Types"
+#Region "Globals"
 
-    Friend Map As MapRec
+    Friend Map As MapStruct
     Friend MapLock As New Object()
-    Friend MapItem(MAX_MAP_ITEMS) As MapItemRec
-    Friend MapNpc(MAX_MAP_NPCS) As MapNpcRec
-    Friend TempTile(,) As TempTileRec
+    Friend MapItem(MAX_MAP_ITEMS) As MapItemStruct
+    Friend MapNpc(MAX_MAP_NPCS) As MapNpcStruct
+    Friend TempTile(,) As TempTileStruct
 
+#End Region
+
+#Region "Structs"
+    Friend Structure MapStruct
+        Dim Name As String
+        Dim Music As String
+
+        Dim Revision As Integer
+        Dim Moral As Byte
+        Dim Tileset As Integer
+
+        Dim Up As Integer
+        Dim Down As Integer
+        Dim Left As Integer
+        Dim Right As Integer
+
+        Dim BootMap As Integer
+        Dim BootX As Byte
+        Dim BootY As Byte
+
+        Dim MaxX As Byte
+        Dim MaxY As Byte
+
+        Dim Tile(,) As TileStruct
+        Dim Npc() As Integer
+        Dim EventCount As Integer
+        Dim Events() As EventStruct
+
+        Dim WeatherType As Byte
+        Dim Fogindex As Integer
+        Dim WeatherIntensity As Integer
+        Dim FogAlpha As Byte
+        Dim FogSpeed As Byte
+
+        Dim HasMapTint As Byte
+        Dim MapTintR As Byte
+        Dim MapTintG As Byte
+        Dim MapTintB As Byte
+        Dim MapTintA As Byte
+
+        Dim Instanced As Byte
+
+        Dim Panorama As Byte
+        Dim Parallax As Byte
+
+        'Client Side Only -- Temporary
+        Dim CurrentEvents As Integer
+
+        Dim MapEvents() As MapEventStruct
+    End Structure
+
+    Friend Structure MapItemStruct
+        Dim Num As Integer
+        Dim Value As Integer
+        Dim Frame As Byte
+        Dim X As Byte
+        Dim Y As Byte
+
+        Dim RandData As RandInvStruct
+    End Structure
+
+    Friend Structure MapNpcStruct
+        Dim Num As Integer
+        Dim Target As Integer
+        Dim TargetType As Byte
+        Dim Vital() As Integer
+        Dim Map As Integer
+        Dim X As Byte
+        Dim Y As Byte
+        Dim Dir As Byte
+
+        ' Client use only
+        Dim XOffset As Integer
+
+        Dim YOffset As Integer
+        Dim Moving As Byte
+        Dim Attacking As Byte
+        Dim AttackTimer As Integer
+        Dim Steps As Integer
+    End Structure
+
+    Friend Structure TempTileStruct
+        Dim DoorOpen As Byte
+        Dim DoorFrame As Byte
+        Dim DoorTimer As Integer
+        Dim DoorAnimate As Byte ' 0 = nothing| 1 = opening | 2 = closing
+    End Structure
 #End Region
 
 #Region "DataBase"

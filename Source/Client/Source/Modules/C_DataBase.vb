@@ -302,7 +302,7 @@ Module C_DataBase
 
     Sub ClearNpc(index As Integer)
         Npc(index) = Nothing
-        Npc(index) = New NpcRec With {
+        Npc(index) = New NpcStruct With {
             .Name = "",
             .AttackSay = ""
         }
@@ -319,80 +319,7 @@ Module C_DataBase
 
 #End Region
 
-#Region "Animations"
 
-    Sub ClearAnimation(index As Integer)
-        Animation(index) = Nothing
-        Animation(index) = New AnimationRec
-        For x = 0 To 1
-            ReDim Animation(index).Sprite(x)
-        Next
-        For x = 0 To 1
-            ReDim Animation(index).Frames(x)
-        Next
-        For x = 0 To 1
-            ReDim Animation(index).LoopCount(x)
-        Next
-        For x = 0 To 1
-            ReDim Animation(index).LoopTime(x)
-        Next
-        Animation(index).Name = ""
-    End Sub
-
-    Sub ClearAnimations()
-        Dim i As Integer
-
-        ReDim Animation(MAX_ANIMATIONS)
-
-        For i = 1 To MAX_ANIMATIONS
-            ClearAnimation(i)
-        Next
-
-    End Sub
-
-    Sub ClearAnimInstances()
-        Dim i As Integer
-
-        ReDim AnimInstance(MAX_ANIMATIONS)
-
-        For i = 0 To MAX_ANIMATIONS
-            For x = 0 To 1
-                ReDim AnimInstance(i).Timer(x)
-            Next
-            For x = 0 To 1
-                ReDim AnimInstance(i).Used(x)
-            Next
-            For x = 0 To 1
-                ReDim AnimInstance(i).LoopIndex(x)
-            Next
-            For x = 0 To 1
-                ReDim AnimInstance(i).FrameIndex(x)
-            Next
-
-            ClearAnimInstance(i)
-        Next
-    End Sub
-
-    Sub ClearAnimInstance(index As Integer)
-        AnimInstance(index).Animation = 0
-        AnimInstance(index).X = 0
-        AnimInstance(index).Y = 0
-
-        For i = 0 To UBound(AnimInstance(index).Used)
-            AnimInstance(index).Used(i) = False
-        Next
-        For i = 0 To UBound(AnimInstance(index).Timer)
-            AnimInstance(index).Timer(i) = False
-        Next
-        For i = 0 To UBound(AnimInstance(index).FrameIndex)
-            AnimInstance(index).FrameIndex(i) = False
-        Next
-
-        AnimInstance(index).LockType = 0
-        AnimInstance(index).lockindex = 0
-    End Sub
-
-#End Region
 
 #Region "Skills"
 
@@ -407,7 +334,7 @@ Module C_DataBase
 
     Sub ClearSkill(index As Integer)
         Skill(index) = Nothing
-        Skill(index) = New SkillRec With {
+        Skill(index) = New SkillStruct With {
             .Name = ""
         }
     End Sub

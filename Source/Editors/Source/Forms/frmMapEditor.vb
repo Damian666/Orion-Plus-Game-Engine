@@ -589,7 +589,7 @@ Friend Class frmMapEditor
     Private Sub BtnSetSize_Click(sender As Object, e As EventArgs) Handles btnSetSize.Click
         Dim X As Integer, x2 As Integer, i As Integer
         Dim Y As Integer, y2 As Integer
-        Dim tempArr(,) As TileRec
+        Dim tempArr(,) As TileStruct
 
         If nudMaxX.Value < SCREEN_MAPX Then nudMaxX.Value = SCREEN_MAPX
         If nudMaxY.Value < SCREEN_MAPY Then nudMaxY.Value = SCREEN_MAPY

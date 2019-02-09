@@ -14,7 +14,7 @@ Module C_Shops
 
     Sub ClearShop(index As Integer)
         Shop(index) = Nothing
-        Shop(index) = New ShopRec With {
+        Shop(index) = New ShopStruct With {
             .Name = ""
         }
         ReDim Shop(index).TradeItem(MAX_TRADES)

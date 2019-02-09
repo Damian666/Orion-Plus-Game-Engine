@@ -201,15 +201,6 @@ Module C_NetworkSend
         buffer.Dispose()
     End Sub
 
-    Sub SendRequestAnimations()
-        Dim buffer As New ByteStream(4)
-
-        buffer.WriteInt32(ClientPackets.CRequestAnimations)
-
-        Socket.SendData(buffer.Data, buffer.Head)
-        buffer.Dispose()
-    End Sub
-
     Sub SendTrainStat(statNum As Byte)
         Dim buffer As New ByteStream(4)
 
@@ -410,14 +401,7 @@ Module C_NetworkSend
         buffer.Dispose()
     End Sub
 
-    Friend Sub SendRequestClasses()
-        Dim buffer As New ByteStream(4)
 
-        buffer.WriteInt32(ClientPackets.CRequestClasses)
-
-        Socket.SendData(buffer.Data, buffer.Head)
-        buffer.Dispose()
-    End Sub
 
     Friend Sub SendUseEmote(emote As Integer)
         Dim buffer As New ByteStream(4)

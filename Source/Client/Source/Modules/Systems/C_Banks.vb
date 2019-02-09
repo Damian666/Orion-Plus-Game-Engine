@@ -5,7 +5,7 @@ Module C_Banks
 
 #Region "Globals & Types"
 
-    Friend Bank As BankRec
+    Friend Bank As BankStruct
 
     ' Stores the last bank item we showed in desc
     Friend LastBankDesc As Integer

@@ -41,7 +41,7 @@ Module S_AutoMap
     'Distance between mountains and the map limit, so the player can walk freely when teleport between maps
     Private Const MountainBorder As Byte = 5
 
-    Friend Tile(TilePrefab.Count - 1) As TileRec
+    Friend Tile(TilePrefab.Count - 1) As TileStruct
     Friend Detail() As DetailRec
     Friend ResourcesNum As String
     Private _resources() As String
@@ -79,7 +79,7 @@ Module S_AutoMap
 
     Structure DetailRec
         Dim DetailBase As Byte
-        Dim Tile As TileRec
+        Dim Tile As TileStruct
     End Structure
 
     Structure MapOrientationRec
@@ -305,7 +305,7 @@ Module S_AutoMap
 #Region "Creation Functions"
 
     Sub AddTile(prefab As TilePrefab, mapNum As Integer, x As Integer, y As Integer)
-        Dim tileDest As TileRec
+        Dim tileDest As TileStruct
         Dim cleanNextTiles As Boolean
         Dim i As Integer
 

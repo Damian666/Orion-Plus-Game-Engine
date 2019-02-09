@@ -7,7 +7,7 @@ Module C_Player
 #Region "Globals"
     Friend CharSelection() As CharSelRec
     Friend Player(MAX_PLAYERS) As PlayerRec
-    Friend PlayerInv(MAX_INV) As PlayerInvRec   ' Inventory
+    Friend PlayerInv(MAX_INV) As PlayerInvStruct   ' Inventory
 #End Region
 
 #Region "Structs"
@@ -80,14 +80,14 @@ Module C_Player
         Dim EventTimer As Integer
 
         'gather skills
-        Dim GatherSkills() As ResourceSkillsRec
+        Dim GatherSkills() As ResourceSkillsStruct
 
         Dim RecipeLearned() As Byte
 
         ' Random Items
-        Dim RandInv() As RandInvRec
+        Dim RandInv() As RandInvStruct
 
-        Dim RandEquip() As RandInvRec
+        Dim RandEquip() As RandInvStruct
 
         Dim Pet As PlayerPetRec
     End Structure

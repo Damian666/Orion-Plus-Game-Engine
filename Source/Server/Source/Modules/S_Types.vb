@@ -8,7 +8,7 @@
     Friend PlayersOnMap(MAX_CACHED_MAPS) As Integer
     Friend MapItem(MAX_CACHED_MAPS, MAX_MAP_ITEMS) As MapItemRec
     Friend MapNpc(MAX_CACHED_MAPS) As MapDataRec
-    Friend Bank(MAX_PLAYERS) As BankRec
+    Friend Bank(MAX_PLAYERS) As BankStruct
     Friend TempPlayer(MAX_PLAYERS) As TempPlayerRec
     Friend Player(MAX_PLAYERS) As PlayerRec
 
@@ -50,7 +50,7 @@
         Dim Equipment() As Integer
 
         ' Inventory
-        Dim Inv() As PlayerInvRec
+        Dim Inv() As PlayerInvStruct
 
         Dim Skill() As Integer
 
@@ -80,14 +80,14 @@
         Dim Variables() As Integer
 
         'gather skills
-        Dim GatherSkills() As ResourceSkillsRec
+        Dim GatherSkills() As ResourceSkillsStruct
 
         Dim RecipeLearned() As Byte
 
         ' Random Items
-        Dim RandInv() As RandInvRec
+        Dim RandInv() As RandInvStruct
 
-        Dim RandEquip() As RandInvRec
+        Dim RandEquip() As RandInvStruct
 
         Dim Pet As PlayerPetRec
     End Structure
@@ -119,7 +119,7 @@
         Dim TradeRequest As Integer
 
         Dim InTrade As Integer
-        Dim TradeOffer() As PlayerInvRec
+        Dim TradeOffer() As PlayerInvStruct
         Dim AcceptTrade As Boolean
 
         'Housing
@@ -202,7 +202,7 @@
         Dim MaxX As Byte
         Dim MaxY As Byte
 
-        Dim Tile(,) As TileRec
+        Dim Tile(,) As TileStruct
 
         Dim Npc() As Integer
 
@@ -247,7 +247,7 @@
         Dim X As Byte
         Dim Y As Byte
 
-        Dim RandData As RandInvRec
+        Dim RandData As RandInvStruct
 
         ' ownership + despawn
         Dim PlayerName As String

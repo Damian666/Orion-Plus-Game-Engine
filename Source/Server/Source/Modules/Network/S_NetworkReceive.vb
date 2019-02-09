@@ -2079,8 +2079,8 @@ Module S_NetworkReceive
     Sub Packet_AcceptTrade(index As Integer, ByRef data() As Byte)
         Dim itemNum As Integer
         Dim tradeTarget As Integer, i As Integer
-        Dim tmpTradeItem(MAX_INV) As PlayerInvRec
-        Dim tmpTradeItem2(MAX_INV) As PlayerInvRec
+        Dim tmpTradeItem(MAX_INV) As PlayerInvStruct
+        Dim tmpTradeItem2(MAX_INV) As PlayerInvStruct
 
         AddDebug("Recieved CMSG: CAcceptTrade")
 
@@ -2798,6 +2798,13 @@ Module S_NetworkReceive
                 SendMapData(i, mapNum, True)
             End If
         Next
+
+        SendMapData(index, mapNum, True)
+        SendMapNames(index)
+
+        buffer = New ByteStream(4)
+        buffer.WriteInt32(ServerPackets.SEditMap)
+        Socket.SendDataTo(index, buffer.Data, buffer.Head)
 
         buffer.Dispose()
     End Sub

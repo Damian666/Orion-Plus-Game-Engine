@@ -35,7 +35,7 @@
         Dim MaxX As Byte
         Dim MaxY As Byte
 
-        Dim Tile(,) As TileRec
+        Dim Tile(,) As TileStruct
         Dim Npc() As Integer
         Dim EventCount As Integer
         Dim Events() As EventRec
@@ -61,24 +61,6 @@
         Dim CurrentEvents As Integer
 
         Dim MapEvents() As MapEventRec
-    End Structure
-
-    Friend Structure ClassRec
-        Dim Name As String
-        Dim Desc As String
-        Dim Stat() As Byte
-        Dim MaleSprite() As Integer
-        Dim FemaleSprite() As Integer
-        Dim StartItem() As Integer
-        Dim StartValue() As Integer
-        Dim StartMap As Integer
-        Dim StartX As Byte
-        Dim StartY As Byte
-        Dim BaseExp As Integer
-
-        ' For client use
-        Dim Vital() As Integer
-
     End Structure
 
     Friend Structure MapItemRec

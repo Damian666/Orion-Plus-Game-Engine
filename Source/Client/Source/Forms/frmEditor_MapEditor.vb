@@ -422,7 +422,7 @@ Public Class FrmEditor_MapEditor
     Private Sub BtnSaveSettings_Click(sender As Object, e As EventArgs) Handles btnSaveSettings.Click
         Dim X As Integer, x2 As Integer
         Dim Y As Integer, y2 As Integer
-        Dim tempArr(,) As TileRec
+        Dim tempArr(,) As TileStruct
 
         If Not IsNumeric(txtMaxX.Text) Then txtMaxX.Text = Map.MaxX
         If Val(txtMaxX.Text) < ScreenMapx Then txtMaxX.Text = ScreenMapx
