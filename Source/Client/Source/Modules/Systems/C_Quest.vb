@@ -284,7 +284,17 @@ Friend Module C_Quest
 
 #Region "Outgoing Packets"
 
-    Sub SendRequestQuests()
+    Friend Sub SendRequestEditQuest()
+        Dim buffer As ByteStream
+
+        buffer = New ByteStream(4)
+        buffer.WriteInt32(ClientPackets.CRequestEditQuest)
+        Socket.SendData(buffer.Data, buffer.Head)
+        buffer.Dispose()
+
+    End Sub
+
+    Friend Sub SendRequestQuests()
         Dim buffer As New ByteStream(4)
 
         buffer.WriteInt32(ClientPackets.CRequestQuests)
@@ -632,6 +642,362 @@ Friend Module C_Quest
         PnlQuestLogVisible = False
 
         SelectedQuest = 0
+    End Sub
+
+    Friend Sub LoadRequirement(QuestNum As Integer, ReqNum As Integer)
+        Dim i As Integer
+
+        With frmEditor_Quest
+            'Populate combo boxes
+            .cmbItemReq.Items.Clear()
+            .cmbItemReq.Items.Add("None")
+
+            For i = 1 To MAX_ITEMS
+                .cmbItemReq.Items.Add(i & ": " & Item(i).Name)
+            Next
+
+            .cmbQuestReq.Items.Clear()
+            .cmbQuestReq.Items.Add("None")
+
+            For i = 1 To MaxQuests
+                .cmbQuestReq.Items.Add(i & ": " & Quest(i).Name)
+            Next
+
+            .cmbClassReq.Items.Clear()
+            .cmbClassReq.Items.Add("None")
+
+            For i = 1 To MaxClasses
+                .cmbClassReq.Items.Add(i & ": " & Classes(i).Name)
+            Next
+
+            .cmbItemReq.Enabled = False
+            .cmbQuestReq.Enabled = False
+            .cmbClassReq.Enabled = False
+
+            Select Case Quest(QuestNum).Requirement(ReqNum)
+                Case 0
+                    .rdbNoneReq.Checked = True
+                Case 1
+                    .rdbItemReq.Checked = True
+                    .cmbItemReq.Enabled = True
+                    .cmbItemReq.SelectedIndex = Quest(QuestNum).RequirementIndex(ReqNum)
+                Case 2
+                    .rdbQuestReq.Checked = True
+                    .cmbQuestReq.Enabled = True
+                    .cmbQuestReq.SelectedIndex = Quest(QuestNum).RequirementIndex(ReqNum)
+                Case 3
+                    .rdbClassReq.Checked = True
+                    .cmbClassReq.Enabled = True
+                    .cmbClassReq.SelectedIndex = Quest(QuestNum).RequirementIndex(ReqNum)
+            End Select
+
+        End With
+
+    End Sub
+
+    'Subroutine that load the desired task in the form
+    Friend Sub LoadTask(QuestNum As Integer, TaskNum As Integer)
+        Dim TaskToLoad As TaskRec
+        TaskToLoad = Quest(QuestNum).Task(TaskNum)
+
+        With frmEditor_Quest
+            'Load the task type
+            Select Case TaskToLoad.Order
+                Case 0
+                    .optTask0.Checked = True
+                Case 1
+                    .optTask1.Checked = True
+                Case 2
+                    .optTask2.Checked = True
+                Case 3
+                    .optTask3.Checked = True
+                Case 4
+                    .optTask4.Checked = True
+                Case 5
+                    .optTask5.Checked = True
+                Case 6
+                    .optTask6.Checked = True
+                Case 7
+                    .optTask7.Checked = True
+            End Select
+
+            'Load textboxes
+            .txtTaskLog.Text = "" & Trim$(TaskToLoad.TaskLog)
+
+            'Populate combo boxes
+            .cmbNpc.Items.Clear()
+            .cmbNpc.Items.Add("None")
+
+            For i = 1 To MAX_NPCS
+                .cmbNpc.Items.Add(i & ": " & Npc(i).Name)
+            Next
+
+            .cmbItem.Items.Clear()
+            .cmbItem.Items.Add("None")
+
+            For i = 1 To MAX_ITEMS
+                .cmbItem.Items.Add(i & ": " & Item(i).Name)
+            Next
+
+            .cmbMap.Items.Clear()
+            .cmbMap.Items.Add("None")
+
+            For i = 1 To MAX_MAPS
+                .cmbMap.Items.Add(i)
+            Next
+
+            .cmbResource.Items.Clear()
+            .cmbResource.Items.Add("None")
+
+            For i = 1 To MAX_RESOURCES
+                .cmbResource.Items.Add(i & ": " & Resource(i).Name)
+            Next
+
+            'Set combo to 0 and disable them so they can be enabled when needed
+            .cmbNpc.SelectedIndex = 0
+            .cmbItem.SelectedIndex = 0
+            .cmbMap.SelectedIndex = 0
+            .cmbResource.SelectedIndex = 0
+            .nudAmount.Value = 0
+
+            .cmbNpc.Enabled = False
+            .cmbItem.Enabled = False
+            .cmbMap.Enabled = False
+            .cmbResource.Enabled = False
+            .nudAmount.Enabled = False
+
+            If TaskToLoad.QuestEnd = 1 Then
+                .chkEnd.Checked = True
+            Else
+                .chkEnd.Checked = False
+            End If
+
+            Select Case TaskToLoad.Order
+                Case 0 'Nothing
+
+                Case QuestType.Slay '1
+                    .cmbNpc.Enabled = True
+                    .cmbNpc.SelectedIndex = TaskToLoad.Npc
+                    .nudAmount.Enabled = True
+                    .nudAmount.Value = TaskToLoad.Amount
+
+                Case QuestType.Collect '2
+                    .cmbItem.Enabled = True
+                    .cmbItem.SelectedIndex = TaskToLoad.Item
+                    .nudAmount.Enabled = True
+                    .nudAmount.Value = TaskToLoad.Amount
+
+                Case QuestType.Talk '3
+                    .cmbNpc.Enabled = True
+                    .cmbNpc.SelectedIndex = TaskToLoad.Npc
+
+                Case QuestType.Reach '4
+                    .cmbMap.Enabled = True
+                    .cmbMap.SelectedIndex = TaskToLoad.Map
+
+                Case QuestType.Give '5
+                    .cmbItem.Enabled = True
+                    .cmbItem.SelectedIndex = TaskToLoad.Item
+                    .nudAmount.Enabled = True
+                    .nudAmount.Value = TaskToLoad.Amount
+                    .cmbNpc.Enabled = True
+                    .cmbNpc.SelectedIndex = TaskToLoad.Npc
+                    .txtTaskSpeech.Text = "" & Trim$(TaskToLoad.Speech)
+
+                Case QuestType.Kill '6
+                    .cmbResource.Enabled = True
+                    .cmbResource.SelectedIndex = TaskToLoad.Resource
+                    .nudAmount.Enabled = True
+                    .nudAmount.Value = TaskToLoad.Amount
+
+                Case QuestType.Gather '7
+                    .cmbNpc.Enabled = True
+                    .cmbNpc.SelectedIndex = TaskToLoad.Npc
+                    .cmbItem.Enabled = True
+                    .cmbItem.SelectedIndex = TaskToLoad.Item
+                    .nudAmount.Enabled = True
+                    .nudAmount.Value = TaskToLoad.Amount
+                    .txtTaskSpeech.Text = "" & Trim$(TaskToLoad.Speech)
+            End Select
+
+            .lblTaskNum.Text = "Task Number: " & TaskNum
+        End With
+    End Sub
+
+#End Region
+
+#Region "Quest Editor"
+
+    Friend Sub SendSaveQuest(QuestNum As Integer)
+        Dim buffer As ByteStream
+
+        buffer = New ByteStream(4)
+
+        buffer.WriteInt32(ClientPackets.CSaveQuest)
+        buffer.WriteInt32(QuestNum)
+
+        buffer.WriteString((Trim(Quest(QuestNum).Name)))
+        buffer.WriteString((Trim(Quest(QuestNum).QuestLog)))
+        buffer.WriteInt32(Quest(QuestNum).Repeat)
+        buffer.WriteInt32(Quest(QuestNum).Cancelable)
+
+        buffer.WriteInt32(Quest(QuestNum).ReqCount)
+        For I = 1 To Quest(QuestNum).ReqCount
+            buffer.WriteInt32(Quest(QuestNum).Requirement(I))
+            buffer.WriteInt32(Quest(QuestNum).RequirementIndex(I))
+        Next
+
+        buffer.WriteInt32(Quest(QuestNum).QuestGiveItem)
+        buffer.WriteInt32(Quest(QuestNum).QuestGiveItemValue)
+        buffer.WriteInt32(Quest(QuestNum).QuestRemoveItem)
+        buffer.WriteInt32(Quest(QuestNum).QuestRemoveItemValue)
+
+        For I = 1 To 3
+            buffer.WriteString((Trim(Quest(QuestNum).Chat(I))))
+        Next
+
+        buffer.WriteInt32(Quest(QuestNum).RewardCount)
+        For i = 1 To Quest(QuestNum).RewardCount
+            buffer.WriteInt32(Quest(QuestNum).RewardItem(i))
+            buffer.WriteInt32(Quest(QuestNum).RewardItemAmount(i))
+        Next
+
+        buffer.WriteInt32(Quest(QuestNum).RewardExp)
+
+        buffer.WriteInt32(Quest(QuestNum).TaskCount)
+        For I = 1 To Quest(QuestNum).TaskCount
+            buffer.WriteInt32(Quest(QuestNum).Task(I).Order)
+            buffer.WriteInt32(Quest(QuestNum).Task(I).Npc)
+            buffer.WriteInt32(Quest(QuestNum).Task(I).Item)
+            buffer.WriteInt32(Quest(QuestNum).Task(I).Map)
+            buffer.WriteInt32(Quest(QuestNum).Task(I).Resource)
+            buffer.WriteInt32(Quest(QuestNum).Task(I).Amount)
+            buffer.WriteString((Trim(Quest(QuestNum).Task(I).Speech)))
+            buffer.WriteString((Trim(Quest(QuestNum).Task(I).TaskLog)))
+            buffer.WriteInt32(Quest(QuestNum).Task(I).QuestEnd)
+            buffer.WriteInt32(Quest(QuestNum).Task(I).TaskType)
+        Next
+
+        Socket.SendData(buffer.Data, buffer.Head)
+        buffer.Dispose()
+
+    End Sub
+    Friend Sub QuestEditorInit()
+
+        If frmEditor_Quest.Visible = False Then Exit Sub
+        Editorindex = frmEditor_Quest.lstIndex.SelectedIndex + 1
+
+        With frmEditor_Quest
+            .txtName.Text = Trim$(Quest(Editorindex).Name)
+
+            If Quest(Editorindex).Repeat = 1 Then
+                .chkRepeat.Checked = True
+            Else
+                .chkRepeat.Checked = False
+            End If
+
+            .txtStartText.Text = Trim$(Quest(Editorindex).Chat(1))
+            .txtProgressText.Text = Trim$(Quest(Editorindex).Chat(2))
+            .txtEndText.Text = Trim$(Quest(Editorindex).Chat(3))
+
+            .cmbStartItem.Items.Clear()
+            .cmbItemReq.Items.Clear()
+            .cmbEndItem.Items.Clear()
+            .cmbItemReward.Items.Clear()
+            .cmbStartItem.Items.Add("None")
+            .cmbItemReq.Items.Add("None")
+            .cmbEndItem.Items.Add("None")
+            .cmbItemReward.Items.Add("None")
+
+            For i = 1 To MAX_ITEMS
+                .cmbStartItem.Items.Add(i & ": " & Item(i).Name)
+                .cmbItemReq.Items.Add(i & ": " & Item(i).Name)
+                .cmbEndItem.Items.Add(i & ": " & Item(i).Name)
+                .cmbItemReward.Items.Add(i & ": " & Item(i).Name)
+            Next
+
+            .cmbStartItem.SelectedIndex = 0
+            .cmbItemReq.SelectedIndex = 0
+            .cmbEndItem.SelectedIndex = 0
+            .cmbItemReward.SelectedIndex = 0
+
+            .cmbClassReq.Items.Clear()
+            .cmbClassReq.Items.Add("None")
+            For i = 1 To MaxClasses
+                .cmbClassReq.Items.Add(Trim(Classes(i).Name))
+            Next
+
+            .cmbStartItem.SelectedIndex = Quest(Editorindex).QuestGiveItem
+            .cmbEndItem.SelectedIndex = Quest(Editorindex).QuestRemoveItem
+
+            .nudGiveAmount.Value = Quest(Editorindex).QuestGiveItemValue
+
+            .nudTakeAmount.Value = Quest(Editorindex).QuestRemoveItemValue
+
+            .lstRewards.Items.Clear()
+            For i = 1 To Quest(Editorindex).RewardCount
+                .lstRewards.Items.Add(i & ":" & Quest(Editorindex).RewardItemAmount(i) & " X " & Trim(Item(Quest(Editorindex).RewardItem(i)).Name))
+            Next
+
+            .nudExpReward.Value = Quest(Editorindex).RewardExp
+
+            .lstRequirements.Items.Clear()
+
+            For i = 1 To Quest(Editorindex).ReqCount
+
+                Select Case Quest(Editorindex).Requirement(i)
+                    Case 1
+                        .lstRequirements.Items.Add(i & ":" & "Item Requirement: " & Trim(Item(Quest(Editorindex).RequirementIndex(i)).Name))
+                    Case 2
+                        .lstRequirements.Items.Add(i & ":" & "Quest Requirement: " & Trim(Quest(Quest(Editorindex).RequirementIndex(i)).Name))
+                    Case 3
+                        .lstRequirements.Items.Add(i & ":" & "Class Requirement: " & Trim(Classes(Quest(Editorindex).RequirementIndex(i)).Name))
+                    Case Else
+                        .lstRequirements.Items.Add(i & ":")
+                End Select
+            Next
+
+            .lstTasks.Items.Clear()
+            For i = 1 To Quest(Editorindex).TaskCount
+                frmEditor_Quest.lstTasks.Items.Add(i & ":" & Quest(Editorindex).Task(i).TaskLog)
+            Next
+
+            .rdbNoneReq.Checked = True
+        End With
+
+        QuestChanged(Editorindex) = True
+
+    End Sub
+
+    Friend Sub QuestEditorOk()
+        Dim I As Integer
+
+        For I = 1 To MaxQuests
+            If QuestChanged(I) Then
+                SendSaveQuest(I)
+            End If
+        Next
+
+        frmEditor_Quest.Dispose()
+        Editor = 0
+        ClearChanged_Quest()
+
+    End Sub
+
+    Friend Sub QuestEditorCancel()
+        Editor = 0
+        frmEditor_Quest.Dispose()
+        ClearChanged_Quest()
+        ClearQuests()
+        SendRequestQuests()
+    End Sub
+
+    Friend Sub ClearChanged_Quest()
+        Dim I As Integer
+
+        For I = 0 To MaxQuests
+            QuestChanged(I) = False
+        Next
     End Sub
 
 #End Region

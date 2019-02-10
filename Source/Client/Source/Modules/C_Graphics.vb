@@ -1,6 +1,4 @@
-﻿Imports System.Drawing
-Imports System.IO
-Imports System.Windows.Forms
+﻿Imports System.IO
 Imports SFML.Graphics
 Imports SFML.Window
 
@@ -10,6 +8,11 @@ Module C_Graphics
 
     Friend GameWindow As RenderWindow
     Friend TilesetWindow As RenderWindow
+
+    Friend EditorItem_Furniture As RenderWindow
+    Friend EditorSkill_Icon As RenderWindow
+    Friend EditorAnimation_Anim1 As RenderWindow
+    Friend EditorAnimation_Anim2 As RenderWindow
 
     Friend SfmlGameFont As SFML.Graphics.Font
 
@@ -307,6 +310,11 @@ Module C_Graphics
 
         GameWindow = New RenderWindow(FrmGame.picscreen.Handle)
         TilesetWindow = New RenderWindow(FrmEditor_MapEditor.picBackSelect.Handle)
+
+        EditorItem_Furniture = New RenderWindow(frmEditor_Item.picFurniture.Handle)
+        EditorSkill_Icon = New RenderWindow(frmEditor_Skill.picSprite.Handle)
+        EditorAnimation_Anim1 = New RenderWindow(FrmEditor_Animation.picSprite0.Handle)
+        EditorAnimation_Anim2 = New RenderWindow(FrmEditor_Animation.picSprite1.Handle)
 
         SfmlGameFont = New SFML.Graphics.Font(Environment.GetFolderPath(Environment.SpecialFolder.Fonts) + "\" + FontName)
 
@@ -2319,9 +2327,6 @@ Module C_Graphics
         'Hp Bar etc
         DrawStatBars()
 
-        'Fps etc
-        If Fps > 64 Then Fps = 64
-
         DrawText(HudWindowX + HudhpBarX + HpBarGfxInfo.Width + 10, HudWindowY + HudhpBarY + 4, Strings.Get("gamegui", "fps") & Fps, SFML.Graphics.Color.White, SFML.Graphics.Color.Black, GameWindow)
         DrawText(HudWindowX + HudmpBarX + MpBarGfxInfo.Width + 10, HudWindowY + HudmpBarY + 4, Strings.Get("gamegui", "ping") & PingToDraw, SFML.Graphics.Color.White, SFML.Graphics.Color.Black, GameWindow)
         DrawText(HudWindowX + HudexpBarX + ExpBarGfxInfo.Width + 10, HudWindowY + HudexpBarY + 4, Strings.Get("gamegui", "clock") & Time.Instance.ToString("h:mm"), SFML.Graphics.Color.White, SFML.Graphics.Color.Black, GameWindow)
@@ -3024,4 +3029,313 @@ NextLoop:
         RenderSprite(CursorSprite, GameWindow, CurMouseX, CurMouseY, 0, 0, CursorInfo.Width, CursorInfo.Height)
     End Sub
 
+
+    Friend Sub EditorItem_DrawItem()
+        Dim itemnum As Integer
+        itemnum = frmEditor_Item.nudPic.Value
+
+        If itemnum < 1 OrElse itemnum > NumItems Then
+            frmEditor_Item.picItem.BackgroundImage = Nothing
+            Exit Sub
+        End If
+
+        If File.Exists(Application.StartupPath & GfxPath & "items\" & itemnum & GfxExt) Then
+            frmEditor_Item.picItem.BackgroundImage = Drawing.Image.FromFile(Application.StartupPath & GfxPath & "items\" & itemnum & GfxExt)
+        End If
+
+    End Sub
+
+    Friend Sub EditorItem_DrawPaperdoll()
+        Dim Sprite As Integer
+
+        Sprite = frmEditor_Item.nudPaperdoll.Value
+
+        If Sprite < 1 OrElse Sprite > NumPaperdolls Then
+            frmEditor_Item.picPaperdoll.BackgroundImage = Nothing
+            Exit Sub
+        End If
+
+        If File.Exists(Application.StartupPath & GfxPath & "paperdolls\" & Sprite & GfxExt) Then
+            frmEditor_Item.picPaperdoll.BackgroundImage = Drawing.Image.FromFile(Application.StartupPath & GfxPath & "paperdolls\" & Sprite & GfxExt)
+        End If
+    End Sub
+
+    Friend Sub EditorItem_DrawFurniture()
+        Dim Furniturenum As Integer
+        Dim sRECT As Rectangle
+        Dim dRECT As Rectangle
+        Furniturenum = frmEditor_Item.nudFurniture.Value
+
+        If Furniturenum < 1 OrElse Furniturenum > NumFurniture Then
+            EditorItem_Furniture.Clear(ToSfmlColor(frmEditor_Item.picFurniture.BackColor))
+            EditorItem_Furniture.Display()
+            Exit Sub
+        End If
+
+        If FurnitureGfxInfo(Furniturenum).IsLoaded = False Then
+            LoadTexture(Furniturenum, 10)
+        End If
+
+        'seeying we still use it, lets update timer
+        With FurnitureGfxInfo(Furniturenum)
+            .TextureTimer = GetTickCount() + 100000
+        End With
+
+        ' rect for source
+        With sRECT
+            .Y = 0
+            .Height = FurnitureGfxInfo(Furniturenum).Height
+            .X = 0
+            .Width = FurnitureGfxInfo(Furniturenum).Width
+        End With
+
+        ' same for destination as source
+        dRECT = sRECT
+
+        EditorItem_Furniture.Clear(ToSfmlColor(frmEditor_Item.picFurniture.BackColor))
+
+        RenderSprite(FurnitureSprite(Furniturenum), EditorItem_Furniture, dRECT.X, dRECT.Y, sRECT.X, sRECT.Y, sRECT.Width, sRECT.Height)
+
+        If frmEditor_Item.optSetBlocks.Checked = True Then
+            For X = 0 To 3
+                For Y = 0 To 3
+                    If X <= (FurnitureGfxInfo(Furniturenum).Width / 32) - 1 Then
+                        If Y <= (FurnitureGfxInfo(Furniturenum).Height / 32) - 1 Then
+                            If Item(Editorindex).FurnitureBlocks(X, Y) = 1 Then
+                                DrawText(X * 32 + 8, Y * 32 + 8, "X", Color.Red, Color.Black, EditorItem_Furniture)
+                            Else
+                                DrawText(X * 32 + 8, Y * 32 + 8, "O", Color.Blue, Color.Black, EditorItem_Furniture)
+                            End If
+                        End If
+                    End If
+                Next
+            Next
+        ElseIf frmEditor_Item.optSetFringe.Checked = True Then
+            For X = 0 To 3
+                For Y = 0 To 3
+                    If X <= (FurnitureGfxInfo(Furniturenum).Width / 32) - 1 Then
+                        If Y <= (FurnitureGfxInfo(Furniturenum).Height / 32) Then
+                            If Item(Editorindex).FurnitureFringe(X, Y) = 1 Then
+                                DrawText(X * 32 + 8, Y * 32 + 8, "O", Color.Blue, Color.Black, EditorItem_Furniture)
+                            End If
+                        End If
+                    End If
+                Next
+            Next
+        End If
+        EditorItem_Furniture.Display()
+    End Sub
+
+    Friend Sub EditorNpc_DrawSprite()
+        Dim Sprite As Integer
+
+        Sprite = frmEditor_NPC.nudSprite.Value
+
+        If Sprite < 1 OrElse Sprite > NumCharacters Then
+            frmEditor_NPC.picSprite.BackgroundImage = Nothing
+            Exit Sub
+        End If
+
+        If File.Exists(Application.StartupPath & GfxPath & "characters\" & Sprite & GfxExt) Then
+            frmEditor_NPC.picSprite.Width = Drawing.Image.FromFile(Application.StartupPath & GfxPath & "characters\" & Sprite & GfxExt).Width / 4
+            frmEditor_NPC.picSprite.Height = Drawing.Image.FromFile(Application.StartupPath & GfxPath & "characters\" & Sprite & GfxExt).Height / 4
+            frmEditor_NPC.picSprite.BackgroundImage = Drawing.Image.FromFile(Application.StartupPath & GfxPath & "characters\" & Sprite & GfxExt)
+        End If
+    End Sub
+
+    Friend Sub EditorResource_DrawSprite()
+        Dim Sprite As Integer
+
+        ' normal sprite
+        Sprite = frmEditor_Resource.nudNormalPic.Value
+
+        If Sprite < 1 OrElse Sprite > NumResources Then
+            frmEditor_Resource.picNormalpic.BackgroundImage = Nothing
+        Else
+            If File.Exists(Application.StartupPath & GfxPath & "resources\" & Sprite & GfxExt) Then
+                frmEditor_Resource.picNormalpic.BackgroundImage = Drawing.Image.FromFile(Application.StartupPath & GfxPath & "resources\" & Sprite & GfxExt)
+            End If
+        End If
+
+        ' exhausted sprite
+        Sprite = frmEditor_Resource.nudExhaustedPic.Value
+
+        If Sprite < 1 OrElse Sprite > NumResources Then
+            frmEditor_Resource.picExhaustedPic.BackgroundImage = Nothing
+        Else
+            If File.Exists(Application.StartupPath & GfxPath & "resources\" & Sprite & GfxExt) Then
+                frmEditor_Resource.picExhaustedPic.BackgroundImage = Drawing.Image.FromFile(Application.StartupPath & GfxPath & "resources\" & Sprite & GfxExt)
+            End If
+        End If
+    End Sub
+
+    Friend Sub EditorSkill_BltIcon()
+        Dim iconnum As Integer
+        Dim sRECT As Rectangle
+        Dim dRECT As Rectangle
+        iconnum = frmEditor_Skill.nudIcon.Value
+
+        If iconnum < 1 OrElse iconnum > NumSkillIcons Then
+            EditorSkill_Icon.Clear(ToSfmlColor(frmEditor_Skill.picSprite.BackColor))
+            EditorSkill_Icon.Display()
+            Exit Sub
+        End If
+
+        If SkillIconsGfxInfo(iconnum).IsLoaded = False Then
+            LoadTexture(iconnum, 9)
+        End If
+
+        'seeying we still use it, lets update timer
+        With SkillIconsGfxInfo(iconnum)
+            .TextureTimer = GetTickCount() + 100000
+        End With
+
+        With sRECT
+            .Y = 0
+            .Height = PicY
+            .X = 0
+            .Width = PicX
+        End With
+
+        'drect is the same, so just copy it
+        dRECT = sRECT
+
+        EditorSkill_Icon.Clear(ToSfmlColor(frmEditor_Skill.picSprite.BackColor))
+
+        RenderSprite(SkillIconsSprite(iconnum), EditorSkill_Icon, dRECT.X, dRECT.Y, sRECT.X, sRECT.Y, sRECT.Width, sRECT.Height)
+
+        EditorSkill_Icon.Display()
+    End Sub
+
+    Friend Sub EditorAnim_DrawAnim()
+        Dim Animationnum As Integer
+        Dim sRECT As Rectangle
+        Dim dRECT As Rectangle
+        Dim width As Integer, height As Integer
+        Dim looptime As Integer
+        Dim FrameCount As Integer
+        Dim ShouldRender As Boolean
+
+        Animationnum = FrmEditor_Animation.nudSprite0.Value
+
+        If Animationnum < 1 OrElse Animationnum > NumAnimations Then
+            EditorAnimation_Anim1.Clear(ToSfmlColor(FrmEditor_Animation.picSprite0.BackColor))
+            EditorAnimation_Anim1.Display()
+        Else
+            If AnimationsGfxInfo(Animationnum).IsLoaded = False Then
+                LoadTexture(Animationnum, 6)
+            End If
+
+            'seeying we still use it, lets update timer
+            With AnimationsGfxInfo(Animationnum)
+                .TextureTimer = GetTickCount() + 100000
+            End With
+
+            looptime = FrmEditor_Animation.nudLoopTime0.Value
+            FrameCount = FrmEditor_Animation.nudFrameCount0.Value
+
+            ShouldRender = False
+
+            ' check if we need to render new frame
+            If AnimEditorTimer(0) + looptime <= GetTickCount() Then
+                ' check if out of range
+                If AnimEditorFrame(0) >= FrameCount Then
+                    AnimEditorFrame(0) = 1
+                Else
+                    AnimEditorFrame(0) = AnimEditorFrame(0) + 1
+                End If
+                AnimEditorTimer(0) = GetTickCount()
+                ShouldRender = True
+            End If
+
+            If ShouldRender Then
+                If FrmEditor_Animation.nudFrameCount0.Value > 0 Then
+                    ' total width divided by frame count
+                    height = AnimationsGfxInfo(Animationnum).Height
+                    width = AnimationsGfxInfo(Animationnum).Width / FrmEditor_Animation.nudFrameCount0.Value
+
+                    With sRECT
+                        .Y = 0
+                        .Height = height
+                        .X = (AnimEditorFrame(0) - 1) * width
+                        .Width = width
+                    End With
+
+                    With dRECT
+                        .Y = 0
+                        .Height = height
+                        .X = 0
+                        .Width = width
+                    End With
+
+                    EditorAnimation_Anim1.Clear(ToSfmlColor(FrmEditor_Animation.picSprite0.BackColor))
+
+                    RenderSprite(AnimationsSprite(Animationnum), EditorAnimation_Anim1, dRECT.X, dRECT.Y, sRECT.X, sRECT.Y, sRECT.Width, sRECT.Height)
+
+                    EditorAnimation_Anim1.Display()
+                End If
+            End If
+        End If
+
+        Animationnum = FrmEditor_Animation.nudSprite1.Value
+
+        If Animationnum < 1 OrElse Animationnum > NumAnimations Then
+            EditorAnimation_Anim2.Clear(ToSfmlColor(FrmEditor_Animation.picSprite1.BackColor))
+            EditorAnimation_Anim2.Display()
+        Else
+            If AnimationsGfxInfo(Animationnum).IsLoaded = False Then
+                LoadTexture(Animationnum, 6)
+            End If
+
+            'seeying we still use it, lets update timer
+            With AnimationsGfxInfo(Animationnum)
+                .TextureTimer = GetTickCount() + 100000
+            End With
+
+            looptime = FrmEditor_Animation.nudLoopTime1.Value
+            FrameCount = FrmEditor_Animation.nudFrameCount1.Value
+
+            ShouldRender = False
+
+            ' check if we need to render new frame
+            If AnimEditorTimer(1) + looptime <= GetTickCount() Then
+                ' check if out of range
+                If AnimEditorFrame(1) >= FrameCount Then
+                    AnimEditorFrame(1) = 1
+                Else
+                    AnimEditorFrame(1) = AnimEditorFrame(1) + 1
+                End If
+                AnimEditorTimer(1) = GetTickCount()
+                ShouldRender = True
+            End If
+
+            If ShouldRender Then
+                If FrmEditor_Animation.nudFrameCount1.Value > 0 Then
+                    ' total width divided by frame count
+                    height = AnimationsGfxInfo(Animationnum).Height
+                    width = AnimationsGfxInfo(Animationnum).Width / FrmEditor_Animation.nudFrameCount1.Value
+
+                    With sRECT
+                        .Y = 0
+                        .Height = height
+                        .X = (AnimEditorFrame(1) - 1) * width
+                        .Width = width
+                    End With
+
+                    With dRECT
+                        .Y = 0
+                        .Height = height
+                        .X = 0
+                        .Width = width
+                    End With
+
+                    EditorAnimation_Anim2.Clear(ToSfmlColor(FrmEditor_Animation.picSprite1.BackColor))
+
+                    RenderSprite(AnimationsSprite(Animationnum), EditorAnimation_Anim2, dRECT.X, dRECT.Y, sRECT.X, sRECT.Y, sRECT.Width, sRECT.Height)
+                    EditorAnimation_Anim2.Display()
+
+                End If
+            End If
+        End If
+    End Sub
 End Module

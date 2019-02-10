@@ -147,6 +147,22 @@ Module C_NetworkReceive
 
         Socket.PacketId(ServerPackets.SClock) = AddressOf Packet_Clock
         Socket.PacketId(ServerPackets.STime) = AddressOf Packet_Time
+
+        ' EDITOR PACKETS ONLY
+        Socket.PacketId(ServerPackets.SItemEditor) = AddressOf Packet_EditItem
+        Socket.PacketId(ServerPackets.SREditor) = AddressOf Packet_ResourceEditor
+        Socket.PacketId(ServerPackets.SNpcEditor) = AddressOf Packet_NPCEditor
+        Socket.PacketId(ServerPackets.SShopEditor) = AddressOf Packet_EditShop
+        Socket.PacketId(ServerPackets.SSkillEditor) = AddressOf Packet_EditSkill
+        Socket.PacketId(ServerPackets.SResourceEditor) = AddressOf Packet_ResourceEditor
+        Socket.PacketId(ServerPackets.SAnimationEditor) = AddressOf Packet_EditAnimation
+        Socket.PacketId(ServerPackets.SQuestEditor) = AddressOf Packet_QuestEditor
+        Socket.PacketId(ServerPackets.SHouseEdit) = AddressOf Packet_EditHouses
+        Socket.PacketId(ServerPackets.SProjectileEditor) = AddressOf HandleProjectileEditor
+        Socket.PacketId(ServerPackets.SRecipeEditor) = AddressOf Packet_RecipeEditor
+        Socket.PacketId(ServerPackets.SClassEditor) = AddressOf Packet_ClassEditor
+        Socket.PacketId(ServerPackets.SAutoMapper) = AddressOf Packet_AutoMapper
+        Socket.PacketId(ServerPackets.SPetEditor) = AddressOf Packet_PetEditor
     End Sub
 
     Private Sub Packet_AlertMSG(ByRef data() As Byte)
@@ -1177,5 +1193,46 @@ Module C_NetworkReceive
     Private Sub Packet_LeftGame(ByRef data() As Byte)
         DestroyGame()
     End Sub
+
+    '**********************
+    '***  EDITOR STUFF  ***
+    '**********************
+
+    Private Sub Packet_EditAnimation(ByRef data() As Byte)
+        InitAnimationEditor = True
+    End Sub
+
+    Private Sub Packet_ClassEditor(ByRef data() As Byte)
+        InitClassEditor = True
+    End Sub
+
+    Sub Packet_EditItem(ByRef data() As Byte)
+        InitItemEditor = True
+    End Sub
+
+    Private Sub Packet_NPCEditor(ByRef data() As Byte)
+        InitNPCEditor = True
+    End Sub
+
+    Private Sub Packet_ResourceEditor(ByRef data() As Byte)
+        InitResourceEditor = True
+    End Sub
+
+    Friend Sub Packet_PetEditor(ByRef data() As Byte)
+        InitPetEditor = True
+    End Sub
+
+    Friend Sub HandleProjectileEditor(ByRef data() As Byte)
+        InitProjectileEditor = True
+    End Sub
+
+    Private Sub Packet_EditShop(ByRef data() As Byte)
+        InitShopEditor = True
+    End Sub
+
+    Private Sub Packet_EditSkill(ByRef data() As Byte)
+        InitSkillEditor = True
+    End Sub
+
 
 End Module

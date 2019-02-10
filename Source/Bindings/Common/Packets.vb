@@ -190,12 +190,9 @@
         CSetSprite
         CGetStats
         CRequestNewMap
-        CSaveMap
         CNeedMap
         CMapGetItem
         CMapDropItem
-        CMapRespawn
-        CMapReport
         CKickPlayer
         CBanList
         CBanDestroy
@@ -297,72 +294,73 @@
         CPetSkill
         CPetUseStatPoint
 
-        ' Make sure COUNT is below everything else
-        Count
-    End Enum
+        '*************************
+        '***   EDITOR PACKETS  ***
+        '*************************
 
-    Friend Enum EditorPackets
-        'Editor login
-        EditorLogin = ClientPackets.Count
+        ' Mapper Packets
+        CMapRespawn
+        CMapReport
+        CSaveMap
 
-        'maps
-        EditorRequestMap
-        EditorSaveMap
-        MapData
+        ' AutoMapper Packets
+        CRequestAutoMap
+        CSaveAutoMap
 
-        'items
-        RequestEditItem
-        SaveItem
-
-        'npc's
-        RequestEditNpc
-        SaveNpc
-
-        'shops
-        RequestEditShop
-        SaveShop
-
-        'skills
-        RequestEditSkill
-        SaveSkill
-
-        'resources
-        RequestEditResource
-        SaveResource
+        ' ####################
+        ' ### Dev+ Packets ###
+        ' ####################
 
         'animations
-        RequestEditAnimation
-        SaveAnimation
-
-        'quests
-        RequestEditQuest
-        SaveQuest
-
-        'houses
-        RequestEditHouse
-        SaveHouses
-
-        'projectiles
-        RequestEditProjectiles
-        SaveProjectile
-
-        'craft
-        RequestEditRecipes
-        SaveRecipe
+        CRequestEditAnimation
+        CSaveAnimation
 
         'Class Editor
-        RequestEditClasses
-        SaveClasses
+        CRequestEditClasses
+        CSaveClasses
 
-        'AutoMapper
-        RequestAutoMap
-        SaveAutoMap
+        'houses
+        CRequestEditHouse
+        CSaveHouses
+
+        'items
+        CRequestEditItem
+        CSaveItem
+
+        'npc's
+        CRequestEditNpc
+        CSaveNpc
 
         'pets
         CRequestEditPet
         CSavePet
 
+        'projectiles
+        CRequestEditProjectiles
+        CSaveProjectile
+
+        'quests
+        CRequestEditQuest
+        CSaveQuest
+
+        'recipe
+        CRequestEditRecipes
+        CSaveRecipe
+
+        'resources
+        CRequestEditResource
+        CSaveResource
+
+        'shops
+        CRequestEditShop
+        CSaveShop
+
+        'skills
+        CRequestEditSkill
+        CSaveSkill
+
         ' Make sure COUNT is below everything else
         Count
     End Enum
+
 End Module

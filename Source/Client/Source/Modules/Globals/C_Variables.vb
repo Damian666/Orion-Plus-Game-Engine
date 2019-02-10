@@ -203,4 +203,42 @@ Module C_Variables
     Friend ShowAnimTimer As Integer
 
     Friend EKeyPair As New ASFW.IO.Encryption.KeyPair()
+
+    ' Editor edited items array
+    Friend Item_Changed(MAX_ITEMS) As Boolean
+    Friend NPC_Changed(MAX_NPCS) As Boolean
+    Friend Resource_Changed(MAX_RESOURCES) As Boolean
+    Friend Animation_Changed(MAX_ANIMATIONS) As Boolean
+    Friend Skill_Changed(MAX_SKILLS) As Boolean
+    Friend Shop_Changed(MAX_SHOPS) As Boolean
+    Friend Pet_Changed(MAX_PETS) As Boolean
+
+    Friend AnimEditorFrame(1) As Integer
+    Friend AnimEditorTimer(1) As Integer
+
+    'Editors
+    Friend InitEditor As Boolean
+    Friend InitMapEditor As Boolean
+    Friend InitPetEditor As Boolean
+    Friend InitItemEditor As Boolean
+    Friend InitResourceEditor As Boolean
+    Friend InitNPCEditor As Boolean
+    Friend InitSkillEditor As Boolean
+    Friend InitShopEditor As Boolean
+    Friend InitAnimationEditor As Boolean
+    Friend InitClassEditor As Boolean
+    Friend InitAutoMapper As Boolean
+
+    ' Game editor constants
+    Friend Const EDITOR_ITEM As Byte = 1
+    Friend Const EDITOR_NPC As Byte = 2
+    Friend Const EDITOR_SKILL As Byte = 3
+    Friend Const EDITOR_SHOP As Byte = 4
+    Friend Const EDITOR_RESOURCE As Byte = 5
+    Friend Const EDITOR_ANIMATION As Byte = 6
+    Friend Const EDITOR_PET As Byte = 7
+    Friend Const EDITOR_QUEST As Byte = 7
+    Friend Const EDITOR_HOUSE As Byte = 8
+    Friend Const EDITOR_RECIPE As Byte = 9
+    Friend Const EDITOR_CLASSES As Byte = 10
 End Module

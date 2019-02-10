@@ -177,6 +177,56 @@ Module C_Pets
 
     End Sub
 
+    Friend Sub SendRequestEditPet()
+        Dim buffer As ByteStream
+        buffer = New ByteStream(4)
+
+        buffer.WriteInt32(ClientPackets.CRequestEditPet)
+
+        Socket.SendData(buffer.Data, buffer.Head)
+
+        buffer.Dispose()
+
+    End Sub
+
+    Friend Sub SendSavePet(petNum As Integer)
+        Dim buffer As ByteStream
+        Dim i As Integer
+
+        buffer = New ByteStream(4)
+        buffer.WriteInt32(ClientPackets.CSavePet)
+        buffer.WriteInt32(petNum)
+
+        With Pet(petNum)
+            buffer.WriteInt32(.Num)
+            buffer.WriteString((Trim$(.Name)))
+            buffer.WriteInt32(.Sprite)
+            buffer.WriteInt32(.Range)
+            buffer.WriteInt32(.Level)
+            buffer.WriteInt32(.MaxLevel)
+            buffer.WriteInt32(.ExpGain)
+            buffer.WriteInt32(.LevelPnts)
+            buffer.WriteInt32(.StatType)
+            buffer.WriteInt32(.LevelingType)
+
+            For i = 1 To StatType.Count - 1
+                buffer.WriteInt32(.Stat(i))
+            Next
+
+            For i = 1 To 4
+                buffer.WriteInt32(.Skill(i))
+            Next
+
+            buffer.WriteInt32(.Evolvable)
+            buffer.WriteInt32(.EvolveLevel)
+            buffer.WriteInt32(.EvolveNum)
+        End With
+
+        Socket.SendData(buffer.Data, buffer.Head)
+
+        buffer.Dispose()
+
+    End Sub
 #End Region
 
 #Region "Incoming Packets"
@@ -678,6 +728,140 @@ Module C_Pets
         Next
 
     End Function
+
+#End Region
+
+#Region "Editor"
+
+    Friend Sub PetEditorInit()
+        Dim i As Integer
+
+        If frmEditor_Pet.Visible = False Then Exit Sub
+        Editorindex = frmEditor_Pet.lstIndex.SelectedIndex + 1
+
+        With frmEditor_Pet
+            'populate skill combo's
+            .cmbSkill1.Items.Clear()
+            .cmbSkill2.Items.Clear()
+            .cmbSkill3.Items.Clear()
+            .cmbSkill4.Items.Clear()
+
+            .cmbSkill1.Items.Add("None")
+            .cmbSkill2.Items.Add("None")
+            .cmbSkill3.Items.Add("None")
+            .cmbSkill4.Items.Add("None")
+
+            For i = 1 To MAX_SKILLS
+                .cmbSkill1.Items.Add(i & ": " & Skill(i).Name)
+                .cmbSkill2.Items.Add(i & ": " & Skill(i).Name)
+                .cmbSkill3.Items.Add(i & ": " & Skill(i).Name)
+                .cmbSkill4.Items.Add(i & ": " & Skill(i).Name)
+            Next
+            .txtName.Text = Trim$(Pet(Editorindex).Name)
+            If Pet(Editorindex).Sprite < 0 OrElse Pet(Editorindex).Sprite > .nudSprite.Maximum Then Pet(Editorindex).Sprite = 0
+
+            .nudSprite.Value = Pet(Editorindex).Sprite
+            .EditorPet_DrawPet()
+
+            .nudRange.Value = Pet(Editorindex).Range
+
+            .nudStrength.Value = Pet(Editorindex).Stat(StatType.Strength)
+            .nudEndurance.Value = Pet(Editorindex).Stat(StatType.Endurance)
+            .nudVitality.Value = Pet(Editorindex).Stat(StatType.Vitality)
+            .nudLuck.Value = Pet(Editorindex).Stat(StatType.Luck)
+            .nudIntelligence.Value = Pet(Editorindex).Stat(StatType.Intelligence)
+            .nudSpirit.Value = Pet(Editorindex).Stat(StatType.Spirit)
+            .nudLevel.Value = Pet(Editorindex).Level
+
+            If Pet(Editorindex).StatType = 1 Then
+                .optCustomStats.Checked = True
+                .pnlCustomStats.Visible = True
+            Else
+                .optAdoptStats.Checked = True
+                .pnlCustomStats.Visible = False
+            End If
+
+            .nudPetExp.Value = Pet(Editorindex).ExpGain
+
+            .nudPetPnts.Value = Pet(Editorindex).LevelPnts
+
+            .nudMaxLevel.Value = Pet(Editorindex).MaxLevel
+
+            'Set skills
+            .cmbSkill1.SelectedIndex = Pet(Editorindex).Skill(1)
+
+            .cmbSkill2.SelectedIndex = Pet(Editorindex).Skill(2)
+
+            .cmbSkill3.SelectedIndex = Pet(Editorindex).Skill(3)
+
+            .cmbSkill4.SelectedIndex = Pet(Editorindex).Skill(4)
+
+            If Pet(Editorindex).LevelingType = 1 Then
+                .optLevel.Checked = True
+
+                .pnlPetlevel.Visible = True
+                .pnlPetlevel.BringToFront()
+                .nudPetExp.Value = Pet(Editorindex).ExpGain
+                If Pet(Editorindex).MaxLevel > 0 Then .nudMaxLevel.Value = Pet(Editorindex).MaxLevel
+                .nudPetPnts.Value = Pet(Editorindex).LevelPnts
+            Else
+                .optDoNotLevel.Checked = True
+
+                .pnlPetlevel.Visible = False
+                .nudPetExp.Value = Pet(Editorindex).ExpGain
+                .nudMaxLevel.Value = Pet(Editorindex).MaxLevel
+                .nudPetPnts.Value = Pet(Editorindex).LevelPnts
+            End If
+
+            If Pet(Editorindex).Evolvable = 1 Then
+                .chkEvolve.Checked = True
+            Else
+                .chkEvolve.Checked = False
+            End If
+
+            .nudEvolveLvl.Value = Pet(Editorindex).EvolveLevel
+            .cmbEvolve.SelectedIndex = Pet(Editorindex).EvolveNum
+        End With
+
+        ClearChanged_Pet()
+
+        Pet_Changed(Editorindex) = True
+
+    End Sub
+
+    Friend Sub PetEditorOk()
+        Dim i As Integer
+
+        For i = 1 To MAX_PETS
+            If Pet_Changed(i) Then
+                SendSavePet(i)
+            End If
+        Next
+
+        frmEditor_Pet.Dispose()
+
+        Editor = 0
+        ClearChanged_Pet()
+
+    End Sub
+
+    Friend Sub PetEditorCancel()
+
+        Editor = 0
+
+        frmEditor_Pet.Dispose()
+
+        ClearChanged_Pet()
+        ClearPets()
+        SendRequestPets()
+
+    End Sub
+
+    Friend Sub ClearChanged_Pet()
+
+        ReDim Pet_Changed(MAX_PETS)
+
+    End Sub
 
 #End Region
 

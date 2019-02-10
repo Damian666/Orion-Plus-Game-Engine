@@ -7,7 +7,7 @@ Friend Module S_NetworkConfig
     Friend Sub InitNetwork()
         If Not Socket Is Nothing Then Return
         ' Establish some Rulez
-        Socket = New Server(EditorPackets.Count, 4096, MAX_PLAYERS) With {
+        Socket = New Server(ClientPackets.Count, 4096, MAX_PLAYERS) With {
             .BufferLimit = 2048000, ' <- this is 2mb max data storage
             .MinimumIndex = 1, ' <- this prevents the network from giving us 0 as an index
             .PacketAcceptLimit = 100, ' Dunno what is a reasonable cap right now so why not? :P

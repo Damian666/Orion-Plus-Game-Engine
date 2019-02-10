@@ -54,9 +54,6 @@
     Friend LblManaText As String
     Friend LblExpText As String
 
-    'Editors
-    Friend InitMapEditor As Boolean
-
     Friend UpdateCharacterPanel As Boolean
 
     Friend NeedToOpenShop As Boolean
@@ -366,6 +363,226 @@
 
         If Frmmaingamevisible <> FrmGame.Visible Then
             FrmGame.Visible = Frmmaingamevisible
+        End If
+
+
+        If InitPetEditor = True Then
+            With frmEditor_Pet
+                Editor = EDITOR_PET
+                .lstIndex.Items.Clear()
+
+                ' Add the names
+                For i = 1 To MAX_PETS
+                    .lstIndex.Items.Add(i & ": " & Trim$(Pet(i).Name))
+                Next
+
+                .cmbEvolve.Items.Clear()
+
+                .cmbEvolve.Items.Add("None")
+
+                ' Add the names
+                For i = 1 To MAX_PETS
+                    .cmbEvolve.Items.Add(i & ": " & Trim$(Pet(i).Name))
+                Next
+
+                .Show()
+                .lstIndex.SelectedIndex = 0
+                .cmbEvolve.SelectedIndex = 0
+                PetEditorInit()
+            End With
+            InitPetEditor = False
+        End If
+
+        If QuestEditorShow = True Then
+            With frmEditor_Quest
+                Editor = EditorTasks
+                .lstIndex.Items.Clear()
+                .cmbQuestReq.Items.Clear()
+                .cmbQuestReq.Items.Add("None")
+                ' Add the names
+                For I = 1 To MaxQuests
+                    .lstIndex.Items.Add(I & ": " & Trim$(Quest(I).Name))
+                    .cmbQuestReq.Items.Add(I & ": " & Trim$(Quest(I).Name))
+                Next
+
+                .Show()
+                .lstIndex.SelectedIndex = 0
+                QuestEditorInit()
+            End With
+            QuestEditorShow = False
+        End If
+
+        If InitAnimationEditor = True Then
+            With FrmEditor_Animation
+                Editor = EDITOR_ANIMATION
+                .lstIndex.Items.Clear()
+
+                ' Add the names
+                For i = 1 To MAX_ANIMATIONS
+                    .lstIndex.Items.Add(i & ": " & Trim$(Animation(i).Name))
+                Next
+
+                .Show()
+                .lstIndex.SelectedIndex = 0
+                AnimationEditorInit()
+            End With
+            InitAnimationEditor = False
+        End If
+
+        If InitItemEditor = True Then
+            ItemEditorPreInit()
+            InitItemEditor = False
+        End If
+
+        If InitRecipeEditor = True Then
+            RecipeEditorPreInit()
+            InitRecipeEditor = False
+        End If
+
+        If InitClassEditor = True Then
+            ClassEditorInit()
+            InitClassEditor = False
+        End If
+
+        If LoadClassInfo = True Then
+            LoadClass()
+            LoadClassInfo = False
+        End If
+
+        If InitResourceEditor = True Then
+            Dim i As Integer
+
+            With frmEditor_Resource
+                Editor = EDITOR_RESOURCE
+                .lstIndex.Items.Clear()
+
+                ' Add the names
+                For i = 1 To MAX_RESOURCES
+                    If Resource(i).Name Is Nothing Then Resource(i).Name = ""
+                    If Resource(i).SuccessMessage Is Nothing Then Resource(i).SuccessMessage = ""
+                    If Resource(i).EmptyMessage Is Nothing Then Resource(i).EmptyMessage = ""
+                    .lstIndex.Items.Add(i & ": " & Trim$(Resource(i).Name))
+                Next
+
+                .Show()
+                .lstIndex.SelectedIndex = 0
+                ResourceEditorInit()
+            End With
+            InitResourceEditor = False
+        End If
+
+        If InitNPCEditor = True Then
+            With frmEditor_NPC
+                Editor = EDITOR_NPC
+                .lstIndex.Items.Clear()
+
+                ' Add the names
+                For i = 1 To MAX_NPCS
+                    .lstIndex.Items.Add(i & ": " & Trim$(Npc(i).Name))
+                Next
+
+                .Show()
+                .lstIndex.SelectedIndex = 0
+                NpcEditorInit()
+            End With
+            InitNPCEditor = False
+        End If
+
+        If InitSkillEditor = True Then
+            With frmEditor_Skill
+                Editor = EDITOR_SKILL
+                .lstIndex.Items.Clear()
+
+                ' Add the names
+                For i = 1 To MAX_SKILLS
+                    .lstIndex.Items.Add(i & ": " & Trim$(Skill(i).Name))
+                Next
+
+                .Show()
+                .lstIndex.SelectedIndex = 0
+                SkillEditorInit()
+            End With
+            InitSkillEditor = False
+        End If
+
+        If InitShopEditor = True Then
+            With frmEditor_Shop
+                Editor = EDITOR_SHOP
+                .lstIndex.Items.Clear()
+
+                ' Add the names
+                For i = 1 To MAX_SHOPS
+                    .lstIndex.Items.Add(i & ": " & Trim$(Shop(i).Name))
+                Next
+
+                .Show()
+                .lstIndex.SelectedIndex = 0
+                ShopEditorInit()
+            End With
+            InitShopEditor = False
+        End If
+
+        If InitAnimationEditor = True Then
+            With FrmEditor_Animation
+                Editor = EDITOR_ANIMATION
+                .lstIndex.Items.Clear()
+
+                ' Add the names
+                For i = 1 To MAX_ANIMATIONS
+                    .lstIndex.Items.Add(i & ": " & Trim$(Animation(i).Name))
+                Next
+
+                .Show()
+                .lstIndex.SelectedIndex = 0
+                AnimationEditorInit()
+            End With
+            InitAnimationEditor = False
+        End If
+
+        If HouseEdit = True Then
+            With frmEditor_House
+                Editor = EDITOR_HOUSE
+                .lstIndex.Items.Clear()
+
+                ' Add the names
+                For i = 1 To MaxHouses
+                    .lstIndex.Items.Add(i & ": " & Trim$(House(i).ConfigName))
+                Next
+
+                .Show()
+                .lstIndex.SelectedIndex = 0
+            End With
+
+            HouseEditorInit()
+
+            HouseEdit = False
+        End If
+
+        If InitProjectileEditor = True Then
+            With frmEditor_Projectile
+                Editor = EditorProjectile
+                .lstIndex.Items.Clear()
+
+                ' Add the names
+                For i = 1 To MaxProjectiles
+                    .lstIndex.Items.Add(i & ": " & Trim$(Projectiles(i).Name))
+                Next
+
+                .Show()
+                .lstIndex.SelectedIndex = 0
+                ProjectileEditorInit()
+            End With
+
+            InitProjectileEditor = False
+        End If
+
+        If frmEditor_Projectile.Visible Then
+            EditorProjectile_DrawProjectile()
+        End If
+
+        If InitAutoMapper = True Then
+            OpenAutomapper()
+            InitAutoMapper = False
         End If
 
         If InitCrafting = True Then

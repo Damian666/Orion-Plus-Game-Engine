@@ -137,40 +137,35 @@ Module S_NetworkReceive
         Socket.PacketId(ClientPackets.CPetSkill) = AddressOf Packet_PetSkill
         Socket.PacketId(ClientPackets.CPetUseStatPoint) = AddressOf Packet_UsePetStatPoint
 
-        'editor login
-        Socket.PacketId(EditorPackets.EditorLogin) = AddressOf Packet_EditorLogin
-        Socket.PacketId(EditorPackets.EditorRequestMap) = AddressOf Packet_EditorRequestMap
-        Socket.PacketId(EditorPackets.EditorSaveMap) = AddressOf Packet_EditorMapData
-
         'editor
-        Socket.PacketId(EditorPackets.RequestEditItem) = AddressOf Packet_EditItem
-        Socket.PacketId(EditorPackets.SaveItem) = AddressOf Packet_SaveItem
-        Socket.PacketId(EditorPackets.RequestEditNpc) = AddressOf Packet_EditNpc
-        Socket.PacketId(EditorPackets.SaveNpc) = AddressOf Packet_SaveNPC
-        Socket.PacketId(EditorPackets.RequestEditShop) = AddressOf Packet_EditShop
-        Socket.PacketId(EditorPackets.SaveShop) = AddressOf Packet_SaveShop
-        Socket.PacketId(EditorPackets.RequestEditSkill) = AddressOf Packet_EditSkill
-        Socket.PacketId(EditorPackets.SaveSkill) = AddressOf Packet_SaveSkill
-        Socket.PacketId(EditorPackets.RequestEditResource) = AddressOf Packet_EditResource
-        Socket.PacketId(EditorPackets.SaveResource) = AddressOf Packet_SaveResource
-        Socket.PacketId(EditorPackets.RequestEditAnimation) = AddressOf Packet_EditAnimation
-        Socket.PacketId(EditorPackets.SaveAnimation) = AddressOf Packet_SaveAnimation
-        Socket.PacketId(EditorPackets.RequestEditQuest) = AddressOf Packet_RequestEditQuest
-        Socket.PacketId(EditorPackets.SaveQuest) = AddressOf Packet_SaveQuest
-        Socket.PacketId(EditorPackets.RequestEditHouse) = AddressOf Packet_RequestEditHouse
-        Socket.PacketId(EditorPackets.SaveHouses) = AddressOf Packet_SaveHouses
-        Socket.PacketId(EditorPackets.RequestEditProjectiles) = AddressOf HandleRequestEditProjectiles
-        Socket.PacketId(EditorPackets.SaveProjectile) = AddressOf HandleSaveProjectile
-        Socket.PacketId(EditorPackets.RequestEditRecipes) = AddressOf Packet_RequestEditRecipes
-        Socket.PacketId(EditorPackets.SaveRecipe) = AddressOf Packet_SaveRecipe
-        Socket.PacketId(EditorPackets.RequestEditClasses) = AddressOf Packet_RequestEditClasses
-        Socket.PacketId(EditorPackets.SaveClasses) = AddressOf Packet_SaveClasses
-        Socket.PacketId(EditorPackets.RequestAutoMap) = AddressOf Packet_RequestAutoMap
-        Socket.PacketId(EditorPackets.SaveAutoMap) = AddressOf Packet_SaveAutoMap
+        Socket.PacketId(ClientPackets.CRequestEditItem) = AddressOf Packet_EditItem
+        Socket.PacketId(ClientPackets.CSaveItem) = AddressOf Packet_SaveItem
+        Socket.PacketId(ClientPackets.CRequestEditNpc) = AddressOf Packet_EditNpc
+        Socket.PacketId(ClientPackets.CSaveNpc) = AddressOf Packet_SaveNPC
+        Socket.PacketId(ClientPackets.CRequestEditShop) = AddressOf Packet_EditShop
+        Socket.PacketId(ClientPackets.CSaveShop) = AddressOf Packet_SaveShop
+        Socket.PacketId(ClientPackets.CRequestEditSkill) = AddressOf Packet_EditSkill
+        Socket.PacketId(ClientPackets.CSaveSkill) = AddressOf Packet_SaveSkill
+        Socket.PacketId(ClientPackets.CRequestEditResource) = AddressOf Packet_EditResource
+        Socket.PacketId(ClientPackets.CSaveResource) = AddressOf Packet_SaveResource
+        Socket.PacketId(ClientPackets.CRequestEditAnimation) = AddressOf Packet_EditAnimation
+        Socket.PacketId(ClientPackets.CSaveAnimation) = AddressOf Packet_SaveAnimation
+        Socket.PacketId(ClientPackets.CRequestEditQuest) = AddressOf Packet_RequestEditQuest
+        Socket.PacketId(ClientPackets.CSaveQuest) = AddressOf Packet_SaveQuest
+        Socket.PacketId(ClientPackets.CRequestEditHouse) = AddressOf Packet_RequestEditHouse
+        Socket.PacketId(ClientPackets.CSaveHouses) = AddressOf Packet_SaveHouses
+        Socket.PacketId(ClientPackets.CRequestEditProjectiles) = AddressOf HandleRequestEditProjectiles
+        Socket.PacketId(ClientPackets.CSaveProjectile) = AddressOf HandleSaveProjectile
+        Socket.PacketId(ClientPackets.CRequestEditRecipes) = AddressOf Packet_RequestEditRecipes
+        Socket.PacketId(ClientPackets.CSaveRecipe) = AddressOf Packet_SaveRecipe
+        Socket.PacketId(ClientPackets.CRequestEditClasses) = AddressOf Packet_RequestEditClasses
+        Socket.PacketId(ClientPackets.CSaveClasses) = AddressOf Packet_SaveClasses
+        Socket.PacketId(ClientPackets.CRequestAutoMap) = AddressOf Packet_RequestAutoMap
+        Socket.PacketId(ClientPackets.CSaveAutoMap) = AddressOf Packet_SaveAutoMap
 
         'pet
-        Socket.PacketId(EditorPackets.CRequestEditPet) = AddressOf Packet_RequestEditPet
-        Socket.PacketId(EditorPackets.CSavePet) = AddressOf Packet_SavePet
+        Socket.PacketId(ClientPackets.CRequestEditPet) = AddressOf Packet_RequestEditPet
+        Socket.PacketId(ClientPackets.CSavePet) = AddressOf Packet_SavePet
 
     End Sub
 

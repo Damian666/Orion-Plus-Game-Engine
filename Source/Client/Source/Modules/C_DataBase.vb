@@ -319,7 +319,12 @@ Module C_DataBase
 
 #End Region
 
-
+    Friend Sub ClearChangedItem()
+        For i = 1 To MAX_ITEMS
+            Item_Changed(i) = Nothing
+        Next i
+        ReDim Item_Changed(MAX_ITEMS)
+    End Sub
 
 #Region "Skills"
 

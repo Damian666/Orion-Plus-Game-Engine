@@ -43,7 +43,34 @@ Friend Module C_Projectiles
 #End Region
 
 #Region "Sending"
+    Sub SendRequestEditProjectiles()
+        Dim buffer As ByteStream
 
+        buffer = New ByteStream(4)
+        buffer.WriteInt32(ClientPackets.CRequestEditProjectiles)
+        Socket.SendData(buffer.Data, buffer.Head)
+        buffer.Dispose()
+
+    End Sub
+
+    Sub SendSaveProjectile(ProjectileNum As Integer)
+        Dim buffer As ByteStream
+
+        buffer = New ByteStream(4)
+
+        buffer.WriteInt32(ClientPackets.CSaveProjectile)
+        buffer.WriteInt32(ProjectileNum)
+
+        buffer.WriteString((Trim(Projectiles(ProjectileNum).Name)))
+        buffer.WriteInt32(Projectiles(ProjectileNum).Sprite)
+        buffer.WriteInt32(Projectiles(ProjectileNum).Range)
+        buffer.WriteInt32(Projectiles(ProjectileNum).Speed)
+        buffer.WriteInt32(Projectiles(ProjectileNum).Damage)
+
+        Socket.SendData(buffer.Data, buffer.Head)
+        buffer.Dispose()
+
+    End Sub
     Sub SendRequestProjectiles()
         Dim buffer As New ByteStream(4)
 
@@ -284,6 +311,76 @@ Friend Module C_Projectiles
             .Position = New Vector2f(x, y)
         }
         GameWindow.Draw(tmpSprite)
+
+    End Sub
+
+    Friend Sub EditorProjectile_DrawProjectile()
+        Dim iconnum As Integer
+
+        iconnum = frmEditor_Projectile.nudPic.Value
+
+        If iconnum < 1 OrElse iconnum > NumProjectiles Then
+            frmEditor_Projectile.picProjectile.BackgroundImage = Nothing
+            Exit Sub
+        End If
+
+        If File.Exists(Application.StartupPath & GfxPath & "Projectiles\" & iconnum & GfxExt) Then
+            frmEditor_Projectile.picProjectile.BackgroundImage = Drawing.Image.FromFile(Application.StartupPath & GfxPath & "Projectiles\" & iconnum & GfxExt)
+        End If
+
+    End Sub
+#End Region
+
+#Region "Projectile Editor"
+
+    Friend Sub ProjectileEditorInit()
+
+        If frmEditor_Projectile.Visible = False Then Exit Sub
+        Editorindex = frmEditor_Projectile.lstIndex.SelectedIndex + 1
+
+        With Projectiles(Editorindex)
+            frmEditor_Projectile.txtName.Text = Trim$(.Name)
+            frmEditor_Projectile.nudPic.Value = .Sprite
+            frmEditor_Projectile.nudRange.Value = .Range
+            frmEditor_Projectile.nudSpeed.Value = .Speed
+            frmEditor_Projectile.nudDamage.Value = .Damage
+        End With
+
+        ProjectileChanged(Editorindex) = True
+
+    End Sub
+
+    Friend Sub ProjectileEditorOk()
+        Dim i As Integer
+
+        For i = 1 To MaxProjectiles
+            If ProjectileChanged(i) Then
+                Call SendSaveProjectile(i)
+            End If
+        Next
+
+        frmEditor_Projectile.Dispose()
+        Editor = 0
+        ClearChanged_Projectile()
+
+    End Sub
+
+    Friend Sub ProjectileEditorCancel()
+
+        Editor = 0
+        frmEditor_Projectile.Dispose()
+        ClearChanged_Projectile()
+        ClearProjectiles()
+        SendRequestProjectiles()
+
+    End Sub
+
+    Friend Sub ClearChanged_Projectile()
+        Dim i As Integer
+
+        For i = 0 To MaxProjectiles
+            ProjectileChanged(i) = False
+        Next
 
     End Sub
 

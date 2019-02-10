@@ -162,7 +162,7 @@ Friend Module C_Crafting
     Sub SendRequestEditRecipes()
         Dim buffer As New ByteStream(4)
 
-        buffer.WriteInt32(EditorPackets.RequestEditRecipes)
+        buffer.WriteInt32(ClientPackets.CRequestEditRecipes)
 
         Socket.SendData(buffer.Data, buffer.Head)
         buffer.Dispose()
@@ -171,7 +171,7 @@ Friend Module C_Crafting
     Sub SendSaveRecipe(recipeNum As Integer)
         Dim buffer As New ByteStream(4)
 
-        buffer.WriteInt32(EditorPackets.SaveRecipe)
+        buffer.WriteInt32(ClientPackets.CSaveRecipe)
 
         buffer.WriteInt32(recipeNum)
 
@@ -242,6 +242,106 @@ Friend Module C_Crafting
         Socket.SendData(buffer.Data, buffer.Head)
 
         buffer.Dispose()
+    End Sub
+
+#End Region
+
+#Region "Editor"
+
+    Friend Sub RecipeEditorPreInit()
+        Dim i As Integer
+
+        With frmEditor_Recipe
+            Editor = EDITOR_RECIPE
+            .lstIndex.Items.Clear()
+
+            ' Add the names
+            For i = 1 To MAX_RECIPE
+                .lstIndex.Items.Add(i & ": " & Trim$(Recipe(i).Name))
+            Next
+
+            'fill comboboxes
+            .cmbMakeItem.Items.Clear()
+            .cmbIngredient.Items.Clear()
+
+            .cmbMakeItem.Items.Add("None")
+            .cmbIngredient.Items.Add("None")
+            For i = 1 To MAX_ITEMS
+                .cmbMakeItem.Items.Add(Trim$(Item(i).Name))
+                .cmbIngredient.Items.Add(Trim$(Item(i).Name))
+            Next
+
+            .Show()
+            .lstIndex.SelectedIndex = 0
+            RecipeEditorInit()
+        End With
+    End Sub
+
+    Friend Sub RecipeEditorInit()
+
+        If frmEditor_Recipe.Visible = False Then Exit Sub
+        Editorindex = frmEditor_Recipe.lstIndex.SelectedIndex + 1
+
+        With Recipe(Editorindex)
+            frmEditor_Recipe.txtName.Text = Trim$(.Name)
+
+            frmEditor_Recipe.lstIngredients.Items.Clear()
+
+            frmEditor_Recipe.cmbType.SelectedIndex = .RecipeType
+            frmEditor_Recipe.cmbMakeItem.SelectedIndex = .MakeItemNum
+
+            If .MakeItemAmount < 1 Then .MakeItemAmount = 1
+            frmEditor_Recipe.nudAmount.Value = .MakeItemAmount
+
+            If .CreateTime < 1 Then .CreateTime = 1
+            frmEditor_Recipe.nudCreateTime.Value = .CreateTime
+
+            UpdateIngredient()
+        End With
+
+        RecipeChanged(Editorindex) = True
+
+    End Sub
+
+    Friend Sub RecipeEditorCancel()
+        Editor = 0
+        frmEditor_Recipe.Visible = False
+        ClearChanged_Recipe()
+        ClearRecipes()
+        SendRequestRecipes()
+    End Sub
+
+    Friend Sub RecipeEditorOk()
+        Dim i As Integer
+
+        For i = 1 To MAX_RECIPE
+            If RecipeChanged(i) Then
+                SendSaveRecipe(i)
+            End If
+        Next
+
+        frmEditor_Recipe.Visible = False
+        Editor = 0
+        ClearChanged_Recipe()
+    End Sub
+
+    Friend Sub UpdateIngredient()
+        Dim i As Integer
+        frmEditor_Recipe.lstIngredients.Items.Clear()
+
+        For i = 1 To MAX_INGREDIENT
+            With Recipe(Editorindex).Ingredients(i)
+                ' if none, show as none
+                If .ItemNum <= 0 AndAlso .Value = 0 Then
+                    frmEditor_Recipe.lstIngredients.Items.Add("Empty")
+                Else
+                    frmEditor_Recipe.lstIngredients.Items.Add(Trim$(Item(.ItemNum).Name) & " X " & .Value)
+                End If
+
+            End With
+        Next
+
+        frmEditor_Recipe.lstIngredients.SelectedIndex = 0
     End Sub
 
 #End Region

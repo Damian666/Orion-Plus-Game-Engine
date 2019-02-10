@@ -45,6 +45,85 @@ Friend Module C_Housing
 
 #End Region
 
+#Region "Editor"
+
+    Friend Sub HouseEditorInit()
+
+        If frmEditor_House.Visible = False Then Exit Sub
+
+        Editorindex = frmEditor_House.lstIndex.SelectedIndex + 1
+
+        With House(Editorindex)
+            frmEditor_House.txtName.Text = Trim$(.ConfigName)
+            If .BaseMap = 0 Then .BaseMap = 1
+            frmEditor_House.nudBaseMap.Value = .BaseMap
+            If .X = 0 Then .X = 1
+            frmEditor_House.nudX.Value = .X
+            If .Y = 0 Then .Y = 1
+            frmEditor_House.nudY.Value = .Y
+            frmEditor_House.nudPrice.Value = .Price
+            frmEditor_House.nudFurniture.Value = .MaxFurniture
+        End With
+
+        HouseChanged(Editorindex) = True
+
+    End Sub
+
+    Friend Sub HouseEditorCancel()
+
+        Editor = 0
+        frmEditor_House.Dispose()
+
+        ClearChanged_House()
+
+    End Sub
+
+    Friend Sub HouseEditorOk()
+        Dim i As Integer, Buffer As ByteStream, count As Integer
+        Buffer = New ByteStream(4)
+
+        Buffer.WriteInt32(ClientPackets.CSaveHouses)
+
+        For i = 1 To MaxHouses
+            If HouseChanged(i) Then count = count + 1
+        Next
+
+        Buffer.WriteInt32(count)
+
+        If count > 0 Then
+            For i = 1 To MaxHouses
+                If HouseChanged(i) Then
+                    Buffer.WriteInt32(i)
+                    Buffer.WriteString((Trim$(House(i).ConfigName)))
+                    Buffer.WriteInt32(House(i).BaseMap)
+                    Buffer.WriteInt32(House(i).X)
+                    Buffer.WriteInt32(House(i).Y)
+                    Buffer.WriteInt32(House(i).Price)
+                    Buffer.WriteInt32(House(i).MaxFurniture)
+                End If
+            Next
+        End If
+
+        Socket.SendData(Buffer.Data, Buffer.Head)
+        Buffer.Dispose()
+        frmEditor_House.Dispose()
+        Editor = 0
+
+        ClearChanged_House()
+
+    End Sub
+
+    Friend Sub ClearChanged_House()
+
+        For i = 1 To MaxHouses
+            HouseChanged(i) = Nothing
+        Next i
+
+        ReDim HouseChanged(MaxHouses)
+    End Sub
+
+#End Region
+
 #Region "Incoming Packets"
 
     Sub Packet_HouseConfigurations(ByRef data() As Byte)
@@ -149,7 +228,7 @@ Friend Module C_Housing
     Friend Sub SendRequestEditHouse()
         Dim buffer As New ByteStream(4)
 
-        buffer.WriteInt32(EditorPackets.RequestEditHouse)
+        buffer.WriteInt32(ClientPackets.CRequestEditHouse)
 
         Socket.SendData(buffer.Data, buffer.Head)
         buffer.Dispose()

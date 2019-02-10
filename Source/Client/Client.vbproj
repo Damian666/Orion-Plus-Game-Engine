@@ -91,6 +91,8 @@
     <Import Include="System.Collections" />
     <Import Include="System.Collections.Generic" />
     <Import Include="System.Diagnostics" />
+    <Import Include="System.Drawing" />
+    <Import Include="System.Windows.Forms" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ApplicationEvents.vb" />
@@ -99,19 +101,105 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <Compile Include="Source\Forms\FrmEditor_Events.Designer.vb">
-      <DependentUpon>FrmEditor_Events.vb</DependentUpon>
+    <Compile Include="Source\Forms\Editors\FrmEditor_Animation.Designer.vb">
+      <DependentUpon>FrmEditor_Animation.vb</DependentUpon>
     </Compile>
-    <Compile Include="Source\Forms\FrmEditor_Events.vb">
+    <Compile Include="Source\Forms\Editors\FrmEditor_Animation.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Source\Forms\FrmEditor_MapEditor.designer.vb">
+    <Compile Include="Source\Forms\Editors\FrmEditor_AutoMapper.Designer.vb">
+      <DependentUpon>FrmEditor_AutoMapper.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Source\Forms\Editors\FrmEditor_AutoMapper.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Source\Forms\Editors\FrmEditor_Classes.Designer.vb">
+      <DependentUpon>FrmEditor_Classes.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Source\Forms\Editors\FrmEditor_Classes.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Source\Forms\Editors\FrmEditor_Events.Designer.vb">
+      <DependentUpon>FrmEditor_Events.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Source\Forms\Editors\FrmEditor_Events.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Source\Forms\Editors\FrmEditor_House.Designer.vb">
+      <DependentUpon>FrmEditor_House.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Source\Forms\Editors\FrmEditor_House.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Source\Forms\Editors\FrmEditor_Item.Designer.vb">
+      <DependentUpon>FrmEditor_Item.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Source\Forms\Editors\FrmEditor_Item.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Source\Forms\Editors\FrmEditor_MapEditor.designer.vb">
       <DependentUpon>FrmEditor_MapEditor.vb</DependentUpon>
     </Compile>
-    <Compile Include="Source\Forms\FrmEditor_MapEditor.vb">
+    <Compile Include="Source\Forms\Editors\FrmEditor_MapEditor.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Source\Forms\Editors\FrmEditor_NPC.Designer.vb">
+      <DependentUpon>FrmEditor_NPC.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Source\Forms\Editors\FrmEditor_NPC.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Source\Forms\Editors\FrmEditor_Pet.Designer.vb">
+      <DependentUpon>FrmEditor_Pet.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Source\Forms\Editors\FrmEditor_Pet.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Source\Forms\Editors\FrmEditor_Projectile.Designer.vb">
+      <DependentUpon>FrmEditor_Projectile.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Source\Forms\Editors\FrmEditor_Projectile.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Source\Forms\Editors\FrmEditor_Quest.Designer.vb">
+      <DependentUpon>FrmEditor_Quest.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Source\Forms\Editors\FrmEditor_Quest.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Source\Forms\Editors\FrmEditor_Recipe.Designer.vb">
+      <DependentUpon>FrmEditor_Recipe.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Source\Forms\Editors\FrmEditor_Recipe.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Source\Forms\Editors\FrmEditor_Resource.Designer.vb">
+      <DependentUpon>FrmEditor_Resource.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Source\Forms\Editors\FrmEditor_Resource.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Source\Forms\Editors\FrmEditor_Shop.Designer.vb">
+      <DependentUpon>FrmEditor_Shop.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Source\Forms\Editors\FrmEditor_Shop.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Source\Forms\Editors\FrmEditor_Skill.Designer.vb">
+      <DependentUpon>FrmEditor_Skill.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Source\Forms\Editors\FrmEditor_Skill.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Source\Forms\Editors\FrmEditor_VisualWarp.Designer.vb">
+      <DependentUpon>FrmEditor_VisualWarp.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Source\Forms\Editors\FrmEditor_VisualWarp.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Source\Modules\C_Options.vb" />
+    <Compile Include="Source\Modules\C_AutoMap.vb" />
+    <Compile Include="Source\Modules\C_Editors.vb" />
     <Compile Include="Source\Modules\Objects\C_Animations.vb" />
     <Compile Include="Source\Modules\Objects\C_Classes.vb" />
     <Compile Include="Source\Modules\Objects\C_Items.vb" />
@@ -121,16 +209,16 @@
     <Compile Include="Source\Modules\Systems\C_Shops.vb" />
     <Compile Include="Source\Modules\Systems\C_Trade.vb" />
     <Compile Include="Source\Modules\UI\C_Chat.vb" />
-    <Compile Include="Source\Forms\FrmAdmin.Designer.vb">
+    <Compile Include="Source\Forms\Game\FrmAdmin.Designer.vb">
       <DependentUpon>FrmAdmin.vb</DependentUpon>
     </Compile>
-    <Compile Include="Source\Forms\FrmAdmin.vb">
+    <Compile Include="Source\Forms\Game\FrmAdmin.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Source\Forms\FrmGame.Designer.vb">
+    <Compile Include="Source\Forms\Game\FrmGame.Designer.vb">
       <DependentUpon>FrmGame.vb</DependentUpon>
     </Compile>
-    <Compile Include="Source\Forms\FrmGame.vb">
+    <Compile Include="Source\Forms\Game\FrmGame.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Source\Forms\FrmMenu.Designer.vb">
@@ -139,10 +227,10 @@
     <Compile Include="Source\Forms\FrmMenu.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Source\Forms\FrmOptions.Designer.vb">
+    <Compile Include="Source\Forms\Game\FrmOptions.Designer.vb">
       <DependentUpon>FrmOptions.vb</DependentUpon>
     </Compile>
-    <Compile Include="Source\Forms\FrmOptions.vb">
+    <Compile Include="Source\Forms\Game\FrmOptions.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Source\Modules\Objects\C_AutoTiles.vb" />
@@ -183,17 +271,59 @@
     <Compile Include="Source\Modules\Network\C_NetworkSend.vb" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Source\Forms\FrmAdmin.resx">
+    <EmbeddedResource Include="Source\Forms\Editors\FrmEditor_Animation.resx">
+      <DependentUpon>FrmEditor_Animation.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Source\Forms\Editors\FrmEditor_AutoMapper.resx">
+      <DependentUpon>FrmEditor_AutoMapper.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Source\Forms\Editors\FrmEditor_Classes.resx">
+      <DependentUpon>FrmEditor_Classes.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Source\Forms\Editors\FrmEditor_House.resx">
+      <DependentUpon>FrmEditor_House.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Source\Forms\Editors\FrmEditor_Item.resx">
+      <DependentUpon>FrmEditor_Item.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Source\Forms\Editors\FrmEditor_NPC.resx">
+      <DependentUpon>FrmEditor_NPC.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Source\Forms\Editors\FrmEditor_Pet.resx">
+      <DependentUpon>FrmEditor_Pet.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Source\Forms\Editors\FrmEditor_Projectile.resx">
+      <DependentUpon>FrmEditor_Projectile.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Source\Forms\Editors\FrmEditor_Quest.resx">
+      <DependentUpon>FrmEditor_Quest.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Source\Forms\Editors\FrmEditor_Recipe.resx">
+      <DependentUpon>FrmEditor_Recipe.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Source\Forms\Editors\FrmEditor_Resource.resx">
+      <DependentUpon>FrmEditor_Resource.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Source\Forms\Editors\FrmEditor_Shop.resx">
+      <DependentUpon>FrmEditor_Shop.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Source\Forms\Editors\FrmEditor_Skill.resx">
+      <DependentUpon>FrmEditor_Skill.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Source\Forms\Editors\FrmEditor_VisualWarp.resx">
+      <DependentUpon>FrmEditor_VisualWarp.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Source\Forms\Game\FrmAdmin.resx">
       <DependentUpon>FrmAdmin.vb</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="Source\Forms\FrmEditor_Events.resx">
+    <EmbeddedResource Include="Source\Forms\Editors\FrmEditor_Events.resx">
       <DependentUpon>FrmEditor_Events.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Source\Forms\FrmEditor_MapEditor.resx">
+    <EmbeddedResource Include="Source\Forms\Editors\FrmEditor_MapEditor.resx">
       <DependentUpon>FrmEditor_MapEditor.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Source\Forms\FrmGame.resx">
+    <EmbeddedResource Include="Source\Forms\Game\FrmGame.resx">
       <DependentUpon>FrmGame.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Source\Forms\FrmMenu.resx">
@@ -205,7 +335,7 @@
       <SubType>Designer</SubType>
       <LastGenOutput>Resources.Designer.vb</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Include="Source\Forms\FrmOptions.resx">
+    <EmbeddedResource Include="Source\Forms\Game\FrmOptions.resx">
       <DependentUpon>FrmOptions.vb</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
@@ -277,6 +407,9 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Data\AutoMapper.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Data\Credits.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
