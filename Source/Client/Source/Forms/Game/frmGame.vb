@@ -40,74 +40,69 @@ Friend Class FrmGame
                 HandlePressEnter()
             End If
         Else
-            If e.KeyCode = Keys.S Then VbKeyDown = True
-            If e.KeyCode = Keys.W Then VbKeyUp = True
-            If e.KeyCode = Keys.A Then VbKeyLeft = True
-            If e.KeyCode = Keys.D Then VbKeyRight = True
-            If e.KeyCode = Keys.ShiftKey Then VbKeyShift = True
-            If e.KeyCode = Keys.ControlKey Then VbKeyControl = True
-            If e.KeyCode = Keys.Alt Then VbKeyAlt = True
-
-            If e.KeyCode = Keys.Space Then
-                CheckMapGetItem()
-            End If
+            If Inputs.MoveUp(e.KeyCode) Then VbKeyUp = True
+            If Inputs.MoveDown(e.KeyCode) Then VbKeyDown = True
+            If Inputs.MoveLeft(e.KeyCode) Then VbKeyLeft = True
+            If Inputs.MoveRight(e.KeyCode) Then VbKeyRight = True
+            If Inputs.Attack(e.KeyCode) Then VbKeyControl = True
+            If Inputs.Run(e.KeyCode) Then VbKeyShift = True
+            If Inputs.Loot(e.KeyCode) Then CheckMapGetItem()
         End If
     End Sub
 
     Private Sub FrmMainGame_KeyUp(sender As Object, e As KeyEventArgs) Handles MyBase.KeyUp
         Dim skillnum As Integer
-        If e.KeyCode = Keys.S Then VbKeyDown = False
-        If e.KeyCode = Keys.W Then VbKeyUp = False
-        If e.KeyCode = Keys.A Then VbKeyLeft = False
-        If e.KeyCode = Keys.D Then VbKeyRight = False
-        If e.KeyCode = Keys.ShiftKey Then VbKeyShift = False
-        If e.KeyCode = Keys.ControlKey Then VbKeyControl = False
-        If e.KeyCode = Keys.Alt Then VbKeyAlt = False
+        If Inputs.MoveUp(e.KeyCode) Then VbKeyUp = False
+        If Inputs.MoveDown(e.KeyCode) Then VbKeyDown = False
+        If Inputs.MoveLeft(e.KeyCode) Then VbKeyLeft = False
+        If Inputs.MoveRight(e.KeyCode) Then VbKeyRight = False
+        If Inputs.Attack(e.KeyCode) Then VbKeyControl = False
+        If Inputs.Run(e.KeyCode) Then VbKeyShift = False
 
         'hotbar
-        If e.KeyCode = Keys.NumPad1 Then
+        If Inputs.HotBar1(e.KeyCode) Then
             skillnum = Player(Myindex).Hotbar(1).Slot
 
             If skillnum <> 0 Then
                 PlayerCastSkill(skillnum)
             End If
         End If
-        If e.KeyCode = Keys.NumPad2 Then
+        If Inputs.HotBar2(e.KeyCode) Then
             skillnum = Player(Myindex).Hotbar(2).Slot
 
             If skillnum <> 0 Then
                 PlayerCastSkill(skillnum)
             End If
         End If
-        If e.KeyCode = Keys.NumPad3 Then
+        If Inputs.HotBar3(e.KeyCode) Then
             skillnum = Player(Myindex).Hotbar(3).Slot
 
             If skillnum <> 0 Then
                 PlayerCastSkill(skillnum)
             End If
         End If
-        If e.KeyCode = Keys.NumPad4 Then
+        If Inputs.HotBar4(e.KeyCode) Then
             skillnum = Player(Myindex).Hotbar(4).Slot
 
             If skillnum <> 0 Then
                 PlayerCastSkill(skillnum)
             End If
         End If
-        If e.KeyCode = Keys.NumPad5 Then
+        If Inputs.HotBar5(e.KeyCode) Then
             skillnum = Player(Myindex).Hotbar(5).Slot
 
             If skillnum <> 0 Then
                 PlayerCastSkill(skillnum)
             End If
         End If
-        If e.KeyCode = Keys.NumPad6 Then
+        If Inputs.HotBar6(e.KeyCode) Then
             skillnum = Player(Myindex).Hotbar(6).Slot
 
             If skillnum <> 0 Then
                 PlayerCastSkill(skillnum)
             End If
         End If
-        If e.KeyCode = Keys.NumPad7 Then
+        If Inputs.HotBar7(e.KeyCode) Then
             skillnum = Player(Myindex).Hotbar(7).Slot
 
             If skillnum <> 0 Then
@@ -116,38 +111,23 @@ Friend Class FrmGame
         End If
 
         'admin
-        If e.KeyCode = Keys.Insert Then
+        If Inputs.Admin(e.KeyCode) Then
             If Player(Myindex).Access > 0 Then
                 SendRequestAdmin()
             End If
         End If
         'hide gui
-        If e.KeyCode = Keys.F10 Then
+        If Inputs.HudToggle(e.KeyCode) Then
             HideGui = Not HideGui
         End If
 
         'lets check for keys for inventory etc
         If Not ChatInput.Active Then
-            'inventory
-            If e.KeyCode = Keys.I Then
-                PnlInventoryVisible = Not PnlInventoryVisible
-            End If
-            'Character window
-            If e.KeyCode = Keys.C Then
-                PnlCharacterVisible = Not PnlCharacterVisible
-            End If
-            'quest window
-            If e.KeyCode = Keys.Q Then
-                PnlQuestLogVisible = Not PnlQuestLogVisible
-            End If
-            'options window
-            If e.KeyCode = Keys.O Then
-                FrmOptions.Visible = Not FrmOptions.Visible
-            End If
-            'skill window
-            If e.KeyCode = Keys.K Then
-                PnlSkillsVisible = Not PnlSkillsVisible
-            End If
+            If Inputs.Inventory(e.KeyCode) Then PnlInventoryVisible = Not PnlInventoryVisible
+            If Inputs.Character(e.KeyCode) Then PnlCharacterVisible = Not PnlCharacterVisible
+            If Inputs.Quest(e.KeyCode) Then PnlQuestLogVisible = Not PnlQuestLogVisible
+            If Inputs.skill(e.KeyCode) Then PnlSkillsVisible = Not PnlSkillsVisible
+            If Inputs.Settings(e.KeyCode) Then FrmOptions.Visible = Not FrmOptions.Visible
         End If
 
     End Sub
@@ -257,74 +237,30 @@ Friend Class FrmGame
     End Sub
 
     Private Sub Picscreen_KeyDown(sender As Object, e As KeyEventArgs) Handles picscreen.KeyDown
-        Dim num As Integer
-        If e.KeyCode = Keys.S Then VbKeyDown = True
-        If e.KeyCode = Keys.W Then VbKeyUp = True
-        If e.KeyCode = Keys.A Then VbKeyLeft = True
-        If e.KeyCode = Keys.D Then VbKeyRight = True
-        If e.KeyCode = Keys.ShiftKey Then VbKeyShift = True
-        If e.KeyCode = Keys.ControlKey Then VbKeyControl = True
-        If e.KeyCode = Keys.Alt Then VbKeyAlt = True
+        If Inputs.MoveUp(e.KeyCode) Then VbKeyUp = True
+        If Inputs.MoveDown(e.KeyCode) Then VbKeyDown = True
+        If Inputs.MoveDown(e.KeyCode) Then VbKeyLeft = True
+        If Inputs.MoveDown(e.KeyCode) Then VbKeyRight = True
+        If Inputs.Attack(e.KeyCode) Then VbKeyControl = True
+        If Inputs.Run(e.KeyCode) Then VbKeyShift = True
 
         'hotbar
-        If e.KeyCode = Keys.NumPad1 Then
-            num = Player(Myindex).Hotbar(1).Slot
-
-            If num <> 0 Then
-                SendUseHotbarSlot(1)
-            End If
-        End If
-        If e.KeyCode = Keys.NumPad2 Then
-            num = Player(Myindex).Hotbar(2).Slot
-
-            If num <> 0 Then
-                SendUseHotbarSlot(2)
-            End If
-        End If
-        If e.KeyCode = Keys.NumPad3 Then
-            num = Player(Myindex).Hotbar(3).Slot
-
-            If num <> 0 Then
-                SendUseHotbarSlot(3)
-            End If
-        End If
-        If e.KeyCode = Keys.NumPad4 Then
-            num = Player(Myindex).Hotbar(4).Slot
-
-            If num <> 0 Then
-                SendUseHotbarSlot(4)
-            End If
-        End If
-        If e.KeyCode = Keys.NumPad5 Then
-            num = Player(Myindex).Hotbar(5).Slot
-
-            If num <> 0 Then
-                SendUseHotbarSlot(5)
-            End If
-        End If
-        If e.KeyCode = Keys.NumPad6 Then
-            num = Player(Myindex).Hotbar(6).Slot
-
-            If num <> 0 Then
-                SendUseHotbarSlot(6)
-            End If
-        End If
-        If e.KeyCode = Keys.NumPad7 Then
-            num = Player(Myindex).Hotbar(7).Slot
-
-            If num <> 0 Then
-                SendUseHotbarSlot(7)
-            End If
-        End If
+        If Inputs.HotBar1(e.KeyCode) AndAlso Player(Myindex).Hotbar(1).Slot <> 0 Then SendUseHotbarSlot(1)
+        If Inputs.HotBar2(e.KeyCode) AndAlso Player(Myindex).Hotbar(2).Slot <> 0 Then SendUseHotbarSlot(2)
+        If Inputs.HotBar3(e.KeyCode) AndAlso Player(Myindex).Hotbar(3).Slot <> 0 Then SendUseHotbarSlot(3)
+        If Inputs.HotBar4(e.KeyCode) AndAlso Player(Myindex).Hotbar(4).Slot <> 0 Then SendUseHotbarSlot(4)
+        If Inputs.HotBar5(e.KeyCode) AndAlso Player(Myindex).Hotbar(5).Slot <> 0 Then SendUseHotbarSlot(5)
+        If Inputs.HotBar6(e.KeyCode) AndAlso Player(Myindex).Hotbar(6).Slot <> 0 Then SendUseHotbarSlot(6)
+        If Inputs.HotBar7(e.KeyCode) AndAlso Player(Myindex).Hotbar(7).Slot <> 0 Then SendUseHotbarSlot(7)
 
         'admin
-        If e.KeyCode = Keys.Insert Then
+        If Inputs.Admin(e.KeyCode) Then
             If Player(Myindex).Access > 0 Then
                 SendRequestAdmin()
             End If
         End If
         'hide gui
-        If e.KeyCode = Keys.F10 Then
+        If Inputs.HudToggle(e.KeyCode) Then
             HideGui = Not HideGui
         End If
 
@@ -336,14 +272,12 @@ Friend Class FrmGame
     End Sub
 
     Private Sub Picscreen_KeyUp(sender As Object, e As KeyEventArgs) Handles picscreen.KeyUp
-
-        If e.KeyCode = Keys.S Then VbKeyDown = False
-        If e.KeyCode = Keys.W Then VbKeyUp = False
-        If e.KeyCode = Keys.A Then VbKeyLeft = False
-        If e.KeyCode = Keys.D Then VbKeyRight = False
-        If e.KeyCode = Keys.ShiftKey Then VbKeyShift = False
-        If e.KeyCode = Keys.ControlKey Then VbKeyControl = False
-        If e.KeyCode = Keys.Alt Then VbKeyAlt = False
+        If Inputs.MoveUp(e.KeyCode) Then VbKeyUp = False
+        If Inputs.MoveDown(e.KeyCode) Then VbKeyDown = False
+        If Inputs.MoveDown(e.KeyCode) Then VbKeyLeft = False
+        If Inputs.MoveDown(e.KeyCode) Then VbKeyRight = False
+        If Inputs.Attack(e.KeyCode) Then VbKeyControl = False
+        If Inputs.Run(e.KeyCode) Then VbKeyShift = False
 
         Dim keyData As Keys = e.KeyData
         If IsAcceptable(keyData) Then

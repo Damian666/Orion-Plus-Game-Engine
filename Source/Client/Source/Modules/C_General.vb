@@ -14,6 +14,7 @@ Module C_General
         SFML.Portable.Activate()
         LoadSettings()
         LoadLanguage()
+        LoadInputs()
 
         SetStatus(Language.Load.Loading)
         FrmMenu.Text = FrmGame.Text = Settings.GameName

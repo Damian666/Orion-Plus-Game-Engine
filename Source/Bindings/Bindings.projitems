@@ -12,7 +12,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Common\Time.vb" />
     <Compile Include="$(MSBuildThisFileDirectory)Common\Types.vb" />
     <Compile Include="$(MSBuildThisFileDirectory)Configurations\Language.vb" />
-    <Compile Include="$(MSBuildThisFileDirectory)Configurations\Controls.vb" />
+    <Compile Include="$(MSBuildThisFileDirectory)Configurations\Inputs.vb" />
     <Compile Include="$(MSBuildThisFileDirectory)Configurations\Settings.vb" />
     <Compile Include="$(MSBuildThisFileDirectory)Globals\Constants.vb" />
     <Compile Include="$(MSBuildThisFileDirectory)Globals\Enumerators.vb" />
