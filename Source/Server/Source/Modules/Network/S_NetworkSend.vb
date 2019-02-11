@@ -43,9 +43,6 @@ Module S_NetworkSend
         Dim i As Integer, n As Integer, q As Integer
         Dim buffer As New ByteStream(4)
         buffer.WriteInt32(ServerPackets.SNewCharClasses)
-        buffer.WriteInt32(Max_Classes)
-
-        AddDebug("Sent SMSG: SNewCharClasses")
 
         For i = 1 To Max_Classes
             buffer.WriteString((GetClassName(i)))
@@ -161,55 +158,6 @@ Module S_NetworkSend
 
         buffer.WriteBlock(ClassData)
 
-        'For i = 1 To Max_Classes
-        '    buffer.WriteString((GetClassName(i).Trim))
-        '    buffer.WriteString((Classes(i).Desc.Trim))
-
-        '    buffer.WriteInt32(GetClassMaxVital(i, VitalType.HP))
-        '    buffer.WriteInt32(GetClassMaxVital(i, VitalType.MP))
-        '    buffer.WriteInt32(GetClassMaxVital(i, VitalType.SP))
-
-        '    ' set sprite array size
-        '    n = UBound(Classes(i).MaleSprite)
-
-        '    ' send array size
-        '    buffer.WriteInt32(n)
-
-        '    ' loop around sending each sprite
-        '    For q = 0 To n
-        '        buffer.WriteInt32(Classes(i).MaleSprite(q))
-        '    Next
-
-        '    ' set sprite array size
-        '    n = UBound(Classes(i).FemaleSprite)
-
-        '    ' send array size
-        '    buffer.WriteInt32(n)
-
-        '    ' loop around sending each sprite
-        '    For q = 0 To n
-        '        buffer.WriteInt32(Classes(i).FemaleSprite(q))
-        '    Next
-
-        '    buffer.WriteInt32(Classes(i).Stat(StatType.Strength))
-        '    buffer.WriteInt32(Classes(i).Stat(StatType.Endurance))
-        '    buffer.WriteInt32(Classes(i).Stat(StatType.Vitality))
-        '    buffer.WriteInt32(Classes(i).Stat(StatType.Intelligence))
-        '    buffer.WriteInt32(Classes(i).Stat(StatType.Luck))
-        '    buffer.WriteInt32(Classes(i).Stat(StatType.Spirit))
-
-        '    For q = 1 To 5
-        '        buffer.WriteInt32(Classes(i).StartItem(q))
-        '        buffer.WriteInt32(Classes(i).StartValue(q))
-        '    Next
-
-        '    buffer.WriteInt32(Classes(i).StartMap)
-        '    buffer.WriteInt32(Classes(i).StartX)
-        '    buffer.WriteInt32(Classes(i).StartY)
-
-        '    buffer.WriteInt32(Classes(i).BaseExp)
-        'Next
-
         Socket.SendDataTo(index, buffer.Data, buffer.Head)
         buffer.Dispose()
     End Sub
@@ -222,55 +170,6 @@ Module S_NetworkSend
         AddDebug("Sent SMSG: SClassesData To All")
 
         buffer.WriteBlock(ClassData)
-
-        'For i = 1 To Max_Classes
-        '    buffer.WriteString((Trim$(GetClassName(i))))
-        '    buffer.WriteString((Trim$(Classes(i).Desc)))
-
-        '    buffer.WriteInt32(GetClassMaxVital(i, VitalType.HP))
-        '    buffer.WriteInt32(GetClassMaxVital(i, VitalType.MP))
-        '    buffer.WriteInt32(GetClassMaxVital(i, VitalType.SP))
-
-        '    ' set sprite array size
-        '    n = UBound(Classes(i).MaleSprite)
-
-        '    ' send array size
-        '    buffer.WriteInt32(n)
-
-        '    ' loop around sending each sprite
-        '    For q = 0 To n
-        '        buffer.WriteInt32(Classes(i).MaleSprite(q))
-        '    Next
-
-        '    ' set sprite array size
-        '    n = UBound(Classes(i).FemaleSprite)
-
-        '    ' send array size
-        '    buffer.WriteInt32(n)
-
-        '    ' loop around sending each sprite
-        '    For q = 0 To n
-        '        buffer.WriteInt32(Classes(i).FemaleSprite(q))
-        '    Next
-
-        '    buffer.WriteInt32(Classes(i).Stat(StatType.Strength))
-        '    buffer.WriteInt32(Classes(i).Stat(StatType.Endurance))
-        '    buffer.WriteInt32(Classes(i).Stat(StatType.Vitality))
-        '    buffer.WriteInt32(Classes(i).Stat(StatType.Intelligence))
-        '    buffer.WriteInt32(Classes(i).Stat(StatType.Luck))
-        '    buffer.WriteInt32(Classes(i).Stat(StatType.Spirit))
-
-        '    For q = 1 To 5
-        '        buffer.WriteInt32(Classes(i).StartItem(q))
-        '        buffer.WriteInt32(Classes(i).StartValue(q))
-        '    Next
-
-        '    buffer.WriteInt32(Classes(i).StartMap)
-        '    buffer.WriteInt32(Classes(i).StartX)
-        '    buffer.WriteInt32(Classes(i).StartY)
-
-        '    buffer.WriteInt32(Classes(i).BaseExp)
-        'Next
 
         SendDataToAll(buffer.Data, buffer.Head)
         buffer.Dispose()
@@ -565,9 +464,9 @@ Module S_NetworkSend
 
     Sub SendWelcome(index As Integer)
 
-        ' Send them MOTD
-        If Options.Motd.Trim.Length > 0 Then
-            PlayerMsg(index, Options.Motd, ColorType.BrightCyan)
+        ' Send them welcome
+        If Settings.Welcome.Trim.Length > 0 Then
+            PlayerMsg(index, Settings.Welcome, ColorType.BrightCyan)
         End If
 
         ' Send whos online
@@ -1495,8 +1394,8 @@ Module S_NetworkSend
 
         AddDebug("Sent SMSG: SNews")
 
-        buffer.WriteString(Options.GameName.Trim)
-        buffer.WriteString(GetFileContents(Application.StartupPath & "\data\news.txt").Trim)
+        buffer.WriteString(Settings.GameName.Trim)
+        buffer.WriteString(GetFileContents(Path.Database & "news.txt").Trim)
 
         Socket.SendDataTo(index, buffer.Data, buffer.Head)
 

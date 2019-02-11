@@ -94,7 +94,7 @@ Friend Module S_Quest
     Sub SaveQuest(QuestNum As Integer)
         Dim filename As String
         Dim I As Integer
-        filename = Path.Combine(Application.StartupPath, "data", "quests", String.Format("quest{0}.dat", QuestNum))
+        filename = Path.Quest(QuestNum)
 
         Dim writer As New ByteStream(100)
 
@@ -157,7 +157,7 @@ Friend Module S_Quest
         Dim FileName As String
         Dim I As Integer
 
-        FileName = Path.Combine(Application.StartupPath, "data", "quests", String.Format("quest{0}.dat", QuestNum))
+        FileName = Path.Quest(QuestNum)
 
         Dim reader As New ByteStream()
         BinaryFile.Load(FileName, reader)
@@ -212,7 +212,7 @@ Friend Module S_Quest
     Sub CheckQuests()
         Dim I As Integer
         For I = 1 To MAX_QUESTS
-            If Not File.Exists(Path.Combine(Application.StartupPath, "data", "quests", String.Format("quest{0}.dat", I))) Then
+            If Not File.Exists(Path.Quest(I)) Then
                 SaveQuest(I)
                 Application.DoEvents()
             End If

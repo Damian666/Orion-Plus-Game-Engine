@@ -164,7 +164,7 @@ Friend Module C_Weather
 #Region "Sound"
 
     Sub PlayWeatherSound(fileName As String, Optional looped As Boolean = False)
-        If Not Options.Sound = 1 OrElse Not File.Exists(Application.StartupPath & SoundPath & fileName) Then Exit Sub
+        If Not Settings.Sound = 1 OrElse Not File.Exists(Path.Sounds & fileName) Then Exit Sub
         If CurWeatherMusic = fileName Then Exit Sub
 
         Dim buffer As SoundBuffer
@@ -174,7 +174,7 @@ Friend Module C_Weather
             WeatherSoundPlayer.Stop()
         End If
 
-        buffer = New SoundBuffer(Application.StartupPath & SoundPath & fileName)
+        buffer = New SoundBuffer(Path.Sounds & fileName)
         WeatherSoundPlayer.SoundBuffer = buffer
         If looped = True Then
             WeatherSoundPlayer.Loop() = True

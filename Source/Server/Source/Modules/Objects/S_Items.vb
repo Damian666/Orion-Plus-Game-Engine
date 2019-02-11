@@ -17,7 +17,7 @@ Friend Module S_Items
 
     Sub SaveItem(itemNum As Integer)
         Dim filename As String
-        filename = Path.Combine(Application.StartupPath, "data", "items", String.Format("item{0}.dat", itemNum))
+        filename = Path.Item(itemNum)
 
         Dim writer As New ByteStream(100)
         writer.WriteString(Item(itemNum).Name)
@@ -94,7 +94,7 @@ Friend Module S_Items
         Dim filename As String
         Dim s As Integer
 
-        filename = Path.Combine(Application.StartupPath, "data", "items", String.Format("item{0}.dat", ItemNum))
+        filename = Path.Item(ItemNum)
 
         Dim reader As New ByteStream()
         BinaryFile.Load(filename, reader)
@@ -162,7 +162,7 @@ Friend Module S_Items
 
         For i = 1 To MAX_ITEMS
 
-            If Not File.Exists(Path.Combine(Application.StartupPath, "data", "items", String.Format("item{0}.dat", i))) Then
+            If Not File.Exists(Path.Item(i)) Then
                 SaveItem(i)
             End If
 

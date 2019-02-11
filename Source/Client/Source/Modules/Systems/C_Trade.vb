@@ -34,7 +34,7 @@ Module C_Trade
 
         DialogType = DialogueTypeTrade
 
-        DialogMsg1 = Strings.Get("trade", "tradeinvite", Trim$((Player(requester).Name)))
+        DialogMsg1 = String.Format(Language.Trade.Request, Trim$((Player(requester).Name)))
 
         UpdateDialog = True
 
@@ -65,13 +65,13 @@ Module C_Trade
                 TradeYourOffer(i).Num = buffer.ReadInt32
                 TradeYourOffer(i).Value = buffer.ReadInt32
             Next
-            YourWorth = Strings.Get("trade", "tradeworth", buffer.ReadInt32)
+            YourWorth = String.Format(Language.Trade.Value, buffer.ReadInt32) & "g"
         ElseIf datatype = 1 Then 'theirs
             For i = 1 To MAX_INV
                 TradeTheirOffer(i).Num = buffer.ReadInt32
                 TradeTheirOffer(i).Value = buffer.ReadInt32
             Next
-            TheirWorth = "Total Worth: " & buffer.ReadInt32 & "g"
+            TheirWorth = String.Format(Language.Trade.Value, buffer.ReadInt32) & "g"
         End If
 
         NeedtoUpdateTrade = True
@@ -86,11 +86,10 @@ Module C_Trade
 
         Select Case tradestatus
             Case 0 ' clear
-                'frmMainGame.lblTradeStatus.Text = ""
             Case 1 ' they've accepted
-                AddText(Strings.Get("trade", "tradestatusok"), ColorType.White)
+                AddText(Language.Trade.StatusOther, ColorType.White)
             Case 2 ' you've accepted
-                AddText(Strings.Get("trade", "tradestatuswait"), ColorType.White)
+                AddText(Language.Trade.StatusSelf, ColorType.White)
         End Select
 
         buffer.Dispose()

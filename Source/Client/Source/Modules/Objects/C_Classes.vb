@@ -7,13 +7,10 @@ Module C_Classes
     Sub Packet_NewCharClasses(ByRef data() As Byte)
         Dim i As Integer, z As Integer, x As Integer
         Dim buffer As New ByteStream(data)
-        ' Max classes
-        MaxClasses = buffer.ReadInt32
-        ReDim Classes(MaxClasses)
 
         SelectedChar = 1
 
-        For i = 1 To MaxClasses
+        For i = 1 To MAX_CLASSES
 
             With Classes(i)
                 .Name = Trim(buffer.ReadString)
@@ -78,9 +75,9 @@ Module C_Classes
         PnlCharCreateVisible = True
         PnlLoginVisible = False
 
-        ReDim Cmbclass(MaxClasses)
+        ReDim Cmbclass(MAX_CLASSES)
 
-        For i = 1 To MaxClasses
+        For i = 1 To MAX_CLASSES
             Cmbclass(i) = Classes(i).Name
         Next
 
@@ -93,13 +90,9 @@ Module C_Classes
         Dim i As Integer, z As Integer, x As Integer
         Dim buffer As New ByteStream(data)
 
-        ' Max classes
-        MaxClasses = buffer.ReadInt32
-        ReDim Classes(MaxClasses)
-
         SelectedChar = 1
 
-        For i = 1 To MaxClasses
+        For i = 1 To MAX_CLASSES
 
             With Classes(i)
                 .Name = Trim(buffer.ReadString)
@@ -154,8 +147,8 @@ Module C_Classes
 
         Next
 
-        ReDim Cmbclass(MaxClasses)
-        For i = 1 To MaxClasses
+        ReDim Cmbclass(MAX_CLASSES)
+        For i = 1 To MAX_CLASSES
             Cmbclass(i) = Classes(i).Name
         Next
         FrmMenu.DrawCharacter()

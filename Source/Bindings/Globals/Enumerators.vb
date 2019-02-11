@@ -1,4 +1,5 @@
-﻿Module Enums
+﻿Friend Module modEnumerators
+
     ''' <Summary> Text Color Contstant </Summary>
     Enum ColorType As Byte
         Black
@@ -263,4 +264,5 @@
         Completed
         Repeatable
     End Enum
+
 End Module

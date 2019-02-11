@@ -49,8 +49,8 @@ Friend Class frmEditor_Pet
             Exit Sub
         End If
 
-        If File.Exists(Application.StartupPath & GfxPath & "Characters\" & petnum & GfxExt) Then
-            picSprite.BackgroundImage = Image.FromFile(Application.StartupPath & GfxPath & "Characters\" & petnum & GfxExt)
+        If File.Exists(Path.Graphics & "Characters\" & petnum & GfxExt) Then
+            picSprite.BackgroundImage = Image.FromFile(Path.Graphics & "Characters\" & petnum & GfxExt)
         End If
 
     End Sub

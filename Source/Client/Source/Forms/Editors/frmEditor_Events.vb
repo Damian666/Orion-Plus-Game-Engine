@@ -41,7 +41,7 @@ Public Class FrmEditor_Events
         cmbCondition_ClassIs.Enabled = False
         cmbCondition_ClassIs.Items.Clear()
 
-        For i = 1 To MaxClasses
+        For i = 1 To MAX_CLASSES
             cmbCondition_ClassIs.Items.Add(i & ". " & CStr(Classes(i).Name))
         Next
         cmbCondition_ClassIs.SelectedIndex = 0
@@ -117,8 +117,8 @@ Public Class FrmEditor_Events
         cmbChangeSkills.SelectedIndex = 0
         cmbChangeClass.Items.Clear()
 
-        If MaxClasses > 0 Then
-            For i = 1 To MaxClasses
+        If MAX_CLASSES > 0 Then
+            For i = 1 To MAX_CLASSES
                 cmbChangeClass.Items.Add(Trim$(Classes(i).Name))
             Next
             cmbChangeClass.SelectedIndex = 0
@@ -371,11 +371,11 @@ Public Class FrmEditor_Events
                 fraCommands.Visible = False
             'Change Class
             Case "Change Class"
-                If MaxClasses > 0 Then
+                If MAX_CLASSES > 0 Then
                     If cmbChangeClass.Items.Count = 0 Then
                         cmbChangeClass.Items.Clear()
 
-                        For i = 1 To MaxClasses
+                        For i = 1 To MAX_CLASSES
                             cmbChangeClass.Items.Add(Trim$(Classes(i).Name))
                         Next
                         cmbChangeClass.SelectedIndex = 0
@@ -1571,8 +1571,8 @@ Public Class FrmEditor_Events
 
     Private Sub NudShowTextFace_ValueChanged(sender As Object, e As EventArgs) Handles nudShowTextFace.ValueChanged
         If nudShowTextFace.Value > 0 Then
-            If File.Exists(Application.StartupPath & GfxPath & "Faces\" & nudShowTextFace.Value & GfxExt) Then
-                picShowTextFace.BackgroundImage = Image.FromFile(Application.StartupPath & GfxPath & "Faces\" & nudShowTextFace.Value & GfxExt)
+            If File.Exists(Path.Graphics & "Faces\" & nudShowTextFace.Value & GfxExt) Then
+                picShowTextFace.BackgroundImage = Image.FromFile(Path.Graphics & "Faces\" & nudShowTextFace.Value & GfxExt)
             End If
         Else
             picShowTextFace.BackgroundImage = Nothing
@@ -1626,8 +1626,8 @@ Public Class FrmEditor_Events
 
     Private Sub NudShowChoicesFace_ValueChanged(sender As Object, e As EventArgs) Handles nudShowChoicesFace.ValueChanged
         If nudShowChoicesFace.Value > 0 Then
-            If File.Exists(Application.StartupPath & GfxPath & "Faces\" & nudShowChoicesFace.Value & GfxExt) Then
-                picShowChoicesFace.BackgroundImage = Image.FromFile(Application.StartupPath & GfxPath & "Faces\" & nudShowChoicesFace.Value & GfxExt)
+            If File.Exists(Path.Graphics & "Faces\" & nudShowChoicesFace.Value & GfxExt) Then
+                picShowChoicesFace.BackgroundImage = Image.FromFile(Path.Graphics & "Faces\" & nudShowChoicesFace.Value & GfxExt)
             End If
         Else
             picShowChoicesFace.Text = "Face: None"

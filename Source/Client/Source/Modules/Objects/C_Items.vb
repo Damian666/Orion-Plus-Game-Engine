@@ -23,7 +23,7 @@ Module C_Items
         Dim i As Integer
         i = 1
 
-        While File.Exists(Application.StartupPath & GfxPath & "Items\" & i & GfxExt)
+        While File.Exists(Path.Graphics & "Items\" & i & GfxExt)
             NumItems = NumItems + 1
             i = i + 1
         End While

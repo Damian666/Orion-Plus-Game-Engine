@@ -19,12 +19,12 @@ Module C_Sound
     Friend MaxVolume As Single
 
     Sub PlayMusic(fileName As String)
-        If Options.Music = 0 OrElse Not File.Exists(Application.StartupPath & MusicPath & fileName) Then Exit Sub
+        If Settings.Music = 0 OrElse Not File.Exists(Path.Music & fileName) Then Exit Sub
         If fileName = CurMusic Then Exit Sub
 
         If MusicPlayer Is Nothing Then
             Try
-                MusicPlayer = New Music(Application.StartupPath & MusicPath & fileName)
+                MusicPlayer = New Music(Path.Music & fileName)
                 MusicPlayer.Loop() = True
                 MusicPlayer.Volume() = 0
                 MusicPlayer.Play()
@@ -52,11 +52,11 @@ Module C_Sound
     End Sub
 
     Sub PlayPreview(fileName As String)
-        If Options.Music = 0 OrElse Not File.Exists(Application.StartupPath & MusicPath & fileName) Then Exit Sub
+        If Settings.Music = 0 OrElse Not File.Exists(Path.Music & fileName) Then Exit Sub
 
         If PreviewPlayer Is Nothing Then
             Try
-                PreviewPlayer = New Music(Application.StartupPath & MusicPath & fileName)
+                PreviewPlayer = New Music(Path.Music & fileName)
                 PreviewPlayer.Loop() = True
                 PreviewPlayer.Volume() = 75
                 PreviewPlayer.Play()
@@ -66,7 +66,7 @@ Module C_Sound
         Else
             Try
                 StopPreview()
-                PreviewPlayer = New Music(Application.StartupPath & MusicPath & fileName)
+                PreviewPlayer = New Music(Path.Music & fileName)
                 PreviewPlayer.Loop() = True
                 PreviewPlayer.Volume() = 75
                 PreviewPlayer.Play()
@@ -84,12 +84,12 @@ Module C_Sound
     End Sub
 
     Sub PlaySound(fileName As String, Optional looped As Boolean = False)
-        If Options.Sound = 0 OrElse Not File.Exists(Application.StartupPath & SoundPath & fileName) Then Exit Sub
+        If Settings.Sound = 0 OrElse Not File.Exists(Path.Sounds & fileName) Then Exit Sub
 
         Dim buffer As SoundBuffer
         If SoundPlayer Is Nothing Then
             SoundPlayer = New Sound()
-            buffer = New SoundBuffer(Application.StartupPath & SoundPath & fileName)
+            buffer = New SoundBuffer(Path.Sounds & fileName)
             SoundPlayer.SoundBuffer = buffer
             If looped = True Then
                 SoundPlayer.Loop() = True
@@ -100,7 +100,7 @@ Module C_Sound
             SoundPlayer.Play()
         Else
             SoundPlayer.Stop()
-            buffer = New SoundBuffer(Application.StartupPath & SoundPath & fileName)
+            buffer = New SoundBuffer(Path.Sounds & fileName)
             SoundPlayer.SoundBuffer = buffer
             If looped = True Then
                 SoundPlayer.Loop() = True
@@ -119,12 +119,12 @@ Module C_Sound
     End Sub
 
     Sub PlayExtraSound(fileName As String, Optional looped As Boolean = False)
-        If Options.Sound = 0 OrElse Not File.Exists(Application.StartupPath & SoundPath & fileName) Then Exit Sub
+        If Settings.Sound = 0 OrElse Not File.Exists(Path.Sounds & fileName) Then Exit Sub
 
         Dim buffer As SoundBuffer
         If ExtraSoundPlayer Is Nothing Then
             ExtraSoundPlayer = New Sound()
-            buffer = New SoundBuffer(Application.StartupPath & SoundPath & fileName)
+            buffer = New SoundBuffer(Path.Sounds & fileName)
             ExtraSoundPlayer.SoundBuffer = buffer
             If looped = True Then
                 ExtraSoundPlayer.Loop() = True
@@ -135,7 +135,7 @@ Module C_Sound
             ExtraSoundPlayer.Play()
         Else
             ExtraSoundPlayer.Stop()
-            buffer = New SoundBuffer(Application.StartupPath & SoundPath & fileName)
+            buffer = New SoundBuffer(Path.Sounds & fileName)
             ExtraSoundPlayer.SoundBuffer = buffer
             If looped = True Then
                 ExtraSoundPlayer.Loop() = True

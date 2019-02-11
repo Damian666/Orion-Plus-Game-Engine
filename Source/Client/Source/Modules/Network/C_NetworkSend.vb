@@ -250,11 +250,11 @@ Module C_NetworkSend
         buffer.Dispose()
     End Sub
 
-    Friend Sub SendMotdChange(motd As String)
+    Friend Sub SendMotdChange(welcome As String)
         Dim buffer As New ByteStream(4)
 
         buffer.WriteInt32(ClientPackets.CSetMotd)
-        buffer.WriteString((motd))
+        buffer.WriteString(welcome)
 
         Socket.SendData(buffer.Data, buffer.Head)
         buffer.Dispose()
@@ -625,9 +625,7 @@ Module C_NetworkSend
 
         buffer.WriteInt32(ClientPackets.CSaveClasses)
 
-        buffer.WriteInt32(MaxClasses)
-
-        For i = 1 To MaxClasses
+        For i = 1 To MAX_CLASSES
             buffer.WriteString((Trim$(Classes(i).Name)))
             buffer.WriteString((Trim$(Classes(i).Desc)))
 

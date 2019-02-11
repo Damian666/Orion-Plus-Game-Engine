@@ -1,6 +1,4 @@
-﻿Imports System.Drawing
-Imports System.IO
-Imports System.Windows.Forms
+﻿Imports System.IO
 Imports ASFW
 
 Friend Class FrmMenu
@@ -19,31 +17,10 @@ Friend Class FrmMenu
     ''' On load, get GUI ready.
     ''' </summary>
     Private Sub Frmmenu_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        Strings.Init(0, "English")
 
         LoadMenuGraphics()
-
-        pnlLoad.Width = 730
-        pnlLoad.Height = 550
-
-        Width = 730
-        pnlLogin.Top = pnlMainMenu.Top
-        pnlLogin.Left = pnlMainMenu.Left
-
-        pnlNewChar.Top = pnlMainMenu.Top
-        pnlNewChar.Left = pnlMainMenu.Left
-
-        pnlRegister.Top = pnlMainMenu.Top
-        pnlRegister.Left = pnlMainMenu.Left
-
-        pnlCredits.Top = pnlMainMenu.Top
-        pnlCredits.Left = pnlMainMenu.Left
-
-        pnlIPConfig.Top = pnlMainMenu.Top
-        pnlIPConfig.Left = pnlMainMenu.Left
-
-        pnlCharSelect.Top = pnlMainMenu.Top
-        pnlCharSelect.Left = pnlMainMenu.Left
+        pnlLoad.Width = Width
+        pnlLoad.Height = Height
 
         If Started = False Then Call Startup()
 
@@ -58,21 +35,6 @@ Friend Class FrmMenu
         DrawCharacterSelect()
     End Sub
 
-    ''' <summary>
-    ''' Shows the IP config.
-    ''' </summary>
-    Private Sub LblServerStatus_Click(sender As Object, e As EventArgs) Handles lblServerStatus.Click
-        PnlCreditsVisible = False
-        PnlLoginVisible = False
-        PnlRegisterVisible = False
-        PnlCharCreateVisible = False
-
-        txtIP.Text = Options.Ip
-        txtPort.Text = Options.Port
-
-        pnlIPConfig.Visible = True
-    End Sub
-
 #End Region
 
 #Region "Draw Functions"
@@ -83,87 +45,78 @@ Friend Class FrmMenu
     Friend Sub LoadMenuGraphics()
 
         'main menu
-        If File.Exists(Application.StartupPath & GfxGuiPath & "Menu\menu" & GfxExt) Then
-            BackgroundImage = Image.FromFile(Application.StartupPath & GfxGuiPath & "Menu\menu" & GfxExt)
+        If File.Exists(Path.Gui & "Menu\menu" & GfxExt) Then
+            BackgroundImage = Image.FromFile(Path.Gui & "Menu\menu" & GfxExt)
         End If
 
         'main menu buttons
-        If File.Exists(Application.StartupPath & GfxGuiPath & "Menu\button" & GfxExt) Then
-            btnCredits.BackgroundImage = Image.FromFile(Application.StartupPath & GfxGuiPath & "Menu\button" & GfxExt)
-            btnExit.BackgroundImage = Image.FromFile(Application.StartupPath & GfxGuiPath & "Menu\button" & GfxExt)
-            btnLogin.BackgroundImage = Image.FromFile(Application.StartupPath & GfxGuiPath & "Menu\button" & GfxExt)
-            btnPlay.BackgroundImage = Image.FromFile(Application.StartupPath & GfxGuiPath & "Menu\button" & GfxExt)
-            btnRegister.BackgroundImage = Image.FromFile(Application.StartupPath & GfxGuiPath & "Menu\button" & GfxExt)
-            btnNewChar.BackgroundImage = Image.FromFile(Application.StartupPath & GfxGuiPath & "Menu\button" & GfxExt)
-            btnUseChar.BackgroundImage = Image.FromFile(Application.StartupPath & GfxGuiPath & "Menu\button" & GfxExt)
-            btnDelChar.BackgroundImage = Image.FromFile(Application.StartupPath & GfxGuiPath & "Menu\button" & GfxExt)
-            btnCreateAccount.BackgroundImage = Image.FromFile(Application.StartupPath & GfxGuiPath & "Menu\button" & GfxExt)
-            btnSaveIP.BackgroundImage = Image.FromFile(Application.StartupPath & GfxGuiPath & "Menu\button" & GfxExt)
+        If File.Exists(Path.Gui & "Menu\button" & GfxExt) Then
+            btnCredits.BackgroundImage = Image.FromFile(Path.Gui & "Menu\button" & GfxExt)
+            btnExit.BackgroundImage = Image.FromFile(Path.Gui & "Menu\button" & GfxExt)
+            btnLogin.BackgroundImage = Image.FromFile(Path.Gui & "Menu\button" & GfxExt)
+            btnPlay.BackgroundImage = Image.FromFile(Path.Gui & "Menu\button" & GfxExt)
+            btnRegister.BackgroundImage = Image.FromFile(Path.Gui & "Menu\button" & GfxExt)
+            btnNewChar.BackgroundImage = Image.FromFile(Path.Gui & "Menu\button" & GfxExt)
+            btnUseChar.BackgroundImage = Image.FromFile(Path.Gui & "Menu\button" & GfxExt)
+            btnDelChar.BackgroundImage = Image.FromFile(Path.Gui & "Menu\button" & GfxExt)
+            btnCreateAccount.BackgroundImage = Image.FromFile(Path.Gui & "Menu\button" & GfxExt)
         End If
 
         'main menu panels
-        If File.Exists(Application.StartupPath & GfxGuiPath & "Menu\panel" & GfxExt) Then
-            pnlMainMenu.BackgroundImage = Image.FromFile(Application.StartupPath & GfxGuiPath & "Menu\panel" & GfxExt)
-            pnlLogin.BackgroundImage = Image.FromFile(Application.StartupPath & GfxGuiPath & "Menu\panel" & GfxExt)
-            pnlNewChar.BackgroundImage = Image.FromFile(Application.StartupPath & GfxGuiPath & "Menu\panel" & GfxExt)
-            pnlCharSelect.BackgroundImage = Image.FromFile(Application.StartupPath & GfxGuiPath & "Menu\panel" & GfxExt)
-            pnlRegister.BackgroundImage = Image.FromFile(Application.StartupPath & GfxGuiPath & "Menu\panel" & GfxExt)
-            pnlCredits.BackgroundImage = Image.FromFile(Application.StartupPath & GfxGuiPath & "Menu\panel" & GfxExt)
-            pnlIPConfig.BackgroundImage = Image.FromFile(Application.StartupPath & GfxGuiPath & "Menu\panel" & GfxExt)
+        If File.Exists(Path.Gui & "Menu\panel" & GfxExt) Then
+            pnlMainMenu.BackgroundImage = Image.FromFile(Path.Gui & "Menu\panel" & GfxExt)
+            pnlLogin.BackgroundImage = Image.FromFile(Path.Gui & "Menu\panel" & GfxExt)
+            pnlNewChar.BackgroundImage = Image.FromFile(Path.Gui & "Menu\panel" & GfxExt)
+            pnlCharSelect.BackgroundImage = Image.FromFile(Path.Gui & "Menu\panel" & GfxExt)
+            pnlRegister.BackgroundImage = Image.FromFile(Path.Gui & "Menu\panel" & GfxExt)
+            pnlCredits.BackgroundImage = Image.FromFile(Path.Gui & "Menu\panel" & GfxExt)
         End If
 
         'logo
-        If File.Exists(Application.StartupPath & GfxGuiPath & "Menu\logo" & GfxExt) Then
-            picLogo.BackgroundImage = Image.FromFile(Application.StartupPath & GfxGuiPath & "Menu\logo" & GfxExt)
+        If File.Exists(Path.Gui & "Menu\logo" & GfxExt) Then
+            picLogo.BackgroundImage = Image.FromFile(Path.Gui & "Menu\logo" & GfxExt)
         End If
 
-        'set text for controls from language file
+        ' Main
+        lblStatusHeader.Text = Language.MainMenu.ServerStatus
+        lblNewsHeader.Text = Language.MainMenu.newsheader
+        lblNews.Text = Language.MainMenu.News
+        btnPlay.Text = Language.MainMenu.buttonplay
+        btnRegister.Text = Language.MainMenu.ButtonRegister
+        btnCredits.Text = Language.MainMenu.buttoncredits
+        btnExit.Text = Language.MainMenu.ButtonExit
 
-        'main
-        lblStatusHeader.Text = Strings.Get("mainmenu", "serverstatus")
-        lblNewsHeader.Text = Strings.Get("mainmenu", "newsheader")
-        lblNews.Text = Strings.Get("mainmenu", "news")
-        btnPlay.Text = Strings.Get("mainmenu", "buttonplay")
-        btnRegister.Text = Strings.Get("mainmenu", "buttonregister")
-        btnCredits.Text = Strings.Get("mainmenu", "buttoncredits")
-        btnExit.Text = Strings.Get("mainmenu", "buttonexit")
+        ' Login
+        lblLogin.Text = Language.MainMenu.Login
+        lblLoginName.Text = Language.MainMenu.LoginName
+        lblLoginPass.Text = Language.MainMenu.LoginPass
+        chkSavePass.Text = Language.MainMenu.LoginCheckBox
+        btnLogin.Text = Language.MainMenu.LoginButton
 
-        'logon panel
-        lblLogin.Text = Strings.Get("mainmenu", "login")
-        lblLoginName.Text = Strings.Get("mainmenu", "loginname")
-        lblLoginPass.Text = Strings.Get("mainmenu", "loginpass")
-        chkSavePass.Text = Strings.Get("mainmenu", "loginchkbox")
-        btnLogin.Text = Strings.Get("mainmenu", "loginbutton")
+        ' New Character
+        lblNewChar.Text = Language.MainMenu.NewCharacter
+        lblNewCharName.Text = Language.MainMenu.NewCharacterName
+        lblNewCharClass.Text = Language.MainMenu.NewCharacterClass
+        lblNewCharGender.Text = Language.MainMenu.NewCharacterGender
+        rdoMale.Text = Language.MainMenu.NewCharacterMale
+        rdoFemale.Text = Language.MainMenu.NewCharacterFemale
+        lblNewCharSprite.Text = Language.MainMenu.NewCharacterSprite
+        btnCreateCharacter.Text = Language.MainMenu.NewCharacterButton
 
-        'new char panel
-        lblNewChar.Text = Strings.Get("mainmenu", "newchar")
-        lblNewCharName.Text = Strings.Get("mainmenu", "newcharname")
-        lblNewCharClass.Text = Strings.Get("mainmenu", "newcharclass")
-        lblNewCharGender.Text = Strings.Get("mainmenu", "newchargender")
-        rdoMale.Text = Strings.Get("mainmenu", "newcharmale")
-        rdoFemale.Text = Strings.Get("mainmenu", "newcharfemale")
-        lblNewCharSprite.Text = Strings.Get("mainmenu", "newcharsprite")
-        btnCreateCharacter.Text = Strings.Get("mainmenu", "newcharbutton")
+        ' Use Character
+        lblCharSelect.Text = Language.MainMenu.UseCharacter
+        btnNewChar.Text = Language.MainMenu.UseCharacterNew
+        btnUseChar.Text = Language.MainMenu.UseCharacteruse
+        btnDelChar.Text = Language.MainMenu.UseCharacterDel
 
-        'char select
-        lblCharSelect.Text = Strings.Get("mainmenu", "selchar")
-        btnNewChar.Text = Strings.Get("mainmenu", "selcharnew")
-        btnUseChar.Text = Strings.Get("mainmenu", "selcharuse")
-        btnDelChar.Text = Strings.Get("mainmenu", "selchardel")
+        ' Registration
+        lblNewAccount.Text = Language.MainMenu.Register
+        lblNewAccName.Text = Language.MainMenu.RegisterName
+        lblNewAccPass.Text = Language.MainMenu.RegisterPass1
+        lblNewAccPass2.Text = Language.MainMenu.RegisterPass2
 
-        'new account
-        lblNewAccount.Text = Strings.Get("mainmenu", "newacc")
-        lblNewAccName.Text = Strings.Get("mainmenu", "newaccname")
-        lblNewAccPass.Text = Strings.Get("mainmenu", "newaccpass")
-        lblNewAccPass2.Text = Strings.Get("mainmenu", "newaccpass2")
-
-        'credits
-        lblCreditsTop.Text = Strings.Get("mainmenu", "credits")
-
-        'ip config
-        lblIpConfig.Text = Strings.Get("mainmenu", "ipconfig")
-        lblIpAdress.Text = Strings.Get("mainmenu", "ipconfigadres")
-        lblPort.Text = Strings.Get("mainmenu", "ipconfigport")
+        ' Credits
+        lblCreditsTop.Text = Language.MainMenu.Credits
     End Sub
 
     ''' <summary>
@@ -182,9 +135,9 @@ Friend Class FrmMenu
             If NewCharSprite = 0 Then NewCharSprite = 1
 
             If rdoMale.Checked = True Then
-                filename = Application.StartupPath & GfxPath & "characters\" & Classes(NewCharClass).MaleSprite(NewCharSprite) & GfxExt
+                filename = Path.Graphics & "characters\" & Classes(NewCharClass).MaleSprite(NewCharSprite) & GfxExt
             Else
-                filename = Application.StartupPath & GfxPath & "characters\" & Classes(NewCharClass).FemaleSprite(NewCharSprite) & GfxExt
+                filename = Path.Graphics & "characters\" & Classes(NewCharClass).FemaleSprite(NewCharSprite) & GfxExt
             End If
 
             Dim charsprite As Bitmap = New Bitmap(filename)
@@ -224,7 +177,7 @@ Friend Class FrmMenu
             If CharSelection(1).Sprite > 0 Then
                 g = picChar1.CreateGraphics
 
-                filename = Application.StartupPath & GfxPath & "characters\" & CharSelection(1).Sprite & GfxExt
+                filename = Path.Graphics & "characters\" & CharSelection(1).Sprite & GfxExt
 
                 Dim charsprite As Bitmap = New Bitmap(filename)
 
@@ -253,7 +206,7 @@ Friend Class FrmMenu
             If CharSelection(2).Sprite > 0 Then
                 g = picChar2.CreateGraphics
 
-                filename = Application.StartupPath & GfxPath & "characters\" & CharSelection(2).Sprite & GfxExt
+                filename = Path.Graphics & "characters\" & CharSelection(2).Sprite & GfxExt
 
                 Dim charsprite As Bitmap = New Bitmap(filename)
 
@@ -282,7 +235,7 @@ Friend Class FrmMenu
             If CharSelection(3).Sprite > 0 Then
                 g = picChar3.CreateGraphics
 
-                filename = Application.StartupPath & GfxPath & "characters\" & CharSelection(3).Sprite & GfxExt
+                filename = Path.Graphics & "characters\" & CharSelection(3).Sprite & GfxExt
 
                 Dim charsprite As Bitmap = New Bitmap(filename)
 
@@ -447,11 +400,10 @@ Friend Class FrmMenu
             PnlLoginVisible = True
             PnlCharCreateVisible = False
             PnlCreditsVisible = False
-            pnlIPConfig.Visible = False
             txtLogin.Focus()
-            If Options.SavePass = True Then
-                txtLogin.Text = Options.Username
-                txtPassword.Text = Options.Password
+            If Settings.SavePass = True Then
+                txtLogin.Text = Settings.Username
+                txtPassword.Text = Settings.Password
                 chkSavePass.Checked = True
             End If
         End If
@@ -461,14 +413,14 @@ Friend Class FrmMenu
     ''' Changes to hover state on button.
     ''' </summary>
     Private Sub BtnPlay_MouseEnter(sender As Object, e As EventArgs) Handles btnPlay.MouseEnter
-        btnPlay.BackgroundImage = Image.FromFile(Application.StartupPath & GfxGuiPath & "Menu\button_hover" & GfxExt)
+        btnPlay.BackgroundImage = Image.FromFile(Path.Gui & "Menu\button_hover" & GfxExt)
     End Sub
 
     ''' <summary>
     ''' Changes to normal state on button.
     ''' </summary>
     Private Sub BtnPlay_MouseLeave(sender As Object, e As EventArgs) Handles btnPlay.MouseLeave
-        btnPlay.BackgroundImage = Image.FromFile(Application.StartupPath & GfxGuiPath & "Menu\button" & GfxExt)
+        btnPlay.BackgroundImage = Image.FromFile(Path.Gui & "Menu\button" & GfxExt)
     End Sub
 
     ''' <summary>
@@ -481,7 +433,6 @@ Friend Class FrmMenu
             PnlLoginVisible = False
             PnlCharCreateVisible = False
             PnlCreditsVisible = False
-            pnlIPConfig.Visible = False
         End If
     End Sub
 
@@ -489,14 +440,14 @@ Friend Class FrmMenu
     ''' Changes to hover state on button.
     ''' </summary>
     Private Sub BtnRegister_MouseEnter(sender As Object, e As EventArgs) Handles btnRegister.MouseEnter
-        btnRegister.BackgroundImage = Image.FromFile(Application.StartupPath & GfxGuiPath & "Menu\button_hover" & GfxExt)
+        btnRegister.BackgroundImage = Image.FromFile(Path.Gui & "Menu\button_hover" & GfxExt)
     End Sub
 
     ''' <summary>
     ''' Changes to normal state on button.
     ''' </summary>
     Private Sub BtnRegister_MouseLeave(sender As Object, e As EventArgs) Handles btnRegister.MouseLeave
-        btnRegister.BackgroundImage = Image.FromFile(Application.StartupPath & GfxGuiPath & "Menu\button" & GfxExt)
+        btnRegister.BackgroundImage = Image.FromFile(Path.Gui & "Menu\button" & GfxExt)
     End Sub
 
     ''' <summary>
@@ -511,21 +462,20 @@ Friend Class FrmMenu
         PnlLoginVisible = False
         PnlRegisterVisible = False
         PnlCharCreateVisible = False
-        pnlIPConfig.Visible = False
     End Sub
 
     ''' <summary>
     ''' Changes to hover state on button.
     ''' </summary>
     Private Sub BtnCredits_MouseEnter(sender As Object, e As EventArgs) Handles btnCredits.MouseEnter
-        btnCredits.BackgroundImage = Image.FromFile(Application.StartupPath & GfxGuiPath & "Menu\button_hover" & GfxExt)
+        btnCredits.BackgroundImage = Image.FromFile(Path.Gui & "Menu\button_hover" & GfxExt)
     End Sub
 
     ''' <summary>
     ''' Changes to normal state on button.
     ''' </summary>
     Private Sub BtnCredits_MouseLeave(sender As Object, e As EventArgs) Handles btnCredits.MouseLeave
-        btnCredits.BackgroundImage = Image.FromFile(Application.StartupPath & GfxGuiPath & "Menu\button" & GfxExt)
+        btnCredits.BackgroundImage = Image.FromFile(Path.Gui & "Menu\button" & GfxExt)
     End Sub
 
     ''' <summary>
@@ -540,14 +490,14 @@ Friend Class FrmMenu
     ''' Changes to hover state on button.
     ''' </summary>
     Private Sub BtnExit_MouseEnter(sender As Object, e As EventArgs) Handles btnExit.MouseEnter
-        btnExit.BackgroundImage = Image.FromFile(Application.StartupPath & GfxGuiPath & "Menu\button_hover" & GfxExt)
+        btnExit.BackgroundImage = Image.FromFile(Path.Gui & "Menu\button_hover" & GfxExt)
     End Sub
 
     ''' <summary>
     ''' Changes to normal state on button.
     ''' </summary>
     Private Sub BtnExit_MouseLeave(sender As Object, e As EventArgs) Handles btnExit.MouseLeave
-        btnExit.BackgroundImage = Image.FromFile(Application.StartupPath & GfxGuiPath & "Menu\button" & GfxExt)
+        btnExit.BackgroundImage = Image.FromFile(Path.Gui & "Menu\button" & GfxExt)
     End Sub
 
     ''' <summary>
@@ -563,14 +513,14 @@ Friend Class FrmMenu
     ''' Changes to hover state on button.
     ''' </summary>
     Private Sub BtnLogin_MouseEnter(sender As Object, e As EventArgs) Handles btnLogin.MouseEnter
-        btnLogin.BackgroundImage = Image.FromFile(Application.StartupPath & GfxGuiPath & "Menu\button_hover" & GfxExt)
+        btnLogin.BackgroundImage = Image.FromFile(Path.Gui & "Menu\button_hover" & GfxExt)
     End Sub
 
     ''' <summary>
     ''' Changes to normal state on button.
     ''' </summary>
     Private Sub BtnLogin_MouseLeave(sender As Object, e As EventArgs) Handles btnLogin.MouseLeave
-        btnLogin.BackgroundImage = Image.FromFile(Application.StartupPath & GfxGuiPath & "Menu\button" & GfxExt)
+        btnLogin.BackgroundImage = Image.FromFile(Path.Gui & "Menu\button" & GfxExt)
     End Sub
 
     ''' <summary>
@@ -600,14 +550,14 @@ Friend Class FrmMenu
     ''' Changes to hover state on button.
     ''' </summary>
     Private Sub BtnCreateAccount_MouseEnter(sender As Object, e As EventArgs) Handles btnCreateAccount.MouseEnter
-        btnCreateAccount.BackgroundImage = Image.FromFile(Application.StartupPath & GfxGuiPath & "Menu\button_hover" & GfxExt)
+        btnCreateAccount.BackgroundImage = Image.FromFile(Path.Gui & "Menu\button_hover" & GfxExt)
     End Sub
 
     ''' <summary>
     ''' Changes to normal state on button.
     ''' </summary>
     Private Sub BtnCreateAccount_MouseLeave(sender As Object, e As EventArgs) Handles btnCreateAccount.MouseLeave
-        btnCreateAccount.BackgroundImage = Image.FromFile(Application.StartupPath & GfxGuiPath & "Menu\button" & GfxExt)
+        btnCreateAccount.BackgroundImage = Image.FromFile(Path.Gui & "Menu\button" & GfxExt)
     End Sub
 
     ''' <summary>
@@ -621,25 +571,14 @@ Friend Class FrmMenu
     ''' Changes to hover state on button.
     ''' </summary>
     Private Sub BtnCreateCharacter_MouseEnter(sender As Object, e As EventArgs) Handles btnCreateCharacter.MouseEnter
-        btnCreateCharacter.BackgroundImage = Image.FromFile(Application.StartupPath & GfxGuiPath & "Menu\button_hover" & GfxExt)
+        btnCreateCharacter.BackgroundImage = Image.FromFile(Path.Gui & "Menu\button_hover" & GfxExt)
     End Sub
 
     ''' <summary>
     ''' Changes to normal state on button.
     ''' </summary>
     Private Sub BtnCreateCharacter_MouseLeave(sender As Object, e As EventArgs) Handles btnCreateCharacter.MouseLeave
-        btnCreateCharacter.BackgroundImage = Image.FromFile(Application.StartupPath & GfxGuiPath & "Menu\button" & GfxExt)
-    End Sub
-
-    ''' <summary>
-    ''' Handles SaveIP button press.
-    ''' </summary>
-    Private Sub BtnSaveIP_Click(sender As Object, e As EventArgs) Handles btnSaveIP.Click
-        Options.Ip = txtIP.Text
-        Options.Port = txtPort.Text
-
-        pnlIPConfig.Visible = False
-        SaveOptions()
+        btnCreateCharacter.BackgroundImage = Image.FromFile(Path.Gui & "Menu\button" & GfxExt)
     End Sub
 
     ''' <summary>

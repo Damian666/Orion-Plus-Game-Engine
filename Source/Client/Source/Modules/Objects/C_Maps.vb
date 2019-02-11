@@ -109,7 +109,7 @@ Module C_Maps
         Dim i As Integer
         i = 1
 
-        While File.Exists(Application.StartupPath & GfxPath & "\tilesets\" & i & GfxExt)
+        While File.Exists(Path.Graphics & "\tilesets\" & i & GfxExt)
             NumTileSets = NumTileSets + 1
             i = i + 1
         End While

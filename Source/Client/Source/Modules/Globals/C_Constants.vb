@@ -12,11 +12,6 @@ Module C_Constants
     Friend Const EffectTypeWeather As Integer = 5
     Friend Const EffectTypeTint As Integer = 6
 
-    ' path constants
-    Friend Const SoundPath As String = "\Data\sound\"
-
-    Friend Const MusicPath As String = "\Data\music\"
-
     ' Font variables
     Friend Const FontName As String = "Arial.ttf"
 
@@ -25,12 +20,7 @@ Module C_Constants
     ' Log Path and variables
     Friend Const LogDebug As String = "debug.txt"
 
-    Friend Const LogPath As String = "\Data\logs\"
-
     ' Gfx Path and variables
-    Friend Const GfxPath As String = "\Data\graphics\"
-
-    Friend Const GfxGuiPath As String = "\Data\graphics\gui\"
     Friend Const GfxExt As String = ".png"
 
     ' Menu states
@@ -68,12 +58,6 @@ Module C_Constants
     ' ********************************************************
     ' * The values below must match with the server's values *
     ' ********************************************************
-
-    ' General constants
-    Friend GameName As String = "Orion+"
-
-    ' Website
-    Friend Const GameWebsite As String = "http://ascensiongamedev.com/index.php"
 
     ' Map constants
     Friend ScreenMapx As Byte = 35

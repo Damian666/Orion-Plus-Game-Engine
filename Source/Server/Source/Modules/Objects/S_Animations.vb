@@ -19,7 +19,7 @@ Friend Module S_Animations
         Dim filename As String
         Dim x As Integer
 
-        filename = Path.Combine(Application.StartupPath, "data", "animations", String.Format("animation{0}.dat", AnimationNum))
+        filename = Path.Animation(AnimationNum)
 
         Dim writer As New ByteStream(100)
 
@@ -59,7 +59,7 @@ Friend Module S_Animations
     Sub LoadAnimation(AnimationNum As Integer)
         Dim filename As String
 
-        filename = Path.Combine(Application.StartupPath, "data", "animations", String.Format("animation{0}.dat", AnimationNum))
+        filename = Path.Animation(AnimationNum)
         Dim reader As New ByteStream()
         BinaryFile.Load(filename, reader)
 
@@ -90,7 +90,7 @@ Friend Module S_Animations
 
         For i = 1 To MAX_ANIMATIONS
 
-            If Not File.Exists(Path.Combine(Application.StartupPath, "data", "animations", String.Format("animation{0}.dat", i))) Then
+            If Not File.Exists(Path.Animation(i)) Then
                 SaveAnimation(i)
                 Application.DoEvents()
             End If

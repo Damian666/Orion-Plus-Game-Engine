@@ -1,4 +1,4 @@
-﻿Module Types
+﻿Friend Module modTypes
     ' Common data structure arrays
     Friend Classes() As ClassStruct
     Friend Item(MAX_ITEMS) As ItemStruct

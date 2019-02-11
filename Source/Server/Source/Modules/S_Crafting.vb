@@ -34,7 +34,7 @@ Friend Module modCrafting
         Dim i As Integer
 
         For i = 1 To MAX_RECIPE
-            If Not File.Exists(Path.Combine(Application.StartupPath, "data", "recipes", String.Format("recipe{0}.dat", i))) Then
+            If Not File.Exists(Path.Recipe(i)) Then
                 SaveRecipe(i)
                 Application.DoEvents()
             End If
@@ -56,7 +56,7 @@ Friend Module modCrafting
         Dim filename As String
         Dim i As Integer
 
-        filename = Path.Combine(Application.StartupPath, "data", "recipes", String.Format("recipe{0}.dat", RecipeNum))
+        filename = Path.Recipe(RecipeNum)
 
         Dim writer As New ByteStream(100)
 
@@ -91,7 +91,7 @@ Friend Module modCrafting
 
         CheckRecipes()
 
-        filename = Path.Combine(Application.StartupPath, "data", "recipes", String.Format("recipe{0}.dat", RecipeNum))
+        filename = Path.Recipe(RecipeNum)
         Dim reader As New ByteStream()
         BinaryFile.Load(filename, reader)
 

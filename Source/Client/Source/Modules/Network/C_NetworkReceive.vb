@@ -184,7 +184,7 @@ Module C_NetworkReceive
 
         buffer.Dispose()
 
-        MsgBox(msg, vbOKOnly, GameName)
+        MsgBox(msg, vbOKOnly, Settings.GameName)
         DestroyGame()
     End Sub
 
@@ -202,7 +202,7 @@ Module C_NetworkReceive
         buffer.Dispose()
 
         Pnlloadvisible = True
-        SetStatus(Strings.Get("gamegui", "datarecieve"))
+        SetStatus(Language.Game.DataReceive)
     End Sub
 
     Private Sub Packet_LoginOk(ByRef data() As Byte)
@@ -210,16 +210,16 @@ Module C_NetworkReceive
         Dim level As Integer, className As String, gender As Byte
 
         ' save options
-        Options.SavePass = ChkSavePassChecked
-        Options.Username = Trim$(TempUserName)
+        Settings.SavePass = ChkSavePassChecked
+        Settings.Username = Trim$(TempUserName)
 
         If ChkSavePassChecked = False Then
-            Options.Password = ""
+            Settings.Password = ""
         Else
-            Options.Password = Trim$(TempPassword)
+            Settings.Password = Trim$(TempPassword)
         End If
 
-        SaveOptions()
+        SaveSettings()
 
         ' Request classes.
         SendRequestClasses()
@@ -761,18 +761,16 @@ Module C_NetworkReceive
         '\\\Read Class Data\\\
 
         ' Max classes
-        MaxClasses = buffer.ReadInt32
-        ReDim Classes(MaxClasses)
 
-        For i = 0 To MaxClasses
+        For i = 0 To MAX_CLASSES
             ReDim Classes(i).Stat(StatType.Count - 1)
         Next
 
-        For i = 0 To MaxClasses
+        For i = 0 To MAX_CLASSES
             ReDim Classes(i).Vital(VitalType.Count - 1)
         Next
 
-        For i = 1 To MaxClasses
+        For i = 1 To MAX_CLASSES
 
             With Classes(i)
                 .Name = Trim(buffer.ReadString)
@@ -1142,7 +1140,7 @@ Module C_NetworkReceive
 
     Private Sub Packet_News(ByRef data() As Byte)
         Dim buffer As New ByteStream(data)
-        GameName = buffer.ReadString
+        Settings.GameName = buffer.ReadString
         News = buffer.ReadString
 
         UpdateNews = True

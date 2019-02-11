@@ -10,12 +10,17 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="$(MSBuildThisFileDirectory)Common\Time.vb" />
-    <Compile Include="$(MSBuildThisFileDirectory)Common\Constants.vb" />
-    <Compile Include="$(MSBuildThisFileDirectory)Common\Enums.vb" />
-    <Compile Include="$(MSBuildThisFileDirectory)Common\Language.vb" />
-    <Compile Include="$(MSBuildThisFileDirectory)Common\Packets.vb" />
-    <Compile Include="$(MSBuildThisFileDirectory)Common\Strings.vb" />
     <Compile Include="$(MSBuildThisFileDirectory)Common\Types.vb" />
-    <Compile Include="$(MSBuildThisFileDirectory)Common\Xml.vb" />
+    <Compile Include="$(MSBuildThisFileDirectory)Configurations\Language.vb" />
+    <Compile Include="$(MSBuildThisFileDirectory)Configurations\Controls.vb" />
+    <Compile Include="$(MSBuildThisFileDirectory)Configurations\Settings.vb" />
+    <Compile Include="$(MSBuildThisFileDirectory)Globals\Constants.vb" />
+    <Compile Include="$(MSBuildThisFileDirectory)Globals\Enumerators.vb" />
+    <Compile Include="$(MSBuildThisFileDirectory)Network\Packets.vb" />
+    <Compile Include="$(MSBuildThisFileDirectory)Globals\Paths.vb" />
+    <Compile Include="$(MSBuildThisFileDirectory)Globals\Variables.vb" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="$(MSBuildThisFileDirectory)Network\" />
   </ItemGroup>
 </Project>

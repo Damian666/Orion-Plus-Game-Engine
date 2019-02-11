@@ -31,16 +31,16 @@ Module C_GameLogic
                 If tmrconnect < GetTickCount() Then
                     If Socket.IsConnected() = True Then
                         FrmMenu.lblServerStatus.ForeColor = Color.LightGreen
-                        FrmMenu.lblServerStatus.Text = Strings.Get("mainmenu", "serveronline")
+                        FrmMenu.lblServerStatus.Text = Language.MainMenu.ServerOnline
                     Else
                         i = i + 1
                         If i = 5 Then
                             Connect()
-                            FrmMenu.lblServerStatus.Text = Strings.Get("mainmenu", "serverreconnect")
+                            FrmMenu.lblServerStatus.Text = Language.MainMenu.ServerReconnect
                             FrmMenu.lblServerStatus.ForeColor = Color.Orange
                             i = 0
                         Else
-                            FrmMenu.lblServerStatus.Text = Strings.Get("mainmenu", "serveroffline")
+                            FrmMenu.lblServerStatus.Text = Language.MainMenu.ServerOffline
                             FrmMenu.lblServerStatus.ForeColor = Color.Red
                         End If
                     End If
@@ -100,7 +100,7 @@ Module C_GameLogic
                 End If
 
                 If tmr10000 < tick Then
-                    If Options.HighEnd = 0 Then
+                    If Settings.HighEnd = 0 Then
                         'clear any unused gfx
                         ClearGfx()
                     End If
@@ -155,7 +155,7 @@ Module C_GameLogic
                 ' check if trade timed out
                 If TradeRequest = True Then
                     If TradeTimer < tick Then
-                        AddText(Strings.Get("trade", "tradetimeout"), ColorType.Yellow)
+                        AddText(Language.Trade.Timeout, ColorType.Yellow)
                         TradeRequest = False
                         TradeTimer = 0
                     End If
@@ -274,7 +274,7 @@ Module C_GameLogic
 
                     If GettingMap Then
                         Dim font As New Font(Environment.GetFolderPath(Environment.SpecialFolder.Fonts) + "\" + FontName, FontSize)
-                        g.DrawString(Strings.Get("gamegui", "maprecieve"), font, Brushes.DarkCyan, FrmGame.picscreen.Width - 130, 5)
+                        g.DrawString(Language.Game.MapReceive, font, Brushes.DarkCyan, FrmGame.picscreen.Width - 130, 5)
                     End If
 
                 End SyncLock
@@ -312,7 +312,7 @@ Module C_GameLogic
 
             Application.DoEvents()
 
-            If Options.HighEnd = 1 Then
+            If Settings.HighEnd = 1 Then
                 Thread.Yield()
             Else
                 Thread.Sleep(1)
@@ -389,9 +389,9 @@ Module C_GameLogic
 
         Select Case Ping
             Case -1
-                PingToDraw = Strings.Get("gamegui", "pingsync")
+                PingToDraw = Language.Game.PingSync
             Case 0 To 5
-                PingToDraw = Strings.Get("gamegui", "pinglocal")
+                PingToDraw = Language.Game.PingLocal
         End Select
 
     End Sub
@@ -550,11 +550,10 @@ Module C_GameLogic
                 ' Send the message to the player
                 PlayerMsg(ChatInput.CurrentMessage, name)
             Else
-                AddText(Strings.Get("chatcommand", "playermsg"), ColorType.Yellow)
+                AddText(Language.Chat.PlayerMsg, ColorType.Yellow)
             End If
 
-            ChatInput.CurrentMessage = ""
-            Exit Sub
+            GoTo Continue1
         End If
 
         If Left$(ChatInput.CurrentMessage, 1) = "/" Then
@@ -563,35 +562,25 @@ Module C_GameLogic
             Select Case command(0)
                 Case "/emote"
                     ' Checks to make sure we have more than one string in the array
-                    If UBound(command) < 1 Then
-                        AddText(Strings.Get("chatcommand", "emote"), ColorType.Yellow)
-                        GoTo Continue1
-                    End If
-
-                    If Not IsNumeric(command(1)) Then
-                        AddText(Strings.Get("chatcommand", "emote"), ColorType.Yellow)
+                    If UBound(command) < 1 OrElse Not IsNumeric(command(1)) Then
+                        AddText(Language.Chat.Emote, ColorType.Yellow)
                         GoTo Continue1
                     End If
 
                     SendUseEmote(command(1))
 
                 Case "/help"
-                    AddText(Strings.Get("chatcommand", "help1"), ColorType.Yellow)
-                    AddText(Strings.Get("chatcommand", "help2"), ColorType.Yellow)
-                    AddText(Strings.Get("chatcommand", "help3"), ColorType.Yellow)
-                    AddText(Strings.Get("chatcommand", "help4"), ColorType.Yellow)
-                    AddText(Strings.Get("chatcommand", "help5"), ColorType.Yellow)
+                    AddText(Language.Chat.Help1, ColorType.Yellow)
+                    AddText(Language.Chat.Help2, ColorType.Yellow)
+                    AddText(Language.Chat.Help3, ColorType.Yellow)
+                    AddText(Language.Chat.Help4, ColorType.Yellow)
+                    AddText(Language.Chat.Help5, ColorType.Yellow)
 
                 Case "/houseinvite"
 
                     ' Checks to make sure we have more than one string in the array
-                    If UBound(command) < 1 Then
-                        AddText(Strings.Get("chatcommand", "houseinvite"), ColorType.Yellow)
-                        GoTo Continue1
-                    End If
-
-                    If IsNumeric(command(1)) Then
-                        AddText(Strings.Get("chatcommand", "houseinvite"), ColorType.Yellow)
+                    If UBound(command) < 1 OrElse IsNumeric(command(1)) Then
+                        AddText(Language.Chat.HouseInvite, ColorType.Yellow)
                         GoTo Continue1
                     End If
 
@@ -605,13 +594,8 @@ Module C_GameLogic
                 Case "/info"
 
                     ' Checks to make sure we have more than one string in the array
-                    If UBound(command) < 1 Then
-                        AddText(Strings.Get("chatcommand", "info"), ColorType.Yellow)
-                        GoTo Continue1
-                    End If
-
-                    If IsNumeric(command(1)) Then
-                        AddText(Strings.Get("chatcommand", "info"), ColorType.Yellow)
+                    If UBound(command) < 1 OrElse IsNumeric(command(1)) Then
+                        AddText(Language.Chat.Info, ColorType.Yellow)
                         GoTo Continue1
                     End If
 
@@ -636,13 +620,8 @@ Module C_GameLogic
                     buffer.Dispose()
                 Case "/party"
                     ' Make sure they are actually sending something
-                    If UBound(command) < 1 Then
-                        AddText(Strings.Get("chatcommand", "party"), ColorType.Yellow)
-                        GoTo Continue1
-                    End If
-
-                    If IsNumeric(command(1)) Then
-                        AddText(Strings.Get("chatcommand", "party"), ColorType.Yellow)
+                    If UBound(command) < 1 OrElse IsNumeric(command(1)) Then
+                        AddText(Language.Chat.Party, ColorType.Yellow)
                         GoTo Continue1
                     End If
 
@@ -663,17 +642,12 @@ Module C_GameLogic
 
                 Case "/questreset"
                     If GetPlayerAccess(Myindex) < AdminType.Mapper Then
-                        AddText(Strings.Get("adminchatcommand", "accesswarning"), QColorType.AlertColor)
+                        AddText(Language.Chat.AccessAlert, QColorType.AlertColor)
                         GoTo Continue1
                     End If
 
-                    If UBound(command) < 1 Then
-                        AddText(Strings.Get("adminchatcommand", "questreset"), ColorType.Yellow)
-                        GoTo Continue1
-                    End If
-
-                    If Not IsNumeric(command(1)) Then
-                        AddText(Strings.Get("adminchatcommand", "questreset"), ColorType.Yellow)
+                    If UBound(command) < 1 OrElse Not IsNumeric(command(1)) Then
+                        AddText(Language.Chat.ResetQuest, ColorType.Yellow)
                         GoTo Continue1
                     End If
 
@@ -683,36 +657,31 @@ Module C_GameLogic
                     If n > 0 AndAlso n <= MaxQuests Then
                         QuestReset(n)
                     Else
-                        AddText(Strings.Get("adminchatcommand", "wrongquestnr"), QColorType.AlertColor)
+                        AddText(Language.Chat.InvalidQuest, QColorType.AlertColor)
                     End If
 
                 ' Admin Help
                 Case "/admin"
 
                     If GetPlayerAccess(Myindex) < AdminType.Monitor Then
-                        AddText(Strings.Get("adminchatcommand", "accesswarning"), QColorType.AlertColor)
+                        AddText(Language.Chat.AccessAlert, QColorType.AlertColor)
                         GoTo Continue1
                     End If
 
-                    AddText(Strings.Get("adminchatcommand", "admin1"), ColorType.Yellow)
-                    AddText(Strings.Get("adminchatcommand", "adminglobal"), ColorType.Yellow)
-                    AddText(Strings.Get("adminchatcommand", "adminprivate"), ColorType.Yellow)
-                    AddText(Strings.Get("adminchatcommand", "admin2"), ColorType.Yellow)
+                    AddText(Language.Chat.Admin1, ColorType.Yellow)
+                    AddText(Language.Chat.Admin2, ColorType.Yellow)
+                    AddText(Language.Chat.AdminGblMsg, ColorType.Yellow)
+                    AddText(Language.Chat.AdminPvtMsg, ColorType.Yellow)
                 ' Kicking a player
                 Case "/kick"
 
                     If GetPlayerAccess(Myindex) < AdminType.Monitor Then
-                        AddText(Strings.Get("adminchatcommand", "accesswarning"), QColorType.AlertColor)
+                        AddText(Language.Chat.AccessAlert, QColorType.AlertColor)
                         GoTo Continue1
                     End If
 
-                    If UBound(command) < 1 Then
-                        AddText(Strings.Get("adminchatcommand", "kick"), ColorType.Yellow)
-                        GoTo Continue1
-                    End If
-
-                    If IsNumeric(command(1)) Then
-                        AddText(Strings.Get("adminchatcommand", "kick"), ColorType.Yellow)
+                    If UBound(command) < 1 OrElse IsNumeric(command(1)) Then
+                        AddText(Language.Chat.Kick, ColorType.Yellow)
                         GoTo Continue1
                     End If
 
@@ -722,35 +691,21 @@ Module C_GameLogic
                 Case "/loc"
 
                     If GetPlayerAccess(Myindex) < AdminType.Mapper Then
-                        AddText(Strings.Get("adminchatcommand", "accesswarning"), QColorType.AlertColor)
+                        AddText(Language.Chat.AccessAlert, QColorType.AlertColor)
                         GoTo Continue1
                     End If
 
                     BLoc = Not BLoc
-                ' Map Editor
-                Case "/mapeditor"
-
-                    If GetPlayerAccess(Myindex) < AdminType.Mapper Then
-                        AddText(Strings.Get("adminchatcommand", "accesswarning"), QColorType.AlertColor)
-                        GoTo Continue1
-                    End If
-
-                    SendRequestEditMap()
                 ' Warping to a player
                 Case "/warpmeto"
 
                     If GetPlayerAccess(Myindex) < AdminType.Mapper Then
-                        AddText(Strings.Get("adminchatcommand", "accesswarning"), QColorType.AlertColor)
+                        AddText(Language.Chat.AccessAlert, QColorType.AlertColor)
                         GoTo Continue1
                     End If
 
-                    If UBound(command) < 1 Then
-                        AddText(Strings.Get("adminchatcommand", "warpmeto"), ColorType.Yellow)
-                        GoTo Continue1
-                    End If
-
-                    If IsNumeric(command(1)) Then
-                        AddText(Strings.Get("adminchatcommand", "warpmeto"), ColorType.Yellow)
+                    If UBound(command) < 1 OrElse IsNumeric(command(1)) Then
+                        AddText(Language.Chat.WarpMeTo, ColorType.Yellow)
                         GoTo Continue1
                     End If
 
@@ -759,17 +714,12 @@ Module C_GameLogic
                 Case "/warptome"
 
                     If GetPlayerAccess(Myindex) < AdminType.Mapper Then
-                        AddText(Strings.Get("adminchatcommand", "accesswarning"), QColorType.AlertColor)
+                        AddText(Language.Chat.AccessAlert, QColorType.AlertColor)
                         GoTo Continue1
                     End If
 
-                    If UBound(command) < 1 Then
-                        AddText(Strings.Get("adminchatcommand", "warptome"), ColorType.Yellow)
-                        GoTo Continue1
-                    End If
-
-                    If IsNumeric(command(1)) Then
-                        AddText(Strings.Get("adminchatcommand", "warptome"), ColorType.Yellow)
+                    If UBound(command) < 1 OrElse IsNumeric(command(1)) Then
+                        AddText(Language.Chat.WarpToMe, ColorType.Yellow)
                         GoTo Continue1
                     End If
 
@@ -778,17 +728,12 @@ Module C_GameLogic
                 Case "/warpto"
 
                     If GetPlayerAccess(Myindex) < AdminType.Mapper Then
-                        AddText(Strings.Get("adminchatcommand", "accesswarning"), QColorType.AlertColor)
+                        AddText(Language.Chat.AccessAlert, QColorType.AlertColor)
                         GoTo Continue1
                     End If
 
-                    If UBound(command) < 1 Then
-                        AddText(Strings.Get("adminchatcommand", "warpto"), ColorType.Yellow)
-                        GoTo Continue1
-                    End If
-
-                    If Not IsNumeric(command(1)) Then
-                        AddText(Strings.Get("adminchatcommand", "warpto"), ColorType.Yellow)
+                    If UBound(command) < 1 OrElse Not IsNumeric(command(1)) Then
+                        AddText(Language.Chat.WarpTo, ColorType.Yellow)
                         GoTo Continue1
                     End If
 
@@ -798,24 +743,19 @@ Module C_GameLogic
                     If n > 0 AndAlso n <= MAX_MAPS Then
                         WarpTo(n)
                     Else
-                        AddText(Strings.Get("adminchatcommand", "wrongmapnr"), QColorType.AlertColor)
+                        AddText(Language.Chat.InvalidMap, QColorType.AlertColor)
                     End If
 
                 ' Setting sprite
-                Case "/setsprite"
+                Case "/sprite"
 
                     If GetPlayerAccess(Myindex) < AdminType.Mapper Then
-                        AddText(Strings.Get("adminchatcommand", "accesswarning"), QColorType.AlertColor)
+                        AddText(Language.Chat.AccessAlert, QColorType.AlertColor)
                         GoTo Continue1
                     End If
 
-                    If UBound(command) < 1 Then
-                        AddText(Strings.Get("adminchatcommand", "setsprite"), ColorType.Yellow)
-                        GoTo Continue1
-                    End If
-
-                    If Not IsNumeric(command(1)) Then
-                        AddText(Strings.Get("adminchatcommand", "setsprite"), ColorType.Yellow)
+                    If UBound(command) < 1 OrElse Not IsNumeric(command(1)) Then
+                        AddText(Language.Chat.Sprite, ColorType.Yellow)
                         GoTo Continue1
                     End If
 
@@ -824,7 +764,7 @@ Module C_GameLogic
                 Case "/mapreport"
 
                     If GetPlayerAccess(Myindex) < AdminType.Mapper Then
-                        AddText(Strings.Get("adminchatcommand", "accesswarning"), QColorType.AlertColor)
+                        AddText(Language.Chat.AccessAlert, QColorType.AlertColor)
                         GoTo Continue1
                     End If
 
@@ -833,21 +773,21 @@ Module C_GameLogic
                 Case "/respawn"
 
                     If GetPlayerAccess(Myindex) < AdminType.Mapper Then
-                        AddText(Strings.Get("adminchatcommand", "accesswarning"), QColorType.AlertColor)
+                        AddText(Language.Chat.AccessAlert, QColorType.AlertColor)
                         GoTo Continue1
                     End If
 
                     SendMapRespawn()
-                ' MOTD change
-                Case "/motd"
+                ' Welcome change
+                Case "/welcome"
 
                     If GetPlayerAccess(Myindex) < AdminType.Mapper Then
-                        AddText(Strings.Get("adminchatcommand", "accesswarning"), QColorType.AlertColor)
+                        AddText(Language.Chat.AccessAlert, QColorType.AlertColor)
                         GoTo Continue1
                     End If
 
                     If UBound(command) < 1 Then
-                        AddText(Strings.Get("adminchatcommand", "motd"), ColorType.Yellow)
+                        AddText(Language.Chat.Welcome, ColorType.Yellow)
                         GoTo Continue1
                     End If
 
@@ -856,7 +796,7 @@ Module C_GameLogic
                 Case "/banlist"
 
                     If GetPlayerAccess(Myindex) < AdminType.Mapper Then
-                        AddText(Strings.Get("adminchatcommand", "accesswarning"), QColorType.AlertColor)
+                        AddText(Language.Chat.AccessAlert, QColorType.AlertColor)
                         GoTo Continue1
                     End If
 
@@ -865,12 +805,12 @@ Module C_GameLogic
                 Case "/ban"
 
                     If GetPlayerAccess(Myindex) < AdminType.Mapper Then
-                        AddText(Strings.Get("adminchatcommand", "accesswarning"), QColorType.AlertColor)
+                        AddText(Language.Chat.AccessAlert, QColorType.AlertColor)
                         GoTo Continue1
                     End If
 
                     If UBound(command) < 1 Then
-                        AddText(Strings.Get("adminchatcommand", "ban"), ColorType.Yellow)
+                        AddText(Language.Chat.Ban, ColorType.Yellow)
                         GoTo Continue1
                     End If
 
@@ -879,39 +819,30 @@ Module C_GameLogic
 
                 ' // Creator Admin Commands //
                 ' Giving another player access
-                Case "/setaccess"
+                Case "/access"
 
                     If GetPlayerAccess(Myindex) < AdminType.Creator Then
-                        AddText(Strings.Get("adminchatcommand", "accesswarning"), QColorType.AlertColor)
+                        AddText(Language.Chat.AccessAlert, QColorType.AlertColor)
                         GoTo Continue1
                     End If
 
-                    If UBound(command) < 2 Then
-                        AddText(Strings.Get("adminchatcommand", "setaccess"), ColorType.Yellow)
-                        GoTo Continue1
-                    End If
-
-                    If IsNumeric(command(1)) OrElse Not IsNumeric(command(2)) Then
-                        AddText(Strings.Get("adminchatcommand", "setaccess"), ColorType.Yellow)
+                    If UBound(command) < 2 OrElse
+                        IsNumeric(command(1)) OrElse
+                        Not IsNumeric(command(2)) Then
+                        AddText(Language.Chat.Access, ColorType.Yellow)
                         GoTo Continue1
                     End If
 
                     SendSetAccess(command(1), CLng(command(2)))
                 Case Else
-                    AddText(Strings.Get("chatcommand", "wrongcmd"), QColorType.AlertColor)
+                    AddText(Language.Chat.InvalidCmd, QColorType.AlertColor)
             End Select
 
-            'continue label where we go instead of exiting the sub
-Continue1:
-            ChatInput.CurrentMessage = ""
-            Exit Sub
-        End If
-
-        ' Say message
-        If Len(chatText) > 0 Then
+        ElseIf Len(chatText) > 0 Then ' Say message
             SayMsg(chatText)
         End If
 
+Continue1:
         ChatInput.CurrentMessage = ""
     End Sub
 
@@ -988,8 +919,8 @@ Continue1:
         ' For the stats label
         Select Case Item(itemnum).Type
             Case ItemType.None
-                ItemDescInfo = Strings.Get("itemdescription", "notavail")
-                ItemDescType = Strings.Get("itemdescription", "notavail")
+                ItemDescInfo = Language.ItemDescription.NotAvailable
+                ItemDescType = Language.ItemDescription.NotAvailable
 
             Case ItemType.Equipment
                 Select Case Item(itemnum).SubType
@@ -997,58 +928,54 @@ Continue1:
                     Case EquipmentType.Weapon
                         If Item(itemnum).Randomize <> 0 Then
                             If windowType = 0 Then
-                                ItemDescInfo = "Damage: " & Player(Myindex).RandInv(invNum).Damage
+                                ItemDescInfo = Language.ItemDescription.Damage &
+                                    Player(Myindex).RandInv(invNum).Damage
                             Else
-                                ItemDescInfo = "Damage: " & Player(Myindex).RandEquip(invNum).Damage
+                                ItemDescInfo = Language.ItemDescription.Damage &
+                                    Player(Myindex).RandEquip(invNum).Damage
                             End If
                         Else
-                            ItemDescInfo = "Damage: " & Item(itemnum).Data2
+                            ItemDescInfo = Language.ItemDescription.Damage & Item(itemnum).Data2
                         End If
-                        ItemDescType = "Weapon"
+                        ItemDescType = Language.ItemDescription.Weapon
                     Case EquipmentType.Armor
-                        ItemDescInfo = "Defence: " & Item(itemnum).Data2
-                        ItemDescType = "Armor"
+                        ItemDescInfo = Language.ItemDescription.Defense & Item(itemnum).Data2
+                        ItemDescType = Language.ItemDescription.Armor
                     Case EquipmentType.Helmet
-                        ItemDescInfo = "Defence: " & Item(itemnum).Data2
-                        ItemDescType = "Helmet"
+                        ItemDescInfo = Language.ItemDescription.Defense & Item(itemnum).Data2
+                        ItemDescType = Language.ItemDescription.Helmet
                     Case EquipmentType.Shield
-                        ItemDescInfo = "Defence: " & Item(itemnum).Data2
-                        ItemDescType = "Shield"
+                        ItemDescInfo = Language.ItemDescription.Defense & Item(itemnum).Data2
+                        ItemDescType = Language.ItemDescription.Shield
                     Case EquipmentType.Shoes
-                        ItemDescInfo = "Defence: " & Item(itemnum).Data2
-                        ItemDescType = "Shoes"
+                        ItemDescInfo = Language.ItemDescription.Defense & Item(itemnum).Data2
+                        ItemDescType = Language.ItemDescription.Shoes
                     Case EquipmentType.Gloves
-                        ItemDescInfo = "Defence: " & Item(itemnum).Data2
-                        ItemDescType = "Gloves"
+                        ItemDescInfo = Language.ItemDescription.Defense & Item(itemnum).Data2
+                        ItemDescType = Language.ItemDescription.Gloves
                 End Select
 
             Case ItemType.Consumable
                 Select Case Item(itemnum).SubType
-                    Case ConsumableType.Hp
-                        ItemDescInfo = Strings.Get("itemdescription", "restore") & Item(itemnum).Data2
-                        ItemDescType = Strings.Get("itemdescription", "potion")
-                    Case ConsumableType.Mp
-                        ItemDescInfo = Strings.Get("itemdescription", "restore") & Item(itemnum).Data2
-                        ItemDescType = Strings.Get("itemdescription", "potion")
-                    Case ConsumableType.Sp
-                        ItemDescInfo = Strings.Get("itemdescription", "restore") & Item(itemnum).Data2
-                        ItemDescType = Strings.Get("itemdescription", "potion")
+                    Case ConsumableType.Hp, ConsumableType.Mp, ConsumableType.Sp
+                        ItemDescInfo = Language.ItemDescription.Restore & Item(itemnum).Data2
+                        ItemDescType = Language.ItemDescription.Potion
                     Case ConsumableType.Exp
-                        ItemDescInfo = Strings.Get("itemdescription", "amount") & Item(itemnum).Data2
-                        ItemDescType = Strings.Get("itemdescription", "potion")
+                        ItemDescInfo = Language.ItemDescription.Amount & Item(itemnum).Data2
+                        ItemDescType = Language.ItemDescription.Potion
                 End Select
 
             Case ItemType.Key
-                ItemDescInfo = Strings.Get("itemdescription", "notavail")
-                ItemDescType = Strings.Get("itemdescription", "key")
+                ItemDescInfo = Language.ItemDescription.NotAvailable
+                ItemDescType = Language.ItemDescription.Key
             Case ItemType.Currency
-                ItemDescInfo = Strings.Get("itemdescription", "notavail")
-                ItemDescType = Strings.Get("itemdescription", "currency")
+                ItemDescInfo = Language.ItemDescription.NotAvailable
+                ItemDescType = Language.ItemDescription.Currency
             Case ItemType.Skill
-                ItemDescInfo = Strings.Get("itemdescription", "notavail")
-                ItemDescType = Strings.Get("itemdescription", "skill")
+                ItemDescInfo = Language.ItemDescription.NotAvailable
+                ItemDescType = Language.ItemDescription.Skill
             Case ItemType.Furniture
-                ItemDescInfo = Strings.Get("itemdescription", "furniture")
+                ItemDescInfo = Language.ItemDescription.Furniture
         End Select
 
         ' Currency
@@ -1057,188 +984,101 @@ Continue1:
         ' If currency, exit out before all the other shit
         If Item(itemnum).Type = ItemType.Currency OrElse Item(itemnum).Type = ItemType.None Then
             ' Clear other labels
-            ItemDescLevel = Strings.Get("itemdescription", "notavail")
-            ItemDescSpeed = Strings.Get("itemdescription", "notavail")
-
-            ItemDescStr = Strings.Get("itemdescription", "notavail")
-            ItemDescEnd = Strings.Get("itemdescription", "notavail")
-            ItemDescInt = Strings.Get("itemdescription", "notavail")
-            ItemDescSpr = Strings.Get("itemdescription", "notavail")
-            ItemDescVit = Strings.Get("itemdescription", "notavail")
-            ItemDescLuck = Strings.Get("itemdescription", "notavail")
+            ItemDescLevel = ItemDescSpeed =
+            ItemDescStr = ItemDescEnd = ItemDescInt =
+            ItemDescSpr = ItemDescVit = ItemDescLuck =
+                    Language.ItemDescription.NotAvailable
             Exit Sub
         End If
 
         ' Potions + crap
         ItemDescLevel = Item(itemnum).LevelReq
 
-        ' Exit out for everything else 'scept equipment
+        ' Exit out for everything else except equipment
         If Item(itemnum).Type <> ItemType.Equipment Then
             ' Clear other labels
-            ItemDescSpeed = Strings.Get("itemdescription", "notavail")
-
-            ItemDescStr = Strings.Get("itemdescription", "notavail")
-            ItemDescEnd = Strings.Get("itemdescription", "notavail")
-            ItemDescInt = Strings.Get("itemdescription", "notavail")
-            ItemDescSpr = Strings.Get("itemdescription", "notavail")
-            ItemDescVit = Strings.Get("itemdescription", "notavail")
-            ItemDescLuck = Strings.Get("itemdescription", "notavail")
+            ItemDescSpeed =
+            ItemDescStr = ItemDescEnd = ItemDescInt =
+            ItemDescSpr = ItemDescVit = ItemDescLuck =
+                    Language.ItemDescription.NotAvailable
             Exit Sub
         End If
 
         ' Equipment specific
         If Item(itemnum).Randomize <> 0 Then
             If windowType = 0 Then
+
+                If Item(itemnum).SubType = EquipmentType.Weapon Then
+                    ItemDescSpeed = Player(Myindex).RandInv(invNum).Speed / 1000 & Language.ItemDescription.Seconds
+                End If
                 If Player(Myindex).RandInv(invNum).Stat(StatType.Strength) > 0 Then
                     ItemDescStr = "+" & Player(Myindex).RandInv(invNum).Stat(StatType.Strength)
-                Else
-                    ItemDescStr = Strings.Get("itemdescription", "none")
                 End If
-            Else
-                If Player(Myindex).RandEquip(invNum).Stat(StatType.Strength) > 0 Then
-                    ItemDescStr = "+" & Player(Myindex).RandEquip(invNum).Stat(StatType.Strength)
-                Else
-                    ItemDescStr = Strings.Get("itemdescription", "none")
-                End If
-            End If
-        Else
-            If Item(itemnum).Add_Stat(StatType.Strength) > 0 Then
-                ItemDescStr = "+" & Item(itemnum).Add_Stat(StatType.Strength)
-            Else
-                ItemDescStr = Strings.Get("itemdescription", "none")
-            End If
-        End If
-
-        If Item(itemnum).Randomize <> 0 Then
-            If windowType = 0 Then
                 If Player(Myindex).RandInv(invNum).Stat(StatType.Vitality) > 0 Then
                     ItemDescVit = "+" & Player(Myindex).RandInv(invNum).Stat(StatType.Vitality)
-                Else
-                    ItemDescVit = Strings.Get("itemdescription", "none")
                 End If
-            Else
-                If Player(Myindex).RandEquip(invNum).Stat(StatType.Vitality) > 0 Then
-                    ItemDescVit = "+" & Player(Myindex).RandEquip(invNum).Stat(StatType.Vitality)
-                Else
-                    ItemDescVit = Strings.Get("itemdescription", "none")
-                End If
-            End If
-        Else
-            If Item(itemnum).Add_Stat(StatType.Vitality) > 0 Then
-                ItemDescVit = "+" & Item(itemnum).Add_Stat(StatType.Vitality)
-            Else
-                ItemDescVit = Strings.Get("itemdescription", "none")
-            End If
-        End If
-
-        If Item(itemnum).Randomize <> 0 Then
-            If windowType = 0 Then
                 If Player(Myindex).RandInv(invNum).Stat(StatType.Intelligence) > 0 Then
                     ItemDescInt = "+" & Player(Myindex).RandInv(invNum).Stat(StatType.Intelligence)
-                Else
-                    ItemDescInt = Strings.Get("itemdescription", "none")
                 End If
-            Else
-                If Player(Myindex).RandEquip(invNum).Stat(StatType.Intelligence) > 0 Then
-                    ItemDescInt = "+" & Player(Myindex).RandEquip(invNum).Stat(StatType.Intelligence)
-                Else
-                    ItemDescInt = Strings.Get("itemdescription", "none")
-                End If
-            End If
-        Else
-            If Item(itemnum).Add_Stat(StatType.Intelligence) > 0 Then
-                ItemDescInt = "+" & Item(itemnum).Add_Stat(StatType.Intelligence)
-            Else
-                ItemDescInt = Strings.Get("itemdescription", "none")
-            End If
-        End If
-
-        If Item(itemnum).Randomize <> 0 Then
-            If windowType = 0 Then
                 If Player(Myindex).RandInv(invNum).Stat(StatType.Endurance) > 0 Then
                     ItemDescEnd = "+" & Player(Myindex).RandInv(invNum).Stat(StatType.Endurance)
-                Else
-                    ItemDescEnd = Strings.Get("itemdescription", "none")
                 End If
-            Else
-                If Player(Myindex).RandEquip(invNum).Stat(StatType.Endurance) > 0 Then
-                    ItemDescEnd = "+" & Player(Myindex).RandEquip(invNum).Stat(StatType.Endurance)
-                Else
-                    ItemDescEnd = Strings.Get("itemdescription", "none")
-                End If
-            End If
-        Else
-            If Item(itemnum).Add_Stat(StatType.Endurance) > 0 Then
-                ItemDescEnd = "+" & Item(itemnum).Add_Stat(StatType.Endurance)
-            Else
-                ItemDescEnd = Strings.Get("itemdescription", "none")
-            End If
-        End If
-
-        If Item(itemnum).Randomize <> 0 Then
-            If windowType = 0 Then
                 If Player(Myindex).RandInv(invNum).Stat(StatType.Luck) > 0 Then
                     ItemDescLuck = "+" & Player(Myindex).RandInv(invNum).Stat(StatType.Luck)
-                Else
-                    ItemDescLuck = Strings.Get("itemdescription", "none")
                 End If
-            Else
-                If Player(Myindex).RandEquip(invNum).Stat(StatType.Luck) > 0 Then
-                    ItemDescLuck = "+" & Player(Myindex).RandEquip(invNum).Stat(StatType.Luck)
-                Else
-                    ItemDescLuck = Strings.Get("itemdescription", "none")
-                End If
-            End If
-        Else
-            If Item(itemnum).Add_Stat(StatType.Luck) > 0 Then
-                ItemDescLuck = "+" & Item(itemnum).Add_Stat(StatType.Luck)
-            Else
-                ItemDescLuck = Strings.Get("itemdescription", "none")
-            End If
-        End If
-
-        If Item(itemnum).Randomize <> 0 Then
-            If windowType = 0 Then
                 If Player(Myindex).RandInv(invNum).Stat(StatType.Spirit) > 0 Then
                     ItemDescSpr = "+" & Player(Myindex).RandInv(invNum).Stat(StatType.Spirit)
-                Else
-                    ItemDescSpr = Strings.Get("itemdescription", "none")
                 End If
+
             Else
+
+                If Item(itemnum).SubType = EquipmentType.Weapon Then
+                    ItemDescSpeed = Player(Myindex).RandEquip(invNum).Speed / 1000 & Language.ItemDescription.Seconds
+                End If
+                If Player(Myindex).RandEquip(invNum).Stat(StatType.Strength) > 0 Then
+                    ItemDescStr = "+" & Player(Myindex).RandEquip(invNum).Stat(StatType.Strength)
+                End If
+                If Player(Myindex).RandEquip(invNum).Stat(StatType.Vitality) > 0 Then
+                    ItemDescVit = "+" & Player(Myindex).RandEquip(invNum).Stat(StatType.Vitality)
+                End If
+                If Player(Myindex).RandEquip(invNum).Stat(StatType.Intelligence) > 0 Then
+                    ItemDescInt = "+" & Player(Myindex).RandEquip(invNum).Stat(StatType.Intelligence)
+                End If
+                If Player(Myindex).RandEquip(invNum).Stat(StatType.Endurance) > 0 Then
+                    ItemDescEnd = "+" & Player(Myindex).RandEquip(invNum).Stat(StatType.Endurance)
+                End If
+                If Player(Myindex).RandEquip(invNum).Stat(StatType.Luck) > 0 Then
+                    ItemDescLuck = "+" & Player(Myindex).RandEquip(invNum).Stat(StatType.Luck)
+                End If
                 If Player(Myindex).RandEquip(invNum).Stat(StatType.Spirit) > 0 Then
                     ItemDescSpr = "+" & Player(Myindex).RandEquip(invNum).Stat(StatType.Spirit)
-                Else
-                    ItemDescSpr = Strings.Get("itemdescription", "none")
                 End If
+
             End If
         Else
+
+            If Item(itemnum).SubType = EquipmentType.Weapon Then
+                ItemDescSpeed = Item(itemnum).Speed / 1000 & Language.ItemDescription.Seconds
+            End If
+            If Item(itemnum).Add_Stat(StatType.Strength) > 0 Then
+                ItemDescStr = "+" & Item(itemnum).Add_Stat(StatType.Strength)
+            End If
+            If Item(itemnum).Add_Stat(StatType.Vitality) > 0 Then
+                ItemDescVit = "+" & Item(itemnum).Add_Stat(StatType.Vitality)
+            End If
+            If Item(itemnum).Add_Stat(StatType.Intelligence) > 0 Then
+                ItemDescInt = "+" & Item(itemnum).Add_Stat(StatType.Intelligence)
+            End If
+            If Item(itemnum).Add_Stat(StatType.Endurance) > 0 Then
+                ItemDescEnd = "+" & Item(itemnum).Add_Stat(StatType.Endurance)
+            End If
+            If Item(itemnum).Add_Stat(StatType.Luck) > 0 Then
+                ItemDescLuck = "+" & Item(itemnum).Add_Stat(StatType.Luck)
+            End If
             If Item(itemnum).Add_Stat(StatType.Spirit) > 0 Then
                 ItemDescSpr = "+" & Item(itemnum).Add_Stat(StatType.Spirit)
-            Else
-                ItemDescSpr = Strings.Get("itemdescription", "none")
             End If
-        End If
 
-        If Item(itemnum).Randomize <> 0 Then
-            If windowType = 0 Then
-                If Item(itemnum).SubType = EquipmentType.Weapon Then
-                    ItemDescSpeed = Player(Myindex).RandInv(invNum).Speed / 1000 & Strings.Get("itemdescription", "secs")
-                Else
-                    ItemDescSpeed = Strings.Get("itemdescription", "notavail")
-                End If
-            Else
-                If Item(itemnum).SubType = EquipmentType.Weapon Then
-                    ItemDescSpeed = Player(Myindex).RandEquip(invNum).Speed / 1000 & Strings.Get("itemdescription", "secs")
-                Else
-                    ItemDescSpeed = Strings.Get("itemdescription", "notavail")
-                End If
-            End If
-        Else
-            If Item(itemnum).SubType = EquipmentType.Weapon Then
-                ItemDescSpeed = Item(itemnum).Speed / 1000 & Strings.Get("itemdescription", "secs")
-            Else
-                ItemDescSpeed = Strings.Get("itemdescription", "notavail")
-            End If
         End If
 
     End Sub
@@ -1294,19 +1134,19 @@ Continue1:
 
         Select Case Skill(skillnum).Type
             Case SkillType.DamageHp
-                SkillDescType = Strings.Get("skilldescription", "damagehp")
-                SkillDescVital = Strings.Get("skilldescription", "damage")
+                SkillDescType = Language.SkillDescription.LoseHp
+                SkillDescVital = Language.SkillDescription.Lose
             Case SkillType.DamageMp
-                SkillDescType = Strings.Get("skilldescription", "damagemp")
-                SkillDescVital = Strings.Get("skilldescription", "damage")
+                SkillDescType = Language.SkillDescription.LoseMp
+                SkillDescVital = Language.SkillDescription.Lose
             Case SkillType.HealHp
-                SkillDescType = Strings.Get("skilldescription", "healhp")
-                SkillDescVital = Strings.Get("skilldescription", "heal")
+                SkillDescType = Language.SkillDescription.GainHp
+                SkillDescVital = Language.SkillDescription.Gain
             Case SkillType.HealMp
-                SkillDescType = Strings.Get("skilldescription", "healmp")
-                SkillDescVital = Strings.Get("skilldescription", "heal")
+                SkillDescType = Language.SkillDescription.GainMp
+                SkillDescVital = Language.SkillDescription.Gain
             Case SkillType.Warp
-                SkillDescType = Strings.Get("skilldescription", "warp")
+                SkillDescType = Language.SkillDescription.Warp
         End Select
 
         SkillDescReqMp = Skill(skillnum).MpCost
@@ -1316,7 +1156,7 @@ Continue1:
         If Skill(skillnum).ClassReq > 0 Then
             SkillDescReqClass = Trim$(Classes(Skill(skillnum).ClassReq).Name)
         Else
-            SkillDescReqClass = Strings.Get("skilldescription", "none")
+            SkillDescReqClass = Language.SkillDescription.None
         End If
 
         SkillDescCastTime = Skill(skillnum).CastTime & "s"
@@ -1324,15 +1164,15 @@ Continue1:
         SkillDescDamage = Skill(skillnum).Vital
 
         If Skill(skillnum).IsAoE Then
-            SkillDescAoe = Skill(skillnum).AoE & Strings.Get("skilldescription", "tiles")
+            SkillDescAoe = Skill(skillnum).AoE & Language.SkillDescription.Tiles
         Else
-            SkillDescAoe = Strings.Get("skilldescription", "no")
+            SkillDescAoe = Language.SkillDescription.No
         End If
 
         If Skill(skillnum).Range > 0 Then
-            SkillDescRange = Skill(skillnum).Range & Strings.Get("skilldescription", "tiles")
+            SkillDescRange = Skill(skillnum).Range & Language.SkillDescription.Tiles
         Else
-            SkillDescRange = Strings.Get("skilldescription", "selfcast")
+            SkillDescRange = Language.SkillDescription.SelfCast
         End If
 
     End Sub

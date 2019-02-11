@@ -48,7 +48,7 @@ Friend Module S_Projectiles
     Sub SaveProjectile(ProjectileNum As Integer)
         Dim filename As String
 
-        filename = Path.Combine(Application.StartupPath, "data", "projectiles", String.Format("projectile{0}.dat", ProjectileNum))
+        filename = Path.Projectile(ProjectileNum)
 
         Dim writer As New ByteStream(100)
 
@@ -69,7 +69,7 @@ Friend Module S_Projectiles
         CheckProjectile()
 
         For i = 1 To MAX_PROJECTILES
-            filename = Path.Combine(Application.StartupPath, "data", "projectiles", String.Format("projectile{0}.dat", i))
+            filename = Path.Projectile(i)
             Dim reader As New ByteStream()
             BinaryFile.Load(filename, reader)
 
@@ -88,7 +88,7 @@ Friend Module S_Projectiles
         Dim i As Integer
 
         For i = 1 To MAX_PROJECTILES
-            If Not File.Exists(Path.Combine(Application.StartupPath, "data", "projectiles", String.Format("projectile{0}.dat", i))) Then
+            If Not File.Exists(Path.Projectile(i)) Then
                 SaveProjectile(i)
             End If
         Next

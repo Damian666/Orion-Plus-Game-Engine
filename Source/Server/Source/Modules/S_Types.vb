@@ -1,5 +1,4 @@
-﻿Module modTypes
-    Friend Options As New S_Options()
+﻿Module modTypes2
 
     ' Friend data structures
     Friend Map(MAX_CACHED_MAPS) As MapRec

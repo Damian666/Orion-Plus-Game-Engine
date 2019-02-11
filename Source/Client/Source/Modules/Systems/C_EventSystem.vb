@@ -1,6 +1,4 @@
-﻿Imports System.Drawing
-Imports System.Windows.Forms
-Imports ASFW
+﻿Imports ASFW
 Imports SFML.Graphics
 Imports SFML.Window
 
@@ -2826,7 +2824,7 @@ newlist:
                     Case 1
                         If TmpEvent.Pages(CurPageNum).Graphic > 0 AndAlso TmpEvent.Pages(CurPageNum).Graphic <= NumCharacters Then
                             'Load character from Contents into our sourceBitmap
-                            sourceBitmap = New Bitmap(Application.StartupPath & GfxPath & "\characters\" & TmpEvent.Pages(CurPageNum).Graphic & ".png")
+                            sourceBitmap = New Bitmap(Path.Graphics & "\characters\" & TmpEvent.Pages(CurPageNum).Graphic & ".png")
                             targetBitmap = New Bitmap(sourceBitmap.Width, sourceBitmap.Height) 'Create our target Bitmap
 
                             g = Graphics.FromImage(targetBitmap)
@@ -2848,7 +2846,7 @@ newlist:
                     Case 2
                         If TmpEvent.Pages(CurPageNum).Graphic > 0 AndAlso TmpEvent.Pages(CurPageNum).Graphic <= NumTileSets Then
                             'Load tilesheet from Contents into our sourceBitmap
-                            sourceBitmap = New Bitmap(Application.StartupPath & GfxPath & "tilesets\" & TmpEvent.Pages(CurPageNum).Graphic & ".png")
+                            sourceBitmap = New Bitmap(Path.Graphics & "tilesets\" & TmpEvent.Pages(CurPageNum).Graphic & ".png")
                             targetBitmap = New Bitmap(sourceBitmap.Width, sourceBitmap.Height) 'Create our target Bitmap
 
                             If TmpEvent.Pages(CurPageNum).GraphicX2 = 0 AndAlso TmpEvent.Pages(CurPageNum).GraphicY2 = 0 Then
@@ -3201,7 +3199,7 @@ nextevent:
                     DrawText(EventChatX + 226, EventChatY + 146, Trim(temptext), SFML.Graphics.Color.White, SFML.Graphics.Color.Black, GameWindow, 13)
                 End If
             Else
-                temptext = Strings.Get("events", "continue")
+                temptext = Language.Events.OptContinue
                 DrawText(EventChatX + 410, EventChatY + 156, Trim(temptext), SFML.Graphics.Color.White, SFML.Graphics.Color.Black, GameWindow, 13)
             End If
 

@@ -178,7 +178,7 @@ Friend Module C_Projectiles
 
         i = 1
 
-        While File.Exists(Application.StartupPath & GfxPath & "projectiles\" & i & GfxExt)
+        While File.Exists(Path.Graphics & "projectiles\" & i & GfxExt)
 
             NumProjectiles = NumProjectiles + 1
             i = i + 1
@@ -324,8 +324,8 @@ Friend Module C_Projectiles
             Exit Sub
         End If
 
-        If File.Exists(Application.StartupPath & GfxPath & "Projectiles\" & iconnum & GfxExt) Then
-            frmEditor_Projectile.picProjectile.BackgroundImage = Drawing.Image.FromFile(Application.StartupPath & GfxPath & "Projectiles\" & iconnum & GfxExt)
+        If File.Exists(Path.Graphics & "Projectiles\" & iconnum & GfxExt) Then
+            frmEditor_Projectile.picProjectile.BackgroundImage = Drawing.Image.FromFile(Path.Graphics & "Projectiles\" & iconnum & GfxExt)
         End If
 
     End Sub

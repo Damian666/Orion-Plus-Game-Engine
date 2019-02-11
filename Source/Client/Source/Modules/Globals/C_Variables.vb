@@ -96,7 +96,7 @@ Module C_Variables
     Friend SOffsetY As Integer
 
     ' Used to freeze controls when getting a new map
-    Friend GettingMap As Boolean
+    Friend GettingMap As Boolean = True
 
     ' Used to check if FPS needs to be drawn
     Friend Bfps As Boolean
@@ -153,9 +153,6 @@ Module C_Variables
 
     Friend MapEditorHealAmount As Integer
     Friend MapEditorSlideDir As Integer
-
-    ' Maximum classes
-    Friend MaxClasses As Byte
 
     Friend Camera As Rectangle
     Friend TileView As Rect

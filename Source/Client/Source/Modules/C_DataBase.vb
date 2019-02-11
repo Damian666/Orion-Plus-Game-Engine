@@ -24,7 +24,7 @@ Module C_DataBase
         Dim i As Integer
         i = 1
 
-        While File.Exists(Application.StartupPath & GfxPath & "characters\" & i & GfxExt)
+        While File.Exists(Path.Graphics & "characters\" & i & GfxExt)
             NumCharacters = NumCharacters + 1
             i = i + 1
         End While
@@ -36,7 +36,7 @@ Module C_DataBase
         Dim i As Integer
         i = 1
 
-        While File.Exists(Application.StartupPath & GfxPath & "paperdolls\" & i & GfxExt)
+        While File.Exists(Path.Graphics & "paperdolls\" & i & GfxExt)
             NumPaperdolls = NumPaperdolls + 1
             i = i + 1
         End While
@@ -48,7 +48,7 @@ Module C_DataBase
         Dim i As Integer
         i = 1
 
-        While File.Exists(Application.StartupPath & GfxPath & "animations\" & i & GfxExt)
+        While File.Exists(Path.Graphics & "animations\" & i & GfxExt)
             NumAnimations = NumAnimations + 1
             i = i + 1
         End While
@@ -60,7 +60,7 @@ Module C_DataBase
         Dim i As Integer
         i = 1
 
-        While File.Exists(Application.StartupPath & GfxPath & "SkillIcons\" & i & GfxExt)
+        While File.Exists(Path.Graphics & "SkillIcons\" & i & GfxExt)
             NumSkillIcons = NumSkillIcons + 1
             i = i + 1
         End While
@@ -72,7 +72,7 @@ Module C_DataBase
         Dim i As Integer
         i = 1
 
-        While File.Exists(Application.StartupPath & GfxPath & "Faces\" & i & GfxExt)
+        While File.Exists(Path.Graphics & "Faces\" & i & GfxExt)
             NumFaces = NumFaces + 1
             i = i + 1
         End While
@@ -84,7 +84,7 @@ Module C_DataBase
         Dim i As Integer
         i = 1
 
-        While File.Exists(Application.StartupPath & GfxPath & "Fogs\" & i & GfxExt)
+        While File.Exists(Path.Graphics & "Fogs\" & i & GfxExt)
             NumFogs = NumFogs + 1
             i = i + 1
         End While
@@ -96,7 +96,7 @@ Module C_DataBase
         Dim i As Integer
         i = 1
 
-        While File.Exists(Application.StartupPath & GfxPath & "Emotes\" & i & GfxExt)
+        While File.Exists(Path.Graphics & "Emotes\" & i & GfxExt)
             NumEmotes = NumEmotes + 1
             i = i + 1
         End While
@@ -108,7 +108,7 @@ Module C_DataBase
         Dim i As Integer
         i = 1
 
-        While File.Exists(Application.StartupPath & GfxPath & "Panoramas\" & i & GfxExt)
+        While File.Exists(Path.Graphics & "Panoramas\" & i & GfxExt)
             NumPanorama = NumPanorama + 1
             i = i + 1
         End While
@@ -120,7 +120,7 @@ Module C_DataBase
         Dim i As Integer
         i = 1
 
-        While File.Exists(Application.StartupPath & GfxPath & "Parallax\" & i & GfxExt)
+        While File.Exists(Path.Graphics & "Parallax\" & i & GfxExt)
             NumParallax = NumParallax + 1
             i = i + 1
         End While
@@ -129,14 +129,14 @@ Module C_DataBase
     End Sub
 
     Friend Sub CacheMusic()
-        Dim files As String() = Directory.GetFiles(Application.StartupPath & MusicPath, "*.ogg")
-        Dim maxNum As String = Directory.GetFiles(Application.StartupPath & MusicPath, "*.ogg").Count
+        Dim files As String() = Directory.GetFiles(Path.Music, "*.ogg")
+        Dim maxNum As String = Directory.GetFiles(Path.Music, "*.ogg").Count
         Dim counter As Integer = 1
 
         For Each FileName In files
             ReDim Preserve MusicCache(counter)
 
-            MusicCache(counter) = Path.GetFileName(FileName)
+            MusicCache(counter) = System.IO.Path.GetFileName(FileName)
             counter = counter + 1
             Application.DoEvents()
         Next
@@ -144,14 +144,14 @@ Module C_DataBase
     End Sub
 
     Friend Sub CacheSound()
-        Dim files As String() = Directory.GetFiles(Application.StartupPath & SoundPath, "*.ogg")
-        Dim maxNum As String = Directory.GetFiles(Application.StartupPath & SoundPath, "*.ogg").Count
+        Dim files As String() = Directory.GetFiles(Path.Sounds, "*.ogg")
+        Dim maxNum As String = Directory.GetFiles(Path.Sounds, "*.ogg").Count
         Dim counter As Integer = 1
 
         For Each FileName In files
             ReDim Preserve SoundCache(counter)
 
-            SoundCache(counter) = Path.GetFileName(FileName)
+            SoundCache(counter) = System.IO.Path.GetFileName(FileName)
             counter = counter + 1
             Application.DoEvents()
         Next
@@ -160,122 +160,6 @@ Module C_DataBase
 
 #End Region
 
-#Region "Options"
-
-    Friend Sub CreateOptions()
-        Dim myXml As New XmlClass With {
-            .Filename = Application.StartupPath & "\Data\Config.xml",
-            .Root = "Options"
-        }
-
-        myXml.NewXmlDocument()
-
-        Options.Password = ""
-        Options.SavePass = False
-        Options.Username = ""
-        Options.Ip = "127.0.0.1"
-        Options.Port = 7001
-        Options.MenuMusic = ""
-        Options.Music = 1
-        Options.Sound = 1
-        Options.Volume = 100
-        Options.ScreenSize = 0
-        Options.HighEnd = 0
-        Options.ShowNpcBar = 0
-
-        myXml.LoadXml()
-
-        myXml.WriteString("UserInfo", "Username", Trim$(Options.Username))
-        myXml.WriteString("UserInfo", "Password", Trim$(Options.Password))
-        myXml.WriteString("UserInfo", "SavePass", Trim$(Options.SavePass))
-
-        myXml.WriteString("Connection", "Ip", Trim$(Options.Ip))
-        myXml.WriteString("Connection", "Port", Trim$(Options.Port))
-
-        myXml.WriteString("Sfx", "MenuMusic", Trim$(Options.MenuMusic))
-        myXml.WriteString("Sfx", "Music", Trim$(Options.Music))
-        myXml.WriteString("Sfx", "Sound", Trim$(Options.Sound))
-        myXml.WriteString("Sfx", "Volume", Trim$(Options.Volume))
-
-        myXml.WriteString("Misc", "ScreenSize", Trim$(Options.ScreenSize))
-        myXml.WriteString("Misc", "HighEnd", Trim$(Options.HighEnd))
-        myXml.WriteString("Misc", "ShowNpcBar", Trim$(Options.ShowNpcBar))
-
-        myXml.CloseXml(True)
-    End Sub
-
-    Friend Sub SaveOptions()
-        Dim myXml As New XmlClass With {
-            .Filename = Application.StartupPath & "\Data\Config.xml",
-            .Root = "Options"
-        }
-
-        myXml.LoadXml()
-
-        myXml.WriteString("UserInfo", "Username", Trim$(Options.Username))
-        myXml.WriteString("UserInfo", "Password", Trim$(Options.Password))
-        myXml.WriteString("UserInfo", "SavePass", Trim$(Options.SavePass))
-
-        myXml.WriteString("Connection", "Ip", Trim$(Options.Ip))
-        myXml.WriteString("Connection", "Port", Trim$(Options.Port))
-
-        myXml.WriteString("Sfx", "MenuMusic", Trim$(Options.MenuMusic))
-        myXml.WriteString("Sfx", "Music", Trim$(Options.Music))
-        myXml.WriteString("Sfx", "Sound", Trim$(Options.Sound))
-        myXml.WriteString("Sfx", "Volume", Trim$(Options.Volume))
-
-        myXml.WriteString("Misc", "ScreenSize", Trim$(Options.ScreenSize))
-        myXml.WriteString("Misc", "HighEnd", Trim$(Options.HighEnd))
-        myXml.WriteString("Misc", "ShowNpcBar", Trim$(Options.ShowNpcBar))
-
-        myXml.CloseXml(True)
-    End Sub
-
-    Friend Sub LoadOptions()
-        Dim myXml As New XmlClass With {
-            .Filename = Application.StartupPath & "\Data\Config.xml",
-            .Root = "Options"
-        }
-
-        myXml.LoadXml()
-        Options.Username = myXml.ReadString("UserInfo", "Username", "")
-        Options.Password = myXml.ReadString("UserInfo", "Password", "")
-        Options.SavePass = myXml.ReadString("UserInfo", "SavePass", "False")
-
-        Options.Ip = myXml.ReadString("Connection", "Ip", "127.0.0.1")
-        Options.Port = Val(myXml.ReadString("Connection", "Port", "7001"))
-
-        Options.MenuMusic = myXml.ReadString("Sfx", "MenuMusic", "")
-        Options.Music = myXml.ReadString("Sfx", "Music", "1")
-        Options.Sound = myXml.ReadString("Sfx", "Sound", "1")
-        Options.Volume = Val(myXml.ReadString("Sfx", "Volume", "100"))
-
-        Options.ScreenSize = myXml.ReadString("Misc", "ScreenSize", "0")
-        Options.HighEnd = Val(myXml.ReadString("Misc", "HighEnd", "0"))
-        Options.ShowNpcBar = Val(myXml.ReadString("Misc", "ShowNpcBar", "1"))
-        myXml.CloseXml(True)
-
-        ' show in GUI
-        If Options.Music = 1 Then
-            FrmOptions.optMOn.Checked = True
-        Else
-            FrmOptions.optMOff.Checked = False
-        End If
-
-        If Options.Music = 1 Then
-            FrmOptions.optSOn.Checked = True
-        Else
-            FrmOptions.optSOff.Checked = False
-        End If
-
-        FrmOptions.lblVolume.Text = "Volume: " & Options.Volume
-        FrmOptions.scrlVolume.Value = Options.Volume
-
-        FrmOptions.cmbScreenSize.SelectedIndex = Options.ScreenSize
-
-    End Sub
-
-#End Region
 
 #Region "Blood"
 

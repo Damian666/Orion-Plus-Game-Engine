@@ -307,7 +307,7 @@ Module S_NetworkReceive
 
                 ' Check versions
                 If EKeyPair.DecryptString(buffer.ReadString()) <> Application.ProductVersion Then
-                    AlertMsg(index, "Version outdated, please visit " & Options.Website)
+                    AlertMsg(index, "Version outdated, please visit " & Settings.Website)
                     Exit Sub
                 End If
 
@@ -447,7 +447,7 @@ Module S_NetworkReceive
 
             Next
 
-            If (Sex < Enums.SexType.Male) OrElse (Sex > Enums.SexType.Female) Then Exit Sub
+            If (Sex < modEnumerators.SexType.Male) OrElse (Sex > modEnumerators.SexType.Female) Then Exit Sub
 
             If Classes < 1 OrElse Classes > Max_Classes Then Exit Sub
 
@@ -1254,7 +1254,7 @@ Module S_NetworkReceive
         If n <> index Then
             If n > 0 Then
                 If GetPlayerAccess(n) < GetPlayerAccess(index) Then
-                    GlobalMsg(GetPlayerName(n) & " has been kicked from " & Options.GameName & " by " & GetPlayerName(index) & "!")
+                    GlobalMsg(GetPlayerName(n) & " has been kicked from " & Settings.GameName & " by " & GetPlayerName(index) & "!")
                     Addlog(GetPlayerName(index) & " has kicked " & GetPlayerName(n) & ".", ADMIN_LOG)
                     AlertMsg(n, "You have been kicked by " & GetPlayerName(index) & "!")
                 Else
@@ -1514,11 +1514,11 @@ Module S_NetworkReceive
         ' Prevent hacking
         If GetPlayerAccess(index) < AdminType.Mapper Then Exit Sub
 
-        Options.Motd = Trim$(buffer.ReadString)
-        SaveOptions()
+        Settings.Welcome = Trim$(buffer.ReadString)
+        SaveSettings()
 
-        GlobalMsg("MOTD changed to: " & Options.Motd)
-        Addlog(GetPlayerName(index) & " changed MOTD to: " & Options.Motd, ADMIN_LOG)
+        GlobalMsg("Welcome changed to: " & Settings.Welcome)
+        Addlog(GetPlayerName(index) & " changed welcome to: " & Settings.welcome, ADMIN_LOG)
 
         buffer.Dispose()
     End Sub
@@ -2285,7 +2285,7 @@ Module S_NetworkReceive
         If index > 0 AndAlso IsPlaying(index) Then
             GlobalMsg(GetPlayerLogin(index) & "/" & GetPlayerName(index) & " has been booted for (" & Reason & ")")
 
-            AlertMsg(index, "You have lost your connection with " & Options.GameName & ".")
+            AlertMsg(index, "You have lost your connection with " & Settings.GameName & ".")
         End If
 
     End Sub
@@ -2390,10 +2390,6 @@ Module S_NetworkReceive
         ' Prevent hacking
         If GetPlayerAccess(index) < AdminType.Developer Then Exit Sub
 
-        ' Max classes
-        Max_Classes = buffer.ReadInt32
-        ReDim Classes(Max_Classes)
-
         For i = 0 To Max_Classes
             ReDim Classes(i).Stat(StatType.Count - 1)
         Next
@@ -2470,7 +2466,7 @@ Module S_NetworkReceive
 
             ' Check versions
             If Version <> Application.ProductVersion Then
-                AlertMsg(index, "Version outdated, please visit " & Options.Website)
+                AlertMsg(index, "Version outdated, please visit " & Settings.Website)
                 Exit Sub
             End If
 

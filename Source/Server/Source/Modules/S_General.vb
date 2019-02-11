@@ -26,6 +26,8 @@ Module S_General
             AddHandler currentDomain.UnhandledException, AddressOf ErrorHandler
         End If
 
+        LoadSettings()
+
         Console.Title = "Orion+ Server"
         Console.SetWindowSize(120, 20)
 
@@ -62,8 +64,8 @@ Module S_General
         ClearQuests()
 
         'event
-        ReDim Switches(MaxSwitches)
-        ReDim Variables(MaxVariables)
+        ReDim Switches(MAX_SWITCHES)
+        ReDim Variables(MAX_VARIABLES)
         ReDim TempEventMap(MAX_CACHED_MAPS)
 
         'Housing
@@ -76,6 +78,7 @@ Module S_General
         Next
 
         ReDim Bank(MAX_PLAYERS)
+        ReDim Classes(MAX_CLASSES)
 
         For i = 1 To MAX_PLAYERS
             ReDim Bank(i).Item(MAX_BANK)
@@ -91,8 +94,8 @@ Module S_General
             'multi char
             ReDim Player(i).Character(MAX_CHARS)
             For x = 1 To MAX_CHARS
-                ReDim Player(i).Character(x).Switches(MaxSwitches)
-                ReDim Player(i).Character(x).Variables(MaxVariables)
+                ReDim Player(i).Character(x).Switches(MAX_SWITCHES)
+                ReDim Player(i).Character(x).Variables(MAX_VARIABLES)
                 ReDim Player(i).Character(x).Vital(VitalType.Count - 1)
                 ReDim Player(i).Character(x).Stat(StatType.Count - 1)
                 ReDim Player(i).Character(x).Equipment(EquipmentType.Count - 1)
@@ -157,35 +160,21 @@ Module S_General
         ClearPets()
 
         ' Check if the directory is there, if its not make it
-        CheckDir(Path.Combine(Application.StartupPath, "data"))
-        CheckDir(Path.Combine(Application.StartupPath, "data", "items"))
-        CheckDir(Path.Combine(Application.StartupPath, "data", "maps"))
-        CheckDir(Path.Combine(Application.StartupPath, "data", "npcs"))
-        CheckDir(Path.Combine(Application.StartupPath, "data", "shops"))
-        CheckDir(Path.Combine(Application.StartupPath, "data", "skills"))
-        CheckDir(Path.Combine(Application.StartupPath, "data", "accounts"))
-        CheckDir(Path.Combine(Application.StartupPath, "data", "resources"))
-        CheckDir(Path.Combine(Application.StartupPath, "data", "animations"))
-        CheckDir(Path.Combine(Application.StartupPath, "data", "logs"))
-        CheckDir(Path.Combine(Application.StartupPath, "data", "quests"))
-        CheckDir(Path.Combine(Application.StartupPath, "data", "recipes"))
-        CheckDir(Path.Combine(Application.StartupPath, "data", "pets"))
-        CheckDir(Path.Combine(Application.StartupPath, "data", "projectiles"))
-
-        ' load options, set if they dont exist
-        If Not File.Exists(Path.Combine(Application.StartupPath, "Data", "Config.xml")) Then
-
-            Options.GameName = "Orion+"
-            Options.Port = 7001
-            Options.Motd = "Welcome to the Orion+ Engine"
-            Options.Website = "http://ascensiongamedev.com/index.php"
-            Options.StartMap = 1
-            Options.StartX = 13
-            Options.StartY = 7
-            SaveOptions()
-        Else
-            LoadOptions()
-        End If
+        CheckDir(Path.Database)
+        CheckDir(Path.Items)
+        CheckDir(Path.Maps)
+        CheckDir(Path.Npcs)
+        CheckDir(Path.Shops)
+        CheckDir(Path.Skills)
+        CheckDir(Path.accounts)
+        CheckDir(Path.resources)
+        CheckDir(Path.Animations)
+        CheckDir(Path.logs)
+        CheckDir(Path.Quests)
+        CheckDir(Path.Recipes)
+        CheckDir(Path.Pets)
+        CheckDir(Path.Projectiles)
+        CheckDir(Path.Quests)
 
         ' Get that network READY SUN! ~ SpiceyWOlf
         InitNetwork()
@@ -240,7 +229,7 @@ Module S_General
         isShuttingDown = False
 
         ' Start listener now that everything is loaded
-        Socket.StartListening(Options.Port, 5)
+        Socket.StartListening(Settings.Port, 5)
 
         ' Starts the server loop
         ServerLoop()
@@ -267,7 +256,7 @@ Module S_General
     End Function
 
     Sub UpdateCaption()
-        Console.Title = String.Format("{0} <IP {1}:{2}> ({3} Players Online) - Current Errors: {4} - Time: {5}", Options.GameName, MyIPAddress, Options.Port, GetPlayersOnline(), ErrorCount, Time.Instance.ToString())
+        Console.Title = String.Format("{0} <IP {1}:{2}> ({3} Players Online) - Current Errors: {4} - Time: {5}", Settings.GameName, MyIPAddress, Settings.Port, GetPlayersOnline(), ErrorCount, Time.Instance.ToString())
     End Sub
 
     Sub DestroyServer()
@@ -348,7 +337,7 @@ Module S_General
 
     Sub ErrorHandler(sender As Object, args As UnhandledExceptionEventArgs)
         Dim e As Exception = DirectCast(args.ExceptionObject, Exception)
-        Dim myFilePath As String = Path.Combine(Application.StartupPath, "data", "logs", "ErrorLog.log")
+        Dim myFilePath As String = Path.Logs & "ErrorLog.log"
 
         Using sw As New StreamWriter(File.Open(myFilePath, FileMode.Append))
             sw.WriteLine(DateTime.Now)
@@ -367,7 +356,7 @@ Module S_General
         Dim st As New StackTrace(ex, True)
         For Each sf As StackFrame In st.GetFrames
             If sf.GetFileLineNumber() > 0 Then
-                Result &= "Line:" & sf.GetFileLineNumber() & " Filename: " & Path.GetFileName(sf.GetFileName) & Environment.NewLine
+                Result &= "Line:" & sf.GetFileLineNumber() & " Filename: " & System.IO.Path.GetFileName(sf.GetFileName) & Environment.NewLine
             End If
         Next
         Return Result

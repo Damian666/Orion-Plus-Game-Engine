@@ -1,172 +1,4 @@
-﻿Module Packets
-    ' Packets sent by server to client
-    Friend Enum ServerPackets
-        SAlertMsg = 1
-        SKeyPair
-        SLoadCharOk
-        SLoginOk
-        SNewCharClasses
-        SClassesData
-        SInGame
-        SPlayerInv
-        SPlayerInvUpdate
-        SPlayerWornEq
-        SPlayerHp
-        SPlayerMp
-        SPlayerSp
-        SPlayerStats
-        SPlayerData
-        SPlayerMove
-        SNpcMove
-        SPlayerDir
-        SNpcDir
-        SPlayerXY
-        SAttack
-        SNpcAttack
-        SCheckForMap
-        SMapData
-        SMapItemData
-        SMapNpcData
-        SMapNpcUpdate
-        SMapDone
-        SGlobalMsg
-        SAdminMsg
-        SPlayerMsg
-        SMapMsg
-        SSpawnItem
-        SItemEditor
-        SUpdateItem
-        SREditor
-        SSpawnNpc
-        SNpcDead
-        SNpcEditor
-        SUpdateNpc
-        SMapKey
-        SEditMap
-        SShopEditor
-        SUpdateShop
-        SSkillEditor
-        SUpdateSkill
-        SSkills
-        SLeftMap
-        SResourceCache
-        SResourceEditor
-        SUpdateResource
-        SSendPing
-        SDoorAnimation
-        SActionMsg
-        SPlayerEXP
-        SBlood
-        SAnimationEditor
-        SUpdateAnimation
-        SAnimation
-        SMapNpcVitals
-        SCooldown
-        SClearSkillBuffer
-        SSayMsg
-        SOpenShop
-        SResetShopAction
-        SStunned
-        SMapWornEq
-        SBank
-        SLeftGame
-
-        SClearTradeTimer
-        STradeInvite
-        STrade
-        SCloseTrade
-        STradeUpdate
-        STradeStatus
-
-        SGameData
-        SMapReport
-        STarget
-        SAdmin
-        SMapNames
-        SCritical
-        SNews
-        SrClick
-        STotalOnline
-
-        'quests
-        SQuestEditor
-        SUpdateQuest
-        SPlayerQuest
-        SPlayerQuests
-        SQuestMessage
-
-        'Housing
-        SBuyHouse
-        SVisit
-        SFurniture
-        SHouseEdit
-        SHouseConfigs
-
-        'hotbar
-        SHotbar
-
-        'Events
-        SSpawnEvent
-        SEventMove
-        SEventDir
-        SEventChat
-        SEventStart
-        SEventEnd
-        SPlayBGM
-        SPlaySound
-        SFadeoutBGM
-        SStopSound
-        SSwitchesAndVariables
-        SMapEventData
-        SChatBubble
-        SSpecialEffect
-        SPic
-        SHoldPlayer
-
-        SProjectileEditor
-        SUpdateProjectile
-        SMapProjectile
-
-        'recipes
-        SUpdateRecipe
-        SRecipeEditor
-        SSendPlayerRecipe
-        SOpenCraft
-        SUpdateCraft
-
-        'Class Editor
-        SClassEditor
-        SUpdateClasses
-
-        'AutoMapper
-        SAutoMapper
-
-        'emotes
-        SEmote
-
-        'Parties
-        SPartyInvite
-        SPartyUpdate
-        SPartyVitals
-
-        'pets
-        SPetEditor
-        SUpdatePet
-        SUpdatePlayerPet
-        SPetMove
-        SPetDir
-        SPetVital
-        SClearPetSkillBuffer
-        SPetAttack
-        SPetXY
-        SPetExp
-
-        STime
-        SClock
-
-        ' Make sure COUNT is below everything else
-        COUNT
-    End Enum
+﻿Friend Module Packets
 
     ' Packets sent by client to server
     Friend Enum ClientPackets
@@ -361,6 +193,175 @@
 
         ' Make sure COUNT is below everything else
         Count
+    End Enum
+
+    ' Packets sent by server to client
+    Friend Enum ServerPackets
+        SAlertMsg = 1
+        SKeyPair
+        SLoadCharOk
+        SLoginOk
+        SNewCharClasses
+        SClassesData
+        SInGame
+        SPlayerInv
+        SPlayerInvUpdate
+        SPlayerWornEq
+        SPlayerHp
+        SPlayerMp
+        SPlayerSp
+        SPlayerStats
+        SPlayerData
+        SPlayerMove
+        SNpcMove
+        SPlayerDir
+        SNpcDir
+        SPlayerXY
+        SAttack
+        SNpcAttack
+        SCheckForMap
+        SMapData
+        SMapItemData
+        SMapNpcData
+        SMapNpcUpdate
+        SMapDone
+        SGlobalMsg
+        SAdminMsg
+        SPlayerMsg
+        SMapMsg
+        SSpawnItem
+        SItemEditor
+        SUpdateItem
+        SREditor
+        SSpawnNpc
+        SNpcDead
+        SNpcEditor
+        SUpdateNpc
+        SMapKey
+        SEditMap
+        SShopEditor
+        SUpdateShop
+        SSkillEditor
+        SUpdateSkill
+        SSkills
+        SLeftMap
+        SResourceCache
+        SResourceEditor
+        SUpdateResource
+        SSendPing
+        SDoorAnimation
+        SActionMsg
+        SPlayerEXP
+        SBlood
+        SAnimationEditor
+        SUpdateAnimation
+        SAnimation
+        SMapNpcVitals
+        SCooldown
+        SClearSkillBuffer
+        SSayMsg
+        SOpenShop
+        SResetShopAction
+        SStunned
+        SMapWornEq
+        SBank
+        SLeftGame
+
+        SClearTradeTimer
+        STradeInvite
+        STrade
+        SCloseTrade
+        STradeUpdate
+        STradeStatus
+
+        SGameData
+        SMapReport
+        STarget
+        SAdmin
+        SMapNames
+        SCritical
+        SNews
+        SrClick
+        STotalOnline
+
+        'quests
+        SQuestEditor
+        SUpdateQuest
+        SPlayerQuest
+        SPlayerQuests
+        SQuestMessage
+
+        'Housing
+        SBuyHouse
+        SVisit
+        SFurniture
+        SHouseEdit
+        SHouseConfigs
+
+        'hotbar
+        SHotbar
+
+        'Events
+        SSpawnEvent
+        SEventMove
+        SEventDir
+        SEventChat
+        SEventStart
+        SEventEnd
+        SPlayBGM
+        SPlaySound
+        SFadeoutBGM
+        SStopSound
+        SSwitchesAndVariables
+        SMapEventData
+        SChatBubble
+        SSpecialEffect
+        SPic
+        SHoldPlayer
+
+        SProjectileEditor
+        SUpdateProjectile
+        SMapProjectile
+
+        'recipes
+        SUpdateRecipe
+        SRecipeEditor
+        SSendPlayerRecipe
+        SOpenCraft
+        SUpdateCraft
+
+        'Class Editor
+        SClassEditor
+        SUpdateClasses
+
+        'AutoMapper
+        SAutoMapper
+
+        'emotes
+        SEmote
+
+        'Parties
+        SPartyInvite
+        SPartyUpdate
+        SPartyVitals
+
+        'pets
+        SPetEditor
+        SUpdatePet
+        SUpdatePlayerPet
+        SPetMove
+        SPetDir
+        SPetVital
+        SClearPetSkillBuffer
+        SPetAttack
+        SPetXY
+        SPetExp
+
+        STime
+        SClock
+
+        ' Make sure COUNT is below everything else
+        COUNT
     End Enum
 
 End Module

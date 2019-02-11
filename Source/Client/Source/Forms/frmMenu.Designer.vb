@@ -65,14 +65,6 @@ Partial Class FrmMenu
         Me.pnlMainMenu = New System.Windows.Forms.Panel()
         Me.lblNewsHeader = New System.Windows.Forms.Label()
         Me.lblNews = New System.Windows.Forms.Label()
-        Me.pnlIPConfig = New System.Windows.Forms.Panel()
-        Me.btnSaveIP = New System.Windows.Forms.Button()
-        Me.txtPort = New System.Windows.Forms.TextBox()
-        Me.lblPort = New System.Windows.Forms.Label()
-        Me.txtIP = New System.Windows.Forms.TextBox()
-        Me.lblIpAdress = New System.Windows.Forms.Label()
-        Me.lblIpConfig = New System.Windows.Forms.Label()
-        Me.Label13 = New System.Windows.Forms.Label()
         Me.picLogo = New System.Windows.Forms.PictureBox()
         Me.btnPlay = New System.Windows.Forms.Button()
         Me.btnRegister = New System.Windows.Forms.Button()
@@ -95,7 +87,6 @@ Partial Class FrmMenu
         Me.pnlNewChar.SuspendLayout()
         CType(Me.placeholderforsprite, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.pnlMainMenu.SuspendLayout()
-        Me.pnlIPConfig.SuspendLayout()
         CType(Me.picLogo, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.pnlCharSelect.SuspendLayout()
         CType(Me.picChar3, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -117,7 +108,7 @@ Partial Class FrmMenu
         Me.pnlLogin.Controls.Add(Me.lblLoginName)
         Me.pnlLogin.Controls.Add(Me.lblLogin)
         Me.pnlLogin.ForeColor = System.Drawing.Color.White
-        Me.pnlLogin.Location = New System.Drawing.Point(737, 6)
+        Me.pnlLogin.Location = New System.Drawing.Point(160, 180)
         Me.pnlLogin.Name = "pnlLogin"
         Me.pnlLogin.Size = New System.Drawing.Size(400, 192)
         Me.pnlLogin.TabIndex = 37
@@ -210,7 +201,7 @@ Partial Class FrmMenu
         Me.pnlRegister.Controls.Add(Me.lblNewAccName)
         Me.pnlRegister.Controls.Add(Me.lblNewAccount)
         Me.pnlRegister.ForeColor = System.Drawing.Color.White
-        Me.pnlRegister.Location = New System.Drawing.Point(1143, 6)
+        Me.pnlRegister.Location = New System.Drawing.Point(160, 180)
         Me.pnlRegister.Name = "pnlRegister"
         Me.pnlRegister.Size = New System.Drawing.Size(400, 192)
         Me.pnlRegister.TabIndex = 38
@@ -304,7 +295,7 @@ Partial Class FrmMenu
         Me.pnlCredits.Controls.Add(Me.lblCreditsTop)
         Me.pnlCredits.Controls.Add(Me.lblScrollingCredits)
         Me.pnlCredits.ForeColor = System.Drawing.Color.White
-        Me.pnlCredits.Location = New System.Drawing.Point(1143, 204)
+        Me.pnlCredits.Location = New System.Drawing.Point(160, 180)
         Me.pnlCredits.Name = "pnlCredits"
         Me.pnlCredits.Size = New System.Drawing.Size(400, 192)
         Me.pnlCredits.TabIndex = 39
@@ -356,7 +347,7 @@ Partial Class FrmMenu
         Me.pnlNewChar.Controls.Add(Me.lblNewCharName)
         Me.pnlNewChar.Controls.Add(Me.lblNewChar)
         Me.pnlNewChar.ForeColor = System.Drawing.Color.White
-        Me.pnlNewChar.Location = New System.Drawing.Point(737, 204)
+        Me.pnlNewChar.Location = New System.Drawing.Point(160, 180)
         Me.pnlNewChar.Name = "pnlNewChar"
         Me.pnlNewChar.Size = New System.Drawing.Size(400, 192)
         Me.pnlNewChar.TabIndex = 43
@@ -514,7 +505,7 @@ Partial Class FrmMenu
         Me.lblStatusHeader.ForeColor = System.Drawing.Color.White
         Me.lblStatusHeader.Location = New System.Drawing.Point(482, 9)
         Me.lblStatusHeader.Name = "lblStatusHeader"
-        Me.lblStatusHeader.Size = New System.Drawing.Size(114, 21)
+        Me.lblStatusHeader.Size = New System.Drawing.Size(113, 21)
         Me.lblStatusHeader.TabIndex = 44
         Me.lblStatusHeader.Text = "Server Status:"
         '
@@ -564,97 +555,6 @@ Partial Class FrmMenu
         Me.lblNews.TabIndex = 37
         Me.lblNews.Text = resources.GetString("lblNews.Text")
         Me.lblNews.TextAlign = System.Drawing.ContentAlignment.TopCenter
-        '
-        'pnlIPConfig
-        '
-        Me.pnlIPConfig.BackColor = System.Drawing.Color.Transparent
-        Me.pnlIPConfig.BackgroundImage = CType(resources.GetObject("pnlIPConfig.BackgroundImage"), System.Drawing.Image)
-        Me.pnlIPConfig.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
-        Me.pnlIPConfig.Controls.Add(Me.btnSaveIP)
-        Me.pnlIPConfig.Controls.Add(Me.txtPort)
-        Me.pnlIPConfig.Controls.Add(Me.lblPort)
-        Me.pnlIPConfig.Controls.Add(Me.txtIP)
-        Me.pnlIPConfig.Controls.Add(Me.lblIpAdress)
-        Me.pnlIPConfig.Controls.Add(Me.lblIpConfig)
-        Me.pnlIPConfig.Controls.Add(Me.Label13)
-        Me.pnlIPConfig.ForeColor = System.Drawing.Color.White
-        Me.pnlIPConfig.Location = New System.Drawing.Point(1143, 402)
-        Me.pnlIPConfig.Name = "pnlIPConfig"
-        Me.pnlIPConfig.Size = New System.Drawing.Size(400, 133)
-        Me.pnlIPConfig.TabIndex = 51
-        Me.pnlIPConfig.Visible = False
-        '
-        'btnSaveIP
-        '
-        Me.btnSaveIP.BackgroundImage = CType(resources.GetObject("btnSaveIP.BackgroundImage"), System.Drawing.Image)
-        Me.btnSaveIP.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
-        Me.btnSaveIP.FlatStyle = System.Windows.Forms.FlatStyle.Popup
-        Me.btnSaveIP.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnSaveIP.ImageAlign = System.Drawing.ContentAlignment.TopLeft
-        Me.btnSaveIP.Location = New System.Drawing.Point(157, 101)
-        Me.btnSaveIP.Name = "btnSaveIP"
-        Me.btnSaveIP.Size = New System.Drawing.Size(110, 22)
-        Me.btnSaveIP.TabIndex = 50
-        Me.btnSaveIP.Text = "Save IP"
-        Me.btnSaveIP.UseVisualStyleBackColor = True
-        '
-        'txtPort
-        '
-        Me.txtPort.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtPort.Location = New System.Drawing.Point(157, 71)
-        Me.txtPort.Name = "txtPort"
-        Me.txtPort.PasswordChar = Global.Microsoft.VisualBasic.ChrW(42)
-        Me.txtPort.Size = New System.Drawing.Size(110, 25)
-        Me.txtPort.TabIndex = 28
-        '
-        'lblPort
-        '
-        Me.lblPort.AutoSize = True
-        Me.lblPort.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblPort.Location = New System.Drawing.Point(84, 74)
-        Me.lblPort.Name = "lblPort"
-        Me.lblPort.Size = New System.Drawing.Size(35, 17)
-        Me.lblPort.TabIndex = 27
-        Me.lblPort.Text = "Port:"
-        '
-        'txtIP
-        '
-        Me.txtIP.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtIP.Location = New System.Drawing.Point(157, 39)
-        Me.txtIP.Name = "txtIP"
-        Me.txtIP.Size = New System.Drawing.Size(192, 25)
-        Me.txtIP.TabIndex = 26
-        '
-        'lblIpAdress
-        '
-        Me.lblIpAdress.AutoSize = True
-        Me.lblIpAdress.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblIpAdress.Location = New System.Drawing.Point(84, 42)
-        Me.lblIpAdress.Name = "lblIpAdress"
-        Me.lblIpAdress.Size = New System.Drawing.Size(59, 17)
-        Me.lblIpAdress.TabIndex = 25
-        Me.lblIpAdress.Text = "IP Adres:"
-        '
-        'lblIpConfig
-        '
-        Me.lblIpConfig.BackColor = System.Drawing.Color.Transparent
-        Me.lblIpConfig.Font = New System.Drawing.Font("Segoe UI Semibold", 18.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblIpConfig.Location = New System.Drawing.Point(86, 4)
-        Me.lblIpConfig.Name = "lblIpConfig"
-        Me.lblIpConfig.Size = New System.Drawing.Size(247, 32)
-        Me.lblIpConfig.TabIndex = 15
-        Me.lblIpConfig.Text = "IPConfig"
-        Me.lblIpConfig.TextAlign = System.Drawing.ContentAlignment.TopCenter
-        '
-        'Label13
-        '
-        Me.Label13.AutoSize = True
-        Me.Label13.BackColor = System.Drawing.Color.Transparent
-        Me.Label13.Location = New System.Drawing.Point(70, 179)
-        Me.Label13.Name = "Label13"
-        Me.Label13.Size = New System.Drawing.Size(0, 13)
-        Me.Label13.TabIndex = 17
-        Me.Label13.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
         'picLogo
         '
@@ -741,7 +641,7 @@ Partial Class FrmMenu
         Me.pnlCharSelect.Controls.Add(Me.lblCharSelect)
         Me.pnlCharSelect.Controls.Add(Me.Label16)
         Me.pnlCharSelect.ForeColor = System.Drawing.Color.White
-        Me.pnlCharSelect.Location = New System.Drawing.Point(737, 342)
+        Me.pnlCharSelect.Location = New System.Drawing.Point(160, 180)
         Me.pnlCharSelect.Name = "pnlCharSelect"
         Me.pnlCharSelect.Size = New System.Drawing.Size(400, 192)
         Me.pnlCharSelect.TabIndex = 57
@@ -870,7 +770,7 @@ Partial Class FrmMenu
         Me.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.BackColor = System.Drawing.Color.FromArgb(CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer))
         Me.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
-        Me.ClientSize = New System.Drawing.Size(1100, 541)
+        Me.ClientSize = New System.Drawing.Size(784, 562)
         Me.Controls.Add(Me.pnlCharSelect)
         Me.Controls.Add(Me.pnlNewChar)
         Me.Controls.Add(Me.pnlLoad)
@@ -878,7 +778,6 @@ Partial Class FrmMenu
         Me.Controls.Add(Me.btnCredits)
         Me.Controls.Add(Me.btnRegister)
         Me.Controls.Add(Me.btnPlay)
-        Me.Controls.Add(Me.pnlIPConfig)
         Me.Controls.Add(Me.lblServerStatus)
         Me.Controls.Add(Me.lblStatusHeader)
         Me.Controls.Add(Me.pnlCredits)
@@ -906,8 +805,6 @@ Partial Class FrmMenu
         CType(Me.placeholderforsprite, System.ComponentModel.ISupportInitialize).EndInit()
         Me.pnlMainMenu.ResumeLayout(False)
         Me.pnlMainMenu.PerformLayout()
-        Me.pnlIPConfig.ResumeLayout(False)
-        Me.pnlIPConfig.PerformLayout()
         CType(Me.picLogo, System.ComponentModel.ISupportInitialize).EndInit()
         Me.pnlCharSelect.ResumeLayout(False)
         Me.pnlCharSelect.PerformLayout()
@@ -955,13 +852,6 @@ Partial Class FrmMenu
     Friend WithEvents pnlMainMenu As System.Windows.Forms.Panel
     Friend WithEvents lblNewsHeader As System.Windows.Forms.Label
     Friend WithEvents lblNews As System.Windows.Forms.Label
-    Friend WithEvents pnlIPConfig As Windows.Forms.Panel
-    Friend WithEvents txtPort As Windows.Forms.TextBox
-    Friend WithEvents lblPort As Windows.Forms.Label
-    Friend WithEvents txtIP As Windows.Forms.TextBox
-    Friend WithEvents lblIpAdress As Windows.Forms.Label
-    Friend WithEvents lblIpConfig As Windows.Forms.Label
-    Friend WithEvents Label13 As Windows.Forms.Label
     Friend WithEvents picLogo As Windows.Forms.PictureBox
     Friend WithEvents btnLogin As Windows.Forms.Button
     Friend WithEvents btnCreateAccount As Windows.Forms.Button
@@ -970,7 +860,6 @@ Partial Class FrmMenu
     Friend WithEvents btnCredits As Windows.Forms.Button
     Friend WithEvents btnExit As Windows.Forms.Button
     Friend WithEvents btnCreateCharacter As Windows.Forms.Button
-    Friend WithEvents btnSaveIP As Windows.Forms.Button
     Friend WithEvents pnlCharSelect As Windows.Forms.Panel
     Friend WithEvents lblCharSelect As Windows.Forms.Label
     Friend WithEvents Label16 As Windows.Forms.Label

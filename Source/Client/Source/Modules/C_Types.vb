@@ -1,7 +1,4 @@
-﻿Module C_Types
-
-    ' options
-    Friend Options As New C_Options()
+﻿Module C_Types2
 
     ' client-side stuff
     Friend ActionMsg(Byte.MaxValue) As ActionMsgRec

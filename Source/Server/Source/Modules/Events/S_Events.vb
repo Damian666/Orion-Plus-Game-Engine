@@ -1,5 +1,6 @@
 ﻿Imports System.IO
 Imports ASFW
+Imports Ini = ASFW.IO.FileIO.TextFile
 
 Friend Module S_Events
 
@@ -8,9 +9,6 @@ Friend Module S_Events
     Friend TempEventMap() As GlobalEventsStruct
     Friend Switches() As String
     Friend Variables() As String
-
-    Friend Const MaxSwitches As Integer = 500
-    Friend Const MaxVariables As Integer = 500
 
     Friend Const PathfindingType As Integer = 1
 
@@ -396,15 +394,7 @@ Friend Module S_Events
 #Region "Database"
 
     Sub CreateSwitches()
-        Dim i As Integer
-        Dim myXml As New XmlClass With {
-            .Filename = Path.Combine(Application.StartupPath, "Data", "Switches.xml"),
-            .Root = "Data"
-        }
-
-        myXml.NewXmlDocument()
-
-        For i = 1 To MaxSwitches
+        For i = 1 To MAX_SWITCHES
             Switches(i) = ""
         Next
 
@@ -412,15 +402,7 @@ Friend Module S_Events
     End Sub
 
     Sub CreateVariables()
-        Dim i As Integer
-        Dim myXml As New XmlClass With {
-            .Filename = Path.Combine(Application.StartupPath, "Data", "Variables.xml"),
-            .Root = "Data"
-        }
-
-        myXml.NewXmlDocument()
-
-        For i = 1 To MaxVariables
+        For i = 1 To MAX_VARIABLES
             Variables(i) = ""
         Next
 
@@ -428,78 +410,47 @@ Friend Module S_Events
     End Sub
 
     Sub SaveSwitches()
-        Dim i As Integer
-        Dim myXml As New XmlClass With {
-            .Filename = Path.Combine(Application.StartupPath, "Data", "Switches.xml"),
-            .Root = "Data"
-        }
+        Dim cf = Path.Database & "Switches.ini"
+        If Not File.Exists(cf) Then File.Create(cf).Dispose()
 
-        myXml.LoadXml()
-
-        For i = 1 To MaxSwitches
-            myXml.WriteString("Switches", "Switch" & i & "Name", Switches(i))
+        For i = 1 To MAX_SWITCHES
+            Ini.PutVar(cf, "Switches", i, Switches(i))
         Next
-
-        myXml.CloseXml(True)
     End Sub
 
     Sub SaveVariables()
-        Dim i As Integer
-        Dim myXml As New XmlClass With {
-            .Filename = Path.Combine(Application.StartupPath, "Data", "Variables.xml"),
-            .Root = "Data"
-        }
+        Dim cf = Path.Database & "Variables.ini"
+        If Not File.Exists(cf) Then File.Create(cf).Dispose()
 
-        myXml.LoadXml()
-
-        For i = 1 To MaxVariables
-            myXml.WriteString("Variables", "Variable" & i & "Name", Variables(i))
+        For i = 1 To MAX_VARIABLES
+            Ini.PutVar(cf, "Variables", i, Variables(i))
         Next
-
-        myXml.CloseXml(True)
     End Sub
 
     Sub LoadSwitches()
-        Dim i As Integer
-        Dim myXml As New XmlClass With {
-            .Filename = Path.Combine(Application.StartupPath, "Data", "Switches.xml"),
-            .Root = "Data"
-        }
+        Dim cf = Path.Database & "Switches.ini"
 
-        If Not File.Exists(myXml.Filename) Then
+        If Not File.Exists(cf) Then
             CreateSwitches()
             Exit Sub
         End If
 
-        myXml.LoadXml()
-
-        For i = 1 To MaxSwitches
-            Switches(i) = myXml.ReadString("Switches", "Switch" & i & "Name")
+        For i = 1 To MAX_SWITCHES
+            Switches(i) = Ini.GetVar(cf, "Switches", i)
         Next
-
-        myXml.CloseXml(False)
     End Sub
 
     Sub LoadVariables()
-        Dim i As Integer
-        Dim myXml As New XmlClass With {
-            .Filename = Path.Combine(Application.StartupPath, "Data", "Variables.xml"),
-            .Root = "Data"
-        }
+        Dim cf = Path.Database & "Variables.ini"
 
-        If Not File.Exists(myXml.Filename) Then
+        If Not File.Exists(cf) Then
             CreateVariables()
             Exit Sub
         End If
 
-        myXml.LoadXml()
-
-        For i = 1 To MaxVariables
-            Variables(i) = myXml.ReadString("Variables", "Variable" & i & "Name")
+        For i = 1 To MAX_VARIABLES
+            Variables(i) = Ini.GetVar(cf, "Variables", i)
         Next
-
-        myXml.CloseXml(False)
-
     End Sub
 
 #End Region
@@ -1926,11 +1877,11 @@ Friend Module S_Events
 
         AddDebug("Recieved CMSG: CSwitchesAndVariables")
 
-        For i = 1 To MaxSwitches
+        For i = 1 To MAX_SWITCHES
             Switches(i) = buffer.ReadString
         Next
 
-        For i = 1 To MaxVariables
+        For i = 1 To MAX_VARIABLES
             Variables(i) = buffer.ReadString
         Next
 
@@ -1990,11 +1941,11 @@ Friend Module S_Events
 
         AddDebug("Sent SMSG: SSwitchesAndVariables")
 
-        For i = 1 To MaxSwitches
+        For i = 1 To MAX_SWITCHES
             buffer.WriteString((Trim(Switches(i))))
         Next
 
-        For i = 1 To MaxVariables
+        For i = 1 To MAX_VARIABLES
             buffer.WriteString((Trim(Variables(i))))
         Next
 

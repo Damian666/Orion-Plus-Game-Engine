@@ -3,11 +3,11 @@
 #Region "Options"
 
     Private Sub scrlVolume_ValueChanged(sender As Object, e As EventArgs) Handles scrlVolume.ValueChanged
-        Options.Volume = scrlVolume.Value
+        Settings.Volume = scrlVolume.Value
 
-        MaxVolume = Options.Volume
+        MaxVolume = Settings.Volume
 
-        lblVolume.Text = "Volume: " & Options.Volume
+        lblVolume.Text = "Volume: " & Settings.Volume
 
         If Not MusicPlayer Is Nothing Then MusicPlayer.Volume() = MaxVolume
 
@@ -16,11 +16,11 @@
     Private Sub btnSaveSettings_Click(sender As Object, e As EventArgs) Handles btnSaveSettings.Click
         'music
         If optMOn.Checked = True Then
-            Options.Music = 1
+            Settings.Music = True
             ' start music playing
             PlayMusic(Trim$(Map.Music))
         Else
-            Options.Music = 0
+            Settings.Music = False
             ' stop music playing
             StopMusic()
             CurMusic = ""
@@ -28,32 +28,29 @@
 
         'sound
         If optSOn.Checked = True Then
-            Options.Sound = 1
+            Settings.Sound = True
         Else
-            Options.Sound = 0
+            Settings.Sound = False
             StopSound()
         End If
 
         'screensize
-        Options.ScreenSize = cmbScreenSize.SelectedIndex
+        Settings.ScreenSize = cmbScreenSize.SelectedIndex
 
         If chkHighEnd.Checked Then
-            Options.HighEnd = 1
+            Settings.HighEnd = 1
         Else
-            Options.HighEnd = 0
+            Settings.HighEnd = 0
         End If
 
         If chkNpcBars.Checked Then
-            Options.ShowNpcBar = 1
+            Settings.ShowNpcBar = 1
         Else
-            Options.ShowNpcBar = 0
+            Settings.ShowNpcBar = 0
         End If
 
         ' save to config.ini
-        SaveOptions()
-
-        'reload options
-        LoadOptions()
+        SaveSettings()
 
         RePositionGui()
 

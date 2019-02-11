@@ -21,7 +21,7 @@ Module C_Resources
         Dim i As Integer
         i = 1
 
-        While File.Exists(Application.StartupPath & GfxPath & "Resources\" & i & GfxExt)
+        While File.Exists(Path.Graphics & "Resources\" & i & GfxExt)
             NumResources = NumResources + 1
             i = i + 1
         End While

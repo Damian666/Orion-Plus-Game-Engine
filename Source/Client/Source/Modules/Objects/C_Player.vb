@@ -446,16 +446,16 @@ Module C_Player
         End If
 
         Select Case direction
-            Case Enums.DirectionType.Up
+            Case modEnumerators.DirectionType.Up
                 x = GetPlayerX(Myindex)
                 y = GetPlayerY(Myindex) - 1
-            Case Enums.DirectionType.Down
+            Case modEnumerators.DirectionType.Down
                 x = GetPlayerX(Myindex)
                 y = GetPlayerY(Myindex) + 1
-            Case Enums.DirectionType.Left
+            Case modEnumerators.DirectionType.Left
                 x = GetPlayerX(Myindex) - 1
                 y = GetPlayerY(Myindex)
-            Case Enums.DirectionType.Right
+            Case modEnumerators.DirectionType.Right
                 x = GetPlayerX(Myindex) + 1
                 y = GetPlayerY(Myindex)
         End Select
@@ -1196,29 +1196,29 @@ Module C_Player
 
         ' Set the character windows
         'name
-        DrawText(CharWindowX + 10, CharWindowY + 14, Strings.Get("charwindow", "charname") & GetPlayerName(Myindex), SFML.Graphics.Color.White, SFML.Graphics.Color.Black, GameWindow)
+        DrawText(CharWindowX + 10, CharWindowY + 14, Language.Character.name & GetPlayerName(Myindex), SFML.Graphics.Color.White, SFML.Graphics.Color.Black, GameWindow)
         'class
-        DrawText(CharWindowX + 10, CharWindowY + 33, Strings.Get("charwindow", "charclass") & Trim(Classes(GetPlayerClass(Myindex)).Name), SFML.Graphics.Color.White, SFML.Graphics.Color.Black, GameWindow)
+        DrawText(CharWindowX + 10, CharWindowY + 33, Language.Character.ClassType & Trim(Classes(GetPlayerClass(Myindex)).Name), SFML.Graphics.Color.White, SFML.Graphics.Color.Black, GameWindow)
         'level
-        DrawText(CharWindowX + 150, CharWindowY + 14, Strings.Get("charwindow", "charlvl") & GetPlayerLevel(Myindex), SFML.Graphics.Color.White, SFML.Graphics.Color.Black, GameWindow)
+        DrawText(CharWindowX + 150, CharWindowY + 14, Language.Character.Level & GetPlayerLevel(Myindex), SFML.Graphics.Color.White, SFML.Graphics.Color.Black, GameWindow)
         'points
-        DrawText(CharWindowX + 6, CharWindowY + 200, Strings.Get("charwindow", "charpoints") & GetPlayerPoints(Myindex), SFML.Graphics.Color.White, SFML.Graphics.Color.Black, GameWindow)
+        DrawText(CharWindowX + 6, CharWindowY + 200, Language.Character.Points & GetPlayerPoints(Myindex), SFML.Graphics.Color.White, SFML.Graphics.Color.Black, GameWindow)
 
         'Header
-        DrawText(CharWindowX + 250, CharWindowY + 14, Strings.Get("charwindow", "charstatslbl"), SFML.Graphics.Color.White, SFML.Graphics.Color.Black, GameWindow)
+        DrawText(CharWindowX + 250, CharWindowY + 14, Language.Character.StatsLabel, SFML.Graphics.Color.White, SFML.Graphics.Color.Black, GameWindow)
 
         'strength stat
-        DrawText(CharWindowX + 210, CharWindowY + 30, Strings.Get("charwindow", "charstrength") & GetPlayerStat(Myindex, StatType.Strength), SFML.Graphics.Color.White, SFML.Graphics.Color.Black, GameWindow, 11)
+        DrawText(CharWindowX + 210, CharWindowY + 30, Language.Character.Strength & GetPlayerStat(Myindex, StatType.Strength), SFML.Graphics.Color.White, SFML.Graphics.Color.Black, GameWindow, 11)
         'endurance stat
-        DrawText(CharWindowX + 210, CharWindowY + 50, Strings.Get("charwindow", "charendurance") & GetPlayerStat(Myindex, StatType.Endurance), SFML.Graphics.Color.White, SFML.Graphics.Color.Black, GameWindow, 11)
+        DrawText(CharWindowX + 210, CharWindowY + 50, Language.Character.endurance & GetPlayerStat(Myindex, StatType.Endurance), SFML.Graphics.Color.White, SFML.Graphics.Color.Black, GameWindow, 11)
         'vitality stat
-        DrawText(CharWindowX + 210, CharWindowY + 70, Strings.Get("charwindow", "charvitality") & GetPlayerStat(Myindex, StatType.Vitality), SFML.Graphics.Color.White, SFML.Graphics.Color.Black, GameWindow, 11)
+        DrawText(CharWindowX + 210, CharWindowY + 70, Language.Character.Vitality & GetPlayerStat(Myindex, StatType.Vitality), SFML.Graphics.Color.White, SFML.Graphics.Color.Black, GameWindow, 11)
         'intelligence stat
-        DrawText(CharWindowX + 210, CharWindowY + 90, Strings.Get("charwindow", "charintelligence") & GetPlayerStat(Myindex, StatType.Intelligence), SFML.Graphics.Color.White, SFML.Graphics.Color.Black, GameWindow, 11)
+        DrawText(CharWindowX + 210, CharWindowY + 90, Language.Character.intelligence & GetPlayerStat(Myindex, StatType.Intelligence), SFML.Graphics.Color.White, SFML.Graphics.Color.Black, GameWindow, 11)
         'luck stat
-        DrawText(CharWindowX + 210, CharWindowY + 110, Strings.Get("charwindow", "charluck") & GetPlayerStat(Myindex, StatType.Luck), SFML.Graphics.Color.White, SFML.Graphics.Color.Black, GameWindow, 11)
+        DrawText(CharWindowX + 210, CharWindowY + 110, Language.Character.Luck & GetPlayerStat(Myindex, StatType.Luck), SFML.Graphics.Color.White, SFML.Graphics.Color.Black, GameWindow, 11)
         'spirit stat
-        DrawText(CharWindowX + 210, CharWindowY + 130, Strings.Get("charwindow", "charspirit") & GetPlayerStat(Myindex, StatType.Spirit), SFML.Graphics.Color.White, SFML.Graphics.Color.Black, GameWindow, 11)
+        DrawText(CharWindowX + 210, CharWindowY + 130, Language.Character.spirit & GetPlayerStat(Myindex, StatType.Spirit), SFML.Graphics.Color.White, SFML.Graphics.Color.Black, GameWindow, 11)
 
         If GetPlayerPoints(Myindex) > 0 Then
             'strength upgrade
@@ -1237,15 +1237,15 @@ Module C_Player
 
         'gather skills
         'Header
-        DrawText(CharWindowX + 250, CharWindowY + 145, Strings.Get("charwindow", "chargather"), SFML.Graphics.Color.White, SFML.Graphics.Color.Black, GameWindow)
+        DrawText(CharWindowX + 250, CharWindowY + 145, Language.Character.SkillLabel, SFML.Graphics.Color.White, SFML.Graphics.Color.Black, GameWindow)
         'herbalist skill
-        DrawText(CharWindowX + 210, CharWindowY + 164, Strings.Get("charwindow", "charherb") & GetPlayerGatherSkillLvl(Myindex, ResourceSkills.Herbalist) & Strings.Get("charwindow", "charexp") & GetPlayerGatherSkillExp(Myindex, ResourceSkills.Herbalist) & "/" & GetPlayerGatherSkillMaxExp(Myindex, ResourceSkills.Herbalist), SFML.Graphics.Color.White, SFML.Graphics.Color.Black, GameWindow, 11)
+        DrawText(CharWindowX + 210, CharWindowY + 164, String.Format(Language.Character.Herbalist & GetPlayerGatherSkillLvl(Myindex, ResourceSkills.Herbalist)) & Language.Character.Exp & GetPlayerGatherSkillExp(Myindex, ResourceSkills.Herbalist) & "/" & GetPlayerGatherSkillMaxExp(Myindex, ResourceSkills.Herbalist), SFML.Graphics.Color.White, SFML.Graphics.Color.Black, GameWindow, 11)
         'woodcutter
-        DrawText(CharWindowX + 210, CharWindowY + 184, Strings.Get("charwindow", "charwood") & GetPlayerGatherSkillLvl(Myindex, ResourceSkills.WoodCutter) & Strings.Get("charwindow", "charexp") & GetPlayerGatherSkillExp(Myindex, ResourceSkills.WoodCutter) & "/" & GetPlayerGatherSkillMaxExp(Myindex, ResourceSkills.WoodCutter), SFML.Graphics.Color.White, SFML.Graphics.Color.Black, GameWindow, 11)
+        DrawText(CharWindowX + 210, CharWindowY + 184, String.Format(Language.Character.Woodcutter & GetPlayerGatherSkillLvl(Myindex, ResourceSkills.WoodCutter)) & Language.Character.Exp & GetPlayerGatherSkillExp(Myindex, ResourceSkills.WoodCutter) & "/" & GetPlayerGatherSkillMaxExp(Myindex, ResourceSkills.WoodCutter), SFML.Graphics.Color.White, SFML.Graphics.Color.Black, GameWindow, 11)
         'miner
-        DrawText(CharWindowX + 210, CharWindowY + 204, Strings.Get("charwindow", "charmine") & GetPlayerGatherSkillLvl(Myindex, ResourceSkills.Miner) & Strings.Get("charwindow", "charexp") & GetPlayerGatherSkillExp(Myindex, ResourceSkills.Miner) & "/" & GetPlayerGatherSkillMaxExp(Myindex, ResourceSkills.Miner), SFML.Graphics.Color.White, SFML.Graphics.Color.Black, GameWindow, 11)
+        DrawText(CharWindowX + 210, CharWindowY + 204, String.Format(Language.Character.Miner & GetPlayerGatherSkillLvl(Myindex, ResourceSkills.Miner)) & Language.Character.Exp & GetPlayerGatherSkillExp(Myindex, ResourceSkills.Miner) & "/" & GetPlayerGatherSkillMaxExp(Myindex, ResourceSkills.Miner), SFML.Graphics.Color.White, SFML.Graphics.Color.Black, GameWindow, 11)
         'fisherman
-        DrawText(CharWindowX + 210, CharWindowY + 224, Strings.Get("charwindow", "charfish") & GetPlayerGatherSkillLvl(Myindex, ResourceSkills.Fisherman) & Strings.Get("charwindow", "charexp") & GetPlayerGatherSkillExp(Myindex, ResourceSkills.Fisherman) & "/" & GetPlayerGatherSkillMaxExp(Myindex, ResourceSkills.Fisherman), SFML.Graphics.Color.White, SFML.Graphics.Color.Black, GameWindow, 11)
+        DrawText(CharWindowX + 210, CharWindowY + 224, String.Format(Language.Character.Fisherman & GetPlayerGatherSkillLvl(Myindex, ResourceSkills.Fisherman)) & Language.Character.Exp & GetPlayerGatherSkillExp(Myindex, ResourceSkills.Fisherman) & "/" & GetPlayerGatherSkillMaxExp(Myindex, ResourceSkills.Fisherman), SFML.Graphics.Color.White, SFML.Graphics.Color.Black, GameWindow, 11)
     End Sub
 #End Region
 

@@ -273,7 +273,7 @@ Friend Module C_Housing
         Dim i As Integer
         i = 1
 
-        While File.Exists(Application.StartupPath & GfxPath & "Furniture\" & i & GfxExt)
+        While File.Exists(Path.Graphics & "Furniture\" & i & GfxExt)
             NumFurniture = NumFurniture + 1
             i = i + 1
         End While

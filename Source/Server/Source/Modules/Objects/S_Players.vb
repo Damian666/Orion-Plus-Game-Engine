@@ -1091,7 +1091,7 @@ Module S_Players
     Friend Sub HandleUseChar(index As Integer)
         If Not IsPlaying(index) Then
             JoinGame(index)
-            Dim text = String.Format("{0} | {1} has began playing {2}.", GetPlayerLogin(index), GetPlayerName(index), Options.GameName)
+            Dim text = String.Format("{0} | {1} has began playing {2}.", GetPlayerLogin(index), GetPlayerName(index), Settings.GameName)
             Addlog(text, PLAYER_LOG)
             Console.WriteLine(text)
         End If
@@ -1543,7 +1543,7 @@ Module S_Players
                 VitalType = .Data1
                 amount = .Data2
                 If Not GetPlayerVital(index, VitalType) = GetPlayerMaxVital(index, VitalType) Then
-                    If VitalType = Enums.VitalType.HP Then
+                    If VitalType = modEnumerators.VitalType.HP Then
                         Colour = ColorType.BrightGreen
                     Else
                         Colour = ColorType.BrightBlue
@@ -1562,13 +1562,13 @@ Module S_Players
             If .Type = TileType.Trap Then
                 amount = .Data1
                 SendActionMsg(GetPlayerMap(index), "-" & amount, ColorType.BrightRed, ActionMsgType.Scroll, GetPlayerX(index) * 32, GetPlayerY(index) * 32, 1)
-                If GetPlayerVital(index, Enums.VitalType.HP) - amount <= 0 Then
+                If GetPlayerVital(index, modEnumerators.VitalType.HP) - amount <= 0 Then
                     KillPlayer(index)
                     PlayerMsg(index, "You've been killed by a trap.", ColorType.BrightRed)
                 Else
-                    SetPlayerVital(index, Enums.VitalType.HP, GetPlayerVital(index, Enums.VitalType.HP) - amount)
+                    SetPlayerVital(index, modEnumerators.VitalType.HP, GetPlayerVital(index, modEnumerators.VitalType.HP) - amount)
                     PlayerMsg(index, "You've been injured by a trap.", ColorType.BrightRed)
-                    SendVital(index, Enums.VitalType.HP)
+                    SendVital(index, modEnumerators.VitalType.HP)
                     ' send vitals to party if in one
                     If TempPlayer(index).InParty > 0 Then SendPartyVitals(TempPlayer(index).InParty, index)
                 End If
@@ -2826,7 +2826,7 @@ Module S_Players
         TempPlayer(index).InGame = True
 
         ' Notify everyone that a player has joined the game.
-        GlobalMsg(String.Format("{0} has joined {1}!", GetPlayerName(index), Options.GameName))
+        GlobalMsg(String.Format("{0} has joined {1}!", GetPlayerName(index), Settings.GameName))
 
         ' Send an ok to client to start receiving in game data
         SendLoadCharOk(index)
@@ -2931,9 +2931,9 @@ Module S_Players
             SaveBank(index)
 
             ' Send a global message that he/she left
-            GlobalMsg(String.Format("{0} has left {1}!", GetPlayerName(index), Options.GameName))
+            GlobalMsg(String.Format("{0} has left {1}!", GetPlayerName(index), Settings.GameName))
 
-            Console.WriteLine(String.Format("{0} has left {1}!", GetPlayerName(index), Options.GameName))
+            Console.WriteLine(String.Format("{0} has left {1}!", GetPlayerName(index), Settings.GameName))
 
             TempPlayer(index) = Nothing
             ReDim TempPlayer(i).SkillCd(MAX_PLAYER_SKILLS)
@@ -2945,7 +2945,6 @@ Module S_Players
         ClearPlayer(index)
         ClearBank(index)
 
-        Socket.Disconnect(index)
         UpdateCaption()
     End Sub
 
@@ -2982,7 +2981,7 @@ Module S_Players
             If .BootMap > 0 Then
                 PlayerWarp(index, .BootMap, .BootX, .BootY)
             Else
-                PlayerWarp(index, Options.StartMap, Options.StartX, Options.StartY)
+                PlayerWarp(index, Settings.StartMap, Settings.StartX, Settings.StartY)
             End If
         End With
 

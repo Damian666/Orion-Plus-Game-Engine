@@ -1,5 +1,6 @@
 ﻿Imports System.IO
 Imports ASFW
+Imports Ini = ASFW.IO.FileIO.TextFile
 
 Friend Module S_Housing
 
@@ -33,84 +34,44 @@ Friend Module S_Housing
 #End Region
 
 #Region "DataBase"
-
-    Sub CreateHouses()
-        Dim myXml As New XmlClass With {
-            .Filename = Path.Combine(Application.StartupPath, "data", "houseconfig.xml"),
-            .Root = "Config"
-        }
-
-        myXml.NewXmlDocument()
-
-        myXml.LoadXml()
-
-        myXml.WriteString("House" & 1, "BaseMap", HouseConfig(1).BaseMap)
-        myXml.WriteString("House" & 1, "Name", HouseConfig(1).ConfigName)
-        myXml.WriteString("House" & 1, "MaxFurniture", HouseConfig(1).MaxFurniture)
-        myXml.WriteString("House" & 1, "Price", HouseConfig(1).Price)
-        myXml.WriteString("House" & 1, "X", HouseConfig(1).X)
-        myXml.WriteString("House" & 1, "Y", HouseConfig(1).Y)
-
-        myXml.CloseXml(True)
-    End Sub
-
     Sub LoadHouses()
-        Dim i As Integer
-
-        If Not File.Exists(Path.Combine(Application.StartupPath, "data", "houseconfig.xml")) Then CreateHouses()
-
-        Dim myXml As New XmlClass With {
-            .Filename = Path.Combine(Application.StartupPath, "data", "houseconfig.xml"),
-            .Root = "Config"
-        }
-
-        myXml.LoadXml()
+        Dim cf = Path.Database & "houseconfig.ini"
+        If Not File.Exists(cf) Then
+            SaveHouses()
+            Exit Sub
+        End If
 
         For i = 1 To MAX_HOUSES
-
-            HouseConfig(i).BaseMap = Val(myXml.ReadString("House" & i, "BaseMap"))
-            HouseConfig(i).ConfigName = Trim$(myXml.ReadString("House" & i, "Name"))
-            HouseConfig(i).MaxFurniture = Val(myXml.ReadString("House" & i, "MaxFurniture"))
-            HouseConfig(i).Price = Val(myXml.ReadString("House" & i, "Price"))
-            HouseConfig(i).X = Val(myXml.ReadString("House" & i, "X"))
-            HouseConfig(i).Y = Val(myXml.ReadString("House" & i, "Y"))
+            HouseConfig(i).BaseMap = Val(Ini.Read(cf, i, "BaseMap"))
+            HouseConfig(i).ConfigName = Trim$(Ini.Read(cf, i, "Name"))
+            HouseConfig(i).MaxFurniture = Val(Ini.Read(cf, i, "MaxFurniture"))
+            HouseConfig(i).Price = Val(Ini.Read(cf, i, "Price"))
+            HouseConfig(i).X = Val(Ini.Read(cf, i, "X"))
+            HouseConfig(i).Y = Val(Ini.Read(cf, i, "Y"))
         Next
-
-        myXml.CloseXml(False)
 
         For i = 1 To GetPlayersOnline()
             If IsPlaying(i) Then
                 SendHouseConfigs(i)
             End If
         Next
-
     End Sub
 
     Sub SaveHouse(index As Integer)
-        Dim myXml As New XmlClass With {
-            .Filename = Path.Combine(Application.StartupPath, "data", "houseconfig.xml"),
-            .Root = "Config"
-        }
+        If Not (index > 0 AndAlso index <= MAX_HOUSES) Then Return
 
-        myXml.LoadXml()
-
-        If index > 0 AndAlso index <= MAX_HOUSES Then
-            myXml.WriteString("House" & index, "BaseMap", HouseConfig(index).BaseMap)
-            myXml.WriteString("House" & index, "Name", HouseConfig(index).ConfigName)
-            myXml.WriteString("House" & index, "MaxFurniture", HouseConfig(index).MaxFurniture)
-            myXml.WriteString("House" & index, "Price", HouseConfig(index).Price)
-            myXml.WriteString("House" & index, "X", HouseConfig(index).X)
-            myXml.WriteString("House" & index, "Y", HouseConfig(index).Y)
-        End If
-
-        myXml.CloseXml(True)
-
-        LoadHouses()
-
+        Dim cf = Path.Database & "houseconfig.ini"
+        Ini.Write(cf, index, "BaseMap", HouseConfig(index).BaseMap)
+        Ini.Write(cf, index, "Name", HouseConfig(index).ConfigName)
+        Ini.Write(cf, index, "MaxFurniture", HouseConfig(index).MaxFurniture)
+        Ini.Write(cf, index, "Price", HouseConfig(index).Price)
+        Ini.Write(cf, index, "X", HouseConfig(index).X)
+        Ini.Write(cf, index, "Y", HouseConfig(index).Y)
     End Sub
 
     Sub SaveHouses()
-        Dim i As Integer
+        Dim cf = Path.Database & "houseconfig.ini"
+        If Not File.Exists(cf) Then File.Create(cf).Dispose()
 
         For i = 1 To MAX_HOUSES
             SaveHouse(i)

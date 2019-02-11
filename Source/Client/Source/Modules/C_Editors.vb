@@ -304,7 +304,7 @@ Module C_Editors
             ' build class combo
             .cmbClass.Items.Clear()
             .cmbClass.Items.Add("None")
-            For i = 1 To MaxClasses
+            For i = 1 To MAX_CLASSES
                 .cmbClass.Items.Add(Trim$(Classes(i).Name))
             Next
             .cmbClass.SelectedIndex = 0
@@ -419,8 +419,8 @@ Module C_Editors
         End If
 
         frmEditor_Shop.nudFace.Value = Shop(Editorindex).Face
-        If File.Exists(Application.StartupPath & GfxPath & "Faces\" & Shop(Editorindex).Face & GfxExt) Then
-            frmEditor_Shop.picFace.BackgroundImage = Image.FromFile(Application.StartupPath & GfxPath & "Faces\" & Shop(Editorindex).Face & GfxExt)
+        If File.Exists(Path.Graphics & "Faces\" & Shop(Editorindex).Face & GfxExt) Then
+            frmEditor_Shop.picFace.BackgroundImage = Image.FromFile(Path.Graphics & "Faces\" & Shop(Editorindex).Face & GfxExt)
         End If
 
         frmEditor_Shop.cmbItem.Items.Clear()
@@ -509,7 +509,7 @@ Module C_Editors
 
         frmEditor_Classes.lstIndex.Items.Clear()
 
-        For i = 1 To MaxClasses
+        For i = 1 To MAX_CLASSES
             frmEditor_Classes.lstIndex.Items.Add(Trim(Classes(i).Name))
         Next
 
@@ -533,7 +533,7 @@ Module C_Editors
     Friend Sub LoadClass()
         Dim i As Integer
 
-        If Editorindex <= 0 OrElse Editorindex > MaxClasses Then Exit Sub
+        If Editorindex <= 0 OrElse Editorindex > MAX_CLASSES Then Exit Sub
 
         frmEditor_Classes.txtName.Text = Classes(Editorindex).Name
         frmEditor_Classes.txtDescription.Text = Classes(Editorindex).Desc
@@ -763,7 +763,7 @@ Module C_Editors
             frmEditor_Item.cmbClassReq.Items.Clear()
             frmEditor_Item.cmbClassReq.Items.Add("None")
 
-            For i = 1 To MaxClasses
+            For i = 1 To MAX_CLASSES
                 frmEditor_Item.cmbClassReq.Items.Add(Classes(i).Name)
             Next
 

@@ -15,12 +15,6 @@
     ' Used for logging
     Friend ServerLog As Boolean
 
-    ' Text vars
-    Friend vbQuote As String
-
-    ' Maximum classes
-    Friend Max_Classes As Byte
-
     ' Used for server loop
     Friend ServerOnline As Boolean
 

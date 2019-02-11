@@ -26,7 +26,7 @@
     Friend Adminvisible As Boolean
 
     'GUI drawing
-    Friend HudVisible As Boolean
+    Friend HudVisible As Boolean = True
 
     Friend PnlCharacterVisible As Boolean
     Friend PnlInventoryVisible As Boolean
@@ -293,8 +293,8 @@
 
         If UpdateNews = True Then
             FrmMenu.lblNews.Text = News
-            FrmMenu.Text = GameName
-            FrmGame.Text = GameName
+            FrmMenu.Text = Settings.GameName
+            FrmGame.Text = Settings.GameName
             UpdateNews = False
         End If
 
@@ -768,30 +768,30 @@
         If OptionsVisible = True Then
 
             ' show in GUI
-            If Options.Music = 1 Then
+            If Settings.Music = 1 Then
                 FrmOptions.optMOn.Checked = True
             Else
                 FrmOptions.optMOff.Checked = True
             End If
 
-            If Options.Music = 1 Then
+            If Settings.Music = 1 Then
                 FrmOptions.optSOn.Checked = True
             Else
                 FrmOptions.optSOff.Checked = True
             End If
 
-            FrmOptions.lblVolume.Text = "Volume: " & Options.Volume
-            FrmOptions.scrlVolume.Value = Options.Volume
+            FrmOptions.lblVolume.Text = "Volume: " & Settings.Volume
+            FrmOptions.scrlVolume.Value = Settings.Volume
 
-            FrmOptions.cmbScreenSize.SelectedIndex = Options.ScreenSize
+            FrmOptions.cmbScreenSize.SelectedIndex = Settings.ScreenSize
 
-            If Options.HighEnd = 1 Then
+            If Settings.HighEnd = 1 Then
                 FrmOptions.chkHighEnd.Checked = True
             Else
                 FrmOptions.chkHighEnd.Checked = False
             End If
 
-            If Options.ShowNpcBar = 1 Then
+            If Settings.ShowNpcBar = 1 Then
                 FrmOptions.chkNpcBars.Checked = True
             Else
                 FrmOptions.chkNpcBars.Checked = False

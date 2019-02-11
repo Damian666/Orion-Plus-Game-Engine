@@ -1,6 +1,7 @@
 ﻿Imports System.IO
 Imports ASFW
 Imports ASFW.IO.FileIO
+Imports Ini = ASFW.IO.FileIO.TextFile
 
 Friend Module S_Resources
 
@@ -38,7 +39,7 @@ Friend Module S_Resources
     Sub SaveResource(ResourceNum As Integer)
         Dim filename As String
 
-        filename = Path.Combine(Application.StartupPath, "data", "resources", String.Format("resource{0}.dat", ResourceNum))
+        filename = Path.Resource(ResourceNum)
 
         Dim writer As New ByteStream(100)
 
@@ -75,7 +76,7 @@ Friend Module S_Resources
     Sub LoadResource(ResourceNum As Integer)
         Dim filename As String
 
-        filename = Path.Combine(Application.StartupPath, "data", "resources", String.Format("resource{0}.dat", ResourceNum))
+        filename = Path.Resource(ResourceNum)
         Dim reader As New ByteStream()
         BinaryFile.Load(filename, reader)
 
@@ -103,7 +104,7 @@ Friend Module S_Resources
     Sub CheckResources()
         For i = 1 To MAX_RESOURCES
 
-            If Not File.Exists(Path.Combine(Application.StartupPath, "data", "resources", String.Format("resource{0}.dat", i))) Then
+            If Not File.Exists(Path.Resource(i)) Then
                 SaveResource(i)
             End If
 
@@ -175,19 +176,10 @@ Friend Module S_Resources
     End Function
 
     Sub LoadSkillExp()
-        Dim i As Integer
-        Dim myXml As New XmlClass With {
-            .Filename = Application.StartupPath & "\Data\SkillExp.xml",
-            .Root = "Data"
-        }
-
-        myXml.LoadXml()
-
+        Dim cf = Path.Database & "SkillExp.ini"
         For i = 1 To 100
-            SkillExpTable(i) = myXml.ReadString("Level", i)
+            SkillExpTable(i) = Ini.Read(cf, "Level", i)
         Next
-
-        myXml.CloseXml(False)
     End Sub
 
 #End Region

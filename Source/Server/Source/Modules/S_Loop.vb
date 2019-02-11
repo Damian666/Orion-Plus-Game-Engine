@@ -58,7 +58,7 @@ Module modLoop
                 ).ToArray()
 
                 ' HoT and DoT logic
-                'For x = 1 To MAX_DOTS
+                'For x = 1 To MAX_COTS
                 '    HandleDoT_Pet i, x
                 '        HandleHoT_Pet i, x
                 '    Next
@@ -979,7 +979,7 @@ Module modLoop
         mpCost = Skill(skillnum).MpCost
 
         ' Check if they have enough MP
-        If MapNpc(mapNum).Npc(npcNum).Vital(Enums.VitalType.MP) < mpCost Then Exit Sub
+        If MapNpc(mapNum).Npc(npcNum).Vital(modEnumerators.VitalType.MP) < mpCost Then Exit Sub
 
         ' find out what kind of skill it is! self cast, target or AOE
         If Skill(skillnum).IsProjectile = 1 Then
@@ -1031,7 +1031,7 @@ Module modLoop
                     If targetType = 0 Then Exit Sub
                     If target = 0 Then Exit Sub
 
-                    If targetType = Enums.TargetType.Player Then
+                    If targetType = modEnumerators.TargetType.Player Then
                         x = GetPlayerX(target)
                         y = GetPlayerY(target)
                     Else
@@ -1051,9 +1051,9 @@ Module modLoop
                                 If GetPlayerMap(i) = mapNum Then
                                     If IsInRange(aoe, x, y, GetPlayerX(i), GetPlayerY(i)) Then
                                         If CanNpcAttackPlayer(npcNum, i) Then
-                                            SendAnimation(mapNum, Skill(skillnum).SkillAnim, 0, 0, Enums.TargetType.Player, i)
+                                            SendAnimation(mapNum, Skill(skillnum).SkillAnim, 0, 0, modEnumerators.TargetType.Player, i)
                                             PlayerMsg(i, Trim(Npc(MapNpc(mapNum).Npc(npcNum).Num).Name) & " uses " & Trim(Skill(skillnum).Name) & "!", ColorType.Yellow)
-                                            SkillPlayer_Effect(Enums.VitalType.HP, False, i, vital, skillnum)
+                                            SkillPlayer_Effect(modEnumerators.VitalType.HP, False, i, vital, skillnum)
                                         End If
                                     End If
                                 End If
@@ -1061,11 +1061,11 @@ Module modLoop
                         Next
                         For i = 1 To MAX_MAP_NPCS
                             If MapNpc(mapNum).Npc(i).Num > 0 Then
-                                If MapNpc(mapNum).Npc(i).Vital(Enums.VitalType.HP) > 0 Then
+                                If MapNpc(mapNum).Npc(i).Vital(modEnumerators.VitalType.HP) > 0 Then
                                     If IsInRange(aoe, x, y, MapNpc(mapNum).Npc(i).X, MapNpc(mapNum).Npc(i).Y) Then
                                         If CanPlayerAttackNpc(npcNum, i, True) Then
-                                            SendAnimation(mapNum, Skill(skillnum).SkillAnim, 0, 0, Enums.TargetType.Npc, i)
-                                            SkillNpc_Effect(Enums.VitalType.HP, False, i, vital, skillnum, mapNum)
+                                            SendAnimation(mapNum, Skill(skillnum).SkillAnim, 0, 0, modEnumerators.TargetType.Npc, i)
+                                            SkillNpc_Effect(modEnumerators.VitalType.HP, False, i, vital, skillnum, mapNum)
                                             If Skill(skillnum).KnockBack = 1 Then
                                                 KnockBackNpc(npcNum, target, skillnum)
                                             End If
@@ -1076,13 +1076,13 @@ Module modLoop
                         Next
                     Case SkillType.HealHp, SkillType.HealMp, SkillType.DamageMp
                         If Skill(skillnum).Type = SkillType.HealHp Then
-                            vitalType = Enums.VitalType.HP
+                            vitalType = modEnumerators.VitalType.HP
                             increment = True
                         ElseIf Skill(skillnum).Type = SkillType.HealMp Then
-                            vitalType = Enums.VitalType.MP
+                            vitalType = modEnumerators.VitalType.MP
                             increment = True
                         ElseIf Skill(skillnum).Type = SkillType.DamageMp Then
-                            vitalType = Enums.VitalType.MP
+                            vitalType = modEnumerators.VitalType.MP
                             increment = False
                         End If
 
@@ -1095,7 +1095,7 @@ Module modLoop
                             End If
                         Next
                         For i = 1 To MAX_MAP_NPCS
-                            If MapNpc(mapNum).Npc(i).Num > 0 AndAlso MapNpc(mapNum).Npc(i).Vital(Enums.VitalType.HP) > 0 Then
+                            If MapNpc(mapNum).Npc(i).Num > 0 AndAlso MapNpc(mapNum).Npc(i).Vital(modEnumerators.VitalType.HP) > 0 Then
                                 If IsInRange(aoe, x, y, MapNpc(mapNum).Npc(i).X, MapNpc(mapNum).Npc(i).Y) Then
                                     SkillNpc_Effect(vitalType, increment, i, vital, skillnum, mapNum)
                                 End If
@@ -1110,7 +1110,7 @@ Module modLoop
 
                 If targetType = 0 OrElse target = 0 Then Exit Sub
 
-                If MapNpc(mapNum).Npc(npcNum).TargetType = Enums.TargetType.Player Then
+                If MapNpc(mapNum).Npc(npcNum).TargetType = modEnumerators.TargetType.Player Then
                     x = GetPlayerX(target)
                     y = GetPlayerY(target)
                 Else
@@ -1122,17 +1122,17 @@ Module modLoop
 
                 Select Case Skill(skillnum).Type
                     Case SkillType.DamageHp
-                        If MapNpc(mapNum).Npc(npcNum).TargetType = Enums.TargetType.Player Then
+                        If MapNpc(mapNum).Npc(npcNum).TargetType = modEnumerators.TargetType.Player Then
                             If CanNpcAttackPlayer(npcNum, target) AndAlso vital > 0 Then
-                                SendAnimation(mapNum, Skill(skillnum).SkillAnim, 0, 0, Enums.TargetType.Player, target)
+                                SendAnimation(mapNum, Skill(skillnum).SkillAnim, 0, 0, modEnumerators.TargetType.Player, target)
                                 PlayerMsg(target, Trim(Npc(MapNpc(mapNum).Npc(npcNum).Num).Name) & " uses " & Trim(Skill(skillnum).Name) & "!", ColorType.Yellow)
-                                SkillPlayer_Effect(Enums.VitalType.HP, False, target, vital, skillnum)
+                                SkillPlayer_Effect(modEnumerators.VitalType.HP, False, target, vital, skillnum)
                                 didCast = True
                             End If
                         Else
                             If CanPlayerAttackNpc(npcNum, target, True) AndAlso vital > 0 Then
-                                SendAnimation(mapNum, Skill(skillnum).SkillAnim, 0, 0, Enums.TargetType.Npc, target)
-                                SkillNpc_Effect(Enums.VitalType.HP, False, i, vital, skillnum, mapNum)
+                                SendAnimation(mapNum, Skill(skillnum).SkillAnim, 0, 0, modEnumerators.TargetType.Npc, target)
+                                SkillNpc_Effect(modEnumerators.VitalType.HP, False, i, vital, skillnum, mapNum)
 
                                 If Skill(skillnum).KnockBack = 1 Then
                                     KnockBackNpc(npcNum, target, skillnum)
@@ -1143,17 +1143,17 @@ Module modLoop
 
                     Case SkillType.DamageMp, SkillType.HealMp, SkillType.HealHp
                         If Skill(skillnum).Type = SkillType.DamageMp Then
-                            vitalType = Enums.VitalType.MP
+                            vitalType = modEnumerators.VitalType.MP
                             increment = False
                         ElseIf Skill(skillnum).Type = SkillType.HealMp Then
-                            vitalType = Enums.VitalType.MP
+                            vitalType = modEnumerators.VitalType.MP
                             increment = True
                         ElseIf Skill(skillnum).Type = SkillType.HealHp Then
-                            vitalType = Enums.VitalType.HP
+                            vitalType = modEnumerators.VitalType.HP
                             increment = True
                         End If
 
-                        If TempPlayer(npcNum).TargetType = Enums.TargetType.Player Then
+                        If TempPlayer(npcNum).TargetType = modEnumerators.TargetType.Player Then
                             If Skill(skillnum).Type = SkillType.DamageMp Then
                                 If CanPlayerAttackPlayer(npcNum, target, True) Then
                                     SkillPlayer_Effect(vitalType, increment, target, vital, skillnum)
@@ -1178,7 +1178,7 @@ Module modLoop
         End Select
 
         If didCast Then
-            MapNpc(mapNum).Npc(npcNum).Vital(Enums.VitalType.MP) = MapNpc(mapNum).Npc(npcNum).Vital(Enums.VitalType.MP) - mpCost
+            MapNpc(mapNum).Npc(npcNum).Vital(modEnumerators.VitalType.MP) = MapNpc(mapNum).Npc(npcNum).Vital(modEnumerators.VitalType.MP) - mpCost
             SendMapNpcVitals(mapNum, npcNum)
             MapNpc(mapNum).Npc(npcNum).SkillCd(skillslot) = GetTimeMs() + (Skill(skillnum).CdTime * 1000)
         End If

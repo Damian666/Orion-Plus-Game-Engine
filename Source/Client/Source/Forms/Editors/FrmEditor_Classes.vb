@@ -19,56 +19,6 @@ Friend Class frmEditor_Classes
         LoadClassInfo = True
     End Sub
 
-    Private Sub BtnAddClass_Click(sender As Object, e As EventArgs) Handles btnAddClass.Click
-        MaxClasses = MaxClasses + 1
-
-        ReDim Preserve Classes(MaxClasses)
-
-        Classes(MaxClasses).Name = "New Class"
-
-        ReDim Classes(MaxClasses).Stat(StatType.Count - 1)
-
-        ReDim Classes(MaxClasses).Vital(VitalType.Count - 1)
-
-        ReDim Classes(MaxClasses).MaleSprite(1)
-        ReDim Classes(MaxClasses).FemaleSprite(1)
-
-        For i = 1 To StatType.Count - 1
-            Classes(MaxClasses).Stat(i) = 1
-        Next
-
-        ReDim Classes(MaxClasses).StartItem(5)
-        ReDim Classes(MaxClasses).StartValue(5)
-
-        Classes(MaxClasses).StartMap = 1
-        Classes(MaxClasses).StartX = 1
-        Classes(MaxClasses).StartY = 1
-
-        ClassEditorInit()
-    End Sub
-
-    Private Sub BtnRemoveClass_Click(sender As Object, e As EventArgs) Handles btnRemoveClass.Click
-        Dim i As Integer
-
-        'If its The Last class, its simple, just remove and redim
-        If Editorindex = MaxClasses Then
-            MaxClasses = MaxClasses - 1
-            ReDim Preserve Classes(MaxClasses)
-        Else
-            'but if its somewhere in the middle, or beginning, it gets harder xD
-            For i = 1 To MaxClasses
-                'we shift everything thats beneath the selected class, up 1 slot
-                Classes(Editorindex) = Classes(Editorindex + 1)
-            Next
-
-            'and then we remove it, and redim
-            MaxClasses = MaxClasses - 1
-            ReDim Preserve Classes(MaxClasses)
-        End If
-
-        ClassEditorInit()
-    End Sub
-
     Private Sub BtnSave_Click(sender As Object, e As EventArgs) Handles btnSave.Click
         ClassesEditorOk()
     End Sub
@@ -83,7 +33,7 @@ Friend Class frmEditor_Classes
 
     Private Sub TxtName_TextChanged(sender As Object, e As EventArgs) Handles txtName.TextChanged
         Dim tmpindex As Integer
-        If Editorindex = 0 OrElse Editorindex > MaxClasses Then Exit Sub
+        If Editorindex = 0 OrElse Editorindex > MAX_CLASSES Then Exit Sub
 
         tmpindex = lstIndex.SelectedIndex
         Classes(Editorindex).Name = Trim$(txtName.Text)
@@ -98,7 +48,7 @@ Friend Class frmEditor_Classes
 
     Private Sub BtnAddMaleSprite_Click(sender As Object, e As EventArgs) Handles btnAddMaleSprite.Click
         Dim tmpamount As Byte
-        If Editorindex = 0 OrElse Editorindex > MaxClasses Then Exit Sub
+        If Editorindex = 0 OrElse Editorindex > MAX_CLASSES Then Exit Sub
 
         tmpamount = UBound(Classes(Editorindex).MaleSprite)
 
@@ -111,7 +61,7 @@ Friend Class frmEditor_Classes
 
     Private Sub BtnDeleteMaleSprite_Click(sender As Object, e As EventArgs) Handles btnDeleteMaleSprite.Click
         Dim tmpamount As Byte
-        If Editorindex = 0 OrElse Editorindex > MaxClasses Then Exit Sub
+        If Editorindex = 0 OrElse Editorindex > MAX_CLASSES Then Exit Sub
 
         tmpamount = UBound(Classes(Editorindex).MaleSprite)
 
@@ -122,7 +72,7 @@ Friend Class frmEditor_Classes
 
     Private Sub BtnAddFemaleSprite_Click(sender As Object, e As EventArgs) Handles btnAddFemaleSprite.Click
         Dim tmpamount As Byte
-        If Editorindex = 0 OrElse Editorindex > MaxClasses Then Exit Sub
+        If Editorindex = 0 OrElse Editorindex > MAX_CLASSES Then Exit Sub
 
         tmpamount = UBound(Classes(Editorindex).FemaleSprite)
 
@@ -135,7 +85,7 @@ Friend Class frmEditor_Classes
 
     Private Sub BtnDeleteFemaleSprite_Click(sender As Object, e As EventArgs) Handles btnDeleteFemaleSprite.Click
         Dim tmpamount As Byte
-        If Editorindex = 0 OrElse Editorindex > MaxClasses Then Exit Sub
+        If Editorindex = 0 OrElse Editorindex > MAX_CLASSES Then Exit Sub
 
         tmpamount = UBound(Classes(Editorindex).FemaleSprite)
 
@@ -172,16 +122,16 @@ Friend Class frmEditor_Classes
 
     Sub DrawPreview()
 
-        If File.Exists(Application.StartupPath & GfxPath & "Characters\" & nudMaleSprite.Value & GfxExt) Then
-            picMale.Width = Image.FromFile(Application.StartupPath & GfxPath & "characters\" & nudMaleSprite.Value & GfxExt).Width \ 4
-            picMale.Height = Image.FromFile(Application.StartupPath & GfxPath & "characters\" & nudMaleSprite.Value & GfxExt).Height \ 4
-            picMale.BackgroundImage = Image.FromFile(Application.StartupPath & GfxPath & "Characters\" & nudMaleSprite.Value & GfxExt)
+        If File.Exists(Path.Graphics & "Characters\" & nudMaleSprite.Value & GfxExt) Then
+            picMale.Width = Image.FromFile(Path.Graphics & "characters\" & nudMaleSprite.Value & GfxExt).Width \ 4
+            picMale.Height = Image.FromFile(Path.Graphics & "characters\" & nudMaleSprite.Value & GfxExt).Height \ 4
+            picMale.BackgroundImage = Image.FromFile(Path.Graphics & "Characters\" & nudMaleSprite.Value & GfxExt)
         End If
 
-        If File.Exists(Application.StartupPath & GfxPath & "Characters\" & nudFemaleSprite.Value & GfxExt) Then
-            picFemale.Width = Image.FromFile(Application.StartupPath & GfxPath & "characters\" & nudFemaleSprite.Value & GfxExt).Width \ 4
-            picFemale.Height = Image.FromFile(Application.StartupPath & GfxPath & "characters\" & nudFemaleSprite.Value & GfxExt).Height \ 4
-            picFemale.BackgroundImage = Image.FromFile(Application.StartupPath & GfxPath & "Characters\" & nudFemaleSprite.Value & GfxExt)
+        If File.Exists(Path.Graphics & "Characters\" & nudFemaleSprite.Value & GfxExt) Then
+            picFemale.Width = Image.FromFile(Path.Graphics & "characters\" & nudFemaleSprite.Value & GfxExt).Width \ 4
+            picFemale.Height = Image.FromFile(Path.Graphics & "characters\" & nudFemaleSprite.Value & GfxExt).Height \ 4
+            picFemale.BackgroundImage = Image.FromFile(Path.Graphics & "Characters\" & nudFemaleSprite.Value & GfxExt)
         End If
 
     End Sub
@@ -199,43 +149,43 @@ Friend Class frmEditor_Classes
 #Region "Stats"
 
     Private Sub NumStrength_ValueChanged(sender As Object, e As EventArgs) Handles nudStrength.Click
-        If Editorindex <= 0 OrElse Editorindex > MaxClasses Then Exit Sub
+        If Editorindex <= 0 OrElse Editorindex > MAX_CLASSES Then Exit Sub
 
         Classes(Editorindex).Stat(StatType.Strength) = nudStrength.Value
     End Sub
 
     Private Sub NumLuck_ValueChanged(sender As Object, e As EventArgs) Handles nudLuck.Click
-        If Editorindex <= 0 OrElse Editorindex > MaxClasses Then Exit Sub
+        If Editorindex <= 0 OrElse Editorindex > MAX_CLASSES Then Exit Sub
 
         Classes(Editorindex).Stat(StatType.Luck) = nudLuck.Value
     End Sub
 
     Private Sub NumEndurance_ValueChanged(sender As Object, e As EventArgs) Handles nudEndurance.Click
-        If Editorindex <= 0 OrElse Editorindex > MaxClasses Then Exit Sub
+        If Editorindex <= 0 OrElse Editorindex > MAX_CLASSES Then Exit Sub
 
         Classes(Editorindex).Stat(StatType.Endurance) = nudEndurance.Value
     End Sub
 
     Private Sub NumIntelligence_ValueChanged(sender As Object, e As EventArgs) Handles nudIntelligence.Click
-        If Editorindex <= 0 OrElse Editorindex > MaxClasses Then Exit Sub
+        If Editorindex <= 0 OrElse Editorindex > MAX_CLASSES Then Exit Sub
 
         Classes(Editorindex).Stat(StatType.Intelligence) = nudIntelligence.Value
     End Sub
 
     Private Sub NumVitality_ValueChanged(sender As Object, e As EventArgs) Handles nudVitality.Click
-        If Editorindex <= 0 OrElse Editorindex > MaxClasses Then Exit Sub
+        If Editorindex <= 0 OrElse Editorindex > MAX_CLASSES Then Exit Sub
 
         Classes(Editorindex).Stat(StatType.Vitality) = nudVitality.Value
     End Sub
 
     Private Sub NumSpirit_ValueChanged(sender As Object, e As EventArgs) Handles nudSpirit.Click
-        If Editorindex <= 0 OrElse Editorindex > MaxClasses Then Exit Sub
+        If Editorindex <= 0 OrElse Editorindex > MAX_CLASSES Then Exit Sub
 
         Classes(Editorindex).Stat(StatType.Spirit) = nudSpirit.Value
     End Sub
 
     Private Sub NumBaseExp_ValueChanged(sender As Object, e As EventArgs) Handles nudBaseExp.Click
-        If Editorindex <= 0 OrElse Editorindex > MaxClasses Then Exit Sub
+        If Editorindex <= 0 OrElse Editorindex > MAX_CLASSES Then Exit Sub
 
         Classes(Editorindex).BaseExp = nudBaseExp.Value
     End Sub
@@ -258,19 +208,19 @@ Friend Class frmEditor_Classes
 #Region "Starting Point"
 
     Private Sub NumStartMap_ValueChanged(sender As Object, e As EventArgs) Handles nudStartMap.Click
-        If Editorindex <= 0 OrElse Editorindex > MaxClasses Then Exit Sub
+        If Editorindex <= 0 OrElse Editorindex > MAX_CLASSES Then Exit Sub
 
         Classes(Editorindex).StartMap = nudStartMap.Value
     End Sub
 
     Private Sub NumStartX_ValueChanged(sender As Object, e As EventArgs) Handles nudStartX.Click
-        If Editorindex <= 0 OrElse Editorindex > MaxClasses Then Exit Sub
+        If Editorindex <= 0 OrElse Editorindex > MAX_CLASSES Then Exit Sub
 
         Classes(Editorindex).StartX = nudStartX.Value
     End Sub
 
     Private Sub NumStartY_ValueChanged(sender As Object, e As EventArgs) Handles nudStartY.Click
-        If Editorindex <= 0 OrElse Editorindex > MaxClasses Then Exit Sub
+        If Editorindex <= 0 OrElse Editorindex > MAX_CLASSES Then Exit Sub
 
         Classes(Editorindex).StartY = nudStartY.Value
     End Sub

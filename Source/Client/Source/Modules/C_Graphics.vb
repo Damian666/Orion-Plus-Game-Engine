@@ -378,9 +378,9 @@ Module C_Graphics
 
         'sadly, gui shit is always needed, so we preload it :/
         CursorInfo = New GraphicInfo
-        If File.Exists(Application.StartupPath & GfxPath & "Misc\Cursor" & GfxExt) Then
+        If File.Exists(Path.Graphics & "Misc\Cursor" & GfxExt) Then
             'Load texture first, dont care about memory streams (just use the filename)
-            CursorGfx = New Texture(Application.StartupPath & GfxPath & "Misc\Cursor" & GfxExt)
+            CursorGfx = New Texture(Path.Graphics & "Misc\Cursor" & GfxExt)
             CursorSprite = New Sprite(CursorGfx)
 
             'Cache the width and height
@@ -389,9 +389,9 @@ Module C_Graphics
         End If
 
         DoorGfxInfo = New GraphicInfo
-        If File.Exists(Application.StartupPath & GfxPath & "Misc\Door" & GfxExt) Then
+        If File.Exists(Path.Graphics & "Misc\Door" & GfxExt) Then
             'Load texture first, dont care about memory streams (just use the filename)
-            DoorGfx = New Texture(Application.StartupPath & GfxPath & "Misc\Door" & GfxExt)
+            DoorGfx = New Texture(Path.Graphics & "Misc\Door" & GfxExt)
             DoorSprite = New Sprite(DoorGfx)
 
             'Cache the width and height
@@ -400,9 +400,9 @@ Module C_Graphics
         End If
 
         BloodGfxInfo = New GraphicInfo
-        If File.Exists(Application.StartupPath & GfxPath & "Misc\Blood" & GfxExt) Then
+        If File.Exists(Path.Graphics & "Misc\Blood" & GfxExt) Then
             'Load texture first, dont care about memory streams (just use the filename)
-            BloodGfx = New Texture(Application.StartupPath & GfxPath & "Misc\Blood" & GfxExt)
+            BloodGfx = New Texture(Path.Graphics & "Misc\Blood" & GfxExt)
             BloodSprite = New Sprite(BloodGfx)
 
             'Cache the width and height
@@ -411,9 +411,9 @@ Module C_Graphics
         End If
 
         DirectionsGfxInfo = New GraphicInfo
-        If File.Exists(Application.StartupPath & GfxPath & "Misc\Direction" & GfxExt) Then
+        If File.Exists(Path.Graphics & "Misc\Direction" & GfxExt) Then
             'Load texture first, dont care about memory streams (just use the filename)
-            DirectionsGfx = New Texture(Application.StartupPath & GfxPath & "Misc\Direction" & GfxExt)
+            DirectionsGfx = New Texture(Path.Graphics & "Misc\Direction" & GfxExt)
             DirectionsSprite = New Sprite(DirectionsGfx)
 
             'Cache the width and height
@@ -422,9 +422,9 @@ Module C_Graphics
         End If
 
         WeatherGfxInfo = New GraphicInfo
-        If File.Exists(Application.StartupPath & GfxPath & "Misc\Weather" & GfxExt) Then
+        If File.Exists(Path.Graphics & "Misc\Weather" & GfxExt) Then
             'Load texture first, dont care about memory streams (just use the filename)
-            WeatherGfx = New Texture(Application.StartupPath & GfxPath & "Misc\Weather" & GfxExt)
+            WeatherGfx = New Texture(Path.Graphics & "Misc\Weather" & GfxExt)
             WeatherSprite = New Sprite(WeatherGfx)
 
             'Cache the width and height
@@ -433,9 +433,9 @@ Module C_Graphics
         End If
 
         HotBarGfxInfo = New GraphicInfo
-        If File.Exists(Application.StartupPath & GfxGuiPath & "Main\HotBar" & GfxExt) Then
+        If File.Exists(Path.Gui & "Main\HotBar" & GfxExt) Then
             'Load texture first, dont care about memory streams (just use the filename)
-            HotBarGfx = New Texture(Application.StartupPath & GfxGuiPath & "Main\HotBar" & GfxExt)
+            HotBarGfx = New Texture(Path.Gui & "Main\HotBar" & GfxExt)
             HotBarSprite = New Sprite(HotBarGfx)
 
             'Cache the width and height
@@ -444,8 +444,8 @@ Module C_Graphics
         End If
 
         ChatWindowGfxInfo = New GraphicInfo
-        If File.Exists(Application.StartupPath & GfxGuiPath & "Main\" & "Chat" & GfxExt) Then
-            ChatWindowGfx = New Texture(Application.StartupPath & GfxGuiPath & "Main\" & "Chat" & GfxExt)
+        If File.Exists(Path.Gui & "Main\" & "Chat" & GfxExt) Then
+            ChatWindowGfx = New Texture(Path.Gui & "Main\" & "Chat" & GfxExt)
             ChatWindowSprite = New Sprite(ChatWindowGfx)
 
             'Cache the width and height
@@ -454,8 +454,8 @@ Module C_Graphics
         End If
 
         MyChatWindowGfxInfo = New GraphicInfo
-        If File.Exists(Application.StartupPath & GfxGuiPath & "Main\" & "MyChat" & GfxExt) Then
-            MyChatWindowGfx = New Texture(Application.StartupPath & GfxGuiPath & "Main\" & "MyChat" & GfxExt)
+        If File.Exists(Path.Gui & "Main\" & "MyChat" & GfxExt) Then
+            MyChatWindowGfx = New Texture(Path.Gui & "Main\" & "MyChat" & GfxExt)
             MyChatWindowSprite = New Sprite(MyChatWindowGfx)
 
             'Cache the width and height
@@ -464,8 +464,8 @@ Module C_Graphics
         End If
 
         ButtonGfxInfo = New GraphicInfo
-        If File.Exists(Application.StartupPath & GfxGuiPath & "Button" & GfxExt) Then
-            ButtonGfx = New Texture(Application.StartupPath & GfxGuiPath & "Button" & GfxExt)
+        If File.Exists(Path.Gui & "Button" & GfxExt) Then
+            ButtonGfx = New Texture(Path.Gui & "Button" & GfxExt)
             ButtonSprite = New Sprite(ButtonGfx)
 
             'Cache the width and height
@@ -474,8 +474,8 @@ Module C_Graphics
         End If
 
         ButtonHoverGfxInfo = New GraphicInfo
-        If File.Exists(Application.StartupPath & GfxGuiPath & "Button_Hover" & GfxExt) Then
-            ButtonHoverGfx = New Texture(Application.StartupPath & GfxGuiPath & "Button_Hover" & GfxExt)
+        If File.Exists(Path.Gui & "Button_Hover" & GfxExt) Then
+            ButtonHoverGfx = New Texture(Path.Gui & "Button_Hover" & GfxExt)
             ButtonHoverSprite = New Sprite(ButtonHoverGfx)
 
             'Cache the width and height
@@ -484,9 +484,9 @@ Module C_Graphics
         End If
 
         HudPanelGfxInfo = New GraphicInfo
-        If File.Exists(Application.StartupPath & GfxGuiPath & "Main\HUD" & GfxExt) Then
+        If File.Exists(Path.Gui & "Main\HUD" & GfxExt) Then
             'Load texture first, dont care about memory streams (just use the filename)
-            HudPanelGfx = New Texture(Application.StartupPath & GfxGuiPath & "Main\HUD" & GfxExt)
+            HudPanelGfx = New Texture(Path.Gui & "Main\HUD" & GfxExt)
             HudPanelSprite = New Sprite(HudPanelGfx)
 
             'Cache the width and height
@@ -495,8 +495,8 @@ Module C_Graphics
         End If
 
         HpBarGfxInfo = New GraphicInfo
-        If File.Exists(Application.StartupPath & GfxGuiPath & "HPBar" & GfxExt) Then
-            HpBarGfx = New Texture(Application.StartupPath & GfxGuiPath & "HPBar" & GfxExt)
+        If File.Exists(Path.Gui & "HPBar" & GfxExt) Then
+            HpBarGfx = New Texture(Path.Gui & "HPBar" & GfxExt)
             HpBarSprite = New Sprite(HpBarGfx)
 
             'Cache the width and height
@@ -505,8 +505,8 @@ Module C_Graphics
         End If
 
         MpBarGfxInfo = New GraphicInfo
-        If File.Exists(Application.StartupPath & GfxGuiPath & "MPBar" & GfxExt) Then
-            MpBarGfx = New Texture(Application.StartupPath & GfxGuiPath & "MPBar" & GfxExt)
+        If File.Exists(Path.Gui & "MPBar" & GfxExt) Then
+            MpBarGfx = New Texture(Path.Gui & "MPBar" & GfxExt)
             MpBarSprite = New Sprite(MpBarGfx)
 
             'Cache the width and height
@@ -515,8 +515,8 @@ Module C_Graphics
         End If
 
         ExpBarGfxInfo = New GraphicInfo
-        If File.Exists(Application.StartupPath & GfxGuiPath & "EXPBar" & GfxExt) Then
-            ExpBarGfx = New Texture(Application.StartupPath & GfxGuiPath & "EXPBar" & GfxExt)
+        If File.Exists(Path.Gui & "EXPBar" & GfxExt) Then
+            ExpBarGfx = New Texture(Path.Gui & "EXPBar" & GfxExt)
             ExpBarSprite = New Sprite(ExpBarGfx)
 
             'Cache the width and height
@@ -525,9 +525,9 @@ Module C_Graphics
         End If
 
         ActionPanelGfxInfo = New GraphicInfo
-        If File.Exists(Application.StartupPath & GfxGuiPath & "ActionBar\ActionBar" & GfxExt) Then
+        If File.Exists(Path.Gui & "ActionBar\ActionBar" & GfxExt) Then
             'Load texture first, dont care about memory streams (just use the filename)
-            ActionPanelGfx = New Texture(Application.StartupPath & GfxGuiPath & "ActionBar\ActionBar" & GfxExt)
+            ActionPanelGfx = New Texture(Path.Gui & "ActionBar\ActionBar" & GfxExt)
             ActionPanelSprite = New Sprite(ActionPanelGfx)
 
             'Cache the width and height
@@ -536,9 +536,9 @@ Module C_Graphics
         End If
 
         InvPanelGfxInfo = New GraphicInfo
-        If File.Exists(Application.StartupPath & GfxGuiPath & "Main\inventory" & GfxExt) Then
+        If File.Exists(Path.Gui & "Main\inventory" & GfxExt) Then
             'Load texture first, dont care about memory streams (just use the filename)
-            InvPanelGfx = New Texture(Application.StartupPath & GfxGuiPath & "Main\inventory" & GfxExt)
+            InvPanelGfx = New Texture(Path.Gui & "Main\inventory" & GfxExt)
             InvPanelSprite = New Sprite(InvPanelGfx)
 
             'Cache the width and height
@@ -547,9 +547,9 @@ Module C_Graphics
         End If
 
         SkillPanelGfxInfo = New GraphicInfo
-        If File.Exists(Application.StartupPath & GfxGuiPath & "Main\skills" & GfxExt) Then
+        If File.Exists(Path.Gui & "Main\skills" & GfxExt) Then
             'Load texture first, dont care about memory streams (just use the filename)
-            SkillPanelGfx = New Texture(Application.StartupPath & GfxGuiPath & "Main\skills" & GfxExt)
+            SkillPanelGfx = New Texture(Path.Gui & "Main\skills" & GfxExt)
             SkillPanelSprite = New Sprite(SkillPanelGfx)
 
             'Cache the width and height
@@ -558,9 +558,9 @@ Module C_Graphics
         End If
 
         CharPanelGfxInfo = New GraphicInfo
-        If File.Exists(Application.StartupPath & GfxGuiPath & "Main\char" & GfxExt) Then
+        If File.Exists(Path.Gui & "Main\char" & GfxExt) Then
             'Load texture first, dont care about memory streams (just use the filename)
-            CharPanelGfx = New Texture(Application.StartupPath & GfxGuiPath & "Main\char" & GfxExt)
+            CharPanelGfx = New Texture(Path.Gui & "Main\char" & GfxExt)
             CharPanelSprite = New Sprite(CharPanelGfx)
 
             'Cache the width and height
@@ -569,9 +569,9 @@ Module C_Graphics
         End If
 
         CharPanelPlusGfxInfo = New GraphicInfo
-        If File.Exists(Application.StartupPath & GfxGuiPath & "Main\plus" & GfxExt) Then
+        If File.Exists(Path.Gui & "Main\plus" & GfxExt) Then
             'Load texture first, dont care about memory streams (just use the filename)
-            CharPanelPlusGfx = New Texture(Application.StartupPath & GfxGuiPath & "Main\plus" & GfxExt)
+            CharPanelPlusGfx = New Texture(Path.Gui & "Main\plus" & GfxExt)
             CharPanelPlusSprite = New Sprite(CharPanelPlusGfx)
 
             'Cache the width and height
@@ -580,9 +580,9 @@ Module C_Graphics
         End If
 
         CharPanelMinGfxInfo = New GraphicInfo
-        If File.Exists(Application.StartupPath & GfxGuiPath & "Main\min" & GfxExt) Then
+        If File.Exists(Path.Gui & "Main\min" & GfxExt) Then
             'Load texture first, dont care about memory streams (just use the filename)
-            CharPanelMinGfx = New Texture(Application.StartupPath & GfxGuiPath & "Main\min" & GfxExt)
+            CharPanelMinGfx = New Texture(Path.Gui & "Main\min" & GfxExt)
             CharPanelMinSprite = New Sprite(CharPanelMinGfx)
 
             'Cache the width and height
@@ -591,9 +591,9 @@ Module C_Graphics
         End If
 
         BankPanelGfxInfo = New GraphicInfo
-        If File.Exists(Application.StartupPath & GfxGuiPath & "Main\Bank" & GfxExt) Then
+        If File.Exists(Path.Gui & "Main\Bank" & GfxExt) Then
             'Load texture first, dont care about memory streams (just use the filename)
-            BankPanelGfx = New Texture(Application.StartupPath & GfxGuiPath & "Main\Bank" & GfxExt)
+            BankPanelGfx = New Texture(Path.Gui & "Main\Bank" & GfxExt)
             BankPanelSprite = New Sprite(BankPanelGfx)
 
             'Cache the width and height
@@ -602,9 +602,9 @@ Module C_Graphics
         End If
 
         ShopPanelGfxInfo = New GraphicInfo
-        If File.Exists(Application.StartupPath & GfxGuiPath & "Main\Shop" & GfxExt) Then
+        If File.Exists(Path.Gui & "Main\Shop" & GfxExt) Then
             'Load texture first, dont care about memory streams (just use the filename)
-            ShopPanelGfx = New Texture(Application.StartupPath & GfxGuiPath & "Main\Shop" & GfxExt)
+            ShopPanelGfx = New Texture(Path.Gui & "Main\Shop" & GfxExt)
             ShopPanelSprite = New Sprite(ShopPanelGfx)
 
             'Cache the width and height
@@ -613,9 +613,9 @@ Module C_Graphics
         End If
 
         TradePanelGfxInfo = New GraphicInfo
-        If File.Exists(Application.StartupPath & GfxGuiPath & "Main\Trade" & GfxExt) Then
+        If File.Exists(Path.Gui & "Main\Trade" & GfxExt) Then
             'Load texture first, dont care about memory streams (just use the filename)
-            TradePanelGfx = New Texture(Application.StartupPath & GfxGuiPath & "Main\Trade" & GfxExt)
+            TradePanelGfx = New Texture(Path.Gui & "Main\Trade" & GfxExt)
             TradePanelSprite = New Sprite(TradePanelGfx)
 
             'Cache the width and height
@@ -624,9 +624,9 @@ Module C_Graphics
         End If
 
         EventChatGfxInfo = New GraphicInfo
-        If File.Exists(Application.StartupPath & GfxGuiPath & "Main\EventChat" & GfxExt) Then
+        If File.Exists(Path.Gui & "Main\EventChat" & GfxExt) Then
             'Load texture first, dont care about memory streams (just use the filename)
-            EventChatGfx = New Texture(Application.StartupPath & GfxGuiPath & "Main\EventChat" & GfxExt)
+            EventChatGfx = New Texture(Path.Gui & "Main\EventChat" & GfxExt)
             EventChatSprite = New Sprite(EventChatGfx)
 
             'Cache the width and height
@@ -635,9 +635,9 @@ Module C_Graphics
         End If
 
         TargetGfxInfo = New GraphicInfo
-        If File.Exists(Application.StartupPath & GfxPath & "Misc\Target" & GfxExt) Then
+        If File.Exists(Path.Graphics & "Misc\Target" & GfxExt) Then
             'Load texture first, dont care about memory streams (just use the filename)
-            TargetGfx = New Texture(Application.StartupPath & GfxPath & "Misc\Target" & GfxExt)
+            TargetGfx = New Texture(Path.Graphics & "Misc\Target" & GfxExt)
             TargetSprite = New Sprite(TargetGfx)
 
             'Cache the width and height
@@ -646,8 +646,8 @@ Module C_Graphics
         End If
 
         DescriptionGfxInfo = New GraphicInfo
-        If File.Exists(Application.StartupPath & GfxGuiPath & "Main\" & "Description" & GfxExt) Then
-            DescriptionGfx = New Texture(Application.StartupPath & GfxGuiPath & "Main\" & "Description" & GfxExt)
+        If File.Exists(Path.Gui & "Main\" & "Description" & GfxExt) Then
+            DescriptionGfx = New Texture(Path.Gui & "Main\" & "Description" & GfxExt)
             DescriptionSprite = New Sprite(DescriptionGfx)
 
             'Cache the width and height
@@ -656,8 +656,8 @@ Module C_Graphics
         End If
 
         RClickGfxInfo = New GraphicInfo
-        If File.Exists(Application.StartupPath & GfxGuiPath & "Main\" & "RightClick" & GfxExt) Then
-            RClickGfx = New Texture(Application.StartupPath & GfxGuiPath & "Main\" & "RightClick" & GfxExt)
+        If File.Exists(Path.Gui & "Main\" & "RightClick" & GfxExt) Then
+            RClickGfx = New Texture(Path.Gui & "Main\" & "RightClick" & GfxExt)
             RClickSprite = New Sprite(RClickGfx)
 
             'Cache the width and height
@@ -666,8 +666,8 @@ Module C_Graphics
         End If
 
         QuestGfxInfo = New GraphicInfo
-        If File.Exists(Application.StartupPath & GfxGuiPath & "Main\" & "QuestLog" & GfxExt) Then
-            QuestGfx = New Texture(Application.StartupPath & GfxGuiPath & "Main\" & "QuestLog" & GfxExt)
+        If File.Exists(Path.Gui & "Main\" & "QuestLog" & GfxExt) Then
+            QuestGfx = New Texture(Path.Gui & "Main\" & "QuestLog" & GfxExt)
             QuestSprite = New Sprite(QuestGfx)
 
             'Cache the width and height
@@ -676,8 +676,8 @@ Module C_Graphics
         End If
 
         CraftGfxInfo = New GraphicInfo
-        If File.Exists(Application.StartupPath & GfxGuiPath & "Main\" & "Craft" & GfxExt) Then
-            CraftGfx = New Texture(Application.StartupPath & GfxGuiPath & "Main\" & "Craft" & GfxExt)
+        If File.Exists(Path.Gui & "Main\" & "Craft" & GfxExt) Then
+            CraftGfx = New Texture(Path.Gui & "Main\" & "Craft" & GfxExt)
             CraftSprite = New Sprite(CraftGfx)
 
             'Cache the width and height
@@ -686,8 +686,8 @@ Module C_Graphics
         End If
 
         ProgBarGfxInfo = New GraphicInfo
-        If File.Exists(Application.StartupPath & GfxGuiPath & "Main\" & "ProgBar" & GfxExt) Then
-            ProgBarGfx = New Texture(Application.StartupPath & GfxGuiPath & "Main\" & "ProgBar" & GfxExt)
+        If File.Exists(Path.Gui & "Main\" & "ProgBar" & GfxExt) Then
+            ProgBarGfx = New Texture(Path.Gui & "Main\" & "ProgBar" & GfxExt)
             ProgBarSprite = New Sprite(ProgBarGfx)
 
             'Cache the width and height
@@ -696,8 +696,8 @@ Module C_Graphics
         End If
 
         ChatBubbleGfxInfo = New GraphicInfo
-        If File.Exists(Application.StartupPath & GfxPath & "Misc\ChatBubble" & GfxExt) Then
-            ChatBubbleGfx = New Texture(Application.StartupPath & GfxPath & "Misc\ChatBubble" & GfxExt)
+        If File.Exists(Path.Graphics & "Misc\ChatBubble" & GfxExt) Then
+            ChatBubbleGfx = New Texture(Path.Graphics & "Misc\ChatBubble" & GfxExt)
             ChatBubbleSprite = New Sprite(ChatBubbleGfx)
             'Cache the width and height
             ChatBubbleGfxInfo.Width = ChatBubbleGfx.Size.X
@@ -705,9 +705,9 @@ Module C_Graphics
         End If
 
         PetStatsGfxInfo = New GraphicInfo
-        If File.Exists(Application.StartupPath & GfxGuiPath & "Main\Pet" & GfxExt) Then
+        If File.Exists(Path.Gui & "Main\Pet" & GfxExt) Then
             'Load texture first, dont care about memory streams (just use the filename)
-            PetStatsGfx = New Texture(Application.StartupPath & GfxGuiPath & "Main\Pet" & GfxExt)
+            PetStatsGfx = New Texture(Path.Gui & "Main\Pet" & GfxExt)
             PetStatsSprite = New Sprite(PetStatsGfx)
 
             'Cache the width and height
@@ -716,9 +716,9 @@ Module C_Graphics
         End If
 
         PetbarGfxInfo = New GraphicInfo
-        If File.Exists(Application.StartupPath & GfxGuiPath & "Main\Petbar" & GfxExt) Then
+        If File.Exists(Path.Gui & "Main\Petbar" & GfxExt) Then
             'Load texture first, dont care about memory streams (just use the filename)
-            PetBarGfx = New Texture(Application.StartupPath & GfxGuiPath & "Main\Petbar" & GfxExt)
+            PetBarGfx = New Texture(Path.Gui & "Main\Petbar" & GfxExt)
             PetBarSprite = New Sprite(PetBarGfx)
 
             'Cache the width and height
@@ -727,8 +727,8 @@ Module C_Graphics
         End If
 
         LightGfxInfo = New GraphicInfo
-        If File.Exists(Application.StartupPath & GfxPath & "Misc\Light" & GfxExt) Then
-            LightGfx = New Texture(Application.StartupPath & GfxPath & "Misc\Light" & GfxExt)
+        If File.Exists(Path.Graphics & "Misc\Light" & GfxExt) Then
+            LightGfx = New Texture(Path.Graphics & "Misc\Light" & GfxExt)
             LightSprite = New Sprite(LightGfx)
 
             'Cache the width and height
@@ -737,8 +737,8 @@ Module C_Graphics
         End If
 
         ShadowGfxInfo = New GraphicInfo
-        If File.Exists(Application.StartupPath & GfxPath & "Misc\Shadow" & GfxExt) Then
-            ShadowGfx = New Texture(Application.StartupPath & GfxPath & "Misc\Shadow" & GfxExt)
+        If File.Exists(Path.Graphics & "Misc\Shadow" & GfxExt) Then
+            ShadowGfx = New Texture(Path.Graphics & "Misc\Shadow" & GfxExt)
             ShadowSprite = New Sprite(ShadowGfx)
 
             'Cache the width and height
@@ -753,7 +753,7 @@ Module C_Graphics
             If index < 0 OrElse index > NumTileSets Then Exit Sub
 
             'Load texture first, dont care about memory streams (just use the filename)
-            TileSetTexture(index) = New Texture(Application.StartupPath & GfxPath & "tilesets\" & index & GfxExt)
+            TileSetTexture(index) = New Texture(Path.Graphics & "tilesets\" & index & GfxExt)
             TileSetSprite(index) = New Sprite(TileSetTexture(index))
 
             'Cache the width and height
@@ -768,7 +768,7 @@ Module C_Graphics
             If index < 0 OrElse index > NumCharacters Then Exit Sub
 
             'Load texture first, dont care about memory streams (just use the filename)
-            CharacterGfx(index) = New Texture(Application.StartupPath & GfxPath & "characters\" & index & GfxExt)
+            CharacterGfx(index) = New Texture(Path.Graphics & "characters\" & index & GfxExt)
             CharacterSprite(index) = New Sprite(CharacterGfx(index))
 
             'Cache the width and height
@@ -783,7 +783,7 @@ Module C_Graphics
             If index < 0 OrElse index > NumPaperdolls Then Exit Sub
 
             'Load texture first, dont care about memory streams (just use the filename)
-            PaperDollGfx(index) = New Texture(Application.StartupPath & GfxPath & "Paperdolls\" & index & GfxExt)
+            PaperDollGfx(index) = New Texture(Path.Graphics & "Paperdolls\" & index & GfxExt)
             PaperDollSprite(index) = New Sprite(PaperDollGfx(index))
 
             'Cache the width and height
@@ -798,7 +798,7 @@ Module C_Graphics
             If index <= 0 OrElse index > NumItems Then Exit Sub
 
             'Load texture first, dont care about memory streams (just use the filename)
-            ItemsGfx(index) = New Texture(Application.StartupPath & GfxPath & "items\" & index & GfxExt)
+            ItemsGfx(index) = New Texture(Path.Graphics & "items\" & index & GfxExt)
             ItemsSprite(index) = New Sprite(ItemsGfx(index))
 
             'Cache the width and height
@@ -813,7 +813,7 @@ Module C_Graphics
             If index < 0 OrElse index > NumResources Then Exit Sub
 
             'Load texture first, dont care about memory streams (just use the filename)
-            ResourcesGfx(index) = New Texture(Application.StartupPath & GfxPath & "resources\" & index & GfxExt)
+            ResourcesGfx(index) = New Texture(Path.Graphics & "resources\" & index & GfxExt)
             ResourcesSprite(index) = New Sprite(ResourcesGfx(index))
 
             'Cache the width and height
@@ -828,7 +828,7 @@ Module C_Graphics
             If index <= 0 OrElse index > NumAnimations Then Exit Sub
 
             'Load texture first, dont care about memory streams (just use the filename)
-            AnimationsGfx(index) = New Texture(Application.StartupPath & GfxPath & "Animations\" & index & GfxExt)
+            AnimationsGfx(index) = New Texture(Path.Graphics & "Animations\" & index & GfxExt)
             AnimationsSprite(index) = New Sprite(AnimationsGfx(index))
 
             'Cache the width and height
@@ -843,7 +843,7 @@ Module C_Graphics
             If index < 0 OrElse index > NumFaces Then Exit Sub
 
             'Load texture first, dont care about memory streams (just use the filename)
-            FacesGfx(index) = New Texture(Application.StartupPath & GfxPath & "Faces\" & index & GfxExt)
+            FacesGfx(index) = New Texture(Path.Graphics & "Faces\" & index & GfxExt)
             FacesSprite(index) = New Sprite(FacesGfx(index))
 
             'Cache the width and height
@@ -858,7 +858,7 @@ Module C_Graphics
             If index < 0 OrElse index > NumFogs Then Exit Sub
 
             'Load texture first, dont care about memory streams (just use the filename)
-            FogGfx(index) = New Texture(Application.StartupPath & GfxPath & "Fogs\" & index & GfxExt)
+            FogGfx(index) = New Texture(Path.Graphics & "Fogs\" & index & GfxExt)
             FogSprite(index) = New Sprite(FogGfx(index))
 
             'Cache the width and height
@@ -873,7 +873,7 @@ Module C_Graphics
             If index <= 0 OrElse index > NumSkillIcons Then Exit Sub
 
             'Load texture first, dont care about memory streams (just use the filename)
-            SkillIconsGfx(index) = New Texture(Application.StartupPath & GfxPath & "SkillIcons\" & index & GfxExt)
+            SkillIconsGfx(index) = New Texture(Path.Graphics & "SkillIcons\" & index & GfxExt)
             SkillIconsSprite(index) = New Sprite(SkillIconsGfx(index))
 
             'Cache the width and height
@@ -888,7 +888,7 @@ Module C_Graphics
             If index < 0 OrElse index > NumFurniture Then Exit Sub
 
             'Load texture first, dont care about memory streams (just use the filename)
-            FurnitureGfx(index) = New Texture(Application.StartupPath & GfxPath & "Furniture\" & index & GfxExt)
+            FurnitureGfx(index) = New Texture(Path.Graphics & "Furniture\" & index & GfxExt)
             FurnitureSprite(index) = New Sprite(FurnitureGfx(index))
 
             'Cache the width and height
@@ -903,7 +903,7 @@ Module C_Graphics
             If index < 0 OrElse index > NumProjectiles Then Exit Sub
 
             'Load texture first, dont care about memory streams (just use the filename)
-            ProjectileGfx(index) = New Texture(Application.StartupPath & GfxPath & "Projectiles\" & index & GfxExt)
+            ProjectileGfx(index) = New Texture(Path.Graphics & "Projectiles\" & index & GfxExt)
             ProjectileSprite(index) = New Sprite(ProjectileGfx(index))
 
             'Cache the width and height
@@ -918,7 +918,7 @@ Module C_Graphics
             If index < 0 OrElse index > NumEmotes Then Exit Sub
 
             'Load texture first, dont care about memory streams (just use the filename)
-            EmotesGfx(index) = New Texture(Application.StartupPath & GfxPath & "Emotes\" & index & GfxExt)
+            EmotesGfx(index) = New Texture(Path.Graphics & "Emotes\" & index & GfxExt)
             EmotesSprite(index) = New Sprite(EmotesGfx(index))
 
             'Cache the width and height
@@ -933,7 +933,7 @@ Module C_Graphics
             If index < 0 OrElse index > NumPanorama Then Exit Sub
 
             'Load texture first, dont care about memory streams (just use the filename)
-            PanoramasGfx(index) = New Texture(Application.StartupPath & GfxPath & "Panoramas\" & index & GfxExt)
+            PanoramasGfx(index) = New Texture(Path.Graphics & "Panoramas\" & index & GfxExt)
             PanoramasSprite(index) = New Sprite(PanoramasGfx(index))
 
             'Cache the width and height
@@ -947,7 +947,7 @@ Module C_Graphics
             If index < 0 OrElse index > NumParallax Then Exit Sub
 
             'Load texture first, dont care about memory streams (just use the filename)
-            ParallaxGfx(index) = New Texture(Application.StartupPath & GfxPath & "Parallax\" & index & GfxExt)
+            ParallaxGfx(index) = New Texture(Path.Graphics & "Parallax\" & index & GfxExt)
             ParallaxSprite(index) = New Sprite(ParallaxGfx(index))
 
             'Cache the width and height
@@ -1852,9 +1852,9 @@ Module C_Graphics
 
         ' draw cursor, player X and Y locations
         If BLoc Then
-            DrawText(1, HudWindowY + HudPanelGfxInfo.Height + 1, Trim$(Strings.Get("gamegui", "curloc", CurX, CurY)), SFML.Graphics.Color.Yellow, SFML.Graphics.Color.Black, GameWindow)
-            DrawText(1, HudWindowY + HudPanelGfxInfo.Height + 15, Trim$(Strings.Get("gamegui", "loc", GetPlayerX(Myindex), GetPlayerY(Myindex))), SFML.Graphics.Color.Yellow, SFML.Graphics.Color.Black, GameWindow)
-            DrawText(1, HudWindowY + HudPanelGfxInfo.Height + 30, Trim$(Strings.Get("gamegui", "curmap", GetPlayerMap(Myindex))), SFML.Graphics.Color.Yellow, SFML.Graphics.Color.Black, GameWindow)
+            DrawText(1, HudWindowY + HudPanelGfxInfo.Height + 1, Trim$(String.Format(Language.Game.MapCurLoc, CurX, CurY)), SFML.Graphics.Color.Yellow, SFML.Graphics.Color.Black, GameWindow)
+            DrawText(1, HudWindowY + HudPanelGfxInfo.Height + 15, Trim$(String.Format(Language.Game.MapLoc, GetPlayerX(Myindex), GetPlayerY(Myindex))), SFML.Graphics.Color.Yellow, SFML.Graphics.Color.Black, GameWindow)
+            DrawText(1, HudWindowY + HudPanelGfxInfo.Height + 30, Trim$(String.Format(Language.Game.MapCurMap, GetPlayerMap(Myindex))), SFML.Graphics.Color.Yellow, SFML.Graphics.Color.Black, GameWindow)
         End If
 
         ' draw player names
@@ -1998,7 +1998,7 @@ Module C_Graphics
             GameWindow.Draw(rectShape)
         End If
 
-        If Options.ShowNpcBar = 1 Then
+        If Settings.ShowNpcBar = 1 Then
             ' check for hp bar
             For i = 1 To MAX_MAP_NPCS
                 If Map.Npc Is Nothing Then Exit Sub
@@ -2074,7 +2074,7 @@ Module C_Graphics
     End Sub
 
     Sub DrawMapName()
-        DrawText(DrawMapNameX, DrawMapNameY, Strings.Get("gamegui", "mapname") & Map.Name, DrawMapNameColor, SFML.Graphics.Color.Black, GameWindow)
+        DrawText(DrawMapNameX, DrawMapNameY, Language.Game.MapName & Map.Name, DrawMapNameColor, SFML.Graphics.Color.Black, GameWindow)
     End Sub
 
     Friend Sub DrawDoor(x As Integer, y As Integer)
@@ -2327,12 +2327,12 @@ Module C_Graphics
         'Hp Bar etc
         DrawStatBars()
 
-        DrawText(HudWindowX + HudhpBarX + HpBarGfxInfo.Width + 10, HudWindowY + HudhpBarY + 4, Strings.Get("gamegui", "fps") & Fps, SFML.Graphics.Color.White, SFML.Graphics.Color.Black, GameWindow)
-        DrawText(HudWindowX + HudmpBarX + MpBarGfxInfo.Width + 10, HudWindowY + HudmpBarY + 4, Strings.Get("gamegui", "ping") & PingToDraw, SFML.Graphics.Color.White, SFML.Graphics.Color.Black, GameWindow)
-        DrawText(HudWindowX + HudexpBarX + ExpBarGfxInfo.Width + 10, HudWindowY + HudexpBarY + 4, Strings.Get("gamegui", "clock") & Time.Instance.ToString("h:mm"), SFML.Graphics.Color.White, SFML.Graphics.Color.Black, GameWindow)
+        DrawText(HudWindowX + HudhpBarX + HpBarGfxInfo.Width + 10, HudWindowY + HudhpBarY + 4, Language.Game.fps & Fps, SFML.Graphics.Color.White, SFML.Graphics.Color.Black, GameWindow)
+        DrawText(HudWindowX + HudmpBarX + MpBarGfxInfo.Width + 10, HudWindowY + HudmpBarY + 4, Language.Game.ping & PingToDraw, SFML.Graphics.Color.White, SFML.Graphics.Color.Black, GameWindow)
+        DrawText(HudWindowX + HudexpBarX + ExpBarGfxInfo.Width + 10, HudWindowY + HudexpBarY + 4, Language.Game.Time & Time.Instance.ToString("h:mm"), SFML.Graphics.Color.White, SFML.Graphics.Color.Black, GameWindow)
 
         If Blps Then
-            DrawText(HudWindowX + HudexpBarX + ExpBarGfxInfo.Width + 10, HudWindowY + HudexpBarY + 20, Strings.Get("gamegui", "lps") & Lps, SFML.Graphics.Color.White, SFML.Graphics.Color.Black, GameWindow)
+            DrawText(HudWindowX + HudexpBarX + ExpBarGfxInfo.Width + 10, HudWindowY + HudexpBarY + 20, Language.Game.Lps & Lps, SFML.Graphics.Color.White, SFML.Graphics.Color.Black, GameWindow)
         End If
 
         ' Draw map name
@@ -3039,8 +3039,8 @@ NextLoop:
             Exit Sub
         End If
 
-        If File.Exists(Application.StartupPath & GfxPath & "items\" & itemnum & GfxExt) Then
-            frmEditor_Item.picItem.BackgroundImage = Drawing.Image.FromFile(Application.StartupPath & GfxPath & "items\" & itemnum & GfxExt)
+        If File.Exists(Path.Graphics & "items\" & itemnum & GfxExt) Then
+            frmEditor_Item.picItem.BackgroundImage = Drawing.Image.FromFile(Path.Graphics & "items\" & itemnum & GfxExt)
         End If
 
     End Sub
@@ -3055,8 +3055,8 @@ NextLoop:
             Exit Sub
         End If
 
-        If File.Exists(Application.StartupPath & GfxPath & "paperdolls\" & Sprite & GfxExt) Then
-            frmEditor_Item.picPaperdoll.BackgroundImage = Drawing.Image.FromFile(Application.StartupPath & GfxPath & "paperdolls\" & Sprite & GfxExt)
+        If File.Exists(Path.Graphics & "paperdolls\" & Sprite & GfxExt) Then
+            frmEditor_Item.picPaperdoll.BackgroundImage = Drawing.Image.FromFile(Path.Graphics & "paperdolls\" & Sprite & GfxExt)
         End If
     End Sub
 
@@ -3136,10 +3136,10 @@ NextLoop:
             Exit Sub
         End If
 
-        If File.Exists(Application.StartupPath & GfxPath & "characters\" & Sprite & GfxExt) Then
-            frmEditor_NPC.picSprite.Width = Drawing.Image.FromFile(Application.StartupPath & GfxPath & "characters\" & Sprite & GfxExt).Width / 4
-            frmEditor_NPC.picSprite.Height = Drawing.Image.FromFile(Application.StartupPath & GfxPath & "characters\" & Sprite & GfxExt).Height / 4
-            frmEditor_NPC.picSprite.BackgroundImage = Drawing.Image.FromFile(Application.StartupPath & GfxPath & "characters\" & Sprite & GfxExt)
+        If File.Exists(Path.Graphics & "characters\" & Sprite & GfxExt) Then
+            frmEditor_NPC.picSprite.Width = Drawing.Image.FromFile(Path.Graphics & "characters\" & Sprite & GfxExt).Width / 4
+            frmEditor_NPC.picSprite.Height = Drawing.Image.FromFile(Path.Graphics & "characters\" & Sprite & GfxExt).Height / 4
+            frmEditor_NPC.picSprite.BackgroundImage = Drawing.Image.FromFile(Path.Graphics & "characters\" & Sprite & GfxExt)
         End If
     End Sub
 
@@ -3152,8 +3152,8 @@ NextLoop:
         If Sprite < 1 OrElse Sprite > NumResources Then
             frmEditor_Resource.picNormalpic.BackgroundImage = Nothing
         Else
-            If File.Exists(Application.StartupPath & GfxPath & "resources\" & Sprite & GfxExt) Then
-                frmEditor_Resource.picNormalpic.BackgroundImage = Drawing.Image.FromFile(Application.StartupPath & GfxPath & "resources\" & Sprite & GfxExt)
+            If File.Exists(Path.Graphics & "resources\" & Sprite & GfxExt) Then
+                frmEditor_Resource.picNormalpic.BackgroundImage = Drawing.Image.FromFile(Path.Graphics & "resources\" & Sprite & GfxExt)
             End If
         End If
 
@@ -3163,8 +3163,8 @@ NextLoop:
         If Sprite < 1 OrElse Sprite > NumResources Then
             frmEditor_Resource.picExhaustedPic.BackgroundImage = Nothing
         Else
-            If File.Exists(Application.StartupPath & GfxPath & "resources\" & Sprite & GfxExt) Then
-                frmEditor_Resource.picExhaustedPic.BackgroundImage = Drawing.Image.FromFile(Application.StartupPath & GfxPath & "resources\" & Sprite & GfxExt)
+            If File.Exists(Path.Graphics & "resources\" & Sprite & GfxExt) Then
+                frmEditor_Resource.picExhaustedPic.BackgroundImage = Drawing.Image.FromFile(Path.Graphics & "resources\" & Sprite & GfxExt)
             End If
         End If
     End Sub

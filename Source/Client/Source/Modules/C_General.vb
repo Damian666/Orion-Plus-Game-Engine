@@ -12,133 +12,85 @@ Module C_General
 
     Sub Startup()
         SFML.Portable.Activate()
+        LoadSettings()
+        LoadLanguage()
 
-        SetStatus(Strings.Get("loadscreen", "loading"))
-
+        SetStatus(Language.Load.Loading)
+        FrmMenu.Text = FrmGame.Text = Settings.GameName
         FrmMenu.Visible = True
 
-        ReDim CharSelection(3)
+        CacheMusic()
+        CacheSound()
+        If Settings.Music = 1 AndAlso Len(Trim$(Settings.MenuMusic)) > 0 Then
+            PlayMusic(Trim$(Settings.MenuMusic))
+            MusicPlayer.Volume() = Settings.Volume
+        End If
 
+        ReDim CharSelection(3)
+        ReDim Classes(MAX_CLASSES)
+        ReDim House(MaxHouses)
+        ReDim HouseConfig(MaxHouses)
+        ReDim Map.Npc(MAX_MAP_NPCS)
+        ReDim MapNpc(MAX_MAP_NPCS)
+        ReDim MapProjectiles(MaxProjectiles)
         ReDim Player(MAX_PLAYERS)
+        ReDim Projectiles(MaxProjectiles)
+
+        ClearAnimations()
+        ClearAnimInstances()
+        ClearAutotiles()
+        ClearBank()
+        ClearItems()
+        ClearNpcs()
+        ClearParty()
+        ClearPets()
+        ClearQuests()
+        ClearRecipes()
+        ClearShops()
 
         For i = 1 To MAX_PLAYERS
             ClearPlayer(i)
         Next
-
-        ClearAutotiles()
-
-        'Housing
-        ReDim House(MaxHouses)
-        ReDim HouseConfig(MaxHouses)
-
-        'quests
-        ClearQuests()
-
-        'npc's
-        ClearNpcs()
-        ReDim Map.Npc(MAX_MAP_NPCS)
-        ReDim MapNpc(MAX_MAP_NPCS)
         For i = 0 To MAX_MAP_NPCS
             For x = 0 To VitalType.Count - 1
                 ReDim MapNpc(i).Vital(x)
             Next
         Next
 
-        ClearShops()
+        SetStatus(Language.Load.Graphics)
+        DirArrowX(DirectionType.Up + 1) = 12
+        DirArrowY(DirectionType.Up + 1) = 0
+        DirArrowX(DirectionType.Down + 1) = 12
+        DirArrowY(DirectionType.Down + 1) = 23
+        DirArrowX(DirectionType.Left + 1) = 0
+        DirArrowY(DirectionType.Left + 1) = 12
+        DirArrowX(DirectionType.Right + 1) = 23
+        DirArrowY(DirectionType.Right + 1) = 12
 
-        ClearAnimations()
-
-        ClearAnimInstances()
-
-        ClearBank()
-
-        ReDim MapProjectiles(MaxProjectiles)
-        ReDim Projectiles(MaxProjectiles)
-
-        ClearItems()
-
-        'craft
-        ClearRecipes()
-
-        'party
-        ClearParty()
-
-        'pets
-        ClearPets()
-
-        GettingMap = True
-        VbQuote = Chr(34) ' "
-
-        ' Update the form with the game's name before it's loaded
-        FrmGame.Text = GameName
-
-        SetStatus(Strings.Get("loadscreen", "options"))
-
-        ' load options
-        If File.Exists(Application.StartupPath & "\Data\Config.xml") Then
-            LoadOptions()
-        Else
-            CreateOptions()
-        End If
-
-        ' randomize rnd's seed
-        Randomize()
-
-        SetStatus(Strings.Get("loadscreen", "network"))
-
-        FrmMenu.Text = GameName
-
-        ' DX7 Master Object is already created, early binding
-        SetStatus(Strings.Get("loadscreen", "graphics"))
-        CheckTilesets()
-        CheckCharacters()
-        CheckPaperdolls()
         CheckAnimations()
-        CheckItems()
-        CheckResources()
-        CheckSkillIcons()
+        CheckCharacters()
+        CheckEmotes()
         CheckFaces()
         CheckFog()
-        CacheMusic()
-        CacheSound()
-        CheckEmotes()
-        CheckPanoramas()
         CheckFurniture()
-        CheckProjectiles()
+        CheckItems()
+        CheckPanoramas()
+        CheckPaperdolls()
         CheckParallax()
-
+        CheckProjectiles()
+        CheckResources()
+        CheckSkillIcons()
+        CheckTilesets()
         InitGraphics()
 
-        ' check if we have main-menu music
-        If Options.Music = 1 AndAlso Len(Trim$(Options.MenuMusic)) > 0 Then
-            PlayMusic(Trim$(Options.MenuMusic))
-            MusicPlayer.Volume() = 100
-        End If
-
-        ' Reset values
+        SetStatus(Language.Load.Network)
+        InitNetwork()
         Ping = -1
 
-        ' set values for directional blocking arrows
-        DirArrowX(1) = 12 ' up
-        DirArrowY(1) = 0
-        DirArrowX(2) = 12 ' down
-        DirArrowY(2) = 23
-        DirArrowX(3) = 0 ' left
-        DirArrowY(3) = 12
-        DirArrowX(4) = 23 ' right
-        DirArrowY(4) = 12
-
-        'set gui switches
-        HudVisible = True
-
-        SetStatus(Strings.Get("loadscreen", "starting"))
+        SetStatus(Language.Load.Starting)
         Started = True
         Frmmenuvisible = True
         Pnlloadvisible = False
-
-        PnlInventoryVisible = True
-
-        InitNetwork()
 
         GameLoop()
     End Sub
@@ -154,7 +106,7 @@ Module C_General
         For i = 1 To Len(sInput)
 
             If (Asc(Mid$(sInput, i, 1))) < 32 OrElse Asc(Mid$(sInput, i, 1)) > 126 Then
-                MsgBox(Strings.Get("mainmenu", "stringlegal"), vbOKOnly, GameName)
+                MsgBox(Language.MainMenu.StringLegal, vbOKOnly, Settings.GameName)
                 IsStringLegal = False
                 Exit Function
             End If
@@ -189,7 +141,7 @@ Module C_General
                 PnlCreditsVisible = False
 
                 If ConnectToServer(1) Then
-                    SetStatus(Strings.Get("mainmenu", "sendaddchar"))
+                    SetStatus(Language.MainMenu.SendNewCharacter)
 
                     If FrmMenu.rdoMale.Checked = True Then
                         SendAddChar(SelectedChar, FrmMenu.txtCharName.Text, SexType.Male, FrmMenu.cmbClass.SelectedIndex + 1, NewCharSprite)
@@ -205,7 +157,7 @@ Module C_General
                 PnlCreditsVisible = False
 
                 If ConnectToServer(1) Then
-                    SetStatus(Strings.Get("mainmenu", "sendnewacc"))
+                    SetStatus(Language.MainMenu.SendRegister)
                     SendNewAccount(FrmMenu.txtRuser.Text, FrmMenu.txtRPass.Text)
                 End If
 
@@ -218,7 +170,7 @@ Module C_General
                 TempPassword = FrmMenu.txtPassword.Text
 
                 If ConnectToServer(1) Then
-                    SetStatus(Strings.Get("mainmenu", "sendlogin"))
+                    SetStatus(Language.MainMenu.SendLogin)
                     SendLogin(FrmMenu.txtLogin.Text, FrmMenu.txtPassword.Text)
                     Exit Sub
                 End If
@@ -241,7 +193,7 @@ Module C_General
 
         Connect()
 
-        SetStatus(Strings.Get("mainmenu", "connectserver", i))
+        SetStatus(String.Format(Language.MainMenu.ConnectToServer, i))
 
         ' Wait until connected or a few seconds have passed and report the server being down
         Do While (Not Socket.IsConnected()) AndAlso (GetTickCount() <= until)
@@ -263,13 +215,13 @@ Module C_General
     Friend Sub RePositionGui()
 
         'first change the tiles
-        If Options.ScreenSize = 0 Then ' 800x600
+        If Settings.ScreenSize = 0 Then ' 800x600
             ScreenMapx = 25
             ScreenMapy = 19
-        ElseIf Options.ScreenSize = 1 Then '1024x768
+        ElseIf Settings.ScreenSize = 1 Then '1024x768
             ScreenMapx = 31
             ScreenMapy = 24
-        ElseIf Options.ScreenSize = 2 Then
+        ElseIf Settings.ScreenSize = 2 Then
             ScreenMapx = 35
             ScreenMapy = 26
         End If
@@ -296,7 +248,7 @@ Module C_General
         MyChatY = FrmGame.Height - 60
 
         'hotbar
-        If Options.ScreenSize = 0 Then
+        If Settings.ScreenSize = 0 Then
             HotbarX = HudWindowX + HudPanelGfxInfo.Width + 20
             HotbarY = 5
 

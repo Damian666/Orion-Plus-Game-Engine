@@ -1,4 +1,6 @@
-﻿Module C_AutoMap
+﻿Imports Ini = ASFW.IO.FileIO.TextFile
+
+Module C_AutoMap
     ' Automapper System
     ' Version: 1.0
     ' Author: Lucas Tardivo (boasfesta)
@@ -98,31 +100,23 @@
 
     Sub LoadTilePrefab()
         Dim Prefab As Integer, Layer As Integer
-
-        Dim myXml As New XmlClass With {
-            .Filename = IO.Path.Combine(Application.StartupPath, "Data", "AutoMapper.xml"),
-            .Root = "Options"
-        }
-
-        myXml.LoadXml()
+        Dim cf = Path.Contents & "AutoMapper.ini"
 
         ReDim Tile(TilePrefab.Count - 1)
         For Prefab = 1 To TilePrefab.Count - 1
 
             ReDim Tile(Prefab).Layer(LayerType.Count - 1)
             For Layer = 1 To LayerType.Count - 1
-                Tile(Prefab).Layer(Layer).Tileset = Val(myXml.ReadString("Prefab" & Prefab, "Layer" & Layer & "Tileset"))
-                Tile(Prefab).Layer(Layer).X = Val(myXml.ReadString("Prefab" & Prefab, "Layer" & Layer & "X"))
-                Tile(Prefab).Layer(Layer).Y = Val(myXml.ReadString("Prefab" & Prefab, "Layer" & Layer & "Y"))
-                Tile(Prefab).Layer(Layer).AutoTile = Val(myXml.ReadString("Prefab" & Prefab, "Layer" & Layer & "Autotile"))
+                Tile(Prefab).Layer(Layer).Tileset = Val(Ini.Read(cf, "Prefab" & Prefab, "Layer" & Layer & "Tileset"))
+                Tile(Prefab).Layer(Layer).X = Val(Ini.Read(cf, "Prefab" & Prefab, "Layer" & Layer & "X"))
+                Tile(Prefab).Layer(Layer).Y = Val(Ini.Read(cf, "Prefab" & Prefab, "Layer" & Layer & "Y"))
+                Tile(Prefab).Layer(Layer).AutoTile = Val(Ini.Read(cf, "Prefab" & Prefab, "Layer" & Layer & "Autotile"))
             Next
-            Tile(Prefab).Type = Val(myXml.ReadString("Prefab" & Prefab, "Type"))
+            Tile(Prefab).Type = Val(Ini.Read(cf, "Prefab" & Prefab, "Type"))
         Next
 
-        ResourcesNum = myXml.ReadString("Resources", "ResourcesNum")
+        ResourcesNum = Ini.Read(cf, "Resources", "ResourcesNum")
         Resources = Split(ResourcesNum, ";")
-
-        myXml.CloseXml(False)
     End Sub
 
     Sub LoadDetail(Prefab As TilePrefab, Tileset As Integer, X As Integer, Y As Integer, Optional TileType As Integer = 0, Optional EndX As Integer = 0, Optional EndY As Integer = 0)
@@ -179,28 +173,20 @@
         DetailFreq = buffer.ReadInt32
         ResourceFreq = buffer.ReadInt32
 
-        Dim myXml As New XmlClass With {
-            .Filename = System.IO.Path.Combine(Application.StartupPath, "Data", "AutoMapper.xml"),
-            .Root = "Options"
-        }
-
-        myXml.LoadXml()
-
-        myXml.WriteString("Resources", "ResourcesNum", buffer.ReadString())
+        Dim cf = Path.Contents & "AutoMapper.ini"
+        Ini.Write(cf, "Resources", "ResourcesNum", buffer.ReadString())
 
         For Prefab = 1 To TilePrefab.Count - 1
             ReDim Tile(Prefab).Layer(LayerType.Count - 1)
 
             Layer = buffer.ReadInt32()
-            myXml.WriteString("Prefab" & Prefab, "Layer" & Layer & "Tileset", buffer.ReadInt32)
-            myXml.WriteString("Prefab" & Prefab, "Layer" & Layer & "X", buffer.ReadInt32)
-            myXml.WriteString("Prefab" & Prefab, "Layer" & Layer & "Y", buffer.ReadInt32)
-            myXml.WriteString("Prefab" & Prefab, "Layer" & Layer & "Autotile", buffer.ReadInt32)
+            Ini.Write(cf, "Prefab" & Prefab, "Layer" & Layer & "Tileset", buffer.ReadInt32)
+            Ini.Write(cf, "Prefab" & Prefab, "Layer" & Layer & "X", buffer.ReadInt32)
+            Ini.Write(cf, "Prefab" & Prefab, "Layer" & Layer & "Y", buffer.ReadInt32)
+            Ini.Write(cf, "Prefab" & Prefab, "Layer" & Layer & "Autotile", buffer.ReadInt32)
 
-            myXml.WriteString("Prefab" & Prefab, "Type", buffer.ReadInt32)
+            Ini.Write(cf, "Prefab" & Prefab, "Type", buffer.ReadInt32)
         Next
-
-        myXml.CloseXml(True)
 
         buffer.Dispose()
 
@@ -221,10 +207,7 @@
     End Sub
 
     Friend Sub SendSaveAutoMapper()
-        Dim myXml As New XmlClass With {
-            .Filename = Application.StartupPath & "\Data\AutoMapper.xml",
-            .Root = "Options"
-        }
+        Dim cf = Path.Contents & "AutoMapper.ini"
         Dim buffer As New ASFW.ByteStream(4)
 
         buffer.WriteInt32(ClientPackets.CSaveAutoMap)
@@ -237,25 +220,21 @@
         buffer.WriteInt32(DetailFreq)
         buffer.WriteInt32(ResourceFreq)
 
-        myXml.LoadXml()
-
         'send xml info
-        buffer.WriteString((myXml.ReadString("Resources", "ResourcesNum")))
+        buffer.WriteString((Ini.Read(cf, "Resources", "ResourcesNum")))
 
         For Prefab = 1 To TilePrefab.Count - 1
             For Layer = 1 To LayerType.Count - 1
-                If Val(myXml.ReadString("Prefab" & Prefab, "Layer" & Layer & "Tileset")) > 0 Then
+                If Val(Ini.Read(cf, "Prefab" & Prefab, "Layer" & Layer & "Tileset")) > 0 Then
                     buffer.WriteInt32(Layer)
-                    buffer.WriteInt32(Val(myXml.ReadString("Prefab" & Prefab, "Layer" & Layer & "Tileset")))
-                    buffer.WriteInt32(Val(myXml.ReadString("Prefab" & Prefab, "Layer" & Layer & "X")))
-                    buffer.WriteInt32(Val(myXml.ReadString("Prefab" & Prefab, "Layer" & Layer & "Y")))
-                    buffer.WriteInt32(Val(myXml.ReadString("Prefab" & Prefab, "Layer" & Layer & "Autotile")))
+                    buffer.WriteInt32(Val(Ini.Read(cf, "Prefab" & Prefab, "Layer" & Layer & "Tileset")))
+                    buffer.WriteInt32(Val(Ini.Read(cf, "Prefab" & Prefab, "Layer" & Layer & "X")))
+                    buffer.WriteInt32(Val(Ini.Read(cf, "Prefab" & Prefab, "Layer" & Layer & "Y")))
+                    buffer.WriteInt32(Val(Ini.Read(cf, "Prefab" & Prefab, "Layer" & Layer & "Autotile")))
                 End If
             Next
-            buffer.WriteInt32(Val(myXml.ReadString("Prefab" & Prefab, "Type")))
+            buffer.WriteInt32(Val(Ini.Read(cf, "Prefab" & Prefab, "Type")))
         Next
-
-        myXml.CloseXml(False)
 
         Socket.SendData(buffer.Data, buffer.Head)
         buffer.Dispose()
