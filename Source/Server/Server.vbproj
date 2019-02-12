@@ -6,12 +6,12 @@
     <ProductVersion>9.0.30729</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{B554FD23-0844-49D1-A05A-D79CEAD3FA7A}</ProjectGuid>
-    <OutputType>WinExe</OutputType>
+    <OutputType>Exe</OutputType>
     <StartupObject>Sub Main</StartupObject>
     <RootNamespace>Engine</RootNamespace>
-    <AssemblyName>Server</AssemblyName>
+    <AssemblyName>Orion+ Server</AssemblyName>
     <FileAlignment>512</FileAlignment>
-    <MyType>WindowsFormsWithCustomSubMain</MyType>
+    <MyType>Console</MyType>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <OptionExplicit>On</OptionExplicit>
     <OptionCompare>Binary</OptionCompare>
@@ -46,7 +46,7 @@
     <DebugSymbols>true</DebugSymbols>
     <DefineDebug>true</DefineDebug>
     <DefineTrace>true</DefineTrace>
-    <OutputPath>..\..\build\Server\</OutputPath>
+    <OutputPath>..\..\Build\Server\</OutputPath>
     <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022,42353,42354,42355</NoWarn>
     <DebugType>full</DebugType>
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -56,7 +56,7 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|AnyCPU'">
     <DefineTrace>true</DefineTrace>
-    <OutputPath>..\..\build\Server\</OutputPath>
+    <OutputPath>..\..\Build\Server\</OutputPath>
     <Optimize>true</Optimize>
     <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022,42353,42354,42355</NoWarn>
     <DebugType>None</DebugType>
@@ -67,46 +67,55 @@
   </PropertyGroup>
   <PropertyGroup />
   <ItemGroup>
-    <Reference Include="ASFW, Version=1.0.6691.35832, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\CS-ASFW.1.0.0.5\lib\ASFW.dll</HintPath>
+    <Reference Include="CS-ASFW, Version=2.0.0.1, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\CS-ASFW.2.0.0.1\lib\net45\CS-ASFW.dll</HintPath>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.Data" />
     <Reference Include="System.Deployment" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.XML" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="..\GlobalAssemblyInfo.vb">
-      <Link>My Project\GlobalAssemblyInfo.vb</Link>
-    </Compile>
-    <Compile Include="Old Source\Network\S_NetworkReceive.vb" />
-    <Compile Include="Old Source\Network\S_NetworkSend.vb" />
-    <Compile Include="Old Source\Objects\S_Animations.vb" />
-    <Compile Include="Old Source\Objects\S_Items.vb" />
-    <Compile Include="Old Source\Objects\S_Npc.vb" />
-    <Compile Include="Old Source\S_AutoMap.vb" />
-    <Compile Include="Old Source\S_Console.vb" />
-    <Compile Include="Old Source\S_Constants.vb" />
-    <Compile Include="Old Source\S_Crafting.vb" />
-    <Compile Include="Old Source\S_Database.vb" />
-    <Compile Include="Old Source\Events\S_EventLogic.vb" />
-    <Compile Include="Old Source\Events\S_Events.vb" />
-    <Compile Include="Old Source\S_GameLogic.vb" />
-    <Compile Include="Old Source\S_General.vb" />
-    <Compile Include="Old Source\S_Globals.vb" />
-    <Compile Include="Old Source\Objects\S_Housing.vb" />
-    <Compile Include="Old Source\Objects\S_Instances.vb" />
-    <Compile Include="Old Source\S_Parties.vb" />
-    <Compile Include="Old Source\Objects\S_Pets.vb" />
-    <Compile Include="Old Source\Objects\S_Players.vb" />
-    <Compile Include="Old Source\S_Loop.vb" />
-    <Compile Include="Old Source\Objects\S_Projectiles.vb" />
-    <Compile Include="Old Source\Objects\S_Quest.vb" />
-    <Compile Include="Old Source\Objects\S_RandomItems.vb" />
-    <Compile Include="Old Source\Objects\S_Resources.vb" />
-    <Compile Include="Old Source\S_Time.vb" />
-    <Compile Include="Old Source\S_Types.vb" />
+    <Import Include="Microsoft.VisualBasic" />
+    <Import Include="System" />
+    <Import Include="System.Collections" />
+    <Import Include="System.Collections.Generic" />
+    <Import Include="System.Drawing" />
+    <Import Include="System.Diagnostics" />
+    <Import Include="System.Windows.Forms" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="My Project\GlobalSuppressions.vb" />
+    <Compile Include="Source\Network\S_NetworkConfig.vb" />
+    <Compile Include="Source\Network\S_NetworkReceive.vb" />
+    <Compile Include="Source\Network\S_NetworkSend.vb" />
+    <Compile Include="Source\Objects\S_Animations.vb" />
+    <Compile Include="Source\Objects\S_Items.vb" />
+    <Compile Include="Source\Objects\S_Npc.vb" />
+    <Compile Include="Source\S_AutoMap.vb" />
+    <Compile Include="Source\S_Console.vb" />
+    <Compile Include="Source\S_Constants.vb" />
+    <Compile Include="Source\S_Crafting.vb" />
+    <Compile Include="Source\S_Database.vb" />
+    <Compile Include="Source\Events\S_EventLogic.vb" />
+    <Compile Include="Source\Events\S_Events.vb" />
+    <Compile Include="Source\S_GameLogic.vb" />
+    <Compile Include="Source\S_General.vb" />
+    <Compile Include="Source\S_Globals.vb" />
+    <Compile Include="Source\Objects\S_Housing.vb" />
+    <Compile Include="Source\Objects\S_Instances.vb" />
+    <Compile Include="Source\S_Parties.vb" />
+    <Compile Include="Source\Objects\S_Pets.vb" />
+    <Compile Include="Source\Objects\S_Players.vb" />
+    <Compile Include="Source\S_Loop.vb" />
+    <Compile Include="Source\Objects\S_Projectiles.vb" />
+    <Compile Include="Source\Objects\S_Quest.vb" />
+    <Compile Include="Source\Objects\S_RandomItems.vb" />
+    <Compile Include="Source\Objects\S_Resources.vb" />
+    <Compile Include="Source\S_Time.vb" />
+    <Compile Include="Source\S_Types.vb" />
     <Compile Include="My Project\AssemblyInfo.vb" />
     <Compile Include="My Project\Application.Designer.vb">
       <AutoGen>True</AutoGen>
@@ -116,6 +125,11 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="My Project\Settings.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
   </ItemGroup>
   <ItemGroup>
@@ -127,12 +141,20 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <None Include="My Project\App.config" />
+    <None Include="Database\Classes.ini">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="My Project\app.config" />
     <None Include="My Project\Application.myapp">
       <Generator>MyApplicationCodeGenerator</Generator>
       <LastGenOutput>Application.Designer.vb</LastGenOutput>
     </None>
-    <None Include="My Project\packages.config" />
+    <None Include="My Project\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <CustomToolNamespace>My</CustomToolNamespace>
+      <LastGenOutput>Settings.Designer.vb</LastGenOutput>
+    </None>
+    <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
@@ -167,9 +189,17 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
+    <None Include="Database\AutoMapper.ini">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Database\SkillExp.ini">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <Content Include="My Project\Icon.ico" />
+    <None Include="Database\News.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
-  <ItemGroup />
   <Import Project="..\Bindings\Bindings.projitems" Label="Shared" />
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

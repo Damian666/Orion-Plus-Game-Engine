@@ -1,0 +1,8 @@
+[CHARACTER FORMATTER]
+To use the character formatter, place it in the
+directory with your character files.
+
+After running it your rearranged character files
+should be in a folder called RePacked. Replace
+your originals and they should work in the new
+Orion+!
