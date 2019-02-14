@@ -1,0 +1,25 @@
+To begin using Orion for the first time, you will need to 
+run the launcher at least once. This will download the
+beginner assets you need to begin running orion.
+
+From here, you will need to run the Server.exe and Client 
+either from Visual Studio's debugger or by pressing Play 
+from the launcher.
+
+Create an account and then use the command-line in the
+server to give yourself developer access. Type 'help'
+without quotes for information on server commands.
+
+At this point forward you are ready to begin developing
+your first game in Orion!
+
+If you do not wish to use the Launcher for your game you
+can simply go to the "My Project" page located in the
+Client project and go to the "Settings" tab and change
+the Password field to just an empty string.
+
+If you have previously used Orion you may wish to refer
+to the "Recurring Users" folder documentation for any
+information related to correcting assets that are no
+longer compatible should you be bringing them from an
+old project.

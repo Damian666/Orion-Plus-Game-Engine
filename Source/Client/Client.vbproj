@@ -1,238 +1,77 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <Import Project="$(MSBuildExtensionsPath)\MonoGame\v3.0\MonoGame.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\MonoGame\v3.0\MonoGame.Common.props')" />
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProductVersion>8.0.30703</ProductVersion>
+    <ProductVersion>9.0.30729</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{6946CF85-EE55-4413-8C9F-C56788108629}</ProjectGuid>
+    <ProjectGuid>{531B337C-BC02-44ED-90C2-C448FE5190A2}</ProjectGuid>
     <OutputType>WinExe</OutputType>
-    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <StartupObject>Sub Main</StartupObject>
     <RootNamespace>Engine</RootNamespace>
-    <AssemblyName>Orion+ Client</AssemblyName>
+    <AssemblyName>Client</AssemblyName>
     <FileAlignment>512</FileAlignment>
-    <MonoGamePlatform>DesktopGL</MonoGamePlatform>
+    <MyType>WindowsFormsWithCustomSubMain</MyType>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
-    <NuGetPackageImportStamp>
-    </NuGetPackageImportStamp>
+    <OptionExplicit>On</OptionExplicit>
+    <OptionCompare>Binary</OptionCompare>
+    <OptionStrict>Off</OptionStrict>
+    <OptionInfer>On</OptionInfer>
+    <ApplicationManifest>My Project\app.manifest</ApplicationManifest>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <ManifestCertificateThumbprint>181BBD77C201FB969E61DF100063FD42A08B2BE6</ManifestCertificateThumbprint>
+    <ManifestKeyFile>Orion Client_TemporaryKey.pfx</ManifestKeyFile>
+    <GenerateManifests>false</GenerateManifests>
+    <TargetZone>LocalIntranet</TargetZone>
+    <SignManifests>false</SignManifests>
+    <FileUpgradeFlags>
+    </FileUpgradeFlags>
+    <UpgradeBackupLocation>
+    </UpgradeBackupLocation>
+    <OldToolsVersion>3.5</OldToolsVersion>
+    <TargetFrameworkProfile />
+    <PublishUrl>\Publish\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>1</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <PublishWizardCompleted>true</PublishWizardCompleted>
+    <BootstrapperEnabled>false</BootstrapperEnabled>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>My Project\Icon.ico</ApplicationIcon>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|AnyCPU'">
     <DebugSymbols>true</DebugSymbols>
-    <OutputPath>..\..\Build\Client\</OutputPath>
-    <DefineConstants>CLIENT</DefineConstants>
-    <DebugType>full</DebugType>
-    <PlatformTarget>AnyCPU</PlatformTarget>
-    <ErrorReport>prompt</ErrorReport>
-    <Prefer32Bit>false</Prefer32Bit>
-    <WarningLevel>4</WarningLevel>
-    <NoWarn>41999,42016,42017,42018,42019,42020,42021,42022,42032,42036</NoWarn>
     <DefineDebug>true</DefineDebug>
     <DefineTrace>true</DefineTrace>
+    <OutputPath>..\..\build\Client\</OutputPath>
+    <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022,42353,42354,42355</NoWarn>
+    <DebugType>full</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>false</Prefer32Bit>
+    <DefineConstants>CLIENT</DefineConstants>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|AnyCPU'">
-    <OutputPath>..\..\Build\Client\</OutputPath>
-    <DefineConstants>CLIENT</DefineConstants>
-    <Optimize>true</Optimize>
-    <DebugType>none</DebugType>
-    <PlatformTarget>AnyCPU</PlatformTarget>
-    <ErrorReport>prompt</ErrorReport>
-    <Prefer32Bit>false</Prefer32Bit>
-    <WarningLevel>4</WarningLevel>
-    <NoWarn>41999,42016,42017,42018,42019,42020,42021,42022,42032,42036</NoWarn>
     <DefineTrace>true</DefineTrace>
+    <OutputPath>..\..\build\Client\</OutputPath>
+    <Optimize>true</Optimize>
+    <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022,42353,42354,42355</NoWarn>
+    <DebugType>None</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>false</Prefer32Bit>
+    <DefineConstants>CLIENT</DefineConstants>
   </PropertyGroup>
-  <PropertyGroup>
-    <ApplicationIcon>Icon.ico</ApplicationIcon>
-  </PropertyGroup>
-  <PropertyGroup>
-    <ApplicationManifest>Properties\app.manifest</ApplicationManifest>
-  </PropertyGroup>
-  <PropertyGroup>
-    <OptionExplicit>On</OptionExplicit>
-  </PropertyGroup>
-  <PropertyGroup>
-    <OptionCompare>Binary</OptionCompare>
-  </PropertyGroup>
-  <PropertyGroup>
-    <OptionStrict>Off</OptionStrict>
-  </PropertyGroup>
-  <PropertyGroup>
-    <OptionInfer>On</OptionInfer>
-  </PropertyGroup>
-  <ItemGroup>
-    <Compile Include="Properties\Application.Designer.vb">
-      <DependentUpon>Application.myapp</DependentUpon>
-      <AutoGen>True</AutoGen>
-    </Compile>
-    <Compile Include="Properties\ApplicationEvents.vb" />
-    <Compile Include="Properties\AssemblyInfo.vb" />
-    <Compile Include="Properties\Settings.Designer.vb">
-      <DependentUpon>Settings.settings</DependentUpon>
-      <AutoGen>True</AutoGen>
-      <DesignTimeSharedInput>True</DesignTimeSharedInput>
-    </Compile>
-    <Compile Include="Source\Forms\Editors\FrmEditor_Animation.Designer.vb">
-      <DependentUpon>FrmEditor_Animation.vb</DependentUpon>
-    </Compile>
-    <Compile Include="Source\Forms\Editors\FrmEditor_Animation.vb">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Source\Forms\Editors\FrmEditor_AutoMapper.Designer.vb">
-      <DependentUpon>FrmEditor_AutoMapper.vb</DependentUpon>
-    </Compile>
-    <Compile Include="Source\Forms\Editors\FrmEditor_AutoMapper.vb">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Source\Forms\Editors\FrmEditor_Classes.Designer.vb">
-      <DependentUpon>FrmEditor_Classes.vb</DependentUpon>
-    </Compile>
-    <Compile Include="Source\Forms\Editors\FrmEditor_Classes.vb">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Source\Forms\Editors\frmEditor_Events.Designer.vb">
-      <DependentUpon>FrmEditor_Events.vb</DependentUpon>
-    </Compile>
-    <Compile Include="Source\Forms\Editors\FrmEditor_Events.vb">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Source\Forms\Editors\FrmEditor_House.Designer.vb">
-      <DependentUpon>FrmEditor_House.vb</DependentUpon>
-    </Compile>
-    <Compile Include="Source\Forms\Editors\FrmEditor_House.vb">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Source\Forms\Editors\FrmEditor_Item.Designer.vb">
-      <DependentUpon>FrmEditor_Item.vb</DependentUpon>
-    </Compile>
-    <Compile Include="Source\Forms\Editors\FrmEditor_Item.vb">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Source\Forms\Editors\frmEditor_MapEditor.designer.vb">
-      <DependentUpon>frmEditor_MapEditor.vb</DependentUpon>
-    </Compile>
-    <Compile Include="Source\Forms\Editors\frmEditor_MapEditor.vb">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Source\Forms\Editors\FrmEditor_NPC.Designer.vb">
-      <DependentUpon>FrmEditor_NPC.vb</DependentUpon>
-    </Compile>
-    <Compile Include="Source\Forms\Editors\FrmEditor_NPC.vb">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Source\Forms\Editors\FrmEditor_Pet.Designer.vb">
-      <DependentUpon>FrmEditor_Pet.vb</DependentUpon>
-    </Compile>
-    <Compile Include="Source\Forms\Editors\FrmEditor_Pet.vb">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Source\Forms\Editors\FrmEditor_Projectile.Designer.vb">
-      <DependentUpon>FrmEditor_Projectile.vb</DependentUpon>
-    </Compile>
-    <Compile Include="Source\Forms\Editors\FrmEditor_Projectile.vb">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Source\Forms\Editors\FrmEditor_Quest.Designer.vb">
-      <DependentUpon>FrmEditor_Quest.vb</DependentUpon>
-    </Compile>
-    <Compile Include="Source\Forms\Editors\FrmEditor_Quest.vb">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Source\Forms\Editors\FrmEditor_Recipe.Designer.vb">
-      <DependentUpon>FrmEditor_Recipe.vb</DependentUpon>
-    </Compile>
-    <Compile Include="Source\Forms\Editors\FrmEditor_Recipe.vb">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Source\Forms\Editors\FrmEditor_Resource.Designer.vb">
-      <DependentUpon>FrmEditor_Resource.vb</DependentUpon>
-    </Compile>
-    <Compile Include="Source\Forms\Editors\FrmEditor_Resource.vb">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Source\Forms\Editors\FrmEditor_Shop.Designer.vb">
-      <DependentUpon>FrmEditor_Shop.vb</DependentUpon>
-    </Compile>
-    <Compile Include="Source\Forms\Editors\FrmEditor_Shop.vb">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Source\Forms\Editors\FrmEditor_Skill.Designer.vb">
-      <DependentUpon>FrmEditor_Skill.vb</DependentUpon>
-    </Compile>
-    <Compile Include="Source\Forms\Editors\FrmEditor_Skill.vb">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Source\Forms\Editors\FrmEditor_VisualWarp.Designer.vb">
-      <DependentUpon>FrmEditor_VisualWarp.vb</DependentUpon>
-    </Compile>
-    <Compile Include="Source\Forms\Editors\FrmEditor_VisualWarp.vb">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Source\Forms\frmMenu.Designer.vb">
-      <DependentUpon>FrmMenu.vb</DependentUpon>
-    </Compile>
-    <Compile Include="Source\Forms\FrmMenu.vb">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Source\Forms\Game\frmAdmin.Designer.vb">
-      <DependentUpon>FrmAdmin.vb</DependentUpon>
-    </Compile>
-    <Compile Include="Source\Forms\Game\FrmAdmin.vb">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Source\Forms\Game\frmGame.Designer.vb">
-      <DependentUpon>FrmGame.vb</DependentUpon>
-    </Compile>
-    <Compile Include="Source\Forms\Game\FrmGame.vb">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Source\Forms\Game\frmOptions.Designer.vb">
-      <DependentUpon>FrmOptions.vb</DependentUpon>
-    </Compile>
-    <Compile Include="Source\Forms\Game\FrmOptions.vb">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Source\Modules\C_AutoMap.vb" />
-    <Compile Include="Source\Modules\C_DataBase.vb" />
-    <Compile Include="Source\Modules\C_Editors.vb" />
-    <Compile Include="Source\Modules\C_GameLogic.vb" />
-    <Compile Include="Source\Modules\C_General.vb" />
-    <Compile Include="Source\MonoGame\Graphics\C_Graphics_Gui.vb" />
-    <Compile Include="Source\MonoGame\Graphics\C_Graphics_Game.vb" />
-    <Compile Include="Source\MonoGame\Graphics\C_Graphics_OLD.vb" />
-    <Compile Include="Source\MonoGame\C_Audio.vb" />
-    <Compile Include="Source\Modules\C_Types.vb" />
-    <Compile Include="Source\Modules\Globals\C_Constants.vb" />
-    <Compile Include="Source\Modules\Globals\C_Variables.vb" />
-    <Compile Include="Source\MonoGame\Graphics\C_Graphics_Config.vb" />
-    <Compile Include="Source\Network\C_NetworkConfig.vb" />
-    <Compile Include="Source\Network\C_NetworkReceive.vb" />
-    <Compile Include="Source\Network\C_NetworkSend.vb" />
-    <Compile Include="Source\Modules\Objects\C_Animations.vb" />
-    <Compile Include="Source\Modules\Objects\C_AutoTiles.vb" />
-    <Compile Include="Source\Modules\Objects\C_Classes.vb" />
-    <Compile Include="Source\Modules\Objects\C_Items.vb" />
-    <Compile Include="Source\Modules\Objects\C_Maps.vb" />
-    <Compile Include="Source\Modules\Objects\C_Pets.vb" />
-    <Compile Include="Source\Modules\Objects\C_Player.vb" />
-    <Compile Include="Source\Modules\Objects\C_Projectiles.vb" />
-    <Compile Include="Source\Modules\Objects\C_Resources.vb" />
-    <Compile Include="Source\Modules\Systems\C_Banks.vb" />
-    <Compile Include="Source\Modules\Systems\C_Crafting.vb" />
-    <Compile Include="Source\Modules\Systems\C_EventSystem.vb" />
-    <Compile Include="Source\Modules\Systems\C_Housing.vb" />
-    <Compile Include="Source\Modules\Systems\C_Parties.vb" />
-    <Compile Include="Source\Modules\Systems\C_Quest.vb" />
-    <Compile Include="Source\Modules\Systems\C_Shops.vb" />
-    <Compile Include="Source\Modules\Systems\C_Trade.vb" />
-    <Compile Include="Source\Modules\Systems\C_Weather.vb" />
-    <Compile Include="Source\Modules\UI\C_Chat.vb" />
-    <Compile Include="Source\Modules\UI\C_GuiFunctions.vb" />
-    <Compile Include="Source\Modules\UI\C_HotBar.vb" />
-    <Compile Include="Source\Modules\UI\C_Text.vb" />
-    <Compile Include="Source\Modules\UI\C_Time.vb" />
-    <Compile Include="Source\Modules\UI\C_UpdateUI.vb" />
-  </ItemGroup>
   <ItemGroup>
     <Reference Include="CS-ASFW, Version=2.0.0.1, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\packages\CS-ASFW.2.0.0.1\lib\net45\CS-ASFW.dll</HintPath>
@@ -240,167 +79,13 @@
     <Reference Include="DarkUI, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\packages\DarkUI.1.0.0.1\lib\DarkUI.dll</HintPath>
     </Reference>
-    <Reference Include="MonoGame.Framework, Version=3.7.1.189, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\MonoGame.Framework.DesktopGL.3.7.1.189\lib\net45\MonoGame.Framework.dll</HintPath>
-    </Reference>
-    <Reference Include="MonoGame.Framework.Winforms, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\MonoGame.Framework.Winforms.1.0.0\lib\MonoGame.Framework.Winforms.dll</HintPath>
+    <Reference Include="SFML.Portable, Version=2.0.6982.41496, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\SFML-Portable-2.4.1.6.1\lib\SFML.Portable.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Content\Credits.txt">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <Content Include="License\Eclipse Public License v1.1.txt">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="License\Item Credits.txt">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="License\SFML License.txt">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resources\Clear.png" />
-    <Content Include="Resources\Exit.png" />
-    <Content Include="Resources\Fill.png" />
-    <Content Include="Resources\Grid.png" />
-    <Content Include="Resources\Preview.png" />
-    <Content Include="Resources\Save.png" />
-    <Content Include="Resources\ScreenShot.png" />
-    <EmbeddedResource Include="Properties\Resources.resx">
-      <Generator>PublicVbMyResourcesResXFileCodeGenerator</Generator>
-      <CustomToolNamespace>My.Resources</CustomToolNamespace>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Source\Forms\Editors\FrmEditor_Animation.resx">
-      <DependentUpon>FrmEditor_Animation.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Source\Forms\Editors\FrmEditor_AutoMapper.resx">
-      <DependentUpon>FrmEditor_AutoMapper.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Source\Forms\Editors\FrmEditor_Classes.resx">
-      <DependentUpon>FrmEditor_Classes.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Source\Forms\Editors\frmEditor_Events.resx">
-      <DependentUpon>FrmEditor_Events.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Source\Forms\Editors\FrmEditor_House.resx">
-      <DependentUpon>FrmEditor_House.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Source\Forms\Editors\FrmEditor_Item.resx">
-      <DependentUpon>FrmEditor_Item.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Source\Forms\Editors\frmEditor_MapEditor.resx">
-      <DependentUpon>frmEditor_MapEditor.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Source\Forms\Editors\FrmEditor_NPC.resx">
-      <DependentUpon>FrmEditor_NPC.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Source\Forms\Editors\FrmEditor_Pet.resx">
-      <DependentUpon>FrmEditor_Pet.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Source\Forms\Editors\FrmEditor_Projectile.resx">
-      <DependentUpon>FrmEditor_Projectile.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Source\Forms\Editors\FrmEditor_Quest.resx">
-      <DependentUpon>FrmEditor_Quest.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Source\Forms\Editors\FrmEditor_Recipe.resx">
-      <DependentUpon>FrmEditor_Recipe.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Source\Forms\Editors\FrmEditor_Resource.resx">
-      <DependentUpon>FrmEditor_Resource.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Source\Forms\Editors\FrmEditor_Shop.resx">
-      <DependentUpon>FrmEditor_Shop.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Source\Forms\Editors\FrmEditor_Skill.resx">
-      <DependentUpon>FrmEditor_Skill.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Source\Forms\Editors\FrmEditor_VisualWarp.resx">
-      <DependentUpon>FrmEditor_VisualWarp.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Source\Forms\frmMenu.resx">
-      <DependentUpon>FrmMenu.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Source\Forms\Game\frmAdmin.resx">
-      <DependentUpon>FrmAdmin.vb</DependentUpon>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Source\Forms\Game\frmGame.resx">
-      <DependentUpon>FrmGame.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Source\Forms\Game\frmOptions.resx">
-      <DependentUpon>FrmOptions.vb</DependentUpon>
-    </EmbeddedResource>
-    <None Include="Content\AutoMapper.ini">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="packages.config" />
-    <None Include="Properties\Application.myapp">
-      <Generator>MyApplicationCodeGenerator</Generator>
-      <LastGenOutput>Application.Designer.vb</LastGenOutput>
-    </None>
-    <Content Include="Icon.ico" />
-    <EmbeddedResource Include="Icon.bmp" />
-    <None Include="Properties\Settings.settings">
-      <Generator>SettingsSingleFileGenerator</Generator>
-      <LastGenOutput>Settings.Designer.vb</LastGenOutput>
-      <CustomToolNamespace>My</CustomToolNamespace>
-    </None>
-  </ItemGroup>
-  <ItemGroup>
-    <MonoGameContentReference Include="Content\Content.mgcb" />
-    <None Include="$(MonoGameInstallDirectory)\MonoGame\v3.0\Assemblies\DesktopGL\x86\SDL2.dll">
-      <Link>x86\SDL2.dll</Link>
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="$(MonoGameInstallDirectory)\MonoGame\v3.0\Assemblies\DesktopGL\x64\SDL2.dll">
-      <Link>x64\SDL2.dll</Link>
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="$(MonoGameInstallDirectory)\MonoGame\v3.0\Assemblies\DesktopGL\x86\soft_oal.dll">
-      <Link>x86\soft_oal.dll</Link>
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="$(MonoGameInstallDirectory)\MonoGame\v3.0\Assemblies\DesktopGL\x64\soft_oal.dll">
-      <Link>x64\soft_oal.dll</Link>
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="$(MonoGameInstallDirectory)\MonoGame\v3.0\Assemblies\DesktopGL\x86\libSDL2-2.0.so.0">
-      <Link>x86\libSDL2-2.0.so.0</Link>
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="$(MonoGameInstallDirectory)\MonoGame\v3.0\Assemblies\DesktopGL\x64\libSDL2-2.0.so.0">
-      <Link>x64\libSDL2-2.0.so.0</Link>
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="$(MonoGameInstallDirectory)\MonoGame\v3.0\Assemblies\DesktopGL\x86\libopenal.so.1">
-      <Link>x86\libopenal.so.1</Link>
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="$(MonoGameInstallDirectory)\MonoGame\v3.0\Assemblies\DesktopGL\x64\libopenal.so.1">
-      <Link>x64\libopenal.so.1</Link>
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="C:\Program Files (x86)\MonoGame\v3.0\Assemblies\DesktopGL\libSDL2-2.0.0.dylib">
-      <Link>libSDL2-2.0.0.dylib</Link>
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="C:\Program Files (x86)\MonoGame\v3.0\Assemblies\DesktopGL\libopenal.1.dylib">
-      <Link>libopenal.1.dylib</Link>
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="C:\Program Files (x86)\MonoGame\v3.0\Assemblies\DesktopGL\MonoGame.Framework.dll.config">
-      <Link>MonoGame.Framework.dll.config</Link>
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="Properties\app.manifest" />
-    <None Include="Properties\app.config" />
   </ItemGroup>
   <ItemGroup>
     <Import Include="Microsoft.VisualBasic" />
@@ -411,16 +96,332 @@
     <Import Include="System.Drawing" />
     <Import Include="System.Windows.Forms" />
   </ItemGroup>
+  <ItemGroup>
+    <Compile Include="..\GlobalAssemblyInfo.vb">
+      <Link>My Project\GlobalAssemblyInfo.vb</Link>
+    </Compile>
+    <Compile Include="My Project\ApplicationEvents.vb" />
+    <Compile Include="My Project\Resources.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="OldSource\Forms\Editors\FrmEditor_Animation.Designer.vb">
+      <DependentUpon>FrmEditor_Animation.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Source\C_Entry.vb" />
+    <Compile Include="Source\SFML\C_Audio.vb" />
+    <Compile Include="Source\SFML\C_Draw_Game.vb" />
+    <Compile Include="Source\SFML\C_Draw_Gui.vb" />
+    <Compile Include="Source\SFML\C_Graphics.vb" />
+    <None Include="app.config" />
+    <None Include="OldSource\Forms\Editors\FrmEditor_Animation.vb">
+      <SubType>Form</SubType>
+    </None>
+    <Compile Include="OldSource\Forms\Editors\FrmEditor_AutoMapper.Designer.vb">
+      <DependentUpon>FrmEditor_AutoMapper.vb</DependentUpon>
+    </Compile>
+    <None Include="OldSource\Forms\Editors\FrmEditor_AutoMapper.vb">
+      <SubType>Form</SubType>
+    </None>
+    <Compile Include="OldSource\Forms\Editors\FrmEditor_Classes.Designer.vb">
+      <DependentUpon>FrmEditor_Classes.vb</DependentUpon>
+    </Compile>
+    <None Include="OldSource\Forms\Editors\FrmEditor_Classes.vb">
+      <SubType>Form</SubType>
+    </None>
+    <Compile Include="OldSource\Forms\Editors\FrmEditor_Events.Designer.vb">
+      <DependentUpon>FrmEditor_Events.vb</DependentUpon>
+    </Compile>
+    <None Include="OldSource\Forms\Editors\FrmEditor_Events.vb">
+      <SubType>Form</SubType>
+    </None>
+    <Compile Include="OldSource\Forms\Editors\FrmEditor_House.Designer.vb">
+      <DependentUpon>FrmEditor_House.vb</DependentUpon>
+    </Compile>
+    <None Include="OldSource\Forms\Editors\FrmEditor_House.vb">
+      <SubType>Form</SubType>
+    </None>
+    <Compile Include="OldSource\Forms\Editors\FrmEditor_Item.Designer.vb">
+      <DependentUpon>FrmEditor_Item.vb</DependentUpon>
+    </Compile>
+    <None Include="OldSource\Forms\Editors\FrmEditor_Item.vb">
+      <SubType>Form</SubType>
+    </None>
+    <Compile Include="OldSource\Forms\Editors\FrmEditor_MapEditor.designer.vb">
+      <DependentUpon>FrmEditor_MapEditor.vb</DependentUpon>
+    </Compile>
+    <None Include="OldSource\Forms\Editors\FrmEditor_MapEditor.vb">
+      <SubType>Form</SubType>
+    </None>
+    <Compile Include="OldSource\Forms\Editors\FrmEditor_NPC.Designer.vb">
+      <DependentUpon>FrmEditor_NPC.vb</DependentUpon>
+    </Compile>
+    <None Include="OldSource\Forms\Editors\FrmEditor_NPC.vb">
+      <SubType>Form</SubType>
+    </None>
+    <Compile Include="OldSource\Forms\Editors\FrmEditor_Pet.Designer.vb">
+      <DependentUpon>FrmEditor_Pet.vb</DependentUpon>
+    </Compile>
+    <None Include="OldSource\Forms\Editors\FrmEditor_Pet.vb">
+      <SubType>Form</SubType>
+    </None>
+    <Compile Include="OldSource\Forms\Editors\FrmEditor_Projectile.Designer.vb">
+      <DependentUpon>FrmEditor_Projectile.vb</DependentUpon>
+    </Compile>
+    <None Include="OldSource\Forms\Editors\FrmEditor_Projectile.vb">
+      <SubType>Form</SubType>
+    </None>
+    <Compile Include="OldSource\Forms\Editors\FrmEditor_Quest.Designer.vb">
+      <DependentUpon>FrmEditor_Quest.vb</DependentUpon>
+    </Compile>
+    <None Include="OldSource\Forms\Editors\FrmEditor_Quest.vb">
+      <SubType>Form</SubType>
+    </None>
+    <Compile Include="OldSource\Forms\Editors\FrmEditor_Recipe.Designer.vb">
+      <DependentUpon>FrmEditor_Recipe.vb</DependentUpon>
+    </Compile>
+    <None Include="OldSource\Forms\Editors\FrmEditor_Recipe.vb">
+      <SubType>Form</SubType>
+    </None>
+    <Compile Include="OldSource\Forms\Editors\FrmEditor_Resource.Designer.vb">
+      <DependentUpon>FrmEditor_Resource.vb</DependentUpon>
+    </Compile>
+    <None Include="OldSource\Forms\Editors\FrmEditor_Resource.vb">
+      <SubType>Form</SubType>
+    </None>
+    <Compile Include="OldSource\Forms\Editors\FrmEditor_Shop.Designer.vb">
+      <DependentUpon>FrmEditor_Shop.vb</DependentUpon>
+    </Compile>
+    <None Include="OldSource\Forms\Editors\FrmEditor_Shop.vb">
+      <SubType>Form</SubType>
+    </None>
+    <Compile Include="OldSource\Forms\Editors\FrmEditor_Skill.Designer.vb">
+      <DependentUpon>FrmEditor_Skill.vb</DependentUpon>
+    </Compile>
+    <None Include="OldSource\Forms\Editors\FrmEditor_Skill.vb">
+      <SubType>Form</SubType>
+    </None>
+    <Compile Include="OldSource\Forms\Editors\FrmEditor_VisualWarp.Designer.vb">
+      <DependentUpon>FrmEditor_VisualWarp.vb</DependentUpon>
+    </Compile>
+    <None Include="OldSource\Forms\Editors\FrmEditor_VisualWarp.vb">
+      <SubType>Form</SubType>
+    </None>
+    <None Include="OldSource\Modules\C_AutoMap.vb" />
+    <None Include="OldSource\Modules\C_Editors.vb" />
+    <None Include="OldSource\Modules\Objects\C_Animations.vb" />
+    <None Include="OldSource\Modules\Objects\C_Classes.vb" />
+    <None Include="OldSource\Modules\Objects\C_Items.vb" />
+    <None Include="OldSource\Modules\Objects\C_Maps.vb" />
+    <None Include="OldSource\Modules\Objects\C_Resources.vb" />
+    <None Include="OldSource\Modules\Systems\C_Banks.vb" />
+    <None Include="OldSource\Modules\Systems\C_Shops.vb" />
+    <None Include="OldSource\Modules\Systems\C_Trade.vb" />
+    <None Include="OldSource\Modules\UI\C_Chat.vb" />
+    <Compile Include="OldSource\Forms\Game\FrmAdmin.Designer.vb">
+      <DependentUpon>FrmAdmin.vb</DependentUpon>
+    </Compile>
+    <None Include="OldSource\Forms\Game\FrmAdmin.vb">
+      <SubType>Form</SubType>
+    </None>
+    <Compile Include="OldSource\Forms\Game\FrmGame.Designer.vb">
+      <DependentUpon>FrmGame.vb</DependentUpon>
+    </Compile>
+    <None Include="OldSource\Forms\Game\FrmGame.vb">
+      <SubType>Form</SubType>
+    </None>
+    <Compile Include="OldSource\Forms\FrmMenu.Designer.vb">
+      <DependentUpon>FrmMenu.vb</DependentUpon>
+    </Compile>
+    <None Include="OldSource\Forms\FrmMenu.vb">
+      <SubType>Form</SubType>
+    </None>
+    <Compile Include="OldSource\Forms\Game\FrmOptions.Designer.vb">
+      <DependentUpon>FrmOptions.vb</DependentUpon>
+    </Compile>
+    <None Include="OldSource\Forms\Game\FrmOptions.vb">
+      <SubType>Form</SubType>
+    </None>
+    <None Include="OldSource\Modules\Objects\C_AutoTiles.vb" />
+    <None Include="OldSource\Modules\Systems\C_Crafting.vb" />
+    <None Include="OldSource\Modules\Systems\C_EventSystem.vb" />
+    <None Include="OldSource\SFML\C_GuiFunctions.vb" />
+    <None Include="OldSource\Modules\Globals\C_Variables.vb" />
+    <None Include="OldSource\Modules\C_General.vb" />
+    <None Include="OldSource\Modules\C_GameLogic.vb" />
+    <None Include="OldSource\Modules\UI\C_HotBar.vb" />
+    <None Include="OldSource\Modules\Systems\C_Housing.vb" />
+    <None Include="OldSource\Modules\Systems\C_Parties.vb" />
+    <None Include="OldSource\Modules\Objects\C_Pets.vb" />
+    <None Include="OldSource\Modules\Objects\C_Player.vb" />
+    <None Include="OldSource\Modules\Objects\C_Projectiles.vb" />
+    <None Include="OldSource\Modules\Systems\C_Quest.vb" />
+    <None Include="OldSource\Modules\Globals\C_Constants.vb" />
+    <None Include="OldSource\Modules\C_DataBase.vb" />
+    <None Include="OldSource\Modules\UI\C_Time.vb" />
+    <None Include="OldSource\Modules\UI\C_UpdateUI.vb" />
+    <None Include="OldSource\Modules\UI\C_Text.vb" />
+    <None Include="OldSource\Modules\C_Types.vb" />
+    <None Include="OldSource\Modules\Systems\C_Weather.vb" />
+    <Compile Include="My Project\AssemblyInfo.vb" />
+    <Compile Include="My Project\Application.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Application.myapp</DependentUpon>
+    </Compile>
+    <Compile Include="My Project\Settings.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <None Include="OldSource\Network\C_Network_Config.vb" />
+    <None Include="OldSource\Network\C_Network_Receive.vb" />
+    <None Include="OldSource\Network\C_Network_Send.vb" />
+    <None Include="OldSource\SFML\C_SFML_Draw_Gui.vb" />
+    <None Include="OldSource\SFML\C_SFML_Draw_Game.vb" />
+    <None Include="OldSource\SFML\DisabledCode.vb" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="OldSource\Forms\Editors\FrmEditor_Animation.resx">
+      <DependentUpon>FrmEditor_Animation.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="OldSource\Forms\Editors\FrmEditor_AutoMapper.resx">
+      <DependentUpon>FrmEditor_AutoMapper.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="OldSource\Forms\Editors\FrmEditor_Classes.resx">
+      <DependentUpon>FrmEditor_Classes.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="OldSource\Forms\Editors\FrmEditor_House.resx">
+      <DependentUpon>FrmEditor_House.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="OldSource\Forms\Editors\FrmEditor_Item.resx">
+      <DependentUpon>FrmEditor_Item.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="OldSource\Forms\Editors\FrmEditor_NPC.resx">
+      <DependentUpon>FrmEditor_NPC.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="OldSource\Forms\Editors\FrmEditor_Pet.resx">
+      <DependentUpon>FrmEditor_Pet.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="OldSource\Forms\Editors\FrmEditor_Projectile.resx">
+      <DependentUpon>FrmEditor_Projectile.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="OldSource\Forms\Editors\FrmEditor_Quest.resx">
+      <DependentUpon>FrmEditor_Quest.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="OldSource\Forms\Editors\FrmEditor_Recipe.resx">
+      <DependentUpon>FrmEditor_Recipe.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="OldSource\Forms\Editors\FrmEditor_Resource.resx">
+      <DependentUpon>FrmEditor_Resource.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="OldSource\Forms\Editors\FrmEditor_Shop.resx">
+      <DependentUpon>FrmEditor_Shop.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="OldSource\Forms\Editors\FrmEditor_Skill.resx">
+      <DependentUpon>FrmEditor_Skill.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="OldSource\Forms\Editors\FrmEditor_VisualWarp.resx">
+      <DependentUpon>FrmEditor_VisualWarp.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="OldSource\Forms\Game\FrmAdmin.resx">
+      <DependentUpon>FrmAdmin.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="OldSource\Forms\Editors\FrmEditor_Events.resx">
+      <DependentUpon>FrmEditor_Events.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="OldSource\Forms\Editors\FrmEditor_MapEditor.resx">
+      <DependentUpon>FrmEditor_MapEditor.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="OldSource\Forms\Game\FrmGame.resx">
+      <DependentUpon>FrmGame.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="OldSource\Forms\FrmMenu.resx">
+      <DependentUpon>FrmMenu.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="My Project\Resources.resx">
+      <Generator>PublicVbMyResourcesResXFileCodeGenerator</Generator>
+      <CustomToolNamespace>My.Resources</CustomToolNamespace>
+      <SubType>Designer</SubType>
+      <LastGenOutput>Resources.Designer.vb</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="OldSource\Forms\Game\FrmOptions.resx">
+      <DependentUpon>FrmOptions.vb</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="My Project\App.config" />
+    <None Include="My Project\app.manifest" />
+    <None Include="My Project\Application.myapp">
+      <Generator>MyApplicationCodeGenerator</Generator>
+      <LastGenOutput>Application.Designer.vb</LastGenOutput>
+    </None>
+    <None Include="My Project\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <CustomToolNamespace>My</CustomToolNamespace>
+      <LastGenOutput>Settings.Designer.vb</LastGenOutput>
+    </None>
+    <None Include="My Project\packages.config" />
+    <None Include="My Project\SFML.Portable.dll.config" />
+    <None Include="packages.config" />
+    <None Include="SFML.Portable.dll.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include=".NETFramework,Version=v4.0">
+      <Visible>False</Visible>
+      <ProductName>Microsoft .NET Framework 4 %28x86 and x64%29</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1 Client Profile</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.2.0">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 2.0 %28x86%29</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.0">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.0 %28x86%29</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Windows.Installer.4.5">
+      <Visible>False</Visible>
+      <ProductName>Windows Installer 4.5</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="My Project\Icon.ico" />
+    <Content Include="My Project\Resources\Clear.png" />
+    <Content Include="My Project\Resources\Exit.png" />
+    <Content Include="My Project\Resources\Fill.png" />
+    <Content Include="My Project\Resources\Grid.png" />
+    <Content Include="My Project\Resources\Preview.png" />
+    <Content Include="My Project\Resources\Save.png" />
+    <Content Include="My Project\Resources\ScreenShot.png" />
+  </ItemGroup>
+  <ItemGroup />
   <Import Project="..\Bindings\Bindings.projitems" Label="Shared" />
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
-  <Import Project="$(MSBuildExtensionsPath)\MonoGame\v3.0\MonoGame.Content.Builder.targets" />
-  <Import Project="..\..\packages\MonoGame.Framework.DesktopGL.3.7.1.189\build\MonoGame.Framework.DesktopGL.targets" Condition="Exists('..\..\packages\MonoGame.Framework.DesktopGL.3.7.1.189\build\MonoGame.Framework.DesktopGL.targets')" />
-  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
-    <PropertyGroup>
-      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
-    </PropertyGroup>
-    <Error Condition="!Exists('..\..\packages\MonoGame.Framework.DesktopGL.3.7.1.189\build\MonoGame.Framework.DesktopGL.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\..\packages\MonoGame.Framework.DesktopGL.3.7.1.189\build\MonoGame.Framework.DesktopGL.targets'))" />
-  </Target>
+  <PropertyGroup>
+    <PostBuildEvent>
+    </PostBuildEvent>
+  </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">

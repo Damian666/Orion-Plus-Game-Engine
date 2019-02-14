@@ -9,18 +9,20 @@
     <Import_RootNamespace>Bindings</Import_RootNamespace>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="$(MSBuildThisFileDirectory)Common\Time.vb" />
-    <Compile Include="$(MSBuildThisFileDirectory)Common\Types.vb" />
-    <Compile Include="$(MSBuildThisFileDirectory)Configurations\Language.vb" />
-    <Compile Include="$(MSBuildThisFileDirectory)Configurations\Inputs.vb" />
-    <Compile Include="$(MSBuildThisFileDirectory)Configurations\Settings.vb" />
-    <Compile Include="$(MSBuildThisFileDirectory)Globals\Constants.vb" />
-    <Compile Include="$(MSBuildThisFileDirectory)Globals\Enumerators.vb" />
-    <Compile Include="$(MSBuildThisFileDirectory)Network\Packets.vb" />
-    <Compile Include="$(MSBuildThisFileDirectory)Globals\Paths.vb" />
-    <Compile Include="$(MSBuildThisFileDirectory)Globals\Variables.vb" />
+    <Compile Include="$(MSBuildThisFileDirectory)Source\Configurations\Encryption.vb" />
+    <None Include="$(MSBuildThisFileDirectory)OldSource\Common\Time.vb" />
+    <None Include="$(MSBuildThisFileDirectory)OldSource\Common\Types.vb" />
+    <None Include="$(MSBuildThisFileDirectory)OldSource\Globals\Constants.vb" />
+    <None Include="$(MSBuildThisFileDirectory)OldSource\Globals\Enumerators.vb" />
+    <None Include="$(MSBuildThisFileDirectory)OldSource\Network\Packets.vb" />
+    <None Include="$(MSBuildThisFileDirectory)OldSource\Globals\Variables.vb" />
+    <Compile Include="$(MSBuildThisFileDirectory)Source\Globals\Paths.vb" />
+    <Compile Include="$(MSBuildThisFileDirectory)Source\Configurations\Inputs.vb" />
+    <Compile Include="$(MSBuildThisFileDirectory)Source\Configurations\Language.vb" />
+    <Compile Include="$(MSBuildThisFileDirectory)Source\Configurations\Settings.vb" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="$(MSBuildThisFileDirectory)Network\" />
+    <Folder Include="$(MSBuildThisFileDirectory)OldSource\Network\" />
+    <Folder Include="$(MSBuildThisFileDirectory)OldSource\" />
   </ItemGroup>
 </Project>

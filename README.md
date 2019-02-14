@@ -1,37 +1,39 @@
-Orion plus Game Engine
-=================
+# **Orion+ Game Engine**
 
-Simple 2D ORPG Game Engine written in VB.Net
+Orion is a Tile-Based 2D ORPG game engine. It targets new and advanced developers under the VB.net language with its 
+simple and flexible systems. These systems offer a lot of power to expand gameplay far greater than its base while leaving
+plenty of room to experiment and afford the performance loss for less experienced developers.
 
-Home: http://www.ascensionforums.com
+Currently Orion features a Client, Server, and Auto-Update/Launcher applications taking advantage of the powerful Winforms
+Gui design.
 
-What is it?
-===========
-This is a tilebased 2D ORPG game engine. It features a client and server application setup with a basic GUI on both ends.
+The official Orion+ Engine repository can be found at [Orion+ Github](https://github.com/Damian666/Orion-Plus-Game-Engine/)
 
-Game Features:
-==============
-Basic Character Creation/Class Selection
-Movement/Attacking
-NPC/Computer Characters for attacking
-Items & Spells
-Housing
-Event System
+[Credits and Contributions](/CREDITS)
 
-Creation Features:
-==================
-The client has editors for the world (maps), items, spells, animations, npcs, and more from the in game admin panel.
+## **Current Features**
 
-How do I use this software?
-===========================
-If you are a programmer then you will probably prefer to compile the most recent version from source. Download the engine here, open up the solution in Visual Studio compile both projects and start the client and server application. They should connect automatically. IP and Port options are stored in the root/data (files)/config.ini files.
+_**GAMEPLAY**_
 
-How do I access the editors?
-============================
-Log into the game with the client. On the server, open the player list, right click on your character and promote yourself to an admin. Go back to the client and tap Insert for each of the editor options.
+- [x] Basic Character Creation/Class Selection
+- [x] Movement/Attacking
+- [x] NPC/Computer Characters for attacking
+- [x] Items & Spells
+- [x] Housing
+- [x] Event System
+- [ ] (Needs updated, this list is sloppy and doesnt list everything)
 
-Support & Updates:
-==================
-The home for this engine is http://ascensiongamedev.com/orion-game-engine if you need support or tips in game creation feel free to visit us. If you find any bugs feel free to report them with the issue tracker.
+_**DEVELOPMENT**_
 
-Im working on updating it to a more useable base to use.
+- [x] The client has editors for the world (maps), items, spells, animations, 
+- [x] npcs, and more from the in game admin panel.
+- [ ] (Needs updated, this list is sloppy and doesnt list everything)
+
+
+## **Contact/Support**
+
+If you have any questions/requests about the engine or would like to report any bugs or glitches with the base engine please
+post an 'issue' on the [Github Issues Page](https://github.com/Damian666/Orion-Plus-Game-Engine/issues/).
+
+Additionally you may post [Ascension Forum](http://ascensiongamedev.com/orion-game-engine) which is the official forum 
+thread where the engine is advertised/discussed.

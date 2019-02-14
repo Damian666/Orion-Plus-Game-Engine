@@ -1,0 +1,56 @@
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.28307.271
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "Server", "source\Server\Server.vbproj", "{B554FD23-0844-49D1-A05A-D79CEAD3FA7A}"
+EndProject
+Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "Bindings", "source\Bindings\Bindings.shproj", "{71445CA4-1713-4144-8CF5-2AB69788D6FC}"
+EndProject
+Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "Client", "source\Client\Client.vbproj", "{531B337C-BC02-44ED-90C2-C448FE5190A2}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "License and Introduction", "License and Introduction", "{4A654AC6-AE49-4D53-BB9F-A8C0B8A2A64F}"
+	ProjectSection(SolutionItems) = preProject
+		CREDITS = CREDITS
+		LICENSE = LICENSE
+		README.md = README.md
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Getting Started", "Getting Started", "{9F4E2881-B070-401E-B633-F15801587350}"
+	ProjectSection(SolutionItems) = preProject
+		documentation\1) Where to Start.txt = documentation\1) Where to Start.txt
+		documentation\2) Setting up the Launcher.txt = documentation\2) Setting up the Launcher.txt
+	EndProjectSection
+EndProject
+Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "Launcher", "source\Launcher\Launcher.vbproj", "{81BE0C3F-616D-4621-8750-75B04C7DDCFC}"
+EndProject
+Global
+	GlobalSection(SharedMSBuildProjectFiles) = preSolution
+		Source\Bindings\Bindings.projitems*{531b337c-bc02-44ed-90c2-c448fe5190a2}*SharedItemsImports = 4
+		Source\Bindings\Bindings.projitems*{71445ca4-1713-4144-8cf5-2ab69788d6fc}*SharedItemsImports = 13
+		Source\Bindings\Bindings.projitems*{b554fd23-0844-49d1-a05a-d79cead3fa7a}*SharedItemsImports = 4
+	EndGlobalSection
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{B554FD23-0844-49D1-A05A-D79CEAD3FA7A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B554FD23-0844-49D1-A05A-D79CEAD3FA7A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B554FD23-0844-49D1-A05A-D79CEAD3FA7A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B554FD23-0844-49D1-A05A-D79CEAD3FA7A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{531B337C-BC02-44ED-90C2-C448FE5190A2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{531B337C-BC02-44ED-90C2-C448FE5190A2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{531B337C-BC02-44ED-90C2-C448FE5190A2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{531B337C-BC02-44ED-90C2-C448FE5190A2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{81BE0C3F-616D-4621-8750-75B04C7DDCFC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{81BE0C3F-616D-4621-8750-75B04C7DDCFC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{81BE0C3F-616D-4621-8750-75B04C7DDCFC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{81BE0C3F-616D-4621-8750-75B04C7DDCFC}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {34F4C6E4-D681-43B9-A894-4D9A534ABC40}
+	EndGlobalSection
+EndGlobal

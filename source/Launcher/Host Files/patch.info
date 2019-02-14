@@ -1,0 +1,22 @@
+[DEFAULT]
+Count=1
+App=Client.exe
+Code=YourPasswordHere
+
+[PATCH0]
+Link=https://onedrive.live.com/download?cid=9DFCEF1A8AABBCC4&resid=9DFCEF1A8AABBCC4%21114&authkey=AH4tqd6_W5g1xhA
+SuperLink=
+IndexSkip=
+Note=Initial orion content upload
+
+[PATCH1]
+Link=
+SuperLink=
+IndexSkip=
+Note=
+
+[PATCH2]
+Link=
+SuperLink=
+IndexSkip=
+Note=

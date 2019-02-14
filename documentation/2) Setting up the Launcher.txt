@@ -1,0 +1,167 @@
+To begin making the Launcher unique to your game, you will
+need to customize the images and the layout of the form,
+as well as the Links to your own repositories so people
+can download files that you host.
+
+First, lets look at how to modify the images, they are
+located in the resources folder found at:
+    >Root/Source/Launcher/MyProject/Resources
+
+From the Launcher's My Project page, you can drop down
+to find the resources folder from within Visual Studio.
+This is where "My Resources" for the project are stored.
+
+If you wish to change the existing images, simply overwrite
+them within the folder from the Windows Explorer view.
+
+If you wish to add more images, place them in this folder,
+then go to the My Project page and the Resources tab,
+then Add File -> Existing File and select the new resources.
+
+If you wish to remove images, just remove them from both
+the folder and the Resources tab in the My Project page.
+
+To modify customize the layout of the form, you can easily
+use the Visual Studio Winforms Builder on the L_Form.vb file.
+
+In order to customize the Links that the launcher downloads
+from, you will need to understand the limitations and how it
+works.
+
+The Launcher expects 2 links, one for news.txt and patch.info
+which are both located in the Host Files folder.
+
+The news.txt is used to provide news about your game - usually
+intended for big development or upcoming events.
+
+The patch.info file is just another text file, the .info was
+for aestetics only. This file contains the following info:
+
+[DEFAULT]
+Count= (The number of patches you have available)
+App= (The name of the client.exe in case you changed it)
+Code= (The password required to open the client)
+
+[PATCH0+]
+Link= (The link to download this specific patch)
+SuperLink= (A alternative link that contains multiple 
+            patches - including this one - to reduce
+			the redundancy of updating commonly updated
+			assets)
+IndexSkip= (If SuperLink was used, you would use this to
+			set the users patch version to the first patch
+			after what patches were contained in SuperLinks
+			patch updates)
+Note= (This is just a note for you so you can take note of
+       what was supposed to be in the patch data you set)
+
+To understand the intended usage of SuperLink, lets imagine
+you have a game that has been updated quite a bit over time.
+
+In this game you may have ~50 separate patches, but you don't
+want your users to suffer having to download each one
+individually because you have commonly updated a few files.
+
+These files may be updating a couple of tilesets that you
+added a couple things here and there to, or fixed graphical
+glitches. Maybe you've changed your mind on some character
+or item/skill images and this causes the patches to mostly
+contain alot of redundant updates.
+
+Whatever the reason, at this point you may want to make a 
+Super Patch that just contains all the stuff that was in 
+multiple patches. Lets say a block from patches 3-11.
+
+You would manually download all of those patches and unpack
+them into a folder in order (This to ensure you havent
+overwritten newer files with older ones). Then you would
+proceed to pack everything back up into one new zip file.
+
+You can host this on its own unique link, and then in
+patch.info you can put that 1 link over all the SuperLink
+variables on patches 3-11. In IndexSkip you would set them
+all to 12 so they dont redownload any patches (3-11). This
+sets the patch version to 12 so now if they do more updates
+they will begin at 12 the next time.
+
+The cases this is most useful is players that are out of date
+as well as anyone who may be downloading your game fresh and 
+you dont want to be bothered to update your main download
+link for the game which in late development can be a rather
+large reupload.
+
+Now that you have an understanding on how the Host Files work
+it is time to understand the way they are used.
+
+The Launcher is designed so that it creates a folder where it
+maintains all the patches that have been downloaded. It also
+keeps a record for the current patch version so it can quickly
+check if its up to date and move on to the game.
+
+The patch files are just zip files. In order to create the zip
+files in a structure that the launcher can unpack them properly,
+you will want to make a new empty folder, recreate the directory
+structure (In our case usually the Contents folder then the stuff
+inside of it)
+
+Now the files you want updated will be put inside the proper
+locations within the dummy folder, then highlight everything
+inside the folder (Do not package the dummy folder itself) and
+right click -> Send To -> Compressed (zipped) folder then give it
+a name.
+
+Example: We want to update the client.exe and Tileset (2.png)
+I would make a folder called Updates on my desktop,
+place the client.exe inside, then create the folders:
+    >Contents/Graphics/Tilesets
+and then place the 2.png inside. Now back at the root of the 
+"Updates" folder, I will hold control and press A to automatically
+select all files within the folder and then right click on one of
+them and select Send To Zip.
+
+Now for simplicity sake, I would recommend you name the zip files
+after the patch name ex: "PATCH1.zip".
+
+From here it is time to figure out how to produce download links
+for both your patches and your host files.
+
+I personally prefer One Drive but the beauty of the launcher is
+as long as you can get a direct link (aka paste into your 
+web browser and it will automatically ask you where to save it)
+you can use it! You can also spread out your files to multiple
+host providers and still work as long as all links are placed
+properly and valid.
+
+It is recommended to use OneDrive or Dropbox AT LEAST for the
+Host Files because you can use their desktop app to update them
+and the links will remain the same (Thereby not breaking your
+launcher and requiring a launcher update all the time).
+
+For One Drive, you can just upload the files to your account,
+access your OneDrive account from the webbrowser, right click
+the file and get the embed link, then go to:
+http://metadataconsulting.blogspot.com/2014/05/how-to-get-direct-download-link-from.html
+
+Follow the steps listed on the website to get a direct download 
+link which you can copy back out and is ready to use for the Launcher!
+
+You will need to do this for both the news.txt and patch.info
+and in the Launcher's L_Entry.vb file, change the links listed
+at the top of the module.
+
+Afterwards you can just do this for each patch zip file you
+upload and add into the patch.info file.
+
+To finish this off, you will need to remember, downloading the
+patches become a requirement the moment "Count" under [DEFAULT]
+has been updated.
+
+Note: Setting the count lower or higher wont reset peoples patch 
+version file, so if you made a mistake and need it corrected,
+either tell your users to modify the patch version file manually
+or replace the broken patch numbers with an empty dummy package.
+
+Note2: If you need asset files deleted, I would say it's not reasonable
+to ask of your audience to delete files by hand, so simply update patch1
+with a clean batch of your games assets and instruct your users to delete
+all but the launcher, or provide a brand new update all together.
