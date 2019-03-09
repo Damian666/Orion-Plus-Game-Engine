@@ -109,7 +109,7 @@ Friend Module C_Weather
     Sub ProcessWeather()
         Dim i As Integer, x As Integer
 
-        If CurrentWeather > 0 Then
+        If CurrentWeather > 0 And CurrentWeather < WeatherType.Fog Then
             If CurrentWeather = WeatherType.Rain OrElse CurrentWeather = WeatherType.Storm Then
                 PlayWeatherSound("Rain.ogg", True)
             End If
