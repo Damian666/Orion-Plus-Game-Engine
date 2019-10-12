@@ -161,19 +161,19 @@ Module S_Players
         GetPlayerProtection = (GetPlayerStat(index, StatType.Endurance) \ 5)
 
         If Armor > 0 Then
-            GetPlayerProtection = GetPlayerProtection + Item(Armor).Data2
+            GetPlayerProtection += Item(Armor).Data2
         End If
 
         If Helm > 0 Then
-            GetPlayerProtection = GetPlayerProtection + Item(Helm).Data2
+            GetPlayerProtection += Item(Helm).Data2
         End If
 
         If Shoes > 0 Then
-            GetPlayerProtection = GetPlayerProtection + Item(Shoes).Data2
+            GetPlayerProtection += Item(Shoes).Data2
         End If
 
         If Gloves > 0 Then
-            GetPlayerProtection = GetPlayerProtection + Item(Gloves).Data2
+            GetPlayerProtection += Item(Gloves).Data2
         End If
 
     End Function
@@ -190,7 +190,6 @@ Module S_Players
             End If
 
             ' Check for weapon
-            n = 0
 
             If GetPlayerEquipment(Attacker, EquipmentType.Weapon) > 0 Then
                 n = GetPlayerEquipment(Attacker, EquipmentType.Weapon)
@@ -594,17 +593,17 @@ Module S_Players
 
                 For i = 1 To EquipmentType.Count - 1
                     If GetPlayerEquipment(Victim, i) > 0 Then
-                        armor = armor + Item(GetPlayerEquipment(Victim, i)).Data2
+                        armor += Item(GetPlayerEquipment(Victim, i)).Data2
                     End If
                 Next
 
                 ' take away armour
-                Damage = Damage - ((GetPlayerStat(Victim, StatType.Spirit) * 2) + (GetPlayerLevel(Victim) * 3) + armor)
+                Damage -= (GetPlayerStat(Victim, StatType.Spirit) * 2) + (GetPlayerLevel(Victim) * 3) + armor
 
                 ' * 1.5 if it's a crit!
                 If CanPlayerCriticalHit(Attacker) Then
-                    Damage = Damage * 1.5
-                    SendActionMsg(mapNum, "Critical!", ColorType.BrightCyan, 1, (GetPlayerX(Attacker) * 32), (GetPlayerY(Attacker) * 32))
+                    Damage *= 1.5
+                    SendActionMsg(mapNum, "Critical!", ColorType.BrightCyan, 1, GetPlayerX(Attacker) * 32, GetPlayerY(Attacker) * 32)
                 End If
             End If
 
@@ -697,11 +696,11 @@ Module S_Players
                 Exit Sub
             Else
 
-                Damage = Damage - ((Npc(npcnum).Stat(StatType.Spirit) * 2) + (Npc(npcnum).Level * 3))
+                Damage -= ((Npc(npcnum).Stat(StatType.Spirit) * 2) + (Npc(npcnum).Level * 3))
 
                 ' * 1.5 if it's a crit!
                 If CanPlayerCriticalHit(index) Then
-                    Damage = Damage * 1.5
+                    Damage *= 1.5
                     SendActionMsg(mapNum, "Critical!", ColorType.BrightCyan, 1, (GetPlayerX(index) * 32), (GetPlayerY(index) * 32))
                 End If
 
@@ -797,13 +796,13 @@ Module S_Players
 
             For z = 1 To MAX_INV
                 If GetPlayerInvItemNum(Victim, z) > 0 Then
-                    invcount = invcount + 1
+                    invcount += 1
                 End If
             Next
 
             For z = 1 To EquipmentType.Count - 1
                 If GetPlayerEquipment(Victim, z) > 0 Then
-                    eqcount = eqcount + 1
+                    eqcount += 1
                 End If
             Next
             z = Random(1, invcount + eqcount)
@@ -811,11 +810,11 @@ Module S_Players
             If z = 0 Then z = 1
             If z > invcount + eqcount Then z = invcount + eqcount
             If z > invcount Then
-                z = z - invcount
+                z -= invcount
 
                 For x = 1 To EquipmentType.Count - 1
                     If GetPlayerEquipment(Victim, x) > 0 Then
-                        j = j + 1
+                        j += 1
 
                         If j = z Then
                             'Here it is, drop this piece of equipment!
@@ -831,7 +830,7 @@ Module S_Players
 
                 For x = 1 To MAX_INV
                     If GetPlayerInvItemNum(Victim, x) > 0 Then
-                        j = j + 1
+                        j += 1
 
                         If j = z Then
                             'Here it is, drop this item!
@@ -898,7 +897,7 @@ Module S_Players
         For i = 1 To EquipmentType.Count - 1
             If Player(index).Character(TempPlayer(index).CurChar).Equipment(i) > 0 Then
                 If Item(Player(index).Character(TempPlayer(index).CurChar).Equipment(i)).Add_Stat(Stat) > 0 Then
-                    x = x + Item(Player(index).Character(TempPlayer(index).CurChar).Equipment(i)).Add_Stat(Stat)
+                    x += Item(Player(index).Character(TempPlayer(index).CurChar).Equipment(i)).Add_Stat(Stat)
                 End If
             End If
         Next
@@ -1060,7 +1059,7 @@ Module S_Players
             SetPlayerLevel(index, GetPlayerLevel(index) + 1)
             SetPlayerPOINTS(index, GetPlayerPOINTS(index) + 3)
             SetPlayerExp(index, expRollover)
-            level_count = level_count + 1
+            level_count += 1
         Loop
 
         If level_count > 0 Then
@@ -1136,7 +1135,7 @@ Module S_Players
                     TempPlayer(index).TmpY = GetPlayerY(index)
                     TempPlayer(index).InInstance = 1
                 End If
-                MapNum = MapNum + MAX_MAPS
+                MapNum += MAX_MAPS
             End If
         End If
 

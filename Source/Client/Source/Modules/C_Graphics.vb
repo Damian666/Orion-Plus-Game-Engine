@@ -2144,17 +2144,17 @@ Module C_Graphics
     End Sub
 
     Friend Sub DrawGrid()
-
-        Dim rec As New RectangleShape
-
         For x = TileView.Left To TileView.Right ' - 1
             For y = TileView.Top To TileView.Bottom ' - 1
                 If IsValidMapPoint(x, y) Then
-                    rec.OutlineColor = New SFML.Graphics.Color(SFML.Graphics.Color.White)
-                    rec.OutlineThickness = 0.6
-                    rec.FillColor = New SFML.Graphics.Color(SFML.Graphics.Color.Transparent)
-                    rec.Size = New Vector2f((x * PicX), (y * PicX))
-                    rec.Position = New Vector2f(ConvertMapX((x - 1) * PicX), ConvertMapY((y - 1) * PicY))
+
+                    Dim rec As New RectangleShape With {
+                        .OutlineColor = New SFML.Graphics.Color(SFML.Graphics.Color.White),
+                        .OutlineThickness = 0.6,
+                        .FillColor = New SFML.Graphics.Color(SFML.Graphics.Color.Transparent),
+                        .Size = New Vector2f((x * PicX), (y * PicX)),
+                        .Position = New Vector2f(ConvertMapX((x - 1) * PicX), ConvertMapY((y - 1) * PicY))
+                    }
 
                     GameWindow.Draw(rec)
                 End If
@@ -2327,8 +2327,8 @@ Module C_Graphics
         'Hp Bar etc
         DrawStatBars()
 
-        DrawText(HudWindowX + HudhpBarX + HpBarGfxInfo.Width + 10, HudWindowY + HudhpBarY + 4, Language.Game.fps & Fps, SFML.Graphics.Color.White, SFML.Graphics.Color.Black, GameWindow)
-        DrawText(HudWindowX + HudmpBarX + MpBarGfxInfo.Width + 10, HudWindowY + HudmpBarY + 4, Language.Game.ping & PingToDraw, SFML.Graphics.Color.White, SFML.Graphics.Color.Black, GameWindow)
+        DrawText(HudWindowX + HudhpBarX + HpBarGfxInfo.Width + 10, HudWindowY + HudhpBarY + 4, Language.Game.Fps & Fps, SFML.Graphics.Color.White, SFML.Graphics.Color.Black, GameWindow)
+        DrawText(HudWindowX + HudmpBarX + MpBarGfxInfo.Width + 10, HudWindowY + HudmpBarY + 4, Language.Game.Ping & PingToDraw, SFML.Graphics.Color.White, SFML.Graphics.Color.Black, GameWindow)
         DrawText(HudWindowX + HudexpBarX + ExpBarGfxInfo.Width + 10, HudWindowY + HudexpBarY + 4, Language.Game.Time & Time.Instance.ToString("h:mm"), SFML.Graphics.Color.White, SFML.Graphics.Color.Black, GameWindow)
 
         If Blps Then
@@ -2779,7 +2779,7 @@ NextLoop:
         For Each str As String In WordWrap(ItemDescName, 22, WrapMode.Characters, WrapType.BreakWord)
             'description
             DrawText(xoffset - DescriptionGfxInfo.Width + 10, yoffset + 12 + y, str, ItemDescRarityColor, ItemDescRarityBackColor, GameWindow)
-            y = y + 15
+            y += 15
         Next
 
         If ShiftDown OrElse VbKeyShift = True Then
@@ -2812,7 +2812,7 @@ NextLoop:
             For Each str As String In WordWrap(ItemDescDescription, 22, WrapMode.Characters, WrapType.BreakWord)
                 'description
                 DrawText(xoffset - DescriptionGfxInfo.Width + 10, yoffset + 44 + y, str, SFML.Graphics.Color.White, SFML.Graphics.Color.Black, GameWindow)
-                y = y + 15
+                y += 15
             Next
         End If
 

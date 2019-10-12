@@ -133,7 +133,7 @@ Friend Module S_Resources
             For y = 0 To Map(mapNum).MaxY
 
                 If Map(mapNum).Tile(x, y).Type = TileType.Resource Then
-                    Resource_Count = Resource_Count + 1
+                    Resource_Count += 1
                     ReDim Preserve ResourceCache(mapNum).ResourceData(Resource_Count)
                     ResourceCache(mapNum).ResourceData(Resource_Count).X = x
                     ResourceCache(mapNum).ResourceData(Resource_Count).Y = y
@@ -232,8 +232,7 @@ Friend Module S_Resources
     End Sub
 
     Sub CheckResourceLevelUp(index As Integer, SkillSlot As Integer)
-        Dim expRollover As Integer, skillname As String = ""
-        Dim level_count As Integer
+        Dim expRollover As Integer, level_count As Integer
 
         level_count = 0
 
@@ -351,7 +350,7 @@ Friend Module S_Resources
 
 #Region "Outgoing Packets"
 
-    Sub SendResourceCacheTo(index As Integer, Resource_num As Integer)
+    Sub SendResourceCacheTo(index As Integer, Resource_num As long)
         Dim i As Integer, mapnum As Integer
         Dim buffer As New ByteStream(4)
 

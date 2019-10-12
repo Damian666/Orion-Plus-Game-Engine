@@ -76,8 +76,8 @@
     <Reference Include="CS-ASFW, Version=2.0.0.3, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\packages\CS-ASFW.2.0.0.6\lib\net45\CS-ASFW.dll</HintPath>
     </Reference>
-    <Reference Include="DarkUI">
-      <HintPath>..\Editors\DarkUI.dll</HintPath>
+    <Reference Include="DarkUI, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\DarkUI.1.0.0.1\lib\DarkUI.dll</HintPath>
     </Reference>
     <Reference Include="SFML.Portable, Version=2.0.6807.40114, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\packages\SFML-Portable-2.1.1.5.1\lib\SFML.Portable.dll</HintPath>

@@ -630,7 +630,7 @@ Friend Module C_GuiFunctions
                                 LoadQuestlogBox()
                             End If
                         End If
-                        tmpy = tmpy + 20
+                        tmpy += 20
                     End If
                 Next
 
@@ -657,7 +657,7 @@ Friend Module C_GuiFunctions
                                 CraftingInit()
                             End If
                         End If
-                        tmpy = tmpy + 20
+                        tmpy += 20
                     End If
                 Next
 
@@ -685,7 +685,7 @@ Friend Module C_GuiFunctions
                 If x > (CraftPanelX + 340) AndAlso x < (CraftPanelX + 340 + 10) Then
                     If y > (CraftPanelY + 422) AndAlso y < (CraftPanelY + 422 + 10) Then
                         If CraftAmountValue > 1 Then
-                            CraftAmountValue = CraftAmountValue - 1
+                            CraftAmountValue -= 1
                         End If
                     End If
                 End If
@@ -694,7 +694,7 @@ Friend Module C_GuiFunctions
                 If x > (CraftPanelX + 392) AndAlso x < (CraftPanelX + 392 + 10) Then
                     If y > (CraftPanelY + 422) AndAlso y < (CraftPanelY + 422 + 10) Then
                         If CraftAmountValue < 100 Then
-                            CraftAmountValue = CraftAmountValue + 1
+                            CraftAmountValue += 1
                         End If
                     End If
                 End If
@@ -1102,12 +1102,12 @@ Friend Module C_GuiFunctions
         If HudVisible = True Then
             If AboveChatScrollUp(x, y) Then
                 If ScrollMod + FirstLineindex < MaxChatDisplayLines Then
-                    ScrollMod = ScrollMod + 1
+                    ScrollMod += 1
                 End If
             End If
             If AboveChatScrollDown(x, y) Then
                 If ScrollMod - 1 >= 0 Then
-                    ScrollMod = ScrollMod - 1
+                    ScrollMod -= 1
                 End If
             End If
         End If

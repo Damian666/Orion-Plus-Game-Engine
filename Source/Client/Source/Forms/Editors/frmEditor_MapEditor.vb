@@ -935,8 +935,8 @@ Public Class FrmEditor_MapEditor
             ElseIf tabpages.SelectedTab Is tpDirBlock Then
                 If movedMouse Then Exit Sub
                 ' find what tile it is
-                X = X - ((X \ PicX) * PicX)
-                Y = Y - ((Y \ PicY) * PicY)
+                X -= ((X \ PicX) * PicX)
+                Y -= ((Y \ PicY) * PicY)
                 ' see if it hits an arrow
                 For i = 1 To 4
                     If X >= DirArrowX(i) AndAlso X <= DirArrowX(i) + 8 Then
@@ -1051,9 +1051,9 @@ Public Class FrmEditor_MapEditor
                             End With
                         End If
                     End If
-                    x2 = x2 + 1
+                    x2 += 1
                 Next
-                y2 = y2 + 1
+                y2 += 1
             Next
         End If
     End Sub
