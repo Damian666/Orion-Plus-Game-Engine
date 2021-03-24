@@ -1,6 +1,6 @@
 ﻿Imports System.IO
 Imports System.Windows.Forms
-Imports ASFW
+Imports Asfw
 Imports SFML.Graphics
 Imports SFML.Window
 

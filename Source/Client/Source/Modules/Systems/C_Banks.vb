@@ -1,5 +1,5 @@
 ﻿Imports System.Drawing
-Imports ASFW
+Imports Asfw
 
 Module C_Banks
 

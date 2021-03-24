@@ -1,6 +1,6 @@
 ﻿Imports System.IO
-Imports ASFW
-Imports ASFW.IO.FileIO
+Imports Asfw
+Imports Asfw.IO
 
 Friend Module S_Projectiles
 
@@ -58,7 +58,7 @@ Friend Module S_Projectiles
         writer.WriteInt32(Projectiles(ProjectileNum).Speed)
         writer.WriteInt32(Projectiles(ProjectileNum).Damage)
 
-        BinaryFile.Save(filename, writer)
+        ByteFile.Save(filename, writer)
 
     End Sub
 
@@ -71,7 +71,7 @@ Friend Module S_Projectiles
         For i = 1 To MAX_PROJECTILES
             filename = Path.Projectile(i)
             Dim reader As New ByteStream()
-            BinaryFile.Load(filename, reader)
+            ByteFile.Load(filename, reader)
 
             Projectiles(i).Name = reader.ReadString()
             Projectiles(i).Sprite = reader.ReadInt32()

@@ -1,6 +1,6 @@
 ﻿Imports System.IO
-Imports ASFW
-Imports ASFW.IO
+Imports Asfw
+Imports Asfw.IO
 
 Module S_NetworkReceive
 

@@ -1,5 +1,5 @@
 ﻿Imports System.Drawing
-Imports ASFW
+Imports Asfw
 Imports SFML.Graphics
 Imports SFML.Window
 

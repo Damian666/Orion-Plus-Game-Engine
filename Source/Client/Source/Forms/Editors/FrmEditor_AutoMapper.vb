@@ -1,4 +1,4 @@
-﻿Imports Ini = ASFW.IO.FileIO.TextFile
+﻿Imports Ini = Asfw.IO.TextFile
 
 Friend Class frmEditor_AutoMapper
 

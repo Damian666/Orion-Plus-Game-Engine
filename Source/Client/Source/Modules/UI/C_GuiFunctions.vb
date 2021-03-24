@@ -1,6 +1,6 @@
 ﻿Imports System.Drawing
 Imports System.Windows.Forms
-Imports ASFW
+Imports Asfw
 
 Friend Module C_GuiFunctions
 

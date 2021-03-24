@@ -1,6 +1,7 @@
 ﻿Imports System.IO
-Imports ASFW
-Imports ASFW.IO.FileIO
+Imports Asfw
+Imports Asfw.IO
+
 
 Module S_Pets
 
@@ -107,7 +108,7 @@ Module S_Pets
         writer.WriteInt32(Pet(petNum).EvolveLevel)
         writer.WriteInt32(Pet(petNum).EvolveNum)
 
-        BinaryFile.Save(filename, writer)
+        ByteFile.Save(filename, writer)
 
     End Sub
 
@@ -129,7 +130,7 @@ Module S_Pets
 
         filename = Path.Pet(petNum)
 
-        BinaryFile.Load(filename, reader)
+        ByteFile.Load(filename, reader)
 
         Pet(petNum).Num = reader.ReadInt32()
         Pet(petNum).Name = reader.ReadString()

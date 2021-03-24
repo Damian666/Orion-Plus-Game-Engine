@@ -1,8 +1,8 @@
 ﻿Imports System.Drawing
 Imports System.IO
 Imports System.Windows.Forms
-Imports ASFW
-Imports ASFW.IO
+Imports Asfw
+Imports Asfw.IO
 
 Module C_Maps
 

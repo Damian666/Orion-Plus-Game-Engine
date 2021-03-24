@@ -1,5 +1,5 @@
 ﻿Imports System.IO
-Imports ASFW
+Imports Asfw
 
 Friend Class FrmMenu
     Inherits Form

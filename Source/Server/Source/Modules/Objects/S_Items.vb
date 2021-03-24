@@ -1,6 +1,6 @@
 ﻿Imports System.IO
-Imports ASFW
-Imports ASFW.IO.FileIO
+Imports Asfw
+Imports Asfw.IO
 
 Friend Module S_Items
 
@@ -76,7 +76,7 @@ Friend Module S_Items
         writer.WriteInt32(Item(itemNum).Projectile)
         writer.WriteInt32(Item(itemNum).Ammo)
 
-        BinaryFile.Save(filename, writer)
+        ByteFile.Save(filename, writer)
     End Sub
 
     Sub LoadItems()
@@ -97,7 +97,7 @@ Friend Module S_Items
         filename = Path.Item(ItemNum)
 
         Dim reader As New ByteStream()
-        BinaryFile.Load(filename, reader)
+        ByteFile.Load(filename, reader)
 
         Item(ItemNum).Name = reader.ReadString()
         Item(ItemNum).Pic = reader.ReadInt32()

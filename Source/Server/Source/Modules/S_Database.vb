@@ -1,7 +1,7 @@
 ﻿Imports System.IO
-Imports ASFW
-Imports ASFW.IO.FileIO
-Imports Ini = ASFW.IO.FileIO.TextFile
+Imports Asfw
+Imports Asfw.IO
+Imports Ini = Asfw.IO.TextFile
 
 Module modDatabase
 
@@ -242,7 +242,7 @@ Module modDatabase
             writer.WriteInt32(Map(mapNum).Npc(x))
         Next
 
-        BinaryFile.Save(filename, writer)
+        ByteFile.Save(filename, writer)
 
     End Sub
 
@@ -527,7 +527,7 @@ Module modDatabase
 
         filename = Path.Map(mapNum)
         Dim reader As New ByteStream()
-        BinaryFile.Load(filename, reader)
+        ByteFile.Load(filename, reader)
 
         Map(mapNum).Name = reader.ReadString()
         Map(mapNum).Music = reader.ReadString()
@@ -687,7 +687,7 @@ Module modDatabase
         writer.WriteInt32(Npc(NpcNum).Level)
         writer.WriteInt32(Npc(NpcNum).Damage)
 
-        BinaryFile.Save(filename, writer)
+        ByteFile.Save(filename, writer)
     End Sub
 
     Sub LoadNpcs()
@@ -708,7 +708,7 @@ Module modDatabase
 
         filename = Path.Npc(NpcNum)
         Dim reader As New ByteStream()
-        BinaryFile.Load(filename, reader)
+        ByteFile.Load(filename, reader)
 
         Npc(NpcNum).Name = reader.ReadString()
         Npc(NpcNum).AttackSay = reader.ReadString()
@@ -840,7 +840,7 @@ Module modDatabase
             writer.WriteInt32(Shop(shopNum).TradeItem(i).CostValue)
         Next
 
-        BinaryFile.Save(filename, writer)
+        ByteFile.Save(filename, writer)
     End Sub
 
     Sub LoadShops()
@@ -862,7 +862,7 @@ Module modDatabase
 
         filename = Path.Shop(ShopNum)
         Dim reader As New ByteStream()
-        BinaryFile.Load(filename, reader)
+        ByteFile.Load(filename, reader)
 
         Shop(ShopNum).Name = reader.ReadString()
         Shop(ShopNum).Face = reader.ReadByte()
@@ -959,7 +959,7 @@ Module modDatabase
         writer.WriteByte(Skill(skillnum).KnockBack)
         writer.WriteByte(Skill(skillnum).KnockBackTiles)
 
-        BinaryFile.Save(filename, writer)
+        ByteFile.Save(filename, writer)
     End Sub
 
     Sub LoadSkills()
@@ -979,7 +979,7 @@ Module modDatabase
 
         filename = Path.Skill(SkillNum)
         Dim reader As New ByteStream()
-        BinaryFile.Load(filename, reader)
+        ByteFile.Load(filename, reader)
 
         Skill(SkillNum).Name = reader.ReadString()
         Skill(SkillNum).Type = reader.ReadByte()
@@ -1050,7 +1050,7 @@ Module modDatabase
     Function PasswordOK(Name As String, Password As String) As Boolean
         If Not AccountExist(Name) Then Return False
         Dim reader As New ByteStream()
-        BinaryFile.Load(Application.StartupPath & "\Data\Accounts\" & Trim$(Name) & "\Data.bin", reader)
+        ByteFile.Load(Application.StartupPath & "\Data\Accounts\" & Trim$(Name) & "\Data.bin", reader)
         If reader.ReadString().Trim <> Name.Trim Then Return False
         Return reader.ReadString().Trim.ToUpper = Password.Trim.ToUpper
     End Function
@@ -1091,7 +1091,7 @@ Module modDatabase
         writer.WriteString(Player(index).Password)
         writer.WriteByte(Player(index).Access)
 
-        BinaryFile.Save(filename, writer)
+        ByteFile.Save(filename, writer)
 
         For i = 1 To MAX_CHARS
             SaveCharacter(index, i)
@@ -1103,7 +1103,7 @@ Module modDatabase
         Dim filename As String = Application.StartupPath & "\Data\Accounts\" & Name.Trim() & "\Data.bin"
         ClearPlayer(index)
         Dim reader As New ByteStream()
-        BinaryFile.Load(filename, reader)
+        ByteFile.Load(filename, reader)
 
         Player(index).Login = reader.ReadString()
         Player(index).Password = reader.ReadString()
@@ -1145,7 +1145,7 @@ Module modDatabase
         End If
 
         Dim reader As New ByteStream()
-        BinaryFile.Load(filename, reader)
+        ByteFile.Load(filename, reader)
 
         For i = 1 To MAX_BANK
             Bank(index).Item(i).Num = reader.ReadByte()
@@ -1193,7 +1193,7 @@ Module modDatabase
             'writer.WriteInt32(Bank(Index).ItemRand(i).Stat(Stats.Spirit))
         Next
 
-        BinaryFile.Save(filename, writer)
+        ByteFile.Save(filename, writer)
     End Sub
 
     Sub ClearBank(index As Integer)
@@ -1371,7 +1371,7 @@ Module modDatabase
         ClearCharacter(index, CharNum)
 
         Dim reader As New ByteStream()
-        BinaryFile.Load(filename, reader)
+        ByteFile.Load(filename, reader)
 
         Player(index).Character(CharNum).Classes = reader.ReadByte()
         Player(index).Character(CharNum).Dir = reader.ReadByte()
@@ -1646,7 +1646,7 @@ Module modDatabase
         writer.WriteInt32(Player(index).Character(CharNum).Pet.Points)
         writer.WriteInt32(Player(index).Character(CharNum).Pet.Exp)
 
-        BinaryFile.Save(filename, writer)
+        ByteFile.Save(filename, writer)
     End Sub
 
     Function CharExist(index As Integer, CharNum As Integer) As Boolean

@@ -1,7 +1,7 @@
 ﻿Imports System.Drawing
 Imports System.Threading
 Imports System.Windows.Forms
-Imports ASFW
+Imports Asfw
 
 Module C_GameLogic
     Friend GameRand As New Random()

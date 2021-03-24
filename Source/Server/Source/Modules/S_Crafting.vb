@@ -1,6 +1,6 @@
 ﻿Imports System.IO
-Imports ASFW
-Imports ASFW.IO.FileIO
+Imports Asfw
+Imports Asfw.IO
 
 Friend Module modCrafting
 
@@ -72,7 +72,7 @@ Friend Module modCrafting
 
         writer.WriteByte(Recipe(RecipeNum).CreateTime)
 
-        BinaryFile.Save(filename, writer)
+        ByteFile.Save(filename, writer)
     End Sub
 
     Sub LoadRecipes()
@@ -93,7 +93,7 @@ Friend Module modCrafting
 
         filename = Path.Recipe(RecipeNum)
         Dim reader As New ByteStream()
-        BinaryFile.Load(filename, reader)
+        ByteFile.Load(filename, reader)
 
         Recipe(RecipeNum).Name = reader.ReadString()
         Recipe(RecipeNum).RecipeType = reader.ReadByte()

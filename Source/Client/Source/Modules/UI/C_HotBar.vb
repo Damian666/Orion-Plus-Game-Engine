@@ -1,5 +1,5 @@
 ﻿Imports System.Drawing
-Imports ASFW
+Imports Asfw
 
 Friend Module C_HotBar
     Friend SelHotbarSlot As Integer

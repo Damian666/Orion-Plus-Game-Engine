@@ -199,7 +199,7 @@ Module C_Variables
     Friend ShowAnimLayers As Boolean
     Friend ShowAnimTimer As Integer
 
-    Friend EKeyPair As New ASFW.IO.Encryption.KeyPair()
+    Friend EKeyPair As New Asfw.IO.Encryption.KeyPair()
 
     ' Editor edited items array
     Friend Item_Changed(MAX_ITEMS) As Boolean

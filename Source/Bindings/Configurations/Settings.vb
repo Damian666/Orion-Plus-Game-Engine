@@ -1,6 +1,6 @@
 ﻿Imports System.IO
 Imports System.Xml.Serialization
-Imports ASFW.IO.Serialization
+Imports Asfw.IO.Serialization
 
 Public Class SettingsDef
 

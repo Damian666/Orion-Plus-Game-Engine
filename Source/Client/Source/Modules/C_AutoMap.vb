@@ -1,4 +1,4 @@
-﻿Imports Ini = ASFW.IO.FileIO.TextFile
+﻿Imports Ini = Asfw.IO.TextFile
 
 Module C_AutoMap
     ' Automapper System
@@ -164,7 +164,7 @@ Module C_AutoMap
 
     Sub Packet_AutoMapper(ByRef data() As Byte)
         Dim Layer As Integer
-        Dim buffer As New ASFW.ByteStream(data)
+        Dim buffer As New Asfw.ByteStream(data)
         MapStart = buffer.ReadInt32
         MapSize = buffer.ReadInt32
         MapX = buffer.ReadInt32
@@ -199,7 +199,7 @@ Module C_AutoMap
 #Region "Outgoing Packets"
 
     Friend Sub SendRequestAutoMapper()
-        Dim buffer As New ASFW.ByteStream(4)
+        Dim buffer As New Asfw.ByteStream(4)
 
         buffer.WriteInt32(ClientPackets.CRequestAutoMap)
         Socket.SendData(buffer.Data, buffer.Head)
@@ -208,7 +208,7 @@ Module C_AutoMap
 
     Friend Sub SendSaveAutoMapper()
         Dim cf = Path.Contents & "AutoMapper.ini"
-        Dim buffer As New ASFW.ByteStream(4)
+        Dim buffer As New Asfw.ByteStream(4)
 
         buffer.WriteInt32(ClientPackets.CSaveAutoMap)
 

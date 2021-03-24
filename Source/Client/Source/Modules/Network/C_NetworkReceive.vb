@@ -1,5 +1,5 @@
-﻿Imports ASFW
-Imports ASFW.IO
+﻿Imports Asfw
+Imports Asfw.IO
 
 Module C_NetworkReceive
 

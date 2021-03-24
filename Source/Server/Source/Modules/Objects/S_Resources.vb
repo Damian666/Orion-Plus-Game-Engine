@@ -1,7 +1,7 @@
 ﻿Imports System.IO
-Imports ASFW
-Imports ASFW.IO.FileIO
-Imports Ini = ASFW.IO.FileIO.TextFile
+Imports Asfw
+Imports Asfw.IO
+Imports Ini = Asfw.IO.TextFile
 
 Friend Module S_Resources
 
@@ -58,7 +58,7 @@ Friend Module S_Resources
         writer.WriteBoolean(Resource(ResourceNum).Walkthrough)
         writer.WriteInt32(Resource(ResourceNum).Animation)
 
-        BinaryFile.Save(filename, writer)
+        ByteFile.Save(filename, writer)
     End Sub
 
     Sub LoadResources()
@@ -78,7 +78,7 @@ Friend Module S_Resources
 
         filename = Path.Resource(ResourceNum)
         Dim reader As New ByteStream()
-        BinaryFile.Load(filename, reader)
+        ByteFile.Load(filename, reader)
 
         Resource(ResourceNum).Name = reader.ReadString()
         Resource(ResourceNum).SuccessMessage = reader.ReadString()
