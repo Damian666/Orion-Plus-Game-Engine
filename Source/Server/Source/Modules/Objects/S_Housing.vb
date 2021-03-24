@@ -1,6 +1,6 @@
 ﻿Imports System.IO
-Imports ASFW
-Imports Ini = ASFW.IO.FileIO.TextFile
+Imports Asfw
+Imports Ini = Asfw.IO.TextFile
 
 Friend Module S_Housing
 

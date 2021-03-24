@@ -1,7 +1,7 @@
 ﻿Imports System.Drawing
 Imports System.IO
 Imports System.Windows.Forms
-Imports ASFW
+Imports Asfw
 
 Module C_Resources
 

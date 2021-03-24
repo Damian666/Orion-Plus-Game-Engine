@@ -1,5 +1,5 @@
 ﻿Imports System.Windows.Forms
-Imports ASFW
+Imports Asfw
 
 Module C_NetworkSend
 

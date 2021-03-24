@@ -1,5 +1,5 @@
 ﻿Imports System.Net
-Imports ASFW.Network
+Imports Asfw.Network
 
 Friend Module S_NetworkConfig
     Friend WithEvents Socket As Server

@@ -1,5 +1,5 @@
 ﻿Imports System.IO
-Imports ASFW.IO.Serialization
+Imports Asfw.IO.Serialization
 
 #If CLIENT Then
 Public Class LanguageDef

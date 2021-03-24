@@ -1,6 +1,6 @@
 ﻿Imports System.IO
-Imports ASFW
-Imports ASFW.IO.FileIO
+Imports Asfw
+Imports Asfw.IO
 
 Friend Module S_Animations
 
@@ -42,7 +42,7 @@ Friend Module S_Animations
             writer.WriteInt32(Animation(AnimationNum).LoopTime(x))
         Next
 
-        BinaryFile.Save(filename, writer)
+        ByteFile.Save(filename, writer)
     End Sub
 
     Sub LoadAnimations()
@@ -61,7 +61,7 @@ Friend Module S_Animations
 
         filename = Path.Animation(AnimationNum)
         Dim reader As New ByteStream()
-        BinaryFile.Load(filename, reader)
+        ByteFile.Load(filename, reader)
 
         Animation(AnimationNum).Name = reader.ReadString()
         Animation(AnimationNum).Sound = reader.ReadString()

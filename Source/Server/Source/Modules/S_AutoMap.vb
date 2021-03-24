@@ -1,5 +1,5 @@
-﻿Imports ASFW
-Imports Ini = ASFW.IO.FileIO.TextFile
+﻿Imports Asfw
+Imports Ini = Asfw.IO.TextFile
 
 Module S_AutoMap
     ' Automapper System

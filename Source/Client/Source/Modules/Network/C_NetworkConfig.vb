@@ -1,4 +1,4 @@
-﻿Imports ASFW.Network
+﻿Imports Asfw.Network
 
 Friend Module C_NetworkConfig
     Friend WithEvents Socket As Client

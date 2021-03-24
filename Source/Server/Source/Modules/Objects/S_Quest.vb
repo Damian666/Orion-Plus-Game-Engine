@@ -1,6 +1,6 @@
 ﻿Imports System.IO
-Imports ASFW
-Imports ASFW.IO.FileIO
+Imports Asfw
+Imports Asfw.IO
 
 Friend Module S_Quest
 
@@ -139,7 +139,7 @@ Friend Module S_Quest
             writer.WriteInt32(Quest(QuestNum).Task(I).TaskType)
         Next
 
-        BinaryFile.Save(filename, writer)
+        ByteFile.Save(filename, writer)
     End Sub
 
     Sub LoadQuests()
@@ -160,7 +160,7 @@ Friend Module S_Quest
         FileName = Path.Quest(QuestNum)
 
         Dim reader As New ByteStream()
-        BinaryFile.Load(FileName, reader)
+        ByteFile.Load(FileName, reader)
 
         Quest(QuestNum).Name = reader.ReadString()
         Quest(QuestNum).QuestLog = reader.ReadString()
